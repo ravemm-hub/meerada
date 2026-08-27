@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ brand }} Receipt · {{ period }}</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif; margin: 0;
+         background: #0b0e14; color: #e8eaed; }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  h1 { font-size: 1.4rem; margin: 0; }
+  h1 .b { color: #4f8ff7; }
+  .sub { color: #8b93a1; font-size: .85rem; margin-top: .25rem; }
+  .headline { display: flex; gap: 1rem; margin: 1.6rem 0 2rem; flex-wrap: wrap; }
+  .chip { background: #131824; border: 1px solid #1f2736; border-radius: 12px;
+          padding: .8rem 1.1rem; flex: 1; min-width: 140px; }
+  .chip .k { color: #8b93a1; font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; }
+  .chip .v { font-size: 1.3rem; font-weight: 800; margin-top: .15rem; font-variant-numeric: tabular-nums; }
+  h2 { font-size: .95rem; color: #8b93a1; text-transform: uppercase; letter-spacing: .05em;
+       margin: 2rem 0 .8rem; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+  th { color: #8b93a1; font-weight: 600; font-size: .7rem; text-transform: uppercase;
+       letter-spacing: .05em; text-align: left; padding: .45rem .6rem; border-bottom: 1px solid #1f2736; }
+  td { padding: .5rem .6rem; border-bottom: 1px solid #151b28; font-variant-numeric: tabular-nums; }
+  td.num, th.num { text-align: right; }
+  .grade { font-size: .66rem; padding: .05rem .4rem; border-radius: 999px; border: 1px solid; margin-left: .45rem; }
+  .grade.measured { color: #7ee787; border-color: #2ea043; }
+  .grade.derived { color: #f0b429; border-color: #9e6a03; }
+  .rec { border: 1px solid #2d4a1e; background: #12200f; border-radius: 12px;
+         padding: 1rem 1.2rem; margin-top: 1rem; }
+  .rec.stay { border-color: #1f2736; background: #131824; }
+  .rec .t { font-weight: 700; }
+  .rec .n { color: #8b93a1; font-size: .8rem; margin-top: .35rem; }
+  .savings { color: #3fb950; font-weight: 800; }
+  footer { margin-top: 2.5rem; color: #5b6472; font-size: .72rem; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><span class="b">{{ brand }}</span> — Monthly Receipt · {{ period }}</h1>
+  <div class="sub">What your LLM spend delivered, verified · generated {{ generated_at }}</div>
+
+  <div class="headline">
+    <div class="chip"><div class="k">Spend</div><div class="v">{{ total_spend }}</div></div>
+    <div class="chip"><div class="k">Delivered tasks</div><div class="v">{{ "{:,}".format(delivered) }}</div></div>
+    <div class="chip"><div class="k">CPAT</div><div class="v">{{ cpat }}</div></div>
+    <div class="chip"><div class="k">Waste</div><div class="v">{{ waste_total }} <span class="sub">({{ waste_share }})</span></div></div>
+  </div>
+
+  <h2>Spend vs delivered, per model</h2>
+  <table>
+    <tr><th>Model</th><th class="num">Spend</th><th class="num">Delivered</th><th class="num">CPAT</th><th>Success rate</th></tr>
+    {% for m in model_rows %}
+    <tr><td>{{ m.name }}</td><td class="num">{{ m.spend }}</td><td class="num">{{ "{:,}".format(m.delivered) }}</td>
+        <td class="num">{{ m.cpat }}</td><td>{{ m.success }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <h2>Waste breakdown</h2>
+  <table>
+    {% for w in waste_rows %}
+    <tr><td>{{ w.name }}<span class="grade {{ w.grade }}">{{ w.grade }}</span></td>
+        <td class="num">{{ w.amount }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <h2>Routing recommendation</h2>
+  {% if rec.kind == "move" %}
+  <div class="rec">
+    <div class="t">Move eligible traffic from {{ rec.from_model }} → {{ rec.to_model }} ·
+      est. savings <span class="savings">{{ rec_savings }}/period</span>
+      (quality Δ {{ "%+.1f"|format(rec.quality_delta_points) }} pts)</div>
+    <div class="n">{{ rec.note }}. {{ brand }} recommends — it never routes.</div>
+  </div>
+  {% else %}
+  <div class="rec stay">
+    <div class="t">No move recommended this period.</div>
+    <div class="n">{{ rec.note }}.</div>
+  </div>
+  {% endif %}
+
+  <footer>
+    {{ "{:,}".format(n_verified) }} of {{ "{:,}".format(n_tasks) }} tasks verified · unknown-rate {{ unknown_rate }} —
+    unverified tasks are excluded from every number, never estimated.
+    Metadata-only: no request or response content exists in this receipt's inputs.
+  </footer>
+</div>
+</body>
+</html>

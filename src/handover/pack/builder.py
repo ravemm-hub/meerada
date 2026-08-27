@@ -36,6 +36,50 @@ def _write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
 
 
+def write_signed_manifest(out_dir: Path, extra: dict[str, Any]) -> Path:
+    """Write manifest.json: per-file sha256 digests plus a bundle content digest."""
+    digests = {
+        str(path.relative_to(out_dir)).replace("\\", "/"): hashlib.sha256(
+            path.read_bytes()
+        ).hexdigest()
+        for path in sorted(out_dir.rglob("*"))
+        if path.is_file() and path.name != "manifest.json"
+    }
+    _write_json(
+        out_dir / "manifest.json",
+        {
+            **extra,
+            "files": digests,
+            "content_sha256": hashlib.sha256(
+                json.dumps(digests, sort_keys=True).encode()
+            ).hexdigest(),
+        },
+    )
+    return out_dir / "manifest.json"
+
+
+def verify_signed_manifest(out_dir: Path) -> list[str]:
+    """Digest verification for any signed bundle. Empty list = intact."""
+    manifest_path = out_dir / "manifest.json"
+    if not manifest_path.exists():
+        return ["missing manifest.json"]
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except ValueError as exc:
+        return [f"invalid manifest json: {exc}"]
+    errors = []
+    for key in ("files", "content_sha256"):
+        if key not in manifest:
+            errors.append(f"manifest missing {key}")
+    for rel, digest in manifest.get("files", {}).items():
+        file_path = out_dir / rel
+        if not file_path.exists():
+            errors.append(f"manifest lists missing file {rel}")
+        elif hashlib.sha256(file_path.read_bytes()).hexdigest() != digest:
+            errors.append(f"digest mismatch for {rel}")
+    return errors
+
+
 def _cluster_items(
     clustering: Clustering, items: Sequence[TaskTraces]
 ) -> dict[str, list[TaskTraces]]:
@@ -124,15 +168,8 @@ def build_pack(
     _write_json(out_dir / "baseline.json", baselines)
     (out_dir / "edge_cases.jsonl").write_text("\n".join(edge_lines), encoding="utf-8")
 
-    digests = {
-        str(path.relative_to(out_dir)).replace("\\", "/"): hashlib.sha256(
-            path.read_bytes()
-        ).hexdigest()
-        for path in sorted(out_dir.rglob("*"))
-        if path.is_file() and path.name != "manifest.json"
-    }
-    _write_json(
-        out_dir / "manifest.json",
+    write_signed_manifest(
+        out_dir,
         {
             "schema_version": "1.0",
             "created_at": datetime.now(tz=UTC).isoformat(),
@@ -140,10 +177,6 @@ def build_pack(
             "from_model": from_model,
             "n_tasks": len(items),
             "n_clusters": len(clustering.clusters),
-            "files": digests,
-            "content_sha256": hashlib.sha256(
-                json.dumps(digests, sort_keys=True).encode()
-            ).hexdigest(),
         },
     )
     return out_dir
@@ -164,7 +197,7 @@ def validate_pack(pack_dir: Path) -> list[str]:
         json.loads((pack_dir / "tool_policy.json").read_text(encoding="utf-8"))
     except ValueError as exc:
         return [f"invalid json: {exc}"]
-    for key in ("schema_version", "from_model", "n_clusters", "files", "content_sha256"):
+    for key in ("schema_version", "from_model", "n_clusters"):
         if key not in manifest:
             errors.append(f"manifest missing {key}")
     for entry in taxonomy:
@@ -173,10 +206,5 @@ def validate_pack(pack_dir: Path) -> list[str]:
             errors.append(f"missing golden set for {cluster_id}")
         if not (pack_dir / "prompts" / f"{cluster_id}.json").exists():
             errors.append(f"missing prompts for {cluster_id}")
-    for rel, digest in manifest.get("files", {}).items():
-        file_path = pack_dir / rel
-        if not file_path.exists():
-            errors.append(f"manifest lists missing file {rel}")
-        elif hashlib.sha256(file_path.read_bytes()).hexdigest() != digest:
-            errors.append(f"digest mismatch for {rel}")
+    errors.extend(verify_signed_manifest(pack_dir))
     return errors
