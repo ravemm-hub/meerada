@@ -68,6 +68,19 @@ def wilson_interval(successes: int, n: int, z: float = 1.96) -> tuple[float, flo
     return min(p, max(0.0, centre - margin)), max(p, min(1.0, centre + margin))
 
 
+def newcombe_diff_ci(
+    successes_new: int, n_new: int, successes_old: int, n_old: int, z: float = 1.96
+) -> tuple[float, float]:
+    """Wilson-based (Newcombe) CI for delta = p_new - p_old. Negative = a drop."""
+    p_new, p_old = successes_new / n_new, successes_old / n_old
+    low_new, high_new = wilson_interval(successes_new, n_new, z)
+    low_old, high_old = wilson_interval(successes_old, n_old, z)
+    delta = p_new - p_old
+    lower = delta - math.sqrt((p_new - low_new) ** 2 + (high_old - p_old) ** 2)
+    upper = delta + math.sqrt((high_new - p_new) ** 2 + (p_old - low_old) ** 2)
+    return max(-1.0, lower), min(1.0, upper)
+
+
 def proportion(successes: int, n: int) -> Proportion:
     if n == 0:
         return Proportion(value=None, n=0, ci_low=None, ci_high=None)

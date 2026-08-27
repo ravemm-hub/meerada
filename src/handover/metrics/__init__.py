@@ -5,6 +5,7 @@ from handover.metrics.core import (
     Proportion,
     by_model,
     compute_core,
+    newcombe_diff_ci,
     proportion,
     wilson_interval,
 )
@@ -28,6 +29,7 @@ __all__ = [
     "by_model",
     "compute_core",
     "compute_waste",
+    "newcombe_diff_ci",
     "proportion",
     "wilson_interval",
 ]
