@@ -3,68 +3,159 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Handover · CPAT Report</title>
+<title>HV Grade · Model Rankings</title>
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif; margin: 2.5rem auto;
-         max-width: 960px; padding: 0 1rem; background: #0f1115; color: #e8eaed; }
-  h1 { font-size: 1.6rem; margin-bottom: .2rem; }
-  h2 { font-size: 1.1rem; margin-top: 2.2rem; border-bottom: 1px solid #2a2e37; padding-bottom: .3rem; }
-  .sub { color: #9aa0a6; font-size: .85rem; }
-  table { border-collapse: collapse; width: 100%; margin-top: .8rem; font-size: .9rem; }
-  th, td { text-align: left; padding: .45rem .6rem; border-bottom: 1px solid #22262e; }
-  th { color: #9aa0a6; font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
-  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
-  .headline { display: flex; gap: 2.5rem; margin-top: 1.4rem; flex-wrap: wrap; }
-  .stat { min-width: 150px; }
-  .stat .v { font-size: 1.5rem; font-weight: 700; }
-  .stat .k { color: #9aa0a6; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
-  .grade { font-size: .72rem; padding: .1rem .45rem; border-radius: 999px; border: 1px solid; }
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { font-family: ui-sans-serif, system-ui, "Segoe UI", sans-serif; margin: 0;
+         background: #0b0e14; color: #e8eaed; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  h1 { font-size: 1.5rem; margin: 0; letter-spacing: -.01em; }
+  h1 .hv { color: #4f8ff7; }
+  .sub { color: #8b93a1; font-size: .85rem; margin-top: .25rem; }
+
+  .strip { display: flex; gap: 1rem; margin: 1.6rem 0 2rem; flex-wrap: wrap; }
+  .chip { background: #131824; border: 1px solid #1f2736; border-radius: 12px;
+          padding: .8rem 1.1rem; min-width: 150px; flex: 1; }
+  .chip .k { color: #8b93a1; font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; }
+  .chip .v { font-size: 1.25rem; font-weight: 700; margin-top: .15rem; font-variant-numeric: tabular-nums; }
+  .warn { color: #ff7b72; }
+
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+  thead th { color: #8b93a1; font-weight: 600; font-size: .72rem; text-transform: uppercase;
+             letter-spacing: .05em; text-align: left; padding: .55rem .7rem;
+             border-bottom: 1px solid #1f2736; position: sticky; top: 0; background: #0b0e14; }
+  th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.model-row td { padding: .8rem .7rem; border-bottom: 1px solid #151b28; }
+  tr.model-row { cursor: pointer; transition: background .12s; }
+  tr.model-row:hover { background: #121826; }
+  tr.model-row.open { background: #131a2a; }
+  .rank { color: #8b93a1; width: 2.2rem; }
+  .rank .medal { font-size: 1rem; }
+  .mname { font-weight: 700; }
+  .caret { color: #8b93a1; font-size: .7rem; margin-left: .45rem; transition: transform .15s; display: inline-block; }
+  tr.model-row.open .caret { transform: rotate(90deg); }
+
+  .scorecell { display: flex; align-items: center; gap: .6rem; }
+  .donut { width: 44px; height: 44px; }
+  .donut .bg { fill: none; stroke: #1f2736; stroke-width: 4; }
+  .donut .fg { fill: none; stroke-width: 4; stroke-linecap: round;
+               transform: rotate(-90deg); transform-origin: 50% 50%; }
+  .good .fg { stroke: #3fb950; } .mid .fg { stroke: #d29922; } .low .fg { stroke: #f85149; }
+  .scoreval { font-weight: 800; font-size: 1.05rem; }
+  .good .scoreval { color: #3fb950; } .mid .scoreval { color: #d29922; } .low .scoreval { color: #f85149; }
+
+  .bar { background: #1f2736; border-radius: 999px; height: 6px; width: 110px; margin-top: .35rem; }
+  .bar i { display: block; height: 6px; border-radius: 999px; background: #4f8ff7; }
+
+  tr.detail-row { display: none; }
+  tr.detail-row.open { display: table-row; }
+  tr.detail-row > td { padding: 0 .7rem 1.2rem; border-bottom: 1px solid #1f2736; background: #0e1420; }
+  .detail { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; padding-top: 1rem; }
+  @media (max-width: 760px) { .detail { grid-template-columns: 1fr; } }
+  .panel { background: #131824; border: 1px solid #1f2736; border-radius: 12px; padding: 1rem 1.1rem; }
+  .panel h3 { margin: 0 0 .6rem; font-size: .8rem; color: #8b93a1; text-transform: uppercase; letter-spacing: .05em; }
+  .kv { display: flex; justify-content: space-between; padding: .3rem 0; font-size: .85rem;
+        border-bottom: 1px dashed #1c2434; }
+  .kv:last-child { border-bottom: none; }
+  .kv .k { color: #8b93a1; }
+  .kv .v { font-variant-numeric: tabular-nums; }
+  .grade { font-size: .68rem; padding: .05rem .45rem; border-radius: 999px; border: 1px solid; margin-left: .5rem; }
   .grade.measured { color: #7ee787; border-color: #2ea043; }
   .grade.derived { color: #f0b429; border-color: #9e6a03; }
-  .warn { color: #ff7b72; }
-  .empty { color: #9aa0a6; font-style: italic; padding: 1rem 0; }
-  footer { margin-top: 3rem; color: #6e7681; font-size: .75rem; }
+
+  footer { margin-top: 3rem; color: #5b6472; font-size: .75rem; line-height: 1.6; }
 </style>
 </head>
 <body>
-<h1>Handover · CPAT Report</h1>
-<div class="sub">Cost per accepted task — all-attempt cost over verified successes · generated {{ generated_at }}</div>
+<div class="wrap">
+  <h1><span class="hv">HV</span> Grade — Model Rankings</h1>
+  <div class="sub">Ranked by verified production performance: quality 60% · speed 20% · value 20% · generated {{ generated_at }}</div>
 
-<div class="headline">
-  <div class="stat"><div class="v">{{ overall.cpat }}</div><div class="k">CPAT (all models)</div></div>
-  <div class="stat"><div class="v">{{ overall.ttat }}</div><div class="k">TTAT</div></div>
-  <div class="stat"><div class="v">{{ overall.attempts }}</div><div class="k">Attempts / win</div></div>
-  <div class="stat"><div class="v {% if unknown_high %}warn{% endif %}">{{ unknown_rate }}</div><div class="k">Unknown rate</div></div>
+  <div class="strip">
+    <div class="chip"><div class="k">Tasks</div><div class="v">{{ "{:,}".format(n_tasks) }}</div></div>
+    <div class="chip"><div class="k">Total spend</div><div class="v">{{ total_cost }}</div></div>
+    <div class="chip"><div class="k">CPAT · all models</div><div class="v">{{ cpat }}</div></div>
+    <div class="chip"><div class="k">Waste</div><div class="v">{{ waste_total }} <span class="sub">({{ waste_share }})</span></div></div>
+    <div class="chip"><div class="k">Unknown rate</div><div class="v {% if unknown_high %}warn{% endif %}">{{ unknown_rate }}</div></div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="rank">#</th><th>Model</th><th>HV score</th><th>Success rate</th>
+        <th class="num">CPAT</th><th class="num">TTAT</th><th class="num">Attempts/win</th>
+        <th class="num">Waste %</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr class="model-row" data-target="detail-{{ loop.index }}">
+        <td class="rank">{% if r.rank == 1 %}<span class="medal">🥇</span>{% elif r.rank == 2 %}<span class="medal">🥈</span>{% elif r.rank == 3 %}<span class="medal">🥉</span>{% else %}{{ r.rank }}{% endif %}</td>
+        <td><span class="mname">{{ r.name }}</span><span class="caret">▶</span></td>
+        <td>
+          <div class="scorecell {{ r.score_class }}">
+            <svg class="donut" viewBox="0 0 36 36">
+              <circle class="bg" cx="18" cy="18" r="15.5"></circle>
+              <circle class="fg" cx="18" cy="18" r="15.5" pathLength="100"
+                      stroke-dasharray="{{ r.score_pct }} 100"></circle>
+            </svg>
+            <span class="scoreval">{{ r.score }}</span>
+          </div>
+        </td>
+        <td>{{ r.success }}<div class="bar"><i style="width: {{ r.success_bar }}%"></i></div></td>
+        <td class="num">{{ r.cpat }}</td>
+        <td class="num">{{ r.ttat }}</td>
+        <td class="num">{{ r.attempts }}</td>
+        <td class="num">{{ r.waste_share }}</td>
+      </tr>
+      <tr class="detail-row" id="detail-{{ loop.index }}">
+        <td colspan="8">
+          <div class="detail">
+            <div class="panel">
+              <h3>Verified performance</h3>
+              <div class="kv"><span class="k">Verified tasks</span><span class="v">{{ "{:,}".format(r.n_verified) }}</span></div>
+              <div class="kv"><span class="k">Successful tasks</span><span class="v">{{ "{:,}".format(r.n_wins) }}</span></div>
+              <div class="kv"><span class="k">Success rate (Wilson 95%)</span><span class="v">{{ r.success }}</span></div>
+              <div class="kv"><span class="k">CPAT — cost per accepted task</span><span class="v">{{ r.cpat }}</span></div>
+              <div class="kv"><span class="k">TTAT — time per accepted task</span><span class="v">{{ r.ttat }}</span></div>
+              <div class="kv"><span class="k">Attempts per win</span><span class="v">{{ r.attempts }}</span></div>
+              <div class="kv"><span class="k">Unverified tasks (excluded)</span><span class="v">{{ "{:,}".format(r.n_unknown) }}</span></div>
+            </div>
+            <div class="panel">
+              <h3>Spend &amp; waste</h3>
+              <div class="kv"><span class="k">Total spend</span><span class="v">{{ r.total_cost }}</span></div>
+              <div class="kv"><span class="k">Total waste</span><span class="v">{{ r.waste_total }} ({{ r.waste_share }})</span></div>
+              {% for w in r.waste_rows %}
+              <div class="kv"><span class="k">{{ w.name }}<span class="grade {{ w.grade }}">{{ w.grade }}</span></span>
+                  <span class="v">{{ w.amount }}</span></div>
+              {% endfor %}
+              <div class="kv"><span class="k">Tokens in / out / reasoning</span>
+                  <span class="v">{{ r.tokens_input }} / {{ r.tokens_output }} / {{ r.tokens_reasoning }}</span></div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <footer>
+    {{ "{:,}".format(n_verified) }} of {{ "{:,}".format(n_tasks) }} tasks verified · unverified tasks are excluded from every metric, never guessed.
+    {% if n_unpriced %}{{ n_unpriced }} traces had no price entry and contribute $0 to waste.{% endif %}<br>
+    Scores follow the three-axis formula (quality 0.6 · speed 0.2 · value 0.2), min-max normalized across the models above.
+    Metadata-only: no request or response content exists in this report's inputs. Task clusters arrive in P1.
+  </footer>
 </div>
 
-<h2>Per model</h2>
-<table>
-  <tr><th>Model</th><th class="num">Verified tasks</th><th>Success rate (Wilson 95%)</th>
-      <th class="num">CPAT</th><th class="num">TTAT</th><th class="num">Attempts/win</th></tr>
-  {% for r in model_rows %}
-  <tr><td>{{ r.model }}</td><td class="num">{{ r.n_verified }}</td><td>{{ r.success }}</td>
-      <td class="num">{{ r.cpat }}</td><td class="num">{{ r.ttat }}</td><td class="num">{{ r.attempts }}</td></tr>
-  {% endfor %}
-</table>
-
-<h2>Waste breakdown</h2>
-<table>
-  <tr><th>Component</th><th class="num">Amount</th><th>Evidence</th><th class="num">Traces</th></tr>
-  {% for w in waste_rows %}
-  <tr><td>{{ w.name }}</td><td class="num">{{ w.amount }}</td>
-      <td><span class="grade {{ w.grade }}">{{ w.grade }}</span></td><td class="num">{{ w.n }}</td></tr>
-  {% endfor %}
-  <tr><td><strong>Total waste</strong></td><td class="num"><strong>{{ waste_total }}</strong></td><td></td><td></td></tr>
-</table>
-{% if n_unpriced %}<div class="sub">{{ n_unpriced }} traces had no price entry and contribute $0 (counted, not guessed).</div>{% endif %}
-
-<h2>Per cluster</h2>
-<div class="empty">Task clusters arrive in P1 (taxonomy extraction). This table is intentionally empty.</div>
-
-<footer>
-  {{ n_tasks }} tasks total · {{ n_unknown }} unverified (excluded from every metric) ·
-  metadata-only: no request or response content exists in this report's inputs.
-</footer>
+<script>
+  document.querySelectorAll("tr.model-row").forEach(function (row) {
+    row.addEventListener("click", function () {
+      var detail = document.getElementById(row.dataset.target);
+      row.classList.toggle("open");
+      if (detail) detail.classList.toggle("open");
+    });
+  });
+</script>
 </body>
 </html>

@@ -11,8 +11,8 @@ from uuid import UUID
 
 from handover.assemble import AttemptRecord, assemble_grouped
 from handover.collect import Normalizer, RawEvent
-from handover.metrics import ModelPrice, TaskTraces, by_model, compute_core, compute_waste
-from handover.report.renderer import render_report
+from handover.metrics import ModelPrice, TaskTraces, compute_core, compute_waste
+from handover.report.renderer import build_model_reports, render_report
 
 # P0 price table; replaced by the model_registry table in P1+.
 DEFAULT_PRICES: dict[str, ModelPrice] = {
@@ -53,10 +53,10 @@ def main(argv: list[str] | None = None) -> int:
     grouped = assemble_grouped(load_records(args.fixtures, normalizer))
     tasks = [task for task, _ in grouped]
     overall = compute_core(tasks)
-    waste = compute_waste(
-        [TaskTraces(task=task, traces=traces) for task, traces in grouped], DEFAULT_PRICES
-    )
-    out = render_report(overall=overall, per_model=by_model(tasks), waste=waste, out_path=args.out)
+    items = [TaskTraces(task=task, traces=traces) for task, traces in grouped]
+    waste = compute_waste(items, DEFAULT_PRICES)
+    models = build_model_reports(items, DEFAULT_PRICES)
+    out = render_report(overall=overall, models=models, waste=waste, out_path=args.out)
     unknown = "—" if overall.unknown_rate.value is None else f"{overall.unknown_rate.value:.1%}"
     print(f"report: {out}")
     print(f"tasks: {overall.n_tasks} ({overall.n_verified} verified) · unknown-rate: {unknown}")
