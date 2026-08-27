@@ -118,7 +118,8 @@ def _build_task(group: Sequence[AttemptRecord], task_id: UUID) -> Task:
     )
 
 
-def assemble(records: Iterable[AttemptRecord]) -> list[Task]:
+def assemble_grouped(records: Iterable[AttemptRecord]) -> list[tuple[Task, tuple[Trace, ...]]]:
+    """Assemble tasks and keep each task paired with its ordered traces."""
     explicit: dict[UUID, list[AttemptRecord]] = {}
     implicit: list[AttemptRecord] = []
     for record in records:
@@ -127,8 +128,17 @@ def assemble(records: Iterable[AttemptRecord]) -> list[Task]:
         else:
             implicit.append(record)
 
-    tasks = [_build_task(group, task_id) for task_id, group in explicit.items()]
-    tasks.extend(
-        _build_task(group, group[0].trace.task_id) for group in _heuristic_groups(implicit)
-    )
-    return tasks
+    groups: list[tuple[list[AttemptRecord], UUID]] = [
+        (group, task_id) for task_id, group in explicit.items()
+    ]
+    groups.extend((group, group[0].trace.task_id) for group in _heuristic_groups(implicit))
+
+    result: list[tuple[Task, tuple[Trace, ...]]] = []
+    for group, task_id in groups:
+        ordered = sorted(group, key=lambda r: r.trace.ts_start)
+        result.append((_build_task(ordered, task_id), tuple(r.trace for r in ordered)))
+    return result
+
+
+def assemble(records: Iterable[AttemptRecord]) -> list[Task]:
+    return [task for task, _ in assemble_grouped(records)]

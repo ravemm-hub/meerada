@@ -3,6 +3,7 @@ from handover.assemble.task_assembler import (
     MIN_INPUT_OVERLAP,
     AttemptRecord,
     assemble,
+    assemble_grouped,
 )
 
-__all__ = ["GAP_SECONDS", "MIN_INPUT_OVERLAP", "AttemptRecord", "assemble"]
+__all__ = ["GAP_SECONDS", "MIN_INPUT_OVERLAP", "AttemptRecord", "assemble", "assemble_grouped"]
