@@ -9,6 +9,7 @@ dependencies = [
     "pydantic-settings>=2.4",
     "typer>=0.12",
     "jinja2>=3.1",
+    "jsonschema>=4.23",
     "duckdb>=1.0",
     "psycopg[binary]>=3.2",
     "redis>=5.0",
@@ -50,7 +51,7 @@ mypy_path = "src"
 packages = ["handover"]
 
 [[tool.mypy.overrides]]
-module = ["duckdb.*", "arq.*"]
+module = ["duckdb.*", "arq.*", "jsonschema.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
