@@ -19,6 +19,7 @@ from typing import Any
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from pydantic import BaseModel, ConfigDict
 
+from handover.branding import BRAND_NAME, GRADE_NAME
 from handover.metrics import (
     CoreMetrics,
     ModelPrice,
@@ -175,6 +176,8 @@ def render_report(
         autoescape=select_autoescape(["html"]),
     )
     html = env.get_template("report.html.j2").render(
+        brand=BRAND_NAME,
+        grade_name=GRADE_NAME,
         generated_at=(generated_at or datetime.now(tz=UTC)).strftime("%Y-%m-%d %H:%MZ"),
         rows=[_row(i + 1, m, scores[m.name], max_success) for i, m in enumerate(ordered)],
         n_tasks=overall.n_tasks,

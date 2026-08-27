@@ -4,6 +4,7 @@ from pathlib import Path
 
 from typer.testing import CliRunner
 
+from handover.branding import BRAND_NAME
 from handover.cli.main import app
 from handover.cli.store import SqliteStore
 
@@ -24,7 +25,7 @@ def test_record_then_report(tmp_path: Path) -> None:
     assert reported.exit_code == 0
     assert out.exists()
     html = out.read_text(encoding="utf-8")
-    assert "HV" in html and "claude-sonnet-4-6" in html
+    assert BRAND_NAME in html and "claude-sonnet-4-6" in html
 
 
 def test_record_is_idempotent_by_trace_id(tmp_path: Path) -> None:

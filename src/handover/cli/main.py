@@ -1,4 +1,4 @@
-"""The free developer CLI: ``hv record``, ``hv report``, ``hv pack``.
+"""The free developer CLI: ``prooly record``, ``prooly report``, ``prooly pack`` (alias: ``hv``).
 
 Runs entirely locally against SQLite — zero infrastructure. This is the
 distribution wedge: a developer records a trace source and gets the ranked
@@ -12,6 +12,7 @@ from typing import Annotated
 import typer
 
 from handover.assemble import AttemptRecord, assemble_grouped
+from handover.branding import CLI_NAME
 from handover.cli.store import SqliteStore
 from handover.collect import Normalizer, RawEvent
 from handover.metrics import TaskTraces, compute_core, compute_waste
@@ -22,7 +23,8 @@ from handover.report.renderer import build_model_reports, render_report
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
 DbOption = Annotated[Path, typer.Option("--db", help="SQLite database path")]
-DEFAULT_DB = Path("hv.db")
+DEFAULT_DB = Path(f"{CLI_NAME}.db")
+DEFAULT_REPORT = Path(f"{CLI_NAME}-report.html")
 
 
 @app.command()
@@ -62,17 +64,17 @@ def record(
 @app.command()
 def report(
     db: DbOption = DEFAULT_DB,
-    out: Annotated[Path, typer.Option("--out", help="output HTML path")] = Path("hv-report.html"),
+    out: Annotated[Path, typer.Option("--out", help="output HTML path")] = DEFAULT_REPORT,
 ) -> None:
     """Assemble tasks, compute CPAT and waste, render the ranked HTML report."""
     if not db.exists():
-        typer.echo(f"no database at {db} — run `hv record` first", err=True)
+        typer.echo(f"no database at {db} — run `{CLI_NAME} record` first", err=True)
         raise typer.Exit(1)
     store = SqliteStore(db)
     stored = store.load_records()
     store.close()
     if not stored:
-        typer.echo("store is empty — run `hv record` first", err=True)
+        typer.echo(f"store is empty — run `{CLI_NAME} record` first", err=True)
         raise typer.Exit(1)
 
     grouped = assemble_grouped(stored)
@@ -107,14 +109,14 @@ def pack(
 ) -> None:
     """Build a handover pack: taxonomy, contracts, tool policies, golden sets."""
     if not db.exists():
-        typer.echo(f"no database at {db} — run `hv record` first", err=True)
+        typer.echo(f"no database at {db} — run `{CLI_NAME} record` first", err=True)
         raise typer.Exit(1)
     store = SqliteStore(db)
     stored = store.load_records()
     tenant = store.tenant_id()
     store.close()
     if not stored:
-        typer.echo("store is empty — run `hv record` first", err=True)
+        typer.echo(f"store is empty — run `{CLI_NAME} record` first", err=True)
         raise typer.Exit(1)
 
     grouped = assemble_grouped(stored)

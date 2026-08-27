@@ -5,6 +5,7 @@ Fails if the unknown-rate exceeds 30%."""
 from pathlib import Path
 
 from handover.assemble import assemble_grouped
+from handover.branding import BRAND_NAME
 from handover.metrics import TaskTraces, by_model, compute_core, compute_waste
 from handover.report import build_model_reports, render_report
 from handover.report.__main__ import DEFAULT_PRICES
@@ -44,7 +45,7 @@ def test_p0_acceptance_end_to_end() -> None:
     out = render_report(overall=overall, models=models, waste=waste, out_path=OUT)
     html = out.read_text(encoding="utf-8")
     assert "CPAT" in html
-    assert "HV score" in html  # the ranking table
+    assert f"{BRAND_NAME} score" in html  # the ranking table
     assert "model-gamma" in html
     assert "derived" in html  # waste estimates are labelled
     assert 'src="http' not in html and 'href="http' not in html  # self-contained

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HV Grade · Model Rankings</title>
+<title>{{ grade_name }} · Model Rankings</title>
 <style>
   :root { color-scheme: dark; }
   * { box-sizing: border-box; }
@@ -69,7 +69,7 @@
 </head>
 <body>
 <div class="wrap">
-  <h1><span class="hv">HV</span> Grade — Model Rankings</h1>
+  <h1><span class="hv">{{ brand }}</span> Grade — Model Rankings</h1>
   <div class="sub">Ranked by verified production performance: quality 60% · speed 20% · value 20% · generated {{ generated_at }}</div>
 
   <div class="strip">
@@ -83,7 +83,7 @@
   <table>
     <thead>
       <tr>
-        <th class="rank">#</th><th>Model</th><th>HV score</th><th>Success rate</th>
+        <th class="rank">#</th><th>Model</th><th>{{ brand }} score</th><th>Success rate</th>
         <th class="num">CPAT</th><th class="num">TTAT</th><th class="num">Attempts/win</th>
         <th class="num">Waste %</th>
       </tr>
