@@ -13,6 +13,7 @@ from handover.schema.trace import (
     Latency,
     OutputShape,
     Tokens,
+    ToolCall,
     Trace,
     Verification,
 )
@@ -36,6 +37,10 @@ def make_trace(
     cached_tokens: int = 0,
     output_tokens: int = 0,
     reasoning_tokens: int = 0,
+    tools: tuple[str, ...] = (),
+    output_type: Literal["json", "text", "code", "mixed"] = "text",
+    schema_seed: str | None = None,
+    n_chars: int = 50,
 ) -> Trace:
     start = T0 + timedelta(seconds=start_s)
     return Trace(
@@ -65,12 +70,22 @@ def make_trace(
             input_fingerprint=fp(f"input-{start_s}"),
         ),
         output_shape=OutputShape(
-            type="text",
-            n_chars=50,
-            json_valid=False,
-            schema_fingerprint=None,
-            has_code_block=False,
-            n_code_blocks=0,
+            type=output_type,
+            n_chars=n_chars,
+            json_valid=output_type == "json",
+            schema_fingerprint=fp(schema_seed) if schema_seed else None,
+            has_code_block=output_type in ("code", "mixed"),
+            n_code_blocks=1 if output_type in ("code", "mixed") else 0,
+        ),
+        tool_calls=tuple(
+            ToolCall(
+                name=name,
+                args_fingerprint=fp(f"args-{name}"),
+                ts_offset_ms=i * 1000,
+                duration_ms=500,
+                status="ok",
+            )
+            for i, name in enumerate(tools)
         ),
         verification=Verification(
             status=status,
