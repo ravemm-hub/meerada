@@ -155,6 +155,21 @@ class Cusum:
         self.statistic = 0.0
 
 
+def benjamini_hochberg_qvalues(p_values: Sequence[float]) -> list[float]:
+    """BH-adjusted q-values (monotone step-up), in the input order."""
+    m = len(p_values)
+    if m == 0:
+        return []
+    order = sorted(range(m), key=lambda i: p_values[i])
+    adjusted = [0.0] * m
+    running = 1.0
+    for rank in range(m, 0, -1):
+        index = order[rank - 1]
+        running = min(running, p_values[index] * m / rank)
+        adjusted[index] = running
+    return adjusted
+
+
 def benjamini_hochberg(p_values: Sequence[float], q: float = 0.05) -> list[bool]:
     """FDR control across all model x cluster comparisons (SPEC §6.3 rule 4).
 
