@@ -1,0 +1,48 @@
+{
+  "_meta": {
+    "as_of": "2026-08-27",
+    "note": "Seed for the model_registry table (P3). Prices USD per 1M tokens, first-party API, standard tier. Verified via web search; re-verify before billing-grade use.",
+    "caveats": [
+      "Mistral Large 3 output price conflicted across sources ($1.50 vs $6.00) - confirm on mistral.ai",
+      "Google AI Studio free-tier RPD figures vary by source - ai.google.dev/gemini-api/docs/rate-limits is authoritative",
+      "GLM 5.3 per-token pricing unpublished as of this date"
+    ]
+  },
+  "models": [
+    {"provider": "openai", "model_id": "gpt-5.6-sol", "tier": "flagship", "price_in": 5.0, "price_out": 30.0, "price_cached_in": 0.5, "batch_discount": 0.5},
+    {"provider": "openai", "model_id": "gpt-5.6-terra", "tier": "workhorse", "price_in": 2.0, "price_out": 12.0, "batch_discount": 0.5},
+    {"provider": "openai", "model_id": "gpt-5.6-luna", "tier": "budget", "price_in": 0.2, "price_out": 1.2, "batch_discount": 0.5},
+    {"provider": "anthropic", "model_id": "claude-fable-5", "tier": "frontier", "price_in": 10.0, "price_out": 50.0, "cache_hit_factor": 0.1, "batch_discount": 0.5},
+    {"provider": "anthropic", "model_id": "claude-opus-5", "tier": "flagship", "price_in": 5.0, "price_out": 25.0, "context": "1M", "batch_discount": 0.5},
+    {"provider": "anthropic", "model_id": "claude-sonnet-5", "tier": "workhorse", "price_in": 2.0, "price_out": 10.0, "batch_discount": 0.5},
+    {"provider": "anthropic", "model_id": "claude-haiku-4-5", "tier": "budget", "price_in": 1.0, "price_out": 5.0, "batch_discount": 0.5},
+    {"provider": "google", "model_id": "gemini-3.1-pro", "tier": "flagship", "price_in": 2.0, "price_out": 12.0, "batch_discount": 0.5},
+    {"provider": "google", "model_id": "gemini-3.6-flash", "tier": "workhorse", "price_in": 1.5, "price_out": 7.5, "promo_until_2026_12_31": {"price_in": 0.75, "price_out": 3.75}, "batch_discount": 0.5},
+    {"provider": "meta", "model_id": "llama-4-maverick", "tier": "flagship-oss", "price_in": 0.08, "price_out": 0.9, "note": "open weights; price depends on host (Groq/DeepInfra); first-party API wound down 2026-07"},
+    {"provider": "deepseek", "model_id": "deepseek-v4-flash", "tier": "workhorse", "price_in": 0.14, "price_out": 0.28, "price_cached_in": 0.0028, "context": "1M", "offpeak_factor": 0.5},
+    {"provider": "deepseek", "model_id": "deepseek-v4-pro", "tier": "flagship", "price_in": 0.435, "price_out": 0.87, "price_cached_in": 0.0036, "offpeak_factor": 0.5},
+    {"provider": "mistral", "model_id": "mistral-medium-3.5", "tier": "flagship-oss", "price_in": 1.5, "price_out": 7.5, "batch_discount": 0.5},
+    {"provider": "mistral", "model_id": "mistral-small-4", "tier": "budget", "price_in": 0.15, "price_out": 0.6, "batch_discount": 0.5},
+    {"provider": "alibaba", "model_id": "qwen3.8-max", "tier": "flagship", "price_in": 2.0, "price_out": 6.0, "price_cached_in": 0.25, "batch_discount": 0.5},
+    {"provider": "alibaba", "model_id": "qwen3.7-max", "tier": "workhorse", "price_in": 1.25, "price_out": 3.75},
+    {"provider": "xai", "model_id": "grok-4.6", "tier": "flagship", "price_in": 2.0, "price_out": 6.0, "price_cached_in": 0.5, "note": "prompts >=200K tokens billed 2x"},
+    {"provider": "xai", "model_id": "grok-4.3", "tier": "workhorse", "price_in": 1.25, "price_out": 2.5},
+    {"provider": "amazon", "model_id": "nova-premier", "tier": "flagship", "price_in": 2.5, "price_out": 12.5, "batch_discount": 0.5},
+    {"provider": "amazon", "model_id": "nova-pro", "tier": "workhorse", "price_in": 0.8, "price_out": 3.2, "batch_discount": 0.5},
+    {"provider": "amazon", "model_id": "nova-micro", "tier": "budget", "price_in": 0.035, "price_out": 0.14, "batch_discount": 0.5},
+    {"provider": "moonshot", "model_id": "kimi-k3", "tier": "flagship-oss", "price_in": 3.0, "price_out": 15.0, "price_cached_in": 0.3},
+    {"provider": "moonshot", "model_id": "kimi-k2.6", "tier": "workhorse", "price_in": 0.95, "price_out": 4.0}
+  ],
+  "free_access": [
+    {"provider": "google", "path": "AI Studio free tier, no card", "limits": "Flash-Lite ~1000 req/day 15 RPM; Flash ~250 RPD; Pro ~100 RPD; prompts may train models"},
+    {"provider": "openai", "path": "opt-in data sharing -> up to 1M-10M free tokens/day", "limits": "requires sharing traffic for training"},
+    {"provider": "anthropic", "path": "no free API tier; small console trial credits; batch -50% + cache reads -90%"},
+    {"provider": "xai", "path": "$25 signup credit + $150/mo via data-sharing program"},
+    {"provider": "deepseek", "path": "5M free tokens on signup (30 days); paid is near-free at benchmark scale; off-peak -50%"},
+    {"provider": "alibaba", "path": "1M tokens/model one-time trial (~70M total, 90 days, Singapore endpoint)"},
+    {"provider": "mistral", "path": "La Plateforme Experiment tier: $0 all models", "limits": "~1 req/s, ~500K TPM, ~1B tokens/mo, eval use only"},
+    {"provider": "groq", "path": "free tier, no card; hosts Llama 4, Qwen 3, Kimi K2, GPT-OSS", "limits": "30 RPM, 1K-14.4K req/day per model"},
+    {"provider": "openrouter", "path": "~18-27 rotating :free models", "limits": "20 RPM; 50 req/day (1000/day after ever buying $10 credits)"},
+    {"provider": "local", "path": "Ollama: Llama 4 Scout/Maverick, Qwen3, DeepSeek distills, Mistral Small 4", "limits": "hardware-bound only"}
+  ]
+}
