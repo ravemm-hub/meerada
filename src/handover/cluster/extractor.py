@@ -123,7 +123,10 @@ def extract_clusters(
     matrix = _features(reps)
 
     size = min_cluster_size or max(5, len(items) // 100)
-    labels = np.asarray(HDBSCAN(min_cluster_size=size, copy=True).fit_predict(matrix))
+    if len(items) <= size:  # too few tasks for density clustering
+        labels = _fallback_by_template(reps)
+    else:
+        labels = np.asarray(HDBSCAN(min_cluster_size=size, copy=True).fit_predict(matrix))
 
     if (labels == -1).all():
         labels = _fallback_by_template(reps)  # degenerate case: group by template

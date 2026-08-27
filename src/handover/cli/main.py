@@ -5,6 +5,7 @@ distribution wedge: a developer records a trace source and gets the ranked
 CPAT report in two commands.
 """
 
+import json
 from pathlib import Path
 from typing import Annotated
 
@@ -14,6 +15,7 @@ from handover.assemble import AttemptRecord, assemble_grouped
 from handover.cli.store import SqliteStore
 from handover.collect import Normalizer, RawEvent
 from handover.metrics import TaskTraces, compute_core, compute_waste
+from handover.pack.builder import build_pack, validate_pack
 from handover.report.__main__ import DEFAULT_PRICES
 from handover.report.renderer import build_model_reports, render_report
 
@@ -97,12 +99,42 @@ def report(
 
 
 @app.command()
-def pack(db: DbOption = DEFAULT_DB) -> None:
-    """Build a handover pack (taxonomy, contracts, golden set). Arrives in P1."""
-    typer.echo(
-        "`hv pack` requires cluster extraction (P1: T9-T11) which is not built yet.", err=True
+def pack(
+    db: DbOption = DEFAULT_DB,
+    out: Annotated[Path, typer.Option("--out", help="pack output directory")] = Path(
+        "handover-pack"
+    ),
+) -> None:
+    """Build a handover pack: taxonomy, contracts, tool policies, golden sets."""
+    if not db.exists():
+        typer.echo(f"no database at {db} — run `hv record` first", err=True)
+        raise typer.Exit(1)
+    store = SqliteStore(db)
+    stored = store.load_records()
+    tenant = store.tenant_id()
+    store.close()
+    if not stored:
+        typer.echo("store is empty — run `hv record` first", err=True)
+        raise typer.Exit(1)
+
+    grouped = assemble_grouped(stored)
+    items = [TaskTraces(task=task, traces=traces) for task, traces in grouped]
+    from_model = max(
+        (task.models_used[-1] for task, _ in grouped),
+        key=[task.models_used[-1] for task, _ in grouped].count,
     )
-    raise typer.Exit(2)
+    pack_dir = build_pack(out, items, tenant_id=tenant, from_model=from_model)
+    errors = validate_pack(pack_dir)
+    if errors:
+        for error in errors:
+            typer.echo(f"invalid pack: {error}", err=True)
+        raise typer.Exit(1)
+    manifest = json.loads((pack_dir / "manifest.json").read_text(encoding="utf-8"))
+    typer.echo(f"pack: {pack_dir.resolve()}")
+    typer.echo(
+        f"clusters: {manifest['n_clusters']} · tasks: {manifest['n_tasks']} · "
+        f"from-model: {manifest['from_model']} · valid ✓"
+    )
 
 
 if __name__ == "__main__":

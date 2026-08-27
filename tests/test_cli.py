@@ -54,6 +54,16 @@ def test_report_without_db_fails_cleanly(tmp_path: Path) -> None:
     assert result.exit_code == 1
 
 
-def test_pack_is_honest_about_p1(tmp_path: Path) -> None:
+def test_pack_without_db_fails_cleanly(tmp_path: Path) -> None:
     result = runner.invoke(app, ["pack", "--db", str(tmp_path / "hv.db")])
-    assert result.exit_code == 2
+    assert result.exit_code == 1
+
+
+def test_record_then_pack(tmp_path: Path) -> None:
+    db = tmp_path / "hv.db"
+    out = tmp_path / "pack"
+    runner.invoke(app, ["record", str(FIXTURE), "--db", str(db)])
+    result = runner.invoke(app, ["pack", "--db", str(db), "--out", str(out)])
+    assert result.exit_code == 0, result.output
+    assert (out / "manifest.json").exists()
+    assert "valid" in result.output
