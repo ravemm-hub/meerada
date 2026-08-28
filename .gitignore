@@ -10,3 +10,8 @@ out/
 *.egg-info/
 dist/
 .env
+pilot/meerada.db
+pilot/teeby_events.jsonl
+pilot/content_store.jsonl
+pilot/trybe_pack/
+pilot/*_report.html

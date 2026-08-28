@@ -6,6 +6,7 @@ CPAT report in two commands.
 """
 
 import json
+import sys
 from pathlib import Path
 from typing import Annotated
 
@@ -19,6 +20,18 @@ from handover.metrics import TaskTraces, compute_core, compute_waste
 from handover.pack.builder import build_pack, validate_pack
 from handover.report.__main__ import DEFAULT_PRICES
 from handover.report.renderer import build_model_reports, render_report
+
+
+def _force_utf8() -> None:
+    """Windows consoles default to a legacy codepage (cp1255 here); force UTF-8
+    so report paths and status glyphs never crash the CLI."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            reconfigure(encoding="utf-8")
+
+
+_force_utf8()
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 
@@ -90,7 +103,7 @@ def report(
     unknown = "—" if overall.unknown_rate.value is None else f"{overall.unknown_rate.value:.1%}"
     typer.echo(f"report: {path.resolve()}")
     typer.echo(
-        f"tasks: {overall.n_tasks} ({overall.n_verified} verified) · unknown-rate: {unknown}"
+        f"tasks: {overall.n_tasks} ({overall.n_verified} verified) | unknown-rate: {unknown}",
     )
     if (overall.unknown_rate.value or 0) > 0.30:
         typer.echo(
@@ -134,8 +147,8 @@ def pack(
     manifest = json.loads((pack_dir / "manifest.json").read_text(encoding="utf-8"))
     typer.echo(f"pack: {pack_dir.resolve()}")
     typer.echo(
-        f"clusters: {manifest['n_clusters']} · tasks: {manifest['n_tasks']} · "
-        f"from-model: {manifest['from_model']} · valid ✓"
+        f"clusters: {manifest['n_clusters']} | tasks: {manifest['n_tasks']} | "
+        f"from-model: {manifest['from_model']} | valid OK"
     )
 
 
