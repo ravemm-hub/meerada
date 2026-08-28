@@ -53,7 +53,7 @@ mypy_path = "src"
 packages = ["handover"]
 
 [[tool.mypy.overrides]]
-module = ["duckdb.*", "arq.*", "jsonschema.*", "sklearn.*"]
+module = ["duckdb.*", "arq.*", "jsonschema.*", "sklearn.*", "anthropic.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
