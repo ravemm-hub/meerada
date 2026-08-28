@@ -117,8 +117,9 @@ def test_evidence_bundle_signed_and_tamper_detected(tmp_path: Path) -> None:
     assert by_model["model-b"]["n_verified"] == 0
 
     change_log = (bundle / "change_log.jsonl").read_text(encoding="utf-8")
-    assert "structured extraction" in change_log
-    assert "pass rate: 0.91" in change_log  # rendered §6.4 format preserved
+    assert "structured extraction" in change_log  # sanitized label only
+    assert '"baseline_rate": 0.91' in change_log  # structured fields, no prose
+    assert "pass rate:" not in change_log  # rendered prose removed (leak channel closed)
 
     (bundle / "inventory.json").write_text("[]", encoding="utf-8")
     assert any("digest mismatch" in e for e in verify_evidence(bundle))

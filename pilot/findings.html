@@ -1,0 +1,127 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trybe Pilot Findings</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0B1020; color: #E9EEF9;
+         font-family: "IBM Plex Sans", system-ui, sans-serif; line-height: 1.6; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 2.4rem 1.25rem 4rem; }
+  .brand { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.4rem; }
+  .wordmark { font-family: "Archivo"; font-weight: 800; font-size: 1.3rem; letter-spacing: -.03em; }
+  .wordmark em { font-style: normal; color: #63CFC2; }
+  h1 { font-family: "Archivo"; font-weight: 800; font-size: 1.7rem; letter-spacing: -.02em; margin: 0; }
+  .sub { color: #92A2BE; font-size: .88rem; margin-top: .3rem; }
+  .verdict { border-left: 3px solid #F2B84B; background: #14161f; padding: 1rem 1.2rem;
+             border-radius: 0 10px 10px 0; margin: 1.6rem 0; }
+  .verdict b { color: #F2B84B; }
+  h2 { font-family: "Archivo"; font-weight: 700; font-size: 1.15rem; margin: 2.4rem 0 1rem;
+       padding-bottom: .4rem; border-bottom: 1px solid #22304F; }
+  .strip { display: flex; gap: .8rem; flex-wrap: wrap; margin: 1rem 0; }
+  .chip { background: #131a2c; border: 1px solid #22304F; border-radius: 12px; padding: .8rem 1rem; flex: 1; min-width: 130px; }
+  .chip .k { color: #92A2BE; font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; }
+  .chip .v { font-size: 1.35rem; font-weight: 800; margin-top: .15rem; font-variant-numeric: tabular-nums; }
+  .warn { color: #E5645C; } .ok { color: #58C07A; } .amber { color: #F2B84B; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; margin-top: .6rem; }
+  th { color: #92A2BE; font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; text-align: left;
+       padding: .45rem .6rem; border-bottom: 1px solid #22304F; }
+  td { padding: .5rem .6rem; border-bottom: 1px solid #171f30; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .step { display: flex; gap: .8rem; align-items: flex-start; margin: .7rem 0; }
+  .badge { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+           font-size: .8rem; font-weight: 700; }
+  .badge.pass { background: #14301a; color: #58C07A; border: 1px solid #2d5a34; }
+  .badge.stop { background: #301616; color: #E5645C; border: 1px solid #5a2d2d; }
+  .step .t { font-weight: 600; }
+  .step .d { color: #92A2BE; font-size: .86rem; }
+  code { font-family: "IBM Plex Mono", monospace; font-size: .82em; background: #0E1526; padding: .1rem .35rem; border-radius: 4px; }
+  .grade { font-size: .68rem; padding: .05rem .45rem; border-radius: 999px; border: 1px solid; }
+  .grade.derived { color: #F2B84B; border-color: #9e6a03; }
+  .grade.unknown { color: #92A2BE; border-color: #22304F; }
+  footer { margin-top: 2.6rem; color: #5b6472; font-size: .74rem; line-height: 1.6; }
+</style>
+
+<div class="wrap">
+  <div class="brand">
+    <svg viewBox="0 0 104 104" width="34" height="34" aria-hidden="true"><g transform="translate(0,20)">
+      <path d="M6 32 Q52 -16 98 32" fill="none" stroke="#63CFC2" stroke-width="8" stroke-linecap="round"/>
+      <path d="M6 32 Q52 80 98 32" fill="none" stroke="#F2B84B" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="52" cy="32" r="18" fill="none" stroke="#22304F" stroke-width="6"/>
+      <circle cx="52" cy="32" r="18" fill="none" stroke="#F2B84B" stroke-width="6" pathLength="100" stroke-dasharray="80 100" stroke-linecap="round" transform="rotate(-90 52 32)"/>
+      <circle cx="52" cy="32" r="7" fill="#63CFC2"/></g></svg>
+    <span class="wordmark">m<em>ee</em>rada</span>
+  </div>
+
+  <h1>Pilot #0 — Meerada on its own maker</h1>
+  <div class="sub">First real-data run: Trybe's live Teeby / group-agent traffic · 2026-08-28 · all content stayed on the machine</div>
+
+  <div class="verdict">
+    <b>The headline:</b> the full pipeline ran end-to-end on 469 real production LLM calls — and Meerada
+    then <b>correctly refused to grade or migrate them.</b> Trybe's warm-chat assistant has almost no
+    programmatic verification, so 76% of tasks are <code>unknown</code> and the golden set is empty.
+    That is not a failure — it is the product proving its integrity, exactly as the spec predicted.
+    Trybe validated the <b>engine</b>; it is not itself a Handshake customer.
+  </div>
+
+  <h2>What actually ran</h2>
+  <div class="step"><div class="badge pass">✓</div><div><div class="t">Collect &amp; normalize</div>
+    <div class="d">569 messages pulled from <code>agent_messages</code> + <code>teeby_space_messages</code>,
+      normalized to 469 metadata-only traces. Every message body stayed local — the exported events carry only
+      salted fingerprints, token estimates and timings.</div></div></div>
+  <div class="step"><div class="badge pass">✓</div><div><div class="t">Grade (CPAT report)</div>
+    <div class="d">426 tasks assembled, real CPAT and waste computed, ranked report rendered.</div></div></div>
+  <div class="step"><div class="badge pass">✓</div><div><div class="t">Extract taxonomy</div>
+    <div class="d">12 task clusters discovered by HDBSCAN from real traffic shape — a genuine map of what Teeby does.</div></div></div>
+  <div class="step"><div class="badge stop">✕</div><div><div class="t">Handshake — correctly blocked</div>
+    <div class="d">Golden sets came back <b>empty</b>: the builder admits only grade-A <em>measured</em> cases, and
+      Trybe has zero. Nothing to replay on a candidate model. Meerada did not invent a migration it couldn't prove.</div></div></div>
+
+  <h2>The grade, on real traffic</h2>
+  <div class="strip">
+    <div class="chip"><div class="k">Tasks</div><div class="v">426</div></div>
+    <div class="chip"><div class="k">Verified</div><div class="v">103</div></div>
+    <div class="chip"><div class="k">Unknown rate</div><div class="v warn">75.8%</div></div>
+    <div class="chip"><div class="k">CPAT (est.)</div><div class="v">$0.0054</div></div>
+    <div class="chip"><div class="k">TTAT</div><div class="v">8.6s</div></div>
+  </div>
+  <table>
+    <tr><th>Signal</th><th>Grade</th><th class="num">Tasks</th><th>Meaning</th></tr>
+    <tr><td>silent acceptance</td><td><span class="grade derived">derived</span></td><td class="num">103</td><td>reply was engaged with, no retry within 10 min</td></tr>
+    <tr><td>none</td><td><span class="grade unknown">unknown</span></td><td class="num">323</td><td>proactive nudge, no downstream signal — excluded from every number</td></tr>
+  </table>
+  <p class="sub">Success rate on the 103 verifiable tasks: <b class="ok">100%</b> [96.4–100] Wilson 95% — but note the grade
+    is <span class="grade derived">derived</span>, never <span class="grade unknown">measured</span>. Meerada labels this honestly rather than dressing it up as fact.</p>
+
+  <h2>Waste — where the estimate points</h2>
+  <div class="strip">
+    <div class="chip"><div class="k">Total spend (est.)</div><div class="v">$1.75</div></div>
+    <div class="chip"><div class="k">Waste</div><div class="v amber">$0.48 (27.5%)</div></div>
+    <div class="chip"><div class="k">Dominant leak</div><div class="v">uncached<br>context</div></div>
+  </div>
+  <p class="sub">All of the estimated waste is <b>uncached repeated context</b> — Teeby re-sends its ~3k-token system
+    prompt on every call. Trybe's own edge function already caches it above 3,500 chars; Meerada independently
+    flagged the same leak from metadata alone. Retry and dead-task waste are $0 because there are no measured failures.</p>
+
+  <h2>Why this is the most useful possible result</h2>
+  <table>
+    <tr><th>Spec prediction</th><th>What the pilot showed</th></tr>
+    <tr><td>§5.1 — a workload under 50% grade-A is not a P0/P1 fit</td><td>Trybe is at <b>0%</b> grade-A. Confirmed, in one run.</td></tr>
+    <tr><td>§7.5 — a customer with no verification signal breaks the Handshake promise</td><td>Golden set empty → Handshake declined. The guardrail works.</td></tr>
+    <tr><td>§13 — high <code>unknown</code> rate is the top product risk</td><td>76% unknown surfaced immediately, with the built-in warning firing.</td></tr>
+    <tr><td>The engine is sound</td><td>Collect → normalize → assemble → grade → cluster → pack all ran on messy real data without a hitch.</td></tr>
+  </table>
+
+  <h2>What a real Handshake pilot needs next</h2>
+  <p class="sub">The right first customer is a <b>verifiable</b> workload — code generation with tests, structured
+    extraction with schemas, or agents with tool-call contracts — where 50%+ of tasks carry a measured signal.
+    Trybe could become one narrow slice at a time: if Teeby emitted a JSON action-envelope (it already uses
+    action tags), those calls would become <span class="grade" style="color:#7ee787;border-color:#2ea043">measured</span>
+    and a real Handshake from <code>claude-haiku-4-5</code> to a cheaper candidate would become possible — with a real gap report.</p>
+
+  <footer>
+    Meerada Pilot #0 · run on Trybe's own data by its maker · content never left the machine (metadata-only exports, gitignored) ·
+    dollar figures are DERIVED estimates (chat workload has no billing log), labelled as such throughout ·
+    engine: handover package, 139 tests green.
+  </footer>
+</div>

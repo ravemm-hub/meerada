@@ -13,6 +13,7 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, model_validator
 
+from handover.collect.redaction import assert_metadata_only
 from handover.metrics.core import CoreMetrics
 
 
@@ -137,4 +138,8 @@ def index_payload(
         for cluster_id, metrics_by_model in sorted(per_cluster.items())
         for norm in cluster_axis_norms(cluster_id, metrics_by_model)
     ]
-    return {"norms": norms, "cost_shares": dict(cost_shares)}
+    payload = {"norms": norms, "cost_shares": dict(cost_shares)}
+    # This payload is the score export that crosses to Meerada's cloud (SPEC
+    # §2.1). Guard it: nothing content-shaped may leave the tenant boundary.
+    assert_metadata_only(payload, name="index_payload")
+    return payload

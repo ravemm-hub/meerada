@@ -12,9 +12,19 @@ from pathlib import Path
 from uuid import UUID
 
 from handover.canary.drift import DriftAlert
+from handover.collect.redaction import assert_metadata_only
 from handover.migrate.gap_report import GapReport
 from handover.pack.builder import verify_signed_manifest, write_signed_manifest
 from handover.schema.task import Task
+
+
+def _guard_file(path: Path) -> None:
+    """Refuse to emit an evidence file that looks like it carries content."""
+    text = path.read_text(encoding="utf-8")
+    lines = text.splitlines() if path.suffix == ".jsonl" else [text]
+    for line in lines:
+        if line.strip():
+            assert_metadata_only(json.loads(line), name=path.name)
 
 
 def _inventory(tasks: Sequence[Task]) -> list[dict[str, object]]:
@@ -42,11 +52,11 @@ def export_evidence(
     (out_dir / "inventory.json").write_text(
         json.dumps(_inventory(tasks), indent=2, sort_keys=True), encoding="utf-8"
     )
+    # Structured alert fields only — no rendered prose. Every field is a number
+    # or the already-sanitized cluster label, so the egress guard passes and a
+    # consumer re-renders the §6.4 format from these fields.
     (out_dir / "change_log.jsonl").write_text(
-        "\n".join(
-            json.dumps({**alert.model_dump(), "rendered": alert.render()}, sort_keys=True)
-            for alert in drift_alerts
-        ),
+        "\n".join(json.dumps(alert.model_dump(), sort_keys=True) for alert in drift_alerts),
         encoding="utf-8",
     )
     (out_dir / "gap_reports.json").write_text(
@@ -57,6 +67,10 @@ def export_evidence(
         ),
         encoding="utf-8",
     )
+
+    for name in ("inventory.json", "change_log.jsonl", "gap_reports.json"):
+        _guard_file(out_dir / name)
+
     write_signed_manifest(
         out_dir,
         {

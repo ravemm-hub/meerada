@@ -141,6 +141,15 @@ class Hasher:
         return "Hasher(salt=<redacted>)"
 
 
+def slugify(value: str, *, max_len: int = 128) -> str:
+    """Reduce a free-text identifier to a safe slug: interior whitespace and
+    unexpected characters collapse to '-', truncated to max_len. Neutralizes
+    any content an adapter might carry in an identifier field before it reaches
+    the content-typed Trace schema. Empty result becomes 'unknown'."""
+    slug = re.sub(r"[^A-Za-z0-9.:/+_-]+", "-", value.strip()).strip("-")[:max_len]
+    return slug or "unknown"
+
+
 class Normalizer:
     """Converts RawEvent (content) into Trace (metadata only)."""
 
@@ -161,10 +170,10 @@ class Normalizer:
             attempt_no=raw.attempt_no,
             ts_start=raw.ts_start,
             ts_end=raw.ts_end,
-            provider=raw.provider,
-            model_id=raw.model_id,
-            model_version_hint=raw.model_version_hint,
-            endpoint_region=raw.endpoint_region,
+            provider=slugify(raw.provider, max_len=40),
+            model_id=slugify(raw.model_id, max_len=40),
+            model_version_hint=slugify(raw.model_version_hint, max_len=40),
+            endpoint_region=slugify(raw.endpoint_region, max_len=40),
             tokens=Tokens(
                 input=raw.tokens.input,
                 input_cached=raw.tokens.input_cached,
@@ -183,13 +192,13 @@ class Normalizer:
             output_shape=self._output_shape(raw.output_text),
             tool_calls=tuple(
                 ToolCall(
-                    name=call.name,
+                    name=slugify(call.name),
                     args_fingerprint=self._hasher.fingerprint(
                         json.dumps(call.args, sort_keys=True, default=str)
                     ),
                     ts_offset_ms=call.ts_offset_ms,
                     duration_ms=call.duration_ms,
-                    status=call.status,
+                    status=slugify(call.status, max_len=32),
                 )
                 for call in raw.tool_calls
             ),

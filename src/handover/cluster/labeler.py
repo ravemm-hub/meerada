@@ -84,8 +84,20 @@ def label_clusters(
             continue
         result = model.complete(_prompt_for(cluster, items_by_task))
         budget.charge(result.cost_usd)
-        labeled.append(cluster.model_copy(update={"label": result.text.strip().lower() or None}))
+        labeled.append(cluster.model_copy(update={"label": _sanitize_label(result.text)}))
     return Clustering(clusters=tuple(labeled), assignments=clustering.assignments)
+
+
+# A cluster label is a short human tag. Clamp what the model returns so a model
+# that echoes input content cannot smuggle it into a shipped pack (defense in
+# depth behind redaction.assert_metadata_only).
+MAX_LABEL_WORDS = 6
+MAX_LABEL_CHARS = 60
+
+
+def _sanitize_label(text: str) -> str | None:
+    label = " ".join(text.strip().lower().split()[:MAX_LABEL_WORDS])[:MAX_LABEL_CHARS]
+    return label or None
 
 
 def apply_to_tasks(clustering: Clustering, items: Sequence[TaskTraces]) -> list[TaskTraces]:

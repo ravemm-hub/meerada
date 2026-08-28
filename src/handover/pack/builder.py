@@ -14,6 +14,7 @@ from typing import Any
 from uuid import UUID
 
 from handover.cluster import Clustering, extract_clusters
+from handover.collect.redaction import ContentLeakError, assert_metadata_only
 from handover.metrics import compute_core
 from handover.metrics.waste import TaskTraces
 from handover.pack.contract import find_edge_cases, infer_contract
@@ -207,4 +208,25 @@ def validate_pack(pack_dir: Path) -> list[str]:
         if not (pack_dir / "prompts" / f"{cluster_id}.json").exists():
             errors.append(f"missing prompts for {cluster_id}")
     errors.extend(verify_signed_manifest(pack_dir))
+    errors.extend(_scan_pack_for_content(pack_dir))
+    return errors
+
+
+def _scan_pack_for_content(pack_dir: Path) -> list[str]:
+    """Egress guard: every shipped pack file must be metadata-only. A pack that
+    trips this is refused rather than sent (defense in depth, CLAUDE.md rule 1)."""
+    errors: list[str] = []
+    for path in sorted(pack_dir.rglob("*")):
+        if not path.is_file() or path.name == "manifest.json":
+            continue
+        text = path.read_text(encoding="utf-8")
+        for line in text.splitlines() if path.suffix == ".jsonl" else [text]:
+            if not line.strip():
+                continue
+            try:
+                assert_metadata_only(json.loads(line), name=path.name)
+            except ContentLeakError as exc:
+                errors.append(str(exc).splitlines()[0])
+            except ValueError:
+                pass  # non-JSON file; digest check already covers integrity
     return errors

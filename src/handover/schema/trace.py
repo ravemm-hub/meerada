@@ -24,6 +24,20 @@ SCHEMA_VERSION = "1.0"
 
 Fingerprint = Annotated[str, StringConstraints(pattern=r"^sha256:[0-9a-f]{64}$")]
 
+# Content-typed identifier fields. These are the free-text fields that would
+# otherwise ship in a pack/report; constraining them at the schema means a
+# Trace carrying content in them fails validation and never enters the system
+# (preventive, not merely detected at export). No interior whitespace, bounded
+# length — enough for real model ids / tool names / signals, too little for
+# smuggled content.
+Slug = Annotated[str, StringConstraints(pattern=r"^[A-Za-z0-9](?:[\w.:/+-]{0,127})$")]
+# Signals are enum-like lowercase tokens (test_exit_code, silent_acceptance...).
+Signal = Annotated[str, StringConstraints(pattern=r"^[a-z0-9_]{1,64}$")]
+# A short status word (ok, error, timeout...).
+Status = Annotated[str, StringConstraints(pattern=r"^[A-Za-z0-9_-]{1,32}$")]
+# Region: identifier or the literal "unknown".
+Region = Annotated[str, StringConstraints(pattern=r"^[A-Za-z0-9_-]{1,64}$")]
+
 
 class StrictModel(BaseModel):
     """Base for all boundary models: unknown fields are rejected, instances are immutable."""
@@ -61,17 +75,17 @@ class OutputShape(StrictModel):
 
 
 class ToolCall(StrictModel):
-    name: str
+    name: Slug
     args_fingerprint: Fingerprint
     ts_offset_ms: NonNegativeInt
     duration_ms: NonNegativeInt
-    status: str
+    status: Status
 
 
 class Verification(StrictModel):
     status: Literal["pass", "fail", "unknown"]
     method: Literal["programmatic", "downstream", "judge"]
-    signal: str
+    signal: Signal
     confidence: Annotated[float, Field(ge=0.0, le=1.0)]
     evidence_grade: Literal["measured", "derived", "declared"]
 
@@ -85,10 +99,10 @@ class Trace(StrictModel):
     ts_start: AwareDatetime
     ts_end: AwareDatetime
 
-    provider: str
-    model_id: str
-    model_version_hint: str
-    endpoint_region: str
+    provider: Slug
+    model_id: Slug
+    model_version_hint: Slug
+    endpoint_region: Region
 
     tokens: Tokens
     cost_usd: Money
