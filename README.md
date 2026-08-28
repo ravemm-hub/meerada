@@ -1,4 +1,4 @@
-# Prooly — working name (`prooly` CLI, package `handover`)
+# Meerada — working name (`meerada` CLI, package `handover`)
 
 **Measure what your LLM spend actually buys.**
 
@@ -7,7 +7,7 @@ that matters: **CPAT — cost per accepted task** — what one *verified, comple
 unit of work really costs, including the retries, the reasoning-token burn, and
 the attempts that died on the way.
 
-`prooly` (working name — may change) reads your LLM traffic locally, verifies task success with programmatic
+`meerada` (working name — may change) reads your LLM traffic locally, verifies task success with programmatic
 signals (test exit codes, schema validation, output contracts), and renders a
 ranked model leaderboard for **your** workload — not a synthetic benchmark.
 
@@ -15,8 +15,8 @@ ranked model leaderboard for **your** workload — not a synthetic benchmark.
 
 ```bash
 pip install -e .
-prooly record events.jsonl # ingest a trace source (metadata extracted locally)
-prooly report              # ranked HTML leaderboard: CPAT, waste, success rates
+meerada record events.jsonl # ingest a trace source (metadata extracted locally)
+meerada report              # ranked HTML leaderboard: CPAT, waste, success rates
 ```
 
 Zero infrastructure: local SQLite, one self-contained HTML file, no accounts.
@@ -44,7 +44,7 @@ verification signal are **excluded**, never guessed.
 ## Status
 
 P0 (core pipeline + report) complete. P1 in progress: task clustering,
-output-contract extraction, golden sets, and `prooly pack` — the handover pack that
+output-contract extraction, golden sets, and `meerada pack` — the handover pack that
 lets you migrate a workload between models with a measured gap report.
 
 See `SPEC.md` for the full design. Development: `make test`, `make lint`.

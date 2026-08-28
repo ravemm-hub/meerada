@@ -28,7 +28,7 @@ dev = [
 ]
 
 [project.scripts]
-prooly = "handover.cli.main:app"
+meerada = "handover.cli.main:app"
 hv = "handover.cli.main:app"
 
 [build-system]

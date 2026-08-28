@@ -1,4 +1,4 @@
-"""The free developer CLI: ``prooly record``, ``prooly report``, ``prooly pack`` (alias: ``hv``).
+"""The free developer CLI: ``meerada record``, ``meerada report``, ``meerada pack`` (alias: ``hv``).
 
 Runs entirely locally against SQLite — zero infrastructure. This is the
 distribution wedge: a developer records a trace source and gets the ranked
