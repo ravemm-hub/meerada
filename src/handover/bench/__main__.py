@@ -12,7 +12,7 @@ import os
 from decimal import Decimal
 from pathlib import Path
 
-from handover.bench.runner import ModelSpec, run_index
+from handover.bench.runner import Complete, ModelSpec, _Completion, run_index
 from handover.metrics.index import compute_index
 from handover.replay.budget import DailyBudget
 from handover.replay.openai_client import ENDPOINTS, HttpChatCaller
@@ -63,10 +63,10 @@ def main(argv: list[str] | None = None) -> int:
 
     budget = DailyBudget(args.budget)
 
-    def complete_for(spec: ModelSpec):
+    def complete_for(spec: ModelSpec) -> Complete:
         caller = callers[spec.model_id]
 
-        def complete(system: str, user: str, max_tokens: int):
+        def complete(system: str, user: str, max_tokens: int) -> _Completion:
             return caller.complete(
                 spec.model_id, system, [{"role": "user", "content": user}], max_tokens
             )
