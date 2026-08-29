@@ -38,6 +38,11 @@ class Artifacts(BaseModel):
     accepted_downstream: bool | None = None
     retried_within_10m: bool | None = None
     correction_followed: bool | None = None
+    # For migration quality: the incumbent's proven-good output to match against.
+    # Present only during replay; enables "as good as the old model", not merely
+    # "well-formed". Both stay in-tenant.
+    expected_output: str | None = None
+    candidate_exit_code: int | None = None  # candidate ran the SAME tests
 
 
 @runtime_checkable
@@ -72,6 +77,7 @@ class VerifierRegistry:
 
 
 def default_registry() -> VerifierRegistry:
+    from handover.verify.equivalence import EquivalenceVerifier
     from handover.verify.exit_code import ExitCodeVerifier
     from handover.verify.json_schema import JsonSchemaVerifier
     from handover.verify.regex_contract import RegexContractVerifier
@@ -79,6 +85,7 @@ def default_registry() -> VerifierRegistry:
 
     return VerifierRegistry(
         [
+            EquivalenceVerifier(),
             ExitCodeVerifier(),
             JsonSchemaVerifier(),
             RegexContractVerifier(),
