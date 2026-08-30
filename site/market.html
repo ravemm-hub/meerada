@@ -7,7 +7,7 @@
     --teal:#63CFC2; --amber:#F2B84B; --good:#58C07A; --bad:#E5645C; }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--ground); color:var(--text); font-family:"IBM Plex Sans",system-ui,sans-serif; }
-  .wrap { max-width:1240px; margin:0 auto; padding:1.3rem 1rem 4rem; }
+  .wrap { max-width:1300px; margin:0 auto; padding:1.3rem 1rem 4rem; }
   .top { display:flex; align-items:center; gap:.9rem; flex-wrap:wrap; }
   .brand { display:flex; align-items:center; gap:.5rem; }
   .wm { font-family:"Archivo"; font-weight:800; font-size:1.15rem; letter-spacing:-.03em; }
@@ -20,68 +20,65 @@
   h1 { font-family:"Archivo"; font-weight:800; font-size:1.4rem; letter-spacing:-.02em; margin:.6rem 0 .1rem; }
   .sub { color:var(--muted); font-size:.82rem; }
   .teal{color:var(--teal)} .up{color:var(--good)} .down{color:var(--bad)} .flat{color:var(--muted)} .amber{color:var(--amber)}
-
-  .tabs { display:flex; gap:.4rem; margin:1.1rem 0 .4rem; flex-wrap:wrap; border-bottom:1px solid var(--line); }
-  .tab { background:none; border:none; color:var(--muted); font-family:"Archivo"; font-weight:700; font-size:.92rem;
-    padding:.6rem .9rem; cursor:pointer; border-bottom:2px solid transparent; }
-  .tab.active { color:var(--text); border-bottom-color:var(--teal); }
-  .view { display:none; } .view.active { display:block; }
-
-  .bench { display:grid; grid-template-columns:1.2fr 1fr; gap:1rem; margin:1rem 0; }
-  @media (max-width:820px){ .bench{grid-template-columns:1fr} }
-  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1rem 1.15rem; }
-  .card h4 { margin:.1rem 0 .7rem; font-family:"Archivo"; font-size:.95rem; }
-  .card h4 .tag { font-family:"IBM Plex Mono",monospace; font-size:.6rem; color:var(--muted); font-weight:400; margin-left:.4rem; }
-  .measuring .mrow { display:flex; align-items:center; gap:.6rem; font-size:.82rem; margin:.3rem 0; }
-  .measuring .task { font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--muted); }
-  .fill { flex:1; background:var(--panel2); border-radius:999px; height:8px; overflow:hidden; border:1px solid var(--line); }
-  .fill i { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--teal),var(--amber)); transition:width .1s linear; }
-  .verdict-chip { font-family:"IBM Plex Mono",monospace; font-size:.72rem; }
-  .feed { font-family:"IBM Plex Mono",monospace; font-size:.71rem; max-height:180px; overflow-y:auto; }
-  .feed .f { display:flex; gap:.5rem; padding:.2rem 0; border-bottom:1px solid #171f30; white-space:nowrap; }
-  .feed .f .t { color:var(--muted); } .feed .f .mn { color:var(--text); flex:1; }
-  .cmp { width:100%; border-collapse:collapse; font-size:.78rem; }
-  .cmp th,.cmp td { padding:.4rem .5rem; border-bottom:1px solid #171f30; text-align:center; }
-  .cmp th { color:var(--muted); font-size:.62rem; text-transform:uppercase; }
-  .cmp td.l,.cmp th.l { text-align:left; color:var(--muted); }
-  .cmp .ours { color:var(--teal); font-weight:700; } .cmp .no{color:var(--bad)} .cmp .yes{color:var(--good)}
+  h2 { font-family:"Archivo"; font-weight:800; font-size:1.25rem; margin:2.4rem 0 .3rem; }
+  .h2sub { color:var(--muted); font-size:.85rem; margin-bottom:1rem; }
 
   .stats { display:flex; gap:.7rem; flex-wrap:wrap; margin:1rem 0 .8rem; }
-  .stat { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:.6rem .9rem; min-width:120px; }
+  .stat { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:.6rem .9rem; min-width:118px; }
   .stat .k { color:var(--muted); font-size:.6rem; text-transform:uppercase; letter-spacing:.05em; }
   .stat .v { font-family:"Archivo"; font-weight:800; font-size:1.15rem; font-variant-numeric:tabular-nums; }
-  .ticker { overflow:hidden; white-space:nowrap; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    margin:.6rem 0 1rem; padding:.5rem 0; font-family:"IBM Plex Mono",monospace; font-size:.76rem; }
+  .ticker { overflow:hidden; white-space:nowrap; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin:.6rem 0 1rem; padding:.5rem 0; font-family:"IBM Plex Mono",monospace; font-size:.76rem; }
   .ticker .run { display:inline-block; animation:scroll 46s linear infinite; } @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
   .ticker span { margin-right:2.2rem; }
-  .controls { display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:.7rem; }
+
+  /* board + side-by-side measuring sidebar */
+  .arena { display:grid; grid-template-columns:1fr 320px; gap:1rem; align-items:start; }
+  @media (max-width:980px){ .arena{grid-template-columns:1fr} }
+  .controls { display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:.6rem; }
   .controls input, .controls select, .controls button { background:var(--panel); border:1px solid var(--line); color:var(--text); border-radius:8px; padding:.42rem .7rem; font-size:.84rem; font-family:inherit; }
   .controls button { cursor:pointer; } .controls button.on { border-color:var(--good); color:var(--good); }
   .controls .note { color:var(--muted); font-size:.72rem; margin-left:auto; }
-
   .scroll { overflow-x:auto; border:1px solid var(--line); border-radius:12px; }
-  table.board { border-collapse:collapse; width:100%; font-size:.83rem; min-width:980px; }
-  table.board thead th { position:sticky; top:0; background:#0e1526; color:var(--muted); font-size:.62rem; text-transform:uppercase; letter-spacing:.05em; text-align:right; padding:.55rem .7rem; border-bottom:1px solid var(--line); cursor:pointer; white-space:nowrap; }
+  table.board { border-collapse:collapse; width:100%; font-size:.82rem; min-width:760px; }
+  table.board thead th { position:sticky; top:0; background:#0e1526; color:var(--muted); font-size:.6rem; text-transform:uppercase; letter-spacing:.04em; text-align:right; padding:.5rem .6rem; border-bottom:1px solid var(--line); cursor:pointer; white-space:nowrap; }
   table.board thead th.l { text-align:left; } table.board thead th.sorted { color:var(--teal); }
-  table.board tbody td { padding:.5rem .7rem; border-bottom:1px solid #171f30; text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  table.board tbody td { padding:.48rem .6rem; border-bottom:1px solid #171f30; text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
   table.board tbody td.l { text-align:left; } tbody tr.model-row { cursor:pointer; } tbody tr.model-row:hover { background:#121a2b; }
   tbody tr.flash-up td { background:rgba(88,192,122,.10) } tbody tr.flash-down td { background:rgba(229,100,92,.10) }
-  .mid { font-family:"IBM Plex Mono",monospace; font-size:.82rem; }
+  .mid { font-family:"IBM Plex Mono",monospace; font-size:.8rem; }
   .grade { font-family:"Archivo"; font-weight:800; } .g-good{color:var(--good)} .g-mid{color:var(--amber)} .g-low{color:var(--bad)}
   .delta { font-family:"IBM Plex Mono",monospace; font-size:.72rem; }
-  .pill { font-size:.58rem; padding:.05rem .4rem; border-radius:999px; border:1px solid; }
+  .pill { font-size:.56rem; padding:.05rem .4rem; border-radius:999px; border:1px solid; }
   .pill.confirmed{color:var(--good);border-color:#2ea043} .pill.provisional{color:var(--amber);border-color:#9e6a03}
   svg.spark { vertical-align:middle; } .caret{color:var(--muted);font-size:.65rem}
+
+  .side { position:sticky; top:.6rem; display:flex; flex-direction:column; gap:.8rem; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1rem 1.1rem; }
+  .card h4 { margin:.1rem 0 .6rem; font-family:"Archivo"; font-size:.92rem; }
+  .card h4 .tag { font-family:"IBM Plex Mono",monospace; font-size:.58rem; color:var(--muted); font-weight:400; }
+  .mrow { display:flex; align-items:center; gap:.5rem; font-size:.8rem; margin:.35rem 0; }
+  .mtask { font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--muted); }
+  .fill { flex:1; background:var(--panel2); border-radius:999px; height:8px; overflow:hidden; border:1px solid var(--line); }
+  .fill i { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--teal),var(--amber)); transition:width .1s linear; }
+  .feed { font-family:"IBM Plex Mono",monospace; font-size:.68rem; max-height:230px; overflow-y:auto; margin-top:.4rem; }
+  .feed .f { display:flex; gap:.4rem; padding:.18rem 0; border-bottom:1px solid #171f30; }
+  .feed .f .tt { color:var(--muted); } .feed .f .mn { color:var(--text); flex:1; overflow:hidden; text-overflow:ellipsis; }
+  .cmp { width:100%; border-collapse:collapse; font-size:.72rem; }
+  .cmp th,.cmp td { padding:.32rem .3rem; border-bottom:1px solid #171f30; text-align:center; }
+  .cmp th { color:var(--muted); font-size:.56rem; text-transform:uppercase; }
+  .cmp td.l,.cmp th.l { text-align:left; color:var(--muted); }
+  .cmp .ours{color:var(--teal);font-weight:700} .cmp .no{color:var(--bad)}
+
   tr.detail-row { display:none; } tr.detail-row.open { display:table-row; }
-  tr.detail-row > td { background:var(--panel2); padding:0 .8rem 1.1rem; border-bottom:1px solid var(--line); }
-  .detail { display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; padding-top:.9rem; } @media (max-width:800px){ .detail{grid-template-columns:1fr} }
-  .dpanel { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:.9rem 1rem; }
-  .dpanel h4 { margin:0 0 .6rem; font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
-  .axis { margin:.5rem 0; } .axis .lab { display:flex; justify-content:space-between; font-size:.8rem; margin-bottom:.2rem; }
+  tr.detail-row > td { background:var(--panel2); padding:0 .7rem 1rem; border-bottom:1px solid var(--line); }
+  .detail { display:grid; grid-template-columns:1fr 1fr; gap:1rem; padding-top:.8rem; } @media (max-width:700px){ .detail{grid-template-columns:1fr} }
+  .dpanel { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:.8rem .9rem; }
+  .dpanel h4 { margin:0 0 .5rem; font-size:.74rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+  .axis { margin:.45rem 0; } .axis .lab { display:flex; justify-content:space-between; font-size:.78rem; margin-bottom:.2rem; }
   .bar { background:var(--line); border-radius:999px; height:7px; overflow:hidden; } .bar i { display:block; height:7px; border-radius:999px; }
   .bar.q i{background:var(--teal)} .bar.s i{background:var(--amber)} .bar.v i{background:var(--good)}
-  .kv { display:flex; justify-content:space-between; padding:.28rem 0; font-size:.82rem; border-bottom:1px dashed #1c2434; } .kv:last-child{border-bottom:none} .kv .k{color:var(--muted)}
-  .testrow { font-family:"IBM Plex Mono",monospace; font-size:.72rem; display:flex; justify-content:space-between; padding:.25rem 0; }
+  .kv { display:flex; justify-content:space-between; padding:.26rem 0; font-size:.8rem; border-bottom:1px dashed #1c2434; } .kv:last-child{border-bottom:none} .kv .k{color:var(--muted)}
+  .testrow { font-family:"IBM Plex Mono",monospace; font-size:.7rem; display:flex; justify-content:space-between; padding:.22rem 0; }
   .ok{color:var(--good)} .noo{color:var(--bad)}
 
   .hs { display:grid; grid-template-columns:1fr auto 1fr; gap:1rem; align-items:center; } @media (max-width:700px){ .hs{grid-template-columns:1fr} }
@@ -95,11 +92,15 @@
   .btn.primary { background:var(--amber); color:#171205; border-color:transparent; }
   code { font-family:"IBM Plex Mono",monospace; font-size:.82em; background:var(--panel2); padding:.1rem .35rem; border-radius:4px; }
 
-  .cop { display:grid; grid-template-columns:1fr 1fr; gap:1rem; } @media (max-width:760px){ .cop{grid-template-columns:1fr} }
-  .cop .side { border-radius:12px; border:1px solid var(--line); padding:1rem 1.1rem; }
-  .cop .side.bad { background:linear-gradient(180deg,#1e1210,var(--panel)); border-color:#5a2d2d; }
-  .cop .side.good { background:linear-gradient(180deg,#0f2114,var(--panel)); border-color:#2ea043; }
-  .cop .side h5 { margin:.1rem 0 .5rem; font-family:"Archivo"; font-size:.9rem; }
+  .simbadge { display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:.62rem; color:var(--amber); border:1px solid #4a3d1e; background:#211c0e; border-radius:999px; padding:.12rem .55rem; }
+  .cop-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:.8rem; margin:.9rem 0; } @media (max-width:760px){ .cop-steps{grid-template-columns:1fr} }
+  .cstep { background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:.9rem; }
+  .cstep .n { font-family:"IBM Plex Mono",monospace; font-size:.65rem; color:var(--teal); } .cstep .t{font-weight:600;margin:.3rem 0;font-size:.9rem} .cstep .d{color:var(--muted);font-size:.8rem}
+  .cop { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:.6rem; } @media (max-width:760px){ .cop{grid-template-columns:1fr} }
+  .cop .sd { border-radius:12px; border:1px solid var(--line); padding:1rem 1.1rem; }
+  .cop .sd.bad { background:linear-gradient(180deg,#1e1210,var(--panel)); border-color:#5a2d2d; }
+  .cop .sd.good { background:linear-gradient(180deg,#0f2114,var(--panel)); border-color:#2ea043; }
+  .cop .sd h5 { margin:.1rem 0 .5rem; font-family:"Archivo"; font-size:.9rem; }
   .cop pre { background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:.6rem .7rem; font-family:"IBM Plex Mono",monospace; font-size:.68rem; white-space:pre-wrap; margin:.4rem 0; color:var(--muted); }
   .cop .m { display:flex; justify-content:space-between; font-size:.8rem; padding:.2rem 0; } .cop .m b{font-variant-numeric:tabular-nums}
   .cop .cost { font-family:"Archivo"; font-weight:800; font-size:1.4rem; font-variant-numeric:tabular-nums; }
@@ -123,112 +124,108 @@
     <span class="demo">DEMO FEED — real telemetry when the canary connects</span>
   </div>
   <h1>The Decision Arena</h1>
-  <div class="sub">Watch the tests run, see how every grade is earned, and plan a measured migration — one place to decide. <span id="clock" class="mid"></span></div>
+  <div class="sub">The live model market, your migration planner, and a prompt copilot that makes you more efficient on any model — all in one place. <span id="clock" class="mid"></span></div>
 
-  <div class="tabs">
-    <button class="tab active" data-v="board">📈 Live Arena</button>
-    <button class="tab" data-v="handshake">🤝 The Handshake</button>
-    <button class="tab" data-v="copilot">✍️ Prompt Copilot</button>
+  <div class="stats">
+    <div class="stat"><div class="k">Tests run today</div><div class="v" id="s-meas">0</div></div>
+    <div class="stat"><div class="k">Models tracked</div><div class="v" id="s-models">0</div></div>
+    <div class="stat"><div class="k">Avg CPAT</div><div class="v" id="s-cpat">—</div></div>
+    <div class="stat"><div class="k">Top mover</div><div class="v" id="s-mover" style="font-size:.88rem">—</div></div>
   </div>
+  <div class="ticker"><div class="run" id="ticker"></div></div>
 
-  <!-- ===== LIVE ARENA ===== -->
-  <div class="view active" id="v-board">
-    <div class="bench">
-      <div class="card measuring">
-        <h4>Now measuring <span class="tag">watch a grade get earned, live</span></h4>
-        <div class="mrow"><span class="mid" id="mz-model">—</span><span class="task" id="mz-task"></span></div>
-        <div class="mrow"><div class="fill"><i id="mz-bar"></i></div><span class="mid" id="mz-lat">—</span></div>
-        <div class="mrow"><span class="verdict-chip" id="mz-verdict">dispatching task…</span><span class="mid" id="mz-score" style="margin-left:auto"></span></div>
+  <!-- ===== BOARD (left) + MEASURING SIDEBAR (right) ===== -->
+  <div class="arena">
+    <div>
+      <div class="controls">
+        <input type="search" id="q" placeholder="filter…" oninput="render()">
+        <select id="provider" onchange="render()"><option value="">all providers</option></select>
+        <button id="btn-live" class="on" onclick="toggleLive()">⏸ pause</button>
+        <span class="note">click a row for the full analysis · <span id="count"></span></span>
+      </div>
+      <div class="scroll"><table class="board"><thead><tr id="head"></tr></thead><tbody id="body"></tbody></table></div>
+    </div>
+    <div class="side">
+      <div class="card">
+        <h4>Now measuring <span class="tag">watch a grade get earned</span></h4>
+        <div class="mrow"><span class="mid" id="mz-model">—</span></div>
+        <div class="mrow"><span class="mtask" id="mz-task"></span></div>
+        <div class="mrow"><div class="fill"><i id="mz-bar"></i></div><span class="mid" id="mz-lat" style="font-size:.72rem">—</span></div>
+        <div class="mrow"><span id="mz-verdict" style="font-family:'IBM Plex Mono',monospace;font-size:.72rem">dispatching…</span><span class="mid" id="mz-score" style="margin-left:auto;font-size:.72rem"></span></div>
         <div class="feed" id="feed"></div>
       </div>
       <div class="card">
-        <h4>Why our grade beats the leaderboards</h4>
+        <h4>Why our grade wins</h4>
         <table class="cmp">
-          <tr><th class="l">measures</th><th>LMArena</th><th>Artif.&nbsp;Analysis</th><th>$/token</th><th class="ours">Meerada</th></tr>
-          <tr><td class="l">the real cost of a done task</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="ours">✓</td></tr>
-          <tr><td class="l">counts retries &amp; reasoning burn</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="ours">✓</td></tr>
-          <tr><td class="l">verified success, not preference</td><td class="no">✕</td><td>~</td><td class="no">✕</td><td class="ours">✓</td></tr>
-          <tr><td class="l">updates within the hour</td><td class="no">weeks</td><td>~</td><td class="no">static</td><td class="ours">✓</td></tr>
-          <tr><td class="l">on YOUR workload</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="ours">✓</td></tr>
+          <tr><th class="l">measures</th><th>Arena</th><th>AA</th><th>$/tok</th><th class="ours">us</th></tr>
+          <tr><td class="l">cost of a done task</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="ours">✓</td></tr>
+          <tr><td class="l">retries &amp; reasoning</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="ours">✓</td></tr>
+          <tr><td class="l">verified, not vibes</td><td class="no">✕</td><td>~</td><td class="no">✕</td><td class="ours">✓</td></tr>
+          <tr><td class="l">hourly-fresh</td><td class="no">wk</td><td>~</td><td class="no">—</td><td class="ours">✓</td></tr>
         </table>
-        <div class="legend" style="margin-top:.6rem">A model can win on <b>$/token</b> yet lose on <b>cost per <em>done</em> task</b> — cheap tokens don't help if it needs three tries. That gap is exactly what we measure.</div>
+        <div class="legend" style="margin-top:.4rem;font-size:.68rem">Cheap per token ≠ cheap per <em>done task</em>. That gap is what we measure.</div>
       </div>
-    </div>
-
-    <div class="stats">
-      <div class="stat"><div class="k">Tests run today</div><div class="v" id="s-meas">0</div></div>
-      <div class="stat"><div class="k">Models tracked</div><div class="v" id="s-models">0</div></div>
-      <div class="stat"><div class="k">Avg CPAT</div><div class="v" id="s-cpat">—</div></div>
-      <div class="stat"><div class="k">Top mover</div><div class="v" id="s-mover" style="font-size:.9rem">—</div></div>
-    </div>
-    <div class="ticker"><div class="run" id="ticker"></div></div>
-    <div class="controls">
-      <input type="search" id="q" placeholder="filter…" oninput="render()">
-      <select id="provider" onchange="render()"><option value="">all providers</option></select>
-      <button id="btn-live" class="on" onclick="toggleLive()">⏸ pause feed</button>
-      <span class="note">click a row for the full analysis · <span id="count"></span></span>
-    </div>
-    <div class="scroll"><table class="board"><thead><tr id="head"></tr></thead><tbody id="body"></tbody></table></div>
-  </div>
-
-  <!-- ===== HANDSHAKE ===== -->
-  <div class="view" id="v-handshake">
-    <div class="card">
-      <h4>Plan a migration</h4>
-      <div class="sub" style="margin-bottom:1rem">Pick the model you run today and a candidate. We estimate the savings and the quality delta — and guarantee, via output equivalence, that you don't lose quality silently.</div>
-      <div class="hs">
-        <div><div class="k sub">FROM (today)</div><select id="hs-from"></select></div>
-        <div class="arrow">→</div>
-        <div><div class="k sub">TO (candidate)</div><select id="hs-to"></select></div>
-      </div>
-      <div class="hs-out" id="hs-out"></div>
-      <div id="hs-verdict"></div>
-      <div style="margin-top:1rem">
-        <a class="btn primary" href="index.html#download">Run the real Handshake →</a>
-        <span class="sub" style="margin-left:.6rem">Extracts your golden set, replays it on the candidate, returns a measured per-cluster gap report. Content never leaves your machine.</span>
-      </div>
-    </div>
-    <div class="card" style="border-left:3px solid var(--teal)">
-      <b>The quality guarantee.</b> A cheaper model only "passes" if its output is <b>equivalent</b> to your current model's proven-good output — field-for-field on JSON, same tests on code, same value in text. A model that's cheaper but changes an answer is flagged <b class="down">BLOCK</b>, never sold as a win.
     </div>
   </div>
 
-  <!-- ===== COPILOT ===== -->
-  <div class="view" id="v-copilot">
-    <div class="card">
-      <h4 style="font-size:1.05rem">A wrong prompt burns money — every single call. Watch.</h4>
-      <div class="sub" style="margin-bottom:1rem">Same task, two prompts, running side by side. The naive one re-sends a bloated system prompt, over-thinks, and retries. The Copilot-tuned one is lean, cached, and one-shot. The counter is real cost accumulating per call.</div>
-      <div class="cop">
-        <div class="side bad">
-          <h5 class="down">✕ Naive prompt</h5>
-          <pre>You are an incredibly helpful, thorough assistant. Think step by step in great detail before answering. Explain your reasoning fully. [ …3,200-token system prompt re-sent every call, no caching… ] Now extract the invoice fields.</pre>
-          <div class="m"><span class="k sub">tokens / call</span><b id="c-bad-tok">3,240</b></div>
-          <div class="m"><span class="k sub">retries to succeed</span><b id="c-bad-retry">1.8×</b></div>
-          <div class="m"><span class="k sub">cost / accepted task</span><b class="down" id="c-bad-cpat">$0.048</b></div>
-          <div class="m" style="border-top:1px solid #5a2d2d;margin-top:.4rem;padding-top:.5rem"><span class="k sub">spent so far</span><span class="cost down" id="c-bad-total">$0.00</span></div>
-        </div>
-        <div class="side good">
-          <h5 class="up">✓ Meerada-tuned prompt</h5>
-          <pre>Extract invoice fields as JSON: {payee, amount, currency}. [ concise, cached prefix, reasoning off — the Copilot cut the fat and kept the contract ]</pre>
-          <div class="m"><span class="k sub">tokens / call</span><b id="c-good-tok">890</b></div>
-          <div class="m"><span class="k sub">retries to succeed</span><b id="c-good-retry">1.0×</b></div>
-          <div class="m"><span class="k sub">cost / accepted task</span><b class="up" id="c-good-cpat">$0.011</b></div>
-          <div class="m" style="border-top:1px solid #2ea043;margin-top:.4rem;padding-top:.5rem"><span class="k sub">spent so far</span><span class="cost up" id="c-good-total">$0.00</span></div>
-        </div>
+  <!-- ===== PROMPT COPILOT (main screen) ===== -->
+  <h2>✍️ Prompt Copilot <span class="simbadge">the demo below is a SIMULATION — no real API calls, no charges</span></h2>
+  <div class="h2sub">Your always-on efficiency companion. Install it once; it watches how you prompt across <em>any</em> model, teaches you the tricks pros use, and rewrites the waste away — so every call costs less and returns better, whatever model you're on. Learn while you work.</div>
+  <div class="card">
+    <div class="cop-steps">
+      <div class="cstep"><div class="n">STEP 1 · INSTALL</div><div class="t">One line, stays local</div><div class="d"><code>pip install meerada</code> — runs on your machine, on your keys. Your prompts never leave.</div></div>
+      <div class="cstep"><div class="n">STEP 2 · IT LEARNS YOU</div><div class="t">Reads your real usage</div><div class="d">Points it at your traffic; it finds where you burn tokens — bloated prompts, no caching, needless reasoning, retries.</div></div>
+      <div class="cstep"><div class="n">STEP 3 · IT COACHES YOU</div><div class="t">Improves you, every call</div><div class="d">Suggests a leaner prompt, explains <em>why</em>, and proves the quality held. Accept, edit, or reject. You get faster and cheaper — on any model.</div></div>
+    </div>
+
+    <div style="font-weight:600;margin:.6rem 0 .2rem">A wrong prompt burns money on every call. Watch the difference <span class="sub">(simulated — illustrating typical savings, not your account)</span>:</div>
+    <div class="cop">
+      <div class="sd bad">
+        <h5 class="down">✕ Naive prompt</h5>
+        <pre>You are an incredibly helpful, thorough assistant. Think step by step in great detail… [3,200-token system prompt re-sent every call, no caching, reasoning on]</pre>
+        <div class="m"><span class="k sub">tokens / call</span><b id="c-bad-tok">3,240</b></div>
+        <div class="m"><span class="k sub">retries to succeed</span><b id="c-bad-retry">1.8×</b></div>
+        <div class="m"><span class="k sub">cost / accepted task</span><b class="down">$0.048</b></div>
+        <div class="m" style="border-top:1px solid #5a2d2d;margin-top:.4rem;padding-top:.5rem"><span class="k sub">simulated spend</span><span class="cost down" id="c-bad-total">$0.00</span></div>
       </div>
-      <div class="saved">
-        <div class="sub">Saved by the Copilot so far — same task, same quality</div>
-        <div class="big" id="c-saved">$0.00</div>
-        <div class="sub" id="c-saved-pct">—</div>
+      <div class="sd good">
+        <h5 class="up">✓ Copilot-tuned prompt</h5>
+        <pre>Extract invoice fields as JSON: {payee, amount, currency}. [concise, cached prefix, reasoning off — the Copilot cut the fat, kept the contract]</pre>
+        <div class="m"><span class="k sub">tokens / call</span><b id="c-good-tok">890</b></div>
+        <div class="m"><span class="k sub">retries to succeed</span><b id="c-good-retry">1.0×</b></div>
+        <div class="m"><span class="k sub">cost / accepted task</span><b class="up">$0.011</b></div>
+        <div class="m" style="border-top:1px solid #2ea043;margin-top:.4rem;padding-top:.5rem"><span class="k sub">simulated spend</span><span class="cost up" id="c-good-total">$0.00</span></div>
       </div>
-      <div style="margin-top:1.1rem">
-        <a class="btn primary" href="index.html#download">Download the Copilot (free)</a>
-        <a class="btn" href="https://github.com/ravemm-hub/meerada" target="_blank" rel="noopener">Source on GitHub</a>
-        <span class="sub" style="margin-left:.4rem">Runs on your machine, on your keys — edit, accept, reject or delete any change. Apache-2.0.</span>
-      </div>
-      <pre style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:.9rem;font-family:'IBM Plex Mono',monospace;font-size:.76rem;margin-top:1rem;color:var(--muted)">pip install meerada
-meerada record traffic.jsonl     # find the measured waste
-meerada optimize --cluster c01   # tune the prompt, verify quality held</pre>
+    </div>
+    <div class="saved">
+      <div class="sub">What the Copilot would have saved — same task, quality held <span class="simbadge">simulated</span></div>
+      <div class="big" id="c-saved">$0.00</div>
+      <div class="sub" id="c-saved-pct">—</div>
+    </div>
+    <div style="margin-top:1.1rem">
+      <a class="btn primary" href="index.html#download">Download the Copilot (free)</a>
+      <a class="btn" href="https://github.com/ravemm-hub/meerada" target="_blank" rel="noopener">Source on GitHub</a>
+      <span class="sub" style="margin-left:.4rem">Apache-2.0 · yours to edit, accept, reject or delete any change.</span>
+    </div>
+    <pre style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:.9rem;font-family:'IBM Plex Mono',monospace;font-size:.76rem;margin-top:1rem;color:var(--muted)">pip install meerada
+meerada record traffic.jsonl     # it learns how you use models
+meerada optimize --cluster c01   # it coaches: leaner prompt, quality verified</pre>
+  </div>
+
+  <!-- ===== HANDSHAKE (main screen) ===== -->
+  <h2>🤝 The Handshake — plan a migration</h2>
+  <div class="h2sub">Pick the model you run today and a candidate. We estimate the savings and the quality delta — and guarantee, via output equivalence, that you don't lose quality silently.</div>
+  <div class="card">
+    <div class="hs">
+      <div><div class="k sub">FROM (today)</div><select id="hs-from"></select></div>
+      <div class="arrow">→</div>
+      <div><div class="k sub">TO (candidate)</div><select id="hs-to"></select></div>
+    </div>
+    <div class="hs-out" id="hs-out"></div>
+    <div id="hs-verdict"></div>
+    <div style="margin-top:1rem">
+      <a class="btn primary" href="index.html#download">Run the real Handshake →</a>
+      <span class="sub" style="margin-left:.6rem">Replays your golden set on the candidate, returns a measured per-cluster gap report. Content never leaves your machine.</span>
     </div>
   </div>
 </div>
@@ -262,9 +259,7 @@ var MODELS = [
 MODELS.forEach(function(x){ x.base=x.grade; x.delta=0; x.hist=[]; var g=x.grade; for(var i=0;i<12;i++){ g+=Math.sin(i*1.3+x.m.length)*0.6; x.hist.push(g);} x.hist[11]=x.grade; });
 var TASKS=[{cl:"structured_extraction",lab:"extract invoice → JSON"},{cl:"json_transform",lab:"numbers → {sum,count}"},{cl:"code_fix",lab:"is_even(n) passes tests"},{cl:"classification",lab:"sentiment → one word"}];
 
-function spark(h,cls){ if(!h||h.length<2)return""; var w=64,ht=18,lo=Math.min.apply(null,h),hi=Math.max.apply(null,h),r=(hi-lo)||1;
-  var pts=h.map(function(v,i){return (i/(h.length-1)*w).toFixed(1)+","+(ht-((v-lo)/r)*ht).toFixed(1);}).join(" ");
-  var c=cls=="up"?"#58C07A":(cls=="down"?"#E5645C":"#92A2BE"); return '<svg class="spark" width="'+w+'" height="'+ht+'"><polyline points="'+pts+'" fill="none" stroke="'+c+'" stroke-width="1.5"/></svg>'; }
+function spark(h,cls){ if(!h||h.length<2)return""; var w=54,ht=16,lo=Math.min.apply(null,h),hi=Math.max.apply(null,h),r=(hi-lo)||1; var pts=h.map(function(v,i){return (i/(h.length-1)*w).toFixed(1)+","+(ht-((v-lo)/r)*ht).toFixed(1);}).join(" "); var c=cls=="up"?"#58C07A":(cls=="down"?"#E5645C":"#92A2BE"); return '<svg class="spark" width="'+w+'" height="'+ht+'"><polyline points="'+pts+'" fill="none" stroke="'+c+'" stroke-width="1.5"/></svg>'; }
 function dCls(d){ return d>0.05?"up":(d<-0.05?"down":"flat"); }
 function dTxt(d){ if(d==null)return'<span class="flat">—</span>'; var c=dCls(d),a=c=="up"?"▲":(c=="down"?"▼":"■"); return '<span class="delta '+c+'">'+a+Math.abs(d).toFixed(1)+'</span>'; }
 function gcls(v){ return v>=85?"g-good":(v>=75?"g-mid":"g-low"); }
@@ -272,16 +267,15 @@ function gcls(v){ return v>=85?"g-good":(v>=75?"g-mid":"g-low"); }
 var COLS=[
   {k:"rank",t:"#",l:true,fmt:function(v,r,i){return i+1;}},
   {k:"m",t:"Model",l:true,sort:"m",fmt:function(v){return '<span class="mid">'+v+'</span> <span class="caret">▶</span>';}},
-  {k:"p",t:"Provider",l:true,sort:"p",fmt:function(v){return v;}},
   {k:"grade",t:"Grade",sort:"grade",fmt:function(v){return '<span class="grade '+gcls(v)+'">'+v.toFixed(1)+'</span>';}},
   {k:"delta",t:"Δ",sort:"delta",fmt:function(v,r){return dTxt(r.delta);}},
   {k:"trend",t:"trend",l:true,fmt:function(v,r){return spark(r.hist,dCls(r.delta));}},
-  {k:"q",t:"Quality",sort:"q",fmt:function(v){return v.toFixed(0)+"%";}},
-  {k:"lat",t:"Resp ms",sort:"lat",fmt:function(v){return v.toLocaleString();}},
-  {k:"cpat",t:"CPAT $",sort:"cpat",fmt:function(v){return v==null?"—":"$"+v.toFixed(4);}},
-  {k:"out",t:"Out $/M",sort:"out",fmt:function(v){return v==null?"—":"$"+v.toFixed(2);}},
-  {k:"pro",t:"Pro $/mo",sort:"pro",fmt:function(v){return v?("$"+v):(v===0?"free":"—");}},
-  {k:"usage",t:"Usage %",sort:"usage",fmt:function(v){return v==null?"—":v.toFixed(1)+"%";}},
+  {k:"q",t:"Qual",sort:"q",fmt:function(v){return v.toFixed(0)+"%";}},
+  {k:"lat",t:"ms",sort:"lat",fmt:function(v){return v.toLocaleString();}},
+  {k:"cpat",t:"CPAT",sort:"cpat",fmt:function(v){return v==null?"—":"$"+v.toFixed(4);}},
+  {k:"out",t:"$/M out",sort:"out",fmt:function(v){return v==null?"—":"$"+v.toFixed(2);}},
+  {k:"pro",t:"Pro/mo",sort:"pro",fmt:function(v){return v?("$"+v):(v===0?"free":"—");}},
+  {k:"usage",t:"Use%",sort:"usage",fmt:function(v){return v==null?"—":v.toFixed(1)+"%";}},
   {k:"conf",t:"Conf",sort:"conf",fmt:function(v){return '<span class="pill '+v+'">'+v+'</span>';}}
 ];
 var sortKey="grade",sortDir=-1,liveOn=true,meas=0,openM=null;
@@ -295,15 +289,15 @@ function detailHtml(r){
   var tests=TASKS.map(function(t){ var passed=Math.random()<(r.q/100+0.05); return '<div class="testrow"><span>'+t.cl+'</span><span class="'+(passed?"ok":"noo")+'">'+(passed?"pass":"fail")+'</span></div>'; }).join("");
   return '<div class="detail"><div class="dpanel"><h4>Score breakdown</h4>'
     + axisBar("q","Quality — verified success",r.q+"%",r.q)
-    + axisBar("s","Speed — resp time "+r.lat.toLocaleString()+"ms",(r.lat<1200?"fast":(r.lat<2600?"mid":"slow")),speedPct)
+    + axisBar("s","Speed — resp "+r.lat.toLocaleString()+"ms",(r.lat<1200?"fast":(r.lat<2600?"mid":"slow")),speedPct)
     + axisBar("v","Value — CPAT "+(r.cpat==null?"—":"$"+r.cpat.toFixed(4)),(valPct>70?"strong":(valPct>40?"ok":"weak")),valPct)
-    + '<div class="kv"><span class="k">Meerada Grade</span><span class="grade '+gcls(r.grade)+'">'+r.grade.toFixed(1)+'</span></div>'
+    + '<div class="kv"><span class="k">Grade</span><span class="grade '+gcls(r.grade)+'">'+r.grade.toFixed(1)+'</span></div>'
     + '<div class="kv"><span class="k">Confidence</span><span class="pill '+r.conf+'">'+r.conf+'</span></div></div>'
     + '<div class="dpanel"><h4>Tests run this cycle</h4>'+tests
-    + '<div class="kv" style="margin-top:.5rem"><span class="k">Input price</span><span>'+(r.in==null?"—":"$"+r.in.toFixed(2)+"/M")+'</span></div>'
-    + '<div class="kv"><span class="k">Output price</span><span>'+(r.out==null?"—":"$"+r.out.toFixed(2)+"/M")+'</span></div>'
-    + '<div class="kv"><span class="k">Pro subscription</span><span>'+(r.pro?"$"+r.pro+"/mo":(r.pro===0?"free / API-only":"—"))+'</span></div>'
-    + '<div class="kv"><span class="k">OpenRouter usage</span><span>'+(r.usage==null?"—":r.usage.toFixed(1)+"%")+'</span></div></div></div>';
+    + '<div class="kv" style="margin-top:.4rem"><span class="k">Input</span><span>'+(r.in==null?"—":"$"+r.in.toFixed(2)+"/M")+'</span></div>'
+    + '<div class="kv"><span class="k">Output</span><span>'+(r.out==null?"—":"$"+r.out.toFixed(2)+"/M")+'</span></div>'
+    + '<div class="kv"><span class="k">Pro sub</span><span>'+(r.pro?"$"+r.pro+"/mo":(r.pro===0?"free / API":"—"))+'</span></div>'
+    + '<div class="kv"><span class="k">Usage</span><span>'+(r.usage==null?"—":r.usage.toFixed(1)+"%")+'</span></div></div></div>';
 }
 function render(){
   var q=(document.getElementById("q").value||"").toLowerCase(),pf=document.getElementById("provider").value;
@@ -326,69 +320,53 @@ function stats(){
 function ticker(){ var items=MODELS.slice().sort(function(a,b){return b.grade-a.grade;}).map(function(x){ var c=dCls(x.delta),a=c=="up"?"▲":(c=="down"?"▼":"·"); return '<span>'+x.m+' <b>'+x.grade.toFixed(1)+'</b> <span class="'+c+'">'+a+Math.abs(x.delta).toFixed(1)+'</span></span>';}); document.getElementById("ticker").innerHTML=items.join("")+items.join(""); }
 function clock(){ document.getElementById("clock").textContent=new Date().toISOString().slice(11,19)+"Z"; }
 
-// ---- Live test bench: dispatch a task to a model, fill latency, verdict, score ----
 var feedItems=[];
 function runOneTest(){
-  if(!liveOn||!document.getElementById("v-board").classList.contains("active"))return;
+  if(!liveOn)return;
   var x=MODELS[Math.floor(Math.random()*MODELS.length)], t=TASKS[Math.floor(Math.random()*TASKS.length)];
-  document.getElementById("mz-model").textContent=x.m;
-  document.getElementById("mz-task").textContent="· "+t.lab;
+  document.getElementById("mz-model").textContent=x.m; document.getElementById("mz-task").textContent="· "+t.lab;
   document.getElementById("mz-lat").textContent=x.lat.toLocaleString()+"ms";
-  document.getElementById("mz-verdict").innerHTML='<span class="amber">▸ dispatching…</span>';
-  document.getElementById("mz-score").textContent="";
-  var bar=document.getElementById("mz-bar"); bar.style.transition="none"; bar.style.width="0%";
-  var dur=Math.min(1600,600+x.lat/4); // visual fill time scaled from latency
+  document.getElementById("mz-verdict").innerHTML='<span class="amber">▸ dispatching…</span>'; document.getElementById("mz-score").textContent="";
+  var bar=document.getElementById("mz-bar"); bar.style.transition="none"; bar.style.width="0%"; var dur=Math.min(1500,600+x.lat/4);
   setTimeout(function(){ bar.style.transition="width "+dur+"ms linear"; bar.style.width="100%"; },30);
   setTimeout(function(){
-    var pass=Math.random()<(x.q/100+0.05);
-    var step=(pass?1:-1)*(Math.random()*0.5+0.05); x.grade=Math.max(40,Math.min(99,+(x.grade+step).toFixed(1)));
-    x.delta=+(x.grade-x.base).toFixed(1); x.base=x.grade; x.hist.push(x.grade); if(x.hist.length>12)x.hist.shift();
-    if(x.cpat!=null)x.cpat=Math.max(0.0005,+(x.cpat*(1+(Math.random()-0.5)*0.03)).toFixed(4));
-    x._flash=dCls(step); meas++;
+    var pass=Math.random()<(x.q/100+0.05); var step=(pass?1:-1)*(Math.random()*0.5+0.05);
+    x.grade=Math.max(40,Math.min(99,+(x.grade+step).toFixed(1))); x.delta=+(x.grade-x.base).toFixed(1); x.base=x.grade; x.hist.push(x.grade); if(x.hist.length>12)x.hist.shift();
+    if(x.cpat!=null)x.cpat=Math.max(0.0005,+(x.cpat*(1+(Math.random()-0.5)*0.03)).toFixed(4)); x._flash=dCls(step); meas++;
     document.getElementById("mz-verdict").innerHTML=pass?'<span class="ok">✓ verified pass</span>':'<span class="noo">✗ failed check</span>';
     document.getElementById("mz-score").innerHTML='grade '+x.grade.toFixed(1)+' '+dTxt(x.delta);
-    feedItems.unshift('<div class="f"><span class="t">'+new Date().toISOString().slice(11,19)+'</span><span class="mn">'+x.m+' · '+t.cl+'</span><span class="mid">'+x.lat.toLocaleString()+'ms</span><span class="'+(pass?"ok":"noo")+'">'+(pass?"pass":"fail")+'</span><span class="'+dCls(x.delta)+'">'+(x.delta>=0?"+":"")+x.delta.toFixed(1)+'</span></div>');
-    if(feedItems.length>40)feedItems.pop();
-    document.getElementById("feed").innerHTML=feedItems.join("");
-    render(); stats(); ticker();
-    setTimeout(function(){ x._flash=null; if(document.getElementById("v-board").classList.contains("active"))render(); },600);
+    feedItems.unshift('<div class="f"><span class="tt">'+new Date().toISOString().slice(11,19)+'</span><span class="mn">'+x.m+' · '+t.cl+'</span><span class="'+(pass?"ok":"noo")+'">'+(pass?"pass":"fail")+'</span></div>');
+    if(feedItems.length>40)feedItems.pop(); document.getElementById("feed").innerHTML=feedItems.join("");
+    render(); stats(); ticker(); setTimeout(function(){ x._flash=null; render(); },600);
   }, dur+60);
 }
-function toggleLive(){ liveOn=!liveOn; var b=document.getElementById("btn-live"); b.textContent=liveOn?"⏸ pause feed":"▶ resume feed"; b.className=liveOn?"on":""; }
+function toggleLive(){ liveOn=!liveOn; var b=document.getElementById("btn-live"); b.textContent=liveOn?"⏸ pause":"▶ resume"; b.className=liveOn?"on":""; }
 
-// Handshake
 function hsOptions(){ return MODELS.map(function(x){return '<option value="'+x.m+'">'+x.m+' (grade '+x.grade.toFixed(0)+')</option>';}).join(""); }
 function hsRender(){
   var from=MODELS.find(function(x){return x.m==document.getElementById("hs-from").value;}), to=MODELS.find(function(x){return x.m==document.getElementById("hs-to").value;});
   if(!from||!to)return; var save=(from.cpat!=null&&to.cpat!=null)?Math.round((1-to.cpat/from.cpat)*100):null; var qd=+(to.q-from.q).toFixed(0); var latd=Math.round((to.lat-from.lat)/from.lat*100);
   document.getElementById("hs-out").innerHTML=
-    '<div class="hs-stat"><div class="k">Est. cost / task</div><div class="v '+(save>0?"up":"down")+'">'+(save==null?"—":(save>0?"−"+save+"%":"+"+(-save)+"%"))+'</div></div>'
+    '<div class="hs-stat"><div class="k">Cost / task</div><div class="v '+(save>0?"up":"down")+'">'+(save==null?"—":(save>0?"−"+save+"%":"+"+(-save)+"%"))+'</div></div>'
     +'<div class="hs-stat"><div class="k">Quality Δ</div><div class="v '+(qd>=-2?"up":"down")+'">'+(qd>=0?"+"+qd:qd)+' pts</div></div>'
     +'<div class="hs-stat"><div class="k">Latency Δ</div><div class="v '+(latd<=0?"up":"down")+'">'+(latd>0?"+"+latd:latd)+'%</div></div>'
     +'<div class="hs-stat"><div class="k">Monthly value</div><div class="v">'+(save>0?save+"% ▾":"—")+'</div></div>';
   var v=document.getElementById("hs-verdict");
   if(from.m==to.m){ v.className="verdict review"; v.textContent="Pick two different models to compare."; }
-  else if(qd< -2){ v.className="verdict block"; v.innerHTML="⛔ BLOCK — "+to.m+" drops verified quality by "+(-qd)+" points. Not recommended without prompt work on the failing clusters."; }
+  else if(qd< -2){ v.className="verdict block"; v.innerHTML="⛔ BLOCK — "+to.m+" drops verified quality by "+(-qd)+" points. Not recommended without prompt work first."; }
   else if(save!=null&&save>0){ v.className="verdict pass"; v.innerHTML="✅ PASS — migrating to "+to.m+" is estimated to cut cost per task ~"+save+"% while holding quality (Δ "+(qd>=0?"+"+qd:qd)+" pts). Confirm on your own traffic with a measured gap report."; }
-  else { v.className="verdict review"; v.textContent="↔ REVIEW — no clear cost win here; the candidate isn't cheaper per task."; }
+  else { v.className="verdict review"; v.textContent="↔ REVIEW — no clear cost win here."; }
 }
 
-// Copilot live savings demo
 var copBad=0,copGood=0,copCalls=0;
-function copTick(){
-  if(!document.getElementById("v-copilot").classList.contains("active"))return;
-  copCalls++; copBad+=0.048; copGood+=0.011;
-  document.getElementById("c-bad-total").textContent="$"+copBad.toFixed(2);
-  document.getElementById("c-good-total").textContent="$"+copGood.toFixed(2);
-  var saved=copBad-copGood; document.getElementById("c-saved").textContent="$"+saved.toFixed(2);
-  document.getElementById("c-saved-pct").textContent=Math.round((1-copGood/copBad)*100)+"% cheaper · over "+copCalls.toLocaleString()+" calls · same task, quality held";
+function copTick(){ copCalls++; copBad+=0.048; copGood+=0.011;
+  document.getElementById("c-bad-total").textContent="$"+copBad.toFixed(2); document.getElementById("c-good-total").textContent="$"+copGood.toFixed(2);
+  document.getElementById("c-saved").textContent="$"+(copBad-copGood).toFixed(2);
+  document.getElementById("c-saved-pct").textContent=Math.round((1-copGood/copBad)*100)+"% cheaper · over "+copCalls.toLocaleString()+" simulated calls · quality held";
 }
-
-function switchTab(v){ document.querySelectorAll(".tab").forEach(function(t){t.classList.toggle("active",t.dataset.v==v);}); document.querySelectorAll(".view").forEach(function(el){el.classList.toggle("active",el.id=="v-"+v);}); }
 
 (function init(){
   var sel=document.getElementById("provider"); providers().forEach(function(p){var o=document.createElement("option");o.value=p;o.textContent=p;sel.appendChild(o);});
-  document.querySelectorAll(".tab").forEach(function(t){t.addEventListener("click",function(){switchTab(t.dataset.v);});});
   document.getElementById("hs-from").innerHTML=hsOptions(); document.getElementById("hs-to").innerHTML=hsOptions();
   document.getElementById("hs-from").value="gpt-5.6-terra"; document.getElementById("hs-to").value="deepseek-v4-flash";
   document.getElementById("hs-from").onchange=hsRender; document.getElementById("hs-to").onchange=hsRender;
