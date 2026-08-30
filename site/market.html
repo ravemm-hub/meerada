@@ -58,7 +58,9 @@
   .grade { font-family:"Archivo"; font-weight:800; } .g-good{color:var(--good)} .g-mid{color:var(--amber)} .g-low{color:var(--bad)}
   .delta { font-family:"IBM Plex Mono",monospace; font-size:.72rem; }
   .pill { font-size:.56rem; padding:.05rem .4rem; border-radius:999px; border:1px solid; }
-  .pill.confirmed{color:var(--good);border-color:#2ea043} .pill.provisional{color:var(--amber);border-color:#9e6a03}
+  .pill.confirmed{color:var(--good);border-color:#2ea043} .pill.provisional{color:var(--amber);border-color:#9e6a03} .pill.stale{color:var(--muted);border-color:var(--line)}
+  .mpill{font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--good);border:1px solid #2ea043;background:#0f2114;border-radius:999px;padding:.12rem .5rem;vertical-align:middle;}
+  .ipill{font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--amber);border:1px solid #9e6a03;background:#211c0e;border-radius:999px;padding:.12rem .5rem;vertical-align:middle;}
   svg.spark { vertical-align:middle; } .caret{color:var(--muted);font-size:.65rem}
 
   /* clear, graphic measuring panel */
@@ -184,6 +186,24 @@
   </div>
   <div class="ticker"><div class="run" id="ticker"></div></div>
 
+  <!-- ===== MEASURED LIVE (real engine output) ===== -->
+  <div id="measured-wrap" style="display:none">
+    <h2 style="margin:1.4rem 0 .2rem">🟢 Measured live <span class="mpill">REAL</span></h2>
+    <div class="h2sub">Actual grades from our engine — every model below ran the verified task set on the free Groq tier. No pricing here (the free tier doesn't expose it), just measured quality with its confidence interval and sample size.</div>
+    <div class="scroll"><table class="board"><thead><tr>
+      <th class="l">#</th><th class="l">Model</th>
+      <th title="Meerada Grade from the measured quality (0–100).">Grade</th>
+      <th title="Verified success rate with its 95% confidence interval.">Quality (95% CI)</th>
+      <th title="Number of verified tasks behind the grade.">n</th>
+      <th title="Grade over recent measured cycles.">trend</th>
+      <th title="provisional (small sample) → confirmed (n ≥ 600).">Status</th>
+      <th title="When this model was last measured.">updated</th>
+    </tr></thead><tbody id="measured-body"></tbody></table></div>
+    <div class="sub" id="measured-note" style="margin:.5rem 0 .2rem"></div>
+  </div>
+
+  <h2 style="margin:1.6rem 0 .2rem">📋 The catalog <span class="ipill">illustrative</span></h2>
+  <div class="h2sub">The full model landscape with prices, subscriptions and value metrics. Grades here animate to show how the arena works; the <b class="teal">measured band above</b> is the live truth from our engine as it expands to cover more models.</div>
   <div class="arena">
     <div>
       <details class="legend-card" open>
@@ -541,6 +561,36 @@ function analyzeWorkload(){
     +'<div class="sub">≈ $'+(saved*12).toLocaleString()+' / year. LLManager measures your real number from your own traffic — this is illustrative.</div></div>';
 }
 
+// ---- Measured live: real grades from grade_state.json (engine output) ----
+function loadMeasured(){
+  fetch("grade_state.json?cb="+(new Date().getTime())).then(function(res){
+    if(!res.ok)throw 0; return res.json();
+  }).then(function(data){
+    var cards=Object.keys((data&&data.cards)||{}).map(function(k){return data.cards[k];})
+      .filter(function(c){return c && c.score!=null && c.n>0;});
+    if(!cards.length)return;
+    cards.sort(function(a,b){return b.score-a.score;});
+    document.getElementById("measured-wrap").style.display="block";
+    document.getElementById("measured-body").innerHTML=cards.map(function(c,i){
+      var q=(c.quality&&c.quality.value!=null)?Math.round(c.quality.value*100):null;
+      var ci=(c.ci_width_points!=null)?(" ±"+Math.round(c.ci_width_points/2)):"";
+      var hist=c.history||[];
+      var d=hist.length>=2?(hist[hist.length-1]-hist[hist.length-2]):0;
+      return '<tr class="model-row"><td class="l">'+(i+1)+'</td>'
+        +'<td class="l"><span class="mid">'+c.model_id+'</span></td>'
+        +'<td><span class="grade '+gcls(c.score)+'">'+c.score.toFixed(1)+'</span></td>'
+        +'<td>'+(q!=null?(q+"%"+ci):"—")+'</td>'
+        +'<td>'+c.n+'</td>'
+        +'<td>'+spark(hist,dCls(d))+'</td>'
+        +'<td><span class="pill '+c.status+'">'+c.status+'</span></td>'
+        +'<td class="mid" style="font-size:.68rem;color:var(--muted)">'+(c.updated_at?c.updated_at.slice(5,16).replace("T"," "):"—")+'</td></tr>';
+    }).join("");
+    var upd=cards[0].updated_at?cards[0].updated_at.slice(0,16).replace("T"," ")+"Z":"";
+    document.getElementById("measured-note").innerHTML=cards.length+" models measured on verified tasks · last run "+upd
+      +" · grades run lower and intervals wider than the illustrative catalog because these are small free-tier models on small samples — showing that honestly is the whole point.";
+  }).catch(function(){ /* local file / not deployed yet — leave hidden */ });
+}
+
 // ---- Session Console (parallel sessions, simulated) ----
 var SC_STAGES=["translating…","sending lean prompt…","model working…","verifying…","done ✓"];
 function scRun(){
@@ -587,7 +637,7 @@ function hsRender(){
   document.getElementById("hs-from").value="gpt-5.6-terra"; document.getElementById("hs-to").value="deepseek-v4-flash";
   document.getElementById("hs-from").onchange=hsRender; document.getElementById("hs-to").onchange=hsRender;
   document.getElementById("legend").innerHTML=legendHtml();
-  render(); stats(); ticker(); clock(); hsRender(); analyzeWorkload(); scRun(); renderBattery();
+  render(); stats(); ticker(); clock(); hsRender(); analyzeWorkload(); scRun(); renderBattery(); loadMeasured();
   setInterval(clock,1000);
   if(!window.matchMedia("(prefers-reduced-motion:reduce)").matches){ setInterval(runOneTest,4200); runOneTest(); }
 })();
