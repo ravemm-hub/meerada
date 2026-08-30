@@ -41,7 +41,13 @@
   .controls .note { color:var(--muted); font-size:.72rem; margin-left:auto; }
   .scroll { overflow-x:auto; border:1px solid var(--line); border-radius:12px; }
   table.board { border-collapse:collapse; width:100%; font-size:.82rem; min-width:760px; }
-  table.board thead th { position:sticky; top:0; background:#0e1526; color:var(--muted); font-size:.6rem; text-transform:uppercase; letter-spacing:.04em; text-align:right; padding:.5rem .6rem; border-bottom:1px solid var(--line); cursor:pointer; white-space:nowrap; }
+  table.board thead th { position:sticky; top:0; background:#0e1526; color:var(--muted); font-size:.6rem; text-transform:uppercase; letter-spacing:.04em; text-align:right; padding:.5rem .6rem; border-bottom:1px solid var(--line); cursor:help; white-space:nowrap; text-decoration:underline dotted rgba(146,162,190,.5); text-underline-offset:3px; }
+  table.board thead th:hover { color:var(--text); }
+  .legend-card { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:.55rem .8rem; margin-bottom:.6rem; font-size:.78rem; }
+  .legend-card summary { cursor:pointer; color:var(--text); font-weight:600; font-size:.8rem; }
+  .lg-hint { color:var(--muted); font-weight:400; font-size:.68rem; margin-left:.4rem; }
+  .lg-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:.3rem .9rem; margin-top:.6rem; }
+  .lg-item { color:var(--muted); font-size:.74rem; line-height:1.5; } .lg-item b { color:var(--teal); font-family:"IBM Plex Mono",monospace; }
   table.board thead th.l { text-align:left; } table.board thead th.sorted { color:var(--teal); }
   table.board tbody td { padding:.48rem .6rem; border-bottom:1px solid #171f30; text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
   table.board tbody td.l { text-align:left; } tbody tr.model-row { cursor:pointer; } tbody tr.model-row:hover { background:#121a2b; }
@@ -170,6 +176,10 @@
 
   <div class="arena">
     <div>
+      <details class="legend-card" open>
+        <summary>What each column means <span class="lg-hint">hover a header for detail · click to sort · click Grade for the overall</span></summary>
+        <div class="lg-grid" id="legend"></div>
+      </details>
       <div class="controls">
         <input type="search" id="q" placeholder="filter…" oninput="render()">
         <select id="provider" onchange="render()"><option value="">all providers</option></select>
@@ -333,16 +343,17 @@ MODELS.forEach(function(x){
 // The test battery — every check is programmatically verifiable (no opinions).
 // Light tests run constantly for freshness; heavy tests run less often but weigh more.
 var TESTS=[
-  {id:"format",  name:"Strict format contract", w:"light", probe:"obey a hard output spec — JSON only, zero prose", verify:"parses + schema-valid", base:0.93},
-  {id:"classify",name:"Edge-case classification", w:"light", probe:"sarcasm, negation & mixed signals", verify:"exact label match", base:0.86},
-  {id:"extract1",name:"Field extraction (noisy)", w:"light", probe:"pull one fact from messy real text", verify:"normalized exact match", base:0.90},
-  {id:"reason",  name:"Multi-step word problem", w:"light", probe:"chained arithmetic + unit tracking", verify:"final answer checked", base:0.82},
-  {id:"code",    name:"Code + hidden unit tests", w:"heavy", probe:"implement a function to spec", verify:"every assert passes in a sandbox", base:0.71},
-  {id:"invoice", name:"Nested invoice → JSON", w:"heavy", probe:"line-items + totals from a scanned bill", verify:"schema valid AND totals add up", base:0.67},
-  {id:"needle",  name:"Long-context retrieval", w:"heavy", probe:"find one fact buried in ~30k tokens + cite it", verify:"fact + location exact", base:0.74},
-  {id:"sql",     name:"Natural-language → SQL", w:"heavy", probe:"turn a question into a query", verify:"result-set matches the gold rows", base:0.65},
-  {id:"faithful",name:"Faithful summary", w:"heavy", probe:"keep the required facts, invent no numbers", verify:"facts present + no fabricated figures", base:0.70},
-  {id:"toolcall",name:"Tool-call contract", w:"heavy", probe:"emit a valid function call with the right args", verify:"schema + argument values", base:0.77}
+  {id:"schema",  name:"Structured-output conformance", w:"light", probe:"hold a strict JSON schema under adversarial input — no prose leakage", verify:"parses + schema-valid + no extra keys", base:0.93},
+  {id:"intent",  name:"Intent routing (adversarial)", w:"light", probe:"sarcasm, negation, code-switching & near-duplicate classes", verify:"exact label vs gold", base:0.85},
+  {id:"extract", name:"Entity extraction from filings", w:"light", probe:"pull parties, dates & obligations from a contract / 10-K clause", verify:"normalized field-level match", base:0.88},
+  {id:"reason",  name:"Quantitative multi-step reasoning", w:"light", probe:"chained calculation with unit & currency tracking", verify:"final value within tolerance", base:0.81},
+  {id:"impl",    name:"Implement-to-spec + hidden tests", w:"heavy", probe:"write a function/class against a spec, unseen edge cases", verify:"every hidden assert passes in a sandbox", base:0.70},
+  {id:"review",  name:"Code review — find the injected bug", w:"heavy", probe:"locate a subtle defect (off-by-one, race, auth gap)", verify:"identifies the exact line & fix", base:0.63},
+  {id:"sql",     name:"Text-to-SQL over a real schema", w:"heavy", probe:"joins, filters & aggregation on a live fixture DB", verify:"result-set matches the gold rows", base:0.66},
+  {id:"rag",     name:"RAG faithfulness + citations", w:"heavy", probe:"answer only from the given context and cite the exact spans", verify:"claims grounded + citations resolve", base:0.69},
+  {id:"needle",  name:"Long-context multi-hop retrieval", w:"heavy", probe:"synthesize facts scattered across ~100k tokens", verify:"all hops correct + provenance exact", base:0.72},
+  {id:"agent",   name:"Agentic tool-use plan", w:"heavy", probe:"choose and order the right tool calls with valid arguments", verify:"schema + call sequence vs gold trace", base:0.68},
+  {id:"safety",  name:"Safety — refuse jailbreak, allow benign", w:"heavy", probe:"paired prompts: one adversarial, one legitimate", verify:"correct allow/deny on both", base:0.79}
 ];
 TESTS.forEach(function(t){ t.pass=0; t.n=0; t.rate=t.base; });
 // back-compat alias used by the drill-down "tests this cycle" list
@@ -354,23 +365,35 @@ function dTxt(d){ if(d==null)return'<span class="flat">—</span>'; var c=dCls(d
 function gcls(v){ return v>=83?"g-good":(v>=77?"g-mid":"g-low"); }
 
 var COLS=[
-  {k:"rank",t:"#",l:true,fmt:function(v,r,i){return i+1;}},
-  {k:"m",t:"Model",l:true,sort:"m",fmt:function(v){return '<span class="mid">'+v+'</span> <span class="caret">▶</span>';}},
-  {k:"grade",t:"Grade",sort:"grade",fmt:function(v){return '<span class="grade '+gcls(v)+'">'+v.toFixed(1)+'</span>';}},
-  {k:"delta",t:"Δ",sort:"delta",fmt:function(v,r){return dTxt(r.delta);}},
-  {k:"trend",t:"trend",l:true,fmt:function(v,r){return spark(r.hist,dCls(r.delta));}},
-  {k:"q",t:"Qual",sort:"q",fmt:function(v){return v.toFixed(0)+"%";}},
-  {k:"lat",t:"ms",sort:"lat",fmt:function(v){return v.toLocaleString();}},
-  {k:"cpat",t:"CPAT",sort:"cpat",fmt:function(v){return v==null?"—":"$"+v.toFixed(4);}},
-  {k:"out",t:"$/M out",sort:"out",fmt:function(v){return v==null?"—":"$"+v.toFixed(2);}},
-  {k:"pro",t:"Pro/mo",sort:"pro",fmt:function(v){return v?("$"+v):(v===0?"free":"—");}},
-  {k:"usage",t:"Use%",sort:"usage",fmt:function(v){return v==null?"—":v.toFixed(1)+"%";}},
-  {k:"conf",t:"Conf",sort:"conf",fmt:function(v){return '<span class="pill '+v+'">'+v+'</span>';}}
+  {k:"rank",t:"#",l:true,tip:"Rank by the current sort. Default sort is the overall Grade.",fmt:function(v,r,i){return i+1;}},
+  {k:"m",t:"Model",l:true,sort:"m",tip:"The model and its provider. Click a row for the full score breakdown and the tests it ran.",fmt:function(v){return '<span class="mid">'+v+'</span> <span class="caret">▶</span>';}},
+  {k:"grade",t:"Grade",sort:"grade",tip:"Meerada Grade (0–100) — the single overall score = 75% verified quality + 16% value (CPAT) + 9% speed. Click any other column to re-sort; click Grade to return to the overall ranking.",fmt:function(v){return '<span class="grade '+gcls(v)+'">'+v.toFixed(1)+'</span>';}},
+  {k:"delta",t:"Δ",sort:"delta",tip:"Change in the Grade since the last measurement cycle (▲ improving, ▼ slipping).",fmt:function(v,r){return dTxt(r.delta);}},
+  {k:"trend",t:"trend",l:true,tip:"The Grade over recent measurement cycles (sparkline).",fmt:function(v,r){return spark(r.hist,dCls(r.delta));}},
+  {k:"q",t:"Qual",sort:"q",tip:"Quality — verified success rate: the % of real tasks the model got provably right, checked by machine (unit tests, schemas, exact match) — not human preference.",fmt:function(v){return v.toFixed(0)+"%";}},
+  {k:"lat",t:"ms",sort:"lat",tip:"Latency — median response time in milliseconds. Lower is faster.",fmt:function(v){return v.toLocaleString();}},
+  {k:"cpat",t:"CPAT",sort:"cpat",tip:"CPAT — Cost Per Accepted Task: the real dollars to get ONE correct, verified result, retries included. Our headline value metric — not price per token.",fmt:function(v){return v==null?"—":"$"+v.toFixed(4);}},
+  {k:"out",t:"$/M out",sort:"out",tip:"Provider list price per million output tokens (sticker price, before any efficiency work).",fmt:function(v){return v==null?"—":"$"+v.toFixed(2);}},
+  {k:"pro",t:"Pro/mo",sort:"pro",tip:"Monthly consumer subscription price, where the model is sold as one. 'free' = available via API only.",fmt:function(v){return v?("$"+v):(v===0?"free":"—");}},
+  {k:"usage",t:"Use%",sort:"usage",tip:"Relative adoption / usage share across the developer market (illustrative until the live signal connects).",fmt:function(v){return v==null?"—":v.toFixed(1)+"%";}},
+  {k:"conf",t:"Conf",sort:"conf",tip:"Confidence in the Grade: provisional (small sample, wide interval) → confirmed once n ≥ 600 verified tasks.",fmt:function(v){return '<span class="pill '+v+'">'+v+'</span>';}}
 ];
 var sortKey="grade",sortDir=-1,liveOn=true,meas=0,openM=null;
 
 function providers(){var s={};MODELS.forEach(function(x){s[x.p]=1;});return Object.keys(s).sort();}
-function head(){ document.getElementById("head").innerHTML=COLS.map(function(c){ var cls=(c.l?"l ":"")+(c.sort==sortKey?"sorted":""); var ar=c.sort==sortKey?(sortDir<0?" ▾":" ▴"):""; return '<th class="'+cls+'"'+(c.sort?' onclick="setSort(\''+c.sort+'\')"':'')+'>'+c.t+ar+'</th>'; }).join(""); }
+function head(){ document.getElementById("head").innerHTML=COLS.map(function(c){ var cls=(c.l?"l ":"")+(c.sort==sortKey?"sorted":""); var ar=c.sort==sortKey?(sortDir<0?" ▾":" ▴"):""; var tip=c.tip?' title="'+c.tip.replace(/"/g,"&quot;")+'"':''; return '<th class="'+cls+'"'+tip+(c.sort?' onclick="setSort(\''+c.sort+'\')"':'')+'>'+c.t+ar+'</th>'; }).join(""); }
+var LEGEND=[
+  ["Grade","the one overall score (0–100) = 75% quality + 16% value + 9% speed"],
+  ["Qual","verified success — % of real tasks the model got provably right (machine-checked)"],
+  ["CPAT","Cost Per Accepted Task — real $ for one correct result, retries included"],
+  ["ms","median response time; lower is faster"],
+  ["$/M out","provider list price per million output tokens"],
+  ["Pro/mo","monthly consumer subscription price (free = API only)"],
+  ["Use%","relative adoption share"],
+  ["Conf","provisional (small sample) → confirmed (n ≥ 600)"],
+  ["Δ / trend","grade change &amp; sparkline since the last cycle"]
+];
+function legendHtml(){ return LEGEND.map(function(d){ return '<span class="lg-item"><b>'+d[0]+'</b> — '+d[1]+'</span>'; }).join(""); }
 function setSort(k){ if(sortKey==k)sortDir*=-1; else{sortKey=k;sortDir=(k=="m"||k=="p")?1:-1;} render(); }
 function axisBar(cls,label,val,pct){ return '<div class="axis"><div class="lab"><span>'+label+'</span><span>'+val+'</span></div><div class="bar '+cls+'"><i style="width:'+pct+'%"></i></div></div>'; }
 function detailHtml(r){
@@ -553,6 +576,7 @@ function hsRender(){
   document.getElementById("hs-from").innerHTML=hsOptions(); document.getElementById("hs-to").innerHTML=hsOptions();
   document.getElementById("hs-from").value="gpt-5.6-terra"; document.getElementById("hs-to").value="deepseek-v4-flash";
   document.getElementById("hs-from").onchange=hsRender; document.getElementById("hs-to").onchange=hsRender;
+  document.getElementById("legend").innerHTML=legendHtml();
   render(); stats(); ticker(); clock(); hsRender(); analyzeWorkload(); scRun(); renderBattery();
   setInterval(clock,1000);
   if(!window.matchMedia("(prefers-reduced-motion:reduce)").matches){ setInterval(runOneTest,4200); runOneTest(); }
