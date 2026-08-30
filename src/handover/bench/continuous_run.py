@@ -11,6 +11,7 @@ budget, persists state, and re-renders the public board. Schedule it hourly
 
 import argparse
 import os
+import re
 from datetime import UTC, datetime
 from decimal import Decimal
 from pathlib import Path
@@ -35,6 +36,15 @@ ENV_KEYS = {
 }
 # Fallback price per Mtok when a model isn't in the registry (in, out).
 DEFAULT_PRICE = (Decimal("1"), Decimal("1"))
+
+# Model ids that are not chat-completion models — skip (whisper/tts/embed/guard).
+_NON_CHAT = re.compile(
+    r"whisper|tts|audio|embed|guard|moderation|rerank|vision-ocr|distil-whisper", re.I
+)
+
+
+def _is_chat_model(model_id: str) -> bool:
+    return not _NON_CHAT.search(model_id)
 
 
 def _keys(providers: list[str]) -> dict[str, str]:
@@ -70,7 +80,7 @@ def main(argv: list[str] | None = None) -> int:
     now = datetime.now(tz=UTC)
 
     def do_fetch() -> list[CatalogModel]:
-        return fetch_catalog(live, keys)
+        return [m for m in fetch_catalog(live, keys) if _is_chat_model(m.model_id)]
 
     callers = {p: HttpChatCaller(ENDPOINTS[p], keys[p]) for p in live}
     provider_of: dict[str, str] = {}
@@ -89,7 +99,11 @@ def main(argv: list[str] | None = None) -> int:
                 model_id, system, [{"role": "user", "content": user}], max_tokens
             )
 
-        per_cluster = run_model(spec, complete, budget)
+        try:
+            per_cluster = run_model(spec, complete, budget)
+        except Exception as exc:
+            print(f"  skip {model_id}: {type(exc).__name__} {str(exc)[:80]}")
+            return None, proportion(0, 0)
         quality = {c: m.success_rate for c, m in per_cluster.items()}
         return _overall_quality(quality)
 
