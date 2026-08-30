@@ -59,6 +59,11 @@
   .pill { font-size:.6rem; padding:.05rem .4rem; border-radius:999px; border:1px solid; }
   .pill.confirmed { color:var(--good); border-color:#2ea043; } .pill.provisional { color:var(--amber); border-color:#9e6a03; }
   svg.spark { vertical-align:middle; }
+  .explain { background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--teal);
+    border-radius:0 10px 10px 0; padding:.85rem 1.1rem; margin:.9rem 0 .2rem; font-size:.85rem; color:var(--muted); line-height:1.65; }
+  .explain b { color:var(--text); } .explain .teal { color:var(--teal); }
+  .explain .demo2 { color:var(--amber); }
+  .teal { color:var(--teal); }
   .legend { color:var(--muted); font-size:.74rem; margin-top:1rem; line-height:1.7; }
   .legend b { color:var(--text); }
 </style>
@@ -79,6 +84,17 @@
   </div>
   <h1>The Model Market</h1>
   <div class="sub">Every model, every metric, moving. Click a column to sort · <span id="clock" class="mid"></span></div>
+
+  <div class="explain">
+    <b>What am I looking at?</b> Not a stock price — a <b>live measurement</b>. The moving number is the
+    <b class="teal">Meerada Grade</b>: how well each model does <em>real, verifiable work</em> for what it costs.
+    We continuously re-run a battery of checkable tasks (extraction, code, JSON, classification) against every model,
+    verify each output programmatically, and score three axes — <b>quality</b> (did the task actually succeed),
+    <b>speed</b> (time to an accepted result), and <b>value</b> (cost per accepted task). The grade <b class="up">rises</b>
+    when a model gets better or cheaper relative to its peers and <b class="down">falls</b> when it slips or a rival improves.
+    Each fresh test batch that lands nudges the number — that's the movement you see. <span class="demo2">In this demo the
+    movement is simulated; once the canary loop is connected every tick is a real measurement with its confidence interval.</span>
+  </div>
 
   <div class="stats">
     <div class="stat"><div class="k">Measurements today</div><div class="v" id="s-meas">0</div></div>
@@ -102,10 +118,20 @@
   </div>
 
   <div class="legend">
-    <b>Live-action, honestly:</b> this DEMO feed simulates the movement you'll see once the canary loop is connected —
-    grades drift as fresh samples land, usage and cost tick, movers flash green/red. <b>Real prices and pro-subs are
-    sourced facts; grade, CPAT, usage movement here is illustrative.</b> When <code>continuous_run</code> is scheduled,
-    every number becomes measured telemetry with its confidence interval, and the sparklines become the real grade history.
+    <b>Every column, in plain terms —</b>
+    <b>Grade</b>: the Meerada score (quality 60% · speed 20% · value 20%), 0–100. ·
+    <b>Δ</b>: how much the grade moved on the last measurement. ·
+    <b>7-tick</b>: the recent grade trend (real history once live). ·
+    <b>CPAT</b>: cost per <em>accepted</em> task — the real unit, including retries &amp; reasoning. ·
+    <b>In / Out</b>: API price per 1M tokens (sourced fact). ·
+    <b>Pro</b>: the model's consumer monthly subscription (sourced fact). ·
+    <b>Usage</b>: OpenRouter weekly token share, a real popularity proxy. ·
+    <b>Conf</b>: how much sample backs the grade (confirmed vs provisional).
+    <br><br>
+    <b>Live-action, honestly:</b> this DEMO feed simulates the movement you'll see once the canary loop is connected.
+    <b>Prices and pro-subs are sourced facts; grade / CPAT / usage movement here is illustrative.</b> When
+    <code>continuous_run</code> is scheduled, every number becomes measured telemetry with its confidence interval,
+    and the sparklines become the real grade history — never a bare number.
   </div>
 </div>
 
