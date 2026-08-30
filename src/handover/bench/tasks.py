@@ -13,7 +13,9 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict
 
-Cluster = Literal["structured_extraction", "code_fix", "json_transform", "classification"]
+Cluster = Literal[
+    "structured_extraction", "code_fix", "json_transform", "classification", "reasoning"
+]
 
 
 class BenchTask(BaseModel):
@@ -141,6 +143,47 @@ SEED_TASKS: tuple[BenchTask, ...] = (
         system="Classify sentiment. Reply with exactly one word: positive, negative, or neutral.",
         user="The package arrived on Tuesday.",
         contract_regex=r"(?i)^\s*neutral\.?\s*$",
+    ),
+    # Adversarial classification — sarcasm and double-negation defeat keyword matching.
+    BenchTask(
+        task_id="classify-04",
+        cluster="classification",
+        system="Classify sentiment. Reply with exactly one word: positive, negative, or neutral.",
+        user="Oh great, another two-hour wait on hold. Just what I needed today.",
+        contract_regex=r"(?i)^\s*negative\.?\s*$",
+    ),
+    BenchTask(
+        task_id="classify-05",
+        cluster="classification",
+        system="Classify sentiment. Reply with exactly one word: positive, negative, or neutral.",
+        user="I can't say a single bad thing about this — it exceeded every expectation.",
+        contract_regex=r"(?i)^\s*positive\.?\s*$",
+    ),
+    # Multi-step reasoning — the answer is checked exactly, so guessing the shape
+    # is not enough; the model has to actually get the computation right.
+    BenchTask(
+        task_id="reason-01",
+        cluster="reasoning",
+        system="Solve the problem. Reply with the final number only, no words.",
+        user="A train covers 180 km in 2.5 hours. What is its average speed in km/h?",
+        contract_regex=r"(?i)^\s*72(\.0+)?\s*(km/?h)?\.?\s*$",
+    ),
+    BenchTask(
+        task_id="reason-02",
+        cluster="reasoning",
+        system="Solve the problem. Reply with the final number only, no words.",
+        user=(
+            "If 5 machines make 5 widgets in 5 minutes, how many minutes do 100 "
+            "machines need to make 100 widgets?"
+        ),
+        contract_regex=r"(?i)^\s*5(\.0+)?\s*(min(utes)?)?\.?\s*$",
+    ),
+    BenchTask(
+        task_id="reason-03",
+        cluster="reasoning",
+        system="Solve the problem. Reply with the final number only, no words.",
+        user="A shirt costs $40 after a 20% discount. What was the original price in dollars?",
+        contract_regex=r"(?i)^\s*\$?\s*50(\.0+)?\s*$",
     ),
 )
 

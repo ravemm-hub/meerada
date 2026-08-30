@@ -29,9 +29,18 @@ def perfect_complete(system: str, user: str, max_tokens: int) -> FakeCompletion:
         elif "add(" in user:
             fn = "add"
         return FakeCompletion(f"```python\ndef {fn}(x):\n    return x\n```")
+    if "number only" in system.lower():
+        low = user.lower()
+        if "180 km" in low:
+            return FakeCompletion("72")
+        if "5 machines" in low:
+            return FakeCompletion("5")
+        if "20% discount" in low or "original price" in low:
+            return FakeCompletion("50")
+        return FakeCompletion("0")
     if "sentiment" in system:
         low = user.lower()
-        if "loved" in low or "flawless" in low:
+        if "loved" in low or "flawless" in low or "exceeded every expectation" in low:
             return FakeCompletion("positive")
         if "arrived on tuesday" in low or "package arrived" in low:
             return FakeCompletion("neutral")
