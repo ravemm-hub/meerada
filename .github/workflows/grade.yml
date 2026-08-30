@@ -17,6 +17,7 @@ concurrency:
 jobs:
   grade:
     runs-on: ubuntu-latest
+    environment: meeraba   # the environment that holds GROQ_API_KEY
     steps:
       - name: checkout code
         uses: actions/checkout@v4
