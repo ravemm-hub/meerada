@@ -17,6 +17,8 @@
   @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(88,192,122,.6)} 70%{box-shadow:0 0 0 7px rgba(88,192,122,0)} 100%{box-shadow:0 0 0 0 rgba(88,192,122,0)} }
   @media (prefers-reduced-motion:reduce){ .dot{animation:none} .ticker .run{animation:none} .mstep{transition:none!important} }
   .demo { font-family:"IBM Plex Mono",monospace; font-size:.62rem; color:var(--amber); border:1px solid #4a3d1e; border-radius:999px; padding:.1rem .5rem; }
+  .mgr-cta { margin-left:auto; font-family:"Archivo"; font-weight:700; font-size:.82rem; color:#171205; background:var(--amber); border-radius:999px; padding:.4rem .9rem; text-decoration:none; white-space:nowrap; }
+  .mgr-cta:hover { filter:brightness(1.08); }
   h1 { font-family:"Archivo"; font-weight:800; font-size:1.4rem; letter-spacing:-.02em; margin:.6rem 0 .1rem; }
   .sub { color:var(--muted); font-size:.82rem; }
   .teal{color:var(--teal)} .up{color:var(--good)} .down{color:var(--bad)} .flat{color:var(--muted)} .amber{color:var(--amber)}
@@ -110,6 +112,20 @@
   .arrow2 { text-align:center; color:var(--teal); font-size:1.4rem; margin:.3rem 0; }
   .savebar { margin-top:1rem; text-align:center; background:var(--panel2); border:1px solid #2ea043; border-radius:12px; padding:.9rem; }
   .savebar .big { font-family:"Archivo"; font-weight:800; font-size:1.8rem; color:var(--good); }
+  .wl-in textarea { width:100%; min-height:64px; background:var(--ground); border:1px solid var(--line); color:var(--text); border-radius:9px; padding:.6rem .7rem; font-family:inherit; font-size:.88rem; resize:vertical; }
+  .wl-controls { display:flex; gap:.7rem; flex-wrap:wrap; align-items:flex-end; margin-top:.6rem; }
+  .wl-controls label { display:flex; flex-direction:column; gap:.25rem; font-size:.72rem; color:var(--muted); }
+  .wl-controls input, .wl-controls select { background:var(--ground); border:1px solid var(--line); color:var(--text); border-radius:8px; padding:.45rem .6rem; font-family:inherit; font-size:.85rem; }
+  .wl-controls input { width:120px; }
+  .levers { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; margin-top:1rem; } @media (max-width:760px){ .levers{grid-template-columns:1fr} }
+  .lever { background:var(--panel2); border:1px solid var(--line); border-radius:11px; padding:.8rem .9rem; }
+  .lever .lh { display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; }
+  .lever .ln { font-weight:600; font-size:.9rem; } .lever .lp { font-family:"Archivo"; font-weight:800; color:var(--good); white-space:nowrap; }
+  .lever .ld { color:var(--muted); font-size:.8rem; margin-top:.3rem; line-height:1.45; }
+  .lever .lm { font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--teal); margin-top:.35rem; }
+  .lever.off { opacity:.5; } .lever.off .lp { color:var(--muted); }
+  .wl-total { margin-top:1rem; text-align:center; background:var(--panel2); border:1px solid #2ea043; border-radius:12px; padding:1rem; }
+  .wl-total .big { font-family:"Archivo"; font-weight:900; font-size:2rem; color:var(--good); }
 
   .hs { display:grid; grid-template-columns:1fr auto 1fr; gap:1rem; align-items:center; } @media (max-width:700px){ .hs{grid-template-columns:1fr} }
   .hs select { width:100%; } .hs .arrow { font-size:1.6rem; color:var(--teal); text-align:center; }
@@ -139,9 +155,10 @@
     </div>
     <span class="live"><span class="dot"></span> LIVE</span>
     <span class="demo">DEMO FEED — real telemetry when the canary connects</span>
+    <a class="mgr-cta" href="llmanager.html">🎛️ Meerada LLManager →</a>
   </div>
   <h1>The Decision Arena</h1>
-  <div class="sub">The live model market, a prompt copilot that makes you efficient on any model, and a migration planner — all in one place. <span id="clock" class="mid"></span></div>
+  <div class="sub">The live model market, an efficiency console that manages every model for you, and a migration planner — all in one place. <a href="llmanager.html" class="teal">Meet LLManager →</a> <span id="clock" class="mid"></span></div>
 
   <div class="stats">
     <div class="stat"><div class="k">Tests run today</div><div class="v" id="s-meas">0</div></div>
@@ -191,37 +208,22 @@
   <div class="h2sub">Not a translator — a <b>manager</b> for the communication and tasks between you and your models. Tell it what you want in plain words; it shapes the lean instruction, sends it, checks the answer held up, and keeps the thread. Same result, far fewer tokens — on any model you use. <a href="llmanager.html" class="teal">See the full product →</a></div>
   <div class="card">
     <div class="cop-steps">
-      <div class="cstep"><div class="n">STEP 1 · INSTALL</div><div class="t">One line, stays local</div><div class="d"><code>pip install meerada</code> — runs on your machine, on your keys. Your prompts never leave.</div></div>
-      <div class="cstep"><div class="n">STEP 2 · JUST SAY IT</div><div class="t">Write what you want</div><div class="d">Plain language. No prompt engineering. LLManager takes over the whole exchange between you and whatever model you're on.</div></div>
-      <div class="cstep"><div class="n">STEP 3 · IT SENDS IT LEAN</div><div class="t">Efficient, verified</div><div class="d">It crafts the token-efficient prompt, sends it to your model, and checks the answer held up. You just got cheaper &amp; faster.</div></div>
+      <div class="cstep"><div class="n">STEP 1 · CONNECT</div><div class="t">Your keys, your models</div><div class="d">Add your provider keys once. LLManager runs locally and drives Claude, GPT, Gemini, DeepSeek on your own account — nothing routed through us.</div></div>
+      <div class="cstep"><div class="n">STEP 2 · IT READS YOUR WORKLOAD</div><div class="t">Finds where spend leaks</div><div class="d">It sees how you actually call models and flags the expensive mistakes: re-sent context that should be cached, flagship models doing work a cheap one clears, runaway reasoning, no output ceiling.</div></div>
+      <div class="cstep"><div class="n">STEP 3 · IT RUNS THEM RIGHT</div><div class="t">Same result, fraction of the bill</div><div class="d">Caches stable context, routes each task to the cheapest model that still passes your quality bar, caps reasoning and output — verified, not guessed.</div></div>
     </div>
 
-    <div style="font-weight:600;margin:.4rem 0 .3rem">Try it — type what you want the model to do <span class="simbadge">preview · LLManager does this for real, on your model</span></div>
-    <div class="translator">
-      <div class="tcol">
-        <h5>You say (plain words)</h5>
-        <textarea id="t-intent">give me the invoice payee, the amount and the currency from this text, as json</textarea>
-        <div style="margin-top:.6rem"><button class="btn primary" onclick="translate()">Optimize &amp; send →</button></div>
-        <div class="out">
-          <div class="sub" style="margin:.6rem 0 .2rem">✕ What you'd naively send:</div>
-          <div class="promptbox bad" id="t-naive">—</div>
-          <div class="mrow2"><span class="sub">tokens</span><b id="t-naive-tok">—</b></div>
-        </div>
-      </div>
-      <div class="tcol">
-        <h5>LLManager sends (to your model)</h5>
-        <div class="arrow2">↓ translated &amp; trimmed ↓</div>
-        <div class="promptbox good" id="t-opt">—</div>
-        <div class="mrow2"><span class="sub">tokens</span><b class="up" id="t-opt-tok">—</b></div>
-        <div class="mrow2"><span class="sub">cost / call</span><b class="up" id="t-opt-cost">—</b></div>
-        <div class="mrow2"><span class="sub">quality</span><b class="up">held ✓</b></div>
+    <div style="font-weight:600;margin:1rem 0 .3rem">Analyze your workload <span class="simbadge">illustrative · LLManager measures your real numbers</span></div>
+    <div class="wl-in">
+      <textarea id="wl-task" placeholder="Describe the job you run at scale">Classify each support ticket into 1 of 12 categories + extract SLA-breach risk. Reuses a fixed 12-category rubric + few-shot examples on every call.</textarea>
+      <div class="wl-controls">
+        <label>Monthly model spend <span class="sub">(USD)</span><input type="number" id="wl-spend" value="8000" min="100" step="100"></label>
+        <label>Model class<select id="wl-class"><option value="reasoning">reasoning model (o-series / thinking)</option><option value="flagship">flagship (non-reasoning)</option><option value="mid">mid / workhorse</option></select></label>
+        <label>Repeated context per call<select id="wl-reuse"><option value="high">large &amp; fixed (rubric, examples, schema)</option><option value="med">some</option><option value="low">little</option></select></label>
+        <button class="btn primary" onclick="analyzeWorkload()">Find the waste →</button>
       </div>
     </div>
-    <div class="savebar">
-      <div class="sub">Saved on this prompt vs writing it yourself — same result</div>
-      <div class="big" id="t-save">—</div>
-      <div class="sub" id="t-save-note">type an intent and press Optimize</div>
-    </div>
+    <div id="wl-out"></div>
     <div style="margin-top:1.1rem">
       <a class="btn primary" href="llmanager.html">Meet LLManager →</a>
       <a class="btn" href="https://github.com/ravemm-hub/meerada" target="_blank" rel="noopener">Free core on GitHub</a>
@@ -460,29 +462,50 @@ function renderBattery(){
 }
 
 // ---- Copilot translator (rule-based preview) ----
-function estTokens(s){ return Math.max(1,Math.round(s.length/4)); }
-function translate(){
-  var intent=(document.getElementById("t-intent").value||"").trim();
-  if(!intent){ intent="give me the invoice payee, amount and currency as json"; }
-  // naive: what a beginner would paste — bloated preamble, verbose, no format discipline
-  var naive="You are an extremely helpful and thorough AI assistant. Please think carefully and step by step, "
-    +"explain your reasoning in detail, and be as complete as possible. Here is my request: "+intent
-    +". Please make sure to double-check your work and provide a full explanation.";
-  // optimized: the Copilot's lean rewrite — concise, contract-first, reasoning off
-  var wantsJson=/json|fields|extract|\{/.test(intent.toLowerCase());
-  var opt=(wantsJson?"Return ONLY JSON. ":"Answer in one line, no preamble. ")
-    + intent.charAt(0).toUpperCase()+intent.slice(1)+".";
-  var nTok=estTokens(naive)+800; // +cached system bloat a naive user re-sends
-  var oTok=estTokens(opt);
-  document.getElementById("t-naive").textContent=naive;
-  document.getElementById("t-opt").textContent=opt;
-  document.getElementById("t-naive-tok").textContent=nTok.toLocaleString();
-  document.getElementById("t-opt-tok").innerHTML=oTok.toLocaleString()+' <span class="up">(−'+Math.round((1-oTok/nTok)*100)+'%)</span>';
-  var costN=nTok*2/1e6, costO=oTok*2/1e6; // illustrative $2/Mtok
-  document.getElementById("t-opt-cost").textContent="$"+costO.toFixed(5);
-  var pct=Math.round((1-oTok/nTok)*100);
-  document.getElementById("t-save").textContent=pct+"% fewer tokens";
-  document.getElementById("t-save-note").textContent="over 10k calls/mo that's ≈ $"+Math.round((costN-costO)*10000).toLocaleString()+" saved — same result, on your model";
+// ---- Workload efficiency analyzer (sophisticated levers, illustrative) ----
+function analyzeWorkload(){
+  var task=(document.getElementById("wl-task").value||"").toLowerCase();
+  var spend=Math.max(0,+document.getElementById("wl-spend").value||0);
+  var cls=document.getElementById("wl-class").value;
+  var reuse=document.getElementById("wl-reuse").value;
+  var reuseF=reuse=="high"?1:(reuse=="med"?0.55:0.2);
+  // each lever: fraction of TOTAL spend it removes, gated by workload signals
+  var levers=[];
+  levers.push({on:reuseF>0.3, ic:"🧊", n:"Cache the repeated context",
+    p:Math.round(28*reuseF),
+    d:"Your fixed rubric, few-shot examples and schema are re-sent on every call and re-billed as fresh input. LLManager marks that block cacheable — up to 90% off the repeated tokens.",
+    m:"prompt caching · biggest single win at scale"});
+  var routeGate=/classif|extract|tag|label|route|triage|moderat|score|rank|sentiment|parse/.test(task);
+  levers.push({on:routeGate, ic:"🔀", n:"Route by difficulty",
+    p:routeGate?24:0,
+    d:"Most of these calls are easy and don't need a flagship. We send the unambiguous majority to a model 10–20× cheaper that still clears your verified quality bar; the expensive model only sees the hard tail.",
+    m:"cost-routing · verified, not guessed"});
+  levers.push({on:cls=="reasoning", ic:"🧠", n:"Cap wasted reasoning",
+    p:cls=="reasoning"?34:0,
+    d:"On a reasoning model, uncapped thinking is often the majority of the bill — tokens you're charged for but never read. We hold reasoning to what the task actually needs.",
+    m:"reasoning-effort control"});
+  levers.push({on:true, ic:"📏", n:"Constrain the output",
+    p:9,
+    d:"Force the output schema and a hard max_tokens ceiling, so the model returns the row you asked for — not a paragraph explaining it.",
+    m:"structured output + length cap"});
+  levers.push({on:true, ic:"📦", n:"Batch the async traffic",
+    p:8,
+    d:"Anything not user-facing goes through the provider's batch API at roughly half price, on the same models.",
+    m:"batch pricing ≈ −50% on eligible calls"});
+
+  // combine multiplicatively (levers stack but not linearly); cap at 68%
+  var keep=1; levers.forEach(function(l){ if(l.on) keep*=(1-l.p/100); });
+  var totalPct=Math.min(68, Math.round((1-keep)*100));
+  var saved=Math.round(spend*totalPct/100);
+
+  var cards=levers.map(function(l){
+    return '<div class="lever'+(l.on?'':' off')+'"><div class="lh"><span class="ln">'+l.ic+' '+l.n+'</span><span class="lp">'+(l.on?'−'+l.p+'%':'n/a')+'</span></div>'
+      +'<div class="ld">'+l.d+'</div><div class="lm">'+l.m+'</div></div>';
+  }).join("");
+  document.getElementById("wl-out").innerHTML='<div class="levers">'+cards+'</div>'
+    +'<div class="wl-total"><div class="sub">Estimated cut to your model bill — same verified quality</div>'
+    +'<div class="big">'+totalPct+'% · ≈ $'+saved.toLocaleString()+'/mo</div>'
+    +'<div class="sub">≈ $'+(saved*12).toLocaleString()+' / year. LLManager measures your real number from your own traffic — this is illustrative.</div></div>';
 }
 
 // ---- Session Console (parallel sessions, simulated) ----
@@ -530,7 +553,7 @@ function hsRender(){
   document.getElementById("hs-from").innerHTML=hsOptions(); document.getElementById("hs-to").innerHTML=hsOptions();
   document.getElementById("hs-from").value="gpt-5.6-terra"; document.getElementById("hs-to").value="deepseek-v4-flash";
   document.getElementById("hs-from").onchange=hsRender; document.getElementById("hs-to").onchange=hsRender;
-  render(); stats(); ticker(); clock(); hsRender(); translate(); scRun(); renderBattery();
+  render(); stats(); ticker(); clock(); hsRender(); analyzeWorkload(); scRun(); renderBattery();
   setInterval(clock,1000);
   if(!window.matchMedia("(prefers-reduced-motion:reduce)").matches){ setInterval(runOneTest,4200); runOneTest(); }
 })();

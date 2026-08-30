@@ -69,6 +69,13 @@
   .effrow{display:flex;gap:1rem;align-items:center;justify-content:center;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.3rem;}
   .effrow .big{font-family:"Archivo";font-weight:900;font-size:2.2rem;color:var(--good);}
   .effrow .arrow{font-size:1.6rem;color:var(--teal);}
+  .levers{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;} @media(max-width:760px){.levers{grid-template-columns:1fr}}
+  .lever{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.95rem 1.05rem;}
+  .lever .lh{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;}
+  .lever .ln{font-weight:600;font-size:.95rem;} .lever .lp{font-family:"Archivo";font-weight:800;color:var(--good);white-space:nowrap;}
+  .lever .ld{color:var(--muted);font-size:.86rem;margin-top:.35rem;line-height:1.5;}
+  .wl-total{margin-top:1rem;text-align:center;background:var(--panel);border:1px solid #2ea043;border-radius:14px;padding:1.1rem;}
+  .wl-total .big{font-family:"Archivo";font-weight:900;font-size:1.9rem;color:var(--good);}
   .strike{text-decoration:line-through;color:var(--bad);font-family:"Archivo";font-weight:800;font-size:1.6rem;}
 
   footer{border-top:1px solid var(--line);padding:2rem 0 3rem;text-align:center;color:var(--muted);font-size:.85rem;}
@@ -76,7 +83,15 @@
 </style>
 
 <nav><div class="wrap">
-  <span class="wm">m<em>ee</em>rada</span>
+  <a href="index.html" style="display:flex;align-items:center;gap:.5rem">
+    <svg viewBox="0 0 104 104" width="26" height="26" aria-hidden="true"><g transform="translate(0,20)">
+      <path d="M6 32 Q52 -16 98 32" fill="none" stroke="#63CFC2" stroke-width="8" stroke-linecap="round"/>
+      <path d="M6 32 Q52 80 98 32" fill="none" stroke="#F2B84B" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="52" cy="32" r="18" fill="none" stroke="#22304F" stroke-width="6"/>
+      <circle cx="52" cy="32" r="18" fill="none" stroke="#F2B84B" stroke-width="6" pathLength="100" stroke-dasharray="80 100" stroke-linecap="round" transform="rotate(-90 52 32)"/>
+      <circle cx="52" cy="32" r="7" fill="#63CFC2"/></g></svg>
+    <span class="wm">m<em>ee</em>rada</span>
+  </a>
   <span class="nlinks">
     <a href="index.html">Home</a>
     <a href="market.html">Arena</a>
@@ -137,14 +152,15 @@
 
 <section><div class="wrap">
   <h2>You pay for the models. We make sure it counts.</h2>
-  <div class="h2sub">The same job, done directly vs. done through LLManager — same result, a fraction of the tokens.</div>
-  <div class="effrow">
-    <div><div class="muted" style="font-size:.8rem">direct, by hand</div><div class="strike">1,000 tok</div></div>
-    <div class="arrow">→</div>
-    <div><div class="muted" style="font-size:.8rem">through LLManager</div><div class="big">380 tok</div></div>
-    <div style="min-width:180px"><div class="muted" style="font-size:.8rem">over 10k calls / month</div><div class="big" style="font-size:1.6rem">≈ $1,240 saved</div></div>
+  <div class="h2sub">This isn't "remove please and thank you." At high spend and high volume, the money leaks in structural places — LLManager finds and fixes each one, on your real traffic.</div>
+  <div class="levers">
+    <div class="lever"><div class="lh"><span class="ln">🧊 Cache the repeated context</span><span class="lp">−28%</span></div><div class="ld">Your fixed rubric, few-shot examples and schema are re-sent every call and re-billed as fresh input. Marked cacheable, the repeated block drops to ~10% of its cost.</div></div>
+    <div class="lever"><div class="lh"><span class="ln">🔀 Route by difficulty</span><span class="lp">−24%</span></div><div class="ld">The easy majority of calls go to a model 10–20× cheaper that still clears your verified quality bar; the flagship only sees the hard tail.</div></div>
+    <div class="lever"><div class="lh"><span class="ln">🧠 Cap wasted reasoning</span><span class="lp">−34%</span></div><div class="ld">On reasoning models, uncapped thinking is often the majority of the bill — tokens you pay for but never read. Held to what the task needs.</div></div>
+    <div class="lever"><div class="lh"><span class="ln">📏 Constrain output + 📦 batch</span><span class="lp">−15%</span></div><div class="ld">Hard schema and max-tokens ceilings, and non-interactive traffic through the batch API at ~half price.</div></div>
   </div>
-  <div class="note" style="text-align:center">Illustrative. Actual savings depend on your models and volume — LLManager shows your real number, live.</div>
+  <div class="wl-total"><div class="muted" style="font-size:.85rem">Typical stacked effect on a high-volume workload — same verified quality</div><div class="big">up to −68% of your model bill</div></div>
+  <div class="note" style="text-align:center;margin-top:.8rem">Illustrative levers. LLManager measures your actual number from your own traffic and only routes where verification confirms quality holds.</div>
 </div></section>
 
 <section id="get"><div class="wrap">
