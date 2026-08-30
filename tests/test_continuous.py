@@ -133,3 +133,21 @@ def test_publishable_and_cadence_plan() -> None:
     plan = cadence_plan(state)
     assert plan["good"] == "weekly"  # confirmed -> hold
     assert plan["tiny"] == "daily"  # provisional -> advance
+
+
+def test_history_accumulates_for_sparkline_and_delta() -> None:
+    state = initial_state()
+    scores = iter([80.0, 83.0, 82.0])
+    quals = iter([proportion(24, 30), proportion(25, 30), proportion(24, 30)])
+
+    def fetch() -> list[CatalogModel]:
+        return [cat("m")]
+
+    def grade(model_id: str) -> tuple[float, object]:
+        return next(scores), next(quals)
+
+    for h in range(3):
+        state, _ = tick(state, fetch, grade, big_budget(), NOW + timedelta(hours=h))
+    card = state.cards["m"]
+    assert card.history == (80.0, 83.0, 82.0)  # real time series
+    assert card.delta_points == -1.0  # last move: 83 -> 82

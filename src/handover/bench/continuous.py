@@ -79,13 +79,29 @@ def tick(
             skipped.append(model_id)
             continue
         score, quality = grade(model_id)  # grader charges the budget as it runs
-        new_cards[model_id] = classify(model_id, score, quality, now, now)
+        prior = state.cards.get(model_id)
+        new_cards[model_id] = classify(
+            model_id,
+            score,
+            quality,
+            now,
+            now,
+            prior_history=prior.history if prior else (),
+            append_history=True,
+        )
         graded.append(model_id)
 
     # Refresh status (fresh -> stale) for cards not re-graded this tick.
     for model_id, card in list(new_cards.items()):
         if model_id not in graded:
-            new_cards[model_id] = classify(model_id, card.score, card.quality, card.updated_at, now)
+            new_cards[model_id] = classify(
+                model_id,
+                card.score,
+                card.quality,
+                card.updated_at,
+                now,
+                prior_history=card.history,
+            )
 
     known = {m.model_id: m.version_hint for m in catalog}
     summary = TickSummary(

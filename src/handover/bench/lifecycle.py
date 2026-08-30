@@ -34,12 +34,23 @@ class GradeCard(BaseModel):
     status: GradeStatus
     updated_at: datetime
     ci_width_points: float | None  # high-low of the quality CI, in points
+    history: tuple[float, ...] = ()  # recent scores oldest->newest (real sparkline)
 
     @property
     def is_publishable(self) -> bool:
         """Provisional grades may show (labelled); a grade below the provisional
         floor, or with no successes measured, must not be published as a rank."""
         return self.status != "stale" and self.n >= PROVISIONAL_MIN_N and self.score is not None
+
+    @property
+    def delta_points(self) -> float | None:
+        """Change in score vs the previous graded point — the live 'movement'."""
+        if self.score is None or len(self.history) < 2:
+            return None
+        return round(self.history[-1] - self.history[-2], 1)
+
+
+HISTORY_CAP = 30
 
 
 def classify(
@@ -48,6 +59,9 @@ def classify(
     quality: Proportion,
     updated_at: datetime,
     now: datetime,
+    *,
+    prior_history: tuple[float, ...] = (),
+    append_history: bool = False,
 ) -> GradeCard:
     n = quality.n
     if n < PROVISIONAL_MIN_N:
@@ -62,6 +76,9 @@ def classify(
         if quality.ci_low is None or quality.ci_high is None
         else round((quality.ci_high - quality.ci_low) * 100, 1)
     )
+    history = prior_history
+    if append_history and score is not None:
+        history = (*prior_history, score)[-HISTORY_CAP:]
     return GradeCard(
         model_id=model_id,
         score=score,
@@ -70,6 +87,7 @@ def classify(
         status=status,
         updated_at=updated_at,
         ci_width_points=ci_width,
+        history=history,
     )
 
 
