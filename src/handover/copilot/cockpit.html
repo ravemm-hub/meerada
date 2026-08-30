@@ -6,149 +6,154 @@
 <style>
   :root{--ground:#0B1020;--panel:#131a2c;--panel2:#0E1526;--line:#22304F;--text:#E9EEF9;--muted:#92A2BE;--teal:#63CFC2;--amber:#F2B84B;--good:#58C07A;--bad:#E5645C;}
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--ground);color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;}
-  .wrap{max-width:1200px;margin:0 auto;padding:1.4rem 1.1rem 4rem;}
-  .top{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin-bottom:.4rem;}
-  .wm{font-family:"Archivo";font-weight:800;font-size:1.2rem;letter-spacing:-.03em;}
-  .wm em{font-style:normal;color:var(--teal);}
-  .mode{font-family:"IBM Plex Mono",monospace;font-size:.66rem;border-radius:999px;padding:.15rem .6rem;border:1px solid;}
-  .mode.live{color:var(--good);border-color:#2ea043;}
-  .mode.preview{color:var(--amber);border-color:#9e6a03;}
-  h1{font-family:"Archivo";font-weight:800;font-size:1.5rem;letter-spacing:-.02em;margin:.3rem 0 .1rem;}
-  .sub{color:var(--muted);font-size:.85rem;}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;margin-top:1rem;}
-  label{display:block;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:0 0 .4rem;}
-  textarea,input[type=text]{width:100%;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:.7rem .8rem;font-family:inherit;font-size:.95rem;resize:vertical;}
-  textarea{min-height:84px;}
-  .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin:.6rem 0;}
-  .chip{display:flex;align-items:center;gap:.4rem;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:.35rem .8rem;font-family:"IBM Plex Mono",monospace;font-size:.78rem;cursor:pointer;user-select:none;}
-  .chip.on{border-color:var(--teal);color:var(--teal);}
-  .chip input{accent-color:var(--teal);}
-  .row{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-top:.7rem;}
-  .btn{font-family:"Archivo";font-weight:700;font-size:.92rem;padding:.6rem 1.15rem;border-radius:9px;border:1px solid var(--line);color:var(--text);background:transparent;cursor:pointer;}
-  .btn.primary{background:var(--amber);color:#171205;border-color:transparent;}
+  html,body{height:100%;}
+  body{margin:0;background:var(--ground);color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;display:flex;flex-direction:column;height:100vh;}
+  .bar{display:flex;align-items:center;gap:.8rem;padding:.6rem 1rem;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+  .brand{display:flex;align-items:center;gap:.5rem;}
+  .wm{font-family:"Archivo";font-weight:800;font-size:1.05rem;letter-spacing:-.03em;} .wm em{font-style:normal;color:var(--teal);}
+  .sub{color:var(--muted);font-size:.82rem;}
+  .mode{font-family:"IBM Plex Mono",monospace;font-size:.64rem;border-radius:999px;padding:.14rem .55rem;border:1px solid;}
+  .mode.live{color:var(--good);border-color:#2ea043;} .mode.preview{color:var(--amber);border-color:#9e6a03;}
+  .ledger{margin-left:auto;display:flex;gap:1.1rem;font-family:"IBM Plex Mono",monospace;font-size:.72rem;align-items:center;}
+  .ledger b{font-family:"Archivo";font-weight:800;font-size:.95rem;}
+  .ledger .k{color:var(--muted);display:block;font-size:.58rem;text-transform:uppercase;letter-spacing:.05em;}
+  .btn{font-family:"Archivo";font-weight:700;font-size:.82rem;padding:.42rem .8rem;border-radius:8px;border:1px solid var(--line);color:var(--text);background:transparent;cursor:pointer;}
+  .btn.primary{background:var(--amber);color:#171205;border-color:transparent;} .btn:disabled{opacity:.5;cursor:not-allowed;}
   .btn.ghost{color:var(--teal);border-color:var(--teal);}
-  .btn:disabled{opacity:.5;cursor:not-allowed;}
-  .tally{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--good);}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.9rem;margin-top:1rem;}
-  .out{border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;background:var(--panel2);}
-  .out h3{margin:0 0 .1rem;font-family:"IBM Plex Mono",monospace;font-size:.9rem;color:var(--teal);}
-  .savepct{font-family:"Archivo";font-weight:800;color:var(--good);font-size:1.1rem;}
-  .promptbox{margin-top:.5rem;border-radius:8px;padding:.5rem .6rem;font-family:"IBM Plex Mono",monospace;font-size:.72rem;white-space:pre-wrap;background:#0f2114;border:1px solid #2ea043;color:#bfe9c9;}
-  .toks{display:flex;gap:.8rem;font-size:.72rem;color:var(--muted);margin-top:.4rem;}
-  .toks b{color:var(--text);font-variant-numeric:tabular-nums;}
-  .reply{margin-top:.6rem;border-top:1px dashed var(--line);padding-top:.5rem;font-size:.86rem;white-space:pre-wrap;max-height:260px;overflow:auto;}
-  .err{color:var(--bad);font-size:.8rem;margin-top:.5rem;}
-  .spin{display:inline-block;width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-1px;}
-  @keyframes sp{to{transform:rotate(360deg)}}
-  .empty{color:var(--muted);font-size:.85rem;text-align:center;padding:2rem;}
-  .foot{color:var(--muted);font-size:.74rem;margin-top:1.4rem;line-height:1.7;}
+  .models{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-bottom:1px solid var(--line);flex-wrap:wrap;}
+  .chip{display:flex;align-items:center;gap:.35rem;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:.28rem .7rem;font-family:"IBM Plex Mono",monospace;font-size:.75rem;cursor:pointer;user-select:none;}
+  .chip.on{border-color:var(--teal);color:var(--teal);} .chip input{accent-color:var(--teal);}
+  #custom{background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.32rem .6rem;font-family:inherit;font-size:.78rem;min-width:200px;}
+
+  .cols{flex:1;display:flex;gap:.7rem;padding:.8rem 1rem;overflow-x:auto;overflow-y:hidden;}
+  .col{display:flex;flex-direction:column;min-width:320px;flex:1;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  .colh{padding:.6rem .8rem;border-bottom:1px solid var(--line);background:var(--panel2);}
+  .colh .mn{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:.85rem;}
+  .colh .st{display:flex;gap:.8rem;color:var(--muted);font-size:.68rem;font-family:"IBM Plex Mono",monospace;margin-top:.2rem;} .colh .st b{color:var(--text);}
+  .thread{flex:1;overflow-y:auto;padding:.7rem;display:flex;flex-direction:column;gap:.6rem;}
+  .you{align-self:flex-end;background:#16233b;border:1px solid var(--line);border-radius:12px 12px 2px 12px;padding:.45rem .7rem;font-size:.85rem;max-width:88%;}
+  .ai{align-self:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:12px 12px 12px 2px;padding:.5rem .7rem;font-size:.86rem;max-width:94%;white-space:pre-wrap;}
+  .ai .meta{display:block;margin-top:.4rem;font-family:"IBM Plex Mono",monospace;font-size:.62rem;color:var(--teal);}
+  .ai.err{border-color:#5a2d2d;} .ai.err .meta{color:var(--bad);}
+  .spin{display:inline-block;width:11px;height:11px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite;} @keyframes sp{to{transform:rotate(360deg)}}
+  .empty{margin:auto;color:var(--muted);font-size:.85rem;text-align:center;padding:2rem;}
+
+  .composer{display:flex;gap:.6rem;padding:.7rem 1rem;border-top:1px solid var(--line);align-items:flex-end;}
+  .composer textarea{flex:1;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:.6rem .8rem;font-family:inherit;font-size:.9rem;resize:none;min-height:46px;max-height:150px;}
+  .hint{color:var(--muted);font-size:.68rem;padding:0 1rem .6rem;}
   code{font-family:"IBM Plex Mono",monospace;background:var(--panel2);padding:.1rem .35rem;border-radius:4px;}
 </style>
 
-<div class="wrap">
-  <div class="top">
-    <span class="wm">m<em>ee</em>rada</span> <span class="sub">LLManager</span>
-    <span class="mode preview" id="mode">checking…</span>
+<div class="bar">
+  <div class="brand">
+    <svg viewBox="0 0 104 104" width="26" height="26" aria-hidden="true"><g transform="translate(0,20)">
+      <path d="M6 32 Q52 -16 98 32" fill="none" stroke="#63CFC2" stroke-width="8" stroke-linecap="round"/>
+      <path d="M6 32 Q52 80 98 32" fill="none" stroke="#F2B84B" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="52" cy="32" r="18" fill="none" stroke="#22304F" stroke-width="6"/>
+      <circle cx="52" cy="32" r="18" fill="none" stroke="#F2B84B" stroke-width="6" pathLength="100" stroke-dasharray="80 100" stroke-linecap="round" transform="rotate(-90 52 32)"/>
+      <circle cx="52" cy="32" r="7" fill="#63CFC2"/></g></svg>
+    <span class="wm">m<em>ee</em>rada</span><span class="sub">LLManager</span>
+    <span class="mode preview" id="mode">…</span>
   </div>
-  <h1>One cockpit for every model</h1>
-  <div class="sub">Say what you want in plain words. The Copilot writes the lean prompt and runs it across the models you pick — in parallel, on your keys.</div>
-
-  <div class="card">
-    <label for="intent">What do you want the model to do?</label>
-    <textarea id="intent" placeholder="e.g. extract the invoice payee, amount and currency from this text as json">extract the invoice payee, the total amount and the currency from this text as json</textarea>
-    <label style="margin-top:.9rem">Models to run</label>
-    <div class="chips" id="chips"></div>
-    <input type="text" id="custom" placeholder="add models, comma-separated (e.g. gpt-oss-20b, qwen3.8-27b)">
-    <div class="row">
-      <button class="btn ghost" id="btn-prev" onclick="preview()">Preview the lean prompt (free)</button>
-      <button class="btn primary" id="btn-run" onclick="run()">Run in parallel →</button>
-      <span class="tally" id="tally"></span>
-    </div>
-  </div>
-
-  <div class="grid" id="grid"><div class="empty">Pick your models, then Preview or Run.</div></div>
-
-  <div class="foot">
-    Running locally on your machine. Prompts never leave your device — the Copilot talks straight to your provider on your key.
-    In <b>preview</b> mode (no key) you still see the lean prompt and the token saving; set <code>GROQ_API_KEY</code> and restart to run live.
+  <div class="ledger">
+    <span><span class="k">turns</span><b id="l-turns">0</b></span>
+    <span><span class="k">tokens</span><b id="l-tok">0</b></span>
+    <span><span class="k">spent</span><b id="l-cost">$0</b></span>
+    <span><span class="k">lean vs naive</span><b class="up" id="l-save" style="color:var(--good)">—</b></span>
+    <button class="btn ghost" onclick="reset()">Reset</button>
   </div>
 </div>
 
-<script>
-var CHOSEN={}, savedTokens=0, live=false;
+<div class="models" id="models"></div>
 
+<div class="cols" id="cols"><div class="empty">Pick models above and send a message — it runs on all of them at once.</div></div>
+
+<div class="composer">
+  <textarea id="msg" placeholder="Message every selected model at once…  (Enter to send, Shift+Enter for newline)"></textarea>
+  <button class="btn primary" id="send" onclick="send()">Send →</button>
+</div>
+<div class="hint" id="hint">Runs locally on your keys. In preview mode you see the lean prompt LLManager would send; set <code>GROQ_API_KEY</code> and restart to run live.</div>
+
+<script>
+var CHOSEN={}, live=false, convo=[], totals={}, pending=false;
 function h(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
 function selected(){
   var ids=Object.keys(CHOSEN).filter(function(k){return CHOSEN[k];});
-  var custom=document.getElementById("custom").value.split(",").map(function(s){return s.trim();}).filter(Boolean);
-  custom.forEach(function(c){if(ids.indexOf(c)<0)ids.push(c);});
+  document.getElementById("custom").value.split(",").map(function(s){return s.trim();}).filter(Boolean).forEach(function(c){if(ids.indexOf(c)<0)ids.push(c);});
   return ids;
 }
-function renderChips(models){
-  var box=document.getElementById("chips");
+function renderModels(models){
+  var box=document.getElementById("models");
   box.innerHTML=models.map(function(m){
     if(CHOSEN[m]===undefined)CHOSEN[m]=true;
     return '<label class="chip'+(CHOSEN[m]?" on":"")+'" data-m="'+h(m)+'"><input type="checkbox" '+(CHOSEN[m]?"checked":"")+' onchange="toggle(this)"> '+h(m)+'</label>';
+  }).join("")+'<input id="custom" placeholder="+ add model id, comma-separated" onchange="renderCols()">';
+}
+function toggle(cb){ var m=cb.parentNode.getAttribute("data-m"); CHOSEN[m]=cb.checked; cb.parentNode.classList.toggle("on",cb.checked); renderCols(); }
+
+function renderCols(){
+  var models=selected();
+  var box=document.getElementById("cols");
+  if(!models.length){ box.innerHTML='<div class="empty">Pick at least one model.</div>'; return; }
+  box.innerHTML=models.map(function(m){
+    var t=totals[m]||{turns:0,tokens:0,cost:0,saved:0};
+    var thread=convo.map(function(turn){
+      var r=turn.replies[m];
+      var body;
+      if(r===undefined){ body='<div class="ai"><span class="spin"></span></div>'; }
+      else if(r.error){ body='<div class="ai err">'+h(r.text||"")+'<span class="meta">'+h(r.error)+'</span></div>'; }
+      else { body='<div class="ai">'+h(r.text)+'<span class="meta">−'+r.saved_pct+'% lean · '+(r.output_tokens||0)+' out tok</span></div>'; }
+      return '<div class="you">'+h(turn.you)+'</div>'+body;
+    }).join("");
+    return '<div class="col"><div class="colh"><div class="mn">'+h(m)+'</div>'
+      +'<div class="st"><span>turns <b>'+t.turns+'</b></span><span>tokens <b>'+(t.tokens||0).toLocaleString()+'</b></span><span>$<b>'+(t.cost||0).toFixed(5)+'</b></span></div></div>'
+      +'<div class="thread" id="th-'+btoa(m).replace(/=/g,"")+'">'+(thread||'<div class="empty" style="padding:1rem">no messages yet</div>')+'</div></div>';
   }).join("");
+  // autoscroll threads
+  models.forEach(function(m){ var el=document.getElementById("th-"+btoa(m).replace(/=/g,"")); if(el)el.scrollTop=el.scrollHeight; });
 }
-function toggle(cb){ var m=cb.parentNode.getAttribute("data-m"); CHOSEN[m]=cb.checked; cb.parentNode.classList.toggle("on",cb.checked); }
-function updTally(){ document.getElementById("tally").textContent=savedTokens>0?("≈ "+savedTokens.toLocaleString()+" tokens saved this session"):""; }
-
-function cardPreview(r){
-  return '<div class="out"><h3>'+h(r.model)+'</h3>'
-    +'<div><span class="savepct">−'+r.saved_pct+'%</span> <span class="sub">tokens vs a naive prompt</span></div>'
-    +'<div class="promptbox">system ▸ '+h(r.system)+'\nuser ▸ '+h(r.user)+'</div>'
-    +'<div class="toks"><span>naive <b>'+r.naive_tokens+'</b></span><span>lean <b>'+r.optimized_tokens+'</b></span><span>saved <b>'+r.saved_tokens+'</b></span></div></div>';
+function updLedger(){
+  var tok=0,cost=0,saves=[],turns=convo.length;
+  Object.keys(totals).forEach(function(m){ tok+=totals[m].tokens||0; cost+=totals[m].cost||0; });
+  convo.forEach(function(t){ Object.keys(t.replies).forEach(function(m){ var r=t.replies[m]; if(r&&!r.error&&r.saved_pct!=null)saves.push(r.saved_pct); }); });
+  document.getElementById("l-turns").textContent=turns;
+  document.getElementById("l-tok").textContent=tok.toLocaleString();
+  document.getElementById("l-cost").textContent="$"+cost.toFixed(4);
+  document.getElementById("l-save").textContent=saves.length?("−"+Math.round(saves.reduce(function(a,b){return a+b;},0)/saves.length)+"%"):"—";
 }
-function cardRun(r){
-  var body=r.error?('<div class="err">'+h(r.error)+'</div>'):('<div class="reply">'+h(r.text)+'</div>');
-  var toks=r.error?"":'<div class="toks"><span>in <b>'+(r.input_tokens||0)+'</b></span><span>out <b>'+(r.output_tokens||0)+'</b></span><span>saved <b>'+r.saved_pct+'%</b></span></div>';
-  return '<div class="out"><h3>'+h(r.model)+'</h3>'
-    +'<div><span class="savepct">−'+r.saved_pct+'%</span> <span class="sub">tokens on the prompt</span></div>'
-    +(r.system?'<div class="promptbox">system ▸ '+h(r.system)+'\nuser ▸ '+h(r.user)+'</div>':"")
-    +toks+body+'</div>';
-}
-function loading(models){
-  document.getElementById("grid").innerHTML=models.map(function(m){
-    return '<div class="out"><h3>'+h(m)+'</h3><div class="sub"><span class="spin"></span> working…</div></div>';
-  }).join("");
-}
-function busy(on){ document.getElementById("btn-run").disabled=on; document.getElementById("btn-prev").disabled=on; }
-
-async function preview(){
-  var models=selected(); if(!models.length)return;
-  var intent=document.getElementById("intent").value;
-  busy(true); loading(models);
+async function send(){
+  if(pending)return;
+  var models=selected(); var message=document.getElementById("msg").value.trim();
+  if(!models.length||!message)return;
+  pending=true; document.getElementById("send").disabled=true;
+  document.getElementById("msg").value="";
+  var turn={you:message,replies:{}}; convo.push(turn); renderCols();
   try{
-    var res=await fetch("/optimize",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({intent:intent,models:models})});
+    var res=await fetch("/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:message,models:models})});
     var data=await res.json();
-    document.getElementById("grid").innerHTML=data.results.map(cardPreview).join("");
-    savedTokens+=data.results.reduce(function(a,r){return a+(r.saved_tokens||0);},0); updTally();
-  }catch(e){ document.getElementById("grid").innerHTML='<div class="err">'+h(e)+'</div>'; }
-  busy(false);
+    (data.results||[]).forEach(function(r){
+      turn.replies[r.model]=r;
+      if(r.total_tokens!=null) totals[r.model]={turns:r.turns,tokens:r.total_tokens,cost:r.total_cost||0};
+    });
+    // any model with no reply (shouldn't happen) -> mark
+    models.forEach(function(m){ if(turn.replies[m]===undefined) turn.replies[m]={error:"no response",saved_pct:0}; });
+  }catch(e){ models.forEach(function(m){ turn.replies[m]={error:String(e),saved_pct:0}; }); }
+  pending=false; document.getElementById("send").disabled=false; renderCols(); updLedger();
 }
-async function run(){
-  var models=selected(); if(!models.length)return;
-  var intent=document.getElementById("intent").value;
-  busy(true); loading(models);
-  try{
-    var res=await fetch("/run",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({intent:intent,models:models})});
-    var data=await res.json();
-    if(data.error){ document.getElementById("grid").innerHTML='<div class="err">'+h(data.error)+'</div>'; busy(false); return; }
-    document.getElementById("grid").innerHTML=data.results.map(cardRun).join("");
-  }catch(e){ document.getElementById("grid").innerHTML='<div class="err">'+h(e)+'</div>'; }
-  busy(false);
-}
+async function reset(){ try{ await fetch("/reset",{method:"POST"}); }catch(e){} convo=[]; totals={}; renderCols(); updLedger(); }
 
+document.addEventListener("keydown",function(e){
+  if(e.target&&e.target.id=="msg"&&e.key=="Enter"&&!e.shiftKey){ e.preventDefault(); send(); }
+});
 (async function init(){
   try{
     var res=await fetch("/models"); var data=await res.json();
-    live=data.live; renderChips(data.models||[]);
+    live=data.live; renderModels(data.models||[]);
     var mode=document.getElementById("mode");
     mode.textContent=live?"LIVE · your key":"PREVIEW · no key";
     mode.className="mode "+(live?"live":"preview");
-    document.getElementById("btn-run").textContent=live?"Run in parallel →":"Run (preview) →";
-  }catch(e){ renderChips(["claude","gpt","gemini"]); }
+    if(!live) document.getElementById("send").textContent="Preview →";
+  }catch(e){ renderModels(["claude","gpt","gemini"]); }
+  renderCols();
 })();
 </script>

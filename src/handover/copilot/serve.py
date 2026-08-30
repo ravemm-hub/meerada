@@ -78,12 +78,51 @@ def run_view(payload: Mapping[str, Any], caller_for: CallerFor | None) -> dict[s
     return {"live": True, "results": results}
 
 
+def chat_view(manager: SessionManager | None, payload: Mapping[str, Any]) -> dict[str, Any]:
+    """One turn of the multi-model cockpit: send a message to every selected
+    model in parallel, appending to each model's persistent session. When there
+    is no live manager (no key), return the lean-prompt preview instead."""
+    message = str(payload.get("message", "")).strip()
+    models = [str(m) for m in payload.get("models", []) if str(m).strip()]
+    if not message or not models:
+        return {"live": manager is not None, "error": "message and models required", "results": []}
+    if manager is None:
+        preview = optimize_view({"intent": message, "models": models})["results"]
+        for row in preview:
+            row["text"] = ""
+            row["error"] = "preview only — no API key set"
+            row["turns"] = 0
+        return {"live": False, "results": preview}
+    replies = manager.fan_out(message, models)
+    results = []
+    for reply in replies:
+        session = manager.sessions.get(reply.model_id)
+        results.append(
+            {
+                "model": reply.model_id,
+                "text": reply.text,
+                "error": reply.error,
+                "input_tokens": reply.input_tokens,
+                "output_tokens": reply.output_tokens,
+                "saved_pct": reply.prompt.saved_pct,
+                "turns": len(session.history) // 2 if session else 1,
+                "total_tokens": session.total_tokens if session else 0,
+                "total_cost": float(session.total_cost) if session else 0.0,
+            }
+        )
+    return {"live": True, "results": results}
+
+
 def build_app(caller_for: CallerFor | None = None) -> FastAPI:
-    """Wire the cockpit page and the two endpoints over the injected caller."""
+    """Wire the cockpit page and endpoints. A persistent SessionManager keeps
+    each model's conversation across turns (created lazily, reset on demand)."""
     from fastapi import Request
     from fastapi.responses import HTMLResponse, JSONResponse
 
     app = FastAPI(title="Meerada LLManager", docs_url=None, redoc_url=None)
+    state: dict[str, SessionManager | None] = {
+        "manager": SessionManager(caller_for) if caller_for is not None else None
+    }
 
     @app.get("/", response_class=HTMLResponse)
     def index() -> str:
@@ -100,6 +139,15 @@ def build_app(caller_for: CallerFor | None = None) -> FastAPI:
     @app.post("/run")
     async def run_endpoint(request: Request) -> JSONResponse:
         return JSONResponse(run_view(await request.json(), caller_for))
+
+    @app.post("/chat")
+    async def chat_endpoint(request: Request) -> JSONResponse:
+        return JSONResponse(chat_view(state["manager"], await request.json()))
+
+    @app.post("/reset")
+    def reset_endpoint() -> JSONResponse:
+        state["manager"] = SessionManager(caller_for) if caller_for is not None else None
+        return JSONResponse({"ok": True})
 
     return app
 
