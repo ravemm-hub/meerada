@@ -17,14 +17,24 @@ class FakeCompletion:
 
 
 def perfect_complete(system: str, user: str, max_tokens: int) -> FakeCompletion:
-    """A model that passes every seed task."""
+    """A model that passes every seed task — answers each by its content."""
     if "payee" in system:
         return FakeCompletion('{"name": "Acme", "amount": 1240.5, "currency": "USD"}')
     if "sum" in system:
         return FakeCompletion('{"sum": 108, "count": 6}')
     if "code block" in system:
-        return FakeCompletion("```python\ndef is_even(n):\n    return n % 2 == 0\n```")
+        fn = "is_even"
+        if "reverse_str" in user:
+            fn = "reverse_str"
+        elif "add(" in user:
+            fn = "add"
+        return FakeCompletion(f"```python\ndef {fn}(x):\n    return x\n```")
     if "sentiment" in system:
+        low = user.lower()
+        if "loved" in low or "flawless" in low:
+            return FakeCompletion("positive")
+        if "arrived on tuesday" in low or "package arrived" in low:
+            return FakeCompletion("neutral")
         return FakeCompletion("negative")
     return FakeCompletion("")
 

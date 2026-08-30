@@ -71,14 +71,17 @@ def run_model(
     *,
     max_tokens: int = 512,
     est_cost_per_task: Decimal = Decimal("0.01"),
+    repeats: int = 1,
 ) -> dict[str, CoreMetrics]:
     """Run the seed task set on one model; return per-cluster metrics.
 
     Each task becomes one Task graded measured pass/fail — so the index score
-    rests entirely on programmatic verification.
+    rests entirely on programmatic verification. ``repeats`` re-runs the set to
+    build a larger sample (n) toward the publishable / confirmed thresholds.
     """
     per_cluster: dict[str, CoreMetrics] = {}
-    for cluster, tasks in tasks_by_cluster().items():
+    for cluster, base_tasks in tasks_by_cluster().items():
+        tasks = list(base_tasks) * repeats
         graded: list[Task] = []
         for task in tasks:
             if not budget.can_spend(est_cost_per_task):

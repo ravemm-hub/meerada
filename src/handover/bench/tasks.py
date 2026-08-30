@@ -65,6 +65,42 @@ SEED_TASKS: tuple[BenchTask, ...] = (
         },
     ),
     BenchTask(
+        task_id="extract-03",
+        cluster="structured_extraction",
+        system="Extract the payee, amount and currency. Reply with JSON only.",
+        user="Please remit 3450.00 GBP to Northwind Traders for invoice 88.",
+        json_schema=_EXTRACT_SCHEMA,
+    ),
+    BenchTask(
+        task_id="extract-04",
+        cluster="structured_extraction",
+        system="Extract the payee, amount and currency. Reply with JSON only.",
+        user="Wire 12.75 CAD to Luca Rossi, thanks.",
+        json_schema=_EXTRACT_SCHEMA,
+    ),
+    BenchTask(
+        task_id="json-02",
+        cluster="json_transform",
+        system="Return a JSON object with keys 'sum' and 'count' for the numbers given.",
+        user="Numbers: 10, 20, 30.",
+        json_schema={
+            "type": "object",
+            "required": ["sum", "count"],
+            "properties": {"sum": {"type": "number"}, "count": {"type": "integer"}},
+        },
+    ),
+    BenchTask(
+        task_id="json-03",
+        cluster="json_transform",
+        system="Return a JSON object with keys 'sum' and 'count' for the numbers given.",
+        user="Numbers: 7, 7, 7, 7.",
+        json_schema={
+            "type": "object",
+            "required": ["sum", "count"],
+            "properties": {"sum": {"type": "number"}, "count": {"type": "integer"}},
+        },
+    ),
+    BenchTask(
         task_id="code-01",
         cluster="code_fix",
         system="Reply with a single Python function in a ```python code block.",
@@ -72,11 +108,39 @@ SEED_TASKS: tuple[BenchTask, ...] = (
         contract_regex=r"```python[\s\S]*def is_even\(",
     ),
     BenchTask(
+        task_id="code-02",
+        cluster="code_fix",
+        system="Reply with a single Python function in a ```python code block.",
+        user="Write `reverse_str(s)` that returns the reversed string.",
+        contract_regex=r"```python[\s\S]*def reverse_str\(",
+    ),
+    BenchTask(
+        task_id="code-03",
+        cluster="code_fix",
+        system="Reply with a single Python function in a ```python code block.",
+        user="Write `add(a, b)` that returns the sum of two numbers.",
+        contract_regex=r"```python[\s\S]*def add\(",
+    ),
+    BenchTask(
         task_id="classify-01",
         cluster="classification",
         system="Classify sentiment. Reply with exactly one word: positive, negative, or neutral.",
         user="The delivery was late and the box was damaged.",
-        contract_regex=r"^\s*negative\s*$",
+        contract_regex=r"(?i)^\s*negative\.?\s*$",
+    ),
+    BenchTask(
+        task_id="classify-02",
+        cluster="classification",
+        system="Classify sentiment. Reply with exactly one word: positive, negative, or neutral.",
+        user="Absolutely loved it — fast, friendly and flawless!",
+        contract_regex=r"(?i)^\s*positive\.?\s*$",
+    ),
+    BenchTask(
+        task_id="classify-03",
+        cluster="classification",
+        system="Classify sentiment. Reply with exactly one word: positive, negative, or neutral.",
+        user="The package arrived on Tuesday.",
+        contract_regex=r"(?i)^\s*neutral\.?\s*$",
     ),
 )
 
