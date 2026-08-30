@@ -38,9 +38,7 @@ ENV_KEYS = {
 DEFAULT_PRICE = (Decimal("1"), Decimal("1"))
 
 # Model ids that are not chat-completion models — skip these (audio/embed/etc).
-_NON_CHAT = re.compile(
-    r"whisper|tts|audio|embed|guard|moderation|rerank|orpheus|ocr", re.I
-)
+_NON_CHAT = re.compile(r"whisper|tts|audio|embed|guard|moderation|rerank|orpheus|ocr", re.I)
 
 
 def _is_chat_model(model_id: str) -> bool:
@@ -100,7 +98,7 @@ def main(argv: list[str] | None = None) -> int:
             )
 
         try:
-            per_cluster = run_model(spec, complete, budget, repeats=3)
+            per_cluster = run_model(spec, complete, budget, repeats=3, delay_s=2.2)
         except Exception as exc:
             print(f"  skip {model_id}: {type(exc).__name__} {str(exc)[:80]}")
             return None, proportion(0, 0)

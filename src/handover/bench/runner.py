@@ -72,6 +72,7 @@ def run_model(
     max_tokens: int = 512,
     est_cost_per_task: Decimal = Decimal("0.01"),
     repeats: int = 1,
+    delay_s: float = 0.0,
 ) -> dict[str, CoreMetrics]:
     """Run the seed task set on one model; return per-cluster metrics.
 
@@ -87,8 +88,15 @@ def run_model(
             if not budget.can_spend(est_cost_per_task):
                 break  # hard stop, never overrun (P6)
             start = time.monotonic()
-            completion = complete(task.system, task.user, max_tokens)
+            try:
+                completion = complete(task.system, task.user, max_tokens)
+            except Exception:
+                if delay_s:
+                    time.sleep(delay_s)
+                continue  # is skipped; the successes we DID get still count toward n
             wall_ms = max(1, int((time.monotonic() - start) * 1000))
+            if delay_s:
+                time.sleep(delay_s)  # pace to respect provider rate limits
             cost = (
                 Decimal(completion.input_tokens) * spec.price_in_per_mtok
                 + Decimal(completion.output_tokens) * spec.price_out_per_mtok
