@@ -1,7 +1,7 @@
 """Cockpit view functions: pure, injected, no live API (CLAUDE.md).
 The FastAPI/uvicorn shell is a network seam and is not exercised here."""
 
-from handover.copilot.serve import chat_view, optimize_view, run_view
+from handover.copilot.serve import Board, chat_view, optimize_view, run_view
 from handover.copilot.session import SessionManager
 
 
@@ -73,3 +73,36 @@ def test_chat_view_preview_when_no_manager() -> None:
 
 def test_chat_view_rejects_empty() -> None:
     assert chat_view(SessionManager(_caller_for), {"message": "", "models": ["a"]})["results"] == []
+
+
+def test_board_sessions_are_independent() -> None:
+    board = Board(_caller_for)
+    # two sessions on the SAME model, different tasks — histories must not mix
+    board.send("s1", "llama", "task one")
+    board.send("s2", "llama", "task two")
+    r1 = board.send("s1", "llama", "follow up")
+    assert r1["turns"] == 2  # s1 has its own two turns
+    assert board.send("s2", "llama", "x")["turns"] == 2  # s2 tracked separately
+    assert set(board.sessions) == {"s1", "s2"}
+
+
+def test_board_model_change_rehomes_session() -> None:
+    board = Board(_caller_for)
+    board.send("s1", "llama", "hi")
+    r = board.send("s1", "gemma", "hi again")  # switched model -> fresh session
+    assert r["model"] == "gemma"
+    assert r["turns"] == 1
+
+
+def test_board_preview_and_close() -> None:
+    preview = Board(None).send("s1", "claude", "do x")
+    assert "preview only" in preview["error"]
+    board = Board(_caller_for)
+    board.send("s1", "llama", "hi")
+    board.close("s1")
+    assert "s1" not in board.sessions
+
+
+def test_board_rejects_incomplete() -> None:
+    assert "required" in Board(_caller_for).send("", "llama", "hi")["error"]
+    assert "required" in Board(_caller_for).send("s1", "llama", "")["error"]

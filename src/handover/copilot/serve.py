@@ -14,7 +14,7 @@ from typing import Any
 from fastapi import FastAPI
 
 from handover.copilot.optimize import optimize
-from handover.copilot.session import SessionManager
+from handover.copilot.session import Session, SessionManager
 from handover.replay.openai_client import ChatCaller
 
 _COCKPIT = Path(__file__).parent / "cockpit.html"
@@ -113,9 +113,53 @@ def chat_view(manager: SessionManager | None, payload: Mapping[str, Any]) -> dic
     return {"live": True, "results": results}
 
 
+class Board:
+    """Independent named sessions — assign any model to any session and run many
+    at once. Unlike a single chat, the user gives DIFFERENT tasks to DIFFERENT
+    models (or several sessions on one model) and operates them all in parallel.
+    Each session keeps its own history and cost tally; FastAPI runs the sync send
+    endpoint in a threadpool, so sessions genuinely run concurrently."""
+
+    def __init__(self, caller_for: CallerFor | None, *, max_tokens: int = 512) -> None:
+        self._caller_for = caller_for
+        self._max_tokens = max_tokens
+        self.sessions: dict[str, Session] = {}
+        self.models: dict[str, str] = {}
+
+    def send(self, sid: str, model: str, message: str) -> dict[str, Any]:
+        message = message.strip()
+        if not sid or not model or not message:
+            return {"error": "session id, model and message are required"}
+        self.models[sid] = model
+        if self._caller_for is None:
+            opt = optimize(message, model)
+            return {
+                "id": sid, "model": model, "text": "",
+                "error": "preview only — no API key set",
+                "saved_pct": opt.saved_pct, "system": opt.system, "user": opt.user,
+                "turns": 0, "total_tokens": 0, "total_cost": 0.0,
+            }
+        session = self.sessions.get(sid)
+        if session is None or session.model_id != model:
+            session = Session(model, self._caller_for(model), max_tokens=self._max_tokens)
+            self.sessions[sid] = session
+        reply = session.ask(message)
+        return {
+            "id": sid, "model": model, "text": reply.text, "error": reply.error,
+            "saved_pct": reply.prompt.saved_pct,
+            "input_tokens": reply.input_tokens, "output_tokens": reply.output_tokens,
+            "turns": len(session.history) // 2,
+            "total_tokens": session.total_tokens, "total_cost": float(session.total_cost),
+        }
+
+    def close(self, sid: str) -> None:
+        self.sessions.pop(sid, None)
+        self.models.pop(sid, None)
+
+
 def build_app(caller_for: CallerFor | None = None) -> FastAPI:
-    """Wire the cockpit page and endpoints. A persistent SessionManager keeps
-    each model's conversation across turns (created lazily, reset on demand)."""
+    """Wire the cockpit page and endpoints. The Board holds independent sessions
+    (many models, many tasks) that run in parallel; reset clears them."""
     from fastapi import Request
     from fastapi.responses import HTMLResponse, JSONResponse
 
@@ -123,6 +167,7 @@ def build_app(caller_for: CallerFor | None = None) -> FastAPI:
     state: dict[str, SessionManager | None] = {
         "manager": SessionManager(caller_for) if caller_for is not None else None
     }
+    board: dict[str, Board] = {"board": Board(caller_for)}
 
     @app.get("/", response_class=HTMLResponse)
     def index() -> str:
@@ -144,9 +189,25 @@ def build_app(caller_for: CallerFor | None = None) -> FastAPI:
     async def chat_endpoint(request: Request) -> JSONResponse:
         return JSONResponse(chat_view(state["manager"], await request.json()))
 
+    @app.post("/session/send")
+    def session_send(payload: dict[str, Any]) -> JSONResponse:  # sync -> threadpool -> parallel
+        return JSONResponse(
+            board["board"].send(
+                str(payload.get("id", "")),
+                str(payload.get("model", "")),
+                str(payload.get("message", "")),
+            )
+        )
+
+    @app.post("/session/close")
+    async def session_close(request: Request) -> JSONResponse:
+        board["board"].close(str((await request.json()).get("id", "")))
+        return JSONResponse({"ok": True})
+
     @app.post("/reset")
     def reset_endpoint() -> JSONResponse:
         state["manager"] = SessionManager(caller_for) if caller_for is not None else None
+        board["board"] = Board(caller_for)
         return JSONResponse({"ok": True})
 
     return app
