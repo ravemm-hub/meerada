@@ -152,5 +152,62 @@ def pack(
     )
 
 
+@app.command()
+def ask(
+    intent: Annotated[str, typer.Argument(help="what you want, in plain words")],
+    model: Annotated[str, typer.Option("--model", help="model id")] = "llama-3.1-8b-instant",
+    provider: Annotated[str, typer.Option("--provider", help="free-tier provider")] = "groq",
+    max_tokens: Annotated[int, typer.Option("--max-tokens")] = 512,
+) -> None:
+    """Copilot: rewrite your intent into a lean prompt and send it to one model."""
+    from handover.copilot.optimize import optimize
+    from handover.copilot.providers import caller_for_provider
+
+    opt = optimize(intent, model)
+    typer.echo(f"translated ({opt.saved_pct}% fewer tokens than a naive prompt)")
+    typer.echo(f"  system: {opt.system}")
+    typer.echo(f"  user:   {opt.user}")
+    try:
+        caller = caller_for_provider(provider)
+    except RuntimeError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from exc
+    completion = caller.complete(
+        model, opt.system, [{"role": "user", "content": opt.user}], max_tokens
+    )
+    typer.echo("---")
+    typer.echo(completion.text)
+    typer.echo(f"[{completion.input_tokens} in / {completion.output_tokens} out tokens]")
+
+
+@app.command()
+def fan(
+    intent: Annotated[str, typer.Argument(help="what you want, in plain words")],
+    models: Annotated[str, typer.Option("--models", help="comma-separated model ids")],
+    provider: Annotated[str, typer.Option("--provider", help="free-tier provider")] = "groq",
+    max_tokens: Annotated[int, typer.Option("--max-tokens")] = 512,
+) -> None:
+    """Copilot: run the same intent across several models in parallel, one cockpit."""
+    from handover.copilot.providers import caller_for_provider
+    from handover.copilot.session import SessionManager
+
+    ids = [m.strip() for m in models.split(",") if m.strip()]
+    if not ids:
+        typer.echo("no models given (use --models a,b,c)", err=True)
+        raise typer.Exit(1)
+    try:
+        caller = caller_for_provider(provider)
+    except RuntimeError as exc:
+        typer.echo(str(exc), err=True)
+        raise typer.Exit(1) from exc
+    manager = SessionManager(lambda _model_id: caller, max_tokens=max_tokens)
+    for reply in manager.fan_out(intent, ids):
+        typer.echo(f"== {reply.model_id}  ({reply.prompt.saved_pct}% fewer tokens) ==")
+        if reply.error:
+            typer.echo(f"  error: {reply.error}")
+        else:
+            typer.echo(f"  {reply.text.strip()[:600]}")
+
+
 if __name__ == "__main__":
     app()
