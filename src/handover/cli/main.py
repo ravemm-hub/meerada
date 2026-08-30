@@ -209,5 +209,18 @@ def fan(
             typer.echo(f"  {reply.text.strip()[:600]}")
 
 
+@app.command()
+def up(
+    port: Annotated[int, typer.Option("--port", help="localhost port")] = 8765,
+    provider: Annotated[str, typer.Option("--provider", help="free-tier provider")] = "groq",
+    no_open: Annotated[bool, typer.Option("--no-open", help="don't open the browser")] = False,
+) -> None:
+    """Open the Copilot cockpit in your browser — many models, one place, parallel."""
+    from handover.copilot.serve import serve
+
+    typer.echo(f"Meerada Copilot on http://127.0.0.1:{port}  (Ctrl+C to stop)")
+    serve(port=port, provider=provider, open_browser=not no_open)
+
+
 if __name__ == "__main__":
     app()

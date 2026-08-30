@@ -1,0 +1,154 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meerada Copilot</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root{--ground:#0B1020;--panel:#131a2c;--panel2:#0E1526;--line:#22304F;--text:#E9EEF9;--muted:#92A2BE;--teal:#63CFC2;--amber:#F2B84B;--good:#58C07A;--bad:#E5645C;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ground);color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;}
+  .wrap{max-width:1200px;margin:0 auto;padding:1.4rem 1.1rem 4rem;}
+  .top{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;margin-bottom:.4rem;}
+  .wm{font-family:"Archivo";font-weight:800;font-size:1.2rem;letter-spacing:-.03em;}
+  .wm em{font-style:normal;color:var(--teal);}
+  .mode{font-family:"IBM Plex Mono",monospace;font-size:.66rem;border-radius:999px;padding:.15rem .6rem;border:1px solid;}
+  .mode.live{color:var(--good);border-color:#2ea043;}
+  .mode.preview{color:var(--amber);border-color:#9e6a03;}
+  h1{font-family:"Archivo";font-weight:800;font-size:1.5rem;letter-spacing:-.02em;margin:.3rem 0 .1rem;}
+  .sub{color:var(--muted);font-size:.85rem;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;margin-top:1rem;}
+  label{display:block;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:0 0 .4rem;}
+  textarea,input[type=text]{width:100%;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:9px;padding:.7rem .8rem;font-family:inherit;font-size:.95rem;resize:vertical;}
+  textarea{min-height:84px;}
+  .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin:.6rem 0;}
+  .chip{display:flex;align-items:center;gap:.4rem;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:.35rem .8rem;font-family:"IBM Plex Mono",monospace;font-size:.78rem;cursor:pointer;user-select:none;}
+  .chip.on{border-color:var(--teal);color:var(--teal);}
+  .chip input{accent-color:var(--teal);}
+  .row{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-top:.7rem;}
+  .btn{font-family:"Archivo";font-weight:700;font-size:.92rem;padding:.6rem 1.15rem;border-radius:9px;border:1px solid var(--line);color:var(--text);background:transparent;cursor:pointer;}
+  .btn.primary{background:var(--amber);color:#171205;border-color:transparent;}
+  .btn.ghost{color:var(--teal);border-color:var(--teal);}
+  .btn:disabled{opacity:.5;cursor:not-allowed;}
+  .tally{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:.82rem;color:var(--good);}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.9rem;margin-top:1rem;}
+  .out{border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;background:var(--panel2);}
+  .out h3{margin:0 0 .1rem;font-family:"IBM Plex Mono",monospace;font-size:.9rem;color:var(--teal);}
+  .savepct{font-family:"Archivo";font-weight:800;color:var(--good);font-size:1.1rem;}
+  .promptbox{margin-top:.5rem;border-radius:8px;padding:.5rem .6rem;font-family:"IBM Plex Mono",monospace;font-size:.72rem;white-space:pre-wrap;background:#0f2114;border:1px solid #2ea043;color:#bfe9c9;}
+  .toks{display:flex;gap:.8rem;font-size:.72rem;color:var(--muted);margin-top:.4rem;}
+  .toks b{color:var(--text);font-variant-numeric:tabular-nums;}
+  .reply{margin-top:.6rem;border-top:1px dashed var(--line);padding-top:.5rem;font-size:.86rem;white-space:pre-wrap;max-height:260px;overflow:auto;}
+  .err{color:var(--bad);font-size:.8rem;margin-top:.5rem;}
+  .spin{display:inline-block;width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-1px;}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .empty{color:var(--muted);font-size:.85rem;text-align:center;padding:2rem;}
+  .foot{color:var(--muted);font-size:.74rem;margin-top:1.4rem;line-height:1.7;}
+  code{font-family:"IBM Plex Mono",monospace;background:var(--panel2);padding:.1rem .35rem;border-radius:4px;}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <span class="wm">m<em>ee</em>rada</span> <span class="sub">Copilot</span>
+    <span class="mode preview" id="mode">checking…</span>
+  </div>
+  <h1>One cockpit for every model</h1>
+  <div class="sub">Say what you want in plain words. The Copilot writes the lean prompt and runs it across the models you pick — in parallel, on your keys.</div>
+
+  <div class="card">
+    <label for="intent">What do you want the model to do?</label>
+    <textarea id="intent" placeholder="e.g. extract the invoice payee, amount and currency from this text as json">extract the invoice payee, the total amount and the currency from this text as json</textarea>
+    <label style="margin-top:.9rem">Models to run</label>
+    <div class="chips" id="chips"></div>
+    <input type="text" id="custom" placeholder="add models, comma-separated (e.g. gpt-oss-20b, qwen3.8-27b)">
+    <div class="row">
+      <button class="btn ghost" id="btn-prev" onclick="preview()">Preview the lean prompt (free)</button>
+      <button class="btn primary" id="btn-run" onclick="run()">Run in parallel →</button>
+      <span class="tally" id="tally"></span>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"><div class="empty">Pick your models, then Preview or Run.</div></div>
+
+  <div class="foot">
+    Running locally on your machine. Prompts never leave your device — the Copilot talks straight to your provider on your key.
+    In <b>preview</b> mode (no key) you still see the lean prompt and the token saving; set <code>GROQ_API_KEY</code> and restart to run live.
+  </div>
+</div>
+
+<script>
+var CHOSEN={}, savedTokens=0, live=false;
+
+function h(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+function selected(){
+  var ids=Object.keys(CHOSEN).filter(function(k){return CHOSEN[k];});
+  var custom=document.getElementById("custom").value.split(",").map(function(s){return s.trim();}).filter(Boolean);
+  custom.forEach(function(c){if(ids.indexOf(c)<0)ids.push(c);});
+  return ids;
+}
+function renderChips(models){
+  var box=document.getElementById("chips");
+  box.innerHTML=models.map(function(m){
+    if(CHOSEN[m]===undefined)CHOSEN[m]=true;
+    return '<label class="chip'+(CHOSEN[m]?" on":"")+'" data-m="'+h(m)+'"><input type="checkbox" '+(CHOSEN[m]?"checked":"")+' onchange="toggle(this)"> '+h(m)+'</label>';
+  }).join("");
+}
+function toggle(cb){ var m=cb.parentNode.getAttribute("data-m"); CHOSEN[m]=cb.checked; cb.parentNode.classList.toggle("on",cb.checked); }
+function updTally(){ document.getElementById("tally").textContent=savedTokens>0?("≈ "+savedTokens.toLocaleString()+" tokens saved this session"):""; }
+
+function cardPreview(r){
+  return '<div class="out"><h3>'+h(r.model)+'</h3>'
+    +'<div><span class="savepct">−'+r.saved_pct+'%</span> <span class="sub">tokens vs a naive prompt</span></div>'
+    +'<div class="promptbox">system ▸ '+h(r.system)+'\nuser ▸ '+h(r.user)+'</div>'
+    +'<div class="toks"><span>naive <b>'+r.naive_tokens+'</b></span><span>lean <b>'+r.optimized_tokens+'</b></span><span>saved <b>'+r.saved_tokens+'</b></span></div></div>';
+}
+function cardRun(r){
+  var body=r.error?('<div class="err">'+h(r.error)+'</div>'):('<div class="reply">'+h(r.text)+'</div>');
+  var toks=r.error?"":'<div class="toks"><span>in <b>'+(r.input_tokens||0)+'</b></span><span>out <b>'+(r.output_tokens||0)+'</b></span><span>saved <b>'+r.saved_pct+'%</b></span></div>';
+  return '<div class="out"><h3>'+h(r.model)+'</h3>'
+    +'<div><span class="savepct">−'+r.saved_pct+'%</span> <span class="sub">tokens on the prompt</span></div>'
+    +(r.system?'<div class="promptbox">system ▸ '+h(r.system)+'\nuser ▸ '+h(r.user)+'</div>':"")
+    +toks+body+'</div>';
+}
+function loading(models){
+  document.getElementById("grid").innerHTML=models.map(function(m){
+    return '<div class="out"><h3>'+h(m)+'</h3><div class="sub"><span class="spin"></span> working…</div></div>';
+  }).join("");
+}
+function busy(on){ document.getElementById("btn-run").disabled=on; document.getElementById("btn-prev").disabled=on; }
+
+async function preview(){
+  var models=selected(); if(!models.length)return;
+  var intent=document.getElementById("intent").value;
+  busy(true); loading(models);
+  try{
+    var res=await fetch("/optimize",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({intent:intent,models:models})});
+    var data=await res.json();
+    document.getElementById("grid").innerHTML=data.results.map(cardPreview).join("");
+    savedTokens+=data.results.reduce(function(a,r){return a+(r.saved_tokens||0);},0); updTally();
+  }catch(e){ document.getElementById("grid").innerHTML='<div class="err">'+h(e)+'</div>'; }
+  busy(false);
+}
+async function run(){
+  var models=selected(); if(!models.length)return;
+  var intent=document.getElementById("intent").value;
+  busy(true); loading(models);
+  try{
+    var res=await fetch("/run",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({intent:intent,models:models})});
+    var data=await res.json();
+    if(data.error){ document.getElementById("grid").innerHTML='<div class="err">'+h(data.error)+'</div>'; busy(false); return; }
+    document.getElementById("grid").innerHTML=data.results.map(cardRun).join("");
+  }catch(e){ document.getElementById("grid").innerHTML='<div class="err">'+h(e)+'</div>'; }
+  busy(false);
+}
+
+(async function init(){
+  try{
+    var res=await fetch("/models"); var data=await res.json();
+    live=data.live; renderChips(data.models||[]);
+    var mode=document.getElementById("mode");
+    mode.textContent=live?"LIVE · your key":"PREVIEW · no key";
+    mode.className="mode "+(live?"live":"preview");
+    document.getElementById("btn-run").textContent=live?"Run in parallel →":"Run (preview) →";
+  }catch(e){ renderChips(["claude","gpt","gemini"]); }
+})();
+</script>
