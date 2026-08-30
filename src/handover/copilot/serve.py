@@ -83,7 +83,7 @@ def build_app(caller_for: CallerFor | None = None) -> FastAPI:
     from fastapi import Request
     from fastapi.responses import HTMLResponse, JSONResponse
 
-    app = FastAPI(title="Meerada Copilot", docs_url=None, redoc_url=None)
+    app = FastAPI(title="Meerada LLManager", docs_url=None, redoc_url=None)
 
     @app.get("/", response_class=HTMLResponse)
     def index() -> str:

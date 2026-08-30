@@ -1,0 +1,235 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meerada LLManager</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root{--ground:#0B1020;--panel:#131a2c;--panel2:#0E1526;--line:#22304F;--text:#E9EEF9;--muted:#92A2BE;--teal:#63CFC2;--amber:#F2B84B;--good:#58C07A;--bad:#E5645C;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ground);color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.55;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 1.1rem;}
+  .teal{color:var(--teal)} .amber{color:var(--amber)} .good{color:var(--good)} .muted{color:var(--muted)}
+
+  nav{position:sticky;top:0;z-index:20;background:rgba(11,16,32,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;gap:1rem;padding:.7rem 1.1rem;}
+  .wm{font-family:"Archivo";font-weight:800;font-size:1.12rem;letter-spacing:-.03em;}
+  .wm em{font-style:normal;color:var(--teal);}
+  .nlinks{display:flex;gap:1.1rem;margin-left:.6rem;font-size:.85rem;}
+  .nlinks a{color:var(--muted);} .nlinks a.on{color:var(--text);}
+  nav .cta{margin-left:auto;}
+  .btn{display:inline-block;font-family:"Archivo";font-weight:700;font-size:.9rem;padding:.55rem 1.05rem;border-radius:9px;border:1px solid var(--line);color:var(--text);background:transparent;cursor:pointer;}
+  .btn.primary{background:var(--amber);color:#171205;border-color:transparent;}
+  .btn.ghost{border-color:var(--teal);color:var(--teal);}
+  .btn.lg{font-size:1rem;padding:.72rem 1.4rem;}
+
+  .badge{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);border:1px solid #9e6a03;border-radius:999px;padding:.18rem .7rem;}
+  header.hero{padding:3.2rem 0 1rem;text-align:center;}
+  .hero h1{font-family:"Archivo";font-weight:900;font-size:clamp(2.2rem,6vw,3.7rem);letter-spacing:-.03em;line-height:1.02;margin:.9rem 0 .3rem;}
+  .hero h1 em{font-style:normal;color:var(--teal);}
+  .hero .tag{font-size:clamp(1rem,2.4vw,1.3rem);color:var(--text);max-width:720px;margin:.3rem auto .5rem;}
+  .hero .lede{color:var(--muted);max-width:640px;margin:0 auto 1.4rem;font-size:1rem;}
+  .hero .btns{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;}
+  .note{color:var(--muted);font-size:.78rem;margin-top:.8rem;}
+
+  section{padding:2.4rem 0;}
+  h2{font-family:"Archivo";font-weight:800;font-size:clamp(1.4rem,3.4vw,2rem);letter-spacing:-.02em;text-align:center;margin:0 0 .3rem;}
+  .h2sub{color:var(--muted);text-align:center;max-width:680px;margin:0 auto 1.6rem;}
+
+  /* the killer matrix */
+  .matrixwrap{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.1rem;overflow-x:auto;}
+  .mgrid{display:grid;gap:.5rem;min-width:640px;}
+  .mcell{background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:.5rem .6rem;font-size:.74rem;min-height:58px;transition:border-color .3s,background .3s;}
+  .mcell.head{background:transparent;border:none;display:flex;align-items:center;gap:.4rem;font-family:"IBM Plex Mono",monospace;color:var(--muted);min-height:auto;padding:.2rem .4rem;}
+  .mcell.rowhead{background:transparent;border:none;font-weight:600;font-size:.82rem;display:flex;align-items:center;min-height:58px;}
+  .mcell .st{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--muted);}
+  .mcell.run{border-color:var(--teal);} .mcell.run .st{color:var(--teal);}
+  .mcell.done{border-color:#2ea043;background:#0f2114;} .mcell.done .st{color:var(--good);}
+  .mcell .tok{display:block;margin-top:.25rem;font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--muted);}
+  .mbar{height:4px;background:var(--line);border-radius:99px;margin-top:.35rem;overflow:hidden;} .mbar i{display:block;height:4px;background:var(--teal);width:0;transition:width .3s;}
+  .mstats{display:flex;gap:1.4rem;flex-wrap:wrap;justify-content:center;margin-top:1rem;font-family:"IBM Plex Mono",monospace;font-size:.82rem;}
+  .mstats b{font-family:"Archivo";font-weight:800;font-size:1.2rem;}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;} @media(max-width:820px){.cards{grid-template-columns:1fr}}
+  .fcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem 1.25rem;}
+  .fcard .ic{font-size:1.5rem;} .fcard h3{font-family:"Archivo";font-size:1.05rem;margin:.5rem 0 .35rem;}
+  .fcard p{color:var(--muted);font-size:.9rem;margin:0;}
+
+  .devs{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;} @media(max-width:820px){.devs{grid-template-columns:1fr}}
+  .dev{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;}
+  .dev .k{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--teal);text-transform:uppercase;letter-spacing:.05em;}
+  .dev .t{font-weight:600;margin:.3rem 0;} .dev .d{color:var(--muted);font-size:.85rem;}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:1rem;} @media(max-width:760px){.split{grid-template-columns:1fr}}
+  .tier{border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.5rem;background:var(--panel);}
+  .tier.prem{border-color:var(--amber);box-shadow:0 0 0 1px rgba(242,184,75,.25) inset;}
+  .tier h3{font-family:"Archivo";font-size:1.2rem;margin:.2rem 0;} .tier .price{font-family:"Archivo";font-weight:800;font-size:1.6rem;margin:.3rem 0 .8rem;}
+  .tier ul{list-style:none;padding:0;margin:0 0 1rem;} .tier li{padding:.28rem 0;font-size:.9rem;color:var(--text);} .tier li::before{content:"✓ ";color:var(--good);}
+  .tier li.off{color:var(--muted);} .tier li.off::before{content:"— ";color:var(--muted);}
+
+  .effrow{display:flex;gap:1rem;align-items:center;justify-content:center;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.3rem;}
+  .effrow .big{font-family:"Archivo";font-weight:900;font-size:2.2rem;color:var(--good);}
+  .effrow .arrow{font-size:1.6rem;color:var(--teal);}
+  .strike{text-decoration:line-through;color:var(--bad);font-family:"Archivo";font-weight:800;font-size:1.6rem;}
+
+  footer{border-top:1px solid var(--line);padding:2rem 0 3rem;text-align:center;color:var(--muted);font-size:.85rem;}
+  code{font-family:"IBM Plex Mono",monospace;background:var(--panel2);padding:.12rem .4rem;border-radius:5px;font-size:.85em;}
+</style>
+
+<nav><div class="wrap">
+  <span class="wm">m<em>ee</em>rada</span>
+  <span class="nlinks">
+    <a href="index.html">Home</a>
+    <a href="market.html">Arena</a>
+    <a href="grade.html">Grade</a>
+    <a href="llmanager.html" class="on">LLManager</a>
+  </span>
+  <span class="cta"><a class="btn primary" href="#get">Download beta</a></span>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="badge">Premium · flagship</span>
+  <h1>Meerada <em>LLManager</em></h1>
+  <div class="tag">The console that manages the communication and tasks between you and every model you pay for.</div>
+  <div class="lede">Stop juggling tabs and burning tokens across Claude, GPT, Gemini, DeepSeek and the rest. Say what you need once — LLManager runs it across many models and many tasks at the same time, on your keys, and makes sure not a token of your spend is wasted.</div>
+  <div class="btns">
+    <a class="btn primary lg" href="#get">Download the beta</a>
+    <a class="btn ghost lg" href="#matrix">See it run ↓</a>
+  </div>
+  <div class="note">Desktop · mobile · your keys · your data stays local. The engine underneath is open-source and free.</div>
+</div></header>
+
+<section id="matrix"><div class="wrap">
+  <h2>Multi-task × multi-model, at a glance</h2>
+  <div class="h2sub">Your tasks down the side, your models across the top. LLManager fires them all in parallel, manages every conversation, and routes each task to the model that does it best for the least money.</div>
+  <div class="matrixwrap">
+    <div class="mgrid" id="mgrid"></div>
+  </div>
+  <div class="mstats">
+    <span>tasks done <b class="teal" id="m-done">0</b></span>
+    <span>tokens saved <b class="good" id="m-saved">0</b></span>
+    <span>≈ spend saved <b class="good" id="m-money">$0</b></span>
+    <span class="muted" id="m-note">running…</span>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>What LLManager does</h2>
+  <div class="h2sub">Not a chat window and not a translator — a manager that handles the whole conversation and workload between you and the models.</div>
+  <div class="cards">
+    <div class="fcard"><div class="ic">🎛️</div><h3>Manages the conversation</h3><p>You write intent in plain words. LLManager shapes the right, lean instruction for each model, sends it, checks the answer held up, and keeps the thread — so you never hand-craft a prompt again.</p></div>
+    <div class="fcard"><div class="ic">🧵</div><h3>Many sessions, one place</h3><p>Dozens of live model conversations side by side. Shared context is sent once, not re-pasted into every tab. Switch, compare, continue — from a single cockpit.</p></div>
+    <div class="fcard"><div class="ic">🗂️</div><h3>Many tasks, many models</h3><p>Run a whole batch of tasks across a whole set of models as a matrix. See who wins each cell on quality, speed and cost — then keep the best.</p></div>
+    <div class="fcard"><div class="ic">💸</div><h3>Every token earns its keep</h3><p>Each task is routed to the cheapest model that still clears the quality bar, prompts are trimmed automatically, and the running tally shows exactly how much of your model spend LLManager just saved.</p></div>
+    <div class="fcard"><div class="ic">🖥️</div><h3>Everywhere you work</h3><p>A desktop tray app (mac / win / linux) and a mobile app (iOS / Android). It reaches into what you're actually working on and runs the models right there — no copy-paste round trips.</p></div>
+    <div class="fcard"><div class="ic">🔐</div><h3>Your keys, your data</h3><p>Runs locally and talks straight to your providers on your own keys. Your prompts and content never pass through us. Bring one key or ten.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>On every device you work from</h2>
+  <div class="h2sub">One account, one workflow — wherever the work is.</div>
+  <div class="devs">
+    <div class="dev"><div class="k">Desktop · mac / win / linux</div><div class="t">Tray cockpit + CLI</div><div class="d">Lives in your menu bar. Hotkey to summon, drop in a task, fan it across models. Scriptable from the terminal too.</div></div>
+    <div class="dev"><div class="k">Mobile · iOS / Android</div><div class="t">Pocket console</div><div class="d">Speak or paste a task on the go; LLManager runs it across your models and hands back the winning answer. Share-sheet from any app.</div></div>
+    <div class="dev"><div class="k">Reaches your workspace</div><div class="t">Runs on what you're doing</div><div class="d">Point it at a repo, a doc, a dataset — it operates the models on that context directly, and brings the results back where you need them.</div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>You pay for the models. We make sure it counts.</h2>
+  <div class="h2sub">The same job, done directly vs. done through LLManager — same result, a fraction of the tokens.</div>
+  <div class="effrow">
+    <div><div class="muted" style="font-size:.8rem">direct, by hand</div><div class="strike">1,000 tok</div></div>
+    <div class="arrow">→</div>
+    <div><div class="muted" style="font-size:.8rem">through LLManager</div><div class="big">380 tok</div></div>
+    <div style="min-width:180px"><div class="muted" style="font-size:.8rem">over 10k calls / month</div><div class="big" style="font-size:1.6rem">≈ $1,240 saved</div></div>
+  </div>
+  <div class="note" style="text-align:center">Illustrative. Actual savings depend on your models and volume — LLManager shows your real number, live.</div>
+</div></section>
+
+<section id="get"><div class="wrap">
+  <h2>Free core. Premium cockpit.</h2>
+  <div class="h2sub">The measuring engine and command-line tools are open-source and free forever. LLManager is the premium cockpit on top.</div>
+  <div class="split">
+    <div class="tier">
+      <h3>Free · open-core</h3>
+      <div class="price">$0</div>
+      <ul>
+        <li>The prompt engine (lean, per-model)</li>
+        <li><code>meerada ask</code> — one model from the CLI</li>
+        <li><code>meerada fan</code> — parallel from the CLI</li>
+        <li>The live Grade board &amp; Arena</li>
+        <li class="off">Visual multi-task × multi-model cockpit</li>
+        <li class="off">Mobile app &amp; workspace control</li>
+      </ul>
+      <a class="btn ghost" href="https://github.com/ravemm-hub/meerada" target="_blank" rel="noopener">Get the free core</a>
+    </div>
+    <div class="tier prem">
+      <span class="badge">Premium</span>
+      <h3 style="margin-top:.5rem">Meerada LLManager</h3>
+      <div class="price">Pricing soon</div>
+      <ul>
+        <li>Everything in Free</li>
+        <li>Visual cockpit — many sessions, one place</li>
+        <li>Multi-task × multi-model matrix</li>
+        <li>Auto cost-routing + live savings ledger</li>
+        <li>Desktop tray + mobile apps</li>
+        <li>Runs models on your workspace directly</li>
+      </ul>
+      <a class="btn primary" href="#" onclick="joinBeta(event)">Join the private beta</a>
+      <div class="note" id="beta-note">We'll email you a build. No card, no spam.</div>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <span class="wm">m<em>ee</em>rada</span> LLManager · One console to run every model — and every task — at once.<br>
+  <span style="font-size:.8rem">Runs on your keys · your data stays local · the engine is open-source.</span>
+</div></footer>
+
+<script>
+var MTASKS=["Summarize the contract","Extract invoice fields","Draft the reply","Write the SQL","Fix the failing test"];
+var MMODELS=["Claude","GPT","Gemini","DeepSeek"];
+var COST={Claude:25,GPT:30,Gemini:12,DeepSeek:0.9}; // illustrative $/Mtok out
+var cells={}, doneCount=0, savedTok=0, savedMoney=0;
+
+function buildGrid(){
+  var g=document.getElementById("mgrid");
+  g.style.gridTemplateColumns="minmax(150px,1.3fr) repeat("+MMODELS.length+",1fr)";
+  var html='<div class="mcell head"></div>'+MMODELS.map(function(m){return '<div class="mcell head">'+m+'</div>';}).join("");
+  MTASKS.forEach(function(t,ri){
+    html+='<div class="mcell rowhead">'+t+'</div>';
+    MMODELS.forEach(function(m,ci){
+      var id="c"+ri+"_"+ci;
+      html+='<div class="mcell" id="'+id+'"><span class="st">queued</span><div class="mbar"><i></i></div><span class="tok"></span></div>';
+    });
+  });
+  g.innerHTML=html;
+}
+function tick(){
+  // pick a random queued/idle cell and advance it
+  var ri=Math.floor(Math.random()*MTASKS.length), ci=Math.floor(Math.random()*MMODELS.length), id="c"+ri+"_"+ci;
+  var el=document.getElementById(id); if(!el)return;
+  var st=cells[id]||0;
+  if(st>=2){ // reset a done cell occasionally to keep it alive
+    if(Math.random()<0.25){ cells[id]=0; el.className="mcell"; el.querySelector(".st").textContent="queued"; el.querySelector(".mbar i").style.width="0"; el.querySelector(".tok").textContent=""; }
+    return;
+  }
+  if(st===0){ cells[id]=1; el.className="mcell run"; el.querySelector(".st").textContent="running…"; el.querySelector(".mbar i").style.width=(30+Math.random()*50)+"%"; }
+  else if(st===1){
+    cells[id]=2; el.className="mcell done";
+    var m=MMODELS[ci]; var lean=40+Math.floor(Math.random()*60); var naive=lean*(2.2+Math.random());
+    var saved=Math.round(naive-lean);
+    el.querySelector(".st").textContent="done ✓"; el.querySelector(".mbar i").style.width="100%";
+    el.querySelector(".tok").textContent=m+" · "+lean+" tok (−"+Math.round((1-lean/naive)*100)+"%)";
+    doneCount++; savedTok+=saved; savedMoney+=saved*COST[m]/1e6*1000; // scaled illustrative
+    document.getElementById("m-done").textContent=doneCount;
+    document.getElementById("m-saved").textContent=savedTok.toLocaleString();
+    document.getElementById("m-money").textContent="$"+savedMoney.toFixed(2);
+    document.getElementById("m-note").textContent="routing each task to the cheapest model that clears the bar";
+  }
+}
+function joinBeta(e){ e.preventDefault(); document.getElementById("beta-note").innerHTML='<span class="teal">Thanks — beta signups open shortly. Star the repo to be first in line.</span>'; }
+buildGrid();
+if(!window.matchMedia("(prefers-reduced-motion:reduce)").matches){ setInterval(tick,650); for(var i=0;i<6;i++)setTimeout(tick,i*180); }
+</script>

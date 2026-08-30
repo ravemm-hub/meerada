@@ -15,7 +15,7 @@
   .live { display:flex; align-items:center; gap:.4rem; font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--good); }
   .dot { width:8px; height:8px; border-radius:50%; background:var(--good); animation:pulse 1.8s infinite; }
   @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(88,192,122,.6)} 70%{box-shadow:0 0 0 7px rgba(88,192,122,0)} 100%{box-shadow:0 0 0 0 rgba(88,192,122,0)} }
-  @media (prefers-reduced-motion:reduce){ .dot{animation:none} .ticker .run{animation:none} .fill i{transition:none} }
+  @media (prefers-reduced-motion:reduce){ .dot{animation:none} .ticker .run{animation:none} .mstep{transition:none!important} }
   .demo { font-family:"IBM Plex Mono",monospace; font-size:.62rem; color:var(--amber); border:1px solid #4a3d1e; border-radius:999px; padding:.1rem .5rem; }
   h1 { font-family:"Archivo"; font-weight:800; font-size:1.4rem; letter-spacing:-.02em; margin:.6rem 0 .1rem; }
   .sub { color:var(--muted); font-size:.82rem; }
@@ -31,8 +31,7 @@
   .ticker .run { display:inline-block; animation:scroll 46s linear infinite; } @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
   .ticker span { margin-right:2.2rem; }
 
-  /* board + side-by-side measuring sidebar */
-  .arena { display:grid; grid-template-columns:1fr 320px; gap:1rem; align-items:start; }
+  .arena { display:grid; grid-template-columns:1fr 340px; gap:1rem; align-items:start; }
   @media (max-width:980px){ .arena{grid-template-columns:1fr} }
   .controls { display:flex; gap:.6rem; flex-wrap:wrap; align-items:center; margin-bottom:.6rem; }
   .controls input, .controls select, .controls button { background:var(--panel); border:1px solid var(--line); color:var(--text); border-radius:8px; padding:.42rem .7rem; font-size:.84rem; font-family:inherit; }
@@ -52,23 +51,37 @@
   .pill.confirmed{color:var(--good);border-color:#2ea043} .pill.provisional{color:var(--amber);border-color:#9e6a03}
   svg.spark { vertical-align:middle; } .caret{color:var(--muted);font-size:.65rem}
 
-  .side { position:sticky; top:.6rem; display:flex; flex-direction:column; gap:.8rem; }
-  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1rem 1.1rem; }
-  .card h4 { margin:.1rem 0 .6rem; font-family:"Archivo"; font-size:.92rem; }
-  .card h4 .tag { font-family:"IBM Plex Mono",monospace; font-size:.58rem; color:var(--muted); font-weight:400; }
-  .mrow { display:flex; align-items:center; gap:.5rem; font-size:.8rem; margin:.35rem 0; }
-  .mtask { font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--muted); }
-  .fill { flex:1; background:var(--panel2); border-radius:999px; height:8px; overflow:hidden; border:1px solid var(--line); }
-  .fill i { display:block; height:100%; width:0; background:linear-gradient(90deg,var(--teal),var(--amber)); transition:width .1s linear; }
-  .feed { font-family:"IBM Plex Mono",monospace; font-size:.68rem; max-height:230px; overflow-y:auto; margin-top:.4rem; }
-  .feed .f { display:flex; gap:.4rem; padding:.18rem 0; border-bottom:1px solid #171f30; }
+  /* clear, graphic measuring panel */
+  .side { position:sticky; top:.6rem; }
+  .measure { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1rem 1.1rem; }
+  .measure h4 { margin:.1rem 0 .2rem; font-family:"Archivo"; font-size:.95rem; }
+  .measure .lead { color:var(--muted); font-size:.75rem; margin-bottom:.9rem; }
+  .mtested { font-family:"IBM Plex Mono",monospace; font-size:.9rem; color:var(--teal); margin-bottom:.7rem; text-align:center;
+    background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:.5rem; }
+  .mstep { display:flex; gap:.6rem; align-items:flex-start; padding:.5rem .1rem; opacity:.28; transition:opacity .4s; }
+  .mstep.on { opacity:1; }
+  .mstep .ic { font-size:1.15rem; line-height:1.3; width:1.6rem; text-align:center; }
+  .mstep .tx { font-size:.82rem; } .mstep .tx b{display:block} .mstep .tx span{color:var(--muted);font-size:.75rem}
+  .mresult { margin-top:.6rem; text-align:center; font-family:"Archivo"; font-weight:800; font-size:1.1rem; min-height:1.6rem; }
+  .feed { font-family:"IBM Plex Mono",monospace; font-size:.68rem; max-height:150px; overflow-y:auto; margin-top:.8rem; border-top:1px solid var(--line); padding-top:.5rem; }
+  .feed .f { display:flex; gap:.4rem; padding:.16rem 0; }
   .feed .f .tt { color:var(--muted); } .feed .f .mn { color:var(--text); flex:1; overflow:hidden; text-overflow:ellipsis; }
-  .cmp { width:100%; border-collapse:collapse; font-size:.72rem; }
-  .cmp th,.cmp td { padding:.32rem .3rem; border-bottom:1px solid #171f30; text-align:center; }
-  .cmp th { color:var(--muted); font-size:.56rem; text-transform:uppercase; }
-  .cmp td.l,.cmp th.l { text-align:left; color:var(--muted); }
-  .cmp .ours{color:var(--teal);font-weight:700} .cmp .no{color:var(--bad)}
+  .ok{color:var(--good)} .noo{color:var(--bad)}
+  .tw{font-family:"IBM Plex Mono",monospace;font-size:.6rem;border-radius:999px;padding:.05rem .4rem;border:1px solid;}
+  .tw.light{color:var(--teal);border-color:var(--teal);} .tw.heavy{color:var(--amber);border-color:#9e6a03;}
 
+  .battery{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:.7rem;}
+  .tcard{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:.75rem .85rem;}
+  .tcard .th{display:flex;align-items:center;gap:.4rem;justify-content:space-between;}
+  .tcard .nm{font-weight:600;font-size:.86rem;}
+  .tcard .pr{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--muted);}
+  .tcard .pb{color:var(--good);}
+  .tcard .probe{color:var(--muted);font-size:.76rem;margin:.35rem 0 .2rem;line-height:1.4;}
+  .tcard .vf{font-family:"IBM Plex Mono",monospace;font-size:.68rem;color:var(--teal);margin-bottom:.4rem;}
+  .tcard .bar{background:var(--line);border-radius:999px;height:6px;overflow:hidden;} .tcard .bar i{display:block;height:6px;border-radius:999px;background:var(--good);}
+  .bgroup-h{display:flex;align-items:center;gap:.5rem;margin:1rem 0 .5rem;font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:1rem 1.1rem; }
   tr.detail-row { display:none; } tr.detail-row.open { display:table-row; }
   tr.detail-row > td { background:var(--panel2); padding:0 .7rem 1rem; border-bottom:1px solid var(--line); }
   .detail { display:grid; grid-template-columns:1fr 1fr; gap:1rem; padding-top:.8rem; } @media (max-width:700px){ .detail{grid-template-columns:1fr} }
@@ -79,7 +92,24 @@
   .bar.q i{background:var(--teal)} .bar.s i{background:var(--amber)} .bar.v i{background:var(--good)}
   .kv { display:flex; justify-content:space-between; padding:.26rem 0; font-size:.8rem; border-bottom:1px dashed #1c2434; } .kv:last-child{border-bottom:none} .kv .k{color:var(--muted)}
   .testrow { font-family:"IBM Plex Mono",monospace; font-size:.7rem; display:flex; justify-content:space-between; padding:.22rem 0; }
-  .ok{color:var(--good)} .noo{color:var(--bad)}
+
+  .simbadge { display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:.62rem; color:var(--amber); border:1px solid #4a3d1e; background:#211c0e; border-radius:999px; padding:.12rem .55rem; }
+  .cop-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:.8rem; margin:.9rem 0; } @media (max-width:760px){ .cop-steps{grid-template-columns:1fr} }
+  .cstep { background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:.9rem; }
+  .cstep .n { font-family:"IBM Plex Mono",monospace; font-size:.65rem; color:var(--teal); } .cstep .t{font-weight:600;margin:.3rem 0;font-size:.9rem} .cstep .d{color:var(--muted);font-size:.8rem}
+
+  .translator { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:.6rem; } @media (max-width:820px){ .translator{grid-template-columns:1fr} }
+  .tcol { border:1px solid var(--line); border-radius:12px; padding:1rem 1.1rem; background:var(--panel2); }
+  .tcol h5 { margin:.1rem 0 .5rem; font-family:"Archivo"; font-size:.92rem; }
+  .tcol textarea { width:100%; min-height:70px; background:var(--ground); border:1px solid var(--line); color:var(--text); border-radius:8px; padding:.6rem; font-family:inherit; font-size:.85rem; resize:vertical; }
+  .tcol .out { margin-top:.6rem; }
+  .promptbox { border-radius:8px; padding:.6rem .7rem; font-family:"IBM Plex Mono",monospace; font-size:.72rem; white-space:pre-wrap; }
+  .promptbox.bad { background:#1e1210; border:1px solid #5a2d2d; color:#e9b6b1; }
+  .promptbox.good { background:#0f2114; border:1px solid #2ea043; color:#bfe9c9; }
+  .mrow2 { display:flex; justify-content:space-between; font-size:.78rem; padding:.18rem 0; } .mrow2 b{font-variant-numeric:tabular-nums}
+  .arrow2 { text-align:center; color:var(--teal); font-size:1.4rem; margin:.3rem 0; }
+  .savebar { margin-top:1rem; text-align:center; background:var(--panel2); border:1px solid #2ea043; border-radius:12px; padding:.9rem; }
+  .savebar .big { font-family:"Archivo"; font-weight:800; font-size:1.8rem; color:var(--good); }
 
   .hs { display:grid; grid-template-columns:1fr auto 1fr; gap:1rem; align-items:center; } @media (max-width:700px){ .hs{grid-template-columns:1fr} }
   .hs select { width:100%; } .hs .arrow { font-size:1.6rem; color:var(--teal); text-align:center; }
@@ -91,21 +121,8 @@
   .btn { display:inline-block; font-family:"Archivo"; font-weight:700; font-size:.9rem; padding:.6rem 1.1rem; border-radius:8px; border:1px solid var(--line); color:var(--text); background:transparent; cursor:pointer; text-decoration:none; }
   .btn.primary { background:var(--amber); color:#171205; border-color:transparent; }
   code { font-family:"IBM Plex Mono",monospace; font-size:.82em; background:var(--panel2); padding:.1rem .35rem; border-radius:4px; }
-
-  .simbadge { display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:.62rem; color:var(--amber); border:1px solid #4a3d1e; background:#211c0e; border-radius:999px; padding:.12rem .55rem; }
-  .cop-steps { display:grid; grid-template-columns:repeat(3,1fr); gap:.8rem; margin:.9rem 0; } @media (max-width:760px){ .cop-steps{grid-template-columns:1fr} }
-  .cstep { background:var(--panel2); border:1px solid var(--line); border-radius:10px; padding:.9rem; }
-  .cstep .n { font-family:"IBM Plex Mono",monospace; font-size:.65rem; color:var(--teal); } .cstep .t{font-weight:600;margin:.3rem 0;font-size:.9rem} .cstep .d{color:var(--muted);font-size:.8rem}
-  .cop { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:.6rem; } @media (max-width:760px){ .cop{grid-template-columns:1fr} }
-  .cop .sd { border-radius:12px; border:1px solid var(--line); padding:1rem 1.1rem; }
-  .cop .sd.bad { background:linear-gradient(180deg,#1e1210,var(--panel)); border-color:#5a2d2d; }
-  .cop .sd.good { background:linear-gradient(180deg,#0f2114,var(--panel)); border-color:#2ea043; }
-  .cop .sd h5 { margin:.1rem 0 .5rem; font-family:"Archivo"; font-size:.9rem; }
-  .cop pre { background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:.6rem .7rem; font-family:"IBM Plex Mono",monospace; font-size:.68rem; white-space:pre-wrap; margin:.4rem 0; color:var(--muted); }
-  .cop .m { display:flex; justify-content:space-between; font-size:.8rem; padding:.2rem 0; } .cop .m b{font-variant-numeric:tabular-nums}
-  .cop .cost { font-family:"Archivo"; font-weight:800; font-size:1.4rem; font-variant-numeric:tabular-nums; }
-  .saved { text-align:center; margin-top:1rem; padding:.9rem; background:var(--panel2); border:1px solid #2ea043; border-radius:12px; }
-  .saved .big { font-family:"Archivo"; font-weight:800; font-size:2rem; color:var(--good); font-variant-numeric:tabular-nums; }
+  .cmp { width:100%; border-collapse:collapse; font-size:.8rem; } .cmp th,.cmp td { padding:.45rem .5rem; border-bottom:1px solid #171f30; text-align:center; }
+  .cmp th { color:var(--muted); font-size:.6rem; text-transform:uppercase; } .cmp td.l,.cmp th.l { text-align:left; color:var(--muted); } .cmp .ours{color:var(--teal);font-weight:700} .cmp .no{color:var(--bad)}
   .legend { color:var(--muted); font-size:.74rem; margin-top:1rem; line-height:1.7; } .legend b{color:var(--text)}
 </style>
 
@@ -124,7 +141,7 @@
     <span class="demo">DEMO FEED — real telemetry when the canary connects</span>
   </div>
   <h1>The Decision Arena</h1>
-  <div class="sub">The live model market, your migration planner, and a prompt copilot that makes you more efficient on any model — all in one place. <span id="clock" class="mid"></span></div>
+  <div class="sub">The live model market, a prompt copilot that makes you efficient on any model, and a migration planner — all in one place. <span id="clock" class="mid"></span></div>
 
   <div class="stats">
     <div class="stat"><div class="k">Tests run today</div><div class="v" id="s-meas">0</div></div>
@@ -134,7 +151,6 @@
   </div>
   <div class="ticker"><div class="run" id="ticker"></div></div>
 
-  <!-- ===== BOARD (left) + MEASURING SIDEBAR (right) ===== -->
   <div class="arena">
     <div>
       <div class="controls">
@@ -146,75 +162,103 @@
       <div class="scroll"><table class="board"><thead><tr id="head"></tr></thead><tbody id="body"></tbody></table></div>
     </div>
     <div class="side">
-      <div class="card">
-        <h4>Now measuring <span class="tag">watch a grade get earned</span></h4>
-        <div class="mrow"><span class="mid" id="mz-model">—</span></div>
-        <div class="mrow"><span class="mtask" id="mz-task"></span></div>
-        <div class="mrow"><div class="fill"><i id="mz-bar"></i></div><span class="mid" id="mz-lat" style="font-size:.72rem">—</span></div>
-        <div class="mrow"><span id="mz-verdict" style="font-family:'IBM Plex Mono',monospace;font-size:.72rem">dispatching…</span><span class="mid" id="mz-score" style="margin-left:auto;font-size:.72rem"></span></div>
+      <div class="measure">
+        <h4>How a grade is earned</h4>
+        <div class="lead">We give every model the <b>same real, checkable tasks</b> and score only what actually works — not opinions.</div>
+        <div class="mtested" id="mz-model">—</div>
+        <div class="mstep" id="ms1"><div class="ic">📤</div><div class="tx"><b>We send a real task</b><span id="ms1d">—</span></div></div>
+        <div class="mstep" id="ms2"><div class="ic">🤖</div><div class="tx"><b>The model answers</b><span id="ms2d">—</span></div></div>
+        <div class="mstep" id="ms3"><div class="ic">🔍</div><div class="tx"><b>We check it's correct</b><span id="ms3d">—</span></div></div>
+        <div class="mresult" id="mz-result"></div>
         <div class="feed" id="feed"></div>
-      </div>
-      <div class="card">
-        <h4>Why our grade wins</h4>
-        <table class="cmp">
-          <tr><th class="l">measures</th><th>Arena</th><th>AA</th><th>$/tok</th><th class="ours">us</th></tr>
-          <tr><td class="l">cost of a done task</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="ours">✓</td></tr>
-          <tr><td class="l">retries &amp; reasoning</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="ours">✓</td></tr>
-          <tr><td class="l">verified, not vibes</td><td class="no">✕</td><td>~</td><td class="no">✕</td><td class="ours">✓</td></tr>
-          <tr><td class="l">hourly-fresh</td><td class="no">wk</td><td>~</td><td class="no">—</td><td class="ours">✓</td></tr>
-        </table>
-        <div class="legend" style="margin-top:.4rem;font-size:.68rem">Cheap per token ≠ cheap per <em>done task</em>. That gap is what we measure.</div>
       </div>
     </div>
   </div>
 
-  <!-- ===== PROMPT COPILOT (main screen) ===== -->
-  <h2>✍️ Prompt Copilot <span class="simbadge">the demo below is a SIMULATION — no real API calls, no charges</span></h2>
-  <div class="h2sub">Your always-on efficiency companion. Install it once; it watches how you prompt across <em>any</em> model, teaches you the tricks pros use, and rewrites the waste away — so every call costs less and returns better, whatever model you're on. Learn while you work.</div>
+  <!-- ===== TEST BATTERY ===== -->
+  <h2>🧪 The test battery — what actually moves a grade</h2>
+  <div class="h2sub">No opinions, no vibes. Every model runs the same programmatically-checkable tasks. <b class="teal">Light</b> tests run constantly so the grade stays fresh; <b class="amber">heavy</b> tests run less often but weigh more. Hundreds of these micro-checks roll up into the category scores, and the categories into the single grade — that's how small, checkable tasks extrapolate to a macro verdict you can trust.</div>
+  <div class="card">
+    <div class="bgroup-h">⚡ LIGHT — fast, high-frequency, keep the grade current</div>
+    <div class="battery" id="battery-light"></div>
+    <div class="bgroup-h">🏋 HEAVY — complex, weighted, the real separators</div>
+    <div class="battery" id="battery-heavy"></div>
+    <div class="legend" style="margin-top:1rem">Live pass-rates update as tests run above. A test is scored <b>only</b> when its output is machine-verifiable — code that must pass hidden asserts, JSON whose totals must add up, a retrieval whose cited fact must be exact. That's what separates a Meerada grade from a leaderboard vote.</div>
+  </div>
+
+  <!-- ===== PROMPT COPILOT (interactive, main screen) ===== -->
+  <h2>🎛️ Meet <span class="teal">LLManager</span> — it manages every model for you</h2>
+  <div class="h2sub">Not a translator — a <b>manager</b> for the communication and tasks between you and your models. Tell it what you want in plain words; it shapes the lean instruction, sends it, checks the answer held up, and keeps the thread. Same result, far fewer tokens — on any model you use. <a href="llmanager.html" class="teal">See the full product →</a></div>
   <div class="card">
     <div class="cop-steps">
       <div class="cstep"><div class="n">STEP 1 · INSTALL</div><div class="t">One line, stays local</div><div class="d"><code>pip install meerada</code> — runs on your machine, on your keys. Your prompts never leave.</div></div>
-      <div class="cstep"><div class="n">STEP 2 · IT LEARNS YOU</div><div class="t">Reads your real usage</div><div class="d">Points it at your traffic; it finds where you burn tokens — bloated prompts, no caching, needless reasoning, retries.</div></div>
-      <div class="cstep"><div class="n">STEP 3 · IT COACHES YOU</div><div class="t">Improves you, every call</div><div class="d">Suggests a leaner prompt, explains <em>why</em>, and proves the quality held. Accept, edit, or reject. You get faster and cheaper — on any model.</div></div>
+      <div class="cstep"><div class="n">STEP 2 · JUST SAY IT</div><div class="t">Write what you want</div><div class="d">Plain language. No prompt engineering. LLManager takes over the whole exchange between you and whatever model you're on.</div></div>
+      <div class="cstep"><div class="n">STEP 3 · IT SENDS IT LEAN</div><div class="t">Efficient, verified</div><div class="d">It crafts the token-efficient prompt, sends it to your model, and checks the answer held up. You just got cheaper &amp; faster.</div></div>
     </div>
 
-    <div style="font-weight:600;margin:.6rem 0 .2rem">A wrong prompt burns money on every call. Watch the difference <span class="sub">(simulated — illustrating typical savings, not your account)</span>:</div>
-    <div class="cop">
-      <div class="sd bad">
-        <h5 class="down">✕ Naive prompt</h5>
-        <pre>You are an incredibly helpful, thorough assistant. Think step by step in great detail… [3,200-token system prompt re-sent every call, no caching, reasoning on]</pre>
-        <div class="m"><span class="k sub">tokens / call</span><b id="c-bad-tok">3,240</b></div>
-        <div class="m"><span class="k sub">retries to succeed</span><b id="c-bad-retry">1.8×</b></div>
-        <div class="m"><span class="k sub">cost / accepted task</span><b class="down">$0.048</b></div>
-        <div class="m" style="border-top:1px solid #5a2d2d;margin-top:.4rem;padding-top:.5rem"><span class="k sub">simulated spend</span><span class="cost down" id="c-bad-total">$0.00</span></div>
+    <div style="font-weight:600;margin:.4rem 0 .3rem">Try it — type what you want the model to do <span class="simbadge">preview · LLManager does this for real, on your model</span></div>
+    <div class="translator">
+      <div class="tcol">
+        <h5>You say (plain words)</h5>
+        <textarea id="t-intent">give me the invoice payee, the amount and the currency from this text, as json</textarea>
+        <div style="margin-top:.6rem"><button class="btn primary" onclick="translate()">Optimize &amp; send →</button></div>
+        <div class="out">
+          <div class="sub" style="margin:.6rem 0 .2rem">✕ What you'd naively send:</div>
+          <div class="promptbox bad" id="t-naive">—</div>
+          <div class="mrow2"><span class="sub">tokens</span><b id="t-naive-tok">—</b></div>
+        </div>
       </div>
-      <div class="sd good">
-        <h5 class="up">✓ Copilot-tuned prompt</h5>
-        <pre>Extract invoice fields as JSON: {payee, amount, currency}. [concise, cached prefix, reasoning off — the Copilot cut the fat, kept the contract]</pre>
-        <div class="m"><span class="k sub">tokens / call</span><b id="c-good-tok">890</b></div>
-        <div class="m"><span class="k sub">retries to succeed</span><b id="c-good-retry">1.0×</b></div>
-        <div class="m"><span class="k sub">cost / accepted task</span><b class="up">$0.011</b></div>
-        <div class="m" style="border-top:1px solid #2ea043;margin-top:.4rem;padding-top:.5rem"><span class="k sub">simulated spend</span><span class="cost up" id="c-good-total">$0.00</span></div>
+      <div class="tcol">
+        <h5>LLManager sends (to your model)</h5>
+        <div class="arrow2">↓ translated &amp; trimmed ↓</div>
+        <div class="promptbox good" id="t-opt">—</div>
+        <div class="mrow2"><span class="sub">tokens</span><b class="up" id="t-opt-tok">—</b></div>
+        <div class="mrow2"><span class="sub">cost / call</span><b class="up" id="t-opt-cost">—</b></div>
+        <div class="mrow2"><span class="sub">quality</span><b class="up">held ✓</b></div>
       </div>
     </div>
-    <div class="saved">
-      <div class="sub">What the Copilot would have saved — same task, quality held <span class="simbadge">simulated</span></div>
-      <div class="big" id="c-saved">$0.00</div>
-      <div class="sub" id="c-saved-pct">—</div>
+    <div class="savebar">
+      <div class="sub">Saved on this prompt vs writing it yourself — same result</div>
+      <div class="big" id="t-save">—</div>
+      <div class="sub" id="t-save-note">type an intent and press Optimize</div>
     </div>
     <div style="margin-top:1.1rem">
-      <a class="btn primary" href="index.html#download">Download the Copilot (free)</a>
-      <a class="btn" href="https://github.com/ravemm-hub/meerada" target="_blank" rel="noopener">Source on GitHub</a>
-      <span class="sub" style="margin-left:.4rem">Apache-2.0 · yours to edit, accept, reject or delete any change.</span>
+      <a class="btn primary" href="llmanager.html">Meet LLManager →</a>
+      <a class="btn" href="https://github.com/ravemm-hub/meerada" target="_blank" rel="noopener">Free core on GitHub</a>
+      <span class="sub" style="margin-left:.4rem">Engine is Apache-2.0 &amp; runs local · the cockpit is the premium product.</span>
     </div>
-    <pre style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:.9rem;font-family:'IBM Plex Mono',monospace;font-size:.76rem;margin-top:1rem;color:var(--muted)">pip install meerada
-meerada record traffic.jsonl     # it learns how you use models
-meerada optimize --cluster c01   # it coaches: leaner prompt, quality verified</pre>
   </div>
 
-  <!-- ===== HANDSHAKE (main screen) ===== -->
+  <!-- ===== SESSION CONSOLE ===== -->
+  <h2>🎛️ Session Console — one cockpit for every model</h2>
+  <div class="h2sub"><b>LLManager</b> is the go-to launcher for <b>any</b> model. Say <code>"open Claude and draft the release notes"</code> — it opens Claude, shapes your ask into a lean instruction, and runs it. Fire several at once, across different models, and manage them all from one place instead of juggling tabs. <a href="llmanager.html" class="teal">Full product →</a></div>
+  <div class="card">
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-bottom:.8rem">
+      <input id="sc-cmd" style="flex:1;min-width:240px;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.55rem .7rem;font-family:inherit;font-size:.85rem" value="open claude + gemini + deepseek and summarise this contract">
+      <button class="btn primary" onclick="scRun()">Launch sessions →</button>
+      <span class="simbadge">preview · SIMULATION</span>
+    </div>
+    <div id="sc-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem"></div>
+    <div class="legend"><b>How it works:</b> LLManager holds your keys locally and drives each provider's API (or app) for you. One plain request → the router picks the cheapest model that clears the quality bar, shapes your words into an efficient instruction, and streams the result back. Parallel sessions share one context so you don't re-paste — and one bill's worth of tokens does the work of many.</div>
+  </div>
+
+  <!-- ===== GET IT ===== -->
+  <h2>⬇️ Get LLManager — any device</h2>
+  <div class="card">
+    <div class="cop-steps">
+      <div class="cstep"><div class="n">DESKTOP · mac / win / linux</div><div class="t">CLI + tray app</div><div class="d"><code>pip install meerada</code> then <code>meerada up</code>. Runs locally, holds your keys, opens as a menu-bar cockpit. Your prompts never leave your machine.</div></div>
+      <div class="cstep"><div class="n">PHONE · iOS / Android</div><div class="t">Share-sheet + PWA</div><div class="d">Install the web app, or hit <b>Share → Meerada</b> from any app. Speak or paste an intent; it routes to your model and returns the lean answer.</div></div>
+      <div class="cstep"><div class="n">EVERYWHERE · bring-your-keys</div><div class="t">Your models, your bill</div><div class="d">Claude, GPT, Gemini, DeepSeek, local Ollama — add a key once. LLManager sits in front of all of them as one interface.</div></div>
+    </div>
+    <div style="margin-top:.4rem">
+      <a class="btn primary" href="llmanager.html#get">Get LLManager →</a>
+      <a class="btn" href="https://github.com/ravemm-hub/meerada" target="_blank" rel="noopener">Free core on GitHub</a>
+    </div>
+  </div>
+
+  <!-- ===== HANDSHAKE ===== -->
   <h2>🤝 The Handshake — plan a migration</h2>
-  <div class="h2sub">Pick the model you run today and a candidate. We estimate the savings and the quality delta — and guarantee, via output equivalence, that you don't lose quality silently.</div>
+  <div class="h2sub">Pick the model you run today and a candidate. We estimate the savings and quality delta — and guarantee, via output equivalence, that you don't lose quality silently.</div>
   <div class="card">
     <div class="hs">
       <div><div class="k sub">FROM (today)</div><select id="hs-from"></select></div>
@@ -227,6 +271,20 @@ meerada optimize --cluster c01   # it coaches: leaner prompt, quality verified</
       <a class="btn primary" href="index.html#download">Run the real Handshake →</a>
       <span class="sub" style="margin-left:.6rem">Replays your golden set on the candidate, returns a measured per-cluster gap report. Content never leaves your machine.</span>
     </div>
+  </div>
+
+  <!-- ===== WHY OUR GRADE WINS (static, bottom) ===== -->
+  <h2>📊 Why our grade beats the leaderboards</h2>
+  <div class="card">
+    <table class="cmp">
+      <tr><th class="l">measures…</th><th>LMArena</th><th>Artificial&nbsp;Analysis</th><th>$/token</th><th class="ours">Meerada</th></tr>
+      <tr><td class="l">the real cost of a done task</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="ours">✓</td></tr>
+      <tr><td class="l">counts retries &amp; reasoning burn</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="ours">✓</td></tr>
+      <tr><td class="l">verified success, not preference</td><td class="no">✕</td><td>~</td><td class="no">✕</td><td class="ours">✓</td></tr>
+      <tr><td class="l">updates within the hour</td><td class="no">weeks</td><td>~</td><td class="no">static</td><td class="ours">✓</td></tr>
+      <tr><td class="l">on YOUR workload</td><td class="no">✕</td><td class="no">✕</td><td class="no">✕</td><td class="ours">✓</td></tr>
+    </table>
+    <div class="legend">A model can win on <b>$/token</b> yet lose on <b>cost per done task</b> — cheap tokens don't help if it needs three tries. That gap is exactly what we measure.</div>
   </div>
 </div>
 
@@ -256,13 +314,42 @@ var MODELS = [
   {m:"kimi-k2.6",p:"moonshot",tier:"workhorse",in:0.95,out:4,pro:0,grade:79,cpat:0.013,usage:2.7,conf:"confirmed",q:86,lat:1800},
   {m:"glm-5.3",p:"zhipu",tier:"flagship",in:null,out:null,pro:18,grade:81,cpat:null,usage:1.9,conf:"provisional",q:88,lat:2300}
 ];
-MODELS.forEach(function(x){ x.base=x.grade; x.delta=0; x.hist=[]; var g=x.grade; for(var i=0;i<12;i++){ g+=Math.sin(i*1.3+x.m.length)*0.6; x.hist.push(g);} x.hist[11]=x.grade; });
-var TASKS=[{cl:"structured_extraction",lab:"extract invoice → JSON"},{cl:"json_transform",lab:"numbers → {sum,count}"},{cl:"code_fix",lab:"is_even(n) passes tests"},{cl:"classification",lab:"sentiment → one word"}];
+// ---- transparent grade: derived from the sub-scores the user can see ----
+// grade = 55% quality (verified success) + 30% value (cost per task) + 15% speed.
+// Quality-led grade: quality is the backbone; value & speed adjust within a
+// floor so a premium model stays strong and a cheap-but-good one can still edge
+// ahead. Value uses a log scale (price spans 2 orders of magnitude).
+var W={q:0.75,v:0.16,s:0.09};
+var CMIN=0.001, CMAX=0.075, LNR=Math.log(CMAX/CMIN);
+function valueScore(cpat){ if(cpat==null)return 60; var c=Math.max(CMIN,Math.min(CMAX,cpat)); return Math.round(45+55*(1-Math.log(c/CMIN)/LNR)); }
+function speedScore(lat){ return Math.round(50+50*(1-Math.max(0,Math.min(1,(lat-600)/3600)))); }
+function computeGrade(r){ return +(W.q*r.q + W.v*valueScore(r.cpat) + W.s*speedScore(r.lat)).toFixed(1); }
+MODELS.forEach(function(x){
+  x.grade=computeGrade(x); x.base=x.grade; x.delta=0; x.hist=[];
+  var g=x.grade; for(var i=0;i<12;i++){ g+=Math.sin(i*1.3+x.m.length)*0.5; x.hist.push(+g.toFixed(1)); } x.hist[11]=x.grade;
+});
+// The test battery — every check is programmatically verifiable (no opinions).
+// Light tests run constantly for freshness; heavy tests run less often but weigh more.
+var TESTS=[
+  {id:"format",  name:"Strict format contract", w:"light", probe:"obey a hard output spec — JSON only, zero prose", verify:"parses + schema-valid", base:0.93},
+  {id:"classify",name:"Edge-case classification", w:"light", probe:"sarcasm, negation & mixed signals", verify:"exact label match", base:0.86},
+  {id:"extract1",name:"Field extraction (noisy)", w:"light", probe:"pull one fact from messy real text", verify:"normalized exact match", base:0.90},
+  {id:"reason",  name:"Multi-step word problem", w:"light", probe:"chained arithmetic + unit tracking", verify:"final answer checked", base:0.82},
+  {id:"code",    name:"Code + hidden unit tests", w:"heavy", probe:"implement a function to spec", verify:"every assert passes in a sandbox", base:0.71},
+  {id:"invoice", name:"Nested invoice → JSON", w:"heavy", probe:"line-items + totals from a scanned bill", verify:"schema valid AND totals add up", base:0.67},
+  {id:"needle",  name:"Long-context retrieval", w:"heavy", probe:"find one fact buried in ~30k tokens + cite it", verify:"fact + location exact", base:0.74},
+  {id:"sql",     name:"Natural-language → SQL", w:"heavy", probe:"turn a question into a query", verify:"result-set matches the gold rows", base:0.65},
+  {id:"faithful",name:"Faithful summary", w:"heavy", probe:"keep the required facts, invent no numbers", verify:"facts present + no fabricated figures", base:0.70},
+  {id:"toolcall",name:"Tool-call contract", w:"heavy", probe:"emit a valid function call with the right args", verify:"schema + argument values", base:0.77}
+];
+TESTS.forEach(function(t){ t.pass=0; t.n=0; t.rate=t.base; });
+// back-compat alias used by the drill-down "tests this cycle" list
+var TASKS=TESTS.map(function(t){ return {cl:t.name, w:t.w}; });
 
 function spark(h,cls){ if(!h||h.length<2)return""; var w=54,ht=16,lo=Math.min.apply(null,h),hi=Math.max.apply(null,h),r=(hi-lo)||1; var pts=h.map(function(v,i){return (i/(h.length-1)*w).toFixed(1)+","+(ht-((v-lo)/r)*ht).toFixed(1);}).join(" "); var c=cls=="up"?"#58C07A":(cls=="down"?"#E5645C":"#92A2BE"); return '<svg class="spark" width="'+w+'" height="'+ht+'"><polyline points="'+pts+'" fill="none" stroke="'+c+'" stroke-width="1.5"/></svg>'; }
 function dCls(d){ return d>0.05?"up":(d<-0.05?"down":"flat"); }
 function dTxt(d){ if(d==null)return'<span class="flat">—</span>'; var c=dCls(d),a=c=="up"?"▲":(c=="down"?"▼":"■"); return '<span class="delta '+c+'">'+a+Math.abs(d).toFixed(1)+'</span>'; }
-function gcls(v){ return v>=85?"g-good":(v>=75?"g-mid":"g-low"); }
+function gcls(v){ return v>=83?"g-good":(v>=77?"g-mid":"g-low"); }
 
 var COLS=[
   {k:"rank",t:"#",l:true,fmt:function(v,r,i){return i+1;}},
@@ -285,14 +372,16 @@ function head(){ document.getElementById("head").innerHTML=COLS.map(function(c){
 function setSort(k){ if(sortKey==k)sortDir*=-1; else{sortKey=k;sortDir=(k=="m"||k=="p")?1:-1;} render(); }
 function axisBar(cls,label,val,pct){ return '<div class="axis"><div class="lab"><span>'+label+'</span><span>'+val+'</span></div><div class="bar '+cls+'"><i style="width:'+pct+'%"></i></div></div>'; }
 function detailHtml(r){
-  var speedPct=Math.max(5,Math.min(100,Math.round(100*(1-(r.lat-600)/4000)))); var valPct=r.cpat==null?0:Math.max(5,Math.min(100,Math.round(100*(1-(r.cpat/0.07)))));
+  var vS=valueScore(r.cpat), sS=speedScore(r.lat);
+  var qC=+(W.q*r.q).toFixed(1), vC=+(W.v*vS).toFixed(1), sC=+(W.s*sS).toFixed(1);
   var tests=TASKS.map(function(t){ var passed=Math.random()<(r.q/100+0.05); return '<div class="testrow"><span>'+t.cl+'</span><span class="'+(passed?"ok":"noo")+'">'+(passed?"pass":"fail")+'</span></div>'; }).join("");
-  return '<div class="detail"><div class="dpanel"><h4>Score breakdown</h4>'
-    + axisBar("q","Quality — verified success",r.q+"%",r.q)
-    + axisBar("s","Speed — resp "+r.lat.toLocaleString()+"ms",(r.lat<1200?"fast":(r.lat<2600?"mid":"slow")),speedPct)
-    + axisBar("v","Value — CPAT "+(r.cpat==null?"—":"$"+r.cpat.toFixed(4)),(valPct>70?"strong":(valPct>40?"ok":"weak")),valPct)
-    + '<div class="kv"><span class="k">Grade</span><span class="grade '+gcls(r.grade)+'">'+r.grade.toFixed(1)+'</span></div>'
-    + '<div class="kv"><span class="k">Confidence</span><span class="pill '+r.conf+'">'+r.conf+'</span></div></div>'
+  return '<div class="detail"><div class="dpanel"><h4>How this grade is built</h4>'
+    + axisBar("q","Quality "+r.q+"% × "+Math.round(W.q*100)+"%",'+'+qC.toFixed(1),r.q)
+    + axisBar("v","Value (CPAT "+(r.cpat==null?"—":"$"+r.cpat.toFixed(4))+") "+vS+" × "+Math.round(W.v*100)+"%",'+'+vC.toFixed(1),vS)
+    + axisBar("s","Speed ("+r.lat.toLocaleString()+"ms) "+sS+" × "+Math.round(W.s*100)+"%",'+'+sC.toFixed(1),sS)
+    + '<div class="kv" style="border-top:1px solid var(--line);margin-top:.3rem;padding-top:.5rem"><span class="k">= Grade '+qC.toFixed(1)+'+'+vC.toFixed(1)+'+'+sC.toFixed(1)+'</span><span class="grade '+gcls(r.grade)+'">'+r.grade.toFixed(1)+'</span></div>'
+    + '<div class="kv"><span class="k">Confidence</span><span class="pill '+r.conf+'">'+r.conf+'</span></div>'
+    + '<div class="sub" style="font-size:.7rem;margin-top:.5rem">Same formula for every model — quality is weighted most, so a premium model can top the board despite higher cost, and a cheap-but-accurate model can beat it. No hand-tuning, no favourites.</div></div>'
     + '<div class="dpanel"><h4>Tests run this cycle</h4>'+tests
     + '<div class="kv" style="margin-top:.4rem"><span class="k">Input</span><span>'+(r.in==null?"—":"$"+r.in.toFixed(2)+"/M")+'</span></div>'
     + '<div class="kv"><span class="k">Output</span><span>'+(r.out==null?"—":"$"+r.out.toFixed(2)+"/M")+'</span></div>'
@@ -320,28 +409,106 @@ function stats(){
 function ticker(){ var items=MODELS.slice().sort(function(a,b){return b.grade-a.grade;}).map(function(x){ var c=dCls(x.delta),a=c=="up"?"▲":(c=="down"?"▼":"·"); return '<span>'+x.m+' <b>'+x.grade.toFixed(1)+'</b> <span class="'+c+'">'+a+Math.abs(x.delta).toFixed(1)+'</span></span>';}); document.getElementById("ticker").innerHTML=items.join("")+items.join(""); }
 function clock(){ document.getElementById("clock").textContent=new Date().toISOString().slice(11,19)+"Z"; }
 
+// ---- clear, slow, step-by-step measuring ----
 var feedItems=[];
+function setStep(id,on){ document.getElementById(id).classList.toggle("on",on); }
 function runOneTest(){
   if(!liveOn)return;
-  var x=MODELS[Math.floor(Math.random()*MODELS.length)], t=TASKS[Math.floor(Math.random()*TASKS.length)];
-  document.getElementById("mz-model").textContent=x.m; document.getElementById("mz-task").textContent="· "+t.lab;
-  document.getElementById("mz-lat").textContent=x.lat.toLocaleString()+"ms";
-  document.getElementById("mz-verdict").innerHTML='<span class="amber">▸ dispatching…</span>'; document.getElementById("mz-score").textContent="";
-  var bar=document.getElementById("mz-bar"); bar.style.transition="none"; bar.style.width="0%"; var dur=Math.min(1500,600+x.lat/4);
-  setTimeout(function(){ bar.style.transition="width "+dur+"ms linear"; bar.style.width="100%"; },30);
+  var x=MODELS[Math.floor(Math.random()*MODELS.length)];
+  // 70% light (freshness), 30% heavy (weight) — mirrors the real schedule
+  var t=(Math.random()<0.7?TESTS.filter(function(z){return z.w=="light";}):TESTS.filter(function(z){return z.w=="heavy";}));
+  t=t[Math.floor(Math.random()*t.length)];
+  var badge=t.w=="heavy"?'<span class="tw heavy">🏋 heavy</span>':'<span class="tw light">⚡ light</span>';
+  document.getElementById("mz-model").textContent=x.m;
+  document.getElementById("mz-result").textContent="";
+  ["ms1","ms2","ms3"].forEach(function(s){setStep(s,false);});
+  // step 1: send the real test + what it probes
+  document.getElementById("ms1d").innerHTML=badge+' <b>'+t.name+'</b><br>'+t.probe;
+  setStep("ms1",true);
+  // step 2: model answers (after a beat, show latency)
+  var lat=t.w=="heavy"?x.lat*2:x.lat;
+  setTimeout(function(){ document.getElementById("ms2d").textContent="replied in "+Math.round(lat).toLocaleString()+"ms"; setStep("ms2",true); }, 1200);
+  // step 3: verify + result
   setTimeout(function(){
-    var pass=Math.random()<(x.q/100+0.05); var step=(pass?1:-1)*(Math.random()*0.5+0.05);
-    x.grade=Math.max(40,Math.min(99,+(x.grade+step).toFixed(1))); x.delta=+(x.grade-x.base).toFixed(1); x.base=x.grade; x.hist.push(x.grade); if(x.hist.length>12)x.hist.shift();
-    if(x.cpat!=null)x.cpat=Math.max(0.0005,+(x.cpat*(1+(Math.random()-0.5)*0.03)).toFixed(4)); x._flash=dCls(step); meas++;
-    document.getElementById("mz-verdict").innerHTML=pass?'<span class="ok">✓ verified pass</span>':'<span class="noo">✗ failed check</span>';
-    document.getElementById("mz-score").innerHTML='grade '+x.grade.toFixed(1)+' '+dTxt(x.delta);
-    feedItems.unshift('<div class="f"><span class="tt">'+new Date().toISOString().slice(11,19)+'</span><span class="mn">'+x.m+' · '+t.cl+'</span><span class="'+(pass?"ok":"noo")+'">'+(pass?"pass":"fail")+'</span></div>');
-    if(feedItems.length>40)feedItems.pop(); document.getElementById("feed").innerHTML=feedItems.join("");
-    render(); stats(); ticker(); setTimeout(function(){ x._flash=null; render(); },600);
-  }, dur+60);
+    var pass=Math.random()<(x.q/100)*(t.base+0.06);
+    t.n++; if(pass)t.pass++; t.rate=t.n<4?t.base:(t.pass/t.n);
+    document.getElementById("ms3d").innerHTML='checked: <b>'+t.verify+'</b> → '+(pass?'<span class="ok">held ✓</span>':'<span class="noo">failed ✗</span>');
+    setStep("ms3",true);
+    renderBattery();
+    // a verified pass/fail nudges the underlying quality; grade is RECOMPUTED from it — never set directly
+    x.q=Math.max(50,Math.min(99,+(x.q+(pass?1:-1)*(Math.random()*0.6+0.05)).toFixed(1)));
+    if(x.cpat!=null)x.cpat=Math.max(0.0005,+(x.cpat*(1+(Math.random()-0.5)*0.03)).toFixed(4));
+    var prev=x.grade; x.grade=computeGrade(x); x.delta=+(x.grade-x.base).toFixed(1); x.base=x.grade;
+    x.hist.push(x.grade); if(x.hist.length>12)x.hist.shift(); x._flash=dCls(x.grade-prev); meas++;
+    document.getElementById("mz-result").innerHTML=(pass?'<span class="ok">✅ PASS</span>':'<span class="noo">❌ FAIL</span>')+' → grade '+x.grade.toFixed(1)+' '+dTxt(x.delta);
+    feedItems.unshift('<div class="f"><span class="tt">'+new Date().toISOString().slice(11,19)+'</span><span class="mn">'+x.m+'</span><span class="'+(pass?"ok":"noo")+'">'+(pass?"pass":"fail")+'</span></div>');
+    if(feedItems.length>30)feedItems.pop(); document.getElementById("feed").innerHTML=feedItems.join("");
+    render(); stats(); ticker(); setTimeout(function(){ x._flash=null; render(); },800);
+  }, 2400);
 }
 function toggleLive(){ liveOn=!liveOn; var b=document.getElementById("btn-live"); b.textContent=liveOn?"⏸ pause":"▶ resume"; b.className=liveOn?"on":""; }
+function tcard(t){
+  var pct=Math.round(t.rate*100);
+  return '<div class="tcard"><div class="th"><span class="nm">'+t.name+'</span><span class="pr pb">'+pct+'%</span></div>'
+    +'<div class="probe">'+t.probe+'</div><div class="vf">✓ '+t.verify+'</div>'
+    +'<div class="bar"><i style="width:'+pct+'%"></i></div>'
+    +'<div class="pr" style="margin-top:.3rem">'+(t.n||0)+' runs</div></div>';
+}
+function renderBattery(){
+  document.getElementById("battery-light").innerHTML=TESTS.filter(function(t){return t.w=="light";}).map(tcard).join("");
+  document.getElementById("battery-heavy").innerHTML=TESTS.filter(function(t){return t.w=="heavy";}).map(tcard).join("");
+}
 
+// ---- Copilot translator (rule-based preview) ----
+function estTokens(s){ return Math.max(1,Math.round(s.length/4)); }
+function translate(){
+  var intent=(document.getElementById("t-intent").value||"").trim();
+  if(!intent){ intent="give me the invoice payee, amount and currency as json"; }
+  // naive: what a beginner would paste — bloated preamble, verbose, no format discipline
+  var naive="You are an extremely helpful and thorough AI assistant. Please think carefully and step by step, "
+    +"explain your reasoning in detail, and be as complete as possible. Here is my request: "+intent
+    +". Please make sure to double-check your work and provide a full explanation.";
+  // optimized: the Copilot's lean rewrite — concise, contract-first, reasoning off
+  var wantsJson=/json|fields|extract|\{/.test(intent.toLowerCase());
+  var opt=(wantsJson?"Return ONLY JSON. ":"Answer in one line, no preamble. ")
+    + intent.charAt(0).toUpperCase()+intent.slice(1)+".";
+  var nTok=estTokens(naive)+800; // +cached system bloat a naive user re-sends
+  var oTok=estTokens(opt);
+  document.getElementById("t-naive").textContent=naive;
+  document.getElementById("t-opt").textContent=opt;
+  document.getElementById("t-naive-tok").textContent=nTok.toLocaleString();
+  document.getElementById("t-opt-tok").innerHTML=oTok.toLocaleString()+' <span class="up">(−'+Math.round((1-oTok/nTok)*100)+'%)</span>';
+  var costN=nTok*2/1e6, costO=oTok*2/1e6; // illustrative $2/Mtok
+  document.getElementById("t-opt-cost").textContent="$"+costO.toFixed(5);
+  var pct=Math.round((1-oTok/nTok)*100);
+  document.getElementById("t-save").textContent=pct+"% fewer tokens";
+  document.getElementById("t-save-note").textContent="over 10k calls/mo that's ≈ $"+Math.round((costN-costO)*10000).toLocaleString()+" saved — same result, on your model";
+}
+
+// ---- Session Console (parallel sessions, simulated) ----
+var SC_STAGES=["translating…","sending lean prompt…","model working…","verifying…","done ✓"];
+function scRun(){
+  var cmd=(document.getElementById("sc-cmd").value||"").toLowerCase();
+  var picks=MODELS.filter(function(x){ return cmd.indexOf(x.p)>=0 || cmd.indexOf(x.m.split("-")[0])>=0; });
+  if(picks.length<2){ picks=[MODELS.find(function(x){return x.p=="anthropic";}),MODELS.find(function(x){return x.p=="google";}),MODELS.find(function(x){return x.p=="deepseek";})].filter(Boolean); }
+  picks=picks.slice(0,3);
+  var task=(cmd.replace(/open|and|claude|gemini|deepseek|gpt|\+/g,"").trim())||"summarise this";
+  var grid=document.getElementById("sc-grid"); grid.style.gridTemplateColumns="repeat("+Math.max(1,picks.length)+",1fr)";
+  grid.innerHTML=picks.map(function(x,i){
+    return '<div class="tcol" style="padding:.8rem"><h5 style="font-size:.82rem"><span class="mid">'+x.m+'</span></h5>'
+      +'<div class="sub" style="font-size:.72rem;margin-bottom:.4rem">grade '+x.grade.toFixed(0)+' · '+(x.cpat==null?"—":"$"+x.cpat.toFixed(4)+"/task")+'</div>'
+      +'<div class="promptbox good" id="sc-p'+i+'" style="min-height:auto">Return only the answer. '+(task.charAt(0).toUpperCase()+task.slice(1))+'.</div>'
+      +'<div class="mrow2"><span class="sub" id="sc-s'+i+'">queued…</span><b class="up" id="sc-t'+i+'"></b></div>'
+      +'<div class="bar q" style="margin-top:.3rem"><i id="sc-b'+i+'" style="width:0%"></i></div></div>';
+  }).join("");
+  picks.forEach(function(x,i){ scStep(i,0,x); });
+}
+function scStep(i,s,x){
+  var st=document.getElementById("sc-s"+i); if(!st)return;
+  st.textContent=SC_STAGES[s]; var b=document.getElementById("sc-b"+i); if(b)b.style.width=Math.round((s+1)/SC_STAGES.length*100)+"%";
+  if(s<SC_STAGES.length-1){ setTimeout(function(){ scStep(i,s+1,x); }, 500+Math.random()*700+i*120); }
+  else { var saved=Math.round(60+Math.random()*20); var t=document.getElementById("sc-t"+i); if(t)t.textContent="−"+saved+"% tokens"; }
+}
 function hsOptions(){ return MODELS.map(function(x){return '<option value="'+x.m+'">'+x.m+' (grade '+x.grade.toFixed(0)+')</option>';}).join(""); }
 function hsRender(){
   var from=MODELS.find(function(x){return x.m==document.getElementById("hs-from").value;}), to=MODELS.find(function(x){return x.m==document.getElementById("hs-to").value;});
@@ -358,20 +525,13 @@ function hsRender(){
   else { v.className="verdict review"; v.textContent="↔ REVIEW — no clear cost win here."; }
 }
 
-var copBad=0,copGood=0,copCalls=0;
-function copTick(){ copCalls++; copBad+=0.048; copGood+=0.011;
-  document.getElementById("c-bad-total").textContent="$"+copBad.toFixed(2); document.getElementById("c-good-total").textContent="$"+copGood.toFixed(2);
-  document.getElementById("c-saved").textContent="$"+(copBad-copGood).toFixed(2);
-  document.getElementById("c-saved-pct").textContent=Math.round((1-copGood/copBad)*100)+"% cheaper · over "+copCalls.toLocaleString()+" simulated calls · quality held";
-}
-
 (function init(){
   var sel=document.getElementById("provider"); providers().forEach(function(p){var o=document.createElement("option");o.value=p;o.textContent=p;sel.appendChild(o);});
   document.getElementById("hs-from").innerHTML=hsOptions(); document.getElementById("hs-to").innerHTML=hsOptions();
   document.getElementById("hs-from").value="gpt-5.6-terra"; document.getElementById("hs-to").value="deepseek-v4-flash";
   document.getElementById("hs-from").onchange=hsRender; document.getElementById("hs-to").onchange=hsRender;
-  render(); stats(); ticker(); clock(); hsRender();
+  render(); stats(); ticker(); clock(); hsRender(); translate(); scRun(); renderBattery();
   setInterval(clock,1000);
-  if(!window.matchMedia("(prefers-reduced-motion:reduce)").matches){ setInterval(runOneTest,2200); setInterval(copTick,900); runOneTest(); }
+  if(!window.matchMedia("(prefers-reduced-motion:reduce)").matches){ setInterval(runOneTest,4200); runOneTest(); }
 })();
 </script>

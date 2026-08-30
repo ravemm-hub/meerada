@@ -12,3 +12,9 @@ GRADE_NAME = f"{BRAND_NAME} Grade"
 PROCESS_NAME = "The Handshake"
 TAGLINE = "The watchful eye on your AI."
 CLI_NAME = "meerada"
+
+# Premium flagship: the cockpit that manages communication and tasks across all
+# of a user's models — multi-task x multi-model, on desktop and mobile. Not a
+# "translator": it is the manager sitting between the user and every model.
+PREMIUM_NAME = f"{BRAND_NAME} LLManager"
+PREMIUM_TAGLINE = "One console to run every model — and every task — at once."
