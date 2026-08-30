@@ -59,6 +59,13 @@
   .delta { font-family:"IBM Plex Mono",monospace; font-size:.72rem; }
   .pill { font-size:.56rem; padding:.05rem .4rem; border-radius:999px; border:1px solid; }
   .pill.confirmed{color:var(--good);border-color:#2ea043} .pill.provisional{color:var(--amber);border-color:#9e6a03} .pill.stale{color:var(--muted);border-color:var(--line)}
+  .prodbanners{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem;margin:1rem 0 .4rem;}
+  .pbanner{display:flex;flex-direction:column;gap:.25rem;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:.7rem .85rem;text-decoration:none;color:var(--text);transition:border-color .2s,transform .1s;}
+  .pbanner:hover{border-color:var(--teal);transform:translateY(-1px);}
+  .pbanner.premium{border-color:#9e6a03;background:#1a160b;}
+  .pbanner b{font-family:"Archivo";font-size:.92rem;display:flex;align-items:center;gap:.4rem;}
+  .pbanner span{color:var(--muted);font-size:.76rem;line-height:1.35;}
+  .pb-tag{font-family:"IBM Plex Mono",monospace;font-size:.56rem;color:var(--amber);border:1px solid #9e6a03;border-radius:999px;padding:.05rem .4rem;}
   .mpill{font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--good);border:1px solid #2ea043;background:#0f2114;border-radius:999px;padding:.12rem .5rem;vertical-align:middle;}
   .ipill{font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--amber);border:1px solid #9e6a03;background:#211c0e;border-radius:999px;padding:.12rem .5rem;vertical-align:middle;}
   svg.spark { vertical-align:middle; } .caret{color:var(--muted);font-size:.65rem}
@@ -176,7 +183,15 @@
     <a class="mgr-cta" href="llmanager.html">🎛️ LLManager →</a>
   </div>
   <h1>The Decision Arena</h1>
-  <div class="sub">The live model market, an efficiency console that manages every model for you, and a migration planner — all in one place. <a href="llmanager.html" class="teal">Meet LLManager →</a> <span id="clock" class="mid"></span></div>
+  <div class="sub">The live model market — and the front door to everything Meerada does. <span id="clock" class="mid"></span></div>
+
+  <div class="prodbanners">
+    <a class="pbanner premium" href="llmanager.html"><b>🎛️ LLManager <span class="pb-tag">premium</span></b><span>One console for every model — many tasks in parallel, on your keys.</span></a>
+    <a class="pbanner" href="dashboard.html"><b>🖥️ Dashboard</b><span>The live multi-model, multi-task cockpit. Try the demo.</span></a>
+    <a class="pbanner" href="#handshake"><b>🤝 The Handshake</b><span>Plan a measured model migration — no silent quality loss.</span></a>
+    <a class="pbanner" href="grade.html"><b>📊 Grade board</b><span>Our real measured grades, refreshed hourly.</span></a>
+    <a class="pbanner" href="llmanager.html#get"><b>⬇️ Free CLI</b><span>The engine &amp; prompt optimizer — open-source, free.</span></a>
+  </div>
 
   <div class="stats">
     <div class="stat"><div class="k">Tests run today</div><div class="v" id="s-meas">0</div></div>
@@ -189,7 +204,7 @@
   <!-- ===== MEASURED LIVE (real engine output) ===== -->
   <div id="measured-wrap" style="display:none">
     <h2 style="margin:1.4rem 0 .2rem">🟢 Measured live <span class="mpill">REAL</span></h2>
-    <div class="h2sub">Actual grades from our engine — every model below ran the verified task set on the free Groq tier. No pricing here (the free tier doesn't expose it), just measured quality with its confidence interval and sample size.</div>
+    <div class="h2sub">Actual grades from our engine — every model below ran the verified task set on the free Groq tier. <b class="teal">Why so few?</b> We only grade models we can run for <b>free</b>: the paid frontier models in the catalog below aren't measured yet because we won't spend real money on them without asking. Coverage grows as we add free capacity (more Groq models, OpenRouter free, local Ollama).</div>
     <div class="scroll"><table class="board"><thead><tr>
       <th class="l">#</th><th class="l">Model</th>
       <th title="Meerada Grade from the measured quality (0–100).">Grade</th>
@@ -299,7 +314,7 @@
   </div>
 
   <!-- ===== HANDSHAKE ===== -->
-  <h2>🤝 The Handshake — plan a migration</h2>
+  <h2 id="handshake">🤝 The Handshake — plan a migration</h2>
   <div class="h2sub">Pick the model you run today and a candidate. We estimate the savings and quality delta — and guarantee, via output equivalence, that you don't lose quality silently.</div>
   <div class="card">
     <div class="hs">
