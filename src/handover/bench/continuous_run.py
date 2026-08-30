@@ -37,6 +37,11 @@ ENV_KEYS = {
 # Fallback price per Mtok when a model isn't in the registry (in, out).
 DEFAULT_PRICE = (Decimal("1"), Decimal("1"))
 
+# HARD SAFETY: only providers with a genuine free tier may be graded by the
+# scheduled loop. A paid provider is refused unless MEERADA_ALLOW_PAID=1 is set
+# explicitly — the loop must never spend real money without a deliberate opt-in.
+FREE_PROVIDERS = {"groq", "openrouter", "ollama"}
+
 # Model ids that are not chat-completion models — skip these (audio/embed/etc).
 _NON_CHAT = re.compile(r"whisper|tts|audio|embed|guard|moderation|rerank|orpheus|ocr", re.I)
 
@@ -67,10 +72,16 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     providers = [p.strip() for p in args.providers.split(",") if p.strip() in ENDPOINTS]
+    allow_paid = os.environ.get("MEERADA_ALLOW_PAID", "") == "1"
+    if not allow_paid:
+        blocked = [p for p in providers if p not in FREE_PROVIDERS]
+        if blocked:
+            print(f"safety: skipping paid providers {blocked} (set MEERADA_ALLOW_PAID=1 to allow)")
+        providers = [p for p in providers if p in FREE_PROVIDERS]
     keys = _keys(providers)
     live = [p for p in providers if keys[p]]
     if not live:
-        print("no providers with keys set — nothing to grade")
+        print("no free-tier providers with keys set — nothing to grade (no spend)")
         return 1
 
     state = load_state(args.state)

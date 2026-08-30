@@ -47,8 +47,8 @@ jobs:
           python -m handover.bench.continuous_run \
             --state grade_state.json \
             --board out/grade.html \
-            --providers groq,openrouter,deepseek,mistral,openai \
-            --budget "1.00"
+            --providers groq \
+            --budget "0.50"
 
       - name: publish board + state to gh-pages
         run: |
