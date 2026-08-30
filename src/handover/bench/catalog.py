@@ -10,26 +10,27 @@ Pure metadata — model ids and version hints only.
 import json
 import urllib.request
 from collections.abc import Callable, Sequence
+from typing import Any
 
 from handover.bench.discovery import CatalogModel
 from handover.replay.openai_client import ENDPOINTS
 
 # Raw fetch: returns the parsed JSON body of GET {base}/models.
-RawModelsFetch = Callable[[str, str], dict]
+RawModelsFetch = Callable[[str, str], dict[str, Any]]
 
 
-def _urllib_fetch(base_url: str, api_key: str) -> dict:
+def _urllib_fetch(base_url: str, api_key: str) -> dict[str, Any]:
     request = urllib.request.Request(
         base_url.rstrip("/") + "/models",
         headers={"Authorization": f"Bearer {api_key}", "User-Agent": "meerada/0.1"},
         method="GET",
     )
     with urllib.request.urlopen(request, timeout=30) as resp:
-        result: dict = json.loads(resp.read().decode())
+        result: dict[str, Any] = json.loads(resp.read().decode())
         return result
 
 
-def parse_models(provider: str, body: dict) -> list[CatalogModel]:
+def parse_models(provider: str, body: dict[str, Any]) -> list[CatalogModel]:
     """Normalize an OpenAI-compatible /models body to CatalogModels."""
     models: list[CatalogModel] = []
     for item in body.get("data", []):
