@@ -1,11 +1,11 @@
 name: live-grade
 
 # The living index: grade models on a schedule and redeploy the board.
-# Runs only when at least one provider key is set as a repo secret.
+# State (grade_state.json) lives on the gh-pages branch next to the board.
 on:
   schedule:
-    - cron: "0 * * * *"   # hourly
-  workflow_dispatch: {}    # manual trigger
+    - cron: "0 * * * *"      # hourly
+  workflow_dispatch: {}       # manual trigger
 
 permissions:
   contents: write
@@ -18,21 +18,21 @@ jobs:
   grade:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: state          # a lightweight branch that holds grade_state.json
-          fetch-depth: 1
-        continue-on-error: true
+      - name: checkout code
+        uses: actions/checkout@v4
 
-      - uses: actions/checkout@v4    # fall back to main if the state branch is new
-        if: ${{ failure() }}
-
-      - uses: actions/setup-python@v5
+      - name: setup python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: install
         run: pip install -e .
+
+      - name: fetch prior state from gh-pages
+        run: |
+          git fetch origin gh-pages || true
+          git show origin/gh-pages:grade_state.json > grade_state.json 2>/dev/null || echo '{}' > grade_state.json
 
       - name: run one grading tick
         env:
@@ -42,25 +42,22 @@ jobs:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          mkdir -p site
+          mkdir -p out
           python -m handover.bench.continuous_run \
             --state grade_state.json \
-            --board site/grade.html \
+            --board out/grade.html \
             --providers groq,openrouter,deepseek,mistral,openai \
-            --budget "${MEERADA_DAILY_BUDGET:-1.00}"
+            --budget "1.00"
 
-      - name: publish board + persist state
+      - name: publish board + state to gh-pages
         run: |
           git config user.name "meerada-bot"
-          git config user.email "bot@meerada.local"
-          # commit the refreshed board to gh-pages
-          git fetch origin gh-pages || true
-          git worktree add -B gh-pages .ghpages origin/gh-pages 2>/dev/null || git worktree add .ghpages gh-pages
-          cp site/grade.html .ghpages/grade.html
-          ( cd .ghpages && git add grade.html && \
-            git commit -m "live grade $(date -u +%FT%RZ)" && git push origin gh-pages ) || true
-          # persist state on its own branch
-          git worktree add -B state .state 2>/dev/null || git worktree add .state state
-          cp grade_state.json .state/grade_state.json
-          ( cd .state && git add grade_state.json && \
-            git commit -m "state $(date -u +%FT%RZ)" && git push -f origin state ) || true
+          git config user.email "bot@users.noreply.github.com"
+          git fetch origin gh-pages
+          git worktree add pages origin/gh-pages
+          cp out/grade.html pages/grade.html
+          cp grade_state.json pages/grade_state.json
+          cd pages
+          git add grade.html grade_state.json
+          git commit -m "live grade $(date -u +%FT%RZ)" || echo "no change"
+          git push origin HEAD:gh-pages
