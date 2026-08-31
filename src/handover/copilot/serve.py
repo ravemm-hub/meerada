@@ -13,6 +13,8 @@ from typing import Any
 
 from fastapi import FastAPI
 
+from handover.copilot.auth import OAuthConfig
+from handover.copilot.keystore import KeyStore
 from handover.copilot.optimize import optimize
 from handover.copilot.session import Session, SessionManager
 from handover.replay.openai_client import ChatCaller
@@ -157,17 +159,65 @@ class Board:
         self.models.pop(sid, None)
 
 
-def build_app(caller_for: CallerFor | None = None) -> FastAPI:
-    """Wire the cockpit page and endpoints. The Board holds independent sessions
-    (many models, many tasks) that run in parallel; reset clears them."""
+def _caller_for_user(keystore: KeyStore, user: str) -> CallerFor:
+    """Build model callers from the signed-in user's own stored provider keys."""
+    from handover.copilot.router import _provider_of
+    from handover.replay.openai_client import ENDPOINTS, HttpChatCaller
+
+    def caller(model_id: str) -> ChatCaller:
+        provider = _provider_of(model_id)
+        key = keystore.get(user, provider)
+        if not key or provider not in ENDPOINTS:
+            raise RuntimeError(f"no key connected for {provider} — add it under Keys")
+        return HttpChatCaller(ENDPOINTS[provider], key)
+
+    return caller
+
+
+def build_app(
+    caller_for: CallerFor | None = None,
+    *,
+    cfg: OAuthConfig | None = None,
+    keystore: KeyStore | None = None,
+) -> FastAPI:
+    """Wire the cockpit, the parallel session Board, and (when configured) real
+    Google sign-in with per-user key vaults. With no OAuth config the app runs
+    open on a single shared caller — exactly the local ``meerada up`` behaviour."""
+    import time
+
     from fastapi import Request
-    from fastapi.responses import HTMLResponse, JSONResponse
+    from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
+
+    from handover.copilot import auth as A
+
+    cfg = cfg or A.config_from_env()
+    keystore = keystore or KeyStore()
+    hosted = cfg.configured
+    secure = cfg.redirect_uri.startswith("https")
 
     app = FastAPI(title="Meerada LLManager", docs_url=None, redoc_url=None)
     state: dict[str, SessionManager | None] = {
         "manager": SessionManager(caller_for) if caller_for is not None else None
     }
     board: dict[str, Board] = {"board": Board(caller_for)}
+    user_boards: dict[str, Board] = {}
+
+    def current_user(request: Request) -> dict[str, Any] | None:
+        if not hosted:
+            return {"sub": "local", "email": "local", "name": "local"}
+        token = request.cookies.get(A.SESSION_COOKIE, "")
+        return A.verify_session(cfg.session_secret, token, now=time.time())
+
+    def board_for(request: Request) -> tuple[Board | None, str | None]:
+        user = current_user(request)
+        if user is None:
+            return None, None
+        sub = str(user["sub"])
+        if not hosted:
+            return board["board"], sub
+        if sub not in user_boards:
+            user_boards[sub] = Board(_caller_for_user(keystore, sub))
+        return user_boards[sub], sub
 
     @app.get("/", response_class=HTMLResponse)
     def index() -> str:
@@ -175,7 +225,61 @@ def build_app(caller_for: CallerFor | None = None) -> FastAPI:
 
     @app.get("/models")
     def models() -> JSONResponse:
-        return JSONResponse({"models": FREE_MODELS, "live": caller_for is not None})
+        return JSONResponse({"models": FREE_MODELS, "live": caller_for is not None or hosted})
+
+    @app.get("/me")
+    def me(request: Request) -> JSONResponse:
+        user = current_user(request)
+        if user is None:
+            return JSONResponse({"user": None, "auth": True})
+        providers = keystore.providers(str(user["sub"])) if hosted else []
+        return JSONResponse(
+            {"user": user.get("email") or user.get("name"), "auth": hosted, "providers": providers}
+        )
+
+    @app.get("/login")
+    def login() -> RedirectResponse:
+        if not hosted:
+            return RedirectResponse("/")
+        st = A.new_state(cfg.session_secret)
+        resp = RedirectResponse(A.login_url(cfg, st))
+        resp.set_cookie(
+            A.STATE_COOKIE, st, httponly=True, secure=secure, samesite="lax", max_age=600
+        )
+        return resp
+
+    @app.get("/auth/callback")
+    def auth_callback(request: Request, code: str = "", state: str = "") -> RedirectResponse:
+        saved = request.cookies.get(A.STATE_COOKIE, "")
+        if not hosted or not code or state != saved or not A.check_state(cfg.session_secret, state):
+            return RedirectResponse("/?auth=failed")
+        user = A.exchange_code(cfg, code)
+        token = A.sign_session(
+            cfg.session_secret, {"sub": user.sub, "email": user.email, "name": user.name},
+            now=time.time(),
+        )
+        resp = RedirectResponse("/")
+        resp.set_cookie(
+            A.SESSION_COOKIE, token, httponly=True, secure=secure, samesite="lax",
+            max_age=A.SESSION_TTL_S,
+        )
+        resp.delete_cookie(A.STATE_COOKIE)
+        return resp
+
+    @app.post("/logout")
+    def logout() -> JSONResponse:
+        resp = JSONResponse({"ok": True})
+        resp.delete_cookie(A.SESSION_COOKIE)
+        return resp
+
+    @app.post("/keys")
+    async def set_key(request: Request) -> JSONResponse:
+        user = current_user(request)
+        if user is None:
+            return JSONResponse({"error": "sign in required"}, status_code=401)
+        body = await request.json()
+        keystore.set(str(user["sub"]), str(body.get("provider", "")), str(body.get("key", "")))
+        return JSONResponse({"ok": True, "providers": keystore.providers(str(user["sub"]))})
 
     @app.post("/optimize")
     async def optimize_endpoint(request: Request) -> JSONResponse:
@@ -190,9 +294,12 @@ def build_app(caller_for: CallerFor | None = None) -> FastAPI:
         return JSONResponse(chat_view(state["manager"], await request.json()))
 
     @app.post("/session/send")
-    def session_send(payload: dict[str, Any]) -> JSONResponse:  # sync -> threadpool -> parallel
+    def session_send(request: Request, payload: dict[str, Any]) -> JSONResponse:  # sync->threadpool
+        b, _ = board_for(request)
+        if b is None:
+            return JSONResponse({"error": "sign in required"}, status_code=401)
         return JSONResponse(
-            board["board"].send(
+            b.send(
                 str(payload.get("id", "")),
                 str(payload.get("model", "")),
                 str(payload.get("message", "")),
@@ -201,13 +308,19 @@ def build_app(caller_for: CallerFor | None = None) -> FastAPI:
 
     @app.post("/session/close")
     async def session_close(request: Request) -> JSONResponse:
-        board["board"].close(str((await request.json()).get("id", "")))
+        b, _ = board_for(request)
+        if b is not None:
+            b.close(str((await request.json()).get("id", "")))
         return JSONResponse({"ok": True})
 
     @app.post("/reset")
-    def reset_endpoint() -> JSONResponse:
-        state["manager"] = SessionManager(caller_for) if caller_for is not None else None
-        board["board"] = Board(caller_for)
+    def reset_endpoint(request: Request) -> JSONResponse:
+        _, sub = board_for(request)
+        if not hosted:
+            state["manager"] = SessionManager(caller_for) if caller_for is not None else None
+            board["board"] = Board(caller_for)
+        elif sub is not None:
+            user_boards[sub] = Board(_caller_for_user(keystore, sub))
         return JSONResponse({"ok": True})
 
     return app
