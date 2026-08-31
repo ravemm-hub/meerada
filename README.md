@@ -2,6 +2,15 @@
 
 **Measure what your LLM spend actually buys.**
 
+**Live site:** <https://ravemm-hub.github.io/meerada/> · **Hosted LLManager:** deploy it in ~10 min →
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ravemm-hub/meerada)
+
+One click reads `render.yaml`. Then set `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`
+and `OAUTH_REDIRECT_URI` (the session/vault secrets are generated for you). Full
+walkthrough — including a local dry-run with no Google needed — in
+[`docs/DEPLOY.md`](docs/DEPLOY.md).
+
 Every dashboard shows you tokens and latency. Nobody shows you the only number
 that matters: **CPAT — cost per accepted task** — what one *verified, completed*
 unit of work really costs, including the retries, the reasoning-token burn, and
