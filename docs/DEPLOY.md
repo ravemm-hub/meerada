@@ -66,8 +66,13 @@ and is never in the deploy config** — production always uses real Google sign-
   state, exchanges the code for the user's identity, and sets an **HMAC-signed,
   http-only session cookie**. No password ever touches us.
 - Each signed-in user connects their own provider keys (Keys panel → `POST
-  /keys`). Keys are held per-user in memory, never logged, never returned to the
-  browser. **For production, move them to an encrypted store/DB** — this is the
-  one thing to harden before real customers (see `keystore.py`).
+  /keys`). Keys are **encrypted at rest** (Fernet, key derived from
+  `KEYVAULT_SECRET` via scrypt) and written to `KEYVAULT_PATH`, so they survive
+  restarts; they are never logged and never returned to the browser. The
+  `[hosted]` extra (installed by the Dockerfile) provides the encryption.
+  - On Render's **free tier the disk is ephemeral**, so the vault resets when the
+    service restarts — users simply reconnect a key. For durability, attach a
+    Render persistent disk (paid) pointed at `KEYVAULT_PATH`, or swap the store
+    for a database.
 - Sessions and tasks run per-user (`Board` per user); one user never sees
   another's models or conversations.

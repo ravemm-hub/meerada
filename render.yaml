@@ -16,3 +16,10 @@ services:
         sync: false
       - key: SESSION_SECRET
         generateValue: true
+      # Encrypts the per-user key vault at rest (with the hosted extra installed).
+      - key: KEYVAULT_SECRET
+        generateValue: true
+      # Where the encrypted vault is written. On the free tier this is ephemeral
+      # (keys reset on restart); attach a persistent disk or a DB for durability.
+      - key: KEYVAULT_PATH
+        value: /tmp/meerada-keyvault.bin

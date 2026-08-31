@@ -4,7 +4,8 @@ WORKDIR /app
 
 COPY pyproject.toml README.md ./
 COPY src ./src
-RUN pip install --no-cache-dir .
+# [hosted] pulls in cryptography so the per-user key vault is encrypted at rest.
+RUN pip install --no-cache-dir ".[hosted]"
 
 ENV PORT=8000
 EXPOSE 8000

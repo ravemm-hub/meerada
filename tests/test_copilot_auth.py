@@ -1,6 +1,10 @@
 """Auth: signed sessions, CSRF state, login URL, key store.
 The Google token exchange is a network seam and is not exercised here (CLAUDE.md)."""
 
+from pathlib import Path
+
+import pytest
+
 from handover.copilot.auth import (
     OAuthConfig,
     check_state,
@@ -79,3 +83,30 @@ def test_keystore() -> None:
     assert ks.get("u1", "groq") == "gsk_abc"
     ks.clear("u1", "groq")
     assert ks.get("u1", "groq") is None
+
+
+def test_keystore_persists_across_instances(tmp_path: Path) -> None:
+    path = str(tmp_path / "vault.bin")
+    ks = KeyStore(path=path, secret="vault-secret")
+    ks.set("u1", "groq", "gsk_secret_value")
+    reopened = KeyStore(path=path, secret="vault-secret")
+    assert reopened.get("u1", "groq") == "gsk_secret_value"
+
+
+def test_keystore_encrypted_at_rest(tmp_path: Path) -> None:
+    pytest.importorskip("cryptography")
+    path = tmp_path / "vault.bin"
+    ks = KeyStore(path=str(path), secret="vault-secret")
+    assert ks.encrypted is True
+    ks.set("u1", "groq", "gsk_TOPSECRET")
+    blob = path.read_bytes()
+    assert b"gsk_TOPSECRET" not in blob  # plaintext never hits disk
+    assert b"groq" not in blob
+
+
+def test_keystore_wrong_secret_cannot_read(tmp_path: Path) -> None:
+    pytest.importorskip("cryptography")
+    path = str(tmp_path / "vault.bin")
+    KeyStore(path=path, secret="right-secret").set("u1", "groq", "gsk_x")
+    # a different secret (rotation / attacker) must not decrypt — starts clean
+    assert KeyStore(path=path, secret="wrong-secret").get("u1", "groq") is None

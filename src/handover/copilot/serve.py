@@ -192,7 +192,10 @@ def build_app(
     from handover.copilot import auth as A
 
     cfg = cfg or A.config_from_env()
-    keystore = keystore or KeyStore()
+    keystore = keystore or KeyStore(
+        path=os.environ.get("KEYVAULT_PATH") or None,
+        secret=os.environ.get("KEYVAULT_SECRET") or cfg.session_secret,
+    )
     google_ok = cfg.configured
     # Auth is enforced whenever a session secret is set. Google is the real path;
     # a dev bypass (explicit opt-in, only when Google is NOT configured) lets you
