@@ -7,6 +7,23 @@ app runs open (that is what `meerada up` does locally).
 
 ---
 
+## 0. See the whole hosted flow locally, right now (no Google, no deploy)
+
+To walk the full experience — sign in → connect keys → per-user parallel sessions —
+on your own machine before deploying, run with the **dev-login** bypass:
+
+```bash
+SESSION_SECRET=devsecret MEERADA_DEV_LOGIN=1 meerada up
+```
+
+Open <http://127.0.0.1:8765>: you'll get the sign-in gate, "Continue with Google"
+signs you straight in (dev only), the Keys panel opens, and once you paste a real
+provider key (e.g. a free Groq key) your sessions return real answers. The bypass
+is **explicit opt-in, refuses to run when Google is configured, prints a warning,
+and is never in the deploy config** — production always uses real Google sign-in.
+
+---
+
 ## 1. Create a Google OAuth client (~3 min)
 
 1. Go to <https://console.cloud.google.com/apis/credentials> → **Create

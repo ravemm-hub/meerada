@@ -183,6 +183,7 @@ def build_app(
     """Wire the cockpit, the parallel session Board, and (when configured) real
     Google sign-in with per-user key vaults. With no OAuth config the app runs
     open on a single shared caller — exactly the local ``meerada up`` behaviour."""
+    import os
     import time
 
     from fastapi import Request
@@ -192,8 +193,15 @@ def build_app(
 
     cfg = cfg or A.config_from_env()
     keystore = keystore or KeyStore()
-    hosted = cfg.configured
+    google_ok = cfg.configured
+    # Auth is enforced whenever a session secret is set. Google is the real path;
+    # a dev bypass (explicit opt-in, only when Google is NOT configured) lets you
+    # walk the full hosted flow locally. It is never enabled in the deploy config.
+    dev_login = os.environ.get("MEERADA_DEV_LOGIN", "") == "1" and not google_ok
+    hosted = bool(cfg.session_secret)
     secure = cfg.redirect_uri.startswith("https")
+    if dev_login:
+        print("WARNING: MEERADA_DEV_LOGIN on — sign-in bypassed. DEV ONLY, never in prod.")
 
     app = FastAPI(title="Meerada LLManager", docs_url=None, redoc_url=None)
     state: dict[str, SessionManager | None] = {
@@ -241,6 +249,20 @@ def build_app(
     def login() -> RedirectResponse:
         if not hosted:
             return RedirectResponse("/")
+        if dev_login:  # bypass Google for local end-to-end testing
+            token = A.sign_session(
+                cfg.session_secret,
+                {"sub": "dev", "email": "dev@local", "name": "dev"},
+                now=time.time(),
+            )
+            resp = RedirectResponse("/")
+            resp.set_cookie(
+                A.SESSION_COOKIE, token, httponly=True, secure=secure,
+                samesite="lax", max_age=A.SESSION_TTL_S,
+            )
+            return resp
+        if not google_ok:
+            return RedirectResponse("/?auth=unconfigured")
         st = A.new_state(cfg.session_secret)
         resp = RedirectResponse(A.login_url(cfg, st))
         resp.set_cookie(
