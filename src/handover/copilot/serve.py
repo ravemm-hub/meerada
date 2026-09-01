@@ -21,11 +21,14 @@ from handover.replay.openai_client import ChatCaller
 
 _COCKPIT = Path(__file__).parent / "cockpit.html"
 
-# A few current Groq free-tier chat models to seed the picker; editable in the UI.
+# Current Groq free-tier chat models our grader has verified as working; editable
+# in the UI. (Groq rotates model ids — these are the live, measured-good ones.)
 FREE_MODELS: list[str] = [
-    "llama-3.1-8b-instant",
-    "llama-3.3-70b-versatile",
-    "gemma2-9b-it",
+    "openai/gpt-oss-20b",
+    "openai/gpt-oss-120b",
+    "qwen/qwen3.8-27b",
+    "groq/compound-mini",
+    "allam-2-7b",
 ]
 
 CallerFor = Callable[[str], ChatCaller]
