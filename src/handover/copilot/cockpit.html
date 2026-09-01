@@ -30,6 +30,7 @@
   .ph .pstat{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--muted);white-space:nowrap;}
   .ph .pstat.run{color:var(--teal);} .ph .pstat.done{color:var(--good);}
   .ph .x{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.95rem;padding:0 .1rem;} .ph .x:hover{color:var(--bad);}
+  .ph .pop{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.95rem;padding:0 .1rem;} .ph .pop:hover{color:var(--teal);}
   .thread{flex:1;overflow-y:auto;padding:.6rem;display:flex;flex-direction:column;gap:.5rem;min-height:120px;}
   .you{align-self:flex-end;background:#16233b;border:1px solid var(--line);border-radius:11px 11px 2px 11px;padding:.4rem .6rem;font-size:.83rem;max-width:90%;}
   .ai{align-self:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:11px 11px 11px 2px;padding:.45rem .65rem;font-size:.84rem;max-width:96%;white-space:pre-wrap;}
@@ -38,9 +39,11 @@
   .spin{display:inline-block;width:11px;height:11px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite;} @keyframes sp{to{transform:rotate(360deg)}}
   .pfoot{display:flex;gap:.7rem;padding:.25rem .65rem;border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:.62rem;color:var(--muted);} .pfoot b{color:var(--text);}
   .pcompose{display:flex;gap:.4rem;padding:.5rem;border-top:1px solid var(--line);}
-  .pcompose textarea{flex:1;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.4rem .55rem;font-family:inherit;font-size:.82rem;resize:none;height:38px;max-height:110px;}
+  .pcompose textarea{flex:1;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem .55rem;font-family:inherit;font-size:.82rem;resize:vertical;min-height:46px;max-height:200px;line-height:1.4;}
+  #bcast{width:340px;max-width:42vw;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem .6rem;font-family:inherit;font-size:.82rem;resize:vertical;min-height:40px;max-height:180px;line-height:1.4;}
   .pcompose button{background:var(--amber);color:#171205;border:none;border-radius:8px;padding:0 .7rem;font-weight:700;cursor:pointer;}
   .empty{grid-column:1/-1;margin:auto;color:var(--muted);text-align:center;padding:2rem;font-size:.9rem;}
+  .solo .ph .pop{display:none;} .solo .grid{padding:.5rem;} .solo .pane{max-height:calc(100vh - 92px);min-height:calc(100vh - 92px);}
   .hint{color:var(--muted);font-size:.68rem;padding:.1rem 1rem .5rem;}
   code{font-family:"IBM Plex Mono",monospace;background:var(--panel2);padding:.1rem .35rem;border-radius:4px;}
 </style>
@@ -77,12 +80,12 @@
   <button class="btn primary" onclick="addSession()">+ New session</button>
   <input id="newmodel" placeholder="add a model id to the picker (e.g. gpt-oss-20b)" onchange="addModel(this)">
   <span style="flex:1"></span>
-  <input id="bcast" placeholder="broadcast one task to every session…">
+  <textarea id="bcast" rows="1" placeholder="broadcast one task to every session…  (Enter to send · Shift+Enter = newline)"></textarea>
   <button class="btn" onclick="broadcast()">Send to all →</button>
 </div>
 
 <div class="grid" id="grid"><div class="empty">Add a session, pick its model, and give it a task. Add more for other models — they all run in parallel.</div></div>
-<div class="hint" id="hint">Every session is independent: different models, different tasks, all live at once. Runs locally on your keys; preview mode shows the lean prompt LLManager would send — set <code>GROQ_API_KEY</code> and restart to run live.</div>
+<div class="hint" id="hint">Every session is independent — different models, different tasks, all live at once. <b>Tip:</b> hit <b>⧉</b> on any session to pop it into its own window. These are small free models; connect your own <b>Claude / GPT</b> key (Keys panel, hosted mode) for flagship quality. Your prompts never leave your machine.</div>
 
 <!-- sign-in gate (hosted mode only) -->
 <div id="gate" style="display:none;position:fixed;inset:0;background:rgba(11,16,32,.94);z-index:60;align-items:center;justify-content:center;">
@@ -138,7 +141,7 @@ function addSession(model){
   structDirty=true; renderGrid(); updateLedger();
   setTimeout(function(){ var el=document.getElementById("in-"+id); if(el)el.focus(); },30);
 }
-function closeSession(id){ try{fetch("/session/close",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:id})});}catch(e){}
+function closeSession(id){ if(SOLO){ window.close(); return; } try{fetch("/session/close",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:id})});}catch(e){}
   SES=SES.filter(function(s){return s.id!=id;}); structDirty=true; renderGrid(); updateLedger(); }
 function setModel(id,m){ var s=find(id); if(s){ s.model=m; } } // next send re-homes the server session
 function find(id){ return SES.filter(function(s){return s.id==id;})[0]; }
@@ -166,6 +169,7 @@ function renderGrid(){
       return '<div class="pane" id="pane-'+s.id+'">'
         +'<div class="ph"><select onchange="setModel(\''+s.id+'\',this.value)">'+opts(s.model)+'</select>'
         +'<span id="ps-'+s.id+'">'+statHtml(s)+'</span>'
+        +'<button class="pop" title="pop out to its own window" onclick="popOut(\''+s.id+'\')">⧉</button>'
         +'<button class="x" title="close" onclick="closeSession(\''+s.id+'\')">✕</button></div>'
         +'<div class="thread" id="th-'+s.id+'">'+threadHtml(s)+'</div>'
         +'<div class="pfoot" id="pf-'+s.id+'">'+footHtml(s)+'</div>'
@@ -213,6 +217,25 @@ function broadcast(){
 }
 async function resetAll(){ try{await fetch("/reset",{method:"POST"});}catch(e){} SES=[]; seq=0; structDirty=true; renderGrid(); updateLedger(); }
 
+// ---- pop a session into its own window (same server-side session) ----
+var SOLO=false;
+function popOut(id){ var s=find(id); if(!s)return;
+  window.open(location.pathname+"?solo="+encodeURIComponent(id)+"&model="+encodeURIComponent(s.model),"mrd_"+id,"width=480,height=760,menubar=no,toolbar=no"); }
+async function soloInit(id, model){
+  SOLO=true; document.body.classList.add("solo");
+  var tb=document.querySelector(".toolbar"); if(tb)tb.style.display="none";
+  document.getElementById("hint").innerHTML="Popped-out session — the same live conversation as the main window.";
+  try{ var r=await fetch("/models"); var d=await r.json(); MODELS=d.models||[]; live=d.live;
+    var mode=document.getElementById("mode"); mode.textContent=live?"LIVE":"PREVIEW"; mode.className="mode "+(live?"live":"preview"); }catch(e){}
+  var s={id:id,model:model||MODELS[0],convo:[],pending:false,stats:{turns:0,tokens:0,cost:0},saves:[]}; SES=[s]; structDirty=true;
+  try{ var hr=await fetch("/session/history?id="+encodeURIComponent(id)); var turns=(await hr.json()).turns||[];
+    for(var i=0;i<turns.length;i+=2){ var u=turns[i],a=turns[i+1]; s.convo.push({you:(u&&u.content)||"", reply:a?{text:a.content,saved_pct:0,output_tokens:0}:undefined}); }
+    s.stats.turns=Math.floor(turns.length/2);
+  }catch(e){}
+  renderGrid(); updateLedger();
+  setTimeout(function(){ var el=document.getElementById("in-"+id); if(el)el.focus(); },40);
+}
+
 // ---- auth + keys (hosted mode) ----
 var HOSTED=false, PROVIDERS=[];
 function showKeys(){ document.getElementById("keys").style.display="flex"; renderConnected(); }
@@ -228,9 +251,11 @@ async function signOut(){ try{await fetch("/logout",{method:"POST"});}catch(e){}
 document.addEventListener("keydown",function(e){
   var t=e.target; if(!t)return;
   if(t.id&&t.id.indexOf("in-")===0&&e.key=="Enter"&&!e.shiftKey){ e.preventDefault(); sendTo(t.id.slice(3)); }
-  if(t.id=="bcast"&&e.key=="Enter"){ e.preventDefault(); broadcast(); }
+  if(t.id=="bcast"&&e.key=="Enter"&&!e.shiftKey){ e.preventDefault(); broadcast(); }
 });
 (async function init(){
+  var params=new URLSearchParams(location.search);
+  if(params.get("solo")){ return soloInit(params.get("solo"), params.get("model")||""); }
   // who am I? (hosted mode enforces Google sign-in; local mode is open)
   try{
     var meRes=await fetch("/me"); var me=await meRes.json();

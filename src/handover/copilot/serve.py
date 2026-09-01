@@ -24,11 +24,9 @@ _COCKPIT = Path(__file__).parent / "cockpit.html"
 # Current Groq free-tier chat models our grader has verified as working; editable
 # in the UI. (Groq rotates model ids — these are the live, measured-good ones.)
 FREE_MODELS: list[str] = [
-    "openai/gpt-oss-20b",
     "openai/gpt-oss-120b",
+    "openai/gpt-oss-20b",
     "qwen/qwen3.8-27b",
-    "groq/compound-mini",
-    "allam-2-7b",
 ]
 
 CallerFor = Callable[[str], ChatCaller]
@@ -160,6 +158,10 @@ class Board:
     def close(self, sid: str) -> None:
         self.sessions.pop(sid, None)
         self.models.pop(sid, None)
+
+    def history(self, sid: str) -> list[dict[str, str]]:
+        session = self.sessions.get(sid)
+        return [{"role": t.role, "content": t.content} for t in session.history] if session else []
 
 
 def _caller_for_user(keystore: KeyStore, user: str) -> CallerFor:
@@ -354,6 +356,11 @@ def build_app(
         if b is not None:
             b.close(str((await request.json()).get("id", "")))
         return JSONResponse({"ok": True})
+
+    @app.get("/session/history")
+    def session_history(request: Request, id: str = "") -> JSONResponse:
+        b, _ = board_for(request)
+        return JSONResponse({"turns": b.history(id) if b is not None else []})
 
     @app.post("/reset")
     def reset_endpoint(request: Request) -> JSONResponse:
