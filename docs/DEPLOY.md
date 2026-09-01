@@ -1,9 +1,39 @@
-# Deploy the hosted LLManager (real Google sign-in)
+# Deploy the hosted LLManager
+
+The code is complete and the container entrypoint is verified. Pick a path:
+
+- **Path A — Tester mode (recommended first, ~5 min, no Google):** deploy with a
+  free Groq key; anyone with the link gets a working dashboard with **real
+  answers**, no sign-up. Best for showing testers fast.
+- **Path B — Full product (~10 min):** add real Google sign-in + per-user
+  encrypted key vaults. Do this once testers validate the idea.
+
+---
+
+## Path A — Tester mode (fastest)
+
+1. Get a free Groq key at <https://console.groq.com/keys> (you likely already
+   have one — the grader uses it).
+2. At <https://dashboard.render.com> → **New → Blueprint** → pick the
+   `ravemm-hub/meerada` repo. Render reads `render.yaml`.
+3. When prompted, set **`GROQ_API_KEY`** to your key. Deploy.
+4. Your live dashboard: `https://meerada-llmanager.onrender.com`. Open it → add
+   sessions → real Groq answers, no sign-in. Share the link with your testers.
+
+> It uses your shared Groq quota, so send the link to a tester group, not the
+> public. On the free tier the service sleeps when idle — the first hit takes
+> ~30–60s to wake.
+
+To upgrade this same service to Path B later, just add the four auth vars below
+in **Settings → Environment** and redeploy.
+
+---
+
+## Path B — Full product (real Google sign-in)
 
 The code is complete. Making it live is **3 steps** — all in accounts only you can
 access. When the four environment variables are set, the app enforces Google
-sign-in and every user connects their own model keys. With them unset, the same
-app runs open (that is what `meerada up` does locally).
+sign-in and every user connects their own model keys.
 
 ---
 

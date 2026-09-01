@@ -206,6 +206,20 @@ def build_app(
     if dev_login:
         print("WARNING: MEERADA_DEV_LOGIN on — sign-in bypassed. DEV ONLY, never in prod.")
 
+    # Open (no-auth) hosting: when there's no injected caller and no sign-in, build
+    # a shared caller from a provider key in the environment (e.g. GROQ_API_KEY),
+    # so a deploy can serve real answers to testers with zero sign-up. If no key is
+    # present it stays in preview. Auth mode ignores this and uses per-user keys.
+    if caller_for is None and not hosted:
+        from handover.copilot.providers import caller_for_provider
+
+        provider = os.environ.get("MEERADA_PROVIDER", "groq")
+        try:
+            caller_for_provider(provider)  # probe: raises if the key is missing
+            caller_for = lambda _model_id: caller_for_provider(provider)  # noqa: E731
+        except RuntimeError:
+            caller_for = None
+
     app = FastAPI(title="Meerada LLManager", docs_url=None, redoc_url=None)
     state: dict[str, SessionManager | None] = {
         "manager": SessionManager(caller_for) if caller_for is not None else None

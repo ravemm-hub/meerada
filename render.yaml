@@ -1,6 +1,15 @@
 # One-click deploy of the hosted LLManager to Render (free tier).
-# Render injects PORT; the Dockerfile CMD binds to it. Set the three OAuth
-# secrets in the dashboard (SESSION_SECRET is generated for you).
+# Render injects PORT; the Dockerfile CMD binds to it.
+#
+# DEFAULT = tester mode: set GROQ_API_KEY (a free key from console.groq.com) and
+# the dashboard serves REAL answers to anyone with the link — no sign-up, no
+# per-user keys. Share the URL with your tester group, not publicly (it uses your
+# shared Groq quota).
+#
+# To switch on real Google sign-in + per-user encrypted key vaults, add the four
+# auth vars from docs/DEPLOY.md (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET,
+# OAUTH_REDIRECT_URI, SESSION_SECRET) — the app enforces auth the moment
+# SESSION_SECRET is set.
 services:
   - type: web
     name: meerada-llmanager
@@ -8,18 +17,5 @@ services:
     plan: free
     healthCheckPath: /me
     envVars:
-      - key: GOOGLE_CLIENT_ID
+      - key: GROQ_API_KEY
         sync: false
-      - key: GOOGLE_CLIENT_SECRET
-        sync: false
-      - key: OAUTH_REDIRECT_URI
-        sync: false
-      - key: SESSION_SECRET
-        generateValue: true
-      # Encrypts the per-user key vault at rest (with the hosted extra installed).
-      - key: KEYVAULT_SECRET
-        generateValue: true
-      # Where the encrypted vault is written. On the free tier this is ephemeral
-      # (keys reset on restart); attach a persistent disk or a DB for durability.
-      - key: KEYVAULT_PATH
-        value: /tmp/meerada-keyvault.bin
