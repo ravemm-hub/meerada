@@ -14,6 +14,7 @@
   .sub{color:var(--muted);font-size:.82rem;}
   .mode{font-family:"IBM Plex Mono",monospace;font-size:.64rem;border-radius:999px;padding:.14rem .55rem;border:1px solid;}
   .mode.live{color:var(--good);border-color:#2ea043;} .mode.preview{color:var(--amber);border-color:#9e6a03;}
+  .suitenav{display:flex;gap:.9rem;margin-left:.4rem;font-size:.82rem;} .suitenav a{color:var(--muted);text-decoration:none;} .suitenav a:hover{color:var(--text);}
   .ledger{margin-left:auto;display:flex;gap:1rem;font-family:"IBM Plex Mono",monospace;font-size:.72rem;align-items:center;}
   .ledger b{font-family:"Archivo";font-weight:800;font-size:.92rem;} .ledger .k{color:var(--muted);display:block;font-size:.56rem;text-transform:uppercase;letter-spacing:.05em;}
   .btn{font-family:"Archivo";font-weight:700;font-size:.8rem;padding:.4rem .75rem;border-radius:8px;border:1px solid var(--line);color:var(--text);background:transparent;cursor:pointer;white-space:nowrap;}
@@ -45,7 +46,7 @@
 </style>
 
 <div class="bar">
-  <div class="brand">
+  <a class="brand" href="https://ravemm-hub.github.io/meerada/market.html" title="Back to the Meerada Arena" style="text-decoration:none;color:inherit">
     <svg viewBox="0 0 104 104" width="26" height="26" aria-hidden="true"><g transform="translate(0,20)">
       <path d="M6 32 Q52 -16 98 32" fill="none" stroke="#63CFC2" stroke-width="8" stroke-linecap="round"/>
       <path d="M6 32 Q52 80 98 32" fill="none" stroke="#F2B84B" stroke-width="8" stroke-linecap="round"/>
@@ -54,7 +55,13 @@
       <circle cx="52" cy="32" r="7" fill="#63CFC2"/></g></svg>
     <span class="wm">m<em>ee</em>rada</span><span class="sub">LLManager</span>
     <span class="mode preview" id="mode">…</span>
-  </div>
+  </a>
+  <span class="suitenav">
+    <a href="https://ravemm-hub.github.io/meerada/market.html">← Arena</a>
+    <a href="https://ravemm-hub.github.io/meerada/market.html#handshake">Handshake</a>
+    <a href="https://ravemm-hub.github.io/meerada/grade.html">Grade</a>
+    <a href="https://ravemm-hub.github.io/meerada/llmanager.html">About</a>
+  </span>
   <div class="ledger">
     <span><span class="k">sessions</span><b id="l-ses">0</b></span>
     <span><span class="k">tokens</span><b id="l-tok">0</b></span>
