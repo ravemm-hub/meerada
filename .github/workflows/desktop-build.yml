@@ -1,9 +1,9 @@
 name: desktop-build
 
-# Builds the Meerada LLManager desktop app for Windows, macOS and Linux with
-# PyInstaller and uploads the binaries as artifacts. Trigger it by hand
-# (Actions -> desktop-build -> Run workflow) or by pushing a v* tag, which also
-# attaches the binaries to a GitHub Release.
+# Builds the Meerada LLManager desktop app. Windows gets a real installer
+# (MeeradaSetup.exe — Start-menu + desktop shortcuts, uninstaller, no admin);
+# macOS/Linux get a zipped app folder. Trigger by hand (Actions -> desktop-build
+# -> Run workflow) or by pushing a v* tag (which also attaches to a Release).
 on:
   workflow_dispatch: {}
   push:
@@ -19,11 +19,11 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            artifact: Meerada-windows
+            artifact: Meerada-Windows-Installer
           - os: macos-latest
-            artifact: Meerada-macos
+            artifact: Meerada-macOS
           - os: ubuntu-latest
-            artifact: Meerada-linux
+            artifact: Meerada-Linux
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -32,7 +32,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      # pywebview needs GTK + WebKit on Linux (Windows uses Edge WebView2, macOS uses WKWebView).
       - name: Linux system deps
         if: runner.os == 'Linux'
         run: |
@@ -44,21 +43,47 @@ jobs:
           python -m pip install --upgrade pip
           pip install ".[desktop]" pyinstaller
 
-      - name: Build
+      # A --onedir build launches instantly (no per-run temp extraction) and is far
+      # less likely to trip antivirus than --onefile.
+      - name: Build (onedir)
         run: >
-          pyinstaller --name Meerada --windowed --onefile
+          pyinstaller --name Meerada --windowed --onedir
           --collect-all handover --collect-all webview
           packaging/app_entry.py
 
-      - name: Upload build
+      - name: Build Windows installer
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          choco install innosetup -y --no-progress
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" packaging\installer.iss
+
+      - name: Zip app (macOS / Linux)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: cd dist && zip -r "../Meerada-${{ runner.os }}.zip" Meerada
+
+      - name: Upload Windows installer
+        if: runner.os == 'Windows'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}
-          path: dist/*
+          path: installer/MeeradaSetup.exe
+          if-no-files-found: error
+
+      - name: Upload app zip (macOS / Linux)
+        if: runner.os != 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: Meerada-*.zip
           if-no-files-found: error
 
       - name: Attach to release (tags only)
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*
+          fail_on_unmatched_files: false
+          files: |
+            installer/MeeradaSetup.exe
+            Meerada-*.zip

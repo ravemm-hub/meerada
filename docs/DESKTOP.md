@@ -39,11 +39,17 @@ Real one-click `.exe` / `.app` / `.AppImage` (per-OS, build on that OS):
 
 ```bash
 pip install ".[desktop]" pyinstaller
-pyinstaller --name Meerada --windowed --onefile \
+pyinstaller --name Meerada --windowed --onedir \
     --collect-all handover --collect-all webview packaging/app_entry.py
-# -> dist/Meerada.exe  (or Meerada.app / Meerada on macOS/Linux)
+# -> dist/Meerada/Meerada.exe  (a folder; launches instantly, AV-friendly)
 ```
 
+- **`--onedir` (a folder), not `--onefile`** — onefile re-extracts to a temp dir on
+  every launch, which is slow and frequently blocked/quarantined by antivirus
+  (that's the "stuck at the same place" symptom). onedir is unpacked once.
+- On Windows, wrap it in a proper installer (Start-menu + desktop shortcut,
+  uninstaller, no admin): install [Inno Setup](https://jrsoftware.org/isdl.php),
+  then `ISCC packaging\installer.iss` → `installer\MeeradaSetup.exe`.
 - `--collect-all handover` bundles the package **and its data** (the cockpit UI).
 - `--collect-all webview` bundles the pywebview backend.
 - **Windows** uses Edge WebView2 (present on Win10/11); no extra runtime.
