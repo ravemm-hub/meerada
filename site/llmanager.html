@@ -65,6 +65,9 @@
   .tier h3{font-family:"Archivo";font-size:1.2rem;margin:.2rem 0;} .tier .price{font-family:"Archivo";font-weight:800;font-size:1.6rem;margin:.3rem 0 .8rem;}
   .tier ul{list-style:none;padding:0;margin:0 0 1rem;} .tier li{padding:.28rem 0;font-size:.9rem;color:var(--text);} .tier li::before{content:"✓ ";color:var(--good);}
   .tier li.off{color:var(--muted);} .tier li.off::before{content:"— ";color:var(--muted);}
+  .dlbox{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.4rem 1.6rem;}
+  .dlbtns{display:flex;gap:.7rem;flex-wrap:wrap;}
+  .dlbox .note{color:var(--muted);font-size:.8rem;margin-top:1rem;line-height:1.6;}
 
   .effrow{display:flex;gap:1rem;align-items:center;justify-content:center;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.3rem;}
   .effrow .big{font-family:"Archivo";font-weight:900;font-size:2.2rem;color:var(--good);}
@@ -165,7 +168,19 @@
 </div></section>
 
 <section id="get"><div class="wrap">
-  <h2>Free core. Premium cockpit.</h2>
+  <h2>⬇️ Download the desktop app</h2>
+  <div class="h2sub">Your keys, your machine — opens and closes like any app, remembers your setup, and tracks the real cost per accepted task.</div>
+  <div class="dlbox">
+    <div class="dlbtns">
+      <a class="btn primary lg" href="https://github.com/ravemm-hub/meerada/releases/latest/download/MeeradaSetup.exe">⊞ Windows — installer</a>
+      <a class="btn lg" href="https://github.com/ravemm-hub/meerada/releases/latest/download/Meerada-macOS.zip"> macOS</a>
+      <a class="btn lg" href="https://github.com/ravemm-hub/meerada/releases/latest/download/Meerada-Linux.zip">🐧 Linux</a>
+      <a class="btn ghost lg" href="https://github.com/ravemm-hub/meerada/releases/latest" target="_blank" rel="noopener">All downloads →</a>
+    </div>
+    <p class="note">Unsigned for now, so first launch shows a one-time SmartScreen/Gatekeeper prompt → <b>More info → Run anyway</b>. Prefer source? <code>pip install "handover[desktop] @ git+https://github.com/ravemm-hub/meerada"</code> then <code>meerada app</code>.</p>
+  </div>
+
+  <h2 style="margin-top:2.4rem">Free core. Premium cockpit.</h2>
   <div class="h2sub">The measuring engine and command-line tools are open-source and free forever. LLManager is the premium cockpit on top.</div>
   <div class="split">
     <div class="tier">
