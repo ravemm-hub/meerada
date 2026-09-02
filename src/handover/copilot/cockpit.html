@@ -248,7 +248,11 @@ async function soloInit(id, model){
 // ---- auth + keys (hosted mode / local vault) ----
 var HOSTED=false, VAULT=false, PROVIDERS=[];
 function showKeys(){ document.getElementById("keys").style.display="flex"; renderConnected(); }
-function renderConnected(){ document.getElementById("k-connected").innerHTML=PROVIDERS.length?("connected: "+PROVIDERS.join(", ")):"no providers connected yet"; }
+function renderConnected(err){
+  var html=PROVIDERS.length?('✓ connected: <b>'+PROVIDERS.join(", ")+'</b>'):'no providers connected yet';
+  if(err){ html+='<br><span style="color:var(--bad)">✗ '+err.provider+' rejected — '+(err.error||'check the key')+'</span>'; }
+  document.getElementById("k-connected").innerHTML=html;
+}
 async function pasteKey(){
   var el=document.getElementById("k-key"); el.focus();
   try{ var t=await navigator.clipboard.readText(); if(t){ el.value=t.trim(); } }
@@ -258,8 +262,12 @@ async function pasteKey(){
 async function connectKey(){
   var p=document.getElementById("k-provider").value, k=document.getElementById("k-key").value.trim();
   if(!k)return;
+  document.getElementById("k-connected").innerHTML='<span class="sub"><span class="spin"></span> checking '+p+' key…</span>';
   try{ var res=await fetch("/keys",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({provider:p,key:k})});
-    var d=await res.json(); if(d.providers)PROVIDERS=d.providers; document.getElementById("k-key").value=""; renderConnected(); }catch(e){}
+    var d=await res.json(); if(d.providers)PROVIDERS=d.providers;
+    if(d.valid){ document.getElementById("k-key").value=""; renderConnected(); }
+    else { renderConnected({provider:p, error:d.error}); }
+  }catch(e){ document.getElementById("k-connected").innerHTML='<span style="color:var(--bad)">connection failed</span>'; }
 }
 async function signOut(){ try{await fetch("/logout",{method:"POST"});}catch(e){} location.href="/"; }
 

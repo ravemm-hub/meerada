@@ -187,6 +187,34 @@ def _caller_for_user(keystore: KeyStore, user: str) -> CallerFor:
     return caller
 
 
+# A cheap model per provider used only to test that a pasted key actually works.
+_VALIDATE_MODEL: dict[str, str] = {
+    "openai": "gpt-4o-mini",
+    "groq": "openai/gpt-oss-20b",
+    "deepseek": "deepseek-chat",
+    "mistral": "mistral-small-latest",
+    "openrouter": "openai/gpt-4o-mini",
+    "together": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+}
+
+
+def _validate_key(provider: str, key: str) -> tuple[bool, str]:
+    """Make one tiny call so a wrong/mis-pasted key is caught at connect time."""
+    from handover.replay.openai_client import ENDPOINTS, HttpChatCaller
+
+    if not key:
+        return False, "empty key"
+    if provider not in ENDPOINTS:
+        return False, f"unknown provider {provider!r}"
+    try:
+        caller = HttpChatCaller(ENDPOINTS[provider], key)
+        ping = [{"role": "user", "content": "ping"}]
+        caller.complete(_VALIDATE_MODEL.get(provider, ""), "", ping, 5)
+    except Exception as exc:
+        return False, f"{type(exc).__name__}: {str(exc)[:100]}"
+    return True, ""
+
+
 def build_app(
     caller_for: CallerFor | None = None,
     *,
@@ -341,8 +369,18 @@ def build_app(
         if user is None:
             return JSONResponse({"error": "sign in required"}, status_code=401)
         body = await request.json()
-        keystore.set(str(user["sub"]), str(body.get("provider", "")), str(body.get("key", "")))
-        return JSONResponse({"ok": True, "providers": keystore.providers(str(user["sub"]))})
+        sub = str(user["sub"])
+        provider = str(body.get("provider", "")).strip()
+        key = str(body.get("key", "")).strip()
+        valid, error = _validate_key(provider, key)
+        if valid:
+            keystore.set(sub, provider, key)
+        else:
+            keystore.clear(sub, provider)  # drop a stale/wrong key so it self-heals
+        return JSONResponse(
+            {"ok": valid, "valid": valid, "provider": provider, "error": error,
+             "providers": keystore.providers(sub)}
+        )
 
     @app.post("/optimize")
     async def optimize_endpoint(request: Request) -> JSONResponse:
