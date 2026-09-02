@@ -77,7 +77,9 @@ def run(port: int | None = None) -> None:
     _ensure_local_vault()
     port = port or _free_port()
     app = build_app()  # reads MEERADA_LOCAL_VAULT + KEYVAULT_* from the environment
-    config = uvicorn.Config(app, host="127.0.0.1", port=port, log_level="warning")
+    # log_config=None: a --windowed build has no console, so sys.stdout is None and
+    # uvicorn's default colour formatter crashes on stdout.isatty(). Skip it.
+    config = uvicorn.Config(app, host="127.0.0.1", port=port, log_level="warning", log_config=None)
     server = uvicorn.Server(config)
     threading.Thread(target=server.run, daemon=True).start()
 
