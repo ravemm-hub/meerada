@@ -30,6 +30,18 @@ FREE_MODELS: list[str] = [
     "qwen/qwen3.8-27b",
 ]
 
+# The desktop / bring-your-keys picker: real ids per provider so the routing is
+# obvious (gpt-4o* -> OpenAI, groq/qwen -> Groq, deepseek-chat -> DeepSeek). The
+# 'openai/gpt-oss-*' ids are Groq-hosted despite the prefix, so they're not the
+# default here — that was a confusing trap for OpenAI users.
+DESKTOP_MODELS: list[str] = [
+    "gpt-4o-mini",
+    "gpt-4o",
+    "deepseek-chat",
+    "openai/gpt-oss-120b",
+    "qwen/qwen3.8-27b",
+]
+
 CallerFor = Callable[[str], ChatCaller]
 
 
@@ -296,7 +308,9 @@ def build_app(
     @app.get("/models")
     def models() -> JSONResponse:
         live = caller_for is not None or hosted or local_vault
-        return JSONResponse({"models": FREE_MODELS, "live": live})
+        # bring-your-keys desktop shows real per-provider ids; hosted tester = Groq.
+        picker = DESKTOP_MODELS if local_vault else FREE_MODELS
+        return JSONResponse({"models": picker, "live": live})
 
     @app.get("/me")
     def me(request: Request) -> JSONResponse:
