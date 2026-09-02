@@ -42,6 +42,26 @@ DESKTOP_MODELS: list[str] = [
     "qwen/qwen3.8-27b",
 ]
 
+# Friendly catalog: {id (sent to the API), label (shown), provider (which key it
+# needs)}. The picker only offers models whose provider key is connected, so a
+# user can never pick a model that 401s on a missing/wrong key.
+MODEL_CATALOG: list[dict[str, str]] = [
+    {"id": "gpt-4o-mini", "label": "GPT-4o mini · OpenAI", "provider": "openai"},
+    {"id": "gpt-4o", "label": "GPT-4o · OpenAI", "provider": "openai"},
+    {"id": "o3-mini", "label": "o3-mini · OpenAI", "provider": "openai"},
+    {"id": "deepseek-chat", "label": "DeepSeek Chat · DeepSeek", "provider": "deepseek"},
+    {"id": "deepseek-reasoner", "label": "DeepSeek Reasoner · DeepSeek", "provider": "deepseek"},
+    {"id": "mistral-large-latest", "label": "Mistral Large · Mistral", "provider": "mistral"},
+    {"id": "anthropic/claude-3.7-sonnet", "label": "Claude 3.7 · OpenRouter",
+     "provider": "openrouter"},
+    {"id": "anthropic/claude-3.5-sonnet", "label": "Claude 3.5 · OpenRouter",
+     "provider": "openrouter"},
+    {"id": "google/gemini-2.5-pro", "label": "Gemini 2.5 · OpenRouter", "provider": "openrouter"},
+    {"id": "openai/gpt-oss-120b", "label": "GPT-OSS 120B · Groq (free)", "provider": "groq"},
+    {"id": "openai/gpt-oss-20b", "label": "GPT-OSS 20B · Groq (free)", "provider": "groq"},
+    {"id": "qwen/qwen3.8-27b", "label": "Qwen3 · Groq (free)", "provider": "groq"},
+]
+
 CallerFor = Callable[[str], ChatCaller]
 
 
@@ -306,11 +326,14 @@ def build_app(
         return _COCKPIT.read_text(encoding="utf-8")
 
     @app.get("/models")
-    def models() -> JSONResponse:
+    def models(request: Request) -> JSONResponse:
         live = caller_for is not None or hosted or local_vault
-        # bring-your-keys desktop shows real per-provider ids; hosted tester = Groq.
-        picker = DESKTOP_MODELS if local_vault else FREE_MODELS
-        return JSONResponse({"models": picker, "live": live})
+        if hosted or local_vault:
+            user = current_user(request)
+            connected = keystore.providers(str(user["sub"])) if user else []
+        else:
+            connected = ["groq"] if caller_for is not None else []  # shared tester key
+        return JSONResponse({"catalog": MODEL_CATALOG, "connected": connected, "live": live})
 
     @app.get("/me")
     def me(request: Request) -> JSONResponse:

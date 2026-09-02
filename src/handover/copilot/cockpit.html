@@ -81,7 +81,6 @@
 
 <div class="toolbar">
   <button class="btn primary" onclick="addSession()">+ New session</button>
-  <input id="newmodel" placeholder="add a model id to the picker (e.g. gpt-oss-20b)" onchange="addModel(this)">
   <span style="flex:1"></span>
   <textarea id="bcast" rows="1" placeholder="broadcast one task to every session…  (Enter to send · Shift+Enter = newline)"></textarea>
   <button class="btn" onclick="broadcast()">Send to all →</button>
@@ -134,14 +133,18 @@
 </div>
 
 <script>
-var MODELS=[], live=false, SES=[], seq=0, structDirty=true;
+var CATALOG=[], CONNECTED=[], live=false, SES=[], seq=0, structDirty=true;
 function h(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
 function esc(s){return String(s).replace(/'/g,"\\'");}
 
-function addModel(inp){ var m=inp.value.trim(); if(m&&MODELS.indexOf(m)<0){MODELS.push(m);} inp.value=""; structDirty=true; renderGrid(); }
+// only models whose provider key is connected — you can never pick one that 401s
+function runnable(){ return CATALOG.filter(function(m){ return CONNECTED.indexOf(m.provider)>=0; }); }
+function labelFor(id){ for(var i=0;i<CATALOG.length;i++){ if(CATALOG[i].id==id)return CATALOG[i].label; } return id; }
+function defaultModel(){ var r=runnable(); return r.length?r[0].id:""; }
+
 function addSession(model){
   seq++; var id="s"+seq;
-  SES.push({id:id, model:model||MODELS[0]||"claude", convo:[], pending:false, stats:{turns:0,tokens:0,cost:0}, saves:[], accepted:0});
+  SES.push({id:id, model:model||defaultModel(), convo:[], pending:false, stats:{turns:0,tokens:0,cost:0}, saves:[], accepted:0});
   structDirty=true; renderGrid(); updateLedger();
   setTimeout(function(){ var el=document.getElementById("in-"+id); if(el)el.focus(); },30);
 }
@@ -150,8 +153,11 @@ function closeSession(id){ if(SOLO){ window.close(); return; } try{fetch("/sessi
 function setModel(id,m){ var s=find(id); if(s){ s.model=m; } } // next send re-homes the server session
 function find(id){ return SES.filter(function(s){return s.id==id;})[0]; }
 
-function opts(sel){ var list=MODELS.slice(); if(list.indexOf(sel)<0)list.unshift(sel);
-  return list.map(function(m){return '<option'+(m==sel?' selected':'')+'>'+h(m)+'</option>';}).join(""); }
+function opts(sel){
+  var list=runnable().slice();
+  if(sel && !list.some(function(m){return m.id==sel;})) list.unshift({id:sel,label:sel});
+  return list.map(function(m){return '<option value="'+h(m.id)+'"'+(m.id==sel?' selected':'')+'>'+h(m.label)+'</option>';}).join("");
+}
 function threadHtml(s){
   if(!s.convo.length) return '<div style="margin:auto;color:var(--muted);font-size:.8rem">no task yet</div>';
   return s.convo.map(function(t,idx){
@@ -171,7 +177,14 @@ function statHtml(s){ return s.pending?'<span class="pstat run"><span class="spi
 
 function renderGrid(){
   var g=document.getElementById("grid");
-  if(!SES.length){ g.innerHTML='<div class="empty">Add a session, pick its model, and give it a task. Add more for other models — they all run in parallel.</div>'; return; }
+  if(!SES.length){
+    if(VAULT && !runnable().length){
+      g.innerHTML='<div class="empty">🔑 Connect a key to start.<br><br>Click <b>🔑 Keys</b> (top right) and paste an <b>OpenAI</b>, <b>Groq</b> (free), <b>DeepSeek</b>, <b>Mistral</b> or <b>OpenRouter</b> (→ Claude/Gemini) key.<br><br><button class="btn primary" onclick="showKeys()">🔑 Connect a key</button></div>';
+    } else {
+      g.innerHTML='<div class="empty">Click <b>+ New session</b>, pick a model, and give it a task. Add more for other models — they run in parallel.</div>';
+    }
+    return;
+  }
   if(structDirty){
     g.innerHTML=SES.map(function(s){
       return '<div class="pane" id="pane-'+s.id+'">'
@@ -234,9 +247,8 @@ async function soloInit(id, model){
   SOLO=true; document.body.classList.add("solo");
   var tb=document.querySelector(".toolbar"); if(tb)tb.style.display="none";
   document.getElementById("hint").innerHTML="Popped-out session — the same live conversation as the main window.";
-  try{ var r=await fetch("/models"); var d=await r.json(); MODELS=d.models||[]; live=d.live;
-    var mode=document.getElementById("mode"); mode.textContent=live?"LIVE":"PREVIEW"; mode.className="mode "+(live?"live":"preview"); }catch(e){}
-  var s={id:id,model:model||MODELS[0],convo:[],pending:false,stats:{turns:0,tokens:0,cost:0},saves:[],accepted:0}; SES=[s]; structDirty=true;
+  await refreshModels();
+  var s={id:id,model:model||defaultModel(),convo:[],pending:false,stats:{turns:0,tokens:0,cost:0},saves:[],accepted:0}; SES=[s]; structDirty=true;
   try{ var hr=await fetch("/session/history?id="+encodeURIComponent(id)); var turns=(await hr.json()).turns||[];
     for(var i=0;i<turns.length;i+=2){ var u=turns[i],a=turns[i+1]; s.convo.push({you:(u&&u.content)||"", reply:a?{text:a.content,saved_pct:0,output_tokens:0}:undefined}); }
     s.stats.turns=Math.floor(turns.length/2);
@@ -246,12 +258,19 @@ async function soloInit(id, model){
 }
 
 // ---- auth + keys (hosted mode / local vault) ----
-var HOSTED=false, VAULT=false, PROVIDERS=[];
+var HOSTED=false, VAULT=false;
 function showKeys(){ document.getElementById("keys").style.display="flex"; renderConnected(); }
 function renderConnected(err){
-  var html=PROVIDERS.length?('✓ connected: <b>'+PROVIDERS.join(", ")+'</b>'):'no providers connected yet';
+  var html=CONNECTED.length?('✓ connected: <b>'+CONNECTED.join(", ")+'</b>'):'no providers connected yet';
   if(err){ html+='<br><span style="color:var(--bad)">✗ '+err.provider+' rejected — '+(err.error||'check the key')+'</span>'; }
   document.getElementById("k-connected").innerHTML=html;
+}
+async function refreshModels(){
+  try{ var r=await fetch("/models"); var d=await r.json();
+    CATALOG=d.catalog||[]; CONNECTED=d.connected||[]; live=d.live;
+    var mode=document.getElementById("mode");
+    if(mode){ mode.textContent=live?"LIVE · your keys":"PREVIEW"; mode.className="mode "+(live?"live":"preview"); }
+  }catch(e){}
 }
 async function pasteKey(){
   var el=document.getElementById("k-key"); el.focus();
@@ -262,11 +281,12 @@ async function pasteKey(){
 async function connectKey(){
   var p=document.getElementById("k-provider").value, k=document.getElementById("k-key").value.trim();
   if(!k)return;
-  document.getElementById("k-connected").innerHTML='<span class="sub"><span class="spin"></span> checking '+p+' key…</span>';
+  document.getElementById("k-connected").innerHTML='<span class="sub"><span class="spin"></span> checking your '+p+' key…</span>';
   try{ var res=await fetch("/keys",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({provider:p,key:k})});
-    var d=await res.json(); if(d.providers)PROVIDERS=d.providers;
-    if(d.valid){ document.getElementById("k-key").value=""; renderConnected(); }
-    else { renderConnected({provider:p, error:d.error}); }
+    var d=await res.json();
+    if(d.valid){ document.getElementById("k-key").value=""; await refreshModels(); renderConnected();
+      if(!SES.length){ addSession(); addSession(); } else { structDirty=true; renderGrid(); } }
+    else { CONNECTED=d.providers||CONNECTED; renderConnected({provider:p, error:d.error}); }
   }catch(e){ document.getElementById("k-connected").innerHTML='<span style="color:var(--bad)">connection failed</span>'; }
 }
 async function signOut(){ try{await fetch("/logout",{method:"POST"});}catch(e){} location.href="/"; }
@@ -279,24 +299,15 @@ document.addEventListener("keydown",function(e){
 (async function init(){
   var params=new URLSearchParams(location.search);
   if(params.get("solo")){ return soloInit(params.get("solo"), params.get("model")||""); }
-  // who am I? (hosted mode enforces Google sign-in; local mode is open)
   try{
     var meRes=await fetch("/me"); var me=await meRes.json();
-    HOSTED=!!me.auth; VAULT=HOSTED||!!me.local_vault; PROVIDERS=me.providers||[];
+    HOSTED=!!me.auth; VAULT=HOSTED||!!me.local_vault;
     if(HOSTED && !me.user){ document.getElementById("gate").style.display="flex"; return; }
     if(VAULT){ document.getElementById("btn-keys").style.display=""; }
-    if(HOSTED){
-      var wb=document.getElementById("whobox"); wb.style.display=""; wb.textContent=me.user;
-    }
+    if(HOSTED){ var wb=document.getElementById("whobox"); wb.style.display=""; wb.textContent=me.user; }
   }catch(e){}
-  try{
-    var res=await fetch("/models"); var data=await res.json();
-    live=data.live; MODELS=data.models||[];
-    var mode=document.getElementById("mode");
-    mode.textContent=live?"LIVE · your key":"PREVIEW · no key";
-    mode.className="mode "+(live?"live":"preview");
-  }catch(e){ MODELS=["claude","gpt","gemini"]; }
-  addSession(MODELS[0]); if(MODELS[1])addSession(MODELS[1]);
-  if(VAULT && !PROVIDERS.length){ showKeys(); } // first run: prompt to connect a key
+  await refreshModels();
+  if(runnable().length){ addSession(); addSession(); }
+  else { renderGrid(); if(VAULT) showKeys(); }  // no runnable model -> connect a key first
 })();
 </script>
