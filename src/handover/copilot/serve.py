@@ -16,6 +16,7 @@ from fastapi import FastAPI
 from handover.copilot.auth import OAuthConfig
 from handover.copilot.keystore import KeyStore
 from handover.copilot.optimize import optimize
+from handover.copilot.pricing import price_for
 from handover.copilot.session import Session, SessionManager
 from handover.replay.openai_client import ChatCaller
 
@@ -144,7 +145,14 @@ class Board:
             }
         session = self.sessions.get(sid)
         if session is None or session.model_id != model:
-            session = Session(model, self._caller_for(model), max_tokens=self._max_tokens)
+            price_in, price_out = price_for(model)
+            session = Session(
+                model,
+                self._caller_for(model),
+                price_in_per_mtok=price_in,
+                price_out_per_mtok=price_out,
+                max_tokens=self._max_tokens,
+            )
             self.sessions[sid] = session
         reply = session.ask(message)
         return {
@@ -207,6 +215,10 @@ def build_app(
     # walk the full hosted flow locally. It is never enabled in the deploy config.
     dev_login = os.environ.get("MEERADA_DEV_LOGIN", "") == "1" and not google_ok
     hosted = bool(cfg.session_secret)
+    # Local vault (desktop app): a single local user brings their OWN provider keys,
+    # stored encrypted on this machine, routed per model — no sign-in. Enabled for
+    # the desktop launcher / `meerada up --keys`.
+    local_vault = os.environ.get("MEERADA_LOCAL_VAULT", "") == "1" and not hosted
     secure = cfg.redirect_uri.startswith("https")
     if dev_login:
         print("WARNING: MEERADA_DEV_LOGIN on — sign-in bypassed. DEV ONLY, never in prod.")
@@ -243,11 +255,11 @@ def build_app(
         if user is None:
             return None, None
         sub = str(user["sub"])
-        if not hosted:
-            return board["board"], sub
-        if sub not in user_boards:
-            user_boards[sub] = Board(_caller_for_user(keystore, sub))
-        return user_boards[sub], sub
+        if hosted or local_vault:  # per-user (or single local) board from the key vault
+            if sub not in user_boards:
+                user_boards[sub] = Board(_caller_for_user(keystore, sub))
+            return user_boards[sub], sub
+        return board["board"], sub
 
     @app.get("/", response_class=HTMLResponse)
     def index() -> str:
@@ -255,16 +267,23 @@ def build_app(
 
     @app.get("/models")
     def models() -> JSONResponse:
-        return JSONResponse({"models": FREE_MODELS, "live": caller_for is not None or hosted})
+        live = caller_for is not None or hosted or local_vault
+        return JSONResponse({"models": FREE_MODELS, "live": live})
 
     @app.get("/me")
     def me(request: Request) -> JSONResponse:
         user = current_user(request)
         if user is None:
             return JSONResponse({"user": None, "auth": True})
-        providers = keystore.providers(str(user["sub"])) if hosted else []
+        vault = hosted or local_vault
+        providers = keystore.providers(str(user["sub"])) if vault else []
         return JSONResponse(
-            {"user": user.get("email") or user.get("name"), "auth": hosted, "providers": providers}
+            {
+                "user": user.get("email") or user.get("name"),
+                "auth": hosted,
+                "local_vault": local_vault,
+                "providers": providers,
+            }
         )
 
     @app.get("/login")

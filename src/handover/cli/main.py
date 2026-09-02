@@ -222,5 +222,16 @@ def up(
     serve(port=port, provider=provider, open_browser=not no_open)
 
 
+@app.command("app")
+def desktop_app(
+    port: Annotated[int, typer.Option("--port", help="localhost port (0 = auto)")] = 0,
+) -> None:
+    """Open Meerada LLManager as a desktop app — native window, your own keys, local."""
+    from handover.copilot.desktop import run
+
+    typer.echo("Meerada LLManager (desktop) — your keys stay on this machine. Ctrl+C to quit.")
+    run(port=port or None)
+
+
 if __name__ == "__main__":
     app()

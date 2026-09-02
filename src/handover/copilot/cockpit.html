@@ -35,6 +35,8 @@
   .you{align-self:flex-end;background:#16233b;border:1px solid var(--line);border-radius:11px 11px 2px 11px;padding:.4rem .6rem;font-size:.83rem;max-width:90%;}
   .ai{align-self:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:11px 11px 11px 2px;padding:.45rem .65rem;font-size:.84rem;max-width:96%;white-space:pre-wrap;}
   .ai .meta{display:block;margin-top:.35rem;font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--teal);}
+  .acc{margin-left:.5rem;background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:.05rem .5rem;font-size:.58rem;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
+  .acc:hover{border-color:var(--good);color:var(--good);} .acc.on{border-color:#2ea043;color:var(--good);background:#0f2114;cursor:default;}
   .ai.err{border-color:#5a2d2d;} .ai.err .meta{color:var(--bad);}
   .spin{display:inline-block;width:11px;height:11px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite;} @keyframes sp{to{transform:rotate(360deg)}}
   .pfoot{display:flex;gap:.7rem;padding:.25rem .65rem;border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:.62rem;color:var(--muted);} .pfoot b{color:var(--text);}
@@ -69,6 +71,7 @@
     <span><span class="k">sessions</span><b id="l-ses">0</b></span>
     <span><span class="k">tokens</span><b id="l-tok">0</b></span>
     <span><span class="k">spent</span><b id="l-cost">$0</b></span>
+    <span><span class="k">CPAT</span><b id="l-cpat" style="color:var(--good)">—</b></span>
     <span><span class="k">lean</span><b id="l-save" style="color:var(--good)">—</b></span>
     <button class="btn ghost" id="btn-keys" style="display:none" onclick="showKeys()">🔑 Keys</button>
     <span id="whobox" style="display:none;font-size:.75rem;color:var(--muted)"></span>
@@ -137,7 +140,7 @@ function esc(s){return String(s).replace(/'/g,"\\'");}
 function addModel(inp){ var m=inp.value.trim(); if(m&&MODELS.indexOf(m)<0){MODELS.push(m);} inp.value=""; structDirty=true; renderGrid(); }
 function addSession(model){
   seq++; var id="s"+seq;
-  SES.push({id:id, model:model||MODELS[0]||"claude", convo:[], pending:false, stats:{turns:0,tokens:0,cost:0}, saves:[]});
+  SES.push({id:id, model:model||MODELS[0]||"claude", convo:[], pending:false, stats:{turns:0,tokens:0,cost:0}, saves:[], accepted:0});
   structDirty=true; renderGrid(); updateLedger();
   setTimeout(function(){ var el=document.getElementById("in-"+id); if(el)el.focus(); },30);
 }
@@ -150,15 +153,19 @@ function opts(sel){ var list=MODELS.slice(); if(list.indexOf(sel)<0)list.unshift
   return list.map(function(m){return '<option'+(m==sel?' selected':'')+'>'+h(m)+'</option>';}).join(""); }
 function threadHtml(s){
   if(!s.convo.length) return '<div style="margin:auto;color:var(--muted);font-size:.8rem">no task yet</div>';
-  return s.convo.map(function(t){
+  return s.convo.map(function(t,idx){
     var body;
     if(t.reply===undefined){ body='<div class="ai"><span class="spin"></span></div>'; }
     else if(t.reply.error){ body='<div class="ai err">'+h(t.reply.text||"")+'<span class="meta">'+h(t.reply.error)+'</span></div>'; }
-    else { body='<div class="ai">'+h(t.reply.text)+'<span class="meta">−'+t.reply.saved_pct+'% lean · '+(t.reply.output_tokens||0)+' out</span></div>'; }
+    else { body='<div class="ai">'+h(t.reply.text)+'<span class="meta">−'+t.reply.saved_pct+'% lean · '+(t.reply.output_tokens||0)+' out'
+      +'<button class="acc'+(t.accepted?' on':'')+'" onclick="accept(\''+s.id+'\','+idx+')">'+(t.accepted?'✓ accepted':'✓ accept')+'</button></span></div>'; }
     return '<div class="you">'+h(t.you)+'</div>'+body;
   }).join("");
 }
-function footHtml(s){ return 'turns <b>'+s.stats.turns+'</b> · tokens <b>'+(s.stats.tokens||0).toLocaleString()+'</b> · $<b>'+(s.stats.cost||0).toFixed(5)+'</b>'; }
+function accept(id, idx){ var s=find(id); if(!s||!s.convo[idx]||s.convo[idx].accepted)return;
+  s.convo[idx].accepted=true; s.accepted=(s.accepted||0)+1; updatePane(id); updateLedger(); }
+function footHtml(s){ var f='turns <b>'+s.stats.turns+'</b> · tokens <b>'+(s.stats.tokens||0).toLocaleString()+'</b> · $<b>'+(s.stats.cost||0).toFixed(5)+'</b>';
+  if(s.accepted){ f+=' · <span style="color:var(--good)">CPAT <b>$'+((s.stats.cost||0)/s.accepted).toFixed(5)+'</b></span>'; } return f; }
 function statHtml(s){ return s.pending?'<span class="pstat run"><span class="spin"></span> running</span>':(s.convo.length?'<span class="pstat done">idle ✓</span>':'<span class="pstat">idle</span>'); }
 
 function renderGrid(){
@@ -187,11 +194,12 @@ function updatePane(id){
   var ps=document.getElementById("ps-"+id); if(ps)ps.innerHTML=statHtml(s);
 }
 function updateLedger(){
-  var tok=0,cost=0,saves=[];
-  SES.forEach(function(s){ tok+=s.stats.tokens||0; cost+=s.stats.cost||0; saves=saves.concat(s.saves); });
+  var tok=0,cost=0,acc=0,saves=[];
+  SES.forEach(function(s){ tok+=s.stats.tokens||0; cost+=s.stats.cost||0; acc+=s.accepted||0; saves=saves.concat(s.saves); });
   document.getElementById("l-ses").textContent=SES.length;
   document.getElementById("l-tok").textContent=tok.toLocaleString();
   document.getElementById("l-cost").textContent="$"+cost.toFixed(4);
+  document.getElementById("l-cpat").textContent=acc?("$"+(cost/acc).toFixed(5)):"—";
   document.getElementById("l-save").textContent=saves.length?("−"+Math.round(saves.reduce(function(a,b){return a+b;},0)/saves.length)+"%"):"—";
 }
 
@@ -227,7 +235,7 @@ async function soloInit(id, model){
   document.getElementById("hint").innerHTML="Popped-out session — the same live conversation as the main window.";
   try{ var r=await fetch("/models"); var d=await r.json(); MODELS=d.models||[]; live=d.live;
     var mode=document.getElementById("mode"); mode.textContent=live?"LIVE":"PREVIEW"; mode.className="mode "+(live?"live":"preview"); }catch(e){}
-  var s={id:id,model:model||MODELS[0],convo:[],pending:false,stats:{turns:0,tokens:0,cost:0},saves:[]}; SES=[s]; structDirty=true;
+  var s={id:id,model:model||MODELS[0],convo:[],pending:false,stats:{turns:0,tokens:0,cost:0},saves:[],accepted:0}; SES=[s]; structDirty=true;
   try{ var hr=await fetch("/session/history?id="+encodeURIComponent(id)); var turns=(await hr.json()).turns||[];
     for(var i=0;i<turns.length;i+=2){ var u=turns[i],a=turns[i+1]; s.convo.push({you:(u&&u.content)||"", reply:a?{text:a.content,saved_pct:0,output_tokens:0}:undefined}); }
     s.stats.turns=Math.floor(turns.length/2);
@@ -236,8 +244,8 @@ async function soloInit(id, model){
   setTimeout(function(){ var el=document.getElementById("in-"+id); if(el)el.focus(); },40);
 }
 
-// ---- auth + keys (hosted mode) ----
-var HOSTED=false, PROVIDERS=[];
+// ---- auth + keys (hosted mode / local vault) ----
+var HOSTED=false, VAULT=false, PROVIDERS=[];
 function showKeys(){ document.getElementById("keys").style.display="flex"; renderConnected(); }
 function renderConnected(){ document.getElementById("k-connected").innerHTML=PROVIDERS.length?("connected: "+PROVIDERS.join(", ")):"no providers connected yet"; }
 async function connectKey(){
@@ -259,10 +267,10 @@ document.addEventListener("keydown",function(e){
   // who am I? (hosted mode enforces Google sign-in; local mode is open)
   try{
     var meRes=await fetch("/me"); var me=await meRes.json();
-    HOSTED=!!me.auth; PROVIDERS=me.providers||[];
+    HOSTED=!!me.auth; VAULT=HOSTED||!!me.local_vault; PROVIDERS=me.providers||[];
     if(HOSTED && !me.user){ document.getElementById("gate").style.display="flex"; return; }
+    if(VAULT){ document.getElementById("btn-keys").style.display=""; }
     if(HOSTED){
-      document.getElementById("btn-keys").style.display="";
       var wb=document.getElementById("whobox"); wb.style.display=""; wb.textContent=me.user;
     }
   }catch(e){}
@@ -274,6 +282,6 @@ document.addEventListener("keydown",function(e){
     mode.className="mode "+(live?"live":"preview");
   }catch(e){ MODELS=["claude","gpt","gemini"]; }
   addSession(MODELS[0]); if(MODELS[1])addSession(MODELS[1]);
-  if(HOSTED && !PROVIDERS.length){ showKeys(); } // first run: prompt to connect a key
+  if(VAULT && !PROVIDERS.length){ showKeys(); } // first run: prompt to connect a key
 })();
 </script>

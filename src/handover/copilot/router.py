@@ -22,9 +22,26 @@ class Candidate(BaseModel):
     free: bool
 
 
+# Ids Groq serves under vendor-prefixed names (they need the Groq key, not the vendor's).
+_GROQ_HINTS = ("gpt-oss", "compound", "allam", "qwen", "gemma", "llama-3", "mixtral-8x7b", "kimi")
+
+
 def _provider_of(model_id: str) -> str:
+    """Map a model id to the provider whose key serves it (OpenAI-compatible)."""
     low = model_id.lower()
-    return low.split("/", 1)[0] if "/" in low else "groq"
+    if any(hint in low for hint in _GROQ_HINTS):
+        return "groq"
+    if low.startswith(("claude", "anthropic/", "google/", "gemini")):
+        return "openrouter"  # reached via an OpenRouter key (OpenAI-compatible)
+    if low.startswith(("gpt-4", "gpt-5", "o1", "o3", "o4", "chatgpt")):
+        return "openai"
+    if low.startswith("deepseek"):
+        return "deepseek"
+    if low.startswith(("mistral", "mixtral", "codestral")):
+        return "mistral"
+    if "/" in low:
+        return low.split("/", 1)[0]
+    return "groq"
 
 
 def pick(

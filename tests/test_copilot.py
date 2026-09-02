@@ -130,6 +130,22 @@ def test_pick_respects_min_grade_and_empty() -> None:
     assert pick([]) is None
 
 
+def test_pricing_and_provider_routing() -> None:
+    from handover.copilot.pricing import price_for
+    from handover.copilot.router import _provider_of
+
+    assert price_for("openai/gpt-oss-120b") == (Decimal("0"), Decimal("0"))  # groq free
+    assert price_for("gpt-4o-mini") == (Decimal("0.15"), Decimal("0.6"))
+    assert price_for("claude-sonnet-4") == (Decimal("3"), Decimal("15"))
+    assert price_for("totally-unknown-xyz") == (Decimal("0"), Decimal("0"))
+    # groq serves vendor-prefixed ids under the groq key
+    assert _provider_of("openai/gpt-oss-20b") == "groq"
+    assert _provider_of("qwen/qwen3.8-27b") == "groq"
+    assert _provider_of("gpt-4o") == "openai"
+    assert _provider_of("claude-3.5-sonnet") == "openrouter"
+    assert _provider_of("deepseek-chat") == "deepseek"
+
+
 def test_load_candidates_parses_state(tmp_path: Path) -> None:
     state = tmp_path / "grade_state.json"
     state.write_text(
