@@ -68,6 +68,13 @@
   .pb-tag{font-family:"IBM Plex Mono",monospace;font-size:.56rem;color:var(--amber);border:1px solid #9e6a03;border-radius:999px;padding:.05rem .4rem;}
   .mpill{font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--good);border:1px solid #2ea043;background:#0f2114;border-radius:999px;padding:.12rem .5rem;vertical-align:middle;}
   .ipill{font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--amber);border:1px solid #9e6a03;background:#211c0e;border-radius:999px;padding:.12rem .5rem;vertical-align:middle;}
+  .ox-controls{display:flex;gap:1.2rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:1rem;}
+  .ox-controls label{display:flex;flex-direction:column;gap:.3rem;font-size:.74rem;color:var(--muted);}
+  .ox-controls select,.ox-controls input{background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem .6rem;font-family:inherit;font-size:.85rem;}
+  .ox-controls input[type=range]{padding:0;width:180px;accent-color:var(--teal);}
+  .ox-clear{display:flex;gap:1.8rem;flex-wrap:wrap;align-items:center;background:var(--panel2);border:1px solid #2ea043;border-radius:12px;padding:1rem 1.2rem;}
+  .ox-clear .big{font-family:"Archivo";font-weight:900;font-size:1.7rem;display:block;} .ox-clear .win{color:var(--teal);} .ox-clear .price{color:var(--good);}
+  .ox-clear .lab{color:var(--muted);font-size:.62rem;text-transform:uppercase;letter-spacing:.05em;display:block;}
   svg.spark { vertical-align:middle; } .caret{color:var(--muted);font-size:.65rem}
 
   /* clear, graphic measuring panel */
@@ -245,6 +252,32 @@
         <div class="feed" id="feed"></div>
       </div>
     </div>
+  </div>
+
+  <!-- ===== OUTCOME EXCHANGE ===== -->
+  <h2>💱 Outcome Exchange — buy a done task, not tokens</h2>
+  <div class="h2sub">This is what makes the arena a real market. Post the job and the quality bar; the exchange routes to the <b>cheapest model that clears it</b>. The price is the live <b class="teal">CPAT</b> — cost per verified task. As grades move, the clearing price moves. <span class="ipill">prototype</span></div>
+  <div class="card">
+    <div class="ox-controls">
+      <label>Task type<select id="ox-cat" onchange="oxCompute()">
+        <option value="extraction">Structured extraction</option>
+        <option value="classification">Classification / routing</option>
+        <option value="code">Code generation</option>
+        <option value="sql">Text-to-SQL</option>
+        <option value="reasoning">Multi-step reasoning</option>
+        <option value="summary">Faithful summary</option>
+      </select></label>
+      <label>Quality bar (min grade) <b id="ox-barval" class="teal">75</b>
+        <input type="range" id="ox-bar" min="60" max="92" value="75" oninput="document.getElementById('ox-barval').textContent=this.value;oxCompute()"></label>
+      <label>Volume <span class="sub">(verified tasks / month)</span>
+        <input type="number" id="ox-vol" value="100000" min="1000" step="1000" oninput="oxCompute()"></label>
+    </div>
+    <div class="ox-clear" id="ox-clear"></div>
+    <div style="font-weight:600;margin:1rem 0 .3rem">📖 Order book — models that clear the bar, by price</div>
+    <div class="scroll"><table class="board" style="min-width:520px"><thead><tr>
+      <th class="l">#</th><th class="l">Model</th><th>Grade (this task)</th><th>CPAT</th><th>Monthly at your volume</th>
+    </tr></thead><tbody id="ox-book"></tbody></table></div>
+    <div class="legend">The clearing price is the lowest CPAT among models over your bar. Only <b>we</b> can run this market — because pricing a "done task" needs verified measurement, which is exactly the grade. A production venue locks that price for prepaid capacity (futures) and takes the routing spread as margin.</div>
   </div>
 
   <!-- ===== TEST BATTERY ===== -->
@@ -513,7 +546,7 @@ function runOneTest(){
     document.getElementById("mz-result").innerHTML=(pass?'<span class="ok">✅ PASS</span>':'<span class="noo">❌ FAIL</span>')+' → grade '+x.grade.toFixed(1)+' '+dTxt(x.delta);
     feedItems.unshift('<div class="f"><span class="tt">'+new Date().toISOString().slice(11,19)+'</span><span class="mn">'+x.m+'</span><span class="'+(pass?"ok":"noo")+'">'+(pass?"pass":"fail")+'</span></div>');
     if(feedItems.length>30)feedItems.pop(); document.getElementById("feed").innerHTML=feedItems.join("");
-    render(); stats(); ticker(); setTimeout(function(){ x._flash=null; render(); },800);
+    render(); stats(); ticker(); oxCompute(); setTimeout(function(){ x._flash=null; render(); },800);
   }, 2400);
 }
 function toggleLive(){ liveOn=!liveOn; var b=document.getElementById("btn-live"); b.textContent=liveOn?"⏸ pause":"▶ resume"; b.className=liveOn?"on":""; }
@@ -606,6 +639,27 @@ function loadMeasured(){
   }).catch(function(){ /* local file / not deployed yet — leave hidden */ });
 }
 
+// ---- Outcome Exchange: buy a verified done-task; clearing price = live CPAT ----
+function oxCatGrade(m, cat){
+  var s=m.m+"|"+cat, hsum=0; for(var i=0;i<s.length;i++){ hsum=(hsum*31+s.charCodeAt(i))%100000; }
+  return Math.max(40,Math.min(99, +(m.q + (hsum%13 - 6)).toFixed(0)));  // ±6 per task type
+}
+function oxCompute(){
+  var cat=document.getElementById("ox-cat").value, bar=+document.getElementById("ox-bar").value, vol=Math.max(0,+document.getElementById("ox-vol").value||0);
+  var cands=MODELS.filter(function(m){return m.cpat!=null;}).map(function(m){ return {m:m.m, g:oxCatGrade(m,cat), cpat:m.cpat}; })
+    .filter(function(c){return c.g>=bar;}).sort(function(a,b){return a.cpat-b.cpat;});
+  var clear=document.getElementById("ox-clear"), book=document.getElementById("ox-book");
+  if(!cands.length){ clear.innerHTML='<div class="sub">No model clears grade '+bar+' for this task — lower the bar.</div>'; book.innerHTML=""; return; }
+  var win=cands[0], monthly=win.cpat*vol;
+  clear.innerHTML='<div><span class="lab">Winning model</span><span class="big win">'+win.m+'</span></div>'
+    +'<div><span class="lab">Clearing price · CPAT</span><span class="big price">$'+win.cpat.toFixed(4)+'</span></div>'
+    +'<div><span class="lab">Your monthly cost</span><span class="big price">$'+Math.round(monthly).toLocaleString()+'</span></div>'
+    +'<div><span class="lab">grade on this task</span><span class="big">'+win.g+'</span></div>';
+  book.innerHTML=cands.slice(0,8).map(function(c,i){
+    return '<tr'+(i==0?' style="background:rgba(88,192,122,.09)"':'')+'><td class="l">'+(i+1)+'</td><td class="l"><span class="mid">'+c.m+'</span>'+(i==0?' <span class="mpill">WINS</span>':'')+'</td><td>'+c.g+'</td><td>$'+c.cpat.toFixed(4)+'</td><td>$'+Math.round(c.cpat*vol).toLocaleString()+'</td></tr>';
+  }).join("");
+}
+
 // ---- Session Console (parallel sessions, simulated) ----
 var SC_STAGES=["translating…","sending lean prompt…","model working…","verifying…","done ✓"];
 function scRun(){
@@ -652,7 +706,7 @@ function hsRender(){
   document.getElementById("hs-from").value="gpt-5.6-terra"; document.getElementById("hs-to").value="deepseek-v4-flash";
   document.getElementById("hs-from").onchange=hsRender; document.getElementById("hs-to").onchange=hsRender;
   document.getElementById("legend").innerHTML=legendHtml();
-  render(); stats(); ticker(); clock(); hsRender(); analyzeWorkload(); scRun(); renderBattery(); loadMeasured();
+  render(); stats(); ticker(); clock(); hsRender(); analyzeWorkload(); scRun(); renderBattery(); loadMeasured(); oxCompute();
   setInterval(clock,1000);
   if(!window.matchMedia("(prefers-reduced-motion:reduce)").matches){ setInterval(runOneTest,4200); runOneTest(); }
 })();
