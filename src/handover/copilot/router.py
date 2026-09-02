@@ -31,8 +31,10 @@ def _provider_of(model_id: str) -> str:
     low = model_id.lower()
     if any(hint in low for hint in _GROQ_HINTS):
         return "groq"
-    if low.startswith(("claude", "anthropic/", "google/", "gemini")):
-        return "openrouter"  # reached via an OpenRouter key (OpenAI-compatible)
+    if low.startswith("claude"):
+        return "anthropic"  # native Anthropic id (claude-3-7-sonnet-latest, …)
+    if low.startswith(("anthropic/", "google/", "gemini")):
+        return "openrouter"  # vendor-prefixed ids reached via an OpenRouter key
     if low.startswith(("gpt-4", "gpt-5", "o1", "o3", "o4", "chatgpt")):
         return "openai"
     if low.startswith("deepseek"):

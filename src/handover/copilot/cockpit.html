@@ -94,7 +94,7 @@
 </div>
 
 <div class="grid" id="grid"><div class="empty">Add a session, pick its model, and give it a task. Add more for other models — they all run in parallel.</div></div>
-<div class="hint" id="hint">Every session is independent — different models, different tasks, all live at once. <b>Tip:</b> hit <b>⧉</b> on any session to pop it into its own window. These are small free models; connect your own <b>Claude / GPT</b> key (Keys panel, hosted mode) for flagship quality. Your prompts never leave your machine.</div>
+<div class="hint" id="hint">Every session is independent — different models, different tasks, all live at once. <b>Tip:</b> hit <b>⧉</b> to pop any session into its own window. <b>You run on your own tokens</b> — connect a key per provider in <b>🔑 Keys</b> (Anthropic for Claude, OpenAI for GPT, or OpenRouter for both); each call is billed to your account there. Keys and prompts never leave your machine.</div>
 
 <!-- sign-in gate (hosted mode only) -->
 <div id="gate" style="display:none;position:fixed;inset:0;background:rgba(11,16,32,.94);z-index:60;align-items:center;justify-content:center;">
@@ -118,14 +118,15 @@
 <div id="keys" style="display:none;position:fixed;inset:0;background:rgba(11,16,32,.9);z-index:60;align-items:center;justify-content:center;">
   <div style="background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.5rem;max-width:440px;width:92%;">
     <h3 style="font-family:Archivo;margin:0 0 .3rem">Connect your model keys</h3>
-    <p style="color:var(--muted);font-size:.82rem;margin:.2rem 0 1rem">Your keys stay on the server, per-account, never shown back. Add a provider you have a key for.</p>
+    <p style="color:var(--muted);font-size:.82rem;margin:.2rem 0 1rem"><b>You run on your own tokens.</b> Meerada never sells you model access — you paste your own key for each provider you want, and every call is billed to <b>your</b> account with that provider. Keys stay on your machine and are never shown back.</p>
     <div style="display:flex;gap:.5rem;margin-bottom:.6rem">
       <select id="k-provider" style="background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.5rem">
-        <option value="groq">Groq (free tier)</option>
-        <option value="openai">OpenAI</option>
+        <option value="anthropic">Anthropic (Claude)</option>
+        <option value="openai">OpenAI (GPT / o-series)</option>
+        <option value="openrouter">OpenRouter (Claude/Gemini/…)</option>
         <option value="deepseek">DeepSeek</option>
         <option value="mistral">Mistral</option>
-        <option value="openrouter">OpenRouter</option>
+        <option value="groq">Groq (free tier)</option>
       </select>
       <input id="k-key" type="password" placeholder="paste (Ctrl+V) or click 📋" style="flex:1;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.5rem">
       <button class="btn" title="Paste from clipboard" onclick="pasteKey()">📋</button>

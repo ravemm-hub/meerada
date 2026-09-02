@@ -142,7 +142,8 @@ def test_pricing_and_provider_routing() -> None:
     assert _provider_of("openai/gpt-oss-20b") == "groq"
     assert _provider_of("qwen/qwen3.8-27b") == "groq"
     assert _provider_of("gpt-4o") == "openai"
-    assert _provider_of("claude-3.5-sonnet") == "openrouter"
+    assert _provider_of("claude-3-5-sonnet-latest") == "anthropic"  # native
+    assert _provider_of("anthropic/claude-3.5-sonnet") == "openrouter"  # via OpenRouter
     assert _provider_of("deepseek-chat") == "deepseek"
 
 

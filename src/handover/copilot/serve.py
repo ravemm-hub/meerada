@@ -47,6 +47,12 @@ DESKTOP_MODELS: list[str] = [
 # user can never pick a model that 401s on a missing/wrong key.
 MODEL_CATALOG: list[dict[str, str]] = [
     # Strong models first, so the default session lands on a capable one.
+    {"id": "claude-3-7-sonnet-latest", "label": "Claude 3.7 Sonnet · Anthropic (top code)",
+     "provider": "anthropic"},
+    {"id": "claude-3-5-sonnet-latest", "label": "Claude 3.5 Sonnet · Anthropic",
+     "provider": "anthropic"},
+    {"id": "claude-3-5-haiku-latest", "label": "Claude 3.5 Haiku · Anthropic (fast)",
+     "provider": "anthropic"},
     {"id": "gpt-4o", "label": "GPT-4o · OpenAI (strong)", "provider": "openai"},
     {"id": "o3", "label": "o3 · OpenAI (reasoning)", "provider": "openai"},
     {"id": "o3-mini", "label": "o3-mini · OpenAI (reasoning)", "provider": "openai"},
@@ -212,15 +218,15 @@ class Board:
 
 def _caller_for_user(keystore: KeyStore, user: str) -> CallerFor:
     """Build model callers from the signed-in user's own stored provider keys."""
+    from handover.copilot.providers import build_caller
     from handover.copilot.router import _provider_of
-    from handover.replay.openai_client import ENDPOINTS, HttpChatCaller
 
     def caller(model_id: str) -> ChatCaller:
         provider = _provider_of(model_id)
         key = keystore.get(user, provider)
-        if not key or provider not in ENDPOINTS:
+        if not key:
             raise RuntimeError(f"no key connected for {provider} — add it under Keys")
-        return HttpChatCaller(ENDPOINTS[provider], key)
+        return build_caller(provider, key)
 
     return caller
 
@@ -233,19 +239,18 @@ _VALIDATE_MODEL: dict[str, str] = {
     "mistral": "mistral-small-latest",
     "openrouter": "openai/gpt-4o-mini",
     "together": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
+    "anthropic": "claude-3-5-haiku-latest",
 }
 
 
 def _validate_key(provider: str, key: str) -> tuple[bool, str]:
     """Make one tiny call so a wrong/mis-pasted key is caught at connect time."""
-    from handover.replay.openai_client import ENDPOINTS, HttpChatCaller
+    from handover.copilot.providers import build_caller
 
     if not key:
         return False, "empty key"
-    if provider not in ENDPOINTS:
-        return False, f"unknown provider {provider!r}"
     try:
-        caller = HttpChatCaller(ENDPOINTS[provider], key)
+        caller = build_caller(provider, key)
         ping = [{"role": "user", "content": "ping"}]
         caller.complete(_VALIDATE_MODEL.get(provider, ""), "", ping, 5)
     except Exception as exc:
