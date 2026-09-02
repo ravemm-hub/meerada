@@ -38,6 +38,36 @@ def _ensure_local_vault() -> None:
     os.environ.setdefault("KEYVAULT_SECRET", secret_file.read_text(encoding="utf-8").strip())
 
 
+def _wait_for_server(url: str, timeout: float = 30.0) -> bool:
+    """Block until the local server answers, so the window never loads a blank
+    page from a not-yet-listening server (the classic race)."""
+    import time
+    import urllib.error
+    import urllib.request
+
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        try:
+            with urllib.request.urlopen(url + "/me", timeout=1):
+                return True
+        except (urllib.error.URLError, OSError):
+            time.sleep(0.25)
+    return False
+
+
+def _open_browser_and_block(url: str) -> None:
+    import time
+    import webbrowser
+
+    print(f"Opening Meerada LLManager in your browser: {url}")
+    webbrowser.open(url)
+    try:
+        while True:
+            time.sleep(3600)
+    except KeyboardInterrupt:
+        return
+
+
 def run(port: int | None = None) -> None:
     """Start the local server and open the native window (or the browser)."""
     import uvicorn
@@ -52,20 +82,19 @@ def run(port: int | None = None) -> None:
     threading.Thread(target=server.run, daemon=True).start()
 
     url = f"http://127.0.0.1:{port}"
+    _wait_for_server(url)  # never open the window before the server is live
+
     try:
         import webview  # pywebview
     except ImportError:
-        import time
-        import webbrowser
+        _open_browser_and_block(url)
+        return
 
-        print(f"Opening Meerada LLManager in your browser: {url}")
-        print("For the native desktop window: pip install '.[desktop]'")
-        webbrowser.open(url)
-        try:
-            while True:
-                time.sleep(3600)
-        except KeyboardInterrupt:
-            return
-    else:
-        webview.create_window("Meerada LLManager", url, width=1240, height=840, min_size=(900, 600))
+    try:
+        webview.create_window(
+            "Meerada LLManager", url, width=1240, height=840, min_size=(900, 600)
+        )
         webview.start()
+    except Exception as exc:  # no WebView2 / GUI backend -> fall back to the browser
+        print(f"native window unavailable ({type(exc).__name__}): {exc} — using the browser")
+        _open_browser_and_block(url)
