@@ -37,6 +37,13 @@
   .ai .meta{display:block;margin-top:.35rem;font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--teal);}
   .acc{margin-left:.5rem;background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:.05rem .5rem;font-size:.58rem;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
   .acc:hover{border-color:var(--good);color:var(--good);} .acc.on{border-color:#2ea043;color:var(--good);background:#0f2114;cursor:default;}
+  .code{position:relative;margin:.4rem 0;}
+  .code pre{background:#0a0f1c;border:1px solid var(--line);border-radius:8px;padding:.6rem .7rem;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:.76rem;white-space:pre;margin:0;}
+  .codecopy{margin-left:.4rem;background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:.02rem .45rem;font-size:.58rem;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
+  .code .codecopy{position:absolute;top:.35rem;right:.35rem;margin:0;background:var(--panel);}
+  .codecopy:hover{border-color:var(--teal);color:var(--teal);}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:.58rem;border-radius:999px;padding:.02rem .45rem;margin-right:.35rem;border:1px solid;}
+  .tag.fast{color:var(--teal);border-color:var(--teal);} .tag.cheap{color:var(--good);border-color:#2ea043;}
   .ai.err{border-color:#5a2d2d;} .ai.err .meta{color:var(--bad);}
   .spin{display:inline-block;width:11px;height:11px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite;} @keyframes sp{to{transform:rotate(360deg)}}
   .pfoot{display:flex;gap:.7rem;padding:.25rem .65rem;border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:.62rem;color:var(--muted);} .pfoot b{color:var(--text);}
@@ -158,14 +165,30 @@ function opts(sel){
   if(sel && !list.some(function(m){return m.id==sel;})) list.unshift({id:sel,label:sel});
   return list.map(function(m){return '<option value="'+h(m.id)+'"'+(m.id==sel?' selected':'')+'>'+h(m.label)+'</option>';}).join("");
 }
+function formatReply(text){
+  var parts=String(text==null?"":text).split("```"), html="";
+  for(var i=0;i<parts.length;i++){
+    if(i%2===1){ // fenced code block: ```lang\n code
+      var seg=parts[i], nl=seg.indexOf("\n");
+      var code=(nl>=0?seg.slice(nl+1):seg);
+      html+='<div class="code"><button class="codecopy" onclick="copyText(this)" data-c="'+encodeURIComponent(code)+'">copy</button><pre>'+h(code)+'</pre></div>';
+    } else { html+='<span>'+h(parts[i])+'</span>'; }
+  }
+  return html;
+}
+function copyText(btn){ try{ navigator.clipboard.writeText(decodeURIComponent(btn.getAttribute("data-c")||"")); var o=btn.textContent; btn.textContent="copied ✓"; setTimeout(function(){btn.textContent=o;},1200); }catch(e){} }
 function threadHtml(s){
   if(!s.convo.length) return '<div style="margin:auto;color:var(--muted);font-size:.8rem">no task yet</div>';
   return s.convo.map(function(t,idx){
     var body;
     if(t.reply===undefined){ body='<div class="ai"><span class="spin"></span></div>'; }
     else if(t.reply.error){ body='<div class="ai err">'+h(t.reply.text||"")+'<span class="meta">'+h(t.reply.error)+'</span></div>'; }
-    else { body='<div class="ai">'+h(t.reply.text)+'<span class="meta">−'+t.reply.saved_pct+'% lean · '+(t.reply.output_tokens||0)+' out'
-      +'<button class="acc'+(t.accepted?' on':'')+'" onclick="accept(\''+s.id+'\','+idx+')">'+(t.accepted?'✓ accepted':'✓ accept')+'</button></span></div>'; }
+    else {
+      var tags=(t.reply.fastest?'<span class="tag fast">⚡ fastest</span>':'')+(t.reply.cheapest?'<span class="tag cheap">💰 cheapest</span>':'');
+      body='<div class="ai">'+formatReply(t.reply.text)+'<span class="meta">'+tags+'−'+t.reply.saved_pct+'% lean · '+(t.reply.output_tokens||0)+' out · '+(t.reply.ms||0)+'ms'
+        +'<button class="codecopy" onclick="copyText(this)" data-c="'+encodeURIComponent(t.reply.text||"")+'">copy all</button>'
+        +'<button class="acc'+(t.accepted?' on':'')+'" onclick="accept(\''+s.id+'\','+idx+')">'+(t.accepted?'✓ accepted':'✓ accept')+'</button></span></div>';
+    }
     return '<div class="you">'+h(t.you)+'</div>'+body;
   }).join("");
 }
@@ -224,18 +247,29 @@ async function sendTo(id, msg){
   if(!message)return;
   if(msg==null&&inp)inp.value="";
   s.pending=true; var turn={you:message,reply:undefined}; s.convo.push(turn); updatePane(id);
+  var t0=Date.now();
   try{
     var res=await fetch("/session/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:id,model:s.model,message:message})});
     var r=await res.json();
+    r.ms=Date.now()-t0;
     turn.reply=r;
     if(r.total_tokens!=null){ s.stats={turns:r.turns,tokens:r.total_tokens,cost:r.total_cost||0}; }
     if(!r.error&&r.saved_pct!=null)s.saves.push(r.saved_pct);
-  }catch(e){ turn.reply={error:String(e),saved_pct:0}; }
+  }catch(e){ turn.reply={error:String(e),saved_pct:0,ms:Date.now()-t0}; }
   s.pending=false; updatePane(id); updateLedger();
+  return turn;
 }
-function broadcast(){
+async function broadcast(){
   var b=document.getElementById("bcast"); var m=b.value.trim(); if(!m||!SES.length)return; b.value="";
-  SES.forEach(function(s){ sendTo(s.id, m); });
+  var turns=await Promise.all(SES.map(function(s){ return sendTo(s.id, m); }));
+  // mark the fastest and the cheapest good answer, so multi-model comparison pops
+  var good=turns.filter(function(t){ return t&&t.reply&&!t.reply.error; });
+  if(good.length>1){
+    var fast=good.slice().sort(function(a,b){return (a.reply.ms||1e9)-(b.reply.ms||1e9);})[0];
+    var cheap=good.slice().sort(function(a,b){return (a.reply.output_tokens||1e9)-(b.reply.output_tokens||1e9);})[0];
+    if(fast)fast.reply.fastest=true; if(cheap)cheap.reply.cheapest=true;
+    SES.forEach(function(s){ updatePane(s.id); });
+  }
 }
 async function resetAll(){ try{await fetch("/reset",{method:"POST"});}catch(e){} SES=[]; seq=0; structDirty=true; renderGrid(); updateLedger(); }
 

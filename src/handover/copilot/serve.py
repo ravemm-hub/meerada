@@ -46,19 +46,25 @@ DESKTOP_MODELS: list[str] = [
 # needs)}. The picker only offers models whose provider key is connected, so a
 # user can never pick a model that 401s on a missing/wrong key.
 MODEL_CATALOG: list[dict[str, str]] = [
-    {"id": "gpt-4o-mini", "label": "GPT-4o mini · OpenAI", "provider": "openai"},
-    {"id": "gpt-4o", "label": "GPT-4o · OpenAI", "provider": "openai"},
-    {"id": "o3-mini", "label": "o3-mini · OpenAI", "provider": "openai"},
-    {"id": "deepseek-chat", "label": "DeepSeek Chat · DeepSeek", "provider": "deepseek"},
-    {"id": "deepseek-reasoner", "label": "DeepSeek Reasoner · DeepSeek", "provider": "deepseek"},
+    # Strong models first, so the default session lands on a capable one.
+    {"id": "gpt-4o", "label": "GPT-4o · OpenAI (strong)", "provider": "openai"},
+    {"id": "o3", "label": "o3 · OpenAI (reasoning)", "provider": "openai"},
+    {"id": "o3-mini", "label": "o3-mini · OpenAI (reasoning)", "provider": "openai"},
+    {"id": "gpt-4o-mini", "label": "GPT-4o mini · OpenAI (fast/cheap)", "provider": "openai"},
+    {"id": "anthropic/claude-3.7-sonnet", "label": "Claude 3.7 Sonnet · OpenRouter",
+     "provider": "openrouter"},
+    {"id": "anthropic/claude-3.5-sonnet", "label": "Claude 3.5 Sonnet · OpenRouter",
+     "provider": "openrouter"},
+    {"id": "openai/gpt-4o", "label": "GPT-4o · OpenRouter", "provider": "openrouter"},
+    {"id": "google/gemini-2.5-pro", "label": "Gemini 2.5 Pro · OpenRouter",
+     "provider": "openrouter"},
+    {"id": "deepseek/deepseek-r1", "label": "DeepSeek R1 · OpenRouter (reasoning)",
+     "provider": "openrouter"},
+    {"id": "deepseek-reasoner", "label": "DeepSeek R1 · DeepSeek (reasoning)",
+     "provider": "deepseek"},
+    {"id": "deepseek-chat", "label": "DeepSeek V3 · DeepSeek", "provider": "deepseek"},
     {"id": "mistral-large-latest", "label": "Mistral Large · Mistral", "provider": "mistral"},
-    {"id": "anthropic/claude-3.7-sonnet", "label": "Claude 3.7 · OpenRouter",
-     "provider": "openrouter"},
-    {"id": "anthropic/claude-3.5-sonnet", "label": "Claude 3.5 · OpenRouter",
-     "provider": "openrouter"},
-    {"id": "google/gemini-2.5-pro", "label": "Gemini 2.5 · OpenRouter", "provider": "openrouter"},
     {"id": "openai/gpt-oss-120b", "label": "GPT-OSS 120B · Groq (free)", "provider": "groq"},
-    {"id": "openai/gpt-oss-20b", "label": "GPT-OSS 20B · Groq (free)", "provider": "groq"},
     {"id": "qwen/qwen3.8-27b", "label": "Qwen3 · Groq (free)", "provider": "groq"},
 ]
 
