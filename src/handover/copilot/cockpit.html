@@ -121,7 +121,8 @@
         <option value="mistral">Mistral</option>
         <option value="openrouter">OpenRouter</option>
       </select>
-      <input id="k-key" type="password" placeholder="paste API key" style="flex:1;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.5rem">
+      <input id="k-key" type="password" placeholder="paste (Ctrl+V) or click 📋" style="flex:1;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.5rem">
+      <button class="btn" title="Paste from clipboard" onclick="pasteKey()">📋</button>
       <button class="btn primary" onclick="connectKey()">Connect</button>
     </div>
     <div id="k-connected" style="font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--good);margin-bottom:1rem"></div>
@@ -248,6 +249,12 @@ async function soloInit(id, model){
 var HOSTED=false, VAULT=false, PROVIDERS=[];
 function showKeys(){ document.getElementById("keys").style.display="flex"; renderConnected(); }
 function renderConnected(){ document.getElementById("k-connected").innerHTML=PROVIDERS.length?("connected: "+PROVIDERS.join(", ")):"no providers connected yet"; }
+async function pasteKey(){
+  var el=document.getElementById("k-key"); el.focus();
+  try{ var t=await navigator.clipboard.readText(); if(t){ el.value=t.trim(); } }
+  catch(e){ try{ document.execCommand("paste"); }catch(_){}
+    if(!el.value){ el.placeholder="press Ctrl+V here to paste"; } }
+}
 async function connectKey(){
   var p=document.getElementById("k-provider").value, k=document.getElementById("k-key").value.trim();
   if(!k)return;
