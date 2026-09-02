@@ -1,0 +1,64 @@
+name: desktop-build
+
+# Builds the Meerada LLManager desktop app for Windows, macOS and Linux with
+# PyInstaller and uploads the binaries as artifacts. Trigger it by hand
+# (Actions -> desktop-build -> Run workflow) or by pushing a v* tag, which also
+# attaches the binaries to a GitHub Release.
+on:
+  workflow_dispatch: {}
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            artifact: Meerada-windows
+          - os: macos-latest
+            artifact: Meerada-macos
+          - os: ubuntu-latest
+            artifact: Meerada-linux
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # pywebview needs GTK + WebKit on Linux (Windows uses Edge WebView2, macOS uses WKWebView).
+      - name: Linux system deps
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.1-dev gir1.2-webkit2-4.1
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install ".[desktop]" pyinstaller
+
+      - name: Build
+        run: >
+          pyinstaller --name Meerada --windowed --onefile
+          --collect-all handover --collect-all webview
+          packaging/app_entry.py
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist/*
+          if-no-files-found: error
+
+      - name: Attach to release (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*

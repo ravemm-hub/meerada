@@ -52,3 +52,19 @@ pyinstaller --name Meerada --windowed --onefile \
   Authenticode cert (~$100–400/yr) for Windows. Skip it for internal testers.
 - Cross-OS builds need each OS (use CI — GitHub Actions matrix — to produce all
   three from one push).
+
+## Build all three OSes automatically (CI)
+
+`.github/workflows/desktop-build.yml` builds Windows / macOS / Linux binaries for
+you. Two ways to run it:
+
+- **On demand:** GitHub → **Actions** → **desktop-build** → **Run workflow**. When
+  it finishes, download the binaries from the run's **Artifacts** (Meerada-windows,
+  Meerada-macos, Meerada-linux).
+- **On release:** push a tag — `git tag v0.1.0 && git push origin v0.1.0` — and the
+  binaries are built and **attached to a GitHub Release** automatically, so testers
+  download from the Releases page.
+
+Binaries are unsigned, so first launch shows an OS warning (Windows SmartScreen /
+macOS Gatekeeper) — fine for a tester group; add code signing before public
+release.
