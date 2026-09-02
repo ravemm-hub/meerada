@@ -45,34 +45,30 @@ DESKTOP_MODELS: list[str] = [
 # Friendly catalog: {id (sent to the API), label (shown), provider (which key it
 # needs)}. The picker only offers models whose provider key is connected, so a
 # user can never pick a model that 401s on a missing/wrong key.
+# (id sent to API, short name, provider = key + grouping, strength tag).
+_CATALOG: tuple[tuple[str, str, str, str], ...] = (
+    ("claude-3-7-sonnet-latest", "Claude 3.7 Sonnet", "anthropic", "top code"),
+    ("claude-3-5-sonnet-latest", "Claude 3.5 Sonnet", "anthropic", "strong"),
+    ("claude-3-5-haiku-latest", "Claude 3.5 Haiku", "anthropic", "fast"),
+    ("gpt-4o", "GPT-4o", "openai", "strong"),
+    ("gpt-4o-mini", "GPT-4o mini", "openai", "fast · cheap"),
+    ("anthropic/claude-3.7-sonnet", "Claude 3.7 Sonnet", "openrouter", "top code"),
+    ("openai/gpt-4o", "GPT-4o", "openrouter", "strong"),
+    ("google/gemini-2.5-pro", "Gemini 2.5 Pro", "openrouter", "strong · vision"),
+    ("deepseek/deepseek-r1", "DeepSeek R1", "openrouter", "reasoning"),
+    ("deepseek-reasoner", "DeepSeek R1", "deepseek", "reasoning"),
+    ("deepseek-chat", "DeepSeek V3", "deepseek", "cheap"),
+    ("mistral-large-latest", "Mistral Large", "mistral", "strong"),
+    ("openai/gpt-oss-120b", "GPT-OSS 120B", "groq", "free · fast"),
+    ("qwen/qwen3.8-27b", "Qwen3", "groq", "free"),
+)
 MODEL_CATALOG: list[dict[str, str]] = [
-    # Strong models first, so the default session lands on a capable one.
-    {"id": "claude-3-7-sonnet-latest", "label": "Claude 3.7 Sonnet · Anthropic (top code)",
-     "provider": "anthropic"},
-    {"id": "claude-3-5-sonnet-latest", "label": "Claude 3.5 Sonnet · Anthropic",
-     "provider": "anthropic"},
-    {"id": "claude-3-5-haiku-latest", "label": "Claude 3.5 Haiku · Anthropic (fast)",
-     "provider": "anthropic"},
-    {"id": "gpt-4o", "label": "GPT-4o · OpenAI (strong)", "provider": "openai"},
-    {"id": "o3", "label": "o3 · OpenAI (reasoning)", "provider": "openai"},
-    {"id": "o3-mini", "label": "o3-mini · OpenAI (reasoning)", "provider": "openai"},
-    {"id": "gpt-4o-mini", "label": "GPT-4o mini · OpenAI (fast/cheap)", "provider": "openai"},
-    {"id": "anthropic/claude-3.7-sonnet", "label": "Claude 3.7 Sonnet · OpenRouter",
-     "provider": "openrouter"},
-    {"id": "anthropic/claude-3.5-sonnet", "label": "Claude 3.5 Sonnet · OpenRouter",
-     "provider": "openrouter"},
-    {"id": "openai/gpt-4o", "label": "GPT-4o · OpenRouter", "provider": "openrouter"},
-    {"id": "google/gemini-2.5-pro", "label": "Gemini 2.5 Pro · OpenRouter",
-     "provider": "openrouter"},
-    {"id": "deepseek/deepseek-r1", "label": "DeepSeek R1 · OpenRouter (reasoning)",
-     "provider": "openrouter"},
-    {"id": "deepseek-reasoner", "label": "DeepSeek R1 · DeepSeek (reasoning)",
-     "provider": "deepseek"},
-    {"id": "deepseek-chat", "label": "DeepSeek V3 · DeepSeek", "provider": "deepseek"},
-    {"id": "mistral-large-latest", "label": "Mistral Large · Mistral", "provider": "mistral"},
-    {"id": "openai/gpt-oss-120b", "label": "GPT-OSS 120B · Groq (free)", "provider": "groq"},
-    {"id": "qwen/qwen3.8-27b", "label": "Qwen3 · Groq (free)", "provider": "groq"},
+    {"id": i, "name": n, "provider": p, "tag": t} for i, n, p, t in _CATALOG
 ]
+PROVIDER_NAMES: dict[str, str] = {
+    "anthropic": "Anthropic (Claude)", "openai": "OpenAI", "openrouter": "OpenRouter",
+    "deepseek": "DeepSeek", "mistral": "Mistral", "groq": "Groq (free)",
+}
 
 CallerFor = Callable[[str], ChatCaller]
 
@@ -344,7 +340,10 @@ def build_app(
             connected = keystore.providers(str(user["sub"])) if user else []
         else:
             connected = ["groq"] if caller_for is not None else []  # shared tester key
-        return JSONResponse({"catalog": MODEL_CATALOG, "connected": connected, "live": live})
+        return JSONResponse(
+            {"catalog": MODEL_CATALOG, "connected": connected,
+             "provider_names": PROVIDER_NAMES, "live": live}
+        )
 
     @app.get("/me")
     def me(request: Request) -> JSONResponse:

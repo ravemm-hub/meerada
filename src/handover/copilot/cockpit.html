@@ -89,7 +89,8 @@
 <div class="toolbar">
   <button class="btn primary" onclick="addSession()">+ New session</button>
   <span style="flex:1"></span>
-  <textarea id="bcast" rows="1" placeholder="broadcast one task to every session…  (Enter to send · Shift+Enter = newline)"></textarea>
+  <textarea id="bcast" rows="1" placeholder="one task → many models…  (Enter = send to all)"></textarea>
+  <button class="btn ghost" onclick="compareAll()" title="fresh session per model, same task">⚖️ Compare all</button>
   <button class="btn" onclick="broadcast()">Send to all →</button>
 </div>
 
@@ -141,13 +142,13 @@
 </div>
 
 <script>
-var CATALOG=[], CONNECTED=[], live=false, SES=[], seq=0, structDirty=true;
+var CATALOG=[], CONNECTED=[], PROVIDER_NAMES={}, live=false, SES=[], seq=0, structDirty=true;
 function h(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
 function esc(s){return String(s).replace(/'/g,"\\'");}
 
 // only models whose provider key is connected — you can never pick one that 401s
 function runnable(){ return CATALOG.filter(function(m){ return CONNECTED.indexOf(m.provider)>=0; }); }
-function labelFor(id){ for(var i=0;i<CATALOG.length;i++){ if(CATALOG[i].id==id)return CATALOG[i].label; } return id; }
+function labelFor(id){ for(var i=0;i<CATALOG.length;i++){ if(CATALOG[i].id==id)return CATALOG[i].name; } return id; }
 function defaultModel(){ var r=runnable(); return r.length?r[0].id:""; }
 
 function addSession(model){
@@ -162,9 +163,16 @@ function setModel(id,m){ var s=find(id); if(s){ s.model=m; } } // next send re-h
 function find(id){ return SES.filter(function(s){return s.id==id;})[0]; }
 
 function opts(sel){
-  var list=runnable().slice();
-  if(sel && !list.some(function(m){return m.id==sel;})) list.unshift({id:sel,label:sel});
-  return list.map(function(m){return '<option value="'+h(m.id)+'"'+(m.id==sel?' selected':'')+'>'+h(m.label)+'</option>';}).join("");
+  var list=runnable(), byProv={}, order=[];
+  list.forEach(function(m){ if(!byProv[m.provider]){byProv[m.provider]=[];order.push(m.provider);} byProv[m.provider].push(m); });
+  var html="";
+  if(sel && !list.some(function(m){return m.id==sel;})) html+='<option value="'+h(sel)+'" selected>'+h(sel)+'</option>';
+  order.forEach(function(p){
+    html+='<optgroup label="'+h(PROVIDER_NAMES[p]||p)+'">';
+    byProv[p].forEach(function(m){ html+='<option value="'+h(m.id)+'"'+(m.id==sel?' selected':'')+'>'+h(m.name)+(m.tag?' — '+h(m.tag):'')+'</option>'; });
+    html+='</optgroup>';
+  });
+  return html;
 }
 function formatReply(text){
   var parts=String(text==null?"":text).split("```"), html="";
@@ -260,8 +268,18 @@ async function sendTo(id, msg){
   s.pending=false; updatePane(id); updateLedger();
   return turn;
 }
-async function broadcast(){
-  var b=document.getElementById("bcast"); var m=b.value.trim(); if(!m||!SES.length)return; b.value="";
+async function compareAll(){
+  var b=document.getElementById("bcast"); var m=b.value.trim();
+  if(!m){ b.focus(); return; }
+  var models=runnable().slice(0,6);
+  if(!models.length){ if(VAULT)showKeys(); return; }
+  SES=[]; seq=0;                                  // fresh: one session per model
+  models.forEach(function(mo){ addSession(mo.id); });
+  b.value="";
+  await broadcast(m);
+}
+async function broadcast(msgArg){
+  var b=document.getElementById("bcast"); var m=(msgArg!=null?msgArg:b.value).trim(); if(!m||!SES.length)return; if(msgArg==null)b.value="";
   var turns=await Promise.all(SES.map(function(s){ return sendTo(s.id, m); }));
   // mark the fastest and the cheapest good answer, so multi-model comparison pops
   var good=turns.filter(function(t){ return t&&t.reply&&!t.reply.error; });
@@ -302,7 +320,7 @@ function renderConnected(err){
 }
 async function refreshModels(){
   try{ var r=await fetch("/models"); var d=await r.json();
-    CATALOG=d.catalog||[]; CONNECTED=d.connected||[]; live=d.live;
+    CATALOG=d.catalog||[]; CONNECTED=d.connected||[]; PROVIDER_NAMES=d.provider_names||{}; live=d.live;
     var mode=document.getElementById("mode");
     if(mode){ mode.textContent=live?"LIVE · your keys":"PREVIEW"; mode.className="mode "+(live?"live":"preview"); }
   }catch(e){}
