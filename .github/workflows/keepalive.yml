@@ -1,0 +1,15 @@
+name: keepalive
+
+# Keeps the free-tier hosted LLManager warm so launch visitors don't hit a
+# 30-60s cold start. Pings /me every ~10 minutes. Public repo -> free minutes.
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wake the hosted app
+        run: curl -sf -m 90 https://meerada-llmanager.onrender.com/me || true
