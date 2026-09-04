@@ -1,7 +1,7 @@
 {
   "cards": {
     "allam-2-7b": {
-      "ci_width_points": 25.2,
+      "ci_width_points": 25.4,
       "history": [
         40.0,
         69.2,
@@ -27,19 +27,20 @@
         63.0,
         63.0,
         64.8,
-        61.1
+        61.1,
+        59.3
       ],
       "model_id": "allam-2-7b",
       "n": 54,
       "quality": {
-        "ci_high": 0.7295825749002496,
-        "ci_low": 0.47788056581508337,
+        "ci_high": 0.7132198481075954,
+        "ci_low": 0.45966610248851525,
         "n": 54,
-        "value": 0.6111111111111112
+        "value": 0.5925925925925926
       },
-      "score": 61.1,
+      "score": 59.3,
       "status": "provisional",
-      "updated_at": "2026-09-03T10:16:58.132092Z"
+      "updated_at": "2026-09-04T05:05:58.561187Z"
     },
     "canopylabs/orpheus-arabic-saudi": {
       "ci_width_points": null,
@@ -54,7 +55,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-03T10:16:58.132092Z"
+      "updated_at": "2026-09-04T05:05:58.561187Z"
     },
     "canopylabs/orpheus-v1-english": {
       "ci_width_points": null,
@@ -69,10 +70,10 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-03T10:16:58.132092Z"
+      "updated_at": "2026-09-04T05:05:58.561187Z"
     },
     "groq/compound": {
-      "ci_width_points": 34.1,
+      "ci_width_points": 31.0,
       "history": [
         0.0,
         60.0,
@@ -97,22 +98,23 @@
         14.3,
         26.9,
         0.0,
-        13.3
+        13.3,
+        11.8
       ],
       "model_id": "groq/compound",
-      "n": 15,
+      "n": 17,
       "quality": {
-        "ci_high": 0.3788249920651624,
-        "ci_low": 0.0373604698913593,
-        "n": 15,
-        "value": 0.13333333333333333
+        "ci_high": 0.3433684249770991,
+        "ci_low": 0.03287908001292092,
+        "n": 17,
+        "value": 0.11764705882352941
       },
-      "score": 13.3,
+      "score": 11.8,
       "status": "provisional",
-      "updated_at": "2026-09-03T10:16:58.132092Z"
+      "updated_at": "2026-09-04T05:05:58.561187Z"
     },
     "groq/compound-mini": {
-      "ci_width_points": 23.3,
+      "ci_width_points": 31.4,
       "history": [
         66.7,
         78.0,
@@ -137,22 +139,23 @@
         58.1,
         51.7,
         68.2,
-        74.5
+        74.5,
+        58.8
       ],
       "model_id": "groq/compound-mini",
-      "n": 51,
+      "n": 34,
       "quality": {
-        "ci_high": 0.8445437675873361,
-        "ci_low": 0.6113145589385128,
-        "n": 51,
-        "value": 0.7450980392156863
+        "ci_high": 0.7363426221431113,
+        "ci_low": 0.42221304146519273,
+        "n": 34,
+        "value": 0.5882352941176471
       },
-      "score": 74.5,
+      "score": 58.8,
       "status": "provisional",
-      "updated_at": "2026-09-03T10:16:58.132092Z"
+      "updated_at": "2026-09-04T05:05:58.561187Z"
     },
     "openai/gpt-oss-120b": {
-      "ci_width_points": 22.8,
+      "ci_width_points": 32.8,
       "history": [
         40.0,
         64.1,
@@ -178,22 +181,23 @@
         77.8,
         50.0,
         72.2,
-        74.1
+        74.1,
+        58.1
       ],
       "model_id": "openai/gpt-oss-120b",
-      "n": 54,
+      "n": 31,
       "quality": {
-        "ci_high": 0.8388149203520608,
-        "ci_low": 0.610688551197827,
-        "n": 54,
-        "value": 0.7407407407407407
+        "ci_high": 0.7358469692645074,
+        "ci_low": 0.40765964352020967,
+        "n": 31,
+        "value": 0.5806451612903226
       },
-      "score": 74.1,
+      "score": 58.1,
       "status": "provisional",
-      "updated_at": "2026-09-03T10:16:58.132092Z"
+      "updated_at": "2026-09-04T05:05:58.561187Z"
     },
     "openai/gpt-oss-20b": {
-      "ci_width_points": 22.3,
+      "ci_width_points": 21.7,
       "history": [
         60.0,
         69.2,
@@ -219,22 +223,23 @@
         75.9,
         72.2,
         75.9,
-        75.9
+        75.9,
+        77.8
       ],
       "model_id": "openai/gpt-oss-20b",
       "n": 54,
       "quality": {
-        "ci_high": 0.8535584529614926,
-        "ci_low": 0.6305222087076177,
+        "ci_high": 0.8680471201042104,
+        "ci_low": 0.6506107316841219,
         "n": 54,
-        "value": 0.7592592592592593
+        "value": 0.7777777777777778
       },
-      "score": 75.9,
+      "score": 77.8,
       "status": "provisional",
-      "updated_at": "2026-09-03T10:16:58.132092Z"
+      "updated_at": "2026-09-04T05:05:58.561187Z"
     },
     "qwen/qwen3.6-27b": {
-      "ci_width_points": 19.7,
+      "ci_width_points": 51.9,
       "history": [
         20.0,
         23.1,
@@ -260,22 +265,23 @@
         16.7,
         16.7,
         16.7,
-        16.7
+        16.7,
+        25.0
       ],
       "model_id": "qwen/qwen3.6-27b",
-      "n": 54,
+      "n": 8,
       "quality": {
-        "ci_high": 0.28736767798789736,
-        "ci_low": 0.0902428998661039,
-        "n": 54,
-        "value": 0.16666666666666666
+        "ci_high": 0.5907301208974108,
+        "ci_low": 0.07147768885802763,
+        "n": 8,
+        "value": 0.25
       },
-      "score": 16.7,
+      "score": 25.0,
       "status": "provisional",
-      "updated_at": "2026-09-03T10:16:58.132092Z"
+      "updated_at": "2026-09-04T05:05:58.561187Z"
     },
     "qwen/qwen3.8-27b": {
-      "ci_width_points": 22.3,
+      "ci_width_points": 21.7,
       "history": [
         60.0,
         69.2,
@@ -301,19 +307,20 @@
         74.1,
         75.9,
         77.8,
-        75.9
+        75.9,
+        77.8
       ],
       "model_id": "qwen/qwen3.8-27b",
       "n": 54,
       "quality": {
-        "ci_high": 0.8535584529614926,
-        "ci_low": 0.6305222087076177,
+        "ci_high": 0.8680471201042104,
+        "ci_low": 0.6506107316841219,
         "n": 54,
-        "value": 0.7592592592592593
+        "value": 0.7777777777777778
       },
-      "score": 75.9,
+      "score": 77.8,
       "status": "provisional",
-      "updated_at": "2026-09-03T10:16:58.132092Z"
+      "updated_at": "2026-09-04T05:05:58.561187Z"
     }
   },
   "known_versions": {
