@@ -441,6 +441,13 @@ def build_app(
     # stored encrypted on this machine, routed per model — no sign-in. Enabled for
     # the desktop launcher / `meerada up --keys`.
     local_vault = os.environ.get("MEERADA_LOCAL_VAULT", "") == "1" and not hosted
+    # Reading THIS machine's files (~/.claude scan, attach a folder by path) is
+    # only for the desktop app / a localhost `meerada up`. It must be opted in
+    # explicitly — an open tester deployment is "not hosted" too, and must never
+    # expose its server filesystem.
+    local_fs = local_vault or (
+        os.environ.get("MEERADA_LOCAL_FS", "") == "1" and not hosted
+    )
     secure = cfg.redirect_uri.startswith("https")
     if dev_login:
         print("WARNING: MEERADA_DEV_LOGIN on — sign-in bypassed. DEV ONLY, never in prod.")
@@ -512,7 +519,7 @@ def build_app(
                 "user": user.get("email") or user.get("name"),
                 "auth": hosted,
                 "local_vault": local_vault,
-                "local_fs": not hosted,  # desktop/local: can scan ~/.claude, attach folders
+                "local_fs": local_fs,  # desktop/localhost: can scan ~/.claude, attach folders
                 "providers": providers,
             }
         )
@@ -635,7 +642,6 @@ def build_app(
     from handover.copilot import importers as IMP
 
     import_cache: dict[str, dict[str, list[IMP.Conversation]]] = {}
-    local_fs = not hosted  # reading this machine's files only makes sense locally
 
     def _stash(sub: str, convs: list[IMP.Conversation]) -> str:
         import secrets
@@ -778,9 +784,13 @@ def build_app(
 
 def serve(port: int = 8765, provider: str = "groq", *, open_browser: bool = True) -> None:
     """Run the cockpit on localhost. Falls back to preview mode if no key."""
+    import os
+
     import uvicorn
 
     from handover.copilot.providers import caller_for_provider
+
+    os.environ.setdefault("MEERADA_LOCAL_FS", "1")  # bound to 127.0.0.1: local files OK
 
     caller_for: CallerFor | None
     try:
