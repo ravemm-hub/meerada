@@ -217,6 +217,8 @@
       <th title="Meerada Grade from the measured quality (0–100).">Grade</th>
       <th title="Verified success rate with its 95% confidence interval.">Quality (95% CI)</th>
       <th title="Number of verified tasks behind the grade.">n</th>
+      <th title="Cost per verified task, priced at the provider's public list price (~ = estimated list price).">CPAT</th>
+      <th title="Time to a verified task (seconds per verified success).">TTAT</th>
       <th title="Grade over recent measured cycles.">trend</th>
       <th title="provisional (small sample) → confirmed (n ≥ 600).">Status</th>
       <th title="When this model was last measured.">updated</th>
@@ -257,6 +259,15 @@
   <!-- ===== OUTCOME EXCHANGE ===== -->
   <h2>💱 Outcome Exchange — buy a done task, not tokens</h2>
   <div class="h2sub">This is what makes the arena a real market. Post the job and the quality bar; the exchange routes to the <b>cheapest model that clears it</b>. The price is the live <b class="teal">CPAT</b> — cost per verified task. As grades move, the clearing price moves. <span class="ipill">prototype</span></div>
+  <div class="card" style="margin-bottom:1rem">
+    <div style="font-weight:600;margin-bottom:.4rem">🧭 The Bourse in 30 seconds</div>
+    <div class="sub" style="line-height:1.6">
+      <b>1 ·</b> Every hour we run the same <b>verifiable tasks</b> (schema, regex, unit-checkable) on every model we can reach, and check the outputs by program — not by opinion.<br>
+      <b>2 ·</b> Each model gets a <b>grade</b> (verified success rate, with its confidence interval) and a <b>price</b>: what one verified task cost at the provider's public list price — <b class="teal">CPAT</b> — plus how long it took (<b>TTAT</b>).<br>
+      <b>3 ·</b> You post a job and a quality bar. The exchange <b>clears at the cheapest model over the bar</b>. That clearing price <i>is</i> the market price of a done task — and it moves as models change.<br>
+      <b>Why only a middleman can run it:</b> pricing a "done task" needs independent verification across every vendor. A vendor can't grade itself; a token reseller doesn't verify. The interface people work through (<a class="teal" href="llmanager.html">LLManager</a>) is where that measurement comes from and where the routing gets applied.
+    </div>
+  </div>
   <div class="card">
     <div class="ox-controls">
       <label>Task type<select id="ox-cat" onchange="oxCompute()">
@@ -271,6 +282,7 @@
         <input type="range" id="ox-bar" min="60" max="92" value="75" oninput="document.getElementById('ox-barval').textContent=this.value;oxCompute()"></label>
       <label>Volume <span class="sub">(verified tasks / month)</span>
         <input type="number" id="ox-vol" value="100000" min="1000" step="1000" oninput="oxCompute()"></label>
+      <label title="Only models we have actually measured on verified tasks (real CPAT at public list price)"><input type="checkbox" id="ox-real" onchange="oxCompute()"> ● measured models only</label>
     </div>
     <div class="ox-clear" id="ox-clear"></div>
     <div style="font-weight:600;margin:1rem 0 .3rem">📖 Order book — models that clear the bar, by price</div>
@@ -618,26 +630,39 @@ function loadMeasured(){
       .filter(function(c){return c && c.score!=null && c.n>0;});
     if(!cards.length)return;
     cards.sort(function(a,b){return b.score-a.score;});
+    // measured models feed the Exchange + Handshake as REAL entries
+    MEASURED=cards.filter(function(c){return c.econ&&c.econ.cpat_usd!=null;}).map(function(c){
+      return {m:c.model_id, p:"groq", q:c.score, grade:c.score, cpat:c.econ.cpat_usd, lat:Math.round((c.econ.ttat_s||1)*1000), note:c.econ.price_note, measured:true, conf:c.status};
+    });
     document.getElementById("measured-wrap").style.display="block";
     document.getElementById("measured-body").innerHTML=cards.map(function(c,i){
       var q=(c.quality&&c.quality.value!=null)?Math.round(c.quality.value*100):null;
       var ci=(c.ci_width_points!=null)?(" ±"+Math.round(c.ci_width_points/2)):"";
       var hist=c.history||[];
       var d=hist.length>=2?(hist[hist.length-1]-hist[hist.length-2]):0;
+      var e=c.econ||{};
+      var cpat=e.cpat_usd!=null?('$'+e.cpat_usd.toFixed(5)+(e.price_note=="estimated"?'<span class="sub" title="estimated list price">~</span>':'')):'<span class="sub">soon</span>';
+      var ttat=e.ttat_s!=null?(e.ttat_s.toFixed(1)+'s'):'<span class="sub">—</span>';
       return '<tr class="model-row"><td class="l">'+(i+1)+'</td>'
         +'<td class="l"><span class="mid">'+c.model_id+'</span></td>'
         +'<td><span class="grade '+gcls(c.score)+'">'+c.score.toFixed(1)+'</span></td>'
         +'<td>'+(q!=null?(q+"%"+ci):"—")+'</td>'
         +'<td>'+c.n+'</td>'
+        +'<td class="mid">'+cpat+'</td>'
+        +'<td class="mid">'+ttat+'</td>'
         +'<td>'+spark(hist,dCls(d))+'</td>'
         +'<td><span class="pill '+c.status+'">'+c.status+'</span></td>'
         +'<td class="mid" style="font-size:.68rem;color:var(--muted)">'+(c.updated_at?c.updated_at.slice(5,16).replace("T"," "):"—")+'</td></tr>';
     }).join("");
     var upd=cards[0].updated_at?cards[0].updated_at.slice(0,16).replace("T"," ")+"Z":"";
     document.getElementById("measured-note").innerHTML=cards.length+" models measured on verified tasks · last run "+upd
-      +" · grades run lower and intervals wider than the illustrative catalog because these are small free-tier models on small samples — showing that honestly is the whole point.";
+      +" · grades run lower and intervals wider than the illustrative catalog because these are small free-tier models on small samples — showing that honestly is the whole point."
+      +(MEASURED.length?" · <b class='teal'>CPAT is real</b>: spend at the provider's public list price ÷ verified successes (~ = estimated price).":" · CPAT/TTAT appear after the next hourly measurement.");
+    if(MEASURED.length){ refreshHsOptions(); oxCompute(); }
   }).catch(function(){ /* local file / not deployed yet — leave hidden */ });
 }
+var MEASURED=[];
+function pool(){ return MODELS.concat(MEASURED); }  // illustrative catalog + real measured entries
 
 // ---- Outcome Exchange: buy a verified done-task; clearing price = live CPAT ----
 function oxCatGrade(m, cat){
@@ -646,17 +671,19 @@ function oxCatGrade(m, cat){
 }
 function oxCompute(){
   var cat=document.getElementById("ox-cat").value, bar=+document.getElementById("ox-bar").value, vol=Math.max(0,+document.getElementById("ox-vol").value||0);
-  var cands=MODELS.filter(function(m){return m.cpat!=null;}).map(function(m){ return {m:m.m, g:oxCatGrade(m,cat), cpat:m.cpat}; })
+  var onlyReal=!!(document.getElementById("ox-real")||{}).checked;
+  var cands=pool().filter(function(m){return m.cpat!=null && (!onlyReal||m.measured);}).map(function(m){ return {m:m.m, g:m.measured?Math.round(m.q):oxCatGrade(m,cat), cpat:m.cpat, measured:!!m.measured, note:m.note}; })
     .filter(function(c){return c.g>=bar;}).sort(function(a,b){return a.cpat-b.cpat;});
   var clear=document.getElementById("ox-clear"), book=document.getElementById("ox-book");
-  if(!cands.length){ clear.innerHTML='<div class="sub">No model clears grade '+bar+' for this task — lower the bar.</div>'; book.innerHTML=""; return; }
+  if(!cands.length){ clear.innerHTML='<div class="sub">No model clears grade '+bar+' for this task — lower the bar'+(onlyReal?' (measured free-tier models grade ~60–76 today)':'')+'.</div>'; book.innerHTML=""; return; }
   var win=cands[0], monthly=win.cpat*vol;
-  clear.innerHTML='<div><span class="lab">Winning model</span><span class="big win">'+win.m+'</span></div>'
+  function mark(c){ return c.measured?' <span class="mpill" title="measured on verified tasks; priced at public list price">● measured'+(c.note=="estimated"?'~':'')+'</span>':' <span class="sub" title="illustrative catalog entry">○</span>'; }
+  clear.innerHTML='<div><span class="lab">Winning model</span><span class="big win">'+win.m+'</span>'+mark(win)+'</div>'
     +'<div><span class="lab">Clearing price · CPAT</span><span class="big price">$'+win.cpat.toFixed(4)+'</span></div>'
     +'<div><span class="lab">Your monthly cost</span><span class="big price">$'+Math.round(monthly).toLocaleString()+'</span></div>'
     +'<div><span class="lab">grade on this task</span><span class="big">'+win.g+'</span></div>';
-  book.innerHTML=cands.slice(0,8).map(function(c,i){
-    return '<tr'+(i==0?' style="background:rgba(88,192,122,.09)"':'')+'><td class="l">'+(i+1)+'</td><td class="l"><span class="mid">'+c.m+'</span>'+(i==0?' <span class="mpill">WINS</span>':'')+'</td><td>'+c.g+'</td><td>$'+c.cpat.toFixed(4)+'</td><td>$'+Math.round(c.cpat*vol).toLocaleString()+'</td></tr>';
+  book.innerHTML=cands.slice(0,10).map(function(c,i){
+    return '<tr'+(i==0?' style="background:rgba(88,192,122,.09)"':'')+'><td class="l">'+(i+1)+'</td><td class="l"><span class="mid">'+c.m+'</span>'+mark(c)+(i==0?' <span class="mpill">WINS</span>':'')+'</td><td>'+c.g+'</td><td>$'+c.cpat.toFixed(4)+'</td><td>$'+Math.round(c.cpat*vol).toLocaleString()+'</td></tr>';
   }).join("");
 }
 
@@ -684,9 +711,10 @@ function scStep(i,s,x){
   if(s<SC_STAGES.length-1){ setTimeout(function(){ scStep(i,s+1,x); }, 500+Math.random()*700+i*120); }
   else { var saved=Math.round(60+Math.random()*20); var t=document.getElementById("sc-t"+i); if(t)t.textContent="−"+saved+"% tokens"; }
 }
-function hsOptions(){ return MODELS.map(function(x){return '<option value="'+x.m+'">'+x.m+' (grade '+x.grade.toFixed(0)+')</option>';}).join(""); }
+function hsOptions(){ return pool().map(function(x){return '<option value="'+x.m+'">'+(x.measured?"● ":"")+x.m+' (grade '+x.grade.toFixed(0)+')</option>';}).join(""); }
+function refreshHsOptions(){ var f=document.getElementById("hs-from"), t=document.getElementById("hs-to"); var fv=f.value, tv=t.value; f.innerHTML=hsOptions(); t.innerHTML=hsOptions(); f.value=fv; t.value=tv; hsRender(); }
 function hsRender(){
-  var from=MODELS.find(function(x){return x.m==document.getElementById("hs-from").value;}), to=MODELS.find(function(x){return x.m==document.getElementById("hs-to").value;});
+  var from=pool().find(function(x){return x.m==document.getElementById("hs-from").value;}), to=pool().find(function(x){return x.m==document.getElementById("hs-to").value;});
   if(!from||!to)return; var save=(from.cpat!=null&&to.cpat!=null)?Math.round((1-to.cpat/from.cpat)*100):null; var qd=+(to.q-from.q).toFixed(0); var latd=Math.round((to.lat-from.lat)/from.lat*100);
   document.getElementById("hs-out").innerHTML=
     '<div class="hs-stat"><div class="k">Cost / task</div><div class="v '+(save>0?"up":"down")+'">'+(save==null?"—":(save>0?"−"+save+"%":"+"+(-save)+"%"))+'</div></div>'
