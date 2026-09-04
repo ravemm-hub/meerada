@@ -22,6 +22,21 @@ CONFIRMED_MIN_N = 600
 STALE_AFTER = timedelta(hours=48)  # a confirmed grade older than this needs a refresh
 
 
+class Economics(BaseModel):
+    """What a verified task from this model costs and takes — the price side of
+    the exchange. CPAT is total spend / verified successes, priced at the
+    provider's public list price (``price_note`` says list vs estimated)."""
+
+    model_config = ConfigDict(frozen=True)
+
+    cpat_usd: float | None  # cost per verified task, USD
+    ttat_s: float | None  # time to a verified task, seconds (wall, per win)
+    n_successes: int
+    price_in: float  # USD per 1M input tokens used for the pricing
+    price_out: float
+    price_note: str = "list"  # list | estimated
+
+
 class GradeCard(BaseModel):
     """One model's public grade with everything needed to trust it."""
 
@@ -35,6 +50,7 @@ class GradeCard(BaseModel):
     updated_at: datetime
     ci_width_points: float | None  # high-low of the quality CI, in points
     history: tuple[float, ...] = ()  # recent scores oldest->newest (real sparkline)
+    econ: Economics | None = None  # measured price/latency of a done task
 
     @property
     def is_publishable(self) -> bool:
@@ -62,6 +78,7 @@ def classify(
     *,
     prior_history: tuple[float, ...] = (),
     append_history: bool = False,
+    econ: Economics | None = None,
 ) -> GradeCard:
     n = quality.n
     if n < PROVISIONAL_MIN_N:
@@ -88,6 +105,7 @@ def classify(
         updated_at=updated_at,
         ci_width_points=ci_width,
         history=history,
+        econ=econ,
     )
 
 

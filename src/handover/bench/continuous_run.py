@@ -20,9 +20,11 @@ from handover.bench.board_page import render_board
 from handover.bench.catalog import fetch_catalog
 from handover.bench.continuous import tick
 from handover.bench.discovery import CatalogModel
+from handover.bench.lifecycle import Economics
+from handover.bench.prices import list_price
 from handover.bench.runner import ModelSpec, run_model
 from handover.bench.state_store import load_state, save_state
-from handover.metrics.core import Proportion, proportion
+from handover.metrics.core import CoreMetrics, Proportion, proportion
 from handover.replay.budget import DailyBudget
 from handover.replay.openai_client import ENDPOINTS, HttpChatCaller
 
@@ -34,8 +36,6 @@ ENV_KEYS = {
     "mistral": "MISTRAL_API_KEY",
     "together": "TOGETHER_API_KEY",
 }
-# Fallback price per Mtok when a model isn't in the registry (in, out).
-DEFAULT_PRICE = (Decimal("1"), Decimal("1"))
 
 # HARD SAFETY: only providers with a genuine free tier may be graded by the
 # scheduled loop. A paid provider is refused unless MEERADA_ALLOW_PAID=1 is set
@@ -61,6 +61,33 @@ def _overall_quality(per_cluster: dict[str, Proportion]) -> tuple[float | None, 
     pooled = proportion(round(total_s), total_n) if total_n else proportion(0, 0)
     score = None if pooled.value is None else round(pooled.value * 100, 1)
     return score, pooled
+
+
+def economics(
+    per_cluster: dict[str, CoreMetrics], price: tuple[Decimal, Decimal, str]
+) -> Economics | None:
+    """Pool the per-cluster CPAT / TTAT into one measured price of a done task.
+    total spend = sum(cpat * wins); pooled CPAT = total spend / total wins."""
+    wins = sum(m.cpat_usd.n_successes for m in per_cluster.values())
+    if wins == 0:
+        return None
+    spend = sum(
+        (Decimal(str(m.cpat_usd.value)) * m.cpat_usd.n_successes
+         for m in per_cluster.values() if m.cpat_usd.value is not None),
+        Decimal("0"),
+    )
+    secs = sum(
+        (m.ttat_seconds.value or 0.0) * m.ttat_seconds.n_successes
+        for m in per_cluster.values()
+    )
+    return Economics(
+        cpat_usd=float(round(spend / wins, 6)),
+        ttat_s=round(secs / wins, 2),
+        n_successes=wins,
+        price_in=float(price[0]),
+        price_out=float(price[1]),
+        price_note=price[2],
+    )
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -94,13 +121,12 @@ def main(argv: list[str] | None = None) -> int:
     callers = {p: HttpChatCaller(ENDPOINTS[p], keys[p]) for p in live}
     provider_of: dict[str, str] = {}
 
-    def grade(model_id: str) -> tuple[float | None, Proportion]:
+    def grade(model_id: str) -> tuple[float | None, Proportion, Economics | None]:
         provider = provider_of.get(model_id, live[0])
         caller = callers[provider]
+        price = list_price(model_id)  # public list price -> a real CPAT, even on a free tier
         spec = ModelSpec(
-            model_id=model_id,
-            price_in_per_mtok=DEFAULT_PRICE[0],
-            price_out_per_mtok=DEFAULT_PRICE[1],
+            model_id=model_id, price_in_per_mtok=price[0], price_out_per_mtok=price[1]
         )
 
         def complete(system: str, user: str, max_tokens: int):  # type: ignore[no-untyped-def]
@@ -112,9 +138,10 @@ def main(argv: list[str] | None = None) -> int:
             per_cluster = run_model(spec, complete, budget, repeats=3, delay_s=2.2)
         except Exception as exc:
             print(f"  skip {model_id}: {type(exc).__name__} {str(exc)[:80]}")
-            return None, proportion(0, 0)
+            return None, proportion(0, 0), None
         quality = {c: m.success_rate for c, m in per_cluster.items()}
-        return _overall_quality(quality)
+        score, pooled = _overall_quality(quality)
+        return score, pooled, economics(per_cluster, price)
 
     # Remember each model's provider for grading routing.
     for m in do_fetch():

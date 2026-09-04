@@ -18,13 +18,15 @@ from decimal import Decimal
 from pydantic import BaseModel, ConfigDict
 
 from handover.bench.discovery import CatalogModel, ModelChange, diff_catalog
-from handover.bench.lifecycle import GradeCard, classify, next_cadence
+from handover.bench.lifecycle import Economics, GradeCard, classify, next_cadence
 from handover.metrics.core import Proportion
 from handover.replay.budget import DailyBudget
 
-# Grade one model now: returns (overall score, quality proportion with n + CI).
+# Grade one model now: returns (overall score, quality proportion with n + CI) and
+# optionally the measured Economics (CPAT / TTAT) as a third element.
 # Cost is charged to the budget by the grader itself.
-Grader = Callable[[str], tuple[float | None, Proportion]]
+GradeResult = tuple[float | None, Proportion] | tuple[float | None, Proportion, Economics | None]
+Grader = Callable[[str], GradeResult]
 CatalogFetch = Callable[[], Sequence[CatalogModel]]
 
 
@@ -78,7 +80,9 @@ def tick(
         if not budget.can_spend(est_cost_per_grade):
             skipped.append(model_id)
             continue
-        score, quality = grade(model_id)  # grader charges the budget as it runs
+        result = grade(model_id)  # grader charges the budget as it runs
+        score, quality = result[0], result[1]
+        econ = result[2] if len(result) > 2 else None
         prior = state.cards.get(model_id)
         new_cards[model_id] = classify(
             model_id,
@@ -88,6 +92,7 @@ def tick(
             now,
             prior_history=prior.history if prior else (),
             append_history=True,
+            econ=econ if econ is not None else (prior.econ if prior else None),
         )
         graded.append(model_id)
 
@@ -101,6 +106,7 @@ def tick(
                 card.updated_at,
                 now,
                 prior_history=card.history,
+                econ=card.econ,
             )
 
     known = {m.model_id: m.version_hint for m in catalog}

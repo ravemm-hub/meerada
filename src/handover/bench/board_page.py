@@ -40,6 +40,14 @@ def _row(rank: int, card: GradeCard) -> dict[str, object]:
         "n": f"{card.n:,}",
         "status": card.status,
         "updated": card.updated_at.strftime("%Y-%m-%d %H:%MZ"),
+        "cpat": (
+            "—" if card.econ is None or card.econ.cpat_usd is None
+            else f"${card.econ.cpat_usd:.5f}"
+        ),
+        "price_note": "" if card.econ is None else card.econ.price_note,
+        "ttat": (
+            "—" if card.econ is None or card.econ.ttat_s is None else f"{card.econ.ttat_s:.1f}s"
+        ),
     }
 
 
