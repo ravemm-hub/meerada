@@ -631,7 +631,8 @@ function loadMeasured(){
     if(!cards.length)return;
     cards.sort(function(a,b){return b.score-a.score;});
     // measured models feed the Exchange + Handshake as REAL entries
-    MEASURED=cards.filter(function(c){return c.econ&&c.econ.cpat_usd!=null;}).map(function(c){
+    // only publishable cards (n ≥ 30, same bar as the ranking) may trade as "measured"
+    MEASURED=cards.filter(function(c){return c.econ&&c.econ.cpat_usd!=null&&c.n>=30;}).map(function(c){
       return {m:c.model_id, p:"groq", q:c.score, grade:c.score, cpat:c.econ.cpat_usd, lat:Math.round((c.econ.ttat_s||1)*1000), note:c.econ.price_note, measured:true, conf:c.status};
     });
     document.getElementById("measured-wrap").style.display="block";
