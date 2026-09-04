@@ -680,13 +680,14 @@ function oxCompute(){
   var win=cands[0], monthly=win.cpat*vol;
   function mark(c){ return c.measured?' <span class="mpill" title="measured on verified tasks; priced at public list price">● measured'+(c.note=="estimated"?'~':'')+'</span>':' <span class="sub" title="illustrative catalog entry">○</span>'; }
   clear.innerHTML='<div><span class="lab">Winning model</span><span class="big win">'+win.m+'</span>'+mark(win)+'</div>'
-    +'<div><span class="lab">Clearing price · CPAT</span><span class="big price">$'+win.cpat.toFixed(4)+'</span></div>'
+    +'<div><span class="lab">Clearing price · CPAT</span><span class="big price">$'+fmtCpat(win.cpat)+'</span></div>'
     +'<div><span class="lab">Your monthly cost</span><span class="big price">$'+Math.round(monthly).toLocaleString()+'</span></div>'
     +'<div><span class="lab">grade on this task</span><span class="big">'+win.g+'</span></div>';
   book.innerHTML=cands.slice(0,10).map(function(c,i){
-    return '<tr'+(i==0?' style="background:rgba(88,192,122,.09)"':'')+'><td class="l">'+(i+1)+'</td><td class="l"><span class="mid">'+c.m+'</span>'+mark(c)+(i==0?' <span class="mpill">WINS</span>':'')+'</td><td>'+c.g+'</td><td>$'+c.cpat.toFixed(4)+'</td><td>$'+Math.round(c.cpat*vol).toLocaleString()+'</td></tr>';
+    return '<tr'+(i==0?' style="background:rgba(88,192,122,.09)"':'')+'><td class="l">'+(i+1)+'</td><td class="l"><span class="mid">'+c.m+'</span>'+mark(c)+(i==0?' <span class="mpill">WINS</span>':'')+'</td><td>'+c.g+'</td><td>$'+fmtCpat(c.cpat)+'</td><td>$'+Math.round(c.cpat*vol).toLocaleString()+'</td></tr>';
   }).join("");
 }
+function fmtCpat(v){ return v>=0.001?v.toFixed(4):v.toFixed(6); }  // tiny free-tier CPATs stay visible
 
 // ---- Session Console (parallel sessions, simulated) ----
 var SC_STAGES=["translating…","sending lean prompt…","model working…","verifying…","done ✓"];
