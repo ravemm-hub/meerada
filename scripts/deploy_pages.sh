@@ -34,9 +34,19 @@ fi
 echo "==> publishing ./site to gh-pages"
 # Publish the site folder to the gh-pages branch via a temporary worktree.
 rm -rf .ghpages-tmp
-git worktree add -B gh-pages .ghpages-tmp >/dev/null 2>&1 || git worktree add .ghpages-tmp gh-pages
+git fetch origin gh-pages >/dev/null 2>&1 || true
+git worktree add -B gh-pages .ghpages-tmp origin/gh-pages >/dev/null 2>&1 || git worktree add .ghpages-tmp gh-pages
+# The live-grade workflow writes grade_state.json + grade.html straight to
+# gh-pages every hour (accumulated measurement history). NEVER wipe them —
+# keep the branch's copies and only fall back to site/ if they don't exist yet.
+mkdir -p .ghpages-keep
+for f in grade_state.json grade.html; do
+  [ -f ".ghpages-tmp/$f" ] && cp ".ghpages-tmp/$f" ".ghpages-keep/$f"
+done
 rm -rf .ghpages-tmp/*
 cp -r site/* .ghpages-tmp/
+cp -f .ghpages-keep/* .ghpages-tmp/ 2>/dev/null || true
+rm -rf .ghpages-keep
 touch .ghpages-tmp/.nojekyll
 ( cd .ghpages-tmp && git add -A && git commit -m "deploy site $(date -u +%Y-%m-%dT%H:%MZ)" && git push -f origin gh-pages )
 git worktree remove --force .ghpages-tmp
