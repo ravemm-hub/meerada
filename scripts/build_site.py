@@ -7,7 +7,6 @@ Run: python scripts/build_site.py
 """
 
 import base64
-import shutil
 from datetime import UTC, date, datetime
 from decimal import Decimal
 from pathlib import Path
@@ -24,7 +23,11 @@ OUT = ROOT / "out"
 
 
 def build_grade_board() -> None:
-    """A demo board from illustrative data (real grades come from continuous_run)."""
+    """A demo board from illustrative data — ONLY as a placeholder when no real
+    board exists yet. The live board (grade.html + grade_state.json) is written
+    to gh-pages by the hourly live-grade workflow and must never be overwritten."""
+    if (SITE / "grade.html").exists():
+        return
     now = datetime(2026, 8, 29, 12, 0, tzinfo=UTC)
     demo = {
         "claude-sonnet-5": (88.0, proportion(602, 640)),
@@ -49,14 +52,6 @@ def build_radar_page() -> None:
     render_radar(build_radar(deps, today), SITE / "radar.html", today=today)
 
 
-def copy_static() -> None:
-    # market.html lives in out/; index.html and logo.svg already live in site/.
-    for name in ("market.html",):
-        src = OUT / name
-        if src.exists() and src.resolve() != (SITE / name).resolve():
-            shutil.copyfile(src, SITE / name)
-
-
 def embed_download() -> None:
     """Base64-embed the wheel so the static site can hand it over with no server."""
     wheel = next((ROOT / "dist").glob("*.whl"), None)
@@ -67,9 +62,10 @@ def embed_download() -> None:
 
 def main() -> None:
     SITE.mkdir(exist_ok=True)
+    # All hand-authored pages (index, market, llmanager, dashboard) live in site/
+    # and are the source of truth — nothing here copies over them.
     build_grade_board()
     build_radar_page()
-    copy_static()
     embed_download()
     (SITE / ".nojekyll").write_text("", encoding="utf-8")  # GitHub Pages: serve as-is
     print(f"site assembled at {SITE}")

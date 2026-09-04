@@ -48,7 +48,8 @@ def test_tick_carries_economics_and_accepts_two_tuple_graders() -> None:
 
     econ = Economics(cpat_usd=0.002, ttat_s=1.5, n_successes=20, price_in=0.1, price_out=0.3)
     budget = DailyBudget(Decimal(9))
-    state, _ = tick(initial_state(), fetch, lambda _m: (80.0, proportion(28, 30), econ), budget, NOW)
+    grader = lambda _m: (80.0, proportion(28, 30), econ)  # noqa: E731
+    state, _ = tick(initial_state(), fetch, grader, budget, NOW)
     assert state.cards["m"].econ == econ
     # a plain (score, quality) grader still works, and keeps the prior economics
     state, _ = tick(state, fetch, lambda _m: (81.0, proportion(29, 30)), budget, NOW)
@@ -62,7 +63,8 @@ def test_state_roundtrip_and_old_state_without_econ_loads(tmp_path: Path) -> Non
 
     econ = Economics(cpat_usd=0.002, ttat_s=1.5, n_successes=20, price_in=0.1, price_out=0.3)
     budget = DailyBudget(Decimal(9))
-    state, _ = tick(initial_state(), fetch, lambda _m: (80.0, proportion(28, 30), econ), budget, NOW)
+    grader = lambda _m: (80.0, proportion(28, 30), econ)  # noqa: E731
+    state, _ = tick(initial_state(), fetch, grader, budget, NOW)
     path = tmp_path / "state.json"
     save_state(path, state)
     assert load_state(path).cards["m"].econ == econ

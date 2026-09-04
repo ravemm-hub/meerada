@@ -34,6 +34,7 @@ fi
 echo "==> publishing ./site to gh-pages"
 # Publish the site folder to the gh-pages branch via a temporary worktree.
 rm -rf .ghpages-tmp
+git worktree prune  # a crashed earlier run leaves a stale registration behind
 git fetch origin gh-pages >/dev/null 2>&1 || true
 git worktree add -B gh-pages .ghpages-tmp origin/gh-pages >/dev/null 2>&1 || git worktree add .ghpages-tmp gh-pages
 # The live-grade workflow writes grade_state.json + grade.html straight to
