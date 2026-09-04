@@ -48,6 +48,14 @@ Your conversations move freely between models — with the whole history:
 Reading local files (`~/.claude` scan, folder by path) is desktop/local only;
 the hosted app accepts uploads.
 
+## New models, automatically
+
+Connect an **OpenRouter** key and the picker grows by itself: everything that
+launched in the last three weeks (🆕, e.g. Ox Alpha = `z-ai/glm-5.3-flash`),
+every `:free` variant, and one flagship per big lab — pulled hourly from
+OpenRouter's public catalog, on your own key. The same feed drives the Arena's
+"New on the market" band and the grader's pricing.
+
 ## Model ids → which key
 
 Routing picks the provider whose key serves the model:

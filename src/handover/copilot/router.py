@@ -42,7 +42,7 @@ def _provider_of(model_id: str) -> str:
     if low.startswith(("mistral", "mixtral", "codestral")):
         return "mistral"
     if "/" in low:
-        return low.split("/", 1)[0]
+        return "openrouter"  # any other vendor/model id: OpenRouter routes it
     return "groq"
 
 

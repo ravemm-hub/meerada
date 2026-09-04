@@ -42,6 +42,21 @@ LIST_PRICES: dict[str, tuple[Decimal, Decimal, str]] = {
 ESTIMATE = (Decimal("0.20"), Decimal("0.60"), "estimated")
 
 
+def price_for_model(
+    model_id: str, live: dict[str, tuple[float, float]] | None = None
+) -> tuple[Decimal, Decimal, str]:
+    """Price a model for CPAT: the live web catalog (OpenRouter) first — a
+    ``:free`` variant is priced at its paid sibling's list price (what it costs
+    at scale) — then our static table, then a labelled estimate."""
+    live = live or {}
+    paid_id = model_id[:-5] if model_id.endswith(":free") else model_id
+    for candidate in (paid_id, model_id):
+        p = live.get(candidate)
+        if p and (p[0] > 0 or p[1] > 0):
+            return Decimal(str(p[0])), Decimal(str(p[1])), "list"
+    return list_price(paid_id)
+
+
 def list_price(model_id: str) -> tuple[Decimal, Decimal, str]:
     """Best public price for ``model_id``: longest matching key wins."""
     mid = model_id.lower()

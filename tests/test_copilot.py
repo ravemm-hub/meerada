@@ -160,5 +160,5 @@ def test_load_candidates_parses_state(tmp_path: Path) -> None:
     )
     cands = {c.model_id: c for c in load_candidates(state)}
     assert cands["gpt-oss-20b"].free is True
-    assert cands["some/paid-model"].provider == "some"  # derived from id
+    assert cands["some/paid-model"].provider == "openrouter"  # vendor ids route via OpenRouter
     assert load_candidates(tmp_path / "missing.json") == []

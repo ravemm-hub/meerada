@@ -50,6 +50,9 @@ jobs:
             --providers groq \
             --budget "0.50"
 
+      - name: discover new models on the web (public OpenRouter catalog)
+        run: python -m handover.bench.discover_web --out out/models_live.json || true
+
       - name: publish board + state to gh-pages
         run: |
           git config user.name "meerada-bot"
@@ -58,7 +61,8 @@ jobs:
           git worktree add pages origin/gh-pages
           cp out/grade.html pages/grade.html
           cp grade_state.json pages/grade_state.json
+          [ -f out/models_live.json ] && cp out/models_live.json pages/models_live.json
           cd pages
-          git add grade.html grade_state.json
+          git add grade.html grade_state.json models_live.json
           git commit -m "live grade $(date -u +%FT%RZ)" || echo "no change"
           git push origin HEAD:gh-pages

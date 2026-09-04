@@ -19,9 +19,10 @@ from pathlib import Path
 from handover.bench.board_page import render_board
 from handover.bench.catalog import fetch_catalog
 from handover.bench.continuous import tick
+from handover.bench.discover_web import fetch_live, live_prices
 from handover.bench.discovery import CatalogModel
 from handover.bench.lifecycle import Economics
-from handover.bench.prices import list_price
+from handover.bench.prices import price_for_model
 from handover.bench.runner import ModelSpec, run_model
 from handover.bench.state_store import load_state, save_state
 from handover.metrics.core import CoreMetrics, Proportion, proportion
@@ -48,6 +49,17 @@ _NON_CHAT = re.compile(r"whisper|tts|audio|embed|guard|moderation|rerank|orpheus
 
 def _is_chat_model(model_id: str) -> bool:
     return not _NON_CHAT.search(model_id)
+
+
+def _gradable(m: CatalogModel, allow_paid: bool) -> bool:
+    """Chat models only; on OpenRouter only the ``:free`` variants unless paid
+    grading is explicitly allowed — new/stealth models land there first, and
+    the loop must never spend real money by accident."""
+    if not _is_chat_model(m.model_id):
+        return False
+    if m.provider == "openrouter" and not allow_paid:
+        return m.model_id.endswith(":free")
+    return True
 
 
 def _keys(providers: list[str]) -> dict[str, str]:
@@ -116,15 +128,16 @@ def main(argv: list[str] | None = None) -> int:
     now = datetime.now(tz=UTC)
 
     def do_fetch() -> list[CatalogModel]:
-        return [m for m in fetch_catalog(live, keys) if _is_chat_model(m.model_id)]
+        return [m for m in fetch_catalog(live, keys) if _gradable(m, allow_paid)]
 
     callers = {p: HttpChatCaller(ENDPOINTS[p], keys[p]) for p in live}
     provider_of: dict[str, str] = {}
+    web_prices = live_prices(fetch_live())  # public list prices for anything discovered
 
     def grade(model_id: str) -> tuple[float | None, Proportion, Economics | None]:
         provider = provider_of.get(model_id, live[0])
         caller = callers[provider]
-        price = list_price(model_id)  # public list price -> a real CPAT, even on a free tier
+        price = price_for_model(model_id, web_prices)  # list price -> real CPAT on a free tier
         spec = ModelSpec(
             model_id=model_id, price_in_per_mtok=price[0], price_out_per_mtok=price[1]
         )

@@ -106,3 +106,21 @@ and is never in the deploy config** — production always uses real Google sign-
     for a database.
 - Sessions and tasks run per-user (`Board` per user); one user never sees
   another's models or conversations.
+
+## Grading new models from the web (the Bourse feeds itself)
+
+Every hourly `live-grade` run now:
+
+1. **Discovers** launches from the public OpenRouter catalog (no key needed) and
+   publishes `models_live.json` → the Arena's "🆕 New on the market" band.
+2. **Grades** every model it can reach for free: Groq's catalog, plus every
+   OpenRouter `:free` variant — **add a free OpenRouter key as the repo secret
+   `OPENROUTER_API_KEY`** (Settings → Secrets → Actions) and new free models are
+   graded automatically on the next run. Paid models are never graded unless
+   `MEERADA_ALLOW_PAID=1` is set deliberately.
+3. **Prices** each verified task at the provider's public list price from the
+   same feed (a `:free` variant is priced at its paid sibling), so CPAT is real.
+
+LLManager users with an OpenRouter key see the same feed in the picker:
+new launches (🆕), free variants, and one flagship per big lab — selectable the
+day they appear, on their own key.

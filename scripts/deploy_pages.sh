@@ -41,7 +41,7 @@ git worktree add -B gh-pages .ghpages-tmp origin/gh-pages >/dev/null 2>&1 || git
 # gh-pages every hour (accumulated measurement history). NEVER wipe them —
 # keep the branch's copies and only fall back to site/ if they don't exist yet.
 mkdir -p .ghpages-keep
-for f in grade_state.json grade.html; do
+for f in grade_state.json grade.html models_live.json; do
   [ -f ".ghpages-tmp/$f" ] && cp ".ghpages-tmp/$f" ".ghpages-keep/$f"
 done
 rm -rf .ghpages-tmp/*

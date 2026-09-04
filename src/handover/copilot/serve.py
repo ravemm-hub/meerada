@@ -52,6 +52,10 @@ _CATALOG: tuple[tuple[str, str, str, str], ...] = (
     ("claude-3-5-haiku-latest", "Claude 3.5 Haiku", "anthropic", "fast"),
     ("gpt-4o", "GPT-4o", "openai", "strong"),
     ("gpt-4o-mini", "GPT-4o mini", "openai", "fast · cheap"),
+    ("z-ai/glm-5.3-flash", "GLM-5.3 Flash (Ox Alpha)", "openrouter", "🆕 code · cheap · vision"),
+    ("anthropic/claude-fable-5.1", "Claude Fable 5.1", "openrouter", "🆕 frontier"),
+    ("google/gemini-3.8-flash", "Gemini 3.8 Flash", "openrouter", "🆕 fast · vision"),
+    ("qwen/qwen3.8-flash", "Qwen3.8 Flash", "openrouter", "🆕 cheap"),
     ("anthropic/claude-3.7-sonnet", "Claude 3.7 Sonnet", "openrouter", "top code"),
     ("openai/gpt-4o", "GPT-4o", "openrouter", "strong"),
     ("google/gemini-2.5-pro", "Gemini 2.5 Pro", "openrouter", "strong · vision"),
@@ -367,13 +371,28 @@ class Board:
         }
 
 
-def _caller_for_user(keystore: KeyStore, user: str) -> CallerFor:
-    """Build model callers from the signed-in user's own stored provider keys."""
-    from handover.copilot.providers import build_caller
+def provider_for(model_id: str, extra: Mapping[str, str] | None = None) -> str:
+    """The catalog's own provider for a known id (static or live-discovered),
+    else the id heuristics. Live rows are all OpenRouter, so a freshly
+    discovered ``vendor/model`` routes through the user's OpenRouter key."""
     from handover.copilot.router import _provider_of
 
+    if extra and model_id in extra:
+        return extra[model_id]
+    for row in MODEL_CATALOG:
+        if row["id"] == model_id:
+            return row["provider"]
+    return _provider_of(model_id)
+
+
+def _caller_for_user(
+    keystore: KeyStore, user: str, providers: Mapping[str, str] | None = None
+) -> CallerFor:
+    """Build model callers from the signed-in user's own stored provider keys."""
+    from handover.copilot.providers import build_caller
+
     def caller(model_id: str) -> ChatCaller:
-        provider = _provider_of(model_id)
+        provider = provider_for(model_id, providers)
         key = keystore.get(user, provider)
         if not key:
             raise RuntimeError(f"no key connected for {provider} — add it under Keys")
@@ -466,6 +485,17 @@ def build_app(
         except RuntimeError:
             caller_for = None
 
+    from handover.copilot.catalog_live import LiveCatalog
+
+    live_catalog = LiveCatalog()
+    live_providers: dict[str, str] = {}  # id -> provider for discovered rows
+
+    def live_rows() -> list[dict[str, str]]:
+        rows = live_catalog.entries()
+        for r in rows:
+            live_providers[r["id"]] = r["provider"]
+        return rows
+
     app = FastAPI(title="Meerada LLManager", docs_url=None, redoc_url=None)
     state: dict[str, SessionManager | None] = {
         "manager": SessionManager(caller_for) if caller_for is not None else None
@@ -486,7 +516,7 @@ def build_app(
         sub = str(user["sub"])
         if hosted or local_vault:  # per-user (or single local) board from the key vault
             if sub not in user_boards:
-                user_boards[sub] = Board(_caller_for_user(keystore, sub))
+                user_boards[sub] = Board(_caller_for_user(keystore, sub, live_providers))
             return user_boards[sub], sub
         return board["board"], sub
 
@@ -502,8 +532,12 @@ def build_app(
             connected = keystore.providers(str(user["sub"])) if user else []
         else:
             connected = ["groq"] if caller_for is not None else []  # shared tester key
+        catalog = list(MODEL_CATALOG)
+        if "openrouter" in connected:  # new models on the web, on the user's own key
+            known = {r["id"] for r in catalog}
+            catalog += [r for r in live_rows() if r["id"] not in known]
         return JSONResponse(
-            {"catalog": MODEL_CATALOG, "connected": connected,
+            {"catalog": catalog, "connected": connected,
              "provider_names": PROVIDER_NAMES, "live": live}
         )
 
@@ -776,7 +810,7 @@ def build_app(
             state["manager"] = SessionManager(caller_for) if caller_for is not None else None
             board["board"] = Board(caller_for)
         elif sub is not None:
-            user_boards[sub] = Board(_caller_for_user(keystore, sub))
+            user_boards[sub] = Board(_caller_for_user(keystore, sub, live_providers))
         return JSONResponse({"ok": True})
 
     return app
