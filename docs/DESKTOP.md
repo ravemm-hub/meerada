@@ -21,6 +21,33 @@ Mistral, or an **OpenRouter** key to reach Claude / Gemini / GPT through one
 OpenAI-compatible endpoint). Then add sessions, give each its own model and task,
 and run them in parallel. Pop any session out (**⧉**) into its own window.
 
+## The Handshake, inside the app
+
+Your conversations move freely between models — with the whole history:
+
+- **📥 Import history** — the app scans `~/.claude/projects` for your **Claude Code**
+  sessions (one click each), or upload a **Claude.ai** / **ChatGPT** data export
+  (`conversations.json`), a Claude Code `.jsonl`, or any `User:` / `Assistant:`
+  transcript. The conversation becomes a live session on the model you pick.
+  Oldest turns are trimmed to a prompt budget (~120k chars); tool dumps are
+  summarised; harness noise and private reasoning are dropped.
+- **↔ Switch mid-conversation** — change the model in a session's dropdown and the
+  history + attachments carry over. Nothing is lost.
+- **⇄ Fork** (⋯ menu) — copy the conversation to a second model, side by side.
+- **📎 / 📁 Attach** (⋯ menu) — files or a folder (browser picker, or a local path
+  in the desktop app). Text/code only, vendor/build dirs skipped, size-capped.
+  Sent as system context, so it persists across turns and travels on handoff.
+- **⚡ Relay** (⋯ menu) — a cheap model drafts, the session's model polishes. Both
+  costs land on the ledger.
+- **⚖️ Judge answers** (toolbar) — after *Send to all* / *Compare all*, a judge
+  model ranks the answers and writes one best answer, in its own Verdict pane.
+- **Refresh-safe** — sessions live on the local server; reloading the window
+  restores them. (They are in memory: closing the app ends them — export a
+  transcript from the ⋯ menu if you want to keep one.)
+
+Reading local files (`~/.claude` scan, folder by path) is desktop/local only;
+the hosted app accepts uploads.
+
 ## Model ids → which key
 
 Routing picks the provider whose key serves the model:

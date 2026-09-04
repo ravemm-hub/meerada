@@ -22,6 +22,34 @@ CallerFactory = Callable[[str], ChatCaller]
 _ZERO = Decimal("0")
 
 
+_HTTP_HINTS: dict[str, str] = {
+    "401": "key rejected by the provider — reconnect it under Keys",
+    "402": "no credit left on your account at this provider",
+    "403": "your account isn't allowed to use this model",
+    "404": "model not available on your account at this provider",
+    "429": "rate limit on YOUR provider account (tokens/min) — wait a minute, "
+    "or continue on a cheaper model / shorter history",
+    "500": "provider error — try again",
+    "502": "provider error — try again",
+    "503": "provider overloaded — try again in a moment",
+    "529": "provider overloaded — try again in a moment",
+}
+
+
+def friendly_error(exc: BaseException) -> str:
+    """Turn a raw HTTP/network exception into something a user can act on. The
+    bill and the limits live at the provider, so we say exactly that."""
+    raw = f"{type(exc).__name__}: {exc}"
+    for code, hint in _HTTP_HINTS.items():
+        if f"Error {code}" in raw or f" {code}:" in raw or raw.endswith(code):
+            return f"{code} — {hint}"
+    if "timed out" in raw or "TimeoutError" in raw:
+        return "timeout — the provider took too long; try again"
+    if "URLError" in raw or "getaddrinfo" in raw or "Connection" in raw:
+        return "network — can't reach the provider; check your connection"
+    return raw[:120]
+
+
 class Turn(BaseModel):
     model_config = ConfigDict(frozen=True)
 
@@ -65,6 +93,31 @@ class Session:
         self.history: list[Turn] = []
         self.total_tokens = 0
         self.total_cost = _ZERO
+        # Handshake metadata: where this conversation came from, and the files
+        # the user attached (sent as system context, so they persist across turns
+        # and travel with the history when the session moves to another model).
+        self.title = ""
+        self.source = ""
+        self.attachments: list[dict[str, str]] = []
+
+    def seed(self, turns: list[dict[str, str]]) -> None:
+        """Start from an existing conversation (import / handoff from another model)."""
+        self.history = [Turn(role=t["role"], content=t["content"]) for t in turns]
+
+    def attach(self, files: list[dict[str, str]]) -> None:
+        names = {f["name"] for f in files}
+        self.attachments = [a for a in self.attachments if a["name"] not in names] + list(files)
+
+    def carry_from(self, other: "Session") -> None:
+        """Take another session's whole context — history, attachments, title."""
+        self.history = list(other.history)
+        self.attachments = list(other.attachments)
+        self.title, self.source = other.title, other.source
+
+    def system_context(self) -> str:
+        from handover.copilot.importers import context_block
+
+        return context_block(self.attachments)
 
     def ask(self, intent: str) -> SessionReply:
         """Optimize ``intent`` for this model, send it, and record the exchange."""
@@ -74,10 +127,12 @@ class Session:
             {"role": t.role, "content": t.content} for t in self.history
         ]
         messages.append({"role": "user", "content": user})
+        system = prompt.system
+        ctx = self.system_context()
+        if ctx:
+            system = f"{system}\n\n{ctx}" if system else ctx
         try:
-            completion = self._caller.complete(
-                self.model_id, prompt.system, messages, self._max_tokens
-            )
+            completion = self._caller.complete(self.model_id, system, messages, self._max_tokens)
         except Exception as exc:  # a dead session must never kill the fan-out
             return SessionReply(
                 model_id=self.model_id,
@@ -86,7 +141,7 @@ class Session:
                 output_tokens=0,
                 cost_usd=_ZERO,
                 prompt=prompt,
-                error=f"{type(exc).__name__}: {exc}"[:120],
+                error=friendly_error(exc),
             )
         cost = (
             Decimal(completion.input_tokens) * self._price_in

@@ -162,13 +162,55 @@ class Board:
     at once. Unlike a single chat, the user gives DIFFERENT tasks to DIFFERENT
     models (or several sessions on one model) and operates them all in parallel.
     Each session keeps its own history and cost tally; FastAPI runs the sync send
-    endpoint in a threadpool, so sessions genuinely run concurrently."""
+    endpoint in a threadpool, so sessions genuinely run concurrently.
 
-    def __init__(self, caller_for: CallerFor | None, *, max_tokens: int = 512) -> None:
+    The Handshake lives here too: changing a session's model carries the WHOLE
+    conversation (history + attached files) to the new model; ``fork`` copies it
+    to a second model side by side; ``import_conversation`` seeds a session from
+    Claude Code / Claude.ai / ChatGPT history; ``judge`` and ``relay`` compose
+    several models into one answer — things no single vendor can offer."""
+
+    def __init__(self, caller_for: CallerFor | None, *, max_tokens: int = 1500) -> None:
         self._caller_for = caller_for
         self._max_tokens = max_tokens
         self.sessions: dict[str, Session] = {}
         self.models: dict[str, str] = {}
+
+    @property
+    def live(self) -> bool:
+        return self._caller_for is not None
+
+    def _new_session(self, model: str) -> Session:
+        assert self._caller_for is not None
+        price_in, price_out = price_for(model)
+        return Session(
+            model, self._caller_for(model), price_in_per_mtok=price_in,
+            price_out_per_mtok=price_out, max_tokens=self._max_tokens,
+        )
+
+    def open(self, sid: str, model: str) -> Session:
+        """Get the session for ``sid`` on ``model``. If it exists on a DIFFERENT
+        model, the conversation moves with it — that's the in-place handshake."""
+        session = self.sessions.get(sid)
+        if session is None:
+            session = self._new_session(model)
+            self.sessions[sid] = session
+        elif session.model_id != model:
+            moved = self._new_session(model)
+            moved.carry_from(session)
+            moved.total_tokens, moved.total_cost = session.total_tokens, session.total_cost
+            self.sessions[sid] = session = moved
+        self.models[sid] = model
+        return session
+
+    def _view(self, sid: str, session: Session) -> dict[str, Any]:
+        return {
+            "id": sid, "model": session.model_id, "title": session.title,
+            "source": session.source, "turns": len(session.history) // 2,
+            "attachments": [a["name"] for a in session.attachments],
+            "context_chars": sum(len(a["text"]) for a in session.attachments),
+            "total_tokens": session.total_tokens, "total_cost": float(session.total_cost),
+        }
 
     def send(self, sid: str, model: str, message: str) -> dict[str, Any]:
         message = message.strip()
@@ -183,17 +225,7 @@ class Board:
                 "saved_pct": opt.saved_pct, "system": opt.system, "user": opt.user,
                 "turns": 0, "total_tokens": 0, "total_cost": 0.0,
             }
-        session = self.sessions.get(sid)
-        if session is None or session.model_id != model:
-            price_in, price_out = price_for(model)
-            session = Session(
-                model,
-                self._caller_for(model),
-                price_in_per_mtok=price_in,
-                price_out_per_mtok=price_out,
-                max_tokens=self._max_tokens,
-            )
-            self.sessions[sid] = session
+        session = self.open(sid, model)
         reply = session.ask(message)
         return {
             "id": sid, "model": model, "text": reply.text, "error": reply.error,
@@ -210,6 +242,129 @@ class Board:
     def history(self, sid: str) -> list[dict[str, str]]:
         session = self.sessions.get(sid)
         return [{"role": t.role, "content": t.content} for t in session.history] if session else []
+
+    def describe(self, sid: str) -> dict[str, Any]:
+        session = self.sessions.get(sid)
+        return self._view(sid, session) if session else {"id": sid, "turns": 0}
+
+    def overview(self) -> list[dict[str, Any]]:
+        return [self._view(sid, s) for sid, s in self.sessions.items()]
+
+    # ---- Handshake operations -------------------------------------------
+    def import_conversation(
+        self, sid: str, model: str, turns: list[dict[str, str]], *, title: str, source: str
+    ) -> dict[str, Any]:
+        if not self.live:
+            return {"error": "connect a key first — imported history needs a live model"}
+        session = self._new_session(model)
+        session.seed(turns)
+        session.title, session.source = title, source
+        self.sessions[sid] = session
+        self.models[sid] = model
+        return self._view(sid, session)
+
+    def fork(self, sid: str, new_sid: str, model: str) -> dict[str, Any]:
+        """Copy the whole conversation to a second session on another model, so
+        the two continue side by side (the original stays where it is)."""
+        src = self.sessions.get(sid)
+        if src is None:
+            return {"error": "nothing to hand off yet — this session has no history"}
+        if not self.live:
+            return {"error": "connect a key first"}
+        session = self._new_session(model)
+        session.carry_from(src)
+        self.sessions[new_sid] = session
+        self.models[new_sid] = model
+        return self._view(new_sid, session)
+
+    def attach(self, sid: str, model: str, files: list[dict[str, str]]) -> dict[str, Any]:
+        if not self.live:
+            return {"error": "connect a key first"}
+        clean = [
+            {"name": str(f.get("name", "file"))[:200], "text": str(f.get("text", ""))}
+            for f in files if str(f.get("text", "")).strip()
+        ]
+        session = self.open(sid, model)
+        session.attach(clean)
+        return self._view(sid, session)
+
+    def judge(self, ids: list[str], judge_sid: str, judge_model: str) -> dict[str, Any]:
+        """Cross-model verdict: a judge model reads the latest answer from each
+        listed session (same question, different models), ranks them, and writes
+        one merged best answer. The verdict lives in its own session so its cost
+        is tracked like any other — the ledger stays honest."""
+        answers = []
+        for sid in ids:
+            s = self.sessions.get(sid)
+            if s and s.history and s.history[-1].role == "assistant":
+                q = s.history[-2].content if len(s.history) >= 2 else ""
+                answers.append((sid, s.model_id, q, s.history[-1].content))
+        if not answers:
+            return {"error": "no answers to judge yet"}
+        if not self.live:
+            return {"error": "connect a key first"}
+        question = answers[0][2]
+        body = [
+            "You are an impartial judge comparing answers from different AI models "
+            "to the same task.",
+            f"TASK:\n{question[:6000]}\n",
+        ]
+        for n, (_, model, _, text) in enumerate(answers, 1):
+            body.append(f"--- ANSWER {n} (from {model}) ---\n{text[:8000]}\n")
+        body.append(
+            "Rank the answers from best to worst with one line of reasoning each "
+            "(format: '1. ANSWER n — reason'), then under a heading 'BEST ANSWER' write the "
+            "single best final answer, merging correct parts if that improves it. Be concrete."
+        )
+        session = self.open(judge_sid, judge_model)
+        session.title = "⚖️ Verdict"
+        session.source = "judge"
+        reply = session.ask("\n".join(body))
+        return {
+            **self._view(judge_sid, session), "text": reply.text, "error": reply.error,
+            "judged": [{"id": sid, "model": m} for sid, m, _, _ in answers],
+            "input_tokens": reply.input_tokens, "output_tokens": reply.output_tokens,
+            "saved_pct": reply.prompt.saved_pct,
+        }
+
+    def relay(self, sid: str, model: str, draft_model: str, message: str) -> dict[str, Any]:
+        """Draft cheap, polish strong: a cheap model drafts, then the session's
+        own (stronger) model refines with the draft in hand. Usually most of the
+        quality at a fraction of the strong model's output cost."""
+        message = message.strip()
+        if not sid or not model or not draft_model or not message:
+            return {"error": "session id, model, draft model and message are required"}
+        if not self.live:
+            return {"error": "connect a key first"}
+        session = self.open(sid, model)
+        drafter = self._new_session(draft_model)
+        drafter.history = list(session.history)
+        drafter.attachments = list(session.attachments)
+        draft = drafter.ask(message)
+        if draft.error:
+            err = f"draft ({draft_model}): {draft.error}"
+            return {"id": sid, "model": model, "text": "", "error": err}
+        polish = (
+            f"{message}\n\n[A faster model drafted this answer. Check it, fix mistakes, "
+            f"improve it, and reply with the final answer only:]\n{draft.text}"
+        )
+        reply = session.ask(polish)
+        # keep the visible history clean: the user's message, the final answer
+        if len(session.history) >= 2 and not reply.error:
+            from handover.copilot.session import Turn
+
+            session.history[-2] = Turn(role="user", content=message)
+        session.total_tokens += draft.input_tokens + draft.output_tokens
+        session.total_cost += draft.cost_usd
+        return {
+            "id": sid, "model": model, "text": reply.text, "error": reply.error,
+            "saved_pct": reply.prompt.saved_pct, "relay": {"draft_model": draft_model,
+            "draft_tokens": draft.output_tokens, "draft_cost": float(draft.cost_usd)},
+            "input_tokens": reply.input_tokens + draft.input_tokens,
+            "output_tokens": reply.output_tokens + draft.output_tokens,
+            "turns": len(session.history) // 2,
+            "total_tokens": session.total_tokens, "total_cost": float(session.total_cost),
+        }
 
 
 def _caller_for_user(keystore: KeyStore, user: str) -> CallerFor:
@@ -357,6 +512,7 @@ def build_app(
                 "user": user.get("email") or user.get("name"),
                 "auth": hosted,
                 "local_vault": local_vault,
+                "local_fs": not hosted,  # desktop/local: can scan ~/.claude, attach folders
                 "providers": providers,
             }
         )
@@ -464,7 +620,148 @@ def build_app(
     @app.get("/session/history")
     def session_history(request: Request, id: str = "") -> JSONResponse:
         b, _ = board_for(request)
-        return JSONResponse({"turns": b.history(id) if b is not None else []})
+        if b is None:
+            return JSONResponse({"turns": []})
+        view = b.describe(id)
+        view["n_turns"] = view.pop("turns", 0)
+        return JSONResponse({**view, "turns": b.history(id)})
+
+    @app.get("/sessions")
+    def sessions_list(request: Request) -> JSONResponse:
+        b, _ = board_for(request)
+        return JSONResponse({"sessions": b.overview() if b is not None else []})
+
+    # ---- the Handshake: import history, move it between models, attach work --
+    from handover.copilot import importers as IMP
+
+    import_cache: dict[str, dict[str, list[IMP.Conversation]]] = {}
+    local_fs = not hosted  # reading this machine's files only makes sense locally
+
+    def _stash(sub: str, convs: list[IMP.Conversation]) -> str:
+        import secrets
+
+        bucket = import_cache.setdefault(sub, {})
+        while len(bucket) >= 3:
+            bucket.pop(next(iter(bucket)))
+        token = secrets.token_urlsafe(8)
+        bucket[token] = convs
+        return token
+
+    def _import_into(
+        b: Board, payload: Mapping[str, Any], conv: IMP.Conversation
+    ) -> dict[str, Any]:
+        return b.import_conversation(
+            str(payload.get("id", "")) or f"imp-{len(b.sessions) + 1}",
+            str(payload.get("model", "")), conv.turns, title=conv.title, source=conv.source,
+        )
+
+    @app.get("/import/scan")
+    def import_scan() -> JSONResponse:
+        if not local_fs:
+            return JSONResponse({"sessions": [], "local": False})
+        return JSONResponse({"sessions": IMP.scan_claude_code(), "local": True})
+
+    @app.post("/import/local")
+    async def import_local(request: Request) -> JSONResponse:
+        b, _ = board_for(request)
+        payload = await request.json()
+        path = str(payload.get("path", ""))
+        if b is None or not local_fs:
+            return JSONResponse({"error": "local import is only available in the desktop app"}, 403)
+        if not IMP.is_under_claude_root(path):
+            msg = "only Claude Code sessions under ~/.claude can be imported"
+            return JSONResponse({"error": msg}, 403)
+        try:
+            text = Path(path).read_text(encoding="utf-8", errors="replace")
+        except OSError as exc:
+            return JSONResponse({"error": f"cannot read: {exc}"}, 400)
+        conv = IMP.parse_claude_code_jsonl(text, path=path)
+        if not conv.turns:
+            return JSONResponse({"error": "no conversation turns found in that session"}, 400)
+        return JSONResponse(_import_into(b, payload, conv))
+
+    @app.post("/import")
+    async def import_upload(request: Request) -> JSONResponse:
+        b, sub = board_for(request)
+        if b is None or sub is None:
+            return JSONResponse({"error": "sign in required"}, status_code=401)
+        payload = await request.json()
+        text = str(payload.get("text", ""))
+        convs = IMP.detect_and_parse(text, str(payload.get("name", "")))
+        if not convs:
+            return JSONResponse({"error": "couldn't recognise a conversation in that file"}, 400)
+        if len(convs) == 1:
+            return JSONResponse(_import_into(b, payload, convs[0]))
+        token = _stash(sub, convs)
+        return JSONResponse(
+            {"token": token, "conversations": [c.summary(i) for i, c in enumerate(convs)]}
+        )
+
+    @app.post("/import/pick")
+    async def import_pick(request: Request) -> JSONResponse:
+        b, sub = board_for(request)
+        if b is None or sub is None:
+            return JSONResponse({"error": "sign in required"}, status_code=401)
+        payload = await request.json()
+        convs = import_cache.get(sub, {}).get(str(payload.get("token", "")))
+        try:
+            conv = (convs or [])[int(payload.get("i", -1))]
+        except (IndexError, ValueError):
+            return JSONResponse({"error": "that import expired — upload the file again"}, 400)
+        return JSONResponse(_import_into(b, payload, conv))
+
+    @app.post("/session/fork")
+    async def session_fork(request: Request) -> JSONResponse:
+        b, _ = board_for(request)
+        if b is None:
+            return JSONResponse({"error": "sign in required"}, status_code=401)
+        p = await request.json()
+        return JSONResponse(
+            b.fork(str(p.get("id", "")), str(p.get("new_id", "")), str(p.get("model", "")))
+        )
+
+    @app.post("/session/attach")
+    async def session_attach(request: Request) -> JSONResponse:
+        b, _ = board_for(request)
+        if b is None:
+            return JSONResponse({"error": "sign in required"}, status_code=401)
+        p = await request.json()
+        files = [f for f in (p.get("files") or []) if isinstance(f, dict)]
+        return JSONResponse(b.attach(str(p.get("id", "")), str(p.get("model", "")), files))
+
+    @app.post("/session/attach_path")
+    async def session_attach_path(request: Request) -> JSONResponse:
+        b, _ = board_for(request)
+        p = await request.json()
+        if b is None or not local_fs:
+            return JSONResponse({"error": "folder attach is desktop-app only"}, 403)
+        files, report = IMP.read_folder(str(p.get("path", "")))
+        if not files:
+            return JSONResponse({"error": "no readable text files there", "report": report}, 400)
+        out = b.attach(str(p.get("id", "")), str(p.get("model", "")), files)
+        out["report"] = report
+        return JSONResponse(out)
+
+    @app.post("/board/judge")
+    def board_judge(request: Request, payload: dict[str, Any]) -> JSONResponse:  # sync->threadpool
+        b, _ = board_for(request)
+        if b is None:
+            return JSONResponse({"error": "sign in required"}, status_code=401)
+        ids = [str(i) for i in (payload.get("ids") or [])]
+        judge_sid, judge_model = str(payload.get("id", "judge")), str(payload.get("model", ""))
+        return JSONResponse(b.judge(ids, judge_sid, judge_model))
+
+    @app.post("/session/relay")
+    def session_relay(request: Request, payload: dict[str, Any]) -> JSONResponse:  # threadpool
+        b, _ = board_for(request)
+        if b is None:
+            return JSONResponse({"error": "sign in required"}, status_code=401)
+        return JSONResponse(
+            b.relay(
+                str(payload.get("id", "")), str(payload.get("model", "")),
+                str(payload.get("draft_model", "")), str(payload.get("message", "")),
+            )
+        )
 
     @app.post("/reset")
     def reset_endpoint(request: Request) -> JSONResponse:

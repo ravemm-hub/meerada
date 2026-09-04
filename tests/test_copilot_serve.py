@@ -86,12 +86,16 @@ def test_board_sessions_are_independent() -> None:
     assert set(board.sessions) == {"s1", "s2"}
 
 
-def test_board_model_change_rehomes_session() -> None:
+def test_board_model_change_is_a_handshake() -> None:
     board = Board(_caller_for)
     board.send("s1", "llama", "hi")
-    r = board.send("s1", "gemma", "hi again")  # switched model -> fresh session
+    r = board.send("s1", "gemma", "hi again")  # switched model -> history moves with it
     assert r["model"] == "gemma"
-    assert r["turns"] == 1
+    assert r["turns"] == 2
+    hist = board.history("s1")
+    assert [t["role"] for t in hist] == ["user", "assistant"] * 2
+    assert hist[1]["content"] == "reply from llama"  # the llama turn survived the switch
+    assert hist[3]["content"] == "reply from gemma"
 
 
 def test_board_preview_and_close() -> None:

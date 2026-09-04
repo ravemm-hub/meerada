@@ -19,22 +19,29 @@
   .ledger b{font-family:"Archivo";font-weight:800;font-size:.92rem;} .ledger .k{color:var(--muted);display:block;font-size:.56rem;text-transform:uppercase;letter-spacing:.05em;}
   .btn{font-family:"Archivo";font-weight:700;font-size:.8rem;padding:.4rem .75rem;border-radius:8px;border:1px solid var(--line);color:var(--text);background:transparent;cursor:pointer;white-space:nowrap;}
   .btn.primary{background:var(--amber);color:#171205;border-color:transparent;} .btn.ghost{color:var(--teal);border-color:var(--teal);} .btn:disabled{opacity:.5;cursor:not-allowed;}
+  .btn.sm{font-size:.7rem;padding:.25rem .55rem;}
   .toolbar{display:flex;align-items:center;gap:.6rem;padding:.5rem 1rem;border-bottom:1px solid var(--line);flex-wrap:wrap;}
   .toolbar input{background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.38rem .6rem;font-family:inherit;font-size:.82rem;}
   #bcast{flex:1;min-width:200px;}
 
   .grid{flex:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:.8rem;padding:.8rem 1rem;overflow-y:auto;align-content:start;}
   .pane{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-height:320px;max-height:70vh;}
-  .ph{display:flex;align-items:center;gap:.5rem;padding:.5rem .65rem;border-bottom:1px solid var(--line);background:var(--panel2);}
-  .ph select{background:var(--ground);border:1px solid var(--line);color:var(--teal);border-radius:7px;padding:.28rem .5rem;font-family:"IBM Plex Mono",monospace;font-size:.78rem;flex:1;}
+  .ph{display:flex;align-items:center;gap:.5rem;padding:.5rem .65rem;border-bottom:1px solid var(--line);background:var(--panel2);position:relative;}
+  .ph select{background:var(--ground);border:1px solid var(--line);color:var(--teal);border-radius:7px;padding:.28rem .5rem;font-family:"IBM Plex Mono",monospace;font-size:.78rem;flex:1;min-width:0;}
   .ph .pstat{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--muted);white-space:nowrap;}
   .ph .pstat.run{color:var(--teal);} .ph .pstat.done{color:var(--good);}
-  .ph .x{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.95rem;padding:0 .1rem;} .ph .x:hover{color:var(--bad);}
-  .ph .pop{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.95rem;padding:0 .1rem;} .ph .pop:hover{color:var(--teal);}
+  .ph .x,.ph .pop,.ph .more{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.95rem;padding:0 .1rem;} .ph .x:hover{color:var(--bad);} .ph .pop:hover,.ph .more:hover{color:var(--teal);}
+  .ptitle{display:flex;gap:.5rem;align-items:center;padding:.3rem .65rem;border-bottom:1px solid var(--line);font-size:.72rem;color:var(--muted);font-family:"IBM Plex Mono",monospace;flex-wrap:wrap;}
+  .ptitle b{color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:60%;}
+  .chip{border:1px solid var(--line);border-radius:999px;padding:.02rem .45rem;font-size:.6rem;} .chip.relay{color:var(--amber);border-color:#9e6a03;cursor:pointer;} .chip.src{color:var(--teal);}
+  .menu{position:absolute;right:.4rem;top:2.2rem;z-index:30;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:.3rem;min-width:230px;box-shadow:0 10px 30px rgba(0,0,0,.45);display:none;}
+  .menu button{display:block;width:100%;text-align:left;background:none;border:none;color:var(--text);padding:.45rem .6rem;border-radius:7px;font-size:.8rem;cursor:pointer;font-family:inherit;}
+  .menu button:hover{background:var(--panel2);color:var(--teal);} .menu .sep{border-top:1px solid var(--line);margin:.25rem 0;} .menu small{display:block;color:var(--muted);font-size:.66rem;}
   .thread{flex:1;overflow-y:auto;padding:.6rem;display:flex;flex-direction:column;gap:.5rem;min-height:120px;}
-  .you{align-self:flex-end;background:#16233b;border:1px solid var(--line);border-radius:11px 11px 2px 11px;padding:.4rem .6rem;font-size:.83rem;max-width:90%;}
+  .you{align-self:flex-end;background:#16233b;border:1px solid var(--line);border-radius:11px 11px 2px 11px;padding:.4rem .6rem;font-size:.83rem;max-width:90%;white-space:pre-wrap;}
   .ai{align-self:flex-start;background:var(--panel2);border:1px solid var(--line);border-radius:11px 11px 11px 2px;padding:.45rem .65rem;font-size:.84rem;max-width:96%;white-space:pre-wrap;}
   .ai .meta{display:block;margin-top:.35rem;font-family:"IBM Plex Mono",monospace;font-size:.6rem;color:var(--teal);}
+  .sys{align-self:center;color:var(--muted);font-family:"IBM Plex Mono",monospace;font-size:.64rem;text-align:center;padding:.15rem .5rem;border:1px dashed var(--line);border-radius:999px;}
   .acc{margin-left:.5rem;background:none;border:1px solid var(--line);color:var(--muted);border-radius:999px;padding:.05rem .5rem;font-size:.58rem;cursor:pointer;font-family:"IBM Plex Mono",monospace;}
   .acc:hover{border-color:var(--good);color:var(--good);} .acc.on{border-color:#2ea043;color:var(--good);background:#0f2114;cursor:default;}
   .code{position:relative;margin:.4rem 0;}
@@ -43,18 +50,28 @@
   .code .codecopy{position:absolute;top:.35rem;right:.35rem;margin:0;background:var(--panel);}
   .codecopy:hover{border-color:var(--teal);color:var(--teal);}
   .tag{font-family:"IBM Plex Mono",monospace;font-size:.58rem;border-radius:999px;padding:.02rem .45rem;margin-right:.35rem;border:1px solid;}
-  .tag.fast{color:var(--teal);border-color:var(--teal);} .tag.cheap{color:var(--good);border-color:#2ea043;}
+  .tag.fast{color:var(--teal);border-color:var(--teal);} .tag.cheap{color:var(--good);border-color:#2ea043;} .tag.imp{color:var(--muted);border-color:var(--line);} .tag.relay{color:var(--amber);border-color:#9e6a03;}
   .ai.err{border-color:#5a2d2d;} .ai.err .meta{color:var(--bad);}
   .spin{display:inline-block;width:11px;height:11px;border:2px solid var(--line);border-top-color:var(--teal);border-radius:50%;animation:sp .7s linear infinite;} @keyframes sp{to{transform:rotate(360deg)}}
-  .pfoot{display:flex;gap:.7rem;padding:.25rem .65rem;border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:.62rem;color:var(--muted);} .pfoot b{color:var(--text);}
+  .pfoot{display:flex;gap:.7rem;padding:.25rem .65rem;border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;font-size:.62rem;color:var(--muted);flex-wrap:wrap;} .pfoot b{color:var(--text);}
   .pcompose{display:flex;gap:.4rem;padding:.5rem;border-top:1px solid var(--line);}
   .pcompose textarea{flex:1;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem .55rem;font-family:inherit;font-size:.82rem;resize:vertical;min-height:46px;max-height:200px;line-height:1.4;}
   #bcast{width:340px;max-width:42vw;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem .6rem;font-family:inherit;font-size:.82rem;resize:vertical;min-height:40px;max-height:180px;line-height:1.4;}
   .pcompose button{background:var(--amber);color:#171205;border:none;border-radius:8px;padding:0 .7rem;font-weight:700;cursor:pointer;}
-  .empty{grid-column:1/-1;margin:auto;color:var(--muted);text-align:center;padding:2rem;font-size:.9rem;}
+  .empty{grid-column:1/-1;margin:auto;color:var(--muted);text-align:center;padding:2rem;font-size:.9rem;line-height:1.6;}
   .solo .ph .pop{display:none;} .solo .grid{padding:.5rem;} .solo .pane{max-height:calc(100vh - 92px);min-height:calc(100vh - 92px);}
   .hint{color:var(--muted);font-size:.68rem;padding:.1rem 1rem .5rem;}
   code{font-family:"IBM Plex Mono",monospace;background:var(--panel2);padding:.1rem .35rem;border-radius:4px;}
+  .modal{display:none;position:fixed;inset:0;background:rgba(11,16,32,.9);z-index:60;align-items:center;justify-content:center;}
+  .modal .box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.4rem;max-width:720px;width:94%;max-height:90vh;overflow:auto;}
+  .modal h3{font-family:Archivo;margin:0 0 .3rem;} .modal p{color:var(--muted);font-size:.82rem;margin:.2rem 0 .9rem;}
+  .modal select,.modal input[type=text],.modal textarea{background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.5rem;font-family:inherit;font-size:.82rem;}
+  .rows{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:.5rem 0 1rem;max-height:260px;overflow-y:auto;}
+  .row{display:flex;gap:.6rem;align-items:center;padding:.45rem .65rem;border-bottom:1px solid var(--line);font-size:.8rem;} .row:last-child{border-bottom:none;}
+  .row .t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;} .row .m{color:var(--muted);font-family:"IBM Plex Mono",monospace;font-size:.66rem;white-space:nowrap;}
+  .row:hover{background:var(--panel2);}
+  .tabs{display:flex;gap:.4rem;margin:.6rem 0;} .tabs .btn.on{background:var(--panel2);border-color:var(--teal);color:var(--teal);}
+  .toast{position:fixed;bottom:1rem;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--teal);color:var(--text);border-radius:10px;padding:.5rem .9rem;font-size:.8rem;z-index:80;display:none;box-shadow:0 10px 30px rgba(0,0,0,.45);}
 </style>
 
 <div class="bar">
@@ -88,6 +105,8 @@
 
 <div class="toolbar">
   <button class="btn primary" onclick="addSession()">+ New session</button>
+  <button class="btn ghost" onclick="showImport()" title="Bring a conversation from Claude Code, Claude.ai, ChatGPT or any transcript — and continue it on any model">📥 Import history</button>
+  <button class="btn" id="btn-judge" onclick="judgeAll()" title="A judge model reads every session's latest answer, ranks them and writes one best answer" disabled>⚖️ Judge answers</button>
   <span style="flex:1"></span>
   <textarea id="bcast" rows="1" placeholder="one task → many models…  (Enter = send to all)"></textarea>
   <button class="btn ghost" onclick="compareAll()" title="fresh session per model, same task">⚖️ Compare all</button>
@@ -95,19 +114,19 @@
 </div>
 
 <div class="grid" id="grid"><div class="empty">Add a session, pick its model, and give it a task. Add more for other models — they all run in parallel.</div></div>
-<div class="hint" id="hint">Every session is independent — different models, different tasks, all live at once. <b>Tip:</b> hit <b>⧉</b> to pop any session into its own window. <b>You run on your own tokens</b> — connect a key per provider in <b>🔑 Keys</b> (Anthropic for Claude, OpenAI for GPT, or OpenRouter for both); each call is billed to your account there. Keys and prompts never leave your machine.</div>
+<div class="hint" id="hint">Every session is independent — different models, different tasks, all live at once. <b>Switch the model mid-conversation and the whole history moves with it</b> — that's the Handshake. <b>⋯</b> on a session: fork to another model, attach files or a folder, relay (draft cheap → polish strong), export. <b>You run on your own tokens</b> — connect a key per provider in <b>🔑 Keys</b>; each call is billed to your account there. Keys, prompts and files never leave your machine.</div>
 
 <!-- sign-in gate (hosted mode only) -->
-<div id="gate" style="display:none;position:fixed;inset:0;background:rgba(11,16,32,.94);z-index:60;align-items:center;justify-content:center;">
-  <div style="background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:2rem;max-width:380px;text-align:center;">
+<div id="gate" class="modal">
+  <div class="box" style="max-width:380px;text-align:center;">
     <svg viewBox="0 0 104 104" width="46" height="46" aria-hidden="true"><g transform="translate(0,20)">
       <path d="M6 32 Q52 -16 98 32" fill="none" stroke="#63CFC2" stroke-width="8" stroke-linecap="round"/>
       <path d="M6 32 Q52 80 98 32" fill="none" stroke="#F2B84B" stroke-width="8" stroke-linecap="round"/>
       <circle cx="52" cy="32" r="18" fill="none" stroke="#22304F" stroke-width="6"/>
       <circle cx="52" cy="32" r="18" fill="none" stroke="#F2B84B" stroke-width="6" pathLength="100" stroke-dasharray="80 100" stroke-linecap="round" transform="rotate(-90 52 32)"/>
       <circle cx="52" cy="32" r="7" fill="#63CFC2"/></g></svg>
-    <h2 style="font-family:Archivo;margin:.7rem 0 .3rem">Sign in to LLManager</h2>
-    <p style="color:var(--muted);font-size:.86rem;margin:.2rem 0 1.2rem">Real Google sign-in. Then connect your model keys — they stay yours.</p>
+    <h3 style="margin:.7rem 0 .3rem">Sign in to LLManager</h3>
+    <p>Real Google sign-in. Then connect your model keys — they stay yours.</p>
     <a href="/login" style="display:flex;align-items:center;justify-content:center;gap:.6rem;background:#fff;color:#3c4043;border-radius:10px;padding:.7rem;font-weight:600;text-decoration:none">
       <svg viewBox="0 0 48 48" width="18" height="18"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.6l6.8-6.8C35.5 2.5 30.1 0 24 0 14.6 0 6.4 5.4 2.5 13.3l7.9 6.1C12.3 13.2 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.6c0-1.6-.1-3.1-.4-4.6H24v9.1h12.4c-.5 2.9-2.1 5.3-4.6 6.9l7.1 5.5c4.1-3.8 6.5-9.4 6.5-16.9z"/><path fill="#FBBC05" d="M10.4 28.6c-.5-1.5-.8-3-.8-4.6s.3-3.1.8-4.6l-7.9-6.1C.9 16.5 0 20.1 0 24s.9 7.5 2.5 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.1-5.5c-2 1.3-4.5 2.1-8.8 2.1-6.3 0-11.7-3.7-13.6-9.1l-7.9 6.1C6.4 42.6 14.6 48 24 48z"/></svg>
       Continue with Google
@@ -115,13 +134,13 @@
   </div>
 </div>
 
-<!-- keys panel (hosted mode) -->
-<div id="keys" style="display:none;position:fixed;inset:0;background:rgba(11,16,32,.9);z-index:60;align-items:center;justify-content:center;">
-  <div style="background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.5rem;max-width:440px;width:92%;">
-    <h3 style="font-family:Archivo;margin:0 0 .3rem">Connect your model keys</h3>
-    <p style="color:var(--muted);font-size:.82rem;margin:.2rem 0 1rem"><b>You run on your own tokens.</b> Meerada never sells you model access — you paste your own key for each provider you want, and every call is billed to <b>your</b> account with that provider. Keys stay on your machine and are never shown back.</p>
+<!-- keys panel -->
+<div id="keys" class="modal">
+  <div class="box" style="max-width:440px;">
+    <h3>Connect your model keys</h3>
+    <p><b>You run on your own tokens.</b> Meerada never sells you model access — you paste your own key for each provider you want, and every call is billed to <b>your</b> account with that provider. Keys stay on your machine and are never shown back.</p>
     <div style="display:flex;gap:.5rem;margin-bottom:.6rem">
-      <select id="k-provider" style="background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.5rem">
+      <select id="k-provider">
         <option value="anthropic">Anthropic (Claude)</option>
         <option value="openai">OpenAI (GPT / o-series)</option>
         <option value="openrouter">OpenRouter (Claude/Gemini/…)</option>
@@ -136,31 +155,85 @@
     <div id="k-connected" style="font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--good);margin-bottom:1rem"></div>
     <div style="display:flex;justify-content:space-between;align-items:center">
       <button class="btn ghost" onclick="signOut()">Sign out</button>
-      <button class="btn" onclick="document.getElementById('keys').style.display='none'">Done</button>
+      <button class="btn" onclick="hide('keys')">Done</button>
     </div>
   </div>
 </div>
 
+<!-- import panel: the Handshake's front door -->
+<div id="imp" class="modal">
+  <div class="box">
+    <h3>📥 Import history — and continue it on any model</h3>
+    <p>Bring a conversation from <b>Claude Code</b>, <b>Claude.ai</b>, <b>ChatGPT</b> or any transcript. It becomes a live session here, with its whole history, on the model you choose — switch models any time and the history moves with you.</p>
+    <div style="display:flex;gap:.6rem;align-items:center;flex-wrap:wrap">
+      <span class="sub">Continue on:</span><select id="imp-model"></select>
+      <span class="sub" id="imp-budget" style="font-size:.7rem"></span>
+    </div>
+    <div class="tabs">
+      <button class="btn sm on" id="tab-local" onclick="impTab('local')">💻 Claude Code on this machine</button>
+      <button class="btn sm" id="tab-file" onclick="impTab('file')">📄 Upload an export / transcript</button>
+      <button class="btn sm" id="tab-paste" onclick="impTab('paste')">📋 Paste text</button>
+    </div>
+    <div id="imp-local">
+      <div class="rows" id="imp-rows"><div class="row"><span class="m">scanning ~/.claude/projects…</span></div></div>
+    </div>
+    <div id="imp-file" style="display:none">
+      <p style="margin:.2rem 0 .6rem"><b>Claude.ai:</b> Settings → Privacy → Export data → <code>conversations.json</code>. &nbsp;<b>ChatGPT:</b> Settings → Data controls → Export → <code>conversations.json</code>. &nbsp;<b>Claude Code:</b> any <code>.jsonl</code> under <code>~/.claude/projects</code>. &nbsp;Or a <code>.md</code>/<code>.txt</code> transcript with <code>User:</code>/<code>Assistant:</code> lines.</p>
+      <input type="file" id="imp-fileinput" accept=".json,.jsonl,.md,.txt,.markdown" onchange="impFile(this)" style="color:var(--muted);font-size:.8rem">
+      <div class="rows" id="imp-pick" style="display:none"></div>
+    </div>
+    <div id="imp-paste" style="display:none">
+      <textarea id="imp-text" rows="8" style="width:100%" placeholder="User: …&#10;Assistant: …&#10;&#10;(or just paste notes / a transcript from anywhere)"></textarea>
+      <div style="margin-top:.5rem"><button class="btn primary" onclick="impPaste()">Import pasted text →</button></div>
+    </div>
+    <div id="imp-status" class="sub" style="min-height:1.2em;margin:.3rem 0"></div>
+    <div style="display:flex;justify-content:flex-end"><button class="btn" onclick="hide('imp')">Close</button></div>
+  </div>
+</div>
+
+<!-- generic picker (fork / judge / relay / folder path) -->
+<div id="pick" class="modal">
+  <div class="box" style="max-width:420px">
+    <h3 id="pick-title">Pick a model</h3>
+    <p id="pick-sub"></p>
+    <select id="pick-model" style="width:100%"></select>
+    <input type="text" id="pick-text" style="width:100%;margin-top:.5rem;display:none" placeholder="">
+    <div style="display:flex;justify-content:flex-end;gap:.5rem;margin-top:1rem"><button class="btn" onclick="hide('pick')">Cancel</button><button class="btn primary" id="pick-ok">OK</button></div>
+  </div>
+</div>
+
+<input type="file" id="f-files" multiple style="display:none" onchange="attachFiles(this)">
+<input type="file" id="f-folder" webkitdirectory directory multiple style="display:none" onchange="attachFiles(this)">
+<div class="toast" id="toast"></div>
+
 <script>
-var CATALOG=[], CONNECTED=[], PROVIDER_NAMES={}, live=false, SES=[], seq=0, structDirty=true;
-function h(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
-function esc(s){return String(s).replace(/'/g,"\\'");}
+var CATALOG=[], CONNECTED=[], PROVIDER_NAMES={}, live=false, SES=[], seq=0, structDirty=true, LOCAL_FS=false;
+function h(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function show(id){document.getElementById(id).style.display="flex";} function hide(id){document.getElementById(id).style.display="none";}
+function toast(msg,ms){ var t=document.getElementById("toast"); t.innerHTML=msg; t.style.display="block"; clearTimeout(t._h); t._h=setTimeout(function(){t.style.display="none";},ms||2600); }
 
 // only models whose provider key is connected — you can never pick one that 401s
 function runnable(){ return CATALOG.filter(function(m){ return CONNECTED.indexOf(m.provider)>=0; }); }
 function labelFor(id){ for(var i=0;i<CATALOG.length;i++){ if(CATALOG[i].id==id)return CATALOG[i].name; } return id; }
 function defaultModel(){ var r=runnable(); return r.length?r[0].id:""; }
+function cheapestModel(){ var r=runnable(); var c=r.filter(function(m){return /cheap|free|fast/.test(m.tag||"");}); return (c[0]||r[r.length-1]||{}).id||""; }
+function strongestModel(){ var r=runnable(); var s=r.filter(function(m){return /top|strong|reasoning/.test(m.tag||"");}); return (s[0]||r[0]||{}).id||""; }
 
-function addSession(model){
-  seq++; var id="s"+seq;
-  SES.push({id:id, model:model||defaultModel(), convo:[], pending:false, stats:{turns:0,tokens:0,cost:0}, saves:[], accepted:0});
+function newSes(id, model, extra){ var s={id:id, model:model||defaultModel(), convo:[], pending:false, stats:{turns:0,tokens:0,cost:0}, saves:[], accepted:0, title:"", source:"", attachments:[], ctxChars:0, relay:""}; if(extra)for(var k in extra)s[k]=extra[k]; return s; }
+function addSession(model, extra){
+  seq++; var id="s"+seq+"-"+Date.now().toString(36).slice(-3);
+  var s=newSes(id, model, extra); SES.push(s);
   structDirty=true; renderGrid(); updateLedger();
   setTimeout(function(){ var el=document.getElementById("in-"+id); if(el)el.focus(); },30);
+  return s;
 }
 function closeSession(id){ if(SOLO){ window.close(); return; } try{fetch("/session/close",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:id})});}catch(e){}
   SES=SES.filter(function(s){return s.id!=id;}); structDirty=true; renderGrid(); updateLedger(); }
-function setModel(id,m){ var s=find(id); if(s){ s.model=m; } } // next send re-homes the server session
 function find(id){ return SES.filter(function(s){return s.id==id;})[0]; }
+
+// ---- the Handshake, in place: change the model and the conversation moves with it
+function setModel(id,m){ var s=find(id); if(!s||s.model==m)return; var from=s.model; s.model=m;
+  if(s.stats.turns>0){ s.convo.push({sys:"↔ handed off "+labelFor(from)+" → "+labelFor(m)+" · "+s.stats.turns+" turns"+(s.attachments.length?" + "+s.attachments.length+" files":"")+" carried"}); updatePane(id); toast("↔ Handshake: continuing on <b>"+h(labelFor(m))+"</b> with the whole history"); } }
 
 function opts(sel){
   var list=runnable(), byProv={}, order=[];
@@ -177,24 +250,28 @@ function opts(sel){
 function formatReply(text){
   var parts=String(text==null?"":text).split("```"), html="";
   for(var i=0;i<parts.length;i++){
-    if(i%2===1){ // fenced code block: ```lang\n code
-      var seg=parts[i], nl=seg.indexOf("\n");
-      var code=(nl>=0?seg.slice(nl+1):seg);
+    if(i%2===1){ var seg=parts[i], nl=seg.indexOf("\n"); var code=(nl>=0?seg.slice(nl+1):seg);
       html+='<div class="code"><button class="codecopy" onclick="copyText(this)" data-c="'+encodeURIComponent(code)+'">copy</button><pre>'+h(code)+'</pre></div>';
     } else { html+='<span>'+h(parts[i])+'</span>'; }
   }
   return html;
 }
 function copyText(btn){ try{ navigator.clipboard.writeText(decodeURIComponent(btn.getAttribute("data-c")||"")); var o=btn.textContent; btn.textContent="copied ✓"; setTimeout(function(){btn.textContent=o;},1200); }catch(e){} }
+var SHOW_MAX=40;
 function threadHtml(s){
   if(!s.convo.length) return '<div style="margin:auto;color:var(--muted);font-size:.8rem">no task yet</div>';
-  return s.convo.map(function(t,idx){
+  var items=s.convo, hidden=0; if(items.length>SHOW_MAX){ hidden=items.length-SHOW_MAX; items=items.slice(hidden); }
+  var html=hidden?'<div class="sys">… '+hidden+' earlier exchanges (kept in the model\'s context)</div>':'';
+  return html+items.map(function(t,k){
+    var idx=k+hidden;
+    if(t.sys!=null) return '<div class="sys">'+h(t.sys)+'</div>';
     var body;
-    if(t.reply===undefined){ body='<div class="ai"><span class="spin"></span></div>'; }
+    if(t.reply===undefined){ body='<div class="ai"><span class="spin"></span>'+(t.note?' <span class="meta" style="display:inline">'+h(t.note)+'</span>':'')+'</div>'; }
     else if(t.reply.error){ body='<div class="ai err">'+h(t.reply.text||"")+'<span class="meta">'+h(t.reply.error)+'</span></div>'; }
+    else if(t.reply.imported){ body='<div class="ai">'+formatReply(t.reply.text)+'<span class="meta"><span class="tag imp">📥 imported</span><button class="codecopy" onclick="copyText(this)" data-c="'+encodeURIComponent(t.reply.text||"")+'">copy</button></span></div>'; }
     else {
-      var tags=(t.reply.fastest?'<span class="tag fast">⚡ fastest</span>':'')+(t.reply.cheapest?'<span class="tag cheap">💰 cheapest</span>':'');
-      body='<div class="ai">'+formatReply(t.reply.text)+'<span class="meta">'+tags+'−'+t.reply.saved_pct+'% lean · '+(t.reply.output_tokens||0)+' out · '+(t.reply.ms||0)+'ms'
+      var tags=(t.reply.fastest?'<span class="tag fast">⚡ fastest</span>':'')+(t.reply.cheapest?'<span class="tag cheap">💰 cheapest</span>':'')+(t.reply.relay?'<span class="tag relay">⚡ drafted by '+h(labelFor(t.reply.relay.draft_model))+'</span>':'');
+      body='<div class="ai">'+formatReply(t.reply.text)+'<span class="meta">'+tags+'−'+(t.reply.saved_pct||0)+'% lean · '+(t.reply.output_tokens||0)+' out · '+(t.reply.ms||0)+'ms'
         +'<button class="codecopy" onclick="copyText(this)" data-c="'+encodeURIComponent(t.reply.text||"")+'">copy all</button>'
         +'<button class="acc'+(t.accepted?' on':'')+'" onclick="accept(\''+s.id+'\','+idx+')">'+(t.accepted?'✓ accepted':'✓ accept')+'</button></span></div>';
     }
@@ -206,14 +283,36 @@ function accept(id, idx){ var s=find(id); if(!s||!s.convo[idx]||s.convo[idx].acc
 function footHtml(s){ var f='turns <b>'+s.stats.turns+'</b> · tokens <b>'+(s.stats.tokens||0).toLocaleString()+'</b> · $<b>'+(s.stats.cost||0).toFixed(5)+'</b>';
   if(s.accepted){ f+=' · <span style="color:var(--good)">CPAT <b>$'+((s.stats.cost||0)/s.accepted).toFixed(5)+'</b></span>'; } return f; }
 function statHtml(s){ return s.pending?'<span class="pstat run"><span class="spin"></span> running</span>':(s.convo.length?'<span class="pstat done">idle ✓</span>':'<span class="pstat">idle</span>'); }
+function titleHtml(s){
+  var bits=[];
+  if(s.title) bits.push('<b title="'+h(s.title)+'">'+h(s.title)+'</b>');
+  if(s.source&&s.source!="judge") bits.push('<span class="chip src">from '+h(s.source)+'</span>');
+  if(s.attachments.length) bits.push('<span class="chip" title="'+h(s.attachments.join("\n"))+'">📎 '+s.attachments.length+' file'+(s.attachments.length>1?'s':'')+' · ~'+Math.round(s.ctxChars/4/1000)+'k tok</span>');
+  if(s.relay) bits.push('<span class="chip relay" title="click to turn relay off" onclick="toggleRelay(\''+s.id+'\')">⚡ relay: '+h(labelFor(s.relay))+' drafts → '+h(labelFor(s.model))+' polishes</span>');
+  return bits.join("");
+}
+function menuHtml(s){
+  return '<div class="menu" id="menu-'+s.id+'">'
+    +'<button onclick="forkTo(\''+s.id+'\')">⇄ Fork to another model…<small>copy the whole conversation to a second model, side by side</small></button>'
+    +'<button onclick="toggleRelay(\''+s.id+'\')">⚡ Relay: draft cheap → polish here<small>a cheap model drafts, this model finishes. Most of the quality, a fraction of the cost</small></button>'
+    +'<div class="sep"></div>'
+    +'<button onclick="pickFiles(\''+s.id+'\',false)">📎 Attach files…<small>text/code files become this session\'s working context</small></button>'
+    +'<button onclick="pickFiles(\''+s.id+'\',true)">📁 Attach a folder…<small>code folder — build/vendor dirs skipped, size-capped</small></button>'
+    +(LOCAL_FS?'<button onclick="attachPath(\''+s.id+'\')">📂 Attach a folder by path…<small>type a path on this machine</small></button>':'')
+    +'<div class="sep"></div>'
+    +'<button onclick="exportMd(\''+s.id+'\')">⬇ Copy transcript as Markdown<small>take it anywhere — portability both ways</small></button>'
+    +'</div>';
+}
+function toggleMenu(id){ var m=document.getElementById("menu-"+id); if(!m)return; var open=m.style.display=="block"; document.querySelectorAll(".menu").forEach(function(x){x.style.display="none";}); m.style.display=open?"none":"block"; }
+document.addEventListener("click",function(e){ if(!e.target.closest(".menu")&&!e.target.closest(".more")) document.querySelectorAll(".menu").forEach(function(x){x.style.display="none";}); });
 
 function renderGrid(){
   var g=document.getElementById("grid");
   if(!SES.length){
     if(VAULT && !runnable().length){
-      g.innerHTML='<div class="empty">🔑 Connect a key to start.<br><br>Click <b>🔑 Keys</b> (top right) and paste an <b>OpenAI</b>, <b>Groq</b> (free), <b>DeepSeek</b>, <b>Mistral</b> or <b>OpenRouter</b> (→ Claude/Gemini) key.<br><br><button class="btn primary" onclick="showKeys()">🔑 Connect a key</button></div>';
+      g.innerHTML='<div class="empty">🔑 Connect a key to start.<br><br>Click <b>🔑 Keys</b> (top right) and paste an <b>Anthropic</b> (Claude), <b>OpenAI</b>, <b>Groq</b> (free), <b>DeepSeek</b>, <b>Mistral</b> or <b>OpenRouter</b> key.<br><br><button class="btn primary" onclick="showKeys()">🔑 Connect a key</button></div>';
     } else {
-      g.innerHTML='<div class="empty">Click <b>+ New session</b>, pick a model, and give it a task. Add more for other models — they run in parallel.</div>';
+      g.innerHTML='<div class="empty">Click <b>+ New session</b>, pick a model, and give it a task. Add more for other models — they run in parallel.<br>Or <b>📥 Import history</b> from Claude Code / Claude.ai / ChatGPT and continue it on any model.</div>';
     }
     return;
   }
@@ -222,8 +321,10 @@ function renderGrid(){
       return '<div class="pane" id="pane-'+s.id+'">'
         +'<div class="ph"><select onchange="setModel(\''+s.id+'\',this.value)">'+opts(s.model)+'</select>'
         +'<span id="ps-'+s.id+'">'+statHtml(s)+'</span>'
+        +'<button class="more" title="more: fork, relay, attach, export" onclick="toggleMenu(\''+s.id+'\')">⋯</button>'
         +'<button class="pop" title="pop out to its own window" onclick="popOut(\''+s.id+'\')">⧉</button>'
-        +'<button class="x" title="close" onclick="closeSession(\''+s.id+'\')">✕</button></div>'
+        +'<button class="x" title="close" onclick="closeSession(\''+s.id+'\')">✕</button>'+menuHtml(s)+'</div>'
+        +'<div class="ptitle" id="pt-'+s.id+'" style="'+(titleHtml(s)?'':'display:none')+'">'+titleHtml(s)+'</div>'
         +'<div class="thread" id="th-'+s.id+'">'+threadHtml(s)+'</div>'
         +'<div class="pfoot" id="pf-'+s.id+'">'+footHtml(s)+'</div>'
         +'<div class="pcompose"><textarea id="in-'+s.id+'" placeholder="Task for this model…"></textarea>'
@@ -232,12 +333,15 @@ function renderGrid(){
     structDirty=false;
   }
   SES.forEach(function(s){ updatePane(s.id); });
+  document.getElementById("btn-judge").disabled = SES.filter(function(s){ return s.source!="judge" && s.convo.some(function(t){return t.reply&&!t.reply.error&&!t.reply.imported;}); }).length<2;
 }
 function updatePane(id){
   var s=find(id); if(!s)return;
   var th=document.getElementById("th-"+id); if(th){ th.innerHTML=threadHtml(s); th.scrollTop=th.scrollHeight; }
   var pf=document.getElementById("pf-"+id); if(pf)pf.innerHTML=footHtml(s);
   var ps=document.getElementById("ps-"+id); if(ps)ps.innerHTML=statHtml(s);
+  var pt=document.getElementById("pt-"+id); if(pt){ var t=titleHtml(s); pt.innerHTML=t; pt.style.display=t?"":"none"; }
+  var inp=document.getElementById("in-"+id); if(inp) inp.placeholder=s.relay?("Task — "+labelFor(s.relay)+" drafts, "+labelFor(s.model)+" polishes…"):"Task for this model…";
 }
 function updateLedger(){
   var tok=0,cost=0,acc=0,saves=[];
@@ -247,7 +351,11 @@ function updateLedger(){
   document.getElementById("l-cost").textContent="$"+cost.toFixed(4);
   document.getElementById("l-cpat").textContent=acc?("$"+(cost/acc).toFixed(5)):"—";
   document.getElementById("l-save").textContent=saves.length?("−"+Math.round(saves.reduce(function(a,b){return a+b;},0)/saves.length)+"%"):"—";
+  var jb=document.getElementById("btn-judge"); if(jb) jb.disabled = SES.filter(function(s){ return s.source!="judge" && s.convo.some(function(t){return t.reply&&!t.reply.error&&!t.reply.imported;}); }).length<2;
 }
+function applyView(s, v){ if(!v)return; if(typeof v.turns=="number")s.stats.turns=v.turns; if(typeof v.n_turns=="number")s.stats.turns=v.n_turns; if(v.total_tokens!=null)s.stats.tokens=v.total_tokens; if(v.total_cost!=null)s.stats.cost=v.total_cost; if(v.title!=null)s.title=v.title; if(v.source!=null)s.source=v.source; if(v.attachments)s.attachments=v.attachments; if(v.context_chars!=null)s.ctxChars=v.context_chars; if(v.model)s.model=v.model; }
+
+async function post(url, body){ var r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body||{})}); return r.json(); }
 
 async function sendTo(id, msg){
   var s=find(id); if(!s||s.pending)return;
@@ -255,11 +363,11 @@ async function sendTo(id, msg){
   var message=(msg!=null?msg:(inp?inp.value:"")).trim();
   if(!message)return;
   if(msg==null&&inp)inp.value="";
-  s.pending=true; var turn={you:message,reply:undefined}; s.convo.push(turn); updatePane(id);
+  s.pending=true; var turn={you:message,reply:undefined,note:s.relay?("drafting on "+labelFor(s.relay)+"…"):""}; s.convo.push(turn); updatePane(id);
   var t0=Date.now();
   try{
-    var res=await fetch("/session/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:id,model:s.model,message:message})});
-    var r=await res.json();
+    var r = s.relay ? await post("/session/relay",{id:id,model:s.model,draft_model:s.relay,message:message})
+                    : await post("/session/send",{id:id,model:s.model,message:message});
     r.ms=Date.now()-t0;
     turn.reply=r;
     if(r.total_tokens!=null){ s.stats={turns:r.turns,tokens:r.total_tokens,cost:r.total_cost||0}; }
@@ -280,8 +388,8 @@ async function compareAll(){
 }
 async function broadcast(msgArg){
   var b=document.getElementById("bcast"); var m=(msgArg!=null?msgArg:b.value).trim(); if(!m||!SES.length)return; if(msgArg==null)b.value="";
-  var turns=await Promise.all(SES.map(function(s){ return sendTo(s.id, m); }));
-  // mark the fastest and the cheapest good answer, so multi-model comparison pops
+  var targets=SES.filter(function(s){return s.source!="judge";});
+  var turns=await Promise.all(targets.map(function(s){ return sendTo(s.id, m); }));
   var good=turns.filter(function(t){ return t&&t.reply&&!t.reply.error; });
   if(good.length>1){
     var fast=good.slice().sort(function(a,b){return (a.reply.ms||1e9)-(b.reply.ms||1e9);})[0];
@@ -292,6 +400,136 @@ async function broadcast(msgArg){
 }
 async function resetAll(){ try{await fetch("/reset",{method:"POST"});}catch(e){} SES=[]; seq=0; structDirty=true; renderGrid(); updateLedger(); }
 
+// ---- generic picker ----
+function pickModel(title, sub, def, cb, textOpts){
+  document.getElementById("pick-title").textContent=title; document.getElementById("pick-sub").textContent=sub||"";
+  var sel=document.getElementById("pick-model"), tx=document.getElementById("pick-text");
+  sel.innerHTML=opts(def||defaultModel()); sel.style.display=textOpts&&textOpts.noModel?"none":"";
+  tx.style.display=textOpts?"":"none"; tx.value=""; tx.placeholder=(textOpts&&textOpts.placeholder)||"";
+  document.getElementById("pick-ok").onclick=function(){ hide("pick"); cb(sel.value, tx.value.trim()); };
+  show("pick"); setTimeout(function(){ (textOpts?tx:sel).focus(); },30);
+}
+
+// ---- Handshake ops ----
+function forkTo(id){ var s=find(id); if(!s)return; toggleMenu(id);
+  if(!s.stats.turns){ toast("Nothing to hand off yet — give this session a task first"); return; }
+  var alt=runnable().filter(function(m){return m.id!=s.model;})[0];
+  pickModel("⇄ Fork to another model", "The whole conversation ("+s.stats.turns+" turns"+(s.attachments.length?", "+s.attachments.length+" files":"")+") is copied to a new session on the model you pick. Both continue independently.", alt?alt.id:s.model, async function(model){
+    seq++; var nid="f"+seq+"-"+Date.now().toString(36).slice(-3);
+    var v=await post("/session/fork",{id:id,new_id:nid,model:model});
+    if(v.error){ toast("✗ "+h(v.error)); return; }
+    var ns=newSes(nid, model); applyView(ns, v); ns.stats.tokens=0; ns.stats.cost=0; SES.push(ns);
+    await hydrate(ns); ns.convo.push({sys:"⇄ forked from "+labelFor(s.model)+" → continuing on "+labelFor(model)});
+    structDirty=true; renderGrid(); updateLedger(); toast("⇄ Forked to <b>"+h(labelFor(model))+"</b> — same history, now side by side");
+  });
+}
+function toggleRelay(id){ var s=find(id); if(!s)return; var m=document.getElementById("menu-"+id); if(m)m.style.display="none";
+  if(s.relay){ s.relay=""; updatePane(id); toast("Relay off — "+h(labelFor(s.model))+" answers directly"); return; }
+  var def=cheapestModel(); if(def==s.model){ var alt=runnable().filter(function(x){return x.id!=s.model;})[0]; def=alt?alt.id:def; }
+  pickModel("⚡ Relay: who drafts?", "The draft model answers first (cheap, fast); then "+labelFor(s.model)+" checks, fixes and polishes it. You see one final answer and both costs on the ledger.", def, function(model){ s.relay=model; updatePane(id); toast("⚡ Relay on: <b>"+h(labelFor(model))+"</b> drafts → <b>"+h(labelFor(s.model))+"</b> polishes"); });
+}
+var ATTACH_TARGET="";
+var TEXT_EXT=/\.(py|js|ts|tsx|jsx|json|md|txt|yml|yaml|toml|html|css|scss|sql|sh|ps1|bat|ini|cfg|rs|go|java|kt|swift|c|h|cpp|hpp|cs|rb|php|xml|csv|graphql|proto|vue|svelte|dart|r|jl|lua|ipynb|tex|rst|log|gitignore|env\.example)$/i;
+var SKIP_DIR=/(^|\/)(\.git|node_modules|__pycache__|\.venv|venv|dist|build|\.next|\.expo|android|ios|\.idea|\.vscode|coverage|\.pytest_cache|\.mypy_cache|\.ruff_cache|target|out|\.gradle|Pods)(\/|$)/;
+function pickFiles(id, folder){ ATTACH_TARGET=id; toggleMenu(id); document.getElementById(folder?"f-folder":"f-files").click(); }
+async function attachFiles(input){
+  var s=find(ATTACH_TARGET); var list=Array.prototype.slice.call(input.files||[]); input.value=""; if(!s||!list.length)return;
+  var files=[], skipped=0, total=0;
+  for(var i=0;i<list.length&&files.length<200;i++){ var f=list[i]; var name=f.webkitRelativePath||f.name;
+    if(SKIP_DIR.test(name)||!TEXT_EXT.test(name)||f.size>400000){ skipped++; continue; }
+    var text=await f.text(); if(text.length>60000) text=text.slice(0,60000)+"\n… [truncated]";
+    if(total+text.length>320000){ skipped++; continue; }
+    files.push({name:name,text:text}); total+=text.length; }
+  if(!files.length){ toast("No text/code files to attach"+(skipped?" ("+skipped+" skipped: binary/too big)":"")); return; }
+  var v=await post("/session/attach",{id:s.id,model:s.model,files:files});
+  if(v.error){ toast("✗ "+h(v.error)); return; }
+  applyView(s,v); s.convo.push({sys:"📎 attached "+files.length+" file"+(files.length>1?"s":"")+" (~"+Math.round(total/4/1000)+"k tokens)"+(skipped?" · "+skipped+" skipped":"")}); updatePane(s.id);
+  toast("📎 "+files.length+" files are now this session's context — on every model it moves to");
+}
+function attachPath(id){ var s=find(id); if(!s)return; toggleMenu(id);
+  pickModel("📂 Attach a folder by path", "Text/code files under this folder become the session's context (vendor/build dirs skipped, sizes capped).", s.model, async function(_m, path){
+    if(!path)return; var v=await post("/session/attach_path",{id:s.id,model:s.model,path:path});
+    if(v.error){ toast("✗ "+h(v.error)); return; }
+    applyView(s,v); var r=v.report||{}; s.convo.push({sys:"📂 "+path+" → "+r.files+" files (~"+Math.round((r.chars||0)/4/1000)+"k tokens)"+(r.skipped_binary?" · "+r.skipped_binary+" non-text skipped":"")}); updatePane(s.id);
+  }, {noModel:true, placeholder:"C:\\Users\\me\\projects\\my-app  or  ~/code/app"});
+}
+function exportMd(id){ var s=find(id); if(!s)return; toggleMenu(id);
+  var md="# "+(s.title||"LLManager session")+"\n\n_model: "+s.model+(s.source?" · imported from "+s.source:"")+" · exported from Meerada LLManager_\n\n";
+  s.convo.forEach(function(t){ if(t.sys!=null){ md+="> "+t.sys+"\n\n"; return; } md+="**User:** "+t.you+"\n\n"; if(t.reply&&t.reply.text) md+="**Assistant ("+labelFor(t.reply.model||s.model)+"):** "+t.reply.text+"\n\n"; });
+  try{ navigator.clipboard.writeText(md); toast("⬇ Transcript copied as Markdown — paste it anywhere"); }catch(e){ toast("Clipboard blocked — use the copy buttons on each answer"); }
+}
+function lastAnswered(s){ var t=s.convo.filter(function(x){return x.sys==null;}).slice(-1)[0]; return (t&&t.reply&&!t.reply.error&&!t.reply.imported)?t:null; }
+async function judgeAll(){
+  // compare only sessions whose LATEST answer is to the same task (send-to-all / compare-all)
+  var groups={}; SES.forEach(function(s){ if(s.source=="judge")return; var t=lastAnswered(s); if(!t)return; var k=t.you.trim(); (groups[k]=groups[k]||[]).push(s); });
+  var cands=Object.keys(groups).map(function(k){return groups[k];}).sort(function(a,b){return b.length-a.length;})[0]||[];
+  if(cands.length<2){ toast("Judge compares sessions that answered the <b>same</b> task — use <b>Send to all</b> or <b>Compare all</b> first"); return; }
+  pickModel("⚖️ Who judges?", "The judge reads the latest answer from "+cands.length+" sessions ("+cands.map(function(s){return labelFor(s.model);}).join(", ")+"), ranks them with reasons, and writes one best answer. Its cost shows in its own pane.", strongestModel(), async function(model){
+    seq++; var jid="j"+seq+"-"+Date.now().toString(36).slice(-3);
+    var js=newSes(jid, model, {title:"⚖️ Verdict", source:"judge"}); SES.push(js); js.pending=true;
+    var turn={you:"⚖️ Judge "+cands.length+" answers: "+cands.map(function(s){return labelFor(s.model);}).join(" · "), reply:undefined, note:"judging…"}; js.convo.push(turn);
+    structDirty=true; renderGrid(); var t0=Date.now();
+    var r=await post("/board/judge",{ids:cands.map(function(s){return s.id;}), id:jid, model:model});
+    r.ms=Date.now()-t0; turn.reply=r; if(r.total_tokens!=null){ js.stats={turns:r.turns||1,tokens:r.total_tokens,cost:r.total_cost||0}; }
+    js.pending=false; updatePane(jid); updateLedger();
+  });
+}
+
+// ---- import ----
+var IMP_TAB="local", IMP_TOKEN="";
+function showImport(){ if(!runnable().length){ if(VAULT)showKeys(); else toast("Connect a key first"); return; }
+  document.getElementById("imp-model").innerHTML=opts(defaultModel()); document.getElementById("imp-status").textContent=""; show("imp");
+  impTab(LOCAL_FS?"local":"file"); document.getElementById("tab-local").style.display=LOCAL_FS?"":"none"; if(LOCAL_FS) scanLocal(); }
+function impTab(t){ IMP_TAB=t; ["local","file","paste"].forEach(function(x){ document.getElementById("imp-"+x).style.display=x==t?"":"none"; document.getElementById("tab-"+x).className="btn sm"+(x==t?" on":""); }); }
+async function scanLocal(){
+  var box=document.getElementById("imp-rows"); box.innerHTML='<div class="row"><span class="m"><span class="spin"></span> scanning ~/.claude/projects…</span></div>';
+  try{ var d=await (await fetch("/import/scan")).json(); var list=d.sessions||[];
+    if(!list.length){ box.innerHTML='<div class="row"><span class="m">no Claude Code sessions found on this machine (~/.claude/projects)</span></div>'; return; }
+    box.innerHTML=list.map(function(r){ return '<div class="row"><span class="m">'+h(r.when||"")+'</span><span class="t" title="'+h(r.title)+'"><b>'+h(r.project||"")+'</b> · '+h(r.title)+'</span><span class="m">'+r.turns+' msgs · '+(r.size_kb>1024?(r.size_kb/1024).toFixed(1)+' MB':r.size_kb+' KB')+'</span><button class="btn sm primary" onclick="impLocal(this,\''+encodeURIComponent(r.path)+'\')">Import →</button></div>'; }).join("");
+  }catch(e){ box.innerHTML='<div class="row"><span class="m" style="color:var(--bad)">scan failed</span></div>'; }
+}
+async function finishImport(v){
+  if(v.error){ document.getElementById("imp-status").innerHTML='<span style="color:var(--bad)">✗ '+h(v.error)+'</span>'; return; }
+  var s=newSes(v.id, v.model); applyView(s,v); s.stats.tokens=0; s.stats.cost=0; SES.push(s);
+  await hydrate(s); s.convo.push({sys:"📥 imported from "+s.source+" — "+s.stats.turns+" exchanges · continuing on "+labelFor(s.model)});
+  structDirty=true; renderGrid(); updateLedger(); hide("imp");
+  toast("📥 <b>"+h(s.title||"conversation")+"</b> is live on <b>"+h(labelFor(s.model))+"</b> — pick another model any time, the history goes with you");
+  setTimeout(function(){ var el=document.getElementById("in-"+s.id); if(el)el.focus(); },50);
+}
+function impId(){ seq++; return "i"+seq+"-"+Date.now().toString(36).slice(-3); }
+async function impLocal(btn, encPath){ btn.disabled=true; btn.textContent="importing…"; var model=document.getElementById("imp-model").value;
+  var v=await post("/import/local",{path:decodeURIComponent(encPath),model:model,id:impId()}); btn.disabled=false; btn.textContent="Import →"; await finishImport(v); }
+async function impFile(input){ var f=input.files&&input.files[0]; if(!f)return; input.value="";
+  document.getElementById("imp-status").innerHTML='<span class="spin"></span> reading '+h(f.name)+'…';
+  var text=await f.text(); await impText(text, f.name); }
+async function impPaste(){ var t=document.getElementById("imp-text").value; if(!t.trim())return; await impText(t, "pasted.txt"); }
+async function impText(text, name){
+  var model=document.getElementById("imp-model").value;
+  var v=await post("/import",{name:name,text:text,model:model,id:impId()});
+  if(v.conversations){ IMP_TOKEN=v.token; var pk=document.getElementById("imp-pick"); pk.style.display=""; impTab("file");
+    document.getElementById("imp-status").textContent=v.conversations.length+" conversations found — pick the ones to continue:";
+    pk.innerHTML=v.conversations.map(function(c){ return '<div class="row"><span class="m">'+h(c.when||"")+'</span><span class="t" title="'+h(c.title)+'">'+h(c.title)+'</span><span class="m">'+c.turns+' turns · ~'+Math.round(c.est_tokens/1000)+'k tok</span><button class="btn sm primary" onclick="impPick(this,'+c.i+')">Import →</button></div>'; }).join("");
+    return; }
+  await finishImport(v);
+}
+async function impPick(btn, i){ btn.disabled=true; btn.textContent="importing…"; var model=document.getElementById("imp-model").value;
+  var v=await post("/import/pick",{token:IMP_TOKEN,i:i,model:model,id:impId()}); btn.disabled=false; btn.textContent="Import →"; await finishImport(v); }
+
+// load a session's server-side history into its pane (import / fork / pop-out / refresh)
+async function hydrate(s){
+  try{ var d=await (await fetch("/session/history?id="+encodeURIComponent(s.id))).json(); var turns=d.turns||[];
+    applyView(s, d); s.convo=[];
+    for(var i=0;i<turns.length;i+=2){ var u=turns[i],a=turns[i+1]; s.convo.push({you:(u&&u.content)||"", reply:a?{text:a.content,imported:true}:undefined}); }
+    s.stats.turns=Math.floor(turns.length/2);
+  }catch(e){}
+}
+async function restoreSessions(){
+  try{ var d=await (await fetch("/sessions")).json(); var list=d.sessions||[]; if(!list.length)return false;
+    for(var i=0;i<list.length;i++){ var v=list[i]; var s=newSes(v.id, v.model); applyView(s,v); SES.push(s); await hydrate(s); }
+    seq=list.length; structDirty=true; renderGrid(); updateLedger(); return true;
+  }catch(e){ return false; }
+}
+
 // ---- pop a session into its own window (same server-side session) ----
 var SOLO=false;
 function popOut(id){ var s=find(id); if(!s)return;
@@ -301,18 +539,15 @@ async function soloInit(id, model){
   var tb=document.querySelector(".toolbar"); if(tb)tb.style.display="none";
   document.getElementById("hint").innerHTML="Popped-out session — the same live conversation as the main window.";
   await refreshModels();
-  var s={id:id,model:model||defaultModel(),convo:[],pending:false,stats:{turns:0,tokens:0,cost:0},saves:[],accepted:0}; SES=[s]; structDirty=true;
-  try{ var hr=await fetch("/session/history?id="+encodeURIComponent(id)); var turns=(await hr.json()).turns||[];
-    for(var i=0;i<turns.length;i+=2){ var u=turns[i],a=turns[i+1]; s.convo.push({you:(u&&u.content)||"", reply:a?{text:a.content,saved_pct:0,output_tokens:0}:undefined}); }
-    s.stats.turns=Math.floor(turns.length/2);
-  }catch(e){}
+  var s=newSes(id, model||defaultModel()); SES=[s]; structDirty=true;
+  await hydrate(s);
   renderGrid(); updateLedger();
   setTimeout(function(){ var el=document.getElementById("in-"+id); if(el)el.focus(); },40);
 }
 
 // ---- auth + keys (hosted mode / local vault) ----
 var HOSTED=false, VAULT=false;
-function showKeys(){ document.getElementById("keys").style.display="flex"; renderConnected(); }
+function showKeys(){ show("keys"); renderConnected(); }
 function renderConnected(err){
   var html=CONNECTED.length?('✓ connected: <b>'+CONNECTED.join(", ")+'</b>'):'no providers connected yet';
   if(err){ html+='<br><span style="color:var(--bad)">✗ '+err.provider+' rejected — '+(err.error||'check the key')+'</span>'; }
@@ -335,8 +570,7 @@ async function connectKey(){
   var p=document.getElementById("k-provider").value, k=document.getElementById("k-key").value.trim();
   if(!k)return;
   document.getElementById("k-connected").innerHTML='<span class="sub"><span class="spin"></span> checking your '+p+' key…</span>';
-  try{ var res=await fetch("/keys",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({provider:p,key:k})});
-    var d=await res.json();
+  try{ var d=await post("/keys",{provider:p,key:k});
     if(d.valid){ document.getElementById("k-key").value=""; await refreshModels(); renderConnected();
       if(!SES.length){ addSession(); addSession(); } else { structDirty=true; renderGrid(); } }
     else { CONNECTED=d.providers||CONNECTED; renderConnected({provider:p, error:d.error}); }
@@ -348,18 +582,20 @@ document.addEventListener("keydown",function(e){
   var t=e.target; if(!t)return;
   if(t.id&&t.id.indexOf("in-")===0&&e.key=="Enter"&&!e.shiftKey){ e.preventDefault(); sendTo(t.id.slice(3)); }
   if(t.id=="bcast"&&e.key=="Enter"&&!e.shiftKey){ e.preventDefault(); broadcast(); }
+  if(e.key=="Escape"){ document.querySelectorAll(".modal").forEach(function(m){ if(m.id!="gate")m.style.display="none"; }); }
 });
 (async function init(){
   var params=new URLSearchParams(location.search);
   if(params.get("solo")){ return soloInit(params.get("solo"), params.get("model")||""); }
   try{
     var meRes=await fetch("/me"); var me=await meRes.json();
-    HOSTED=!!me.auth; VAULT=HOSTED||!!me.local_vault;
-    if(HOSTED && !me.user){ document.getElementById("gate").style.display="flex"; return; }
+    HOSTED=!!me.auth; VAULT=HOSTED||!!me.local_vault; LOCAL_FS=!!me.local_fs;
+    if(HOSTED && !me.user){ show("gate"); return; }
     if(VAULT){ document.getElementById("btn-keys").style.display=""; }
     if(HOSTED){ var wb=document.getElementById("whobox"); wb.style.display=""; wb.textContent=me.user; }
   }catch(e){}
   await refreshModels();
+  if(await restoreSessions()) return;              // page refresh: pick up the live sessions
   if(runnable().length){ addSession(); addSession(); }
   else { renderGrid(); if(VAULT) showKeys(); }  // no runnable model -> connect a key first
 })();
