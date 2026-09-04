@@ -256,6 +256,18 @@
     </div>
   </div>
 
+  <!-- ===== NEW ON THE MARKET ===== -->
+  <div id="new-wrap" style="display:none">
+  <h2>🆕 New on the market — found on the web, queued for grading</h2>
+  <div class="h2sub">Every hour we scan the public model feeds for launches (stealth and alpha models included). Anything with a free tier is graded automatically on the next run; paid-only models are listed at their public price until a sponsor key covers them.</div>
+  <div class="card">
+    <div class="scroll"><table class="board" style="min-width:560px"><thead><tr>
+      <th class="l">launched</th><th class="l">Model</th><th title="Public list price, USD per 1M tokens (in / out)">$ in / out per M</th><th>context</th><th>Bourse status</th>
+    </tr></thead><tbody id="new-body"></tbody></table></div>
+    <div class="sub" id="new-note" style="margin:.5rem 0 .2rem"></div>
+  </div>
+  </div>
+
   <!-- ===== OUTCOME EXCHANGE ===== -->
   <h2>💱 Outcome Exchange — buy a done task, not tokens</h2>
   <div class="h2sub">This is what makes the arena a real market. Post the job and the quality bar; the exchange routes to the <b>cheapest model that clears it</b>. The price is the live <b class="teal">CPAT</b> — cost per verified task. As grades move, the clearing price moves. <span class="ipill">prototype</span></div>
@@ -621,6 +633,25 @@ function analyzeWorkload(){
     +'<div class="sub">≈ $'+(saved*12).toLocaleString()+' / year. LLManager measures your real number from your own traffic — this is illustrative.</div></div>';
 }
 
+
+// ---- New on the market: the web discovery feed (models_live.json) ----
+var GRADED_IDS={};
+function loadNewModels(){
+  fetch("models_live.json?cb="+(new Date().getTime())).then(function(r){ if(!r.ok)throw 0; return r.json(); }).then(function(d){
+    var days=d.new_days||21, list=(d.models||[]).filter(function(m){return m.age_days<=days;});
+    if(!list.length)return;
+    document.getElementById("new-wrap").style.display="block";
+    document.getElementById("new-body").innerHTML=list.slice(0,25).map(function(m){
+      var status = GRADED_IDS[m.id]||GRADED_IDS[m.id+":free"] ? '<span class="pill confirmed">● graded</span>'
+        : (m.free ? '<span class="pill provisional">queued · free tier</span>' : '<span class="sub" title="paid-only: graded when a sponsor key covers it">listed · needs sponsor key</span>');
+      var price = m.free ? '<b class="good">free</b>' : ('$'+m.price_in.toFixed(3)+' / $'+m.price_out.toFixed(2));
+      var badge = /glm-5\.3-flash/.test(m.id) ? ' <span class="mpill" title="the stealth model everyone called Ox Alpha">Ox Alpha</span>' : '';
+      return '<tr class="model-row"><td class="l mid">'+m.created.slice(5)+'</td><td class="l"><span class="mid">'+m.id+'</span>'+badge+(m.modalities.indexOf("image")>=0?' <span class="sub">vision</span>':'')+'</td><td class="mid">'+price+'</td><td class="mid">'+(m.context>=1e6?(m.context/1e6).toFixed(1)+'M':Math.round(m.context/1000)+'k')+'</td><td>'+status+'</td></tr>';
+    }).join("");
+    document.getElementById("new-note").textContent=list.length+" models launched in the last "+days+" days · feed: "+(d.source||"")+" · scanned "+(d.generated_at||"");
+  }).catch(function(){});
+}
+
 // ---- Measured live: real grades from grade_state.json (engine output) ----
 function loadMeasured(){
   fetch("grade_state.json?cb="+(new Date().getTime())).then(function(res){
@@ -630,6 +661,7 @@ function loadMeasured(){
       .filter(function(c){return c && c.score!=null && c.n>0;});
     if(!cards.length)return;
     cards.sort(function(a,b){return b.score-a.score;});
+    cards.forEach(function(c){ GRADED_IDS[c.model_id]=true; });
     // measured models feed the Exchange + Handshake as REAL entries
     // only publishable cards (n ≥ 30, same bar as the ranking) may trade as "measured"
     MEASURED=cards.filter(function(c){return c.econ&&c.econ.cpat_usd!=null&&c.n>=30;}).map(function(c){
@@ -736,7 +768,7 @@ function hsRender(){
   document.getElementById("hs-from").value="gpt-5.6-terra"; document.getElementById("hs-to").value="deepseek-v4-flash";
   document.getElementById("hs-from").onchange=hsRender; document.getElementById("hs-to").onchange=hsRender;
   document.getElementById("legend").innerHTML=legendHtml();
-  render(); stats(); ticker(); clock(); hsRender(); analyzeWorkload(); scRun(); renderBattery(); loadMeasured(); oxCompute();
+  render(); stats(); ticker(); clock(); hsRender(); analyzeWorkload(); scRun(); renderBattery(); loadMeasured(); loadNewModels(); oxCompute();
   setInterval(clock,1000);
   if(!window.matchMedia("(prefers-reduced-motion:reduce)").matches){ setInterval(runOneTest,4200); runOneTest(); }
 })();
