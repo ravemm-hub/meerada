@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-05T06:46Z",
+ "generated_at": "2026-09-05T11:20Z",
  "source": "openrouter public catalog",
  "count": 349,
  "new_days": 21,
@@ -648,7 +648,7 @@
    "price_out": 1.2,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 57,
+   "age_days": 58,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -660,7 +660,7 @@
    "price_out": 1.2,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 57,
+   "age_days": 58,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -672,7 +672,7 @@
    "price_out": 12.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 57,
+   "age_days": 58,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -684,7 +684,7 @@
    "price_out": 12.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 57,
+   "age_days": 58,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -696,7 +696,7 @@
    "price_out": 10.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 57,
+   "age_days": 58,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -708,7 +708,7 @@
    "price_out": 10.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 57,
+   "age_days": 58,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1244,8 +1244,8 @@
    "id": "deepseek/deepseek-v4-pro",
    "name": "DeepSeek: DeepSeek V4 Pro 0423",
    "vendor": "deepseek",
-   "price_in": 0.9412,
-   "price_out": 1.8823,
+   "price_in": 0.8904,
+   "price_out": 1.7807,
    "context": 1048576,
    "created": "2026-04-24",
    "age_days": 134,
@@ -1256,8 +1256,8 @@
    "id": "deepseek/deepseek-v4-flash",
    "name": "DeepSeek: DeepSeek V4 Flash 0423",
    "vendor": "deepseek",
-   "price_in": 0.0861,
-   "price_out": 0.1722,
+   "price_in": 0.0853,
+   "price_out": 0.1705,
    "context": 1048576,
    "created": "2026-04-24",
    "age_days": 134,
@@ -1824,7 +1824,7 @@
    "price_out": 1.56,
    "context": 1000000,
    "created": "2026-02-16",
-   "age_days": 200,
+   "age_days": 201,
    "free": false,
    "modalities": "text+image+video"
   },
