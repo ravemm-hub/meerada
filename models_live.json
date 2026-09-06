@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-06T12:53Z",
+ "generated_at": "2026-09-06T13:15Z",
  "source": "openrouter public catalog",
  "count": 348,
  "new_days": 21,
@@ -216,7 +216,7 @@
    "price_out": 0.177,
    "context": 8192,
    "created": "2026-08-20",
-   "age_days": 16,
+   "age_days": 17,
    "free": false,
    "modalities": "text"
   },
@@ -228,7 +228,7 @@
    "price_out": 0.295,
    "context": 8192,
    "created": "2026-08-20",
-   "age_days": 16,
+   "age_days": 17,
    "free": false,
    "modalities": "text"
   },
@@ -984,7 +984,7 @@
    "price_out": 1.28,
    "context": 1000000,
    "created": "2026-06-03",
-   "age_days": 94,
+   "age_days": 95,
    "free": false,
    "modalities": "text+image"
   },
@@ -1244,8 +1244,8 @@
    "id": "deepseek/deepseek-v4-flash",
    "name": "DeepSeek: DeepSeek V4 Flash 0423",
    "vendor": "deepseek",
-   "price_in": 0.0805,
-   "price_out": 0.161,
+   "price_in": 0.0802,
+   "price_out": 0.1604,
    "context": 1048576,
    "created": "2026-04-24",
    "age_days": 135,
@@ -2124,7 +2124,7 @@
    "price_out": 2.0,
    "context": 262144,
    "created": "2025-12-09",
-   "age_days": 270,
+   "age_days": 271,
    "free": false,
    "modalities": "text+file"
   },
@@ -2244,7 +2244,7 @@
    "price_out": 0.4,
    "context": 163840,
    "created": "2025-12-01",
-   "age_days": 278,
+   "age_days": 279,
    "free": false,
    "modalities": "text"
   },
@@ -2544,7 +2544,7 @@
    "price_out": 0.41,
    "context": 163840,
    "created": "2025-09-29",
-   "age_days": 341,
+   "age_days": 342,
    "free": false,
    "modalities": "text"
   },
@@ -2568,7 +2568,7 @@
    "price_out": 1.25,
    "context": 256000,
    "created": "2025-09-26",
-   "age_days": 344,
+   "age_days": 345,
    "free": false,
    "modalities": "text"
   },
