@@ -47,7 +47,7 @@ jobs:
           python -m handover.bench.continuous_run \
             --state grade_state.json \
             --board out/grade.html \
-            --providers groq \
+            --providers groq,openrouter \
             --budget "0.50"
 
       - name: discover new models on the web (public OpenRouter catalog)
