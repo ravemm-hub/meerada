@@ -73,3 +73,17 @@ def test_state_roundtrip_and_old_state_without_econ_loads(tmp_path: Path) -> Non
     del payload["cards"]["m"]["econ"]
     path.write_text(json.dumps(payload), encoding="utf-8")
     assert load_state(path).cards["m"].econ is None
+
+
+def test_run_model_circuit_breaker_gives_up_on_a_dead_model() -> None:
+    from handover.bench.runner import ModelSpec, run_model
+
+    calls = {"n": 0}
+
+    def dead(system: str, user: str, max_tokens: int):  # type: ignore[no-untyped-def]
+        calls["n"] += 1
+        raise TimeoutError("provider hung")
+
+    spec = ModelSpec(model_id="dead", price_in_per_mtok=Decimal(1), price_out_per_mtok=Decimal(1))
+    out = run_model(spec, dead, DailyBudget(Decimal(100)), repeats=3, max_consecutive_failures=5)
+    assert out == {} and calls["n"] == 5  # stopped after 5 straight failures, not 54+ timeouts

@@ -73,6 +73,7 @@ def run_model(
     est_cost_per_task: Decimal = Decimal("0.01"),
     repeats: int = 1,
     delay_s: float = 0.0,
+    max_consecutive_failures: int = 8,
 ) -> dict[str, CoreMetrics]:
     """Run the seed task set on one model; return per-cluster metrics.
 
@@ -81,19 +82,26 @@ def run_model(
     build a larger sample (n) toward the publishable / confirmed thresholds.
     """
     per_cluster: dict[str, CoreMetrics] = {}
+    failures = 0  # consecutive call failures: a dead/rate-limited model must not stall the tick
     for cluster, base_tasks in tasks_by_cluster().items():
+        if failures >= max_consecutive_failures:
+            break
         tasks = list(base_tasks) * repeats
         graded: list[Task] = []
         for task in tasks:
             if not budget.can_spend(est_cost_per_task):
                 break  # hard stop, never overrun (P6)
+            if failures >= max_consecutive_failures:
+                break  # circuit breaker: give up on this model for this tick
             start = time.monotonic()
             try:
                 completion = complete(task.system, task.user, max_tokens)
             except Exception:
+                failures += 1
                 if delay_s:
                     time.sleep(delay_s)
                 continue  # is skipped; the successes we DID get still count toward n
+            failures = 0
             wall_ms = max(1, int((time.monotonic() - start) * 1000))
             if delay_s:
                 time.sleep(delay_s)  # pace to respect provider rate limits

@@ -134,7 +134,8 @@ def main(argv: list[str] | None = None) -> int:
     def do_fetch() -> list[CatalogModel]:
         return [m for m in fetch_catalog(live, keys) if _gradable(m, allow_paid)]
 
-    callers = {p: HttpChatCaller(ENDPOINTS[p], keys[p]) for p in live}
+    # short timeout: an unresponsive free model must cost seconds, not the whole tick
+    callers = {p: HttpChatCaller(ENDPOINTS[p], keys[p], timeout=25.0) for p in live}
     provider_of: dict[str, str] = {}
     web_prices = live_prices(fetch_live())  # public list prices for anything discovered
 
