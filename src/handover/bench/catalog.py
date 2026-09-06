@@ -65,7 +65,10 @@ def fetch_catalog(
             continue
         try:
             body = raw_fetch(base, key)
-        except Exception:
+        except Exception as exc:  # never fails the tick, but say why
+            print(f"catalog: {provider} fetch failed: {type(exc).__name__} {str(exc)[:80]}")
             continue
-        out.extend(parse_models(provider, body))
+        models = parse_models(provider, body)
+        print(f"catalog: {provider} -> {len(models)} models")
+        out.extend(models)
     return out

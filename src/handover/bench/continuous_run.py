@@ -63,7 +63,11 @@ def _gradable(m: CatalogModel, allow_paid: bool) -> bool:
 
 
 def _keys(providers: list[str]) -> dict[str, str]:
-    return {p: os.environ.get(ENV_KEYS.get(p, ""), "").strip() for p in providers}
+    # strip whitespace AND a stray BOM — a secret pasted through a Windows shell can carry one
+    return {
+        p: os.environ.get(ENV_KEYS.get(p, ""), "").strip().lstrip("﻿").strip()
+        for p in providers
+    }
 
 
 def _overall_quality(per_cluster: dict[str, Proportion]) -> tuple[float | None, Proportion]:
@@ -157,8 +161,11 @@ def main(argv: list[str] | None = None) -> int:
         return score, pooled, economics(per_cluster, price)
 
     # Remember each model's provider for grading routing.
+    print(f"providers live: {live} (paid allowed: {allow_paid})")
     for m in do_fetch():
         provider_of[m.model_id] = m.provider
+    print(f"gradable models: {len(provider_of)} "
+          f"({sum(1 for p in provider_of.values() if p == 'openrouter')} via openrouter)")
 
     state, summary = tick(state, do_fetch, grade, budget, now)
     save_state(args.state, state)
