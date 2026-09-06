@@ -1,17 +1,16 @@
 {
   "cards": {
     "allam-2-7b": {
-      "ci_width_points": 25.5,
+      "ci_width_points": 24.7,
       "econ": {
-        "cpat_usd": 2.3e-05,
-        "n_successes": 31,
+        "cpat_usd": 2.2e-05,
+        "n_successes": 35,
         "price_in": 0.1,
         "price_note": "estimated",
         "price_out": 0.3,
-        "ttat_s": 0.4
+        "ttat_s": 0.41
       },
       "history": [
-        63.0,
         64.8,
         64.8,
         63.0,
@@ -40,19 +39,20 @@
         64.8,
         64.8,
         63.0,
-        57.4
+        57.4,
+        64.8
       ],
       "model_id": "allam-2-7b",
       "n": 54,
       "quality": {
-        "ci_high": 0.6966837820134256,
-        "ci_low": 0.44162497846346305,
+        "ci_high": 0.7617716827757998,
+        "ci_low": 0.5148458381779774,
         "n": 54,
-        "value": 0.5740740740740741
+        "value": 0.6481481481481481
       },
-      "score": 57.4,
+      "score": 64.8,
       "status": "provisional",
-      "updated_at": "2026-09-06T09:50:22.989598Z"
+      "updated_at": "2026-09-06T12:32:49.572296Z"
     },
     "canopylabs/orpheus-arabic-saudi": {
       "ci_width_points": null,
@@ -68,7 +68,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-06T09:50:22.989598Z"
+      "updated_at": "2026-09-06T12:32:49.572296Z"
     },
     "canopylabs/orpheus-v1-english": {
       "ci_width_points": null,
@@ -84,20 +84,19 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-06T09:50:22.989598Z"
+      "updated_at": "2026-09-06T12:32:49.572296Z"
     },
     "groq/compound": {
-      "ci_width_points": 30.2,
+      "ci_width_points": 34.1,
       "econ": {
-        "cpat_usd": 0.00018,
-        "n_successes": 1,
+        "cpat_usd": 0.000676,
+        "n_successes": 2,
         "price_in": 0.15,
         "price_note": "estimated",
         "price_out": 0.6,
-        "ttat_s": 0.59
+        "ttat_s": 6.17
       },
       "history": [
-        37.5,
         50.0,
         16.7,
         50.0,
@@ -126,32 +125,32 @@
         0.0,
         0.0,
         12.5,
-        7.1
+        7.1,
+        13.3
       ],
       "model_id": "groq/compound",
-      "n": 14,
+      "n": 15,
       "quality": {
-        "ci_high": 0.3146926955395781,
-        "ci_low": 0.012721886112291636,
-        "n": 14,
-        "value": 0.07142857142857142
+        "ci_high": 0.3788249920651624,
+        "ci_low": 0.0373604698913593,
+        "n": 15,
+        "value": 0.13333333333333333
       },
-      "score": 7.1,
+      "score": 13.3,
       "status": "provisional",
-      "updated_at": "2026-09-06T09:50:22.989598Z"
+      "updated_at": "2026-09-06T12:32:49.572296Z"
     },
     "groq/compound-mini": {
-      "ci_width_points": 25.3,
+      "ci_width_points": 35.3,
       "econ": {
-        "cpat_usd": 0.000159,
-        "n_successes": 33,
+        "cpat_usd": 0.000215,
+        "n_successes": 14,
         "price_in": 0.15,
         "price_note": "estimated",
         "price_out": 0.6,
-        "ttat_s": 0.69
+        "ttat_s": 0.88
       },
       "history": [
-        33.3,
         14.3,
         22.2,
         30.8,
@@ -180,32 +179,32 @@
         14.3,
         27.8,
         74.0,
-        70.2
+        70.2,
+        51.9
       ],
       "model_id": "groq/compound-mini",
-      "n": 47,
+      "n": 27,
       "quality": {
-        "ci_high": 0.8134891584898374,
-        "ci_low": 0.5602205595363459,
-        "n": 47,
-        "value": 0.7021276595744681
+        "ci_high": 0.6925704935029092,
+        "ci_low": 0.3398532458621043,
+        "n": 27,
+        "value": 0.5185185185185185
       },
-      "score": 70.2,
+      "score": 51.9,
       "status": "provisional",
-      "updated_at": "2026-09-06T09:50:22.989598Z"
+      "updated_at": "2026-09-06T12:32:49.572296Z"
     },
     "openai/gpt-oss-120b": {
-      "ci_width_points": 22.8,
+      "ci_width_points": 22.3,
       "econ": {
-        "cpat_usd": 2e-05,
-        "n_successes": 40,
+        "cpat_usd": 1.9e-05,
+        "n_successes": 41,
         "price_in": 0.037,
         "price_note": "list",
         "price_out": 0.17,
-        "ttat_s": 0.37
+        "ttat_s": 0.38
       },
       "history": [
-        74.1,
         74.1,
         75.9,
         75.9,
@@ -234,9 +233,64 @@
         33.3,
         33.3,
         75.9,
-        74.1
+        74.1,
+        75.9
       ],
       "model_id": "openai/gpt-oss-120b",
+      "n": 54,
+      "quality": {
+        "ci_high": 0.8535584529614926,
+        "ci_low": 0.6305222087076177,
+        "n": 54,
+        "value": 0.7592592592592593
+      },
+      "score": 75.9,
+      "status": "provisional",
+      "updated_at": "2026-09-06T12:32:49.572296Z"
+    },
+    "openai/gpt-oss-20b": {
+      "ci_width_points": 22.8,
+      "econ": {
+        "cpat_usd": 1.8e-05,
+        "n_successes": 40,
+        "price_in": 0.03,
+        "price_note": "list",
+        "price_out": 0.13,
+        "ttat_s": 0.34
+      },
+      "history": [
+        72.2,
+        74.1,
+        75.9,
+        77.8,
+        77.8,
+        75.9,
+        72.2,
+        75.9,
+        75.9,
+        77.8,
+        77.8,
+        74.1,
+        74.1,
+        74.1,
+        75.9,
+        74.1,
+        75.9,
+        75.9,
+        77.8,
+        74.1,
+        75.9,
+        75.9,
+        77.8,
+        72.2,
+        75.9,
+        77.8,
+        75.9,
+        75.9,
+        77.8,
+        74.1
+      ],
+      "model_id": "openai/gpt-oss-20b",
       "n": 54,
       "quality": {
         "ci_high": 0.8388149203520608,
@@ -246,74 +300,19 @@
       },
       "score": 74.1,
       "status": "provisional",
-      "updated_at": "2026-09-06T09:50:22.989598Z"
-    },
-    "openai/gpt-oss-20b": {
-      "ci_width_points": 21.7,
-      "econ": {
-        "cpat_usd": 1.7e-05,
-        "n_successes": 42,
-        "price_in": 0.03,
-        "price_note": "list",
-        "price_out": 0.13,
-        "ttat_s": 0.28
-      },
-      "history": [
-        75.9,
-        72.2,
-        74.1,
-        75.9,
-        77.8,
-        77.8,
-        75.9,
-        72.2,
-        75.9,
-        75.9,
-        77.8,
-        77.8,
-        74.1,
-        74.1,
-        74.1,
-        75.9,
-        74.1,
-        75.9,
-        75.9,
-        77.8,
-        74.1,
-        75.9,
-        75.9,
-        77.8,
-        72.2,
-        75.9,
-        77.8,
-        75.9,
-        75.9,
-        77.8
-      ],
-      "model_id": "openai/gpt-oss-20b",
-      "n": 54,
-      "quality": {
-        "ci_high": 0.8680471201042104,
-        "ci_low": 0.6506107316841219,
-        "n": 54,
-        "value": 0.7777777777777778
-      },
-      "score": 77.8,
-      "status": "provisional",
-      "updated_at": "2026-09-06T09:50:22.989598Z"
+      "updated_at": "2026-09-06T12:32:49.572296Z"
     },
     "qwen/qwen3.6-27b": {
-      "ci_width_points": 48.7,
+      "ci_width_points": 44.8,
       "econ": {
         "cpat_usd": 0.001037,
         "n_successes": 1,
         "price_in": 0.3,
         "price_note": "list",
         "price_out": 2.0,
-        "ttat_s": 1.14
+        "ttat_s": 1.2
       },
       "history": [
-        16.7,
         16.7,
         16.7,
         16.7,
@@ -342,19 +341,20 @@
         0.0,
         11.1,
         14.3,
-        14.3
+        14.3,
+        12.5
       ],
       "model_id": "qwen/qwen3.6-27b",
-      "n": 7,
+      "n": 8,
       "quality": {
-        "ci_high": 0.5131345033190299,
-        "ci_low": 0.02567895594897482,
-        "n": 7,
-        "value": 0.14285714285714285
+        "ci_high": 0.47089480576986154,
+        "ci_low": 0.022416908863296142,
+        "n": 8,
+        "value": 0.125
       },
-      "score": 14.3,
+      "score": 12.5,
       "status": "provisional",
-      "updated_at": "2026-09-06T09:50:22.989598Z"
+      "updated_at": "2026-09-06T12:32:49.572296Z"
     },
     "qwen/qwen3.8-27b": {
       "ci_width_points": 22.3,
@@ -364,10 +364,9 @@
         "price_in": 0.42,
         "price_note": "list",
         "price_out": 3.0,
-        "ttat_s": 0.1
+        "ttat_s": 0.13
       },
       "history": [
-        72.2,
         74.1,
         74.1,
         75.9,
@@ -396,6 +395,7 @@
         77.8,
         72.2,
         77.8,
+        75.9,
         75.9
       ],
       "model_id": "qwen/qwen3.8-27b",
@@ -408,7 +408,7 @@
       },
       "score": 75.9,
       "status": "provisional",
-      "updated_at": "2026-09-06T09:50:22.989598Z"
+      "updated_at": "2026-09-06T12:32:49.572296Z"
     }
   },
   "known_versions": {
