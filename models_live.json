@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-06T13:15Z",
+ "generated_at": "2026-09-06T13:34Z",
  "source": "openrouter public catalog",
  "count": 348,
  "new_days": 21,
@@ -756,7 +756,7 @@
    "price_out": 0.528,
    "context": 262144,
    "created": "2026-07-06",
-   "age_days": 61,
+   "age_days": 62,
    "free": false,
    "modalities": "text"
   },
@@ -2196,7 +2196,7 @@
    "price_out": 0.2,
    "context": 262144,
    "created": "2025-12-02",
-   "age_days": 277,
+   "age_days": 278,
    "free": false,
    "modalities": "text+image"
   },
@@ -2208,7 +2208,7 @@
    "price_out": 0.15,
    "context": 262144,
    "created": "2025-12-02",
-   "age_days": 277,
+   "age_days": 278,
    "free": false,
    "modalities": "text+image"
   },
@@ -2220,7 +2220,7 @@
    "price_out": 0.1,
    "context": 131072,
    "created": "2025-12-02",
-   "age_days": 277,
+   "age_days": 278,
    "free": false,
    "modalities": "text+image"
   },
@@ -2460,7 +2460,7 @@
    "price_out": 10.0,
    "context": 400000,
    "created": "2025-10-14",
-   "age_days": 326,
+   "age_days": 327,
    "free": false,
    "modalities": "image+text+file"
   },
@@ -2640,7 +2640,7 @@
    "price_out": 0.975,
    "context": 1000000,
    "created": "2025-09-17",
-   "age_days": 353,
+   "age_days": 354,
    "free": false,
    "modalities": "text"
   },
@@ -2904,7 +2904,7 @@
    "price_out": 2.3,
    "context": 131072,
    "created": "2025-07-25",
-   "age_days": 407,
+   "age_days": 408,
    "free": false,
    "modalities": "text"
   },
