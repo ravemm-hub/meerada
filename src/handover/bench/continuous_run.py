@@ -43,6 +43,10 @@ ENV_KEYS = {
 # explicitly — the loop must never spend real money without a deliberate opt-in.
 FREE_PROVIDERS = {"groq", "openrouter", "ollama"}
 
+# How many OpenRouter free models to (re)grade per hourly tick — their free tier
+# is quota'd per day, so we rotate rather than blast.
+OPENROUTER_PER_TICK = 4
+
 # Model ids that are not chat-completion models — skip these (audio/embed/etc).
 _NON_CHAT = re.compile(r"whisper|tts|audio|embed|guard|moderation|rerank|orpheus|ocr", re.I)
 
@@ -132,7 +136,19 @@ def main(argv: list[str] | None = None) -> int:
     now = datetime.now(tz=UTC)
 
     def do_fetch() -> list[CatalogModel]:
-        return [m for m in fetch_catalog(live, keys) if _gradable(m, allow_paid)]
+        models = [m for m in fetch_catalog(live, keys) if _gradable(m, allow_paid)]
+        # Free-tier quotas are per day: rotate through OpenRouter's free models a
+        # few per tick (ungraded first) instead of burning the quota on one pass.
+        openrouter = [m for m in models if m.provider == "openrouter"]
+        if len(openrouter) > OPENROUTER_PER_TICK:
+            ungraded = [m for m in openrouter if state.cards.get(m.model_id) is None
+                        or state.cards[m.model_id].n == 0]
+            rest = [m for m in openrouter if m not in ungraded]
+            keep = (ungraded + rest)[:OPENROUTER_PER_TICK]
+            keep_ids = {m.model_id for m in keep}
+            # models left out this tick must not look "removed": keep them known
+            models = [m for m in models if m.provider != "openrouter" or m.model_id in keep_ids]
+        return models
 
     # short timeout: an unresponsive free model must cost seconds, not the whole tick
     callers = {p: HttpChatCaller(ENDPOINTS[p], keys[p], timeout=25.0) for p in live}
@@ -152,8 +168,11 @@ def main(argv: list[str] | None = None) -> int:
                 model_id, system, [{"role": "user", "content": user}], max_tokens
             )
 
+        # First look at a new model is a light pass (1 repeat) so a free tier's
+        # daily quota covers several models per tick; known cards get 3 repeats.
+        repeats = 3 if model_id in state.cards and state.cards[model_id].n > 0 else 1
         try:
-            per_cluster = run_model(spec, complete, budget, repeats=3, delay_s=2.2)
+            per_cluster = run_model(spec, complete, budget, repeats=repeats, delay_s=3.2)
         except Exception as exc:
             print(f"  skip {model_id}: {type(exc).__name__} {str(exc)[:80]}")
             return None, proportion(0, 0), None

@@ -69,7 +69,9 @@ def tick(
     changed_ids = {c.model_id for c in changes if c.needs_grading}
     # Priority: new/upgraded first, then provisional/stale cards due to advance.
     due: list[str] = list(changed_ids)
-    for model_id, card in state.cards.items():
+    # Least-recently-measured first, so a budget-capped tick rotates fairly
+    # instead of starving the same cards every hour.
+    for model_id, card in sorted(state.cards.items(), key=lambda kv: kv[1].updated_at):
         if model_id not in changed_ids and _due_to_advance(card, now):
             due.append(model_id)
 
