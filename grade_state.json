@@ -1,17 +1,16 @@
 {
   "cards": {
     "allam-2-7b": {
-      "ci_width_points": 24.9,
+      "ci_width_points": 25.5,
       "econ": {
-        "cpat_usd": 2.2e-05,
-        "n_successes": 34,
+        "cpat_usd": 2.1e-05,
+        "n_successes": 31,
         "price_in": 0.1,
         "price_note": "estimated",
         "price_out": 0.3,
-        "ttat_s": 0.38
+        "ttat_s": 0.51
       },
       "history": [
-        66.7,
         61.1,
         64.8,
         64.8,
@@ -40,19 +39,20 @@
         66.7,
         64.8,
         61.1,
-        63.0
+        63.0,
+        57.4
       ],
       "model_id": "allam-2-7b",
       "n": 54,
       "quality": {
-        "ci_high": 0.745768102923745,
-        "ci_low": 0.49627222791081016,
+        "ci_high": 0.6966837820134256,
+        "ci_low": 0.44162497846346305,
         "n": 54,
-        "value": 0.6296296296296297
+        "value": 0.5740740740740741
       },
-      "score": 63.0,
+      "score": 57.4,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "canopylabs/orpheus-arabic-saudi": {
       "ci_width_points": null,
@@ -68,7 +68,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "canopylabs/orpheus-v1-english": {
       "ci_width_points": null,
@@ -84,7 +84,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "cohere/north-mini-code:free": {
       "ci_width_points": null,
@@ -100,7 +100,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "dots-studio/dots-3-note-preview:free": {
       "ci_width_points": null,
@@ -125,7 +125,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "google/gemma-4-26b-a4b-it:free": {
       "ci_width_points": null,
@@ -141,7 +141,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "google/gemma-4-31b-it:free": {
       "ci_width_points": null,
@@ -157,10 +157,10 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "groq/compound": {
-      "ci_width_points": 30.6,
+      "ci_width_points": 18.4,
       "econ": {
         "cpat_usd": 0.000549,
         "n_successes": 11,
@@ -170,7 +170,6 @@
         "ttat_s": 3.73
       },
       "history": [
-        0.0,
         0.0,
         0.0,
         7.1,
@@ -199,32 +198,32 @@
         0.0,
         5.9,
         33.3,
-        33.3
+        33.3,
+        0.0
       ],
       "model_id": "groq/compound",
-      "n": 33,
+      "n": 17,
       "quality": {
-        "ci_high": 0.5039241820005003,
-        "ci_low": 0.19750029467803698,
-        "n": 33,
-        "value": 0.3333333333333333
+        "ci_high": 0.18432366037156456,
+        "ci_low": 0.0,
+        "n": 17,
+        "value": 0.0
       },
-      "score": 33.3,
+      "score": 0.0,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "groq/compound-mini": {
       "ci_width_points": 22.3,
       "econ": {
-        "cpat_usd": 0.00016,
+        "cpat_usd": 0.000163,
         "n_successes": 41,
         "price_in": 0.15,
         "price_note": "estimated",
         "price_out": 0.6,
-        "ttat_s": 0.74
+        "ttat_s": 0.68
       },
       "history": [
-        58.8,
         0.0,
         0.0,
         0.0,
@@ -253,6 +252,7 @@
         0.0,
         0.0,
         72.5,
+        75.9,
         75.9
       ],
       "model_id": "groq/compound-mini",
@@ -265,7 +265,7 @@
       },
       "score": 75.9,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "inclusionai/ling-3.0-flash-fin:free": {
       "ci_width_points": null,
@@ -290,7 +290,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "inclusionai/ling-3.0-flash-sante:free": {
       "ci_width_points": null,
@@ -315,7 +315,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "liquid/lfm-2.5-2.6b:free": {
       "ci_width_points": null,
@@ -331,7 +331,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "minimax/minimax-m2.7:free": {
       "ci_width_points": null,
@@ -356,7 +356,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "minimax/minimax-m3:free": {
       "ci_width_points": null,
@@ -381,7 +381,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
       "ci_width_points": null,
@@ -397,7 +397,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "nvidia/nemotron-3-super-120b-a12b:free": {
       "ci_width_points": null,
@@ -413,7 +413,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "nvidia/nemotron-3-ultra-550b-a55b:free": {
       "ci_width_points": null,
@@ -429,7 +429,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "nvidia/nemotron-3.5-content-safety:free": {
       "ci_width_points": null,
@@ -445,7 +445,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "nvidia/nemotron-3.5-lightning:free": {
       "ci_width_points": null,
@@ -461,20 +461,19 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "openai/gpt-oss-120b": {
-      "ci_width_points": 32.7,
+      "ci_width_points": 22.3,
       "econ": {
-        "cpat_usd": 2.7e-05,
-        "n_successes": 17,
+        "cpat_usd": 1.9e-05,
+        "n_successes": 41,
         "price_in": 0.037,
         "price_note": "list",
         "price_out": 0.17,
-        "ttat_s": 0.47
+        "ttat_s": 0.4
       },
       "history": [
-        58.1,
         25.0,
         33.3,
         50.0,
@@ -503,32 +502,32 @@
         0.0,
         0.0,
         53.1,
-        53.1
+        53.1,
+        75.9
       ],
       "model_id": "openai/gpt-oss-120b",
-      "n": 32,
+      "n": 54,
       "quality": {
-        "ci_high": 0.6913087009831766,
-        "ci_low": 0.3644923793257382,
-        "n": 32,
-        "value": 0.53125
+        "ci_high": 0.8535584529614926,
+        "ci_low": 0.6305222087076177,
+        "n": 54,
+        "value": 0.7592592592592593
       },
-      "score": 53.1,
+      "score": 75.9,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "openai/gpt-oss-20b": {
-      "ci_width_points": 22.3,
+      "ci_width_points": 21.7,
       "econ": {
-        "cpat_usd": 1.8e-05,
-        "n_successes": 41,
+        "cpat_usd": 1.6e-05,
+        "n_successes": 42,
         "price_in": 0.03,
         "price_note": "list",
         "price_out": 0.13,
-        "ttat_s": 0.36
+        "ttat_s": 0.3
       },
       "history": [
-        77.8,
         74.1,
         74.1,
         74.1,
@@ -557,19 +556,20 @@
         77.8,
         77.8,
         74.1,
-        75.9
+        75.9,
+        77.8
       ],
       "model_id": "openai/gpt-oss-20b",
       "n": 54,
       "quality": {
-        "ci_high": 0.8535584529614926,
-        "ci_low": 0.6305222087076177,
+        "ci_high": 0.8680471201042104,
+        "ci_low": 0.6506107316841219,
         "n": 54,
-        "value": 0.7592592592592593
+        "value": 0.7777777777777778
       },
-      "score": 75.9,
+      "score": 77.8,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "poolside/laguna-s-2.1:free": {
       "ci_width_points": null,
@@ -585,7 +585,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "poolside/laguna-xs-2.1:free": {
       "ci_width_points": null,
@@ -601,10 +601,10 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "qwen/qwen3.6-27b": {
-      "ci_width_points": 49.0,
+      "ci_width_points": 65.8,
       "econ": {
         "cpat_usd": 0.000467,
         "n_successes": 2,
@@ -614,7 +614,6 @@
         "ttat_s": 0.67
       },
       "history": [
-        12.5,
         20.0,
         14.3,
         12.5,
@@ -643,32 +642,32 @@
         0.0,
         0.0,
         0.0,
+        0.0,
         0.0
       ],
       "model_id": "qwen/qwen3.6-27b",
-      "n": 4,
+      "n": 2,
       "quality": {
-        "ci_high": 0.48990002040399916,
+        "ci_high": 0.6576280471103807,
         "ci_low": 0.0,
-        "n": 4,
+        "n": 2,
         "value": 0.0
       },
       "score": 0.0,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "qwen/qwen3.8-27b": {
-      "ci_width_points": 21.7,
+      "ci_width_points": 22.3,
       "econ": {
-        "cpat_usd": 4.7e-05,
-        "n_successes": 42,
+        "cpat_usd": 5.5e-05,
+        "n_successes": 41,
         "price_in": 0.42,
         "price_note": "list",
         "price_out": 3.0,
-        "ttat_s": 0.15
+        "ttat_s": 0.12
       },
       "history": [
-        77.8,
         74.1,
         74.1,
         75.9,
@@ -697,19 +696,20 @@
         75.9,
         75.9,
         75.9,
-        77.8
+        77.8,
+        75.9
       ],
       "model_id": "qwen/qwen3.8-27b",
       "n": 54,
       "quality": {
-        "ci_high": 0.8680471201042104,
-        "ci_low": 0.6506107316841219,
+        "ci_high": 0.8535584529614926,
+        "ci_low": 0.6305222087076177,
         "n": 54,
-        "value": 0.7777777777777778
+        "value": 0.7592592592592593
       },
-      "score": 77.8,
+      "score": 75.9,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "thinkingmachines/inkling-small:free": {
       "ci_width_points": null,
@@ -725,7 +725,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     },
     "thinkingmachines/inkling:free": {
       "ci_width_points": null,
@@ -741,7 +741,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-09-07T10:55:54.315115Z"
+      "updated_at": "2026-09-07T16:11:38.340902Z"
     }
   },
   "known_versions": {
