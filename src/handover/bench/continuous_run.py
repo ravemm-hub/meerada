@@ -36,19 +36,26 @@ ENV_KEYS = {
     "deepseek": "DEEPSEEK_API_KEY",
     "mistral": "MISTRAL_API_KEY",
     "together": "TOGETHER_API_KEY",
+    "google": "GOOGLE_API_KEY",
+    "github": "GITHUB_MODELS_TOKEN",
+    "cerebras": "CEREBRAS_API_KEY",
 }
 
 # HARD SAFETY: only providers with a genuine free tier may be graded by the
 # scheduled loop. A paid provider is refused unless MEERADA_ALLOW_PAID=1 is set
 # explicitly — the loop must never spend real money without a deliberate opt-in.
-FREE_PROVIDERS = {"groq", "openrouter", "ollama"}
+FREE_PROVIDERS = {"groq", "openrouter", "ollama", "google", "github", "mistral", "cerebras"}
 
-# How many OpenRouter free models to (re)grade per hourly tick — their free tier
-# is quota'd per day, so we rotate rather than blast.
-OPENROUTER_PER_TICK = 4
+# How many models per provider to (re)grade per hourly tick — free tiers are
+# quota'd per day, so we rotate through a few at a time rather than blast.
+PER_TICK: dict[str, int] = {"openrouter": 4, "github": 2, "google": 3, "mistral": 3, "cerebras": 3}
 
 # Model ids that are not chat-completion models — skip these (audio/embed/etc).
-_NON_CHAT = re.compile(r"whisper|tts|audio|embed|guard|moderation|rerank|orpheus|ocr", re.I)
+_NON_CHAT = re.compile(
+    r"whisper|tts|audio|embed|guard|moderation|rerank|orpheus|ocr|imagen|veo|aqa|learnlm"
+    r"|image|vision-|live|native-audio|gemini-1|robotics|computer-use|-exp$|safety",
+    re.I,
+)
 
 
 def _is_chat_model(model_id: str) -> bool:
@@ -137,17 +144,17 @@ def main(argv: list[str] | None = None) -> int:
 
     def do_fetch() -> list[CatalogModel]:
         models = [m for m in fetch_catalog(live, keys) if _gradable(m, allow_paid)]
-        # Free-tier quotas are per day: rotate through OpenRouter's free models a
+        # Free-tier quotas are per day: rotate through each provider's models a
         # few per tick (ungraded first) instead of burning the quota on one pass.
-        openrouter = [m for m in models if m.provider == "openrouter"]
-        if len(openrouter) > OPENROUTER_PER_TICK:
-            ungraded = [m for m in openrouter if state.cards.get(m.model_id) is None
+        for prov, cap in PER_TICK.items():
+            mine = [m for m in models if m.provider == prov]
+            if len(mine) <= cap:
+                continue
+            ungraded = [m for m in mine if state.cards.get(m.model_id) is None
                         or state.cards[m.model_id].n == 0]
-            rest = [m for m in openrouter if m not in ungraded]
-            keep = (ungraded + rest)[:OPENROUTER_PER_TICK]
-            keep_ids = {m.model_id for m in keep}
-            # models left out this tick must not look "removed": keep them known
-            models = [m for m in models if m.provider != "openrouter" or m.model_id in keep_ids]
+            rest = [m for m in mine if m not in ungraded]
+            keep_ids = {m.model_id for m in (ungraded + rest)[:cap]}
+            models = [m for m in models if m.provider != prov or m.model_id in keep_ids]
         return models
 
     # short timeout: an unresponsive free model must cost seconds, not the whole tick

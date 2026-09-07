@@ -7,7 +7,8 @@ and injected, so they are tested with fakes and never call a live API
 (CLAUDE.md). The HTTP shell itself (build_app/serve) is a network seam.
 """
 
-from collections.abc import Callable, Mapping
+from collections.abc import Callable, Mapping, Sequence
+from functools import partial
 from pathlib import Path
 from typing import Any
 
@@ -46,7 +47,15 @@ DESKTOP_MODELS: list[str] = [
 # needs)}. The picker only offers models whose provider key is connected, so a
 # user can never pick a model that 401s on a missing/wrong key.
 # (id sent to API, short name, provider = key + grouping, strength tag).
+AUTO_ID = "auto"
 _CATALOG: tuple[tuple[str, str, str, str], ...] = (
+    (AUTO_ID, "⚡ Auto", "auto", "top-graded model among your keys, per the live Bourse"),
+    ("gemini-2.5-flash", "Gemini 2.5 Flash", "google", "free tier · fast · vision"),
+    ("gemini-2.5-pro", "Gemini 2.5 Pro", "google", "free tier · strong"),
+    ("openai/gpt-4.1", "GPT-4.1", "github", "free tier · strong"),
+    ("openai/gpt-4o-mini", "GPT-4o mini", "github", "free tier · fast"),
+    ("deepseek/deepseek-v3-0324", "DeepSeek V3", "github", "free tier"),
+    ("meta/llama-3.3-70b-instruct", "Llama 3.3 70B", "github", "free tier"),
     ("claude-3-7-sonnet-latest", "Claude 3.7 Sonnet", "anthropic", "top code"),
     ("claude-3-5-sonnet-latest", "Claude 3.5 Sonnet", "anthropic", "strong"),
     ("claude-3-5-haiku-latest", "Claude 3.5 Haiku", "anthropic", "fast"),
@@ -70,8 +79,10 @@ MODEL_CATALOG: list[dict[str, str]] = [
     {"id": i, "name": n, "provider": p, "tag": t} for i, n, p, t in _CATALOG
 ]
 PROVIDER_NAMES: dict[str, str] = {
-    "anthropic": "Anthropic (Claude)", "openai": "OpenAI", "openrouter": "OpenRouter",
-    "deepseek": "DeepSeek", "mistral": "Mistral", "groq": "Groq (free)",
+    "auto": "Meerada", "anthropic": "Anthropic (Claude)", "openai": "OpenAI",
+    "openrouter": "OpenRouter", "deepseek": "DeepSeek", "mistral": "Mistral (free tier)",
+    "groq": "Groq (free)", "google": "Google AI Studio (free)", "github": "GitHub Models (free)",
+    "cerebras": "Cerebras (free)",
 }
 
 CallerFor = Callable[[str], ChatCaller]
@@ -174,11 +185,27 @@ class Board:
     Claude Code / Claude.ai / ChatGPT history; ``judge`` and ``relay`` compose
     several models into one answer — things no single vendor can offer."""
 
-    def __init__(self, caller_for: CallerFor | None, *, max_tokens: int = 1500) -> None:
+    def __init__(
+        self,
+        caller_for: CallerFor | None,
+        *,
+        max_tokens: int = 1500,
+        pick_auto: Callable[[], str | None] | None = None,
+    ) -> None:
         self._caller_for = caller_for
         self._max_tokens = max_tokens
+        self._pick_auto = pick_auto
         self.sessions: dict[str, Session] = {}
         self.models: dict[str, str] = {}
+
+    def resolve(self, model: str) -> str:
+        """``auto`` -> the top-graded model the user can run right now (live
+        Bourse); anything else passes through. Falls back to the model itself
+        when no grade data is reachable, so a send never dies on routing."""
+        if model != AUTO_ID:
+            return model
+        picked = self._pick_auto() if self._pick_auto else None
+        return picked or model
 
     @property
     def live(self) -> bool:
@@ -220,6 +247,11 @@ class Board:
         message = message.strip()
         if not sid or not model or not message:
             return {"error": "session id, model and message are required"}
+        asked = model
+        model = self.resolve(model)
+        if model == AUTO_ID:
+            return {"id": sid, "model": model, "text": "", "turns": 0,
+                    "error": "auto: no graded model matches your connected keys yet — pick one"}
         self.models[sid] = model
         if self._caller_for is None:
             opt = optimize(message, model)
@@ -233,6 +265,7 @@ class Board:
         reply = session.ask(message)
         return {
             "id": sid, "model": model, "text": reply.text, "error": reply.error,
+            "auto": asked == AUTO_ID,
             "saved_pct": reply.prompt.saved_pct,
             "input_tokens": reply.input_tokens, "output_tokens": reply.output_tokens,
             "turns": len(session.history) // 2,
@@ -275,6 +308,7 @@ class Board:
             return {"error": "nothing to hand off yet — this session has no history"}
         if not self.live:
             return {"error": "connect a key first"}
+        model = self.resolve(model)
         session = self._new_session(model)
         session.carry_from(src)
         self.sessions[new_sid] = session
@@ -288,7 +322,7 @@ class Board:
             {"name": str(f.get("name", "file"))[:200], "text": str(f.get("text", ""))}
             for f in files if str(f.get("text", "")).strip()
         ]
-        session = self.open(sid, model)
+        session = self.open(sid, self.resolve(model))
         session.attach(clean)
         return self._view(sid, session)
 
@@ -320,7 +354,7 @@ class Board:
             "(format: '1. ANSWER n — reason'), then under a heading 'BEST ANSWER' write the "
             "single best final answer, merging correct parts if that improves it. Be concrete."
         )
-        session = self.open(judge_sid, judge_model)
+        session = self.open(judge_sid, self.resolve(judge_model))
         session.title = "⚖️ Verdict"
         session.source = "judge"
         reply = session.ask("\n".join(body))
@@ -340,6 +374,7 @@ class Board:
             return {"error": "session id, model, draft model and message are required"}
         if not self.live:
             return {"error": "connect a key first"}
+        model, draft_model = self.resolve(model), self.resolve(draft_model)
         session = self.open(sid, model)
         drafter = self._new_session(draft_model)
         drafter.history = list(session.history)
@@ -371,18 +406,27 @@ class Board:
         }
 
 
-def provider_for(model_id: str, extra: Mapping[str, str] | None = None) -> str:
-    """The catalog's own provider for a known id (static or live-discovered),
-    else the id heuristics. Live rows are all OpenRouter, so a freshly
-    discovered ``vendor/model`` routes through the user's OpenRouter key."""
+def provider_for(
+    model_id: str,
+    extra: Mapping[str, str] | None = None,
+    connected: Sequence[str] | None = None,
+) -> str:
+    """The catalog's provider for a known id (static or live-discovered), else
+    the id heuristics. The same id can be served by several providers (GitHub
+    Models and OpenRouter both take ``openai/gpt-4o-mini``): prefer one the
+    user has actually connected."""
     from handover.copilot.router import _provider_of
 
+    options = [row["provider"] for row in MODEL_CATALOG if row["id"] == model_id]
     if extra and model_id in extra:
-        return extra[model_id]
-    for row in MODEL_CATALOG:
-        if row["id"] == model_id:
-            return row["provider"]
-    return _provider_of(model_id)
+        options.append(extra[model_id])
+    if options:
+        for p in options:
+            if connected is None or p in connected:
+                return p
+        if connected is None:
+            return options[0]
+    return _provider_of(model_id)  # nothing matching is connected: the id's own heuristic
 
 
 def _caller_for_user(
@@ -392,7 +436,7 @@ def _caller_for_user(
     from handover.copilot.providers import build_caller
 
     def caller(model_id: str) -> ChatCaller:
-        provider = provider_for(model_id, providers)
+        provider = provider_for(model_id, providers, keystore.providers(user))
         key = keystore.get(user, provider)
         if not key:
             raise RuntimeError(f"no key connected for {provider} — add it under Keys")
@@ -410,6 +454,9 @@ _VALIDATE_MODEL: dict[str, str] = {
     "openrouter": "openai/gpt-4o-mini",
     "together": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
     "anthropic": "claude-3-5-haiku-latest",
+    "google": "gemini-2.5-flash",
+    "github": "openai/gpt-4o-mini",
+    "cerebras": "llama3.1-8b",
 }
 
 
@@ -485,7 +532,13 @@ def build_app(
         except RuntimeError:
             caller_for = None
 
+    from handover.copilot.autopick import AutoPicker
     from handover.copilot.catalog_live import LiveCatalog
+
+    autopick = AutoPicker()
+
+    def picker_for(connected_fn: Callable[[], list[str]]) -> Callable[[], str | None]:
+        return lambda: autopick.choose(connected_fn())
 
     live_catalog = LiveCatalog()
     live_providers: dict[str, str] = {}  # id -> provider for discovered rows
@@ -500,7 +553,12 @@ def build_app(
     state: dict[str, SessionManager | None] = {
         "manager": SessionManager(caller_for) if caller_for is not None else None
     }
-    board: dict[str, Board] = {"board": Board(caller_for)}
+    shared_connected = ["groq"] if caller_for is not None else []
+
+    def _shared() -> list[str]:
+        return shared_connected
+
+    board: dict[str, Board] = {"board": Board(caller_for, pick_auto=picker_for(_shared))}
     user_boards: dict[str, Board] = {}
 
     def current_user(request: Request) -> dict[str, Any] | None:
@@ -516,7 +574,10 @@ def build_app(
         sub = str(user["sub"])
         if hosted or local_vault:  # per-user (or single local) board from the key vault
             if sub not in user_boards:
-                user_boards[sub] = Board(_caller_for_user(keystore, sub, live_providers))
+                user_boards[sub] = Board(
+                    _caller_for_user(keystore, sub, live_providers),
+                    pick_auto=picker_for(partial(keystore.providers, sub)),
+                )
             return user_boards[sub], sub
         return board["board"], sub
 
@@ -538,7 +599,8 @@ def build_app(
             catalog += [r for r in live_rows() if r["id"] not in known]
         return JSONResponse(
             {"catalog": catalog, "connected": connected,
-             "provider_names": PROVIDER_NAMES, "live": live}
+             "provider_names": PROVIDER_NAMES, "live": live,
+             "auto_pick": autopick.choose(connected) if connected else None}
         )
 
     @app.get("/me")
@@ -808,9 +870,12 @@ def build_app(
         _, sub = board_for(request)
         if not hosted:
             state["manager"] = SessionManager(caller_for) if caller_for is not None else None
-            board["board"] = Board(caller_for)
+            board["board"] = Board(caller_for, pick_auto=picker_for(_shared))
         elif sub is not None:
-            user_boards[sub] = Board(_caller_for_user(keystore, sub, live_providers))
+            user_boards[sub] = Board(
+                _caller_for_user(keystore, sub, live_providers),
+                pick_auto=picker_for(partial(keystore.providers, sub)),
+            )
         return JSONResponse({"ok": True})
 
     return app

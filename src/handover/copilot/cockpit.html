@@ -147,12 +147,22 @@
         <option value="deepseek">DeepSeek</option>
         <option value="mistral">Mistral</option>
         <option value="groq">Groq (free tier)</option>
+        <option value="google">Google AI Studio — Gemini (free tier)</option>
+        <option value="github">GitHub Models — GPT-4.1/4o, Llama, DeepSeek (free tier)</option>
+        <option value="cerebras">Cerebras (free tier)</option>
       </select>
       <input id="k-key" type="password" placeholder="paste (Ctrl+V) or click 📋" style="flex:1;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.5rem">
       <button class="btn" title="Paste from clipboard" onclick="pasteKey()">📋</button>
       <button class="btn primary" onclick="connectKey()">Connect</button>
     </div>
-    <div id="k-connected" style="font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--good);margin-bottom:1rem"></div>
+    <div id="k-connected" style="font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--good);margin-bottom:.6rem"></div>
+    <div class="sub" style="font-size:.74rem;margin-bottom:1rem;line-height:1.6"><b>Free keys (no card):</b>
+      <a class="teal" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:var(--teal)">Google AI Studio</a> ·
+      <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener" style="color:var(--teal)">GitHub Models</a> (fine-grained token → Account permissions → <b>Models: Read</b>) ·
+      <a href="https://console.groq.com/keys" target="_blank" rel="noopener" style="color:var(--teal)">Groq</a> ·
+      <a href="https://openrouter.ai/settings/keys" target="_blank" rel="noopener" style="color:var(--teal)">OpenRouter</a> ·
+      <a href="https://console.mistral.ai/api-keys" target="_blank" rel="noopener" style="color:var(--teal)">Mistral</a>.
+      With any key connected, <b>⚡ Auto</b> picks the top-graded model you can run.</div>
     <div style="display:flex;justify-content:space-between;align-items:center">
       <button class="btn ghost" onclick="signOut()">Sign out</button>
       <button class="btn" onclick="hide('keys')">Done</button>
@@ -213,7 +223,8 @@ function show(id){document.getElementById(id).style.display="flex";} function hi
 function toast(msg,ms){ var t=document.getElementById("toast"); t.innerHTML=msg; t.style.display="block"; clearTimeout(t._h); t._h=setTimeout(function(){t.style.display="none";},ms||2600); }
 
 // only models whose provider key is connected — you can never pick one that 401s
-function runnable(){ return CATALOG.filter(function(m){ return CONNECTED.indexOf(m.provider)>=0; }); }
+function runnable(){ return CATALOG.filter(function(m){ return CONNECTED.indexOf(m.provider)>=0 || (m.provider=="auto" && CONNECTED.length>0); }); }
+var AUTO_PICK="";
 function labelFor(id){ for(var i=0;i<CATALOG.length;i++){ if(CATALOG[i].id==id)return CATALOG[i].name; } return id; }
 function defaultModel(){ var r=runnable(); return r.length?r[0].id:""; }
 function cheapestModel(){ var r=runnable(); var c=r.filter(function(m){return /cheap|free|fast/.test(m.tag||"");}); return (c[0]||r[r.length-1]||{}).id||""; }
@@ -270,7 +281,7 @@ function threadHtml(s){
     else if(t.reply.error){ body='<div class="ai err">'+h(t.reply.text||"")+'<span class="meta">'+h(t.reply.error)+'</span></div>'; }
     else if(t.reply.imported){ body='<div class="ai">'+formatReply(t.reply.text)+'<span class="meta"><span class="tag imp">📥 imported</span><button class="codecopy" onclick="copyText(this)" data-c="'+encodeURIComponent(t.reply.text||"")+'">copy</button></span></div>'; }
     else {
-      var tags=(t.reply.fastest?'<span class="tag fast">⚡ fastest</span>':'')+(t.reply.cheapest?'<span class="tag cheap">💰 cheapest</span>':'')+(t.reply.relay?'<span class="tag relay">⚡ drafted by '+h(labelFor(t.reply.relay.draft_model))+'</span>':'');
+      var tags=(t.reply.auto?'<span class="tag fast" title="⚡ Auto picked the top-graded model you can run">⚡ auto → '+h(labelFor(t.reply.model))+'</span>':'')+(t.reply.fastest?'<span class="tag fast">⚡ fastest</span>':'')+(t.reply.cheapest?'<span class="tag cheap">💰 cheapest</span>':'')+(t.reply.relay?'<span class="tag relay">⚡ drafted by '+h(labelFor(t.reply.relay.draft_model))+'</span>':'');
       body='<div class="ai">'+formatReply(t.reply.text)+'<span class="meta">'+tags+'−'+(t.reply.saved_pct||0)+'% lean · '+(t.reply.output_tokens||0)+' out · '+(t.reply.ms||0)+'ms'
         +'<button class="codecopy" onclick="copyText(this)" data-c="'+encodeURIComponent(t.reply.text||"")+'">copy all</button>'
         +'<button class="acc'+(t.accepted?' on':'')+'" onclick="accept(\''+s.id+'\','+idx+')">'+(t.accepted?'✓ accepted':'✓ accept')+'</button></span></div>';
@@ -555,7 +566,8 @@ function renderConnected(err){
 }
 async function refreshModels(){
   try{ var r=await fetch("/models"); var d=await r.json();
-    CATALOG=d.catalog||[]; CONNECTED=d.connected||[]; PROVIDER_NAMES=d.provider_names||{}; live=d.live;
+    CATALOG=d.catalog||[]; CONNECTED=d.connected||[]; PROVIDER_NAMES=d.provider_names||{}; live=d.live; AUTO_PICK=d.auto_pick||"";
+    CATALOG.forEach(function(m){ if(m.id=="auto") m.tag = AUTO_PICK ? ("→ "+labelFor(AUTO_PICK)+" right now · from the live Bourse") : m.tag; });
     var mode=document.getElementById("mode");
     if(mode){ mode.textContent=live?"LIVE · your keys":"PREVIEW"; mode.className="mode "+(live?"live":"preview"); }
   }catch(e){}

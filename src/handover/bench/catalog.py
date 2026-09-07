@@ -19,15 +19,20 @@ from handover.replay.openai_client import ENDPOINTS
 RawModelsFetch = Callable[[str, str], dict[str, Any]]
 
 
+# Providers whose model list lives somewhere other than {base}/models.
+MODELS_URL: dict[str, str] = {"github": "https://models.github.ai/catalog/models"}
+
+
 def _urllib_fetch(base_url: str, api_key: str) -> dict[str, Any]:
+    url = next((u for b, u in MODELS_URL.items() if b in base_url), None)
     request = urllib.request.Request(
-        base_url.rstrip("/") + "/models",
+        url or base_url.rstrip("/") + "/models",
         headers={"Authorization": f"Bearer {api_key}", "User-Agent": "meerada/0.1"},
         method="GET",
     )
     with urllib.request.urlopen(request, timeout=30) as resp:
-        result: dict[str, Any] = json.loads(resp.read().decode())
-        return result
+        result = json.loads(resp.read().decode())
+        return result if isinstance(result, dict) else {"data": result}  # GitHub returns a list
 
 
 def parse_models(provider: str, body: dict[str, Any]) -> list[CatalogModel]:
@@ -35,6 +40,8 @@ def parse_models(provider: str, body: dict[str, Any]) -> list[CatalogModel]:
     models: list[CatalogModel] = []
     for item in body.get("data", []):
         model_id = str(item.get("id") or "").strip()
+        if model_id.startswith("models/"):  # Google AI Studio: "models/gemini-2.5-flash"
+            model_id = model_id[len("models/"):]
         if not model_id:
             continue
         # version hint: prefer an explicit created/updated stamp so a silent

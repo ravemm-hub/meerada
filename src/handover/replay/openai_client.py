@@ -122,5 +122,8 @@ ENDPOINTS: dict[str, str] = {
     "deepseek": "https://api.deepseek.com/v1",
     "mistral": "https://api.mistral.ai/v1",
     "together": "https://api.together.xyz/v1",
+    "google": "https://generativelanguage.googleapis.com/v1beta/openai",  # AI Studio, free tier
+    "github": "https://models.github.ai/inference",  # GitHub Models, free tier (PAT w/ models:read)
+    "cerebras": "https://api.cerebras.ai/v1",
     "ollama": "http://localhost:11434/v1",
 }

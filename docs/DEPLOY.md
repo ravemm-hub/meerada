@@ -124,3 +124,19 @@ Every hourly `live-grade` run now:
 LLManager users with an OpenRouter key see the same feed in the picker:
 new launches (🆕), free variants, and one flagship per big lab — selectable the
 day they appear, on their own key.
+
+### More free graders (no card, no $10)
+
+Add any of these as repo secrets and the hourly grader picks them up (a few
+models per provider per tick, rotating):
+
+| secret | where to get it (free) | what it grades |
+|---|---|---|
+| `GOOGLE_API_KEY` | https://aistudio.google.com/apikey | Gemini 2.5 Flash / Pro (free tier) |
+| `GH_MODELS_TOKEN` | https://github.com/settings/personal-access-tokens/new → Account permissions → **Models: Read** | GPT-4.1, GPT-4o, Llama 3.3, DeepSeek V3, Mistral… (free tier) |
+| `MISTRAL_API_KEY` | https://console.mistral.ai/api-keys (Experiment tier) | Mistral small/medium/large |
+| `CEREBRAS_API_KEY` | https://cloud.cerebras.ai (needs a card on file) | Llama 3.3 70B, Qwen |
+
+The same keys, pasted in LLManager's 🔑 Keys panel, make those models
+selectable there — and turn on **⚡ Auto**, which sends each task to the
+top-graded model you can run according to the live Bourse.
