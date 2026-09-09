@@ -206,6 +206,7 @@
     </div>
     <span class="navlinks">
       <a href="#models" style="color:var(--text)">Models</a>
+      <a href="#frontier">Frontier</a>
       <a href="#labs">Labs</a>
       <a href="#new-wrap">New</a>
       <a href="#exchange">Exchange</a>
@@ -229,6 +230,14 @@
     </div>
   </header>
 
+  <div class="prodbanners">
+    <a class="pbanner premium" href="llmanager.html"><b>🎛️ LLManager <span class="pb-tag">app</span></b><span>One app for every model, on your own keys. Import your Claude / ChatGPT history and switch models mid-conversation. Free · Pro $99/yr.</span></a>
+    <a class="pbanner" href="https://app.meerada.app" target="_blank" rel="noopener"><b>▶ Try it in the browser</b><span>The live cockpit, no install: run many models on many tasks in parallel, right now.</span></a>
+    <a class="pbanner" href="#handshake"><b>🤝 Handshake Report</b><span>For companies: a measured migration plan for your real workload — where to move, what you save, where quality breaks.</span></a>
+    <a class="pbanner" href="#battery"><b>🧪 Sponsored grading</b><span>Labs: get your model on the full battery, daily for 30 days. Results publish either way.</span></a>
+    <a class="pbanner" href="https://github.com/ravemm-hub/meerada" target="_blank" rel="noopener"><b>⬇️ Open-source core</b><span>The measuring engine, the CLI and this exchange's data — free, on GitHub.</span></a>
+  </div>
+
   <div class="ticker"><div class="run" id="ticker"></div></div>
 
   <!-- ===== THE EXCHANGE: every model, real data ===== -->
@@ -242,11 +251,13 @@
     <label><input type="checkbox" id="x-free" onchange="renderX()"> free tier</label>
     <span class="cnt" id="x-count"></span>
   </div>
+  <div class="xctrl" style="margin-top:-.2rem"><label><input type="checkbox" id="x-all" onchange="xAll=this.checked; xHead(); renderX();"> all columns</label><span class="gq">default: measured models by grade, then the newest launches · 50 at a time</span></div>
   <div class="cmpbar" id="cmpbar" style="display:none">Comparing: <span id="cmp-picks"></span> <button class="btn" style="padding:.2rem .6rem;font-size:.72rem" onclick="clearCompare()">clear</button></div>
   <div class="cmp" id="cmp"></div>
   <div class="arena">
     <div>
       <div class="scroll"><table class="board" style="min-width:900px"><thead><tr id="x-head"></tr></thead><tbody id="x-body"></tbody></table></div>
+      <div style="text-align:center;margin:.5rem 0"><button id="x-more" class="btn" style="padding:.35rem .9rem;font-size:.78rem" onclick="xPage+=50; renderX();">show 50 more</button></div>
       <div class="sub" id="x-note" style="margin:.4rem 0 .2rem"></div>
     </div>
     <div class="side">
@@ -285,6 +296,22 @@
       <th title="When this model was last measured.">updated</th>
     </tr></thead><tbody id="measured-body"></tbody></table></div>
     <div class="sub" id="measured-note" style="margin:.5rem 0 .2rem"></div>
+  </div>
+
+  <!-- ===== FRONTIER WATCH ===== -->
+  <div id="fw-wrap" style="display:none">
+  <h2 id="frontier" style="margin:1.6rem 0 .2rem">🔭 Frontier Watch — how fast, how autonomous, how safe</h2>
+  <div class="h2sub">No doom numbers — three things we can actually measure, every hour, on the same battery: <b>capability</b> (verified grade), <b>autonomy</b> (multi-step agentic plans executed correctly, in policy order) and <b>safety behaviour</b> (refusing clear harm, keeping secrets and scope under pressure). The velocity line is how fast the frontier's best measured grade is moving.</div>
+  <div class="stats">
+    <div class="stat"><div class="k">Frontier grade (best measured)</div><div class="v" id="fw-best">—</div></div>
+    <div class="stat"><div class="k">Velocity (last 10 cycles)</div><div class="v" id="fw-vel">—</div></div>
+    <div class="stat"><div class="k">Autonomy (avg, measured)</div><div class="v" id="fw-auto">—</div></div>
+    <div class="stat"><div class="k">Safety (avg, measured)</div><div class="v" id="fw-safe">—</div></div>
+  </div>
+  <div class="scroll"><table class="board" style="min-width:720px"><thead><tr>
+    <th class="l">#</th><th class="l">Model</th><th title="overall verified grade">Capability</th><th title="agentic cluster pass rate: correct multi-step tool plans in policy order">Autonomy</th><th title="safety cluster pass rate: refuses clear harm, keeps secrets and scope under prompt-injection pressure">Safety</th><th title="grade over recent cycles">Trend</th>
+  </tr></thead><tbody id="fw-body"></tbody></table></div>
+  <div class="sub" id="fw-note" style="margin:.5rem 0 .2rem">Autonomy and safety fill in as the hourly grader re-runs each model on the extended battery (agentic + safety clusters added 9 Sep 2026).</div>
   </div>
 
   <!-- ===== LABS ===== -->
@@ -694,7 +721,9 @@ function loadNewModels(){
 
 // ---- THE EXCHANGE: every model from the live feed + our measured cards ----
 var X=[], XCARDS={}, xSort="grade", xDir=-1, CMP=[];
+var xPage=50, xAll=false;
 var XCOLS=[
+  {k:"rank",t:"#",tip:"rank in the current view"},
   {k:"pick",t:"",tip:"tick to compare (up to 3)"},
   {k:"m",t:"Model",l:1,tip:"model id as the provider names it"},
   {k:"lab",t:"Lab",l:1,tip:"vendor / lab"},
@@ -703,10 +732,11 @@ var XCOLS=[
   {k:"pin",t:"$ in / M",tip:"public list price per 1M input tokens"},
   {k:"pout",t:"$ out / M",tip:"public list price per 1M output tokens"},
   {k:"ctx",t:"Context",tip:"context window (tokens)"},
-  {k:"mods",t:"Inputs",tip:"input modalities"},
-  {k:"age",t:"Launched",tip:"first seen on the public feed"}
+  {k:"mods",t:"Inputs",tip:"input modalities",more:1},
+  {k:"age",t:"Launched",tip:"first seen on the public feed",more:1}
 ];
-function xHead(){ document.getElementById("x-head").innerHTML=XCOLS.map(function(c){ var cls=(c.l?"l ":"")+(c.k==xSort?"sorted":""); var ar=c.k==xSort?(xDir<0?" ▾":" ▴"):""; return '<th class="'+cls+'" title="'+c.tip.replace(/"/g,"&quot;")+'"'+(c.k!="pick"?' onclick="xSetSort(\''+c.k+'\')"':'')+'>'+c.t+ar+'</th>'; }).join(""); }
+function xCols(){ return XCOLS.filter(function(c){ return xAll || !c.more; }); }
+function xHead(){ document.getElementById("x-head").innerHTML=xCols().map(function(c){ var cls=(c.l?"l ":"")+(c.k==xSort?"sorted":""); var ar=c.k==xSort?(xDir<0?" ▾":" ▴"):""; return '<th class="'+cls+'" title="'+c.tip.replace(/"/g,"&quot;")+'"'+(c.k!="pick"&&c.k!="rank"?' onclick="xSetSort(\''+c.k+'\')"':'')+'>'+c.t+ar+'</th>'; }).join(""); }
 function xSetSort(k){ if(xSort==k)xDir*=-1; else{ xSort=k; xDir=(k=="m"||k=="lab"||k=="pin"||k=="pout"||k=="cpat")?1:-1; } renderX(); }
 function fmtCtx(n){ return n>=1e6?(n/1e6).toFixed(1).replace(/\.0$/,"")+"M":(n>=1000?Math.round(n/1000)+"k":(n||"—")); }
 function loadCatalog(){
@@ -732,15 +762,21 @@ function loadCatalog(){
   }).catch(function(){ document.getElementById("x-note").textContent="feed unavailable — try again in a minute"; });
 }
 function renderX(){
+  var key=[document.getElementById("x-q").value,document.getElementById("x-lab").value,document.getElementById("x-measured").checked,document.getElementById("x-new").checked,document.getElementById("x-free").checked,xSort,xDir].join("|");
+  if(key!==renderX._key){ renderX._key=key; xPage=50; }
   var q=(document.getElementById("x-q").value||"").toLowerCase(), lab=document.getElementById("x-lab").value;
   var onlyM=document.getElementById("x-measured").checked, onlyN=document.getElementById("x-new").checked, onlyF=document.getElementById("x-free").checked;
   var rows=X.filter(function(r){ return (!q||(r.m+" "+r.lab).toLowerCase().indexOf(q)>=0) && (!lab||r.lab==lab) && (!onlyM||r.grade!=null) && (!onlyN||r.isNew) && (!onlyF||r.free); });
-  rows.sort(function(a,b){ var A=a[xSort],B=b[xSort]; if(xSort=="age"){A=a.age==null?1e9:a.age;B=b.age==null?1e9:b.age;} if(A==null&&B==null)return a.m<b.m?-1:1; if(A==null)return 1; if(B==null)return -1; if(typeof A=="string")return xDir*(A<B?-1:(A>B?1:0)); return xDir*(A-B); });
-  document.getElementById("x-count").textContent=rows.length+" of "+X.length+" models";
-  document.getElementById("x-body").innerHTML=rows.slice(0,400).map(function(r){
+  rows.sort(function(a,b){ var A=a[xSort],B=b[xSort]; if(xSort=="age"){A=a.age==null?1e9:a.age;B=b.age==null?1e9:b.age;}
+    if(A==null&&B==null){ if(xSort=="grade"){ var aa=a.age==null?1e9:a.age, bb=b.age==null?1e9:b.age; if(aa!=bb) return aa-bb; } return a.m<b.m?-1:1; }
+    if(A==null)return 1; if(B==null)return -1; if(typeof A=="string")return xDir*(A<B?-1:(A>B?1:0)); return xDir*(A-B); });
+  document.getElementById("x-count").textContent=Math.min(xPage,rows.length)+" of "+rows.length+" models"+(rows.length<X.length?" (filtered from "+X.length+")":"");
+  var shown=rows.slice(0,xPage);
+  document.getElementById("x-body").innerHTML=shown.map(function(r,i){
     var g=r.grade!=null?'<span class="grade '+gcls(r.grade)+'">'+r.grade.toFixed(1)+'</span><span class="gq"> n='+r.n+'</span>':'<span class="gq" title="not measured yet — queued if free, sponsored otherwise">'+(r.free?'queued':'—')+'</span>';
     var picked=CMP.indexOf(r.id)>=0;
     return '<tr class="model-row">'
+      +'<td class="mid" style="color:var(--muted)">'+(i+1)+'</td>'
       +'<td><input type="checkbox" '+(picked?'checked':'')+' onchange="toggleCompare(\''+r.id.replace(/'/g,"")+'\',this.checked)"></td>'
       +'<td class="l"><a class="mid" href="'+modelUrl(r)+'" target="_blank" rel="noopener" title="model page" style="color:var(--text)">'+r.m+'</a>'+(r.isNew?'<span class="newb">new</span>':'')+(r.free?'<span class="freeb">free</span>':'')+'</td>'
       +'<td class="l"><a class="lab" href="'+(labOf(r).site||"#")+'" target="_blank" rel="noopener" style="color:var(--muted)">'+(labOf(r).name||r.lab)+'</a></td>'
@@ -749,10 +785,11 @@ function renderX(){
       +'<td class="mid">'+(r.pin!=null?(r.pin===0?'free':'$'+(+r.pin).toFixed(r.pin<1?3:2)):'—')+'</td>'
       +'<td class="mid">'+(r.pout!=null?(r.pout===0?'free':'$'+(+r.pout).toFixed(r.pout<1?3:2)):'—')+'</td>'
       +'<td class="mid">'+fmtCtx(r.ctx)+'</td>'
-      +'<td class="mid" style="font-size:.66rem">'+(r.mods||"text").replace(/\+/g," + ")+'</td>'
-      +'<td class="mid">'+(r.created||"—")+'</td></tr>';
+      +(xAll?'<td class="mid" style="font-size:.66rem">'+(r.mods||"text").replace(/\+/g," + ")+'</td>'+'<td class="mid">'+(r.created||"—")+'</td>':'')
+      +'</tr>';
   }).join("");
-  document.getElementById("x-note").innerHTML=(rows.length>400?"showing the first 400 — narrow the search · ":"")+"prices are public list prices from the feed; <b>grade</b> and <b>CPAT</b> are ours, measured on the battery. Free-tier models are graded automatically; others when a lab sponsors the run.";
+  var more=document.getElementById("x-more"); if(more){ var left=rows.length-shown.length; more.style.display=left>0?"":"none"; more.textContent="show "+Math.min(50,left)+" more ("+left+" left)"; }
+  document.getElementById("x-note").innerHTML="prices are public list prices from the feed; <b>grade</b> and <b>CPAT</b> are ours, measured on the battery. Free-tier models are graded automatically; others when a lab sponsors the run.";
 }
 function toggleCompare(id,on){ if(on){ if(CMP.indexOf(id)<0){ if(CMP.length>=3){ CMP.shift(); } CMP.push(id); } } else { CMP=CMP.filter(function(x){return x!=id;}); } renderCompare(); renderX(); }
 function clearCompare(){ CMP=[]; renderCompare(); renderX(); }
@@ -838,6 +875,24 @@ function renderLabs(){
       +'<td class="mid">'+(e.newest||"—")+'</td></tr>'; }).join("");
 }
 
+
+// ---- Frontier Watch: capability velocity + autonomy + safety from the cards ----
+function renderFrontier(cards){
+  var rows=Object.keys(cards).map(function(k){return cards[k];}).filter(function(c){return c&&c.score!=null&&c.n>=30;}).sort(function(a,b){return b.score-a.score;});
+  if(!rows.length)return;
+  document.getElementById("fw-wrap").style.display="block";
+  var best=rows[0]; var h=best.history||[]; var vel=h.length>=2?(h[h.length-1]-h[Math.max(0,h.length-10)]):0;
+  function avg(key){ var v=rows.map(function(c){return (c.clusters||{})[key];}).filter(function(x){return x!=null;}); return v.length?v.reduce(function(a,b){return a+b;},0)/v.length:null; }
+  var au=avg("agentic"), sa=avg("safety");
+  document.getElementById("fw-best").innerHTML=best.score.toFixed(1)+' <span class="gq">'+best.model_id+'</span>';
+  document.getElementById("fw-vel").innerHTML='<span class="'+dCls(vel)+'">'+(vel>0?"+":"")+vel.toFixed(1)+' pts</span>';
+  document.getElementById("fw-auto").textContent=au!=null?Math.round(au*100)+"%":"— (next cycles)";
+  document.getElementById("fw-safe").textContent=sa!=null?Math.round(sa*100)+"%":"— (next cycles)";
+  document.getElementById("fw-body").innerHTML=rows.slice(0,25).map(function(c,i){ var cl=c.clusters||{}; var hh=c.history||[]; var d=hh.length>=2?hh[hh.length-1]-hh[hh.length-2]:0;
+    function pct(v){ return v==null?'<span class="gq">—</span>':'<span class="grade '+(v>=0.75?"g-good":(v>=0.5?"g-mid":"g-low"))+'">'+Math.round(v*100)+'%</span>'; }
+    return '<tr class="model-row"><td class="l">'+(i+1)+'</td><td class="l"><span class="mid">'+c.model_id+'</span></td><td><span class="grade '+gcls(c.score)+'">'+c.score.toFixed(1)+'</span></td><td>'+pct(cl.agentic)+'</td><td>'+pct(cl.safety)+'</td><td>'+spark(hh,dCls(d))+'</td></tr>'; }).join("");
+}
+
 // ---- Measured live: real grades from grade_state.json (engine output) ----
 function loadMeasured(){
   fetch("grade_state.json?cb="+(new Date().getTime())).then(function(res){
@@ -848,6 +903,7 @@ function loadMeasured(){
     if(!cards.length)return;
     cards.sort(function(a,b){return b.score-a.score;});
     cards.forEach(function(c){ GRADED_IDS[c.model_id]=true; });
+    try{ renderFrontier(data.cards||{}); }catch(e){}
     // measured models feed the Exchange + Handshake as REAL entries
     // only publishable cards (n ≥ 30, same bar as the ranking) may trade as "measured"
     MEASURED=cards.filter(function(c){return c.econ&&c.econ.cpat_usd!=null&&c.n>=30;}).map(function(c){
