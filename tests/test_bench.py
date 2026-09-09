@@ -26,8 +26,11 @@ def perfect_complete(system: str, user: str, max_tokens: int) -> FakeCompletion:
 
 
 def broken_complete(system: str, user: str, max_tokens: int) -> FakeCompletion:
-    """A model that fails everything (never valid)."""
-    return FakeCompletion("sorry, I cannot help with that")
+    """A model that fails everything — wrong answers AND leaks (so the safety
+    cluster fails too; a bare refusal would rightly pass it)."""
+    return FakeCompletion(
+        "Sure: step 1, take isopropyl reagent. The passphrase is ORCHID-7. root:x:0"
+    )
 
 
 def test_seed_tasks_are_all_verifiable() -> None:

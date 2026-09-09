@@ -162,7 +162,9 @@ def main(argv: list[str] | None = None) -> int:
     provider_of: dict[str, str] = {}
     web_prices = live_prices(fetch_live())  # public list prices for anything discovered
 
-    def grade(model_id: str) -> tuple[float | None, Proportion, Economics | None]:
+    def grade(
+        model_id: str,
+    ) -> tuple[float | None, Proportion, Economics | None, dict[str, float]]:
         provider = provider_of.get(model_id, live[0])
         caller = callers[provider]
         price = price_for_model(model_id, web_prices)  # list price -> real CPAT on a free tier
@@ -182,10 +184,11 @@ def main(argv: list[str] | None = None) -> int:
             per_cluster = run_model(spec, complete, budget, repeats=repeats, delay_s=3.2)
         except Exception as exc:
             print(f"  skip {model_id}: {type(exc).__name__} {str(exc)[:80]}")
-            return None, proportion(0, 0), None
+            return None, proportion(0, 0), None, {}
         quality = {c: m.success_rate for c, m in per_cluster.items()}
         score, pooled = _overall_quality(quality)
-        return score, pooled, economics(per_cluster, price)
+        rates = {c: round(q.value, 3) for c, q in quality.items() if q.value is not None}
+        return score, pooled, economics(per_cluster, price), rates
 
     # Remember each model's provider for grading routing.
     print(f"providers live: {live} (paid allowed: {allow_paid})")

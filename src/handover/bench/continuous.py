@@ -31,7 +31,11 @@ from handover.replay.budget import DailyBudget
 # Grade one model now: returns (overall score, quality proportion with n + CI) and
 # optionally the measured Economics (CPAT / TTAT) as a third element.
 # Cost is charged to the budget by the grader itself.
-GradeResult = tuple[float | None, Proportion] | tuple[float | None, Proportion, Economics | None]
+GradeResult = (
+    tuple[float | None, Proportion]
+    | tuple[float | None, Proportion, Economics | None]
+    | tuple[float | None, Proportion, Economics | None, dict[str, float]]
+)
 Grader = Callable[[str], GradeResult]
 CatalogFetch = Callable[[], Sequence[CatalogModel]]
 
@@ -91,13 +95,14 @@ def tick(
         result = grade(model_id)  # grader charges the budget as it runs
         score, quality = result[0], result[1]
         econ = result[2] if len(result) > 2 else None
+        clusters = result[3] if len(result) > 3 else None
         prior = state.cards.get(model_id)
         if prior is not None and prior.n >= PROVISIONAL_MIN_N > quality.n:
             # A rate-limited re-sample (tiny n) must not erase a real grade:
             # keep the prior card, refreshed, and try again next tick.
             new_cards[model_id] = classify(
                 model_id, prior.score, prior.quality, prior.updated_at, now,
-                prior_history=prior.history, econ=prior.econ,
+                prior_history=prior.history, econ=prior.econ, clusters=prior.clusters,
             )
             graded.append(model_id)
             continue
@@ -110,6 +115,7 @@ def tick(
             prior_history=prior.history if prior else (),
             append_history=True,
             econ=econ if econ is not None else (prior.econ if prior else None),
+            clusters=clusters if clusters is not None else (prior.clusters if prior else None),
         )
         graded.append(model_id)
 
@@ -124,6 +130,7 @@ def tick(
                 now,
                 prior_history=card.history,
                 econ=card.econ,
+                clusters=card.clusters,
             )
 
     known = {m.model_id: m.version_hint for m in catalog}

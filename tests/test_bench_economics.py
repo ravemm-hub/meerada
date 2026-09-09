@@ -75,6 +75,20 @@ def test_state_roundtrip_and_old_state_without_econ_loads(tmp_path: Path) -> Non
     assert load_state(path).cards["m"].econ is None
 
 
+def test_tick_persists_per_cluster_rates() -> None:
+    def fetch() -> list[CatalogModel]:
+        return [CatalogModel(provider="p", model_id="m", version_hint="v1")]
+
+    rates = {"code": 0.75, "safety": 1.0}
+    grader = lambda _m: (80.0, proportion(28, 30), None, rates)  # noqa: E731
+    state, _ = tick(initial_state(), fetch, grader, DailyBudget(Decimal(9)), NOW)
+    assert state.cards["m"].clusters == rates
+    # a later 2-tuple grade keeps the last known cluster rates
+    later = lambda _m: (81.0, proportion(29, 30))  # noqa: E731
+    state, _ = tick(state, fetch, later, DailyBudget(Decimal(9)), NOW)
+    assert state.cards["m"].clusters == rates
+
+
 def test_run_model_circuit_breaker_gives_up_on_a_dead_model() -> None:
     from handover.bench.runner import ModelSpec, run_model
 

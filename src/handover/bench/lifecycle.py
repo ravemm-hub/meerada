@@ -51,6 +51,7 @@ class GradeCard(BaseModel):
     ci_width_points: float | None  # high-low of the quality CI, in points
     history: tuple[float, ...] = ()  # recent scores oldest->newest (real sparkline)
     econ: Economics | None = None  # measured price/latency of a done task
+    clusters: dict[str, float] = {}  # pass rate per battery cluster (0..1), last grade
 
     @property
     def is_publishable(self) -> bool:
@@ -79,6 +80,7 @@ def classify(
     prior_history: tuple[float, ...] = (),
     append_history: bool = False,
     econ: Economics | None = None,
+    clusters: dict[str, float] | None = None,
 ) -> GradeCard:
     n = quality.n
     if n < PROVISIONAL_MIN_N:
@@ -106,6 +108,7 @@ def classify(
         ci_width_points=ci_width,
         history=history,
         econ=econ,
+        clusters=dict(clusters or {}),
     )
 
 
