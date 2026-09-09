@@ -239,6 +239,7 @@ class Board:
             "id": sid, "model": session.model_id, "title": session.title,
             "source": session.source, "turns": len(session.history) // 2,
             "attachments": [a["name"] for a in session.attachments],
+            "trail": [{"turn": t, "from": a, "to": b} for t, a, b in session.trail],
             "context_chars": sum(len(a["text"]) for a in session.attachments),
             "total_tokens": session.total_tokens, "total_cost": float(session.total_cost),
         }

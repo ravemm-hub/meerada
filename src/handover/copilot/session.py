@@ -99,6 +99,8 @@ class Session:
         self.title = ""
         self.source = ""
         self.attachments: list[dict[str, str]] = []
+        # Handoff trail: (turn index, from model, to model) — survives a refresh
+        self.trail: list[tuple[int, str, str]] = []
 
     def seed(self, turns: list[dict[str, str]]) -> None:
         """Start from an existing conversation (import / handoff from another model)."""
@@ -113,6 +115,9 @@ class Session:
         self.history = list(other.history)
         self.attachments = list(other.attachments)
         self.title, self.source = other.title, other.source
+        self.trail = list(other.trail)
+        if other.model_id != self.model_id:
+            self.trail.append((len(self.history) // 2, other.model_id, self.model_id))
 
     def system_context(self) -> str:
         from handover.copilot.importers import context_block

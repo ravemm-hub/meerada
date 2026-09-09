@@ -59,7 +59,7 @@
   #bcast{width:340px;max-width:42vw;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem .6rem;font-family:inherit;font-size:.82rem;resize:vertical;min-height:40px;max-height:180px;line-height:1.4;}
   .pcompose button{background:var(--amber);color:#171205;border:none;border-radius:8px;padding:0 .7rem;font-weight:700;cursor:pointer;}
   .empty{grid-column:1/-1;margin:auto;color:var(--muted);text-align:center;padding:2rem;font-size:.9rem;line-height:1.6;}
-  .solo .ph .pop{display:none;} .solo .grid{padding:.5rem;} .solo .pane{max-height:calc(100vh - 92px);min-height:calc(100vh - 92px);}
+  .solo .ph .pop{display:none;} .solo .grid{padding:.5rem;grid-template-columns:1fr;} .solo .pane{max-height:calc(100vh - 92px);min-height:calc(100vh - 92px);}
   .hint{color:var(--muted);font-size:.68rem;padding:.1rem 1rem .5rem;}
   code{font-family:"IBM Plex Mono",monospace;background:var(--panel2);padding:.1rem .35rem;border-radius:4px;}
   .modal{display:none;position:fixed;inset:0;background:rgba(11,16,32,.9);z-index:60;align-items:center;justify-content:center;}
@@ -223,10 +223,10 @@ function show(id){document.getElementById(id).style.display="flex";} function hi
 function toast(msg,ms){ var t=document.getElementById("toast"); t.innerHTML=msg; t.style.display="block"; clearTimeout(t._h); t._h=setTimeout(function(){t.style.display="none";},ms||2600); }
 
 // only models whose provider key is connected — you can never pick one that 401s
-function runnable(){ return CATALOG.filter(function(m){ return CONNECTED.indexOf(m.provider)>=0 || (m.provider=="auto" && CONNECTED.length>0); }); }
 var AUTO_PICK="";
+function runnable(){ return CATALOG.filter(function(m){ return CONNECTED.indexOf(m.provider)>=0 || (m.provider=="auto" && !!AUTO_PICK); }); }
 function labelFor(id){ for(var i=0;i<CATALOG.length;i++){ if(CATALOG[i].id==id)return CATALOG[i].name; } return id; }
-function defaultModel(){ var r=runnable(); return r.length?r[0].id:""; }
+function defaultModel(){ var r=runnable(); if(AUTO_PICK && r.some(function(m){return m.id=="auto";})) return "auto"; r=r.filter(function(m){return m.id!="auto";}); return r.length?r[0].id:""; }
 function cheapestModel(){ var r=runnable(); var c=r.filter(function(m){return /cheap|free|fast/.test(m.tag||"");}); return (c[0]||r[r.length-1]||{}).id||""; }
 function strongestModel(){ var r=runnable(); var s=r.filter(function(m){return /top|strong|reasoning/.test(m.tag||"");}); return (s[0]||r[0]||{}).id||""; }
 
@@ -530,10 +530,14 @@ async function impPick(btn, i){ btn.disabled=true; btn.textContent="importing…
 async function hydrate(s){
   try{ var d=await (await fetch("/session/history?id="+encodeURIComponent(s.id))).json(); var turns=d.turns||[];
     applyView(s, d); s.convo=[];
-    for(var i=0;i<turns.length;i+=2){ var u=turns[i],a=turns[i+1]; s.convo.push({you:(u&&u.content)||"", reply:a?{text:a.content,imported:true}:undefined}); }
+    var trail=d.trail||[];
+    for(var i=0;i<turns.length;i+=2){
+      trail.forEach(function(t){ if(t.turn===i/2) s.convo.push({sys:"↔ handed off "+labelFor(t.from)+" → "+labelFor(t.to)+" · "+t.turn+" turns carried"}); });
+      var u=turns[i],a=turns[i+1]; s.convo.push({you:(u&&u.content)||"", reply:a?{text:a.content,imported:true,model:t_model(trail,i/2,s.model)}:undefined}); }
     s.stats.turns=Math.floor(turns.length/2);
   }catch(e){}
 }
+function t_model(trail, turn, current){ for(var k=0;k<trail.length;k++){ if(trail[k].turn>turn) return trail[k].from; } return current; }  // which model answered exchange #turn
 async function restoreSessions(){
   try{ var d=await (await fetch("/sessions")).json(); var list=d.sessions||[]; if(!list.length)return false;
     for(var i=0;i<list.length;i++){ var v=list[i]; var s=newSes(v.id, v.model); applyView(s,v); SES.push(s); await hydrate(s); }
@@ -610,5 +614,6 @@ document.addEventListener("keydown",function(e){
   if(await restoreSessions()) return;              // page refresh: pick up the live sessions
   if(runnable().length){ addSession(); addSession(); }
   else { renderGrid(); if(VAULT) showKeys(); }  // no runnable model -> connect a key first
+  if(params.get("open")=="import") setTimeout(showImport, 300);  // deep link: ?open=import
 })();
 </script>
