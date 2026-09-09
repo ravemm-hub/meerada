@@ -20,17 +20,26 @@ from typing import Any
 
 from handover.copilot.router import _provider_of
 
-GRADE_URL = "https://ravemm-hub.github.io/meerada/grade_state.json"
+GRADE_URLS = (
+    "https://meerada.app/grade_state.json",
+    "https://ravemm-hub.github.io/meerada/grade_state.json",
+)
 CACHE_TTL_S = 3600
 MIN_N = 30  # same publishable bar as the board
 MIN_SCORE = 60.0
 
 
 def _fetch_state() -> dict[str, Any]:
-    req = urllib.request.Request(GRADE_URL, headers={"User-Agent": "meerada/0.2"})
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        data: dict[str, Any] = json.loads(resp.read().decode())
-        return data
+    last: Exception = RuntimeError("no grade url")
+    for url in GRADE_URLS:
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "meerada/0.2"})
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                data: dict[str, Any] = json.loads(resp.read().decode())
+                return data
+        except Exception as exc:  # try the next origin
+            last = exc
+    raise last
 
 
 def rank(cards: dict[str, Any], connected: Sequence[str]) -> list[tuple[str, float, float]]:

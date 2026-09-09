@@ -1,12 +1,12 @@
 # Meerada — working name (`meerada` CLI, package `handover`)
 
-![Import a Claude Code session and continue it on any model — the Handshake](https://ravemm-hub.github.io/meerada/assets/handshake.gif)
+![Import a Claude Code session and continue it on any model — the Handshake](https://meerada.app/assets/handshake.gif)
 
-**LLManager** imports your Claude Code / Claude.ai / ChatGPT history and lets you continue it on any model — switch mid-conversation and the whole history moves with you. **Arena** grades models hourly on verifiable tasks and prices them by cost per verified task. Site: https://ravemm-hub.github.io/meerada/ · Download: https://github.com/ravemm-hub/meerada/releases/latest
+**LLManager** imports your Claude Code / Claude.ai / ChatGPT history and lets you continue it on any model — switch mid-conversation and the whole history moves with you. **Arena** grades models hourly on verifiable tasks and prices them by cost per verified task. Site: https://meerada.app/ · Download: https://github.com/ravemm-hub/meerada/releases/latest
 
 **Measure what your LLM spend actually buys.**
 
-**Live site:** <https://ravemm-hub.github.io/meerada/> · **Hosted LLManager:** deploy it in ~10 min →
+**Live site:** <https://meerada.app/> · **Hosted LLManager:** deploy it in ~10 min →
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ravemm-hub/meerada)
 

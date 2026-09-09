@@ -17,7 +17,7 @@ The code is complete and the container entrypoint is verified. Pick a path:
 2. At <https://dashboard.render.com> → **New → Blueprint** → pick the
    `ravemm-hub/meerada` repo. Render reads `render.yaml`.
 3. When prompted, set **`GROQ_API_KEY`** to your key. Deploy.
-4. Your live dashboard: `https://meerada-llmanager.onrender.com`. Open it → add
+4. Your live dashboard: `https://app.meerada.app`. Open it → add
    sessions → real Groq answers, no sign-in. Share the link with your testers.
 
 > It uses your shared Groq quota, so send the link to a tester group, not the
@@ -60,7 +60,7 @@ and is never in the deploy config** — production always uses real Google sign-
    credentials** → **OAuth client ID** → **Web application**.
 2. Under **Authorized redirect URIs** add your callback URL. If you deploy to
    Render as `meerada-llmanager`, that is:
-   `https://meerada-llmanager.onrender.com/auth/callback`
+   `https://app.meerada.app/auth/callback`
    (you can add your real domain's callback later, e.g.
    `https://meerada.<your-domain>/auth/callback`).
 3. Copy the **Client ID** and **Client secret**.
