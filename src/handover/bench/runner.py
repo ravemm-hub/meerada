@@ -17,7 +17,6 @@ from handover.bench.tasks import BenchTask, tasks_by_cluster
 from handover.metrics.core import CoreMetrics, compute_core
 from handover.replay.budget import DailyBudget
 from handover.schema.task import Task, TaskTokens
-from handover.verify import Artifacts, default_registry
 
 
 class ModelSpec(BaseModel):
@@ -39,12 +38,11 @@ Complete = Callable[[str, str, int], _Completion]
 
 
 def _verify(task: BenchTask, output_text: str) -> bool:
-    artifacts = Artifacts(
-        output_text=output_text,
-        json_schema=task.json_schema,
-        contract_regex=task.contract_regex,
-    )
-    return default_registry().verify(_placeholder_task(), artifacts).status == "pass"
+    """Programmatic verdict for the battery (hidden tests, real SQL, known
+    values, exact answers, faithful summaries) — see bench.verify_tasks."""
+    from handover.bench.verify_tasks import verify_task
+
+    return verify_task(task, output_text)
 
 
 def _placeholder_task() -> Task:

@@ -45,11 +45,16 @@ class HttpChatCaller:
     def complete(
         self, model: str, system: str, messages: list[dict[str, str]], max_tokens: int
     ) -> ChatCompletion:
-        body = {
+        body: dict[str, object] = {
             "model": model,
-            "max_tokens": max_tokens,
             "messages": ([{"role": "system", "content": system}] if system else []) + messages,
         }
+        # OpenAI's reasoning-era models (gpt-5.x, o-series) reject max_tokens and
+        # want max_completion_tokens; every other OpenAI-compatible host takes max_tokens.
+        if "api.openai.com" in self._url and model.lower().startswith(("gpt-5", "o1", "o3", "o4")):
+            body["max_completion_tokens"] = max(max_tokens, 64)
+        else:
+            body["max_tokens"] = max_tokens
         request = urllib.request.Request(
             self._url,
             data=json.dumps(body).encode(),

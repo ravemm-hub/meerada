@@ -5,31 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ brand }} Grade · Live Board</title>
 <style>
-  :root { color-scheme: dark; }
+  :root { color-scheme: light; }
   * { box-sizing: border-box; }
-  body { margin:0; background:#0B1020; color:#E9EEF9; font-family:ui-sans-serif,system-ui,"Segoe UI",sans-serif; line-height:1.55; }
+  body { margin:0; background:#FFFFFF; color:#0F172A; font-family:ui-sans-serif,system-ui,"Segoe UI",sans-serif; line-height:1.55; }
   .wrap { max-width:960px; margin:0 auto; padding:2.2rem 1.25rem 4rem; }
   h1 { font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:1.6rem; letter-spacing:-.02em; margin:0; }
-  h1 .b { color:#63CFC2; }
-  .sub { color:#92A2BE; font-size:.86rem; margin-top:.3rem; }
+  h1 .b { color:#0E8A7E; }
+  .sub { color:#5B6B82; font-size:.86rem; margin-top:.3rem; }
   .strip { display:flex; gap:.8rem; margin:1.2rem 0 1.6rem; flex-wrap:wrap; }
-  .kpi { background:#131a2c; border:1px solid #22304F; border-radius:12px; padding:.7rem 1rem; }
-  .kpi .k { color:#92A2BE; font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; }
+  .kpi { background:#F7F9FC; border:1px solid #DDE4EE; border-radius:12px; padding:.7rem 1rem; }
+  .kpi .k { color:#5B6B82; font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; }
   .kpi .v { font-family:"Archivo",sans-serif; font-weight:800; font-size:1.3rem; }
   table { border-collapse:collapse; width:100%; font-size:.9rem; }
-  th { color:#92A2BE; font-size:.66rem; text-transform:uppercase; letter-spacing:.06em; text-align:left; padding:.5rem .6rem; border-bottom:1px solid #22304F; }
-  td { padding:.7rem .6rem; border-bottom:1px solid #171f30; }
+  th { color:#5B6B82; font-size:.66rem; text-transform:uppercase; letter-spacing:.06em; text-align:left; padding:.5rem .6rem; border-bottom:1px solid #DDE4EE; }
+  td { padding:.7rem .6rem; border-bottom:1px solid #EEF2F7; }
   td.num,th.num { text-align:right; font-variant-numeric:tabular-nums; }
-  .rank { color:#92A2BE; width:2rem; }
+  .rank { color:#5B6B82; width:2rem; }
   .mid { font-family:"IBM Plex Mono",monospace; font-size:.84rem; }
   .score { font-family:"Archivo",sans-serif; font-weight:800; font-size:1.1rem; }
-  .good { color:#3fb950; } .mid2 { color:#d29922; } .low { color:#f85149; }
+  .good { color:#1E8E4C; } .mid2 { color:#B8860B; } .low { color:#C8403A; }
   .pill { font-family:"IBM Plex Mono",monospace; font-size:.64rem; padding:.1rem .5rem; border-radius:999px; border:1px solid; white-space:nowrap; }
-  .pill.confirmed { color:#58C07A; border-color:#2ea043; }
-  .pill.provisional { color:#F2B84B; border-color:#9e6a03; }
-  .pill.stale { color:#92A2BE; border-color:#22304F; }
-  .ci { color:#92A2BE; font-size:.78rem; font-variant-numeric:tabular-nums; }
-  footer { margin-top:2.4rem; color:#5b6472; font-size:.74rem; line-height:1.6; }
+  .pill.confirmed { color:#1E8E4C; border-color:#1E8E4C; }
+  .pill.provisional { color:#F2B84B; border-color:#E0A93A; }
+  .pill.stale { color:#5B6B82; border-color:#DDE4EE; }
+  .ci { color:#5B6B82; font-size:.78rem; font-variant-numeric:tabular-nums; }
+  footer { margin-top:2.4rem; color:#6B7A90; font-size:.74rem; line-height:1.6; }
 </style>
 </head>
 <body>

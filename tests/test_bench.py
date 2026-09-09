@@ -7,6 +7,7 @@ from handover.bench import ModelSpec, run_index, run_model
 from handover.bench.tasks import SEED_TASKS, tasks_by_cluster
 from handover.metrics.index import compute_index
 from handover.replay.budget import DailyBudget
+from tests.battery_reference import REFERENCE
 
 
 class FakeCompletion:
@@ -17,34 +18,10 @@ class FakeCompletion:
 
 
 def perfect_complete(system: str, user: str, max_tokens: int) -> FakeCompletion:
-    """A model that passes every seed task — answers each by its content."""
-    if "payee" in system:
-        return FakeCompletion('{"name": "Acme", "amount": 1240.5, "currency": "USD"}')
-    if "sum" in system:
-        return FakeCompletion('{"sum": 108, "count": 6}')
-    if "code block" in system:
-        fn = "is_even"
-        if "reverse_str" in user:
-            fn = "reverse_str"
-        elif "add(" in user:
-            fn = "add"
-        return FakeCompletion(f"```python\ndef {fn}(x):\n    return x\n```")
-    if "number only" in system.lower():
-        low = user.lower()
-        if "180 km" in low:
-            return FakeCompletion("72")
-        if "5 machines" in low:
-            return FakeCompletion("5")
-        if "20% discount" in low or "original price" in low:
-            return FakeCompletion("50")
-        return FakeCompletion("0")
-    if "sentiment" in system:
-        low = user.lower()
-        if "loved" in low or "flawless" in low or "exceeded every expectation" in low:
-            return FakeCompletion("positive")
-        if "arrived on tuesday" in low or "package arrived" in low:
-            return FakeCompletion("neutral")
-        return FakeCompletion("negative")
+    """A model that answers every battery task with its reference solution."""
+    for task in SEED_TASKS:
+        if task.user == user:
+            return FakeCompletion(REFERENCE[task.task_id])
     return FakeCompletion("")
 
 
@@ -54,8 +31,11 @@ def broken_complete(system: str, user: str, max_tokens: int) -> FakeCompletion:
 
 
 def test_seed_tasks_are_all_verifiable() -> None:
+    from handover.bench.verify_tasks import verify_task
+
     for task in SEED_TASKS:
-        assert (task.json_schema is not None) ^ (task.contract_regex is not None)
+        assert task.check, task.task_id
+        assert verify_task(task, REFERENCE[task.task_id]), f"reference fails: {task.task_id}"
 
 
 def test_perfect_model_scores_all_clusters() -> None:
