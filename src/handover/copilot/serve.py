@@ -221,6 +221,8 @@ class Board:
         self._pick_auto = pick_auto
         self.sessions: dict[str, Session] = {}
         self.models: dict[str, str] = {}
+        self.switches = 0  # mid-conversation model switches this month
+        self.switch_month = ""
 
     def resolve(self, model: str) -> str:
         """``auto`` -> the top-graded model the user can run right now (live
@@ -251,6 +253,12 @@ class Board:
             session = self._new_session(model)
             self.sessions[sid] = session
         elif session.model_id != model:
+            from datetime import UTC, datetime
+
+            month = datetime.now(tz=UTC).strftime("%Y-%m")
+            if month != self.switch_month:
+                self.switch_month, self.switches = month, 0
+            self.switches += 1
             moved = self._new_session(model)
             moved.carry_from(session)
             moved.total_tokens, moved.total_cost = session.total_tokens, session.total_cost
@@ -671,6 +679,8 @@ def build_app(
                     "licensed": license_status(str(user["sub"])).valid if vault else False,
                     "checkout_url": checkout_url,
                     "free_sessions": LIC.FREE_SESSIONS,
+                    "free_switches": LIC.FREE_SWITCHES_PER_MONTH,
+                    "pro_price": LIC.PRO_PRICE_USD_YEAR,
                 },
             }
         )
@@ -786,12 +796,18 @@ def build_app(
         b, _ = board_for(request)
         if b is None:
             return JSONResponse({"error": "sign in required"}, status_code=401)
-        sid = str(payload.get("id", ""))
+        sid, model = str(payload.get("id", "")), str(payload.get("model", ""))
         if (
             sid not in b.sessions and len(b.sessions) >= LIC.FREE_SESSIONS
             and not premium_ok(request, "sessions")
         ):
             return paywall("sessions")
+        is_switch = sid in b.sessions and model != AUTO_ID and b.sessions[sid].model_id != model
+        if (
+            is_switch and b.switches >= LIC.FREE_SWITCHES_PER_MONTH
+            and not premium_ok(request, "switch")
+        ):
+            return paywall("switch")
         return JSONResponse(
             b.send(
                 str(payload.get("id", "")),

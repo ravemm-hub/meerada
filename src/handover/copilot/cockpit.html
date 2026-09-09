@@ -211,7 +211,7 @@
       <input type="text" id="prem-key" placeholder="license key (from your purchase email)" style="flex:1;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.5rem">
       <button class="btn primary" onclick="setLicense()">Activate</button>
     </div>
-    <p class="sub" style="font-size:.76rem">Premium unlocks unlimited sessions, ⚖️ Judge, ⚡ Relay, ⇄ Fork and file/folder attachments. Models always run on <b>your own keys</b> — Premium never resells tokens.</p>
+    <p class="sub" style="font-size:.76rem"><b>Free:</b> 5 live sessions, 5 model switches a month, ⚡ Auto, import. <b>Pro — $99 / year, one payment:</b> unlimited sessions and switches, ⚖️ Judge, ⚡ Relay, ⇄ Fork, file &amp; folder attachments. Models always run on <b>your own keys</b> — Pro never resells tokens.</p>
     <div style="display:flex;justify-content:space-between;align-items:center">
       <a id="prem-buy" class="btn ghost" href="#" target="_blank" rel="noopener" style="display:none">Get a license →</a>
       <button class="btn" onclick="hide('prem')">Close</button>
@@ -392,7 +392,7 @@ async function showPremium(){ show("prem"); try{ var d=await (await fetch("/lice
 function renderPremium(d){ PREMIUM.licensed=!!d.valid; PREMIUM.beta_open=!!d.beta_open; var s=document.getElementById("prem-status");
   if(d.valid) s.innerHTML='✅ Licensed'+(d.product?' — <b>'+h(d.product)+'</b>':'')+(d.expires_at?' · valid until '+h(d.expires_at.slice(0,10)):'');
   else if(d.beta_open) s.innerHTML='🟢 <b>Open beta</b> — every Premium feature is free right now. Enter a key any time to keep it after the beta.';
-  else s.innerHTML='🔒 Not licensed'+(d.reason&&d.reason!="no license key"?' — '+h(d.reason):'')+'. Free tier: '+(PREMIUM.free_sessions||2)+' sessions, no Judge/Relay/Fork/attachments.';
+  else s.innerHTML='🔒 Not licensed'+(d.reason&&d.reason!="no license key"?' — '+h(d.reason):'')+'. Free tier: '+(PREMIUM.free_sessions||5)+' sessions and '+(PREMIUM.free_switches||5)+' model switches a month.';
   var buy=document.getElementById("prem-buy"); var url=d.checkout_url||PREMIUM.checkout_url; if(url){ buy.href=url; buy.style.display=""; } }
 async function setLicense(){ var k=document.getElementById("prem-key").value.trim(); if(!k)return;
   document.getElementById("prem-status").innerHTML='<span class="spin"></span> checking…';

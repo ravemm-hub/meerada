@@ -1,8 +1,10 @@
 """Premium licensing — Lemon Squeezy license keys, validated at the source.
 
 The desktop app stays free during the open beta (``MEERADA_BETA_OPEN`` unset or
-"1"); when the beta closes, premium features (judge, relay, fork, attachments,
-unlimited sessions) need a license key bought through Lemon Squeezy. Keys are
+"1"); when the beta closes, the free tier keeps 5 live sessions and 5 model
+switches a month, and Pro ($99/year, one payment) unlocks unlimited sessions and
+switches plus judge, relay, fork and attachments — a license key bought through
+Lemon Squeezy. Keys are
 validated against Lemon Squeezy's public license API (no secret needed on our
 side), cached for a day, and stored encrypted in the user's key vault like any
 other key. The HTTP call is the only seam; tests inject a fake.
@@ -22,8 +24,10 @@ from typing import Any
 VALIDATE_URL = "https://api.lemonsqueezy.com/v1/licenses/validate"
 ACTIVATE_URL = "https://api.lemonsqueezy.com/v1/licenses/activate"
 CACHE_TTL_S = 86400
-PREMIUM_FEATURES = frozenset({"judge", "relay", "fork", "attach", "attach_path", "sessions"})
-FREE_SESSIONS = 2
+PREMIUM_FEATURES = frozenset({"judge", "relay", "fork", "attach", "attach_path", "sessions", "switch"})
+FREE_SESSIONS = 5  # live sessions on the free tier
+FREE_SWITCHES_PER_MONTH = 5  # mid-conversation model switches (the Handshake) on the free tier
+PRO_PRICE_USD_YEAR = 99
 LicenseFetch = Callable[[str, dict[str, str]], dict[str, Any]]
 
 

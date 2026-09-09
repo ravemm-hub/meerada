@@ -72,3 +72,13 @@ def test_provider_for_prefers_a_connected_provider_for_shared_ids() -> None:
     assert provider_for("openai/gpt-4o-mini") == "github"  # catalog order when nothing connected
     assert provider_for("gemini-2.5-flash", connected=["google"]) == "google"
     assert provider_for("unknown/thing", {"unknown/thing": "openrouter"}) == "openrouter"
+
+
+def test_board_counts_model_switches_per_month() -> None:
+    caller = _Caller()
+    board = Board(lambda _m: caller)
+    board.send("s1", "a", "hi")
+    board.send("s1", "b", "hi")  # switch 1
+    board.send("s1", "a", "hi")  # switch 2
+    board.send("s2", "a", "hi")  # new session, not a switch
+    assert board.switches == 2 and board.switch_month
