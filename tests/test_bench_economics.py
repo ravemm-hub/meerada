@@ -87,3 +87,18 @@ def test_run_model_circuit_breaker_gives_up_on_a_dead_model() -> None:
     spec = ModelSpec(model_id="dead", price_in_per_mtok=Decimal(1), price_out_per_mtok=Decimal(1))
     out = run_model(spec, dead, DailyBudget(Decimal(100)), repeats=3, max_consecutive_failures=5)
     assert out == {} and calls["n"] == 5  # stopped after 5 straight failures, not 54+ timeouts
+
+
+def test_tiny_resample_does_not_erase_a_real_grade() -> None:
+    def fetch() -> list[CatalogModel]:
+        return [CatalogModel(provider="p", model_id="m", version_hint="v1")]
+
+    budget = DailyBudget(Decimal(9))
+    econ = Economics(cpat_usd=0.002, ttat_s=1.5, n_successes=40, price_in=0.1, price_out=0.3)
+    good = lambda _m: (78.0, proportion(42, 54), econ)  # noqa: E731
+    state, _ = tick(initial_state(), fetch, good, budget, NOW)
+    # next hour the provider rate-limits: 4 tasks answered, 2 passed -> n=4
+    state, summary = tick(state, fetch, lambda _m: (50.0, proportion(2, 4)), budget, NOW)
+    card = state.cards["m"]
+    assert card.score == 78.0 and card.n == 54 and card.econ == econ  # real grade kept
+    assert "m" in summary.graded  # counted as attempted, so rotation stays fair

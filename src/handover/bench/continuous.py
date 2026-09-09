@@ -18,7 +18,13 @@ from decimal import Decimal
 from pydantic import BaseModel, ConfigDict
 
 from handover.bench.discovery import CatalogModel, ModelChange, diff_catalog
-from handover.bench.lifecycle import Economics, GradeCard, classify, next_cadence
+from handover.bench.lifecycle import (
+    PROVISIONAL_MIN_N,
+    Economics,
+    GradeCard,
+    classify,
+    next_cadence,
+)
 from handover.metrics.core import Proportion
 from handover.replay.budget import DailyBudget
 
@@ -86,6 +92,15 @@ def tick(
         score, quality = result[0], result[1]
         econ = result[2] if len(result) > 2 else None
         prior = state.cards.get(model_id)
+        if prior is not None and prior.n >= PROVISIONAL_MIN_N > quality.n:
+            # A rate-limited re-sample (tiny n) must not erase a real grade:
+            # keep the prior card, refreshed, and try again next tick.
+            new_cards[model_id] = classify(
+                model_id, prior.score, prior.quality, prior.updated_at, now,
+                prior_history=prior.history, econ=prior.econ,
+            )
+            graded.append(model_id)
+            continue
         new_cards[model_id] = classify(
             model_id,
             score,
