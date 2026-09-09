@@ -24,7 +24,9 @@ from typing import Any
 VALIDATE_URL = "https://api.lemonsqueezy.com/v1/licenses/validate"
 ACTIVATE_URL = "https://api.lemonsqueezy.com/v1/licenses/activate"
 CACHE_TTL_S = 86400
-PREMIUM_FEATURES = frozenset({"judge", "relay", "fork", "attach", "attach_path", "sessions", "switch"})
+PREMIUM_FEATURES = frozenset(
+    {"judge", "relay", "fork", "attach", "attach_path", "sessions", "switch"}
+)
 FREE_SESSIONS = 5  # live sessions on the free tier
 FREE_SWITCHES_PER_MONTH = 5  # free-tier model switches per month
 PRO_PRICE_USD_YEAR = 99
