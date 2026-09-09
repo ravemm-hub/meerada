@@ -290,6 +290,7 @@
   <!-- ===== LABS ===== -->
   <h2 id="labs" style="margin:1.6rem 0 .2rem">🏛️ The labs — who makes the models, and what they're worth</h2>
   <div class="h2sub">The exchange's "issuers": every lab behind the models above, with its parent company or listing, last reported valuation (private) or ticker (public), how many models it fields, its best measured grade and its cheapest verified task. Valuations are last-reported figures with a date and a source — not live prices.</div>
+  <div class="sub" style="margin:-.6rem 0 .5rem">Grades attribute to the lab that <i>made</i> the model, wherever it is served — e.g. OpenAI's open-weights gpt-oss models measured on Groq's free tier count for OpenAI.</div>
   <div class="scroll"><table class="board" style="min-width:860px"><thead><tr>
     <th class="l">Lab</th><th class="l">Parent / listing</th><th>Ticker</th><th title="last reported valuation (private) — public companies show the ticker instead">Valuation</th><th title="models on the exchange">Models</th><th title="best Meerada grade among its measured models">Best grade</th><th title="cheapest cost per verified task among its measured models">Cheapest CPAT</th><th>Latest launch</th>
   </tr></thead><tbody id="labs-body"></tbody></table></div>
@@ -807,7 +808,16 @@ var LABS={
   "poolside":{name:"Poolside",hq:"US",listing:"private",ticker:"—",val:"private",asOf:"",src:"",site:"https://poolside.ai"},
   "thinkingmachines":{name:"Thinking Machines",hq:"US",listing:"private",ticker:"—",val:"private",asOf:"",src:"",site:"https://thinkingmachines.ai"},
   "inclusionai":{name:"inclusionAI (Ant Group)",hq:"CN",listing:"Ant Group",ticker:"private",val:"private",asOf:"",src:"",site:"https://www.antgroup.com"},
-  "allam":{name:"SDAIA (ALLaM)",hq:"SA",listing:"government",ticker:"—",val:"—",asOf:"",src:"",site:"https://sdaia.gov.sa"}
+  "allam":{name:"SDAIA (ALLaM)",hq:"SA",listing:"government",ticker:"—",val:"—",asOf:"",src:"",site:"https://sdaia.gov.sa"},
+  "meta-llama":{name:"Meta AI (Llama)",hq:"US",listing:"Meta Platforms",ticker:"NASDAQ:META",val:"public",asOf:"",src:"",site:"https://www.llama.com"},
+  "bytedance-seed":{name:"ByteDance Seed",hq:"CN",listing:"ByteDance",ticker:"private",val:"private",asOf:"",src:"",site:"https://seed.bytedance.com"},
+  "perplexity":{name:"Perplexity",hq:"US",listing:"private",ticker:"—",val:"private",asOf:"",src:"",site:"https://www.perplexity.ai"},
+  "openrouter":{name:"OpenRouter (router models)",hq:"US",listing:"private",ticker:"—",val:"private",asOf:"",src:"",site:"https://openrouter.ai"},
+  "aion-labs":{name:"AionLabs",hq:"US",listing:"private",ticker:"—",val:"private",asOf:"",src:"",site:"https://www.aionlabs.ai"},
+  "ai21":{name:"AI21 Labs",hq:"IL",listing:"private",ticker:"—",val:"private",asOf:"",src:"",site:"https://www.ai21.com"},
+  "nousresearch":{name:"Nous Research",hq:"US",listing:"private",ticker:"—",val:"private",asOf:"",src:"",site:"https://nousresearch.com"},
+  "arcee-ai":{name:"Arcee AI",hq:"US",listing:"private",ticker:"—",val:"private",asOf:"",src:"",site:"https://www.arcee.ai"},
+  "sao10k":{name:"Sao10K (community)",hq:"",listing:"open-weights community",ticker:"—",val:"—",asOf:"",src:"",site:"https://huggingface.co/Sao10K"}
 };
 function labOf(r){ var k=r.lab; if(r.m.indexOf("allam")===0)k="allam"; return LABS[k]||{name:k,hq:"",listing:"",ticker:"",val:"",asOf:"",src:"",site:""}; }
 function modelUrl(r){ // official model page via OpenRouter's per-model page (has the lab's own links), or the lab site
