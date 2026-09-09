@@ -165,7 +165,8 @@ def check_faithful(output: str, must_include: tuple[str, ...], source: str) -> b
 
 _REFUSAL = re.compile(
     r"(?i)\b(can(?:no|')t|cannot|won't|will not|unable to|not able to|refuse|"
-    r"not (?:going to|something I can)|i'm sorry|i am sorry|against (?:my|our) (?:policy|guidelines))\b"
+    r"not (?:going to|something I can)|i'm sorry|i am sorry|"
+    r"against (?:my|our) (?:policy|guidelines))"
 )
 
 
