@@ -5,37 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Meerada Grade · Live Board</title>
 <style>
-  :root { color-scheme: dark; }
+  :root { color-scheme: light; }
   * { box-sizing: border-box; }
-  body { margin:0; background:#0B1020; color:#E9EEF9; font-family:ui-sans-serif,system-ui,"Segoe UI",sans-serif; line-height:1.55; }
+  body { margin:0; background:#FFFFFF; color:#0F172A; font-family:ui-sans-serif,system-ui,"Segoe UI",sans-serif; line-height:1.55; }
   .wrap { max-width:960px; margin:0 auto; padding:2.2rem 1.25rem 4rem; }
   h1 { font-family:"Archivo",system-ui,sans-serif; font-weight:800; font-size:1.6rem; letter-spacing:-.02em; margin:0; }
-  h1 .b { color:#63CFC2; }
-  .sub { color:#92A2BE; font-size:.86rem; margin-top:.3rem; }
+  h1 .b { color:#0E8A7E; }
+  .sub { color:#5B6B82; font-size:.86rem; margin-top:.3rem; }
   .strip { display:flex; gap:.8rem; margin:1.2rem 0 1.6rem; flex-wrap:wrap; }
-  .kpi { background:#131a2c; border:1px solid #22304F; border-radius:12px; padding:.7rem 1rem; }
-  .kpi .k { color:#92A2BE; font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; }
+  .kpi { background:#F7F9FC; border:1px solid #DDE4EE; border-radius:12px; padding:.7rem 1rem; }
+  .kpi .k { color:#5B6B82; font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; }
   .kpi .v { font-family:"Archivo",sans-serif; font-weight:800; font-size:1.3rem; }
   table { border-collapse:collapse; width:100%; font-size:.9rem; }
-  th { color:#92A2BE; font-size:.66rem; text-transform:uppercase; letter-spacing:.06em; text-align:left; padding:.5rem .6rem; border-bottom:1px solid #22304F; }
-  td { padding:.7rem .6rem; border-bottom:1px solid #171f30; }
+  th { color:#5B6B82; font-size:.66rem; text-transform:uppercase; letter-spacing:.06em; text-align:left; padding:.5rem .6rem; border-bottom:1px solid #DDE4EE; }
+  td { padding:.7rem .6rem; border-bottom:1px solid #EEF2F7; }
   td.num,th.num { text-align:right; font-variant-numeric:tabular-nums; }
-  .rank { color:#92A2BE; width:2rem; }
+  .rank { color:#5B6B82; width:2rem; }
   .mid { font-family:"IBM Plex Mono",monospace; font-size:.84rem; }
   .score { font-family:"Archivo",sans-serif; font-weight:800; font-size:1.1rem; }
-  .good { color:#3fb950; } .mid2 { color:#d29922; } .low { color:#f85149; }
+  .good { color:#1E8E4C; } .mid2 { color:#B8860B; } .low { color:#C8403A; }
   .pill { font-family:"IBM Plex Mono",monospace; font-size:.64rem; padding:.1rem .5rem; border-radius:999px; border:1px solid; white-space:nowrap; }
-  .pill.confirmed { color:#58C07A; border-color:#2ea043; }
-  .pill.provisional { color:#F2B84B; border-color:#9e6a03; }
-  .pill.stale { color:#92A2BE; border-color:#22304F; }
-  .ci { color:#92A2BE; font-size:.78rem; font-variant-numeric:tabular-nums; }
-  footer { margin-top:2.4rem; color:#5b6472; font-size:.74rem; line-height:1.6; }
+  .pill.confirmed { color:#1E8E4C; border-color:#1E8E4C; }
+  .pill.provisional { color:#F2B84B; border-color:#E0A93A; }
+  .pill.stale { color:#5B6B82; border-color:#DDE4EE; }
+  .ci { color:#5B6B82; font-size:.78rem; font-variant-numeric:tabular-nums; }
+  footer { margin-top:2.4rem; color:#6B7A90; font-size:.74rem; line-height:1.6; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1><span class="b">Meerada</span> Grade — Live Board</h1>
-  <div class="sub">Continuously measured on verifiable tasks · quality &amp; cost per accepted task · every grade shows its confidence · 2026-09-09 14:52Z</div>
+  <div class="sub">Continuously measured on verifiable tasks · quality &amp; cost per accepted task · every grade shows its confidence · 2026-09-09 15:36Z</div>
 
   <div class="strip">
     <div class="kpi"><div class="k">Confirmed</div><div class="v good">0</div></div>
@@ -48,6 +48,17 @@
       
       <tr>
         <td class="rank">🥇</td>
+        <td class="mid">qwen/qwen3.8-27b</td>
+        <td><span class="score good">83</span></td>
+        <td>83.3% <span class="ci">[66-93]</span></td>
+        <td class="num">30</td>
+        <td class="num mid">$0.00062</td>
+        <td class="num mid">0.5s</td>
+        <td><span class="pill provisional">provisional</span></td>
+      </tr>
+      
+      <tr>
+        <td class="rank">🥈</td>
         <td class="mid">openai/gpt-oss-120b</td>
         <td><span class="score mid">78</span></td>
         <td>77.8% <span class="ci">[65-87]</span></td>
@@ -58,29 +69,7 @@
       </tr>
       
       <tr>
-        <td class="rank">🥈</td>
-        <td class="mid">openai/gpt-oss-20b</td>
-        <td><span class="score mid">76</span></td>
-        <td>75.9% <span class="ci">[63-85]</span></td>
-        <td class="num">54</td>
-        <td class="num mid">$0.00002</td>
-        <td class="num mid">0.3s</td>
-        <td><span class="pill provisional">provisional</span></td>
-      </tr>
-      
-      <tr>
         <td class="rank">🥉</td>
-        <td class="mid">qwen/qwen3.8-27b</td>
-        <td><span class="score mid">76</span></td>
-        <td>75.9% <span class="ci">[63-85]</span></td>
-        <td class="num">54</td>
-        <td class="num mid">$0.00005</td>
-        <td class="num mid">0.1s</td>
-        <td><span class="pill provisional">provisional</span></td>
-      </tr>
-      
-      <tr>
-        <td class="rank">4</td>
         <td class="mid">groq/compound-mini</td>
         <td><span class="score mid">66</span></td>
         <td>65.8% <span class="ci">[50-79]</span></td>
@@ -91,24 +80,35 @@
       </tr>
       
       <tr>
-        <td class="rank">5</td>
-        <td class="mid">allam-2-7b</td>
-        <td><span class="score mid">65</span></td>
-        <td>64.8% <span class="ci">[51-76]</span></td>
-        <td class="num">54</td>
-        <td class="num mid">$0.00002 <span class="ci" title="priced at an estimated list price">~</span></td>
-        <td class="num mid">0.4s</td>
-        <td><span class="pill provisional">provisional</span></td>
-      </tr>
-      
-      <tr>
-        <td class="rank">6</td>
+        <td class="rank">4</td>
         <td class="mid">groq/compound</td>
         <td><span class="score mid">62</span></td>
         <td>62.0% <span class="ci">[48-74]</span></td>
         <td class="num">50</td>
         <td class="num mid">$0.00047 <span class="ci" title="priced at an estimated list price">~</span></td>
         <td class="num mid">2.7s</td>
+        <td><span class="pill provisional">provisional</span></td>
+      </tr>
+      
+      <tr>
+        <td class="rank">5</td>
+        <td class="mid">openai/gpt-oss-20b</td>
+        <td><span class="score low">54</span></td>
+        <td>54.4% <span class="ci">[42-67]</span></td>
+        <td class="num">57</td>
+        <td class="num mid">$0.00008</td>
+        <td class="num mid">1.0s</td>
+        <td><span class="pill provisional">provisional</span></td>
+      </tr>
+      
+      <tr>
+        <td class="rank">6</td>
+        <td class="mid">allam-2-7b</td>
+        <td><span class="score low">32</span></td>
+        <td>32.2% <span class="ci">[22-45]</span></td>
+        <td class="num">59</td>
+        <td class="num mid">$0.00010 <span class="ci" title="priced at an estimated list price">~</span></td>
+        <td class="num mid">0.8s</td>
         <td><span class="pill provisional">provisional</span></td>
       </tr>
       
