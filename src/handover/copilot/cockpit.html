@@ -98,6 +98,7 @@
     <span><span class="k">CPAT</span><b id="l-cpat" style="color:var(--good)">—</b></span>
     <span><span class="k">lean</span><b id="l-save" style="color:var(--good)">—</b></span>
     <button class="btn ghost" id="btn-keys" style="display:none" onclick="showKeys()">🔑 Keys</button>
+    <button class="btn ghost" id="btn-prem" style="display:none" onclick="showPremium()">💎 Premium</button>
     <span id="whobox" style="display:none;font-size:.75rem;color:var(--muted)"></span>
     <button class="btn ghost" onclick="resetAll()">Reset</button>
   </div>
@@ -198,6 +199,23 @@
     </div>
     <div id="imp-status" class="sub" style="min-height:1.2em;margin:.3rem 0"></div>
     <div style="display:flex;justify-content:flex-end"><button class="btn" onclick="hide('imp')">Close</button></div>
+  </div>
+</div>
+
+<!-- premium / license -->
+<div id="prem" class="modal">
+  <div class="box" style="max-width:460px">
+    <h3>💎 Meerada Premium</h3>
+    <p id="prem-status"></p>
+    <div style="display:flex;gap:.5rem;margin:.4rem 0 .8rem">
+      <input type="text" id="prem-key" placeholder="license key (from your purchase email)" style="flex:1;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.5rem">
+      <button class="btn primary" onclick="setLicense()">Activate</button>
+    </div>
+    <p class="sub" style="font-size:.76rem">Premium unlocks unlimited sessions, ⚖️ Judge, ⚡ Relay, ⇄ Fork and file/folder attachments. Models always run on <b>your own keys</b> — Premium never resells tokens.</p>
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <a id="prem-buy" class="btn ghost" href="#" target="_blank" rel="noopener" style="display:none">Get a license →</a>
+      <button class="btn" onclick="hide('prem')">Close</button>
+    </div>
   </div>
 </div>
 
@@ -366,7 +384,19 @@ function updateLedger(){
 }
 function applyView(s, v){ if(!v)return; if(typeof v.turns=="number")s.stats.turns=v.turns; if(typeof v.n_turns=="number")s.stats.turns=v.n_turns; if(v.total_tokens!=null)s.stats.tokens=v.total_tokens; if(v.total_cost!=null)s.stats.cost=v.total_cost; if(v.title!=null)s.title=v.title; if(v.source!=null)s.source=v.source; if(v.attachments)s.attachments=v.attachments; if(v.context_chars!=null)s.ctxChars=v.context_chars; if(v.model)s.model=v.model; }
 
-async function post(url, body){ var r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body||{})}); return r.json(); }
+async function post(url, body){ var r=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body||{})}); var d=await r.json();
+  if(r.status==402){ toast("💎 "+h(d.message||"Premium feature")+(d.checkout_url?' — <a href="'+h(d.checkout_url)+'" target="_blank" style="color:var(--amber)">get a license</a>':''), 5000); showPremium(); }
+  return d; }
+var PREMIUM={beta_open:true, licensed:false, checkout_url:""};
+async function showPremium(){ show("prem"); try{ var d=await (await fetch("/license")).json(); renderPremium(d); }catch(e){} }
+function renderPremium(d){ PREMIUM.licensed=!!d.valid; PREMIUM.beta_open=!!d.beta_open; var s=document.getElementById("prem-status");
+  if(d.valid) s.innerHTML='✅ Licensed'+(d.product?' — <b>'+h(d.product)+'</b>':'')+(d.expires_at?' · valid until '+h(d.expires_at.slice(0,10)):'');
+  else if(d.beta_open) s.innerHTML='🟢 <b>Open beta</b> — every Premium feature is free right now. Enter a key any time to keep it after the beta.';
+  else s.innerHTML='🔒 Not licensed'+(d.reason&&d.reason!="no license key"?' — '+h(d.reason):'')+'. Free tier: '+(PREMIUM.free_sessions||2)+' sessions, no Judge/Relay/Fork/attachments.';
+  var buy=document.getElementById("prem-buy"); var url=d.checkout_url||PREMIUM.checkout_url; if(url){ buy.href=url; buy.style.display=""; } }
+async function setLicense(){ var k=document.getElementById("prem-key").value.trim(); if(!k)return;
+  document.getElementById("prem-status").innerHTML='<span class="spin"></span> checking…';
+  var d=await post("/license",{key:k}); renderPremium(d); if(d.valid){ document.getElementById("prem-key").value=""; toast("💎 Premium activated"); } }
 
 async function sendTo(id, msg){
   var s=find(id); if(!s||s.pending)return;
@@ -607,7 +637,8 @@ document.addEventListener("keydown",function(e){
     var meRes=await fetch("/me"); var me=await meRes.json();
     HOSTED=!!me.auth; VAULT=HOSTED||!!me.local_vault; LOCAL_FS=!!me.local_fs;
     if(HOSTED && !me.user){ show("gate"); return; }
-    if(VAULT){ document.getElementById("btn-keys").style.display=""; }
+    if(VAULT){ document.getElementById("btn-keys").style.display=""; document.getElementById("btn-prem").style.display=""; }
+    if(me.premium){ PREMIUM=me.premium; }
     if(HOSTED){ var wb=document.getElementById("whobox"); wb.style.display=""; wb.textContent=me.user; }
   }catch(e){}
   await refreshModels();

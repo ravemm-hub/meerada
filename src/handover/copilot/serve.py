@@ -557,8 +557,29 @@ def build_app(
         except RuntimeError:
             caller_for = None
 
+    from handover.copilot import license as LIC
     from handover.copilot.autopick import AutoPicker
     from handover.copilot.catalog_live import LiveCatalog
+
+    licenses = LIC.Licenses()
+    checkout_url = os.environ.get("MEERADA_CHECKOUT_URL", "")
+    LICENSE_PROVIDER = "meerada-license"  # stored encrypted in the vault like any key
+
+    def license_status(sub: str) -> LIC.LicenseStatus:
+        key = keystore.get(sub, LICENSE_PROVIDER) if (hosted or local_vault) else ""
+        return licenses.check(key or "")
+
+    def premium_ok(request: Request, feature: str) -> bool:
+        user = current_user(request)
+        licensed = license_status(str(user["sub"])).valid if user else False
+        return LIC.allowed(feature, licensed=licensed, beta=LIC.beta_open())
+
+    def paywall(feature: str) -> JSONResponse:
+        return JSONResponse(
+            {"error": "premium", "feature": feature, "checkout_url": checkout_url,
+             "message": f"'{feature}' is a Premium feature — enter a license key under 💎 Premium"},
+            status_code=402,
+        )
 
     autopick = AutoPicker()
 
@@ -615,7 +636,10 @@ def build_app(
         live = caller_for is not None or hosted or local_vault
         if hosted or local_vault:
             user = current_user(request)
-            connected = keystore.providers(str(user["sub"])) if user else []
+            connected = [
+                p for p in (keystore.providers(str(user["sub"])) if user else [])
+                if p != "meerada-license"
+            ]
         else:
             connected = ["groq"] if caller_for is not None else []  # shared tester key
         catalog = list(MODEL_CATALOG)
@@ -641,7 +665,13 @@ def build_app(
                 "auth": hosted,
                 "local_vault": local_vault,
                 "local_fs": local_fs,  # desktop/localhost: can scan ~/.claude, attach folders
-                "providers": providers,
+                "providers": [p for p in providers if p != LICENSE_PROVIDER],
+                "premium": {
+                    "beta_open": LIC.beta_open(),
+                    "licensed": license_status(str(user["sub"])).valid if vault else False,
+                    "checkout_url": checkout_url,
+                    "free_sessions": LIC.FREE_SESSIONS,
+                },
             }
         )
 
@@ -713,6 +743,32 @@ def build_app(
              "providers": keystore.providers(sub)}
         )
 
+    @app.get("/license")
+    def license_get(request: Request) -> JSONResponse:
+        user = current_user(request)
+        if user is None:
+            return JSONResponse({"error": "sign in required"}, status_code=401)
+        st = license_status(str(user["sub"]))
+        return JSONResponse(
+            {**st.as_dict(), "beta_open": LIC.beta_open(), "checkout_url": checkout_url}
+        )
+
+    @app.post("/license")
+    async def license_set(request: Request) -> JSONResponse:
+        user = current_user(request)
+        if user is None:
+            return JSONResponse({"error": "sign in required"}, status_code=401)
+        body = await request.json()
+        sub = str(user["sub"])
+        key = str(body.get("key", "")).strip()
+        if not key:  # remove
+            keystore.clear(sub, LICENSE_PROVIDER)
+            return JSONResponse({"valid": False, "reason": "removed"})
+        st = licenses.check(key, activate=True)
+        if st.valid:
+            keystore.set(sub, LICENSE_PROVIDER, key)
+        return JSONResponse({**st.as_dict(), "beta_open": LIC.beta_open()})
+
     @app.post("/optimize")
     async def optimize_endpoint(request: Request) -> JSONResponse:
         return JSONResponse(optimize_view(await request.json()))
@@ -730,6 +786,12 @@ def build_app(
         b, _ = board_for(request)
         if b is None:
             return JSONResponse({"error": "sign in required"}, status_code=401)
+        sid = str(payload.get("id", ""))
+        if (
+            sid not in b.sessions and len(b.sessions) >= LIC.FREE_SESSIONS
+            and not premium_ok(request, "sessions")
+        ):
+            return paywall("sessions")
         return JSONResponse(
             b.send(
                 str(payload.get("id", "")),
@@ -842,6 +904,8 @@ def build_app(
         b, _ = board_for(request)
         if b is None:
             return JSONResponse({"error": "sign in required"}, status_code=401)
+        if not premium_ok(request, "fork"):
+            return paywall("fork")
         p = await request.json()
         return JSONResponse(
             b.fork(str(p.get("id", "")), str(p.get("new_id", "")), str(p.get("model", "")))
@@ -852,6 +916,8 @@ def build_app(
         b, _ = board_for(request)
         if b is None:
             return JSONResponse({"error": "sign in required"}, status_code=401)
+        if not premium_ok(request, "attach"):
+            return paywall("attach")
         p = await request.json()
         files = [f for f in (p.get("files") or []) if isinstance(f, dict)]
         return JSONResponse(b.attach(str(p.get("id", "")), str(p.get("model", "")), files))
@@ -862,6 +928,8 @@ def build_app(
         p = await request.json()
         if b is None or not local_fs:
             return JSONResponse({"error": "folder attach is desktop-app only"}, 403)
+        if not premium_ok(request, "attach_path"):
+            return paywall("attach_path")
         files, report = IMP.read_folder(str(p.get("path", "")))
         if not files:
             return JSONResponse({"error": "no readable text files there", "report": report}, 400)
@@ -874,6 +942,8 @@ def build_app(
         b, _ = board_for(request)
         if b is None:
             return JSONResponse({"error": "sign in required"}, status_code=401)
+        if not premium_ok(request, "judge"):
+            return paywall("judge")
         ids = [str(i) for i in (payload.get("ids") or [])]
         judge_sid, judge_model = str(payload.get("id", "judge")), str(payload.get("model", ""))
         return JSONResponse(b.judge(ids, judge_sid, judge_model))
@@ -883,6 +953,8 @@ def build_app(
         b, _ = board_for(request)
         if b is None:
             return JSONResponse({"error": "sign in required"}, status_code=401)
+        if not premium_ok(request, "relay"):
+            return paywall("relay")
         return JSONResponse(
             b.relay(
                 str(payload.get("id", "")), str(payload.get("model", "")),
