@@ -23,6 +23,17 @@ from typing import Any
 
 VALIDATE_URL = "https://api.lemonsqueezy.com/v1/licenses/validate"
 ACTIVATE_URL = "https://api.lemonsqueezy.com/v1/licenses/activate"
+# Gumroad's license API (product_id + license_key; increments use count unless told not to).
+GUMROAD_VERIFY_URL = "https://api.gumroad.com/v2/licenses/verify"
+
+
+def provider() -> str:
+    """Which store issues our keys: 'gumroad' (default) or 'lemonsqueezy'."""
+    return os.environ.get("MEERADA_LICENSE_PROVIDER", "gumroad").strip().lower()
+
+
+def gumroad_product_id() -> str:
+    return os.environ.get("MEERADA_GUMROAD_PRODUCT_ID", "").strip()
 CACHE_TTL_S = 86400
 PREMIUM_FEATURES = frozenset(
     {"judge", "relay", "fork", "attach", "attach_path", "sessions", "switch"}
@@ -67,6 +78,24 @@ def _post(url: str, form: dict[str, str]) -> dict[str, Any]:
             return {"error": f"HTTP {exc.code}"}
 
 
+def parse_gumroad(body: dict[str, Any], *, now: float) -> LicenseStatus:
+    """Normalise a Gumroad /licenses/verify response. A refunded, disputed or
+    subscription-ended purchase is not a valid license."""
+    if not isinstance(body, dict):
+        return LicenseStatus(False, "unreadable response", checked_at=now)
+    p = body.get("purchase") or {}
+    if not body.get("success"):
+        return LicenseStatus(False, str(body.get("message") or "invalid key"), checked_at=now)
+    dead = p.get("refunded") or p.get("chargebacked") or p.get("disputed")
+    ended = p.get("subscription_ended_at") or p.get("subscription_cancelled_at")
+    if dead or ended:
+        return LicenseStatus(False, "license refunded or ended", checked_at=now)
+    return LicenseStatus(
+        True, "", product=str(p.get("product_name") or ""),
+        customer=str(p.get("email") or ""), expires_at="", checked_at=now,
+    )
+
+
 def parse_status(body: dict[str, Any], *, now: float) -> LicenseStatus:
     """Normalise a Lemon Squeezy validate/activate response."""
     if not isinstance(body, dict):
@@ -88,9 +117,15 @@ def parse_status(body: dict[str, Any], *, now: float) -> LicenseStatus:
 class Licenses:
     """Validate + cache license keys; ``fetch`` is injectable for tests."""
 
-    def __init__(self, fetch: LicenseFetch = _post, instance: str = "meerada-desktop") -> None:
+    def __init__(
+        self,
+        fetch: LicenseFetch = _post,
+        instance: str = "meerada-desktop",
+        store: str | None = None,
+    ) -> None:
         self._fetch = fetch
         self._instance = instance
+        self._store = store  # None -> MEERADA_LICENSE_PROVIDER at call time
         self._cache: dict[str, LicenseStatus] = {}
 
     def check(self, key: str, *, now: float | None = None, activate: bool = False) -> LicenseStatus:
@@ -101,17 +136,27 @@ class Licenses:
         cached = self._cache.get(key)
         if cached and now - cached.checked_at < CACHE_TTL_S and not activate:
             return cached
-        form = {"license_key": key, "instance_name": self._instance}
+        gumroad = (self._store or provider()) == "gumroad"
+        if gumroad:
+            # a plain re-check must not burn an activation: increment only on activate
+            form = {
+                "product_id": gumroad_product_id(), "license_key": key,
+                "increment_uses_count": "true" if activate else "false",
+            }
+            url = GUMROAD_VERIFY_URL
+        else:
+            form = {"license_key": key, "instance_name": self._instance}
+            url = ACTIVATE_URL if activate else VALIDATE_URL
         try:
-            body = self._fetch(ACTIVATE_URL if activate else VALIDATE_URL, form)
+            body = self._fetch(url, form)
         except Exception as exc:
             # offline: keep a previously-good verdict for the day rather than lock the user out
             if cached and cached.valid:
                 return cached
             why = f"can't reach the license server ({type(exc).__name__})"
             return LicenseStatus(False, why, checked_at=now)
-        status = parse_status(body, now=now)
-        if activate and not status.valid and "already" in status.reason.lower():
+        status = parse_gumroad(body, now=now) if gumroad else parse_status(body, now=now)
+        if not gumroad and activate and not status.valid and "already" in status.reason.lower():
             status = self.check(key, now=now)  # instance already activated: plain validate
         self._cache[key] = status
         return status
