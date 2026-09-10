@@ -1,4 +1,4 @@
-# Meerada — working name (`meerada` CLI, package `handover`)
+# Meerada — the live AI model exchange · LLManager (`meerada` CLI, package `handover`)
 
 ![Import a Claude Code session and continue it on any model — the Handshake](https://meerada.app/assets/handshake.gif)
 
