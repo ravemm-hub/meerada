@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-10T07:16Z",
+ "generated_at": "2026-09-10T12:23Z",
  "source": "openrouter public catalog",
  "count": 346,
  "new_days": 21,
@@ -8,8 +8,8 @@
    "id": "deepseek/deepseek-v4.1-flash",
    "name": "DeepSeek: DeepSeek V4.1 Flash",
    "vendor": "deepseek",
-   "price_in": 0.3,
-   "price_out": 1.2,
+   "price_in": 0.15,
+   "price_out": 0.6,
    "context": 1048576,
    "created": "2026-09-10",
    "age_days": 0,
@@ -212,8 +212,8 @@
    "id": "z-ai/glm-5.3-flash",
    "name": "Z.ai: GLM 5.3 Flash",
    "vendor": "z-ai",
-   "price_in": 0.075,
-   "price_out": 0.25,
+   "price_in": 0.15,
+   "price_out": 0.5,
    "context": 1310720,
    "created": "2026-08-26",
    "age_days": 14,
@@ -240,7 +240,7 @@
    "price_out": 0.66,
    "context": 1048576,
    "created": "2026-08-21",
-   "age_days": 19,
+   "age_days": 20,
    "free": false,
    "modalities": "text+image"
   },
@@ -684,7 +684,7 @@
    "price_out": 1.2,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 62,
+   "age_days": 63,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -696,7 +696,7 @@
    "price_out": 1.2,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 62,
+   "age_days": 63,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -708,7 +708,7 @@
    "price_out": 12.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 62,
+   "age_days": 63,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -720,7 +720,7 @@
    "price_out": 12.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 62,
+   "age_days": 63,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -732,7 +732,7 @@
    "price_out": 10.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 62,
+   "age_days": 63,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -744,7 +744,7 @@
    "price_out": 10.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 62,
+   "age_days": 63,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -924,7 +924,7 @@
    "price_out": 3.5,
    "context": 262144,
    "created": "2026-06-12",
-   "age_days": 89,
+   "age_days": 90,
    "free": false,
    "modalities": "text+image"
   },
@@ -936,7 +936,7 @@
    "price_out": 50.0,
    "context": 1000000,
    "created": "2026-06-09",
-   "age_days": 92,
+   "age_days": 93,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -1524,7 +1524,7 @@
    "price_out": 1.25,
    "context": 400000,
    "created": "2026-03-17",
-   "age_days": 176,
+   "age_days": 177,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1536,7 +1536,7 @@
    "price_out": 4.5,
    "context": 400000,
    "created": "2026-03-17",
-   "age_days": 176,
+   "age_days": 177,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1800,7 +1800,7 @@
    "price_out": 1.56,
    "context": 1000000,
    "created": "2026-02-16",
-   "age_days": 205,
+   "age_days": 206,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -2840,8 +2840,8 @@
    "id": "qwen/qwen3-30b-a3b-instruct-2507",
    "name": "Qwen: Qwen3 30B A3B Instruct 2507",
    "vendor": "qwen",
-   "price_in": 0.09,
-   "price_out": 0.3,
+   "price_in": 0.0481,
+   "price_out": 0.193,
    "context": 262144,
    "created": "2025-07-29",
    "age_days": 407,
@@ -3492,7 +3492,7 @@
    "price_out": 1.0,
    "context": 128000,
    "created": "2025-02-01",
-   "age_days": 585,
+   "age_days": 586,
    "free": false,
    "modalities": "text+image"
   },
@@ -3504,7 +3504,7 @@
    "price_out": 0.78,
    "context": 1000000,
    "created": "2025-02-01",
-   "age_days": 585,
+   "age_days": 586,
    "free": false,
    "modalities": "text"
   },
