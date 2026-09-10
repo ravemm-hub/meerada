@@ -211,7 +211,7 @@
       <input type="text" id="prem-key" placeholder="license key (from your purchase email)" style="flex:1;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.5rem">
       <button class="btn primary" onclick="setLicense()">Activate</button>
     </div>
-    <p class="sub" style="font-size:.76rem"><b>Free:</b> 5 live sessions, 5 model switches a month, ⚡ Auto, import. <b>Pro — $99 / year, one payment:</b> unlimited sessions and switches, ⚖️ Judge, ⚡ Relay, ⇄ Fork, file &amp; folder attachments. Models always run on <b>your own keys</b> — Pro never resells tokens.</p>
+    <p class="sub" style="font-size:.76rem">Everything is free during the open beta — unlimited sessions and switches, ⚖️ Judge, ⚡ Relay, ⇄ Fork, file &amp; folder attachments. Models always run on <b>your own keys</b>; Meerada never resells tokens.</p>
     <div style="display:flex;justify-content:space-between;align-items:center">
       <a id="prem-buy" class="btn ghost" href="#" target="_blank" rel="noopener" style="display:none">Get a license →</a>
       <button class="btn" onclick="hide('prem')">Close</button>
@@ -391,7 +391,7 @@ var PREMIUM={beta_open:true, licensed:false, checkout_url:""};
 async function showPremium(){ show("prem"); try{ var d=await (await fetch("/license")).json(); renderPremium(d); }catch(e){} }
 function renderPremium(d){ PREMIUM.licensed=!!d.valid; PREMIUM.beta_open=!!d.beta_open; var s=document.getElementById("prem-status");
   if(d.valid) s.innerHTML='✅ Licensed'+(d.product?' — <b>'+h(d.product)+'</b>':'')+(d.expires_at?' · valid until '+h(d.expires_at.slice(0,10)):'');
-  else if(d.beta_open) s.innerHTML='🟢 <b>Open beta</b> — every Premium feature is free right now. Enter a key any time to keep it after the beta.';
+  else if(d.beta_open) s.innerHTML='🟢 <b>Open beta</b> — everything is free right now. No key needed.';
   else s.innerHTML='🔒 Not licensed'+(d.reason&&d.reason!="no license key"?' — '+h(d.reason):'')+'. Free tier: '+(PREMIUM.free_sessions||5)+' sessions and '+(PREMIUM.free_switches||5)+' model switches a month.';
   var buy=document.getElementById("prem-buy"); var url=d.checkout_url||PREMIUM.checkout_url; if(url){ buy.href=url; buy.style.display=""; } }
 async function setLicense(){ var k=document.getElementById("prem-key").value.trim(); if(!k)return;
@@ -637,8 +637,10 @@ document.addEventListener("keydown",function(e){
     var meRes=await fetch("/me"); var me=await meRes.json();
     HOSTED=!!me.auth; VAULT=HOSTED||!!me.local_vault; LOCAL_FS=!!me.local_fs;
     if(HOSTED && !me.user){ show("gate"); return; }
-    if(VAULT){ document.getElementById("btn-keys").style.display=""; document.getElementById("btn-prem").style.display=""; }
+    if(VAULT){ document.getElementById("btn-keys").style.display=""; }
     if(me.premium){ PREMIUM=me.premium; }
+    // the 💎 button only exists once the beta closes — while everything is free there is nothing to buy
+    if(VAULT && me.premium && me.premium.beta_open===false){ document.getElementById("btn-prem").style.display=""; }
     if(HOSTED){ var wb=document.getElementById("whobox"); wb.style.display=""; wb.textContent=me.user; }
   }catch(e){}
   await refreshModels();

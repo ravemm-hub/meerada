@@ -100,7 +100,7 @@
     <a href="market.html">Arena</a>
     <a href="grade.html">Grade</a>
     <a href="llmanager.html" class="on">LLManager</a>
-    <a href="pricing.html">Pricing</a>
+    <a href="pricing.html">Free</a>
   </span>
   <span class="cta"><a class="btn primary" href="#get">Download →</a></span>
 </div></nav>
@@ -198,37 +198,35 @@
     <p class="note">Unsigned for now, so first launch shows a one-time SmartScreen/Gatekeeper prompt → <b>More info → Run anyway</b>. Prefer source? <code>pip install "handover[desktop] @ git+https://github.com/ravemm-hub/meerada"</code> then <code>meerada app</code>.</p>
   </div>
 
-  <h2 style="margin-top:2.4rem">Free core. Premium cockpit.</h2>
-  <div class="h2sub">The measuring engine and command-line tools are open-source and free forever. LLManager is the premium cockpit on top.</div>
+  <h2 style="margin-top:2.4rem">Free. Every feature. Open beta.</h2>
+  <div class="h2sub">No card, no license key, no gates. The engine is open-source and free forever; the app is free for everyone during the open beta.</div>
   <div class="split">
     <div class="tier">
-      <h3>Free · open-core</h3>
-      <div class="price">$0</div>
+      <h3>Open-source core</h3>
+      <div class="price">Free</div>
       <ul>
         <li>The prompt engine (lean, per-model)</li>
         <li><code>meerada ask</code> — one model from the CLI</li>
         <li><code>meerada fan</code> — parallel from the CLI</li>
-        <li>The live Grade board &amp; Arena</li>
-        <li class="off">Visual multi-task × multi-model cockpit</li>
-        <li class="off">Mobile app &amp; workspace control</li>
+        <li>The live Grade board &amp; exchange</li>
+        <li>Every measurement, open data</li>
       </ul>
-      <a class="btn ghost" href="https://github.com/ravemm-hub/meerada" target="_blank" rel="noopener">Get the free core</a>
+      <a class="btn ghost" href="https://github.com/ravemm-hub/meerada" target="_blank" rel="noopener">Source on GitHub</a>
     </div>
     <div class="tier prem">
-      <span class="badge">Premium</span>
+      <span class="badge">Open beta</span>
       <h3 style="margin-top:.5rem">Meerada LLManager</h3>
-      <div class="price">Pricing soon</div>
+      <div class="price">Free</div>
       <ul>
-        <li>Everything in Free</li>
         <li>Visual cockpit — many sessions, one place</li>
-        <li>Import history · switch models with it · fork</li>
-        <li>Attach folders · relay · cross-model judge</li>
+        <li>Import Claude / ChatGPT history · switch models with it · fork</li>
+        <li>Attach files &amp; folders · relay · cross-model judge</li>
+        <li>⚡ Auto — the exchange's best-value model, picked for you</li>
         <li>Live cost ledger + CPAT per session</li>
-        <li>Desktop tray + mobile apps</li>
-        <li>Runs models on your workspace directly</li>
+        <li>Runs on your own keys — nothing resold</li>
       </ul>
-      <a class="btn primary" href="#" onclick="joinBeta(event)">Join the private beta</a>
-      <div class="note" id="beta-note">We'll email you a build. No card, no spam.</div>
+      <a class="btn primary" href="#get">Download the app</a>
+      <div class="note">Windows, macOS, Linux · or the hosted tester at <a class="teal" href="https://app.meerada.app">app.meerada.app</a>.</div>
     </div>
   </div>
 </div></section>
@@ -280,7 +278,6 @@ function tick(){
     document.getElementById("m-note").textContent="routing each task to the cheapest model that clears the bar";
   }
 }
-function joinBeta(e){ e.preventDefault(); document.getElementById("beta-note").innerHTML='<span class="teal">Thanks — beta signups open shortly. Star the repo to be first in line.</span>'; }
 buildGrid();
 if(!window.matchMedia("(prefers-reduced-motion:reduce)").matches){ setInterval(tick,650); for(var i=0;i<6;i++)setTimeout(tick,i*180); }
 </script>
