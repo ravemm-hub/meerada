@@ -68,6 +68,22 @@ def _open_browser_and_block(url: str) -> None:
         return
 
 
+def _start_guard() -> None:
+    """Meerada Guard tails the user's live Claude Code sessions in the background
+    and raises a desktop notification when a task stalls, burns or reaches out
+    of the workspace. Off with ``enabled = false`` in ~/.meerada/guard.toml."""
+    from handover.guard.alerts import default_sinks
+    from handover.guard.claude_watch import ClaudeCodeWatcher
+    from handover.guard.policy import load_policy
+
+    policy = load_policy()
+    if not policy.enabled:
+        return
+    _ring, sink = default_sinks(policy.webhook_url)
+    watcher = ClaudeCodeWatcher(policy, sink)
+    threading.Thread(target=watcher.run, daemon=True).start()
+
+
 def run(port: int | None = None) -> None:
     """Start the local server and open the native window (or the browser)."""
     import uvicorn
@@ -82,6 +98,7 @@ def run(port: int | None = None) -> None:
     config = uvicorn.Config(app, host="127.0.0.1", port=port, log_level="warning", log_config=None)
     server = uvicorn.Server(config)
     threading.Thread(target=server.run, daemon=True).start()
+    _start_guard()  # the watchdog beside Claude Code, from the tray, for free
 
     url = f"http://127.0.0.1:{port}"
     _wait_for_server(url)  # never open the window before the server is live

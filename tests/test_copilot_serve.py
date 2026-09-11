@@ -110,3 +110,20 @@ def test_board_preview_and_close() -> None:
 def test_board_rejects_incomplete() -> None:
     assert "required" in Board(_caller_for).send("", "llama", "hi")["error"]
     assert "required" in Board(_caller_for).send("s1", "llama", "")["error"]
+
+
+def test_board_runs_every_call_through_the_guard() -> None:
+    from handover.guard.meter import GuardHub
+    from handover.guard.policy import Policy
+
+    hub = GuardHub(Policy(allowed_roots=("/w",)))
+    board = Board(_caller_for, guard=hub)
+    board.send("s1", "llama", "hello")
+    board.send("s1", "gemma", "again")  # the handshake keeps the guard on the same session id
+    snap = hub.snapshot()
+    assert snap["state"] == "ok" and snap["sessions"]["s1"]["model"] == "gemma"
+    # the handshake restarts the stall clock on the new model but keeps the money spent
+    assert snap["sessions"]["s1"]["out_tokens"] == 6 and snap["sessions"]["s1"]["spent_usd"] > 0
+    r = board.send("s2", "llama", "my key is sk-ant-abcdefghijklmnopqrstuvwxyz1234")
+    assert r["error"] and "blocked" in r["error"] and "abcdefghijklmnop" not in r["error"]
+    assert hub.ring.items[-1].level == "blocked"

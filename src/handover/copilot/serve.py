@@ -19,6 +19,7 @@ from handover.copilot.keystore import KeyStore
 from handover.copilot.optimize import optimize
 from handover.copilot.pricing import price_for
 from handover.copilot.session import Session, SessionManager
+from handover.guard.meter import GuardedCaller, GuardHub
 from handover.replay.openai_client import ChatCaller
 
 _COCKPIT = Path(__file__).parent / "cockpit.html"
@@ -215,10 +216,12 @@ class Board:
         *,
         max_tokens: int = 1500,
         pick_auto: Callable[[], str | None] | None = None,
+        guard: GuardHub | None = None,
     ) -> None:
         self._caller_for = caller_for
         self._max_tokens = max_tokens
         self._pick_auto = pick_auto
+        self._guard = guard
         self.sessions: dict[str, Session] = {}
         self.models: dict[str, str] = {}
         self.switches = 0  # mid-conversation model switches this month
@@ -237,11 +240,14 @@ class Board:
     def live(self) -> bool:
         return self._caller_for is not None
 
-    def _new_session(self, model: str) -> Session:
+    def _new_session(self, model: str, sid: str = "") -> Session:
         assert self._caller_for is not None
         price_in, price_out = price_for(model)
+        caller = self._caller_for(model)
+        if self._guard is not None and sid:  # every call metered, caged, budget-capped
+            caller = GuardedCaller(caller, self._guard, sid, float(price_in), float(price_out))
         return Session(
-            model, self._caller_for(model), price_in_per_mtok=price_in,
+            model, caller, price_in_per_mtok=price_in,
             price_out_per_mtok=price_out, max_tokens=self._max_tokens,
         )
 
@@ -250,7 +256,7 @@ class Board:
         model, the conversation moves with it — that's the in-place handshake."""
         session = self.sessions.get(sid)
         if session is None:
-            session = self._new_session(model)
+            session = self._new_session(model, sid)
             self.sessions[sid] = session
         elif session.model_id != model:
             from datetime import UTC, datetime
@@ -259,7 +265,7 @@ class Board:
             if month != self.switch_month:
                 self.switch_month, self.switches = month, 0
             self.switches += 1
-            moved = self._new_session(model)
+            moved = self._new_session(model, sid)
             moved.carry_from(session)
             moved.total_tokens, moved.total_cost = session.total_tokens, session.total_cost
             self.sessions[sid] = session = moved
@@ -612,7 +618,15 @@ def build_app(
     def _shared() -> list[str]:
         return shared_connected
 
-    board: dict[str, Board] = {"board": Board(caller_for, pick_auto=picker_for(_shared))}
+    from handover.guard.alerts import default_sinks
+    from handover.guard.policy import load_policy
+
+    _gpolicy = load_policy()
+    _gring, _gsink = default_sinks(_gpolicy.webhook_url, desktop=not hosted)
+    guard = GuardHub(_gpolicy, _gsink, _gring)
+    board: dict[str, Board] = {
+        "board": Board(caller_for, pick_auto=picker_for(_shared), guard=guard)
+    }
     user_boards: dict[str, Board] = {}
 
     def current_user(request: Request) -> dict[str, Any] | None:
@@ -631,6 +645,7 @@ def build_app(
                 user_boards[sub] = Board(
                     _caller_for_user(keystore, sub, live_providers),
                     pick_auto=picker_for(partial(keystore.providers, sub)),
+                    guard=guard,
                 )
             return user_boards[sub], sub
         return board["board"], sub
@@ -638,6 +653,13 @@ def build_app(
     @app.get("/", response_class=HTMLResponse)
     def index() -> str:
         return _COCKPIT.read_text(encoding="utf-8")
+
+    @app.get("/guard")
+    def guard_state(request: Request) -> JSONResponse:
+        """The watchdog's view: per-session stall/burn verdicts + recent alerts."""
+        if current_user(request) is None:
+            return JSONResponse({"error": "sign in"}, status_code=401)
+        return JSONResponse(guard.snapshot())
 
     @app.get("/models")
     def models(request: Request) -> JSONResponse:

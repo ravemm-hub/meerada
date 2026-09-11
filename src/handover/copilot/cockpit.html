@@ -97,6 +97,7 @@
     <span><span class="k">spent</span><b id="l-cost">$0</b></span>
     <span><span class="k">CPAT</span><b id="l-cpat" style="color:var(--good)">—</b></span>
     <span><span class="k">lean</span><b id="l-save" style="color:var(--good)">—</b></span>
+    <span id="guard-badge" title="Meerada Guard — watching every call for stalls, burn and data leaving the workspace" style="display:none;font-size:.75rem;color:var(--muted);cursor:default">🛡 guard</span>
     <button class="btn ghost" id="btn-keys" style="display:none" onclick="showKeys()">🔑 Keys</button>
     <button class="btn ghost" id="btn-prem" style="display:none" onclick="showPremium()">💎 Premium</button>
     <span id="whobox" style="display:none;font-size:.75rem;color:var(--muted)"></span>
@@ -372,6 +373,16 @@ function updatePane(id){
   var pt=document.getElementById("pt-"+id); if(pt){ var t=titleHtml(s); pt.innerHTML=t; pt.style.display=t?"":"none"; }
   var inp=document.getElementById("in-"+id); if(inp) inp.placeholder=s.relay?("Task — "+labelFor(s.relay)+" drafts, "+labelFor(s.model)+" polishes…"):"Task for this model…";
 }
+var GUARD_SEEN=0;
+async function pollGuard(){ if(!live) return; try{ var r=await fetch("/guard"); if(!r.ok) return; var g=await r.json();
+  var b=document.getElementById("guard-badge"); if(!g.enabled){ b.style.display="none"; return; } b.style.display="";
+  var col={ok:"var(--good)",watch:"var(--amber)",stalled:"var(--bad)",burning:"var(--bad)"}[g.state]||"var(--muted)";
+  var label={ok:"guard ok",watch:"guard: watch",stalled:"guard: STUCK",burning:"guard: BURNING"}[g.state]||"guard";
+  b.style.color=col; b.textContent="🛡 "+label+(g.spent_today?(" · $"+g.spent_today.toFixed(2)+" today"):"");
+  (g.alerts||[]).forEach(function(a){ if(a.ts<=GUARD_SEEN) return; GUARD_SEEN=Math.max(GUARD_SEEN,a.ts);
+    var ic={stalled:"⏸",burning:"🔥",blocked:"🔒",warn:"⚠"}[a.level]||"🛡"; toast(ic+" <b>"+h(a.title)+"</b>"+(a.session?" ["+h(a.session)+"]":"")+" — "+h(a.body), 7000); });
+}catch(e){} }
+setInterval(pollGuard, 5000);
 function updateLedger(){
   var tok=0,cost=0,acc=0,saves=[];
   SES.forEach(function(s){ tok+=s.stats.tokens||0; cost+=s.stats.cost||0; acc+=s.accepted||0; saves=saves.concat(s.saves); });
