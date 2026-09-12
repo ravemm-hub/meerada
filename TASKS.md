@@ -99,7 +99,8 @@
 ### T20 · חבר המושבעים §5.2 `[BUILD]` ✅ 2026-09-12
 > `schema/verdict.py` (JudgeRequest / JudgeVerdict / JuryResult — סכמה קפואה, ממדים: faithfulness, factuality, instruction_following, code_correctness, pairwise_preference; פעולות: judge / compare / hallucinations), `verify/rubrics.py` (רובריקה לכל ממד + ניכוי מלל + חוזה JSON), `verify/jury.py` (3 שופטים מ-3 מעבדות דרך ChatCaller, מודל לא שופט את משפחתו, השוואה זוגית פעמיים בסדר הפוך, Fleiss' kappa, kappa<0.4 או פאנל חסר → low_agreement → unknown, DailyBudget קשיח), `verify/jury_store.py` (כל פסק דין נשמר ב-SQLite בתוך הדייר; `export_metadata` = hashes+מספרים בלבד; `training_rows` = סט האימון העתידי). טסטים עם fakes בלבד.
 
-### T21 · אמינות בממשק `[BUILD]`
+### T21 · אמינות בממשק `[BUILD]` ✅ חלקית 2026-09-12 — Cross-check
+> ✅ `copilot/crosscheck.py` + כפתור 🔎 Cross-check ב-LLManager (`/board/crosscheck`) + `meerada crosscheck` CLI: כל תשובה נבחנת ע"י פאנל של 3 מודלים ממעבדות אחרות (לעולם לא המשפחה של התשובה), ציון/הסכמה/דגלים/מנצח, דוח בסשן משלו על הלדג'ר, צ'יפ ציון על כל סשן, פסקי דין נשמרים ב-~/.meerada/jury.sqlite (לא ב-hosted). נותר: עמודת הזיות בארנה (תלוי ב-T22).
 > ציון אמינות ליד כל תשובה ב-LLManager (cockpit + `/session/judge`), מופעל מהמושבעים על המפתחות של המשתמש; `Board.judge` הקיים עובר לרוץ דרך ה-jury (נייטרליות: השופטים לעולם לא ממשפחת התשובה). עמודת "הזיות" בארנה מתוך faithfulness על סוללת הסיכום/RAG.
 
 ### T22 · הזרקת הזיות `[BUILD]`

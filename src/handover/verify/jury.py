@@ -83,7 +83,7 @@ class Jury:
         *,
         est_cost_per_call: Decimal = Decimal("0.005"),
         max_tokens: int = 600,
-        store: Callable[[JudgeRequest, JuryResult], None] | None = None,
+        store: Callable[[JudgeRequest, JuryResult], object] | None = None,
         clock: Callable[[], float] = time.time,
     ) -> None:
         labs = {j.lab for j in jurors}

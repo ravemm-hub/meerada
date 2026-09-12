@@ -4,6 +4,8 @@
 
 **LLManager** imports your Claude Code / Claude.ai / ChatGPT history and lets you continue it on any model — switch mid-conversation and the whole history moves with you. **Arena** grades models hourly on verifiable tasks and prices them by cost per verified task. Site: https://meerada.app/ · Download: https://github.com/ravemm-hub/meerada/releases/latest
 
+**🔎 Cross-check — the model that examines models:** send one task to several models; every answer is examined by a jury of three models from the *other* labs (never its own family) — score, agreement, flagged claims, a winner. In LLManager (one button) and the terminal (`meerada crosscheck "…" --models a,b,c`). Verdicts stay on your machine and become the training set for Meerada's own judge. Spec: [`docs/JUDGE.md`](docs/JUDGE.md)
+
 **🛡 Meerada Guard** (in the same download): a watchdog on every model call — tells *stuck* from *working hard*, alerts in seconds when a task stalls or burns, and cages what leaves the workspace (keys, dotfiles, unknown hosts). Works beside Claude Code with zero setup (`meerada guard`), inside LLManager on every call, and company-wide from one policy file. Spec: [`docs/GUARD.md`](docs/GUARD.md) · page: https://meerada.app/guard.html
 
 **Measure what your LLM spend actually buys.**

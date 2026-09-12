@@ -108,7 +108,7 @@
 <div class="toolbar">
   <button class="btn primary" onclick="addSession()">+ New session</button>
   <button class="btn ghost" onclick="showImport()" title="Bring a conversation from Claude Code, Claude.ai, ChatGPT or any transcript — and continue it on any model">📥 Import history</button>
-  <button class="btn" id="btn-judge" onclick="judgeAll()" title="A judge model reads every session's latest answer, ranks them and writes one best answer" disabled>⚖️ Judge answers</button>
+  <button class="btn" id="btn-judge" onclick="crossCheck()" title="Cross-check: every answer is examined by a jury from the OTHER labs you have keys for — scores, agreement, flagged claims, a winner. No model judges its own family." disabled>🔎 Cross-check</button>
   <span style="flex:1"></span>
   <textarea id="bcast" rows="1" placeholder="one task → many models…  (Enter = send to all)"></textarea>
   <button class="btn ghost" onclick="compareAll()" title="fresh session per model, same task">⚖️ Compare all</button>
@@ -319,6 +319,7 @@ function titleHtml(s){
   if(s.source&&s.source!="judge") bits.push('<span class="chip src">from '+h(s.source)+'</span>');
   if(s.attachments.length) bits.push('<span class="chip" title="'+h(s.attachments.join("\n"))+'">📎 '+s.attachments.length+' file'+(s.attachments.length>1?'s':'')+' · ~'+Math.round(s.ctxChars/4/1000)+'k tok</span>');
   if(s.relay) bits.push('<span class="chip relay" title="click to turn relay off" onclick="toggleRelay(\''+s.id+'\')">⚡ relay: '+h(labelFor(s.relay))+' drafts → '+h(labelFor(s.model))+' polishes</span>');
+  if(s.xc&&s.xc.score!=null){ var st={pass:"✅",fail:"❌",unknown:"❔"}[s.xc.status]||"🔎"; bits.push('<span class="chip" title="Cross-check by '+h((s.xc.jurors||[]).join(", "))+' — '+h((s.xc.reasons||[]).join(" | "))+'">'+st+' '+s.xc.score.toFixed(2)+' · '+Math.round((s.xc.agreement||0)*100)+'% agree</span>'); }
   return bits.join("");
 }
 function menuHtml(s){
@@ -511,6 +512,19 @@ function exportMd(id){ var s=find(id); if(!s)return; toggleMenu(id);
   try{ navigator.clipboard.writeText(md); toast("⬇ Transcript copied as Markdown — paste it anywhere"); }catch(e){ toast("Clipboard blocked — use the copy buttons on each answer"); }
 }
 function lastAnswered(s){ var t=s.convo.filter(function(x){return x.sys==null;}).slice(-1)[0]; return (t&&t.reply&&!t.reply.error&&!t.reply.imported)?t:null; }
+async function crossCheck(){
+  var groups={}; SES.forEach(function(s){ if(s.source=="judge")return; var t=lastAnswered(s); if(!t)return; var k=t.you.trim(); (groups[k]=groups[k]||[]).push(s); });
+  var cands=Object.keys(groups).map(function(k){return groups[k];}).sort(function(a,b){return b.length-a.length;})[0]||[];
+  if(cands.length<1){ toast("Cross-check examines the latest answers to the <b>same</b> task — use <b>Send to all</b> or <b>Compare all</b> first"); return; }
+  seq++; var jid="xc"+seq+"-"+Date.now().toString(36).slice(-3);
+  var js=newSes(jid, cands[0].model, {title:"🔎 Cross-check", source:"judge"}); SES.push(js); js.pending=true;
+  var turn={you:"🔎 Cross-check "+cands.length+" answer"+(cands.length>1?"s":"")+": "+cands.map(function(s){return labelFor(s.model);}).join(" · "), reply:undefined, note:"seating juries from the other labs…"}; js.convo.push(turn);
+  structDirty=true; renderGrid(); var t0=Date.now();
+  var r=await post("/board/crosscheck",{ids:cands.map(function(s){return s.id;}), id:jid});
+  r.ms=Date.now()-t0; turn.reply=r; if(r.total_tokens!=null){ js.stats={turns:r.turns||1,tokens:r.total_tokens,cost:r.total_cost||0}; }
+  js.pending=false; updatePane(jid); updateLedger();
+  if(r.report&&r.report.rows){ r.report.rows.forEach(function(row){ var s=SES.filter(function(x){return x.id==row.session_id;})[0]; if(s){ s.xc=row; } }); renderGrid(); }
+}
 async function judgeAll(){
   // compare only sessions whose LATEST answer is to the same task (send-to-all / compare-all)
   var groups={}; SES.forEach(function(s){ if(s.source=="judge")return; var t=lastAnswered(s); if(!t)return; var k=t.you.trim(); (groups[k]=groups[k]||[]).push(s); });

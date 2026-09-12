@@ -7,7 +7,10 @@ and injected, so they are tested with fakes and never call a live API
 (CLAUDE.md). The HTTP shell itself (build_app/serve) is a network seam.
 """
 
+import json
+import os
 from collections.abc import Callable, Mapping, Sequence
+from decimal import Decimal
 from functools import partial
 from pathlib import Path
 from typing import Any
@@ -15,12 +18,15 @@ from typing import Any
 from fastapi import FastAPI
 
 from handover.copilot.auth import OAuthConfig
+from handover.copilot.crosscheck import Answer, CrossCheck
 from handover.copilot.keystore import KeyStore
 from handover.copilot.optimize import optimize
 from handover.copilot.pricing import price_for
-from handover.copilot.session import Session, SessionManager
+from handover.copilot.session import Session, SessionManager, Turn
 from handover.guard.meter import GuardedCaller, GuardHub
+from handover.replay.budget import DailyBudget
 from handover.replay.openai_client import ChatCaller
+from handover.schema.verdict import JudgeRequest, JuryResult
 
 _COCKPIT = Path(__file__).parent / "cockpit.html"
 
@@ -222,6 +228,9 @@ class Board:
         self._max_tokens = max_tokens
         self._pick_auto = pick_auto
         self._guard = guard
+        cap = os.environ.get("MEERADA_JURY_DAILY_USD", "2")
+        self.jury_budget = DailyBudget(Decimal(cap if cap.replace(".", "", 1).isdigit() else "2"))
+        self.jury_store: Callable[[JudgeRequest, JuryResult], object] | None = None
         self.sessions: dict[str, Session] = {}
         self.models: dict[str, str] = {}
         self.switches = 0  # mid-conversation model switches this month
@@ -402,6 +411,38 @@ class Board:
             "judged": [{"id": sid, "model": m} for sid, m, _, _ in answers],
             "input_tokens": reply.input_tokens, "output_tokens": reply.output_tokens,
             "saved_pct": reply.prompt.saved_pct,
+        }
+
+    def crosscheck(self, ids: list[str], sid: str, candidates: Sequence[str]) -> dict[str, Any]:
+        """The model that examines models: every listed session's latest answer
+        (same task, different models) is examined by a jury drawn from the OTHER
+        labs the user can run. The report lives in its own session so the jury's
+        cost is on the ledger like everything else."""
+        answers: list[Answer] = []
+        question, context = "", ""
+        for s_id in ids:
+            s = self.sessions.get(s_id)
+            if s and s.history and s.history[-1].role == "assistant":
+                question = question or (s.history[-2].content if len(s.history) >= 2 else "")
+                context = context or s.system_context()
+                answers.append(Answer(s_id, s.model_id, s.history[-1].content))
+        if not answers:
+            return {"error": "no answers to cross-check yet"}
+        if not self.live or self._caller_for is None:
+            return {"error": "connect a key first"}
+        checker = CrossCheck(self._caller_for, candidates, self.jury_budget, store=self.jury_store)
+        report = checker.examine(question, answers, context=context or None)
+        session = self.sessions.get(sid) or self._new_session(answers[0].model_id, sid)
+        self.sessions[sid] = session
+        self.models[sid] = session.model_id
+        session.title, session.source = "🔎 Cross-check", "judge"
+        asked = "🔎 Cross-check " + " · ".join(a.model_id for a in answers)
+        session.history.append(Turn(role="user", content=asked))
+        session.history.append(Turn(role="assistant", content=report.text))
+        session.total_cost += report.cost_usd
+        return {
+            **self._view(sid, session), "text": report.text, "error": "",
+            "report": report.as_dict(), "input_tokens": 0, "output_tokens": 0, "saved_pct": 0,
         }
 
     def relay(self, sid: str, model: str, draft_model: str, message: str) -> dict[str, Any]:
@@ -627,6 +668,12 @@ def build_app(
     board: dict[str, Board] = {
         "board": Board(caller_for, pick_auto=picker_for(_shared), guard=guard)
     }
+    jury_store: Callable[[JudgeRequest, JuryResult], object] | None = None
+    if not hosted:  # every verdict stays in-tenant: the training set for our own judge
+        from handover.verify.jury_store import JuryStore
+
+        jury_store = JuryStore(Path.home() / ".meerada" / "jury.sqlite").save
+    board["board"].jury_store = jury_store
     user_boards: dict[str, Board] = {}
 
     def current_user(request: Request) -> dict[str, Any] | None:
@@ -647,6 +694,7 @@ def build_app(
                     pick_auto=picker_for(partial(keystore.providers, sub)),
                     guard=guard,
                 )
+                user_boards[sub].jury_store = jury_store
             return user_boards[sub], sub
         return board["board"], sub
 
@@ -974,6 +1022,27 @@ def build_app(
         out = b.attach(str(p.get("id", "")), str(p.get("model", "")), files)
         out["report"] = report
         return JSONResponse(out)
+
+    def _runnable_ids(request: Request) -> list[str]:
+        """Model ids the user can run right now, cheapest-looking first (jurors)."""
+        body = models(request).body
+        data = json.loads(bytes(body))
+        rows = [
+            r for r in data["catalog"] if r["provider"] in data["connected"] and r["id"] != "auto"
+        ]
+        cheap = ("cheap", "fast", "free")
+        rows.sort(key=lambda r: 0 if any(t in r.get("tag", "") for t in cheap) else 1)
+        return [r["id"] for r in rows]
+
+    @app.post("/board/crosscheck")
+    def board_crosscheck(request: Request, payload: dict[str, Any]) -> JSONResponse:  # threadpool
+        b, _ = board_for(request)
+        if b is None:
+            return JSONResponse({"error": "sign in required"}, status_code=401)
+        if not premium_ok(request, "judge"):
+            return paywall("judge")
+        ids = [str(i) for i in (payload.get("ids") or [])]
+        return JSONResponse(b.crosscheck(ids, str(payload.get("id", "xc")), _runnable_ids(request)))
 
     @app.post("/board/judge")
     def board_judge(request: Request, payload: dict[str, Any]) -> JSONResponse:  # sync->threadpool

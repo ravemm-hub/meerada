@@ -34,8 +34,14 @@ def _force_utf8() -> None:
 _force_utf8()
 
 app = typer.Typer(no_args_is_help=True, add_completion=False)
+from handover.cli.crosscheck_cmd import crosscheck_app  # noqa: E402
 from handover.cli.guard_cmd import guard_app  # noqa: E402
 
+app.add_typer(
+    crosscheck_app,
+    name="crosscheck",
+    help="The model that examines models: cross-reference answers across labs",
+)
 app.add_typer(
     guard_app, name="guard", help="Meerada Guard — the watchdog + cage for AI models at work"
 )
