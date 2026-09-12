@@ -93,16 +93,24 @@ def test_examine_ranks_and_reports() -> None:
     assert "ANSWER-CLAUDE" not in fleet["claude-haiku-4-5-20251001"].judged
 
 
-def test_too_few_labs_is_reported_not_faked() -> None:
+def test_thin_panel_uses_what_we_have_and_says_so() -> None:
     fleet = {k: v for k, v in _fleet().items() if k in ("gpt-4o-mini", "claude-haiku-4-5-20251001")}
     cc = CrossCheck(lambda m: fleet[m], list(fleet), _budget())
     rep = cc.examine("q", [Answer("s1", "gpt-4o-mini", "ANSWER-GPT")])
     row = rep.as_dict()["rows"][0]
-    assert (
-        row["status"] == "unknown"
-        and "needs 3 other labs" in row["note"]
-        and "NO WINNER" in rep.text
-    )
+    # one juror (claude) examined gpt's answer: a score, labelled as a thin panel, never grade C
+    assert row["n_judges"] == 1 and row["score"] == 0.9 and row["status"] == "pass"
+    assert row["evidence"] == "declared" and "thin panel" in row["note"]
+    assert "examined by 1 model ·" in rep.text and "WINNER: gpt-4o-mini" in rep.text
+    assert "(thin panel)" in rep.text
+
+
+def test_no_other_lab_is_reported_not_faked() -> None:
+    fleet = {k: v for k, v in _fleet().items() if k == "gpt-4o-mini"}
+    cc = CrossCheck(lambda m: fleet[m], list(fleet), _budget())
+    rep = cc.examine("q", [Answer("s1", "gpt-4o-mini", "ANSWER-GPT")])
+    row = rep.as_dict()["rows"][0]
+    assert row["status"] == "unknown" and "second lab" in row["note"] and "NO WINNER" in rep.text
 
 
 def test_board_crosscheck_lands_on_the_ledger() -> None:

@@ -119,6 +119,8 @@ class CrossCheckReport:
                     "agreement": r.agreement if r else None,
                     "low_agreement": r.low_agreement if r else True,
                     "status": r.verification.status if r else "unknown",
+                    "n_judges": r.n_judges if r else 0,
+                    "evidence": r.verification.evidence_grade if r else "declared",
                     "flags": [s.model_dump() for s in r.flagged_spans] if r else [],
                     "reasons": [v.reason for v in r.verdicts] if r else [],
                 }
@@ -180,15 +182,20 @@ class CrossCheck:
             dim = dimension_for(a.text, has_context=bool(context))
             panel = self.panel_for(a.model_id)
             ex = Examined(a, dim, None, [j.model_id for j in panel])
-            if len(panel) < MIN_JURORS:
+            if not panel:
                 ex.note = (
-                    f"needs {MIN_JURORS} other labs to seat a neutral panel (have {len(panel)}) — "
-                    "connect a key from another lab (an OpenRouter key covers them all)"
+                    "no model from another lab to examine this — connect a key from a second "
+                    "lab (an OpenRouter key covers them all)"
                 )
                 examined.append(ex)
                 continue
+            if len(panel) < MIN_JURORS:  # a thin panel: use what we have, say so
+                ex.note = (
+                    f"thin panel — examined by {len(panel)} of {MIN_JURORS} jurors; "
+                    "connect keys from more labs for a full jury"
+                )
             try:
-                jury = Jury(panel, self._budget, store=self._store)
+                jury = Jury(panel, self._budget, store=self._store, min_jurors=len(panel))
             except JuryConfigError as exc:
                 ex.note = str(exc)
                 examined.append(ex)
@@ -205,6 +212,8 @@ class CrossCheck:
             total += ex.result.cost_usd
             if ex.result.budget_stopped:
                 ex.note = "jury budget for today is spent"
+            elif ex.result.n_judges >= MIN_JURORS:
+                ex.note = ""
             examined.append(ex)
         return CrossCheckReport(question, examined, total, render(question, examined, total))
 
@@ -229,9 +238,10 @@ def render(question: str, examined: Sequence[Examined], cost: Decimal) -> str:
             "fail": "❌ does not hold up",
             "unknown": "❔ jury split",
         }[r.verification.status]
+        who = f"examined by {r.n_judges} model{'s' if r.n_judges != 1 else ''}"
+        agree = f" · jurors agree {int(r.agreement * 100)}%" if r.n_judges > 1 else ""
         lines.append(
-            f"{head}\n   {_bar(r.score)} {r.score:.2f} · {verdict} · "
-            f"jurors agree {int(r.agreement * 100)}%"
+            f"{head}\n   {_bar(r.score)} {r.score:.2f} · {verdict} · {who}{agree}"
             f" · confidence {r.calibrated_prob:.2f} · jurors: {', '.join(e.jurors)}"
         )
         for v in r.verdicts:
@@ -245,8 +255,10 @@ def render(question: str, examined: Sequence[Examined], cost: Decimal) -> str:
     judged = [e for e in ranked if e.result is not None and not e.result.low_agreement]
     if judged:
         best = judged[0]
+        n = best.result.n_judges if best.result else 0
         lines.append(
-            f"WINNER: {best.answer.model_id} — score {best.score:.2f} with a panel that agreed."
+            f"WINNER: {best.answer.model_id} — score {best.score:.2f}, examined by {n} model"
+            f"{'s' if n != 1 else ''}{' (thin panel)' if n < MIN_JURORS else ''}."
         )
     else:
         lines.append(

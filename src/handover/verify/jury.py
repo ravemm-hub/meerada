@@ -85,11 +85,18 @@ class Jury:
         max_tokens: int = 600,
         store: Callable[[JudgeRequest, JuryResult], object] | None = None,
         clock: Callable[[], float] = time.time,
+        min_jurors: int = MIN_JURORS,
     ) -> None:
+        """``min_jurors`` < 3 seats a *thin* panel (what the user has right now):
+        it still scores, but its verification is ``declared``, never grade C."""
         labs = {j.lab for j in jurors}
-        if len(jurors) < MIN_JURORS or len(labs) < MIN_JURORS:
-            raise JuryConfigError(f"a jury needs {MIN_JURORS} jurors from {MIN_JURORS} labs")
+        need = max(1, min(min_jurors, MIN_JURORS))
+        if len(jurors) < need or len(labs) < len(jurors):
+            raise JuryConfigError(
+                f"a jury needs at least {need} juror(s), each from a different lab"
+            )
         self._jurors = list(jurors)
+        self._min = need
         self._budget = budget
         self._est = est_cost_per_call
         self._max_tokens = max_tokens
@@ -178,7 +185,7 @@ class Jury:
         scores = list(per_judge.values())
         n = len(per_judge)
         agreement = _agreement(scores)
-        low = n < MIN_JURORS or (kappa is not None and kappa < KAPPA_FLOOR) or agreement < 0.6
+        low = n < self._min or (kappa is not None and kappa < KAPPA_FLOOR) or agreement < 0.6
         mean = sum(scores) / n if n else 0.5
         prob = sum(v.calibrated_prob for v in verdicts) / len(verdicts) if verdicts else 0.0
         spans: tuple[FlaggedSpan, ...] = tuple(s for v in verdicts for s in v.flagged_spans)
@@ -193,12 +200,13 @@ class Jury:
             )
         else:
             passed = mean >= 0.7
+            full = n >= MIN_JURORS  # grade C needs three labs; a thin panel is only 'declared'
             verification = Verification(
                 status="pass" if passed else "fail",
                 method="judge",
                 signal=signal,
-                confidence=round(min(1.0, prob * agreement), 4),
-                evidence_grade="derived",
+                confidence=round(min(1.0, prob * agreement * min(1.0, n / MIN_JURORS)), 4),
+                evidence_grade="derived" if full else "declared",
             )
         result = JuryResult(
             action=req.action,

@@ -73,6 +73,19 @@ def test_three_labs_required() -> None:
     f = FakeJudge(0.9)
     with pytest.raises(JuryConfigError):
         Jury([Juror("a", "openai", f), Juror("b", "openai", f), Juror("c", "google", f)], _budget())
+    with pytest.raises(JuryConfigError):
+        Jury([Juror("a", "openai", f), Juror("b", "google", f)], _budget())  # default needs 3
+
+
+def test_thin_panel_scores_but_is_only_declared_evidence() -> None:
+    f = FakeJudge(0.9)
+    jury = Jury([Juror("a", "openai", f), Juror("b", "google", f)], _budget(), min_jurors=2)
+    res = jury.judge(REQ)
+    assert res.n_judges == 2 and not res.low_agreement and res.verification.status == "pass"
+    assert res.verification.evidence_grade == "declared"  # grade C needs three labs
+    assert res.verification.confidence < 0.9 * 1.0  # discounted by 2/3
+    with pytest.raises(JuryConfigError):
+        Jury([Juror("a", "openai", f), Juror("b", "openai", f)], _budget(), min_jurors=2)
 
 
 def test_unanimous_pass_is_derived_evidence_with_spans_and_cost() -> None:

@@ -12,6 +12,7 @@ import hashlib
 import json
 import secrets
 import sqlite3
+import threading
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -50,16 +51,21 @@ CREATE TABLE IF NOT EXISTS jury_verdicts (
 
 
 class JuryStore:
+    """Safe to call from any thread — the server judges in a worker pool."""
+
     def __init__(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
-        self._conn = sqlite3.connect(path)
-        self._conn.executescript(_SCHEMA)
-        self._conn.commit()
+        self._conn = sqlite3.connect(path, check_same_thread=False)
+        self._lock = threading.Lock()
+        with self._lock:
+            self._conn.executescript(_SCHEMA)
+            self._conn.commit()
+            self._salt = self._load_salt()
 
     def close(self) -> None:
         self._conn.close()
 
-    def salt(self) -> str:
+    def _load_salt(self) -> str:
         row = self._conn.execute("SELECT value FROM meta WHERE key='salt'").fetchone()
         if row is not None:
             return str(row[0])
@@ -68,11 +74,18 @@ class JuryStore:
         self._conn.commit()
         return salt
 
+    def salt(self) -> str:
+        return self._salt
+
     def _hash(self, text: str) -> str:
         return hashlib.sha256((self.salt() + text).encode("utf-8")).hexdigest()[:32]
 
     # ---------------------------------------------------------------- write --
     def save(self, req: JudgeRequest, res: JuryResult) -> int:
+        with self._lock:
+            return self._save(req, res)
+
+    def _save(self, req: JudgeRequest, res: JuryResult) -> int:
         cur = self._conn.execute(
             "INSERT INTO jury_items (ts, action, dimension, prompt_hash, answer_hash, "
             "request_json, score, calibrated_prob, agreement, kappa, low_agreement, n_judges, "

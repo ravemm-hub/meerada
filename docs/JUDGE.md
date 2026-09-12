@@ -28,7 +28,7 @@ meerada crosscheck "Summarize this memo in 3 bullets" --models gpt-4o-mini,claud
 ```
 
 ## The rules the jury cannot break (all tested)
-- three jurors from three labs, or the result is `unknown`;
+- three jurors from three labs = a full panel (grade C, `derived`). Fewer keys? A **thin panel** of 1–2 jurors from other labs still scores, labelled "examined by N models", but its evidence stays `declared` — never a public number;
 - a juror never judges its own family (`answer_family`);
 - pairwise comparisons run twice in reversed order — position bias cancels;
 - the rubric deducts explicitly for padding — length bias cancels;
