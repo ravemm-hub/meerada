@@ -130,5 +130,6 @@ ENDPOINTS: dict[str, str] = {
     "google": "https://generativelanguage.googleapis.com/v1beta/openai",  # AI Studio, free tier
     "github": "https://models.github.ai/inference",  # GitHub Models, free tier (PAT w/ models:read)
     "cerebras": "https://api.cerebras.ai/v1",
+    "xai": "https://api.x.ai/v1",  # Grok direct: a console.x.ai key (SuperGrok is not one)
     "ollama": "http://localhost:11434/v1",
 }

@@ -24,6 +24,7 @@ ENV_KEYS: dict[str, str] = {
     "google": "GOOGLE_API_KEY",
     "github": "GITHUB_MODELS_TOKEN",
     "cerebras": "CEREBRAS_API_KEY",
+    "xai": "XAI_API_KEY",
 }
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 

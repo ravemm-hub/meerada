@@ -41,6 +41,8 @@ def _provider_of(model_id: str) -> str:
         return "openai"
     if low.startswith("deepseek"):
         return "deepseek"
+    if low.startswith("grok"):
+        return "xai"  # bare Grok id: an xAI console key
     if low.startswith(("mistral", "mixtral", "codestral")):
         return "mistral"
     if "/" in low:

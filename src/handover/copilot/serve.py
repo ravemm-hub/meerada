@@ -92,6 +92,8 @@ _CATALOG: tuple[tuple[str, str, str, str], ...] = (
     ("anthropic/claude-sonnet-5", "Claude Sonnet 5", "openrouter", "workhorse"),
     ("google/gemini-3.8-flash", "Gemini 3.8 Flash", "openrouter", "🆕 fast · vision"),
     ("x-ai/grok-4.6", "Grok 4.6", "openrouter", "strong"),
+    ("grok-4.6", "Grok 4.6 (xAI direct)", "xai", "strong · $2/$6"),
+    ("grok-4.6-fast", "Grok 4.6 Fast (xAI direct)", "xai", "fast · cheap"),
     ("deepseek/deepseek-v4-pro", "DeepSeek V4 Pro", "openrouter", "reasoning · cheap"),
     ("deepseek/deepseek-v4-flash", "DeepSeek V4 Flash", "openrouter", "cheapest strong"),
     ("z-ai/glm-5.3-flash", "GLM-5.3 Flash (Ox Alpha)", "openrouter", "🆕 code · cheap · vision"),
@@ -113,7 +115,7 @@ PROVIDER_NAMES: dict[str, str] = {
     "auto": "Meerada", "anthropic": "Anthropic (Claude)", "openai": "OpenAI",
     "openrouter": "OpenRouter", "deepseek": "DeepSeek", "mistral": "Mistral (free tier)",
     "groq": "Groq (free)", "google": "Google AI Studio (free)", "github": "GitHub Models (free)",
-    "cerebras": "Cerebras (free)",
+    "cerebras": "Cerebras (free)", "xai": "xAI (Grok)",
 }
 
 CallerFor = Callable[[str], ChatCaller]
@@ -537,6 +539,7 @@ _VALIDATE_MODEL: dict[str, str] = {
     "google": "gemini-2.5-flash",
     "github": "openai/gpt-4o-mini",
     "cerebras": "llama3.1-8b",
+    "xai": "grok-4.6-fast",
 }
 
 
