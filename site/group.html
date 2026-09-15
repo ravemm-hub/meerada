@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meerada — the group</title>
+<meta name="description" content="Meerada: an AI product family (Arena, Guard, LLManager, Judge) and Meerada Tribes, the city social app. Everything measured, nothing assumed.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<style>
+  :root{--bg:#0E0D16;--panel:#17162A;--text:#F2F1FF;--muted:#9A98B8;--purple:#6C63FF;--line:#2A2947;--teal:#2ECC71}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55}
+  .wrap{max-width:980px;margin:0 auto;padding:36px 20px 70px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  header img{height:52px}
+  .hero{margin-top:54px;text-align:center}
+  h1{font-size:clamp(30px,6vw,52px);font-weight:900;letter-spacing:-.5px;line-height:1.1}
+  h1 em{font-style:normal;color:var(--purple)}
+  .sub{color:var(--muted);font-size:18px;max-width:640px;margin:16px auto 0}
+  .tree{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:54px}
+  @media (max-width:720px){.tree{grid-template-columns:1fr}}
+  .branch{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px}
+  .branch h2{font-size:22px;font-weight:900}
+  .branch h2 small{display:block;color:var(--muted);font-weight:600;font-size:13px;margin-top:2px}
+  .branch p{color:var(--muted);margin-top:10px;font-size:14.5px}
+  .items{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+  .item{display:flex;gap:10px;align-items:flex-start;text-decoration:none;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+  .item:hover{border-color:var(--purple)}
+  .item b{font-size:14.5px}
+  .item span{display:block;color:var(--muted);font-size:13px}
+  .go{display:inline-block;margin-top:16px;background:var(--purple);color:#fff;border-radius:12px;padding:10px 16px;font-weight:800;text-decoration:none}
+  footer{margin-top:60px;color:var(--muted);font-size:12.5px;text-align:center;border-top:1px solid var(--line);padding-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="assets/meerada-wordmark.png" alt="Meerada">
+    <span style="color:var(--muted);font-size:13px">Tel Aviv · since 2026</span>
+  </header>
+
+  <section class="hero">
+    <h1>Meerada. <em>Measure what's real.</em></h1>
+    <p class="sub">One family, two branches: the AI products that measure models and guard the people who use them — and Tribes, the app that measures real life: real steps, real people, real rooms.</p>
+  </section>
+
+  <section class="tree">
+    <div class="branch">
+      <h2>Meerada <small>AI products · meerada.app</small></h2>
+      <p>Every model from every lab, measured hourly on verifiable tasks and priced by cost per verified task.</p>
+      <div class="items">
+        <a class="item" href="https://meerada.app/"><div>📊</div><div><b>Arena</b><span>The live model exchange.</span></div></a>
+        <a class="item" href="https://meerada.app/llmanager.html"><div>🎛️</div><div><b>LLManager</b><span>Import your Claude / ChatGPT history, switch models mid-conversation.</span></div></a>
+        <a class="item" href="https://meerada.app/guard.html"><div>🛡</div><div><b>Guard</b><span>The watchdog for AI at work: stalled tasks and token burn, caught in seconds.</span></div></a>
+        <a class="item" href="https://meerada.app/llmanager.html#crosscheck"><div>🔎</div><div><b>Judge / Cross-check</b><span>The model that examines models.</span></div></a>
+      </div>
+      <a class="go" href="https://meerada.app/">Open meerada.app ›</a>
+    </div>
+    <div class="branch">
+      <h2>Meerada Tribes <small>the app · iOS &amp; Android</small></h2>
+      <p>Your city's social layer: live groups around you, a radar of who's nearby, step and floor leagues with friends you approve, and Teeby — an AI you just talk to. Its AI characters run on models ranked next door.</p>
+      <div class="items">
+        <a class="item" href="https://play.google.com/store/apps/details?id=com.tryber.social"><div>▶</div><div><b>Google Play</b><span>Android</span></div></a>
+        <a class="item" href="https://apps.apple.com/app/id6780445573"><div></div><div><b>App Store</b><span>iPhone</span></div></a>
+        <a class="item" href="tribes.html"><div>👀</div><div><b>About Tribes</b><span>What it is, in Hebrew and English.</span></div></a>
+      </div>
+      <a class="go" href="tribes.html">Open Tribes ›</a>
+    </div>
+  </section>
+
+  <footer>© Meerada · <a href="mailto:rave.mm@gmail.com" style="color:var(--muted)">Contact</a> · <a href="tribes-privacy.html" style="color:var(--muted)">Tribes privacy</a></footer>
+</div>
+</body>
+</html>
