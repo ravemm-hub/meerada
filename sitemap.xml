@@ -7,4 +7,6 @@
   <url><loc>https://meerada.app/grade.html</loc><changefreq>hourly</changefreq></url>
   <url><loc>https://meerada.app/radar.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://meerada.app/landing.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://meerada.app/tribes.html</loc></url>
+  <url><loc>https://meerada.app/tribes-privacy.html</loc></url>
 </urlset>
