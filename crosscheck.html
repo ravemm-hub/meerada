@@ -1,0 +1,93 @@
+<meta charset="utf-8">
+<script src="assets/family.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meerada Cross-check</title>
+<link rel="canonical" href="https://meerada.app/crosscheck.html">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<meta name="description" content="Meerada Cross-check — the model that examines models. Ask several models, then a jury from the other labs scores every answer, flags claims and names a winner. No model judges its own family.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://meerada.app/crosscheck.html">
+<meta property="og:title" content="Meerada Cross-check — models examining models"><meta property="og:description" content="Every answer examined by a jury from rival labs: score, agreement, flagged claims, a winner. Free, in the app and the terminal.">
+<meta property="og:image" content="https://meerada.app/assets/og.png"><meta name="twitter:card" content="summary_large_image">
+<script data-goatcounter="https://meerada.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root{--ground:#FFFFFF;--panel:#F7F9FC;--panel2:#EEF2F7;--line:#DDE4EE;--text:#0F172A;--muted:#5B6B82;--teal:#0E8A7E;--amber:#D48A00;--good:#1E8E4C;--bad:#C8403A;}
+  *{box-sizing:border-box;} body{margin:0;background:var(--ground);color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.55;}
+  a{color:inherit;text-decoration:none;} .wrap{max-width:1040px;margin:0 auto;padding:0 1.1rem;} .teal{color:var(--teal)}
+  header{text-align:center;padding:3rem 0 1rem;} .kicker{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--good);border:1px solid #1E8E4C;border-radius:999px;padding:.2rem .7rem;}
+  h1{font-family:"Archivo";font-weight:900;font-size:clamp(2rem,5.2vw,3.2rem);letter-spacing:-.03em;line-height:1.05;margin:.5rem 0 .5rem;} h1 em{font-style:normal;color:var(--teal);}
+  .lede{color:var(--muted);max-width:720px;margin:0 auto 1.3rem;font-size:1.06rem;}
+  .btn{display:inline-block;font-family:"Archivo";font-weight:700;font-size:.92rem;padding:.6rem 1.15rem;border-radius:9px;border:1px solid var(--line);color:var(--text);} .btn.primary{background:#F2B84B;color:#171205;border-color:transparent;} .btn.ghost{border-color:var(--teal);color:var(--teal);}
+  section{padding:1.6rem 0;} h2{font-family:"Archivo";font-weight:800;font-size:1.5rem;margin:0 0 .4rem;text-align:center;} .h2sub{color:var(--muted);text-align:center;max-width:700px;margin:0 auto 1.3rem;}
+  .demo{background:#0F172A;color:#E2E8F0;border-radius:16px;padding:1.1rem 1.25rem;font-family:"IBM Plex Mono",monospace;font-size:.8rem;line-height:1.65;max-width:860px;margin:0 auto;white-space:pre-wrap;box-shadow:0 12px 40px rgba(15,23,42,.18)}
+  .demo .g{color:#4ADE80} .demo .r{color:#F87171} .demo .y{color:#FBBF24} .demo .k{color:#5EEAD4}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;} @media(max-width:820px){.cards{grid-template-columns:1fr}}
+  .fcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1.2rem 1.25rem;} .fcard .ic{font-size:1.5rem;} .fcard h3{font-family:"Archivo";font-size:1.05rem;margin:.5rem 0 .35rem;} .fcard p{color:var(--muted);font-size:.9rem;margin:0;}
+  table{width:100%;border-collapse:collapse;font-size:.9rem;} th,td{padding:.55rem .6rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;} th{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  .twrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.4rem .8rem;}
+  pre{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:.8rem;line-height:1.55;margin:0;}
+  .note{color:var(--muted);font-size:.82rem;text-align:center;margin-top:.8rem}
+</style>
+
+<header><div class="wrap">
+  <span class="kicker">FREE · IN THE APP AND THE TERMINAL</span>
+  <h1>🔎 Cross-check<br><em>The model that examines models.</em></h1>
+  <div class="lede">Ask several models the same thing. Then every answer is examined by a jury of models from the <b>other</b> labs — a score, how much the jurors agreed, the claims they flagged, and a winner. A model never judges its own family. A split jury says so instead of pretending.</div>
+  <div style="display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap">
+    <a class="btn primary" href="manager.html#get">Get the app (Cross-check inside)</a>
+    <a class="btn ghost" href="https://github.com/ravemm-hub/meerada/blob/master/docs/JUDGE.md" target="_blank" rel="noopener">Read the spec</a>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+<div class="demo"><span class="k">🔎 CROSS-CHECK</span> — every answer examined by a jury from the other labs
+
+1. gpt-5.6-luna (openai) · instruction_following
+   █████████░ 0.90 · <span class="g">✅ holds up</span> · examined by 3 models · jurors agree 100% · confidence 0.86
+   - claude-sonnet-5: complete, no invented numbers
+   - gemini-2.5-flash: follows every constraint; slightly long
+   - grok-4.6: correct; the last paragraph is padding
+
+2. deepseek-v4-flash (deepseek) · instruction_following
+   ██████░░░░ 0.62 · <span class="y">❔ jury split</span> · examined by 3 models · jurors agree 67%
+   ⚑ flagged: cites a 2024 figure not in the prompt | skipped the required table
+
+3. qwen3.8-max (alibaba) · instruction_following
+   ███░░░░░░░ 0.31 · <span class="r">❌ does not hold up</span> · examined by 3 models · jurors agree 100%
+   ⚑ flagged: answers a different question
+
+<span class="g">WINNER: gpt-5.6-luna — score 0.90, examined by 3 models.</span>
+Jury cost: $0.0041 · every juror is from a lab other than the answer it judged.</div>
+<div class="note">Illustrative report. Real reports come from your own keys; the jury's cost sits on your ledger like any other call.</div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>How it works</h2>
+  <div class="cards">
+    <div class="fcard"><div class="ic">1️⃣</div><h3>Send to all</h3><p>In the Manager, one task goes to several models in parallel — or from the terminal: <code>meerada crosscheck "…" --models a,b,c</code>.</p></div>
+    <div class="fcard"><div class="ic">2️⃣</div><h3>Seat a neutral jury</h3><p>For each answer, up to three jurors are chosen from the <b>other</b> labs you have keys for. Kin never judges kin. Fewer keys? A thin panel of 1–2 still scores, labelled "examined by N models".</p></div>
+    <div class="fcard"><div class="ic">3️⃣</div><h3>Read the verdict</h3><p>Score, the jurors' own one-line reasons, flagged spans, agreement, a winner — or "no winner" when no panel agreed. A score chip lands on every examined session.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The rules the jury cannot break</h2>
+  <div class="twrap"><table>
+    <tr><th>Rule</th><th>Why</th></tr>
+    <tr><td>A juror never judges its own family</td><td>OpenAI grading OpenAI is not neutral — the whole point is that it is not</td></tr>
+    <tr><td>Three labs = a full panel; 1–2 = a thin panel, labelled</td><td>Use what you have today, never pretend it is more</td></tr>
+    <tr><td>Pairwise comparisons run twice, in both orders</td><td>Position bias cancels</td></tr>
+    <tr><td>The rubric deducts explicitly for padding</td><td>Length bias cancels</td></tr>
+    <tr><td>Fleiss' kappa reported; split panel → "unknown"</td><td>A disagreement is information, not a score</td></tr>
+    <tr><td>Hard daily budget on the jury</td><td>It is your money</td></tr>
+    <tr><td>A programmatic check always outranks a jury</td><td>Tests beat opinions, even expert ones</td></tr>
+  </table></div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>From the terminal</h2>
+<pre>meerada crosscheck "Summarize this memo in 3 bullets" \
+  --models gpt-5.6-luna,claude-sonnet-5,gemini-2.5-flash \
+  --context memo.txt --budget 1 --store ~/.meerada/jury.sqlite</pre>
+  <div class="note">Every verdict stays on your machine (<code>~/.meerada/jury.sqlite</code>) and becomes the training set for <a class="teal" href="judge.html">Meerada Judge</a>.</div>
+</div></section>
