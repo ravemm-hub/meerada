@@ -1,6 +1,6 @@
 {
- "value": 63.61,
- "median_cpat_usd": 0.00042,
+ "value": 63.13,
+ "median_cpat_usd": 0.000431,
  "n": 7,
  "members": [
   "groq/compound",
@@ -11,5 +11,5 @@
   "allam-2-7b",
   "qwen/qwen3.6-27b"
  ],
- "as_of": "2026-09-16T19:27+00:00"
+ "as_of": "2026-09-16T21:34+00:00"
 }
