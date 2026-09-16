@@ -51,7 +51,7 @@
     .r1{width:90px;height:90px}.r2{width:180px;height:180px}.r3{width:260px;height:260px}
     .sweep { position:absolute; left:50%; top:50%; width:130px; height:130px; transform-origin:0 0; background:conic-gradient(from 0deg,rgba(108,99,255,.55),transparent 70deg); animation:sweep 3s linear infinite; border-radius:0 100% 0 0; }
     @keyframes sweep { to { transform:rotate(360deg); } }
-    .me { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:var(--live); font-size:14px; }
+    .mepin { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:var(--live); font-size:14px; }
     .blip { position:absolute; width:30px; height:30px; border-radius:50%; background:#1E1B33; border:1px solid var(--primary); display:flex; align-items:center; justify-content:center; font-size:15px; opacity:0; animation:pop .6s forwards; }
     .b1{left:60%;top:30%;animation-delay:.3s}.b2{left:28%;top:58%;animation-delay:.9s}.b3{left:72%;top:66%;animation-delay:1.4s}.b4{left:18%;top:26%;animation-delay:1.9s}.b5{left:52%;top:80%;animation-delay:2.3s}
     .blabel { position:absolute; left:14px; right:14px; bottom:44px; font-size:11px; color:var(--text); background:var(--card2); border:1px solid var(--border); border-radius:10px; padding:6px 8px; opacity:0; animation:rise .5s 2.8s forwards; }
@@ -118,6 +118,7 @@
     .shotcap span { margin-top:calc(var(--capH, 300px) * 0.06); font-size:calc(var(--capH, 300px) * 0.095); color:var(--gray); }
     html[dir=rtl] .shotcap { direction:rtl; }
     body.shot .scene * { animation:none !important; opacity:1 !important; transform:none !important; }
+    body.shot .mepin { transform:translate(-50%,-50%) !important; }
     body.shot .scene .sweep, body.shot .msg.typing { display:none !important; }
     body.shot .row i::after { transform:scaleX(1) !important; }
     body.shot .ph2 { transform:translateX(-50%) !important; }
@@ -156,7 +157,7 @@
               <div class="bar"><b>Radar</b><span>📡 Williamsburg, NYC</span></div>
               <div class="radar">
                 <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="sweep"></div>
-                <div class="me">●</div>
+                <div class="mepin">●</div>
                 <div class="blip b1">🙂</div><div class="blip b2">👟</div><div class="blip b3">🎭</div><div class="blip b4">🙂</div><div class="blip b5">🤖</div>
                 <div class="blabel">👟 Maya · 120 m · <span data-i18n="r_walking"></span> · 🎭 <span data-i18n="r_anon"></span> · 🤖 Sam (AI)</div>
               </div>
