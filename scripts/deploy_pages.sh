@@ -47,6 +47,17 @@ done
 rm -rf .ghpages-tmp/*
 cp -r site/* .ghpages-tmp/
 cp -f .ghpages-keep/* .ghpages-tmp/ 2>/dev/null || true
+# First paint: embed the live grade cards into index.html so the ranking renders before any fetch.
+python - <<'PY'
+import json, pathlib
+idx = pathlib.Path(".ghpages-tmp/index.html"); gs = pathlib.Path(".ghpages-tmp/grade_state.json")
+if idx.exists() and gs.exists() and "<!--GRADE_SNAPSHOT-->" in idx.read_text(encoding="utf-8"):
+    data = json.loads(gs.read_text(encoding="utf-8"))
+    cards = {k: v for k, v in (data.get("cards") or {}).items() if v and v.get("score") is not None}
+    blob = json.dumps({"cards": cards}, separators=(",", ":")).replace("</", "<\\/")
+    html = idx.read_text(encoding="utf-8").replace("<!--GRADE_SNAPSHOT-->", '<script id="grade-snapshot" type="application/json">' + blob + "</script>", 1)
+    idx.write_text(html, encoding="utf-8"); print("snapshot embedded:", len(cards), "graded cards")
+PY
 rm -rf .ghpages-keep
 touch .ghpages-tmp/.nojekyll
 ( cd .ghpages-tmp && git add -A && git commit -m "deploy site $(date -u +%Y-%m-%dT%H:%MZ)" && git push -f origin gh-pages )

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://meerada.app/</loc><changefreq>hourly</changefreq></url>
-  <url><loc>https://meerada.app/llmanager.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://meerada.app/manager.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://meerada.app/guard.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://meerada.app/pricing.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://meerada.app/grade.html</loc><changefreq>hourly</changefreq></url>
@@ -9,4 +9,8 @@
   <url><loc>https://meerada.app/landing.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://meerada.app/tribes.html</loc></url>
   <url><loc>https://meerada.app/tribes-privacy.html</loc></url>
+  <url><loc>https://meerada.app/company.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://meerada.app/crosscheck.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://meerada.app/judge.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://meerada.app/handshake.html</loc><changefreq>weekly</changefreq></url>
 </urlset>
