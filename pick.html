@@ -1,0 +1,74 @@
+<meta charset="utf-8">
+<script src="assets/family.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which model for me</title>
+<link rel="canonical" href="https://meerada.app/pick.html">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<meta name="description" content="Three questions, one honest answer: which AI model fits your work and what it will cost you per month — computed from Meerada's live, verified measurements, not opinions.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://meerada.app/pick.html">
+<meta property="og:title" content="Which AI model for me? — Meerada"><meta property="og:description" content="Three questions → a model, a reason, a monthly cost. From live measured data.">
+<meta property="og:image" content="https://meerada.app/assets/og.png"><meta name="twitter:card" content="summary_large_image">
+<script data-goatcounter="https://meerada.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root{--ground:#FFFFFF;--panel:#F7F9FC;--panel2:#EEF2F7;--line:#DDE4EE;--text:#0F172A;--muted:#5B6B82;--teal:#0E8A7E;--amber:#D48A00;--good:#1E8E4C;--bad:#C8403A;}
+  *{box-sizing:border-box;} body{margin:0;background:var(--ground);color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.55;}
+  a{color:inherit;text-decoration:none;} .wrap{max-width:860px;margin:0 auto;padding:0 1.1rem;} .teal{color:var(--teal)}
+  header{text-align:center;padding:2.8rem 0 .8rem;} h1{font-family:"Archivo";font-weight:900;font-size:clamp(1.9rem,5vw,2.8rem);letter-spacing:-.03em;line-height:1.05;margin:.3rem 0 .4rem;} h1 em{font-style:normal;color:var(--teal);}
+  .lede{color:var(--muted);max-width:640px;margin:0 auto 1rem;font-size:1.02rem;}
+  .q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem;margin:.7rem 0}
+  .q h3{font-family:"Archivo";font-size:1rem;margin:0 0 .5rem} .opts{display:flex;gap:.5rem;flex-wrap:wrap}
+  .opt{border:1px solid var(--line);border-radius:999px;padding:.4rem .85rem;font-size:.86rem;cursor:pointer;background:#fff} .opt.on{border-color:var(--teal);background:#E6F6EC;color:var(--good);font-weight:600}
+  .res{display:none;background:#0F172A;color:#E2E8F0;border-radius:16px;padding:1.2rem 1.3rem;margin-top:1rem}
+  .res h2{font-family:"Archivo";margin:0 0 .3rem;font-size:1.3rem} .res .m{font-family:"IBM Plex Mono",monospace;color:#5EEAD4;font-size:1.1rem}
+  .res .row{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:.8rem 0} .res .k{font-size:.66rem;color:#94A3B8;text-transform:uppercase;font-family:"IBM Plex Mono",monospace} .res .v{font-family:"Archivo";font-weight:800;font-size:1.2rem}
+  .res .alt{color:#CBD5E1;font-size:.84rem;margin-top:.5rem} .res .alt b{color:#fff}
+  .btn{display:inline-block;font-family:"Archivo";font-weight:700;font-size:.9rem;padding:.55rem 1.05rem;border-radius:9px;border:1px solid transparent;background:#F2B84B;color:#171205;margin-top:.7rem}
+  .note{color:var(--muted);font-size:.8rem;text-align:center;margin-top:.8rem}
+</style>
+
+<header><div class="wrap">
+  <h1>Which model for me?<br><em>Three questions. One honest answer.</em></h1>
+  <div class="lede">Computed from Meerada's live measurements — grades from tasks a program verified, and the real cost of a done task — not from opinions or ads.</div>
+</div></header>
+
+<div class="wrap">
+  <div class="q"><h3>1 · What do you mostly do?</h3><div class="opts" data-q="kind">
+    <span class="opt on" data-v="code">💻 Code</span><span class="opt" data-v="write">✍️ Writing & summaries</span><span class="opt" data-v="data">📊 Data / SQL / extraction</span><span class="opt" data-v="agent">🤖 Agents & tools</span><span class="opt" data-v="chat">💬 General questions</span></div></div>
+  <div class="q"><h3>2 · What matters most?</h3><div class="opts" data-q="pri">
+    <span class="opt on" data-v="best">🏆 Best result</span><span class="opt" data-v="value">💱 Best value</span><span class="opt" data-v="cheap">🪙 Cheapest that works</span><span class="opt" data-v="fast">⚡ Fastest</span></div></div>
+  <div class="q"><h3>3 · How many tasks a day?</h3><div class="opts" data-q="vol">
+    <span class="opt" data-v="10">~10</span><span class="opt on" data-v="50">~50</span><span class="opt" data-v="300">~300</span><span class="opt" data-v="2000">~2,000</span></div></div>
+
+  <div class="res" id="res">
+    <div class="k">our pick</div><h2 id="r-name">—</h2><div class="m" id="r-id"></div>
+    <div id="r-why" style="font-size:.9rem;margin-top:.4rem"></div>
+    <div class="row"><div><div class="k">grade</div><div class="v" id="r-grade">—</div></div><div><div class="k">cost per done task</div><div class="v" id="r-cpat">—</div></div><div><div class="k">your month, est.</div><div class="v" id="r-month">—</div></div></div>
+    <div class="alt" id="r-alt"></div>
+    <a class="btn" href="manager.html#get">Run it in the Manager — free</a> <a class="btn" style="background:transparent;color:#5EEAD4;border-color:#5EEAD4" href="index.html">See the full ranking</a>
+  </div>
+  <div class="note" id="note">loading live measurements…</div>
+</div>
+
+<script>
+var CARDS={}, CL={code:["code","sql"], write:["summary","long_context","classification"], data:["sql","structured_extraction","tool_call"], agent:["agentic","tool_call","safety"], chat:["reasoning","summary","classification"]};
+var sel={kind:"code",pri:"best",vol:50};
+document.querySelectorAll(".opts").forEach(function(g){ g.querySelectorAll(".opt").forEach(function(o){ o.onclick=function(){ g.querySelectorAll(".opt").forEach(function(x){x.classList.remove("on");}); o.classList.add("on"); sel[g.dataset.q]=g.dataset.q=="vol"?parseInt(o.dataset.v,10):o.dataset.v; compute(); }; }); });
+function clusterScore(c,kind){ var cl=c.clusters||{}; var ks=CL[kind]||[]; var vals=ks.map(function(k){return cl[k];}).filter(function(v){return v!=null;}); if(!vals.length) return c.score/100; return vals.reduce(function(a,b){return a+b;},0)/vals.length; }
+function compute(){
+  var rows=Object.keys(CARDS).map(function(k){return CARDS[k];}).filter(function(c){ return c&&c.score!=null&&c.n>=30; });
+  if(!rows.length){ document.getElementById("note").textContent="not enough measured models yet — the grader runs hourly"; return; }
+  rows.forEach(function(c){ c._q=clusterScore(c,sel.kind); c._cpat=(c.econ&&c.econ.cpat_usd!=null)?c.econ.cpat_usd:null; c._t=(c.econ&&c.econ.ttat_s)||null; });
+  var pool=rows.filter(function(c){return c._q>=0.5;}); if(!pool.length) pool=rows;
+  var key={best:function(c){return -c._q;}, value:function(c){return -(c._q/((c._cpat||0.01)+0.001));}, cheap:function(c){return c._cpat==null?1e9:c._cpat;}, fast:function(c){return c._t==null?1e9:c._t;}}[sel.pri];
+  pool.sort(function(a,b){return key(a)-key(b);}); var top=pool[0], alt=pool[1];
+  var why={best:"highest measured pass rate on the clusters you use", value:"most verified successes per dollar on your clusters", cheap:"lowest measured cost of a done task among models that pass your clusters", fast:"fastest time to a verified task among models that pass your clusters"}[sel.pri];
+  document.getElementById("r-name").textContent=top.model_id.split("/").pop(); document.getElementById("r-id").textContent=top.model_id;
+  document.getElementById("r-why").textContent=why+" · pass rate "+Math.round(top._q*100)+"% on "+(CL[sel.kind]||[]).join(", ")+" · n="+top.n;
+  document.getElementById("r-grade").textContent=top.score.toFixed(1); document.getElementById("r-cpat").textContent=top._cpat!=null?("$"+top._cpat.toFixed(4)):"—";
+  document.getElementById("r-month").textContent=top._cpat!=null?("$"+(top._cpat*sel.vol*22).toFixed(2)):"—";
+  document.getElementById("r-alt").innerHTML=alt?("Runner-up: <b>"+alt.model_id+"</b> — grade "+alt.score.toFixed(1)+(alt._cpat!=null?(", $"+alt._cpat.toFixed(4)+"/task"):"")):"";
+  document.getElementById("res").style.display="block"; document.getElementById("note").textContent="Month = cost per done task × tasks/day × 22 working days, at the provider's public list price. Measured models only (n≥30).";
+}
+fetch("grade_state.json?cb="+Date.now()).then(function(r){return r.json();}).then(function(d){ CARDS=d.cards||{}; compute(); }).catch(function(){ document.getElementById("note").textContent="live data unavailable right now"; });
+</script>

@@ -38,7 +38,33 @@
 </div></header>
 
 <section><div class="wrap">
-  <img class="gif" src="assets/handshake.gif" alt="Import a Claude Code session and continue it on another model">
+  <div class="hs" id="hs-anim">
+    <div class="hcol"><div class="hd" id="hd-a">🟠 Claude</div><div class="msgs" id="m-a"></div></div>
+    <div class="arrow" id="hs-arrow">→<br><small>🤝 Handshake</small></div>
+    <div class="hcol"><div class="hd" id="hd-b">🟢 GPT</div><div class="msgs" id="m-b"></div></div>
+  </div>
+  <div class="note" id="hs-cap">You start in Claude…</div>
+  <style>
+    .hs{display:grid;grid-template-columns:1fr auto 1fr;gap:.8rem;max-width:860px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1rem;min-height:210px}
+    @media(max-width:600px){.hs{grid-template-columns:1fr}}
+    .hs .hd{font-family:"Archivo";font-weight:800;margin-bottom:.4rem} .hs .msgs{display:flex;flex-direction:column;gap:.35rem}
+    .hs .b{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.4rem .6rem;font-size:.82rem;opacity:0;transform:translateX(-8px);transition:all .45s}
+    .hs .b.on{opacity:1;transform:none} .hs .b.u{background:var(--panel2)} .hs .b.new{border-color:var(--teal)}
+    .hs .arrow{align-self:center;text-align:center;font-family:"Archivo";font-weight:900;font-size:1.6rem;color:var(--line);transition:color .4s} .hs .arrow.on{color:var(--teal)} .hs .arrow small{font-size:.62rem;font-family:"IBM Plex Mono",monospace}
+  </style>
+  <script>
+  (function(){ var A=document.getElementById("m-a"), B=document.getElementById("m-b"), cap=document.getElementById("hs-cap"), arrow=document.getElementById("hs-arrow");
+    function bubble(el,txt,cls){ var d=document.createElement("div"); d.className="b "+(cls||""); d.textContent=txt; el.appendChild(d); requestAnimationFrame(function(){ requestAnimationFrame(function(){ d.classList.add("on"); }); }); return d; }
+    var steps=[
+      function(){ A.innerHTML=""; B.innerHTML=""; arrow.classList.remove("on"); cap.textContent="You start in Claude…"; bubble(A,"You: refactor the checkout module","u"); },
+      function(){ bubble(A,"Claude: done — 3 files changed, tests added"); },
+      function(){ bubble(A,"You: now port it to TypeScript","u"); cap.textContent="…then switch the model in the dropdown."; },
+      function(){ arrow.classList.add("on"); cap.textContent="The whole history moves with you — nothing re-pasted."; Array.prototype.forEach.call(A.children,function(c){ bubble(B,c.textContent,c.className.indexOf("u")>=0?"u":""); }); },
+      function(){ bubble(B,"GPT: here is the TypeScript port, same tests passing","new"); cap.textContent="GPT continues where Claude stopped. Trail: claude → gpt."; },
+      function(){ bubble(B,"You: switch back to Claude for review?","u"); cap.textContent="Switch again any time. Cross-check both if you like."; }
+    ]; var i=0; function tick(){ steps[i%steps.length](); i++; setTimeout(tick, i%steps.length===0?2200:1500); } setTimeout(tick,600); })();
+  </script>
+  <img class="gif" src="assets/handshake.gif" alt="Import a Claude Code session and continue it on another model" style="margin-top:1rem">
   <div class="note">Real recording: a Claude Code session imported into the Manager, continued on GPT, then handed to a second model — the history travels.</div>
 </div></section>
 
