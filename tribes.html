@@ -117,6 +117,11 @@
     .shotcap b em { font-style:normal; color:var(--primary); }
     .shotcap span { margin-top:calc(var(--capH, 300px) * 0.06); font-size:calc(var(--capH, 300px) * 0.095); color:var(--gray); }
     html[dir=rtl] .shotcap { direction:rtl; }
+    body.shot .scene * { animation:none !important; opacity:1 !important; transform:none !important; }
+    body.shot .scene .sweep, body.shot .msg.typing { display:none !important; }
+    body.shot .row i::after { transform:scaleX(1) !important; }
+    body.shot .ph2 { transform:translateX(-50%) !important; }
+    body.shot .spark { transform:translateX(-50%) !important; }
   </style>
 </head>
 <body>
@@ -284,7 +289,7 @@
     // demo player
     var scenes=[].slice.call(document.querySelectorAll('.scene')), tabs=[].slice.call(document.querySelectorAll('.tabs button')), cur=0, timer;
     function restart(el){ el.querySelectorAll('*').forEach(function(n){ var a=getComputedStyle(n).animationName; if(a&&a!=='none'){ n.style.animation='none'; void n.offsetWidth; n.style.animation=''; } }); }
-    function count(el){ var to=+el.getAttribute('data-to'), t0=performance.now(); (function step(t){ var k=Math.min(1,(t-t0)/1400); el.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString(); if(k<1) requestAnimationFrame(step); })(t0); }
+    function count(el){ var to=+el.getAttribute('data-to'), t0=performance.now(); if(window.__shot!=null){ el.textContent=to.toLocaleString(); return; } (function step(t){ var k=Math.min(1,(t-t0)/1400); el.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString(); if(k<1) requestAnimationFrame(step); })(t0); }
     function show(i){ cur=i; scenes.forEach(function(s,j){ s.classList.toggle('on',j===i); if(j===i){ restart(s); var c=s.querySelector('.counter'); if(c) count(c);} }); tabs.forEach(function(b,j){ b.classList.toggle('on',j===i); }); }
     function auto(){ clearInterval(timer); timer=setInterval(function(){ show((cur+1)%scenes.length); }, 6000); }
     tabs.forEach(function(b){ b.addEventListener('click', function(){ show(+b.getAttribute('data-s')); auto(); }); });
