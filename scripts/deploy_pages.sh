@@ -59,6 +59,8 @@ if idx.exists() and gs.exists() and "<!--GRADE_SNAPSHOT-->" in idx.read_text(enc
     idx.write_text(html, encoding="utf-8"); print("snapshot embedded:", len(cards), "graded cards")
 PY
 rm -rf .ghpages-keep
+# Badges per model, the RSS feed of changes and the Meerada Index — from the published data.
+python scripts/build_feeds.py --state .ghpages-tmp/grade_state.json --live .ghpages-tmp/models_live.json --out .ghpages-tmp || true
 touch .ghpages-tmp/.nojekyll
 ( cd .ghpages-tmp && git add -A && git commit -m "deploy site $(date -u +%Y-%m-%dT%H:%MZ)" && git push -f origin gh-pages )
 git worktree remove --force .ghpages-tmp

@@ -40,6 +40,41 @@
 </div></header>
 
 <section><div class="wrap">
+  <h2>Watch it happen</h2>
+  <div class="h2sub">One task, three answers, three juries. Nobody grades their own family.</div>
+  <div class="anim" id="xc-anim">
+    <div class="col"><div class="hd">Answers</div>
+      <div class="a" id="a1">🟢 GPT<span>answer</span></div><div class="a" id="a2">🟠 Claude<span>answer</span></div><div class="a" id="a3">🔵 Gemini<span>answer</span></div></div>
+    <div class="col"><div class="hd">Jury for each</div>
+      <div class="j" id="j1">🟠 🔵 🟣 → <b id="s1">…</b></div><div class="j" id="j2">🟢 🔵 🟣 → <b id="s2">…</b></div><div class="j" id="j3">🟢 🟠 🟣 → <b id="s3">…</b></div></div>
+    <div class="col"><div class="hd">Verdict</div><div class="v" id="v1">…</div><div class="v" id="v2">…</div><div class="v" id="v3">…</div><div class="win" id="win"></div></div>
+  </div>
+  <div class="note">🟣 = a fourth lab (e.g. DeepSeek). Each answer's jury is drawn only from labs that did not write it.</div>
+</div></section>
+<style>
+  .anim{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:.8rem;max-width:860px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1rem}
+  @media(max-width:700px){.anim{grid-template-columns:1fr}}
+  .anim .hd{font-family:"IBM Plex Mono",monospace;font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+  .anim .a,.anim .j,.anim .v{background:#fff;border:1px solid var(--line);border-radius:10px;padding:.5rem .65rem;margin-bottom:.45rem;font-size:.86rem;min-height:2.4rem;transition:all .5s}
+  .anim .a span{display:block;color:var(--muted);font-size:.7rem} .anim .a.on{border-color:var(--teal);box-shadow:0 0 0 2px rgba(14,138,126,.15)}
+  .anim .j{font-family:"IBM Plex Mono",monospace;font-size:.8rem} .anim .j.on{border-color:var(--amber)} .anim .j b{color:var(--text)}
+  .anim .v.pass{border-color:#1E8E4C;background:#E6F6EC;color:var(--good)} .anim .v.fail{border-color:#F5DADA;background:#FBE9E9;color:var(--bad)} .anim .v.split{border-color:#E0A93A;background:#FFF4DB;color:var(--amber)}
+  .anim .win{font-family:"Archivo";font-weight:800;color:var(--good);font-size:.9rem;min-height:1.4rem}
+</style>
+<script>
+(function(){ var steps=[
+  function(){ document.getElementById("a1").classList.add("on"); document.getElementById("j1").classList.add("on"); },
+  function(){ document.getElementById("s1").textContent="0.90 · 0.88 · 0.92"; var v=document.getElementById("v1"); v.className="v pass"; v.textContent="✅ 0.90 · holds up · 100% agree"; },
+  function(){ document.getElementById("a2").classList.add("on"); document.getElementById("j2").classList.add("on"); },
+  function(){ document.getElementById("s2").textContent="0.55 · 0.80 · 0.30"; var v=document.getElementById("v2"); v.className="v split"; v.textContent="❔ 0.55 · jury split · unknown"; },
+  function(){ document.getElementById("a3").classList.add("on"); document.getElementById("j3").classList.add("on"); },
+  function(){ document.getElementById("s3").textContent="0.25 · 0.30 · 0.35"; var v=document.getElementById("v3"); v.className="v fail"; v.textContent="❌ 0.30 · does not hold up · flagged 2 claims"; },
+  function(){ document.getElementById("win").textContent="WINNER: GPT — examined by 3 models"; },
+  function(){ ["a1","a2","a3","j1","j2","j3"].forEach(function(i){document.getElementById(i).classList.remove("on");}); ["v1","v2","v3"].forEach(function(i){var v=document.getElementById(i); v.className="v"; v.textContent="…";}); ["s1","s2","s3"].forEach(function(i){document.getElementById(i).textContent="…";}); document.getElementById("win").textContent=""; }
+ ]; var i=0; function tick(){ steps[i%steps.length](); i++; setTimeout(tick, i%steps.length===0?1600:1300); } setTimeout(tick,800); })();
+</script>
+
+<section><div class="wrap">
 <div class="demo"><span class="k">🔎 CROSS-CHECK</span> — every answer examined by a jury from the other labs
 
 1. gpt-5.6-luna (openai) · instruction_following
