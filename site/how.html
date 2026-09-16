@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meerada — how it works</title>
+<meta name="description" content="Three short animated walkthroughs: reading the Meerada exchange, moving a conversation between models with LLManager, and what Guard catches.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<style>
+  :root{--ground:#FFFFFF;--panel:#F7F9FC;--panel2:#EEF2F7;--line:#DDE4EE;--text:#0F172A;--muted:#5B6B82;--teal:#0E8A7E;--amber:#F2B84B;--good:#1E8E4C;--bad:#C8403A;--purple:#6C63FF}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--ground);color:var(--text);font-family:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.55}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 20px 70px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  header a{color:var(--teal);text-decoration:none;font-weight:700}
+  h1{font-size:clamp(28px,5vw,42px);font-weight:900;letter-spacing:-.4px;margin-top:34px}
+  .sub{color:var(--muted);font-size:17px;margin-top:8px;max-width:680px}
+  .walk{margin-top:44px;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:22px;display:grid;grid-template-columns:1.1fr 1fr;gap:22px;align-items:center}
+  @media (max-width:760px){.walk{grid-template-columns:1fr}}
+  .walk h2{font-size:22px;font-weight:900}
+  .walk h2 small{display:block;color:var(--muted);font-weight:600;font-size:13px;margin-top:2px}
+  .steps{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+  .step{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;opacity:.45;transition:opacity .4s}
+  .step.on{opacity:1}
+  .step b{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;align-items:center;justify-content:center;font-size:12px;flex:none}
+  .stage{background:#fff;border:1px solid var(--line);border-radius:16px;height:300px;position:relative;overflow:hidden;font-size:12.5px}
+  .frame{position:absolute;inset:0;padding:14px;opacity:0;transition:opacity .45s}
+  .frame.on{opacity:1}
+  .tbl{width:100%;border-collapse:collapse;font-family:"IBM Plex Mono",Consolas,monospace;font-size:11.5px}
+  .tbl th,.tbl td{border-bottom:1px solid var(--line);padding:6px 4px;text-align:left}
+  .tbl th{color:var(--muted);font-weight:600}
+  .g{color:var(--good);font-weight:800}.b{color:var(--bad);font-weight:800}.d{color:var(--muted)}
+  .hl{background:#FFF4DB;transition:background .4s}
+  .note{position:absolute;left:14px;right:14px;bottom:12px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;color:var(--text)}
+  .chat{display:flex;flex-direction:column;gap:6px}
+  .bub{max-width:82%;border-radius:12px;padding:7px 10px;font-size:12px}
+  .bub.u{background:var(--panel2);align-self:flex-end}.bub.a{background:#E6F4F1;border:1px solid #BFE3DC}
+  .model{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 9px;font-size:11px;background:var(--panel)}
+  .model.on{border-color:var(--teal);background:#E6F4F1;font-weight:800}
+  .gauge{height:10px;border-radius:5px;background:var(--panel2);overflow:hidden;margin-top:6px}
+  .gauge i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--good),var(--amber),var(--bad));transition:width 2.4s linear}
+  .alert{position:absolute;left:14px;right:14px;bottom:12px;background:#FDECEC;border:1px solid #F3B9B5;border-radius:10px;padding:8px 10px;transform:translateY(120%);transition:transform .4s}
+  .alert.on{transform:none}
+  .ctl{display:flex;gap:6px;margin-top:10px}
+  .ctl button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 10px;font-size:12px;cursor:pointer;font-family:inherit}
+  .ctl button.on{border-color:var(--teal);background:#E6F4F1;font-weight:700}
+  footer{margin-top:50px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><a href="./">← meerada.app</a><a href="group.html">the Meerada group</a></header>
+  <h1>How it works, in three short walkthroughs</h1>
+  <p class="sub">No sign-up needed to follow along. Each walkthrough plays on its own; click a step to jump.</p>
+
+  <!-- 1 ARENA -->
+  <section class="walk" data-walk="arena">
+    <div>
+      <h2>📊 Reading the exchange <small>meerada.app — every model, measured hourly</small></h2>
+      <div class="steps">
+        <div class="step on"><b>1</b><span>Every row is a model. <b style="background:none;color:var(--text);width:auto;height:auto">CPAT</b> = cost per verified task: what you actually pay for one correct answer, not the list price per token.</span></div>
+        <div class="step"><b>2</b><span>Grades come from real tasks with checkable answers, re-run every hour. A grade is never a vibe, always a pass/fail count.</span></div>
+        <div class="step"><b>3</b><span>Grey numbers are <i>derived</i> (estimated from list price); green and red are measured. Only measured rows can rank.</span></div>
+        <div class="step"><b>4</b><span>Filter by task type or budget, then compare two models side by side — the gap report tells you what you'd save and where quality breaks.</span></div>
+      </div>
+      <div class="ctl"></div>
+    </div>
+    <div class="stage">
+      <div class="frame on">
+        <table class="tbl"><tr><th>model</th><th>grade</th><th>CPAT</th><th>list $/M</th></tr>
+          <tr class="hl"><td>gemini-2.5-flash</td><td class="g">A · 46/48</td><td class="g">$0.004</td><td>$0.30</td></tr>
+          <tr><td>llama-3.3-70b</td><td class="g">B · 39/48</td><td>$0.006</td><td>$0.59</td></tr>
+          <tr><td>qwen3-32b</td><td class="g">B · 37/48</td><td>$0.005</td><td>$0.40</td></tr>
+          <tr><td>mistral-small</td><td class="d">derived</td><td class="d">~$0.008</td><td>$0.20</td></tr>
+        </table>
+        <div class="note">💡 CPAT: the price of one <b>correct</b> answer. Cheap tokens that fail often are expensive.</div>
+      </div>
+      <div class="frame">
+        <table class="tbl"><tr><th>task</th><th>expected</th><th>gemini-2.5-flash</th></tr>
+          <tr><td>JSON extract #14</td><td>3 fields</td><td class="g">✓ pass</td></tr>
+          <tr><td>Hebrew date parse</td><td>2026-09-15</td><td class="g">✓ pass</td></tr>
+          <tr><td>SQL fix #7</td><td>row count 12</td><td class="b">✗ fail</td></tr>
+          <tr><td>Unit test gen</td><td>4/4 green</td><td class="g">✓ pass</td></tr>
+        </table>
+        <div class="note">🕐 Re-run every hour · 48 tasks · pass/fail only, no opinions</div>
+      </div>
+      <div class="frame">
+        <table class="tbl"><tr><th>model</th><th>grade</th><th>CPAT</th></tr>
+          <tr><td>gemini-2.5-flash</td><td class="g">A · measured</td><td class="g">$0.004</td></tr>
+          <tr class="hl"><td>mistral-small</td><td class="d">derived</td><td class="d">~$0.008</td></tr>
+          <tr class="hl"><td>gpt-5-mini</td><td class="d">derived</td><td class="d">~$0.012</td></tr>
+        </table>
+        <div class="note">⬜ grey = no key for that lab yet → estimated from list price, cannot rank</div>
+      </div>
+      <div class="frame">
+        <div style="display:flex;gap:8px;margin-bottom:8px"><span class="model on">gemini-2.5-flash</span><span>vs</span><span class="model on">llama-3.3-70b</span></div>
+        <table class="tbl"><tr><th>metric</th><th>flash</th><th>llama</th></tr>
+          <tr><td>grade</td><td class="g">46/48</td><td>39/48</td></tr>
+          <tr><td>CPAT</td><td class="g">$0.004</td><td>$0.006</td></tr>
+          <tr><td>breaks on</td><td>—</td><td class="b">SQL, long JSON</td></tr>
+        </table>
+        <div class="note">📄 Handshake report: move 80% of this workload → save 33%, keep SQL on flash</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 LLMANAGER -->
+  <section class="walk" data-walk="llm">
+    <div>
+      <h2>🎛️ LLManager <small>one app for every model, on your own keys</small></h2>
+      <div class="steps">
+        <div class="step on"><b>1</b><span>Import your history: Claude Code, Claude.ai or ChatGPT export → drag the file in. Every conversation lands in one library.</span></div>
+        <div class="step"><b>2</b><span>Open any conversation and keep talking — the whole history is sent along, so the new model knows everything the old one knew.</span></div>
+        <div class="step"><b>3</b><span>Switch models mid-conversation (Handshake). Pick by the exchange's grade and CPAT, not by brand.</span></div>
+        <div class="step"><b>4</b><span>Run many models on many tasks in parallel and keep the answer that passed. Your keys, your machine, no subscription.</span></div>
+      </div>
+      <div class="ctl"></div>
+    </div>
+    <div class="stage">
+      <div class="frame on">
+        <div style="border:2px dashed var(--line);border-radius:12px;height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted)">⬇ drop claude-export.json / conversations.json</div>
+        <div style="margin-top:10px">📚 Library: <b>312</b> conversations · 2 sources</div>
+        <div class="note">✅ imported in 4 s — nothing leaves your machine</div>
+      </div>
+      <div class="frame">
+        <div class="chat"><div class="bub u">Continue the migration plan we drafted yesterday</div><div class="bub a">Picking up from step 3 (the RLS policies)… here's the next migration file:</div></div>
+        <div class="note">🧠 the full thread travels with you — no re-explaining</div>
+      </div>
+      <div class="frame">
+        <div style="margin-bottom:8px">Model: <span class="model">claude-sonnet</span> <span class="model on">gemini-2.5-flash ★ A · $0.004</span> <span class="model">gpt-5-mini</span></div>
+        <div class="chat"><div class="bub a">🤝 Handshake: switched to gemini-2.5-flash. History: 41 messages carried over. Continuing…</div></div>
+        <div class="note">💱 picked by grade and CPAT from the exchange</div>
+      </div>
+      <div class="frame">
+        <table class="tbl"><tr><th>task</th><th>flash</th><th>llama</th><th>qwen</th></tr>
+          <tr><td>write tests</td><td class="g">✓</td><td class="g">✓</td><td class="b">✗</td></tr>
+          <tr><td>fix bug #212</td><td class="g">✓</td><td class="b">✗</td><td class="g">✓</td></tr>
+          <tr><td>summarize PR</td><td class="g">✓</td><td class="g">✓</td><td class="g">✓</td></tr>
+        </table>
+        <div class="note">⚡ 3 models × 3 tasks in parallel · keep what passed</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 GUARD -->
+  <section class="walk" data-walk="guard">
+    <div>
+      <h2>🛡 Guard <small>the watchdog for AI at work</small></h2>
+      <div class="steps">
+        <div class="step on"><b>1</b><span>Guard watches your AI sessions (Claude Code, agents, batch jobs) and learns what "working" looks like: tokens per minute, files touched, progress.</span></div>
+        <div class="step"><b>2</b><span>A task that stalls — same output looping, no files changing, tokens still burning — is flagged in seconds, not at the end of the bill.</span></div>
+        <div class="step"><b>3</b><span>You get one alert with the numbers: what it cost so far, what it would cost if left alone, and a stop button.</span></div>
+        <div class="step"><b>4</b><span>Stuck vs. working, told apart. The $10-in-one-task session that started Guard never happens again.</span></div>
+      </div>
+      <div class="ctl"></div>
+    </div>
+    <div class="stage">
+      <div class="frame on">
+        <div>session <b>build-tribes-b132</b> · 14 min</div>
+        <div>tokens/min <b>2.1k</b> · files changed <b>7</b> · tests <span class="g">green</span></div>
+        <div class="gauge"><i style="width:22%"></i></div>
+        <div class="note">🟢 working — normal rhythm learned over 3 sessions</div>
+      </div>
+      <div class="frame">
+        <div>session <b>refactor-auth</b> · 31 min</div>
+        <div>tokens/min <b>9.8k</b> · files changed <b>0</b> for 9 min · output repeating</div>
+        <div class="gauge"><i class="grow"></i></div>
+        <div class="note">🟠 looping — same edit attempted 6×</div>
+      </div>
+      <div class="frame">
+        <div>session <b>refactor-auth</b></div>
+        <div class="alert on">🛑 <b>Stalled task</b> · spent $2.40 · projected $11.20 if left alone · <u>Stop</u> · <u>Nudge</u></div>
+        <div class="note">📣 one alert, with numbers, before the bill</div>
+      </div>
+      <div class="frame">
+        <table class="tbl"><tr><th>today</th><th>sessions</th><th>stalls caught</th><th>saved</th></tr><tr><td>Tue</td><td>6</td><td class="g">2</td><td class="g">$18.70</td></tr></table>
+        <div class="note">🧾 stuck vs. working, told apart — every day</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© Meerada · <a href="./" style="color:var(--teal)">meerada.app</a> · <a href="tribes.html" style="color:var(--muted)">Meerada Tribes — our city app</a></footer>
+</div>
+<script>
+document.querySelectorAll('.walk').forEach(function(w){
+  var steps=[].slice.call(w.querySelectorAll('.step')), frames=[].slice.call(w.querySelectorAll('.frame')), ctl=w.querySelector('.ctl'), cur=0, timer;
+  steps.forEach(function(s,i){ var b=document.createElement('button'); b.textContent=(i+1); if(i===0)b.className='on'; b.onclick=function(){show(i);auto();}; ctl.appendChild(b); s.style.cursor='pointer'; s.onclick=function(){show(i);auto();}; });
+  function show(i){ cur=i; steps.forEach(function(s,j){s.classList.toggle('on',j===i)}); frames.forEach(function(f,j){f.classList.toggle('on',j===i); if(j===i){var g=f.querySelector('.grow'); if(g){g.style.width='0'; setTimeout(function(){g.style.width='96%'},50);} var a=f.querySelector('.alert'); if(a){a.classList.remove('on'); setTimeout(function(){a.classList.add('on')},300);} }}); ctl.querySelectorAll('button').forEach(function(b,j){b.classList.toggle('on',j===i)}); }
+  function auto(){ clearInterval(timer); timer=setInterval(function(){ show((cur+1)%steps.length); }, 5000); }
+  show(0); auto();
+});
+</script>
+</body>
+</html>
