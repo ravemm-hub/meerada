@@ -103,6 +103,20 @@
     .cta h2 { font-size:24px; font-weight:900; } .cta p { color:var(--gray); margin-top:8px; max-width:640px; margin-inline:auto; }
     footer { margin-top:60px; color:var(--gray); font-size:12.5px; text-align:center; border-top:1px solid var(--border); padding-top:18px; }
     footer a { color:var(--gray); }
+
+    /* STORE-SHOT MODE (?shot=N&lang=xx): one scene, big caption, nothing else */
+    body.shot { background:radial-gradient(120% 80% at 50% 0%, #2A2454 0%, #0E0D16 60%); overflow:hidden; }
+    body.shot .wrap { padding:0; max-width:none; }
+    body.shot header, body.shot .hero, body.shot .grid, body.shot .cta, body.shot footer, body.shot .demo h2, body.shot .demo-sub, body.shot .tabs { display:none !important; }
+    body.shot .demo { margin:0; padding-top:var(--capH, 300px); }
+    body.shot .demo-wrap { margin-top:0; gap:0; }
+    body.shot .phone { transform:scale(var(--k, 2.4)); transform-origin:top center; box-shadow:0 60px 140px rgba(108,99,255,.45); }
+    body.shot .scene { transition:none; }
+    .shotcap { position:fixed; top:0; left:0; right:0; height:var(--capH, 300px); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:0 80px; z-index:10; }
+    .shotcap b { font-size:calc(var(--capH, 300px) * 0.22); font-weight:900; line-height:1.08; letter-spacing:-1px; color:var(--text); }
+    .shotcap b em { font-style:normal; color:var(--primary); }
+    .shotcap span { margin-top:calc(var(--capH, 300px) * 0.06); font-size:calc(var(--capH, 300px) * 0.095); color:var(--gray); }
+    html[dir=rtl] .shotcap { direction:rtl; }
   </style>
 </head>
 <body>
@@ -244,6 +258,23 @@
     document.getElementById('lang').value=l;
     try{localStorage.setItem('lang',l)}catch(e){}
   }
+  // ── store-shot mode ──
+  (function(){
+    var q=new URLSearchParams(location.search); if(!q.has('shot')) return;
+    var n=+q.get('shot')||0, lang=q.get('lang')||'en';
+    var CAPS={
+      en:[["Who's <em>around</em> you, right now","A live radar of people nearby — visible or anonymous, your call"],["Live <em>Tribes</em> near you","Bars, beaches, co-working tables — join what's happening or open one"],["Every event gets a <em>Tribe</em>","Everyone posts, everyone meets — it melts when the night ends"],["<em>Bump</em> to meet","Shake phones together — cards swap, a chat opens. No NFC, no payments"],["Step &amp; floor <em>leagues</em>","True counts from your phone, stairs included, with friends you approve"],["<em>Teeby</em>, your AI","Just talk — it messages, shares, schedules, and always asks first"],["This week in <em>your city</em>","Events near you, a chat for each one, one tap to your calendar"]],
+      he:[["מי <em>סביבך</em>, עכשיו","ראדאר חי של אנשים בסביבה — גלוי או אנונימי, ההחלטה שלך"],["<em>טרייבס</em> חיים לידך","ברים, חופים, שולחנות עבודה — מצטרפים או פותחים"],["לכל אירוע יש <em>טרייב</em>","כולם מעלים, כולם נפגשים — ונמס כשהערב נגמר"],["<em>באמפ</em> להכיר","מנערים טלפונים יחד — כרטיסים מתחלפים ונפתח צ׳אט"],["<em>ליגות</em> צעדים וקומות","ספירה אמיתית מהטלפון, כולל מדרגות, עם חברים שאישרת"],["<em>טיבי</em>, ה-AI שלך","פשוט מדברים — שולח, משתף, מתזמן, ותמיד שואל קודם"],["השבוע <em>בעיר שלך</em>","אירועים לידך, צ׳אט לכל אחד, לחיצה אחת ליומן"]]
+    };
+    var caps=CAPS[lang]||CAPS.en, c=caps[n]||caps[0];
+    document.body.classList.add('shot'); setLang(lang);
+    var H=window.innerHeight, W=window.innerWidth, capH=Math.round(H*0.16);
+    document.documentElement.style.setProperty('--capH', capH+'px');
+    var k=Math.min((H-capH-Math.round(H*0.02))/640, (W*0.86)/310);
+    document.documentElement.style.setProperty('--k', k.toFixed(3));
+    var el=document.createElement('div'); el.className='shotcap'; el.innerHTML='<b>'+c[0]+'</b><span>'+c[1]+'</span>'; document.body.appendChild(el);
+    window.__shot=n;
+  })();
   (function(){
     var saved=null; try{saved=localStorage.getItem('lang')}catch(e){}
     var nav=(navigator.language||'en').slice(0,2).toLowerCase();
@@ -257,8 +288,9 @@
     function show(i){ cur=i; scenes.forEach(function(s,j){ s.classList.toggle('on',j===i); if(j===i){ restart(s); var c=s.querySelector('.counter'); if(c) count(c);} }); tabs.forEach(function(b,j){ b.classList.toggle('on',j===i); }); }
     function auto(){ clearInterval(timer); timer=setInterval(function(){ show((cur+1)%scenes.length); }, 6000); }
     tabs.forEach(function(b){ b.addEventListener('click', function(){ show(+b.getAttribute('data-s')); auto(); }); });
-    show(0); auto();
+    if(window.__shot!=null){ show(window.__shot); } else { show(0); auto(); }
   })();
+
   </script>
 </body>
 </html>
