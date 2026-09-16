@@ -1,266 +1,264 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meerada Tribes — שכבת החברה של העיר שלך</title>
-  <meta name="description" content="Meerada Tribes: קבוצות חיות סביבך, ראדאר של מי בסביבה, ליגות צעדים עם חברים וטיבי — ה-AI שלך. אנשים אמיתיים, מקומות אמיתיים, עכשיו. הורדה ל-Android ול-iPhone." />
+  <title>Meerada Tribes — your city's social layer</title>
+  <meta name="description" content="Meerada Tribes: live groups around you, a radar of who's nearby, event tribes, step and floor leagues with friends, Bump to meet by shaking, and Teeby, an AI you just talk to. Real people, real places, now." />
   <meta property="og:title" content="Meerada Tribes — your city's social layer" />
-  <meta property="og:description" content="Live groups around you, a radar of who's nearby, step leagues with friends, and Teeby — your AI. Real people, real places, now." />
+  <meta property="og:description" content="Live groups around you, a radar of who's nearby, event tribes, step leagues, Bump and Teeby. Real people, real places, now." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://meerada.app/tribes" />
+  <meta property="og:url" content="https://meerada.app/tribes.html" />
   <meta name="apple-itunes-app" content="app-id=6780445573" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>" />
+  <link rel="icon" href="logo.svg" type="image/svg+xml" />
   <style>
-    :root { --bg:#0E0D16; --card:#17162A; --text:#F2F1FF; --gray:#9A98B8; --primary:#6C63FF; --live:#2ECC71; --border:#2A2947; }
+    :root { --bg:#0E0D16; --card:#17162A; --card2:#1B1930; --text:#F2F1FF; --gray:#9A98B8; --primary:#6C63FF; --live:#2ECC71; --border:#2A2947; --amber:#F2B84B; }
     * { margin:0; padding:0; box-sizing:border-box; }
-    html { color-scheme: dark; }
+    html { color-scheme: dark; scroll-behavior:smooth; }
     body { background:var(--bg); color:var(--text); font-family: -apple-system, "Segoe UI", Roboto, "Heebo", Arial, sans-serif; line-height:1.55; }
     a { color:inherit; }
-    .wrap { max-width:860px; margin:0 auto; padding:28px 20px 60px; }
+    .wrap { max-width:960px; margin:0 auto; padding:24px 20px 60px; }
     header { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .logo { font-weight:900; font-size:22px; letter-spacing:-0.3px; }
-    .logo span { color:var(--primary); }
-    .lang { border:1px solid var(--border); border-radius:999px; padding:6px 12px; font-size:13px; color:var(--gray); background:transparent; cursor:pointer; }
-    .hero { margin-top:44px; text-align:center; }
-    h1 { font-size:clamp(30px,6vw,48px); font-weight:900; line-height:1.15; letter-spacing:-0.5px; }
+    header img { height:52px; }
+    .lang { border:1px solid var(--border); border-radius:999px; padding:7px 12px; font-size:13px; color:var(--text); background:var(--card); font-family:inherit; }
+    .hero { margin-top:48px; text-align:center; }
+    h1 { font-size:clamp(30px,6vw,52px); font-weight:900; line-height:1.12; letter-spacing:-0.5px; }
     h1 em { font-style:normal; color:var(--primary); }
-    .sub { color:var(--gray); font-size:18px; max-width:600px; margin:16px auto 0; }
-    .stores { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:30px; }
+    .sub { color:var(--gray); font-size:18px; max-width:640px; margin:16px auto 0; }
+    .stores { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:28px; }
     .store { display:flex; align-items:center; gap:10px; background:var(--text); color:#0E0D16; border-radius:14px; padding:12px 18px; font-weight:800; text-decoration:none; font-size:15px; min-width:210px; justify-content:center; }
     .store.alt { background:var(--card); color:var(--text); border:1px solid var(--border); }
     .store small { display:block; font-weight:600; font-size:11px; opacity:.7; }
     .fine { color:var(--gray); font-size:12.5px; margin-top:12px; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:14px; margin-top:54px; }
-    .card { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:18px; }
-    .card .ic { font-size:26px; }
-    .card h3 { font-size:16px; margin-top:8px; font-weight:900; }
-    .card p { color:var(--gray); font-size:14px; margin-top:6px; }
-    .steps { margin-top:54px; background:linear-gradient(135deg, rgba(108,99,255,.18), rgba(46,204,113,.10)); border:1px solid var(--border); border-radius:22px; padding:24px; text-align:center; }
-    .steps h2 { font-size:24px; font-weight:900; }
-    .steps p { color:var(--gray); margin-top:8px; max-width:640px; margin-inline:auto; }
-    .big { font-size:40px; margin-bottom:6px; }
+    .cities { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:18px; }
+    .city { border:1px solid var(--border); border-radius:999px; padding:5px 11px; font-size:12px; color:var(--gray); background:var(--card); }
+    /* DEMO */
+    .demo { margin-top:64px; text-align:center; }
+    .demo h2 { font-size:30px; font-weight:900; }
+    .demo-sub { color:var(--gray); margin-top:6px; }
+    .demo-wrap { display:flex; flex-direction:column; align-items:center; gap:16px; margin-top:22px; }
+    .phone { width:310px; height:640px; border-radius:46px; background:#0B0A12; border:8px solid #23213A; position:relative; box-shadow:0 30px 80px rgba(108,99,255,.28); overflow:hidden; }
+    .notch { position:absolute; top:10px; left:50%; transform:translateX(-50%); width:110px; height:26px; background:#23213A; border-radius:14px; z-index:5; }
+    .screen { position:absolute; inset:0; background:linear-gradient(180deg,#14121F,#0E0D16); }
+    .scene { position:absolute; inset:0; padding:52px 14px 14px; opacity:0; transform:translateX(24px); transition:opacity .5s, transform .5s; direction:ltr; text-align:left; }
+    html[dir=rtl] .scene { direction:rtl; text-align:right; }
+    .scene.on { opacity:1; transform:none; }
+    .bar { display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--gray); margin-bottom:10px; }
+    .bar b { color:var(--text); font-size:16px; }
+    .cap { position:absolute; bottom:16px; left:14px; right:14px; font-size:11.5px; color:var(--gray); text-align:center; }
+    .radar { position:relative; height:300px; margin:8px auto 0; width:260px; }
+    .ring { position:absolute; left:50%; top:50%; border:1px solid rgba(108,99,255,.35); border-radius:50%; transform:translate(-50%,-50%); }
+    .r1{width:90px;height:90px}.r2{width:180px;height:180px}.r3{width:260px;height:260px}
+    .sweep { position:absolute; left:50%; top:50%; width:130px; height:130px; transform-origin:0 0; background:conic-gradient(from 0deg,rgba(108,99,255,.55),transparent 70deg); animation:sweep 3s linear infinite; border-radius:0 100% 0 0; }
+    @keyframes sweep { to { transform:rotate(360deg); } }
+    .me { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:var(--live); font-size:14px; }
+    .blip { position:absolute; width:30px; height:30px; border-radius:50%; background:#1E1B33; border:1px solid var(--primary); display:flex; align-items:center; justify-content:center; font-size:15px; opacity:0; animation:pop .6s forwards; }
+    .b1{left:60%;top:30%;animation-delay:.3s}.b2{left:28%;top:58%;animation-delay:.9s}.b3{left:72%;top:66%;animation-delay:1.4s}.b4{left:18%;top:26%;animation-delay:1.9s}.b5{left:52%;top:80%;animation-delay:2.3s}
+    .blabel { position:absolute; left:14px; right:14px; bottom:44px; font-size:11px; color:var(--text); background:var(--card2); border:1px solid var(--border); border-radius:10px; padding:6px 8px; opacity:0; animation:rise .5s 2.8s forwards; }
+    @keyframes pop { from{opacity:0;transform:scale(.3)} to{opacity:1;transform:scale(1)} }
+    .card { display:flex; align-items:center; gap:10px; background:var(--card2); border:1px solid var(--border); border-radius:14px; padding:10px; margin-bottom:8px; opacity:0; transform:translateY(12px); animation:rise .5s forwards; }
+    .card .ic { font-size:22px; } .card b { display:block; font-size:13px; color:var(--text); } .card span { font-size:11px; color:var(--gray); }
+    .d1{animation-delay:.2s}.d2{animation-delay:.6s}.d3{animation-delay:1s}.d4{animation-delay:1.4s}.d5{animation-delay:1.8s}.d6{animation-delay:2.4s}.d7{animation-delay:3s}
+    .cal { margin-inline-start:auto; font-size:16px; opacity:.8; }
+    @keyframes rise { to { opacity:1; transform:none; } }
+    .fab { position:absolute; bottom:18px; left:14px; right:14px; background:var(--primary); color:#fff; border-radius:14px; padding:10px; font-weight:800; font-size:13px; text-align:center; animation:rise .5s 1.6s forwards; opacity:0; }
+    .post { display:flex; gap:8px; align-items:flex-start; background:var(--card2); border:1px solid var(--border); border-radius:12px; padding:8px; margin-bottom:6px; font-size:11.5px; opacity:0; transform:translateY(10px); animation:rise .45s forwards; }
+    .post .av { width:26px; height:26px; border-radius:50%; background:#2A2947; display:flex; align-items:center; justify-content:center; flex:none; }
+    .post b { color:var(--text); font-size:11.5px; } .post > div > span { color:var(--gray); display:block; }
+    .photo { height:54px; border-radius:8px; background:linear-gradient(135deg,#6C63FF,#2ECC71); margin-top:4px; }
+    .photo.p2 { background:linear-gradient(135deg,#F2B84B,#FF6B6B); } .photo.p3 { background:linear-gradient(135deg,#2ECC71,#00D9B8); }
+    .big { text-align:center; margin-top:6px; } .big .counter { font-size:44px; font-weight:900; color:var(--text); display:block; } .big small { color:var(--gray); font-size:12px; }
+    .floors { text-align:center; color:#C9C7FF; font-size:12.5px; margin:6px 0 12px; }
+    .row { display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text); margin-bottom:8px; }
+    .row i { flex:1; height:8px; border-radius:4px; background:var(--border); position:relative; overflow:hidden; }
+    .row i::after { content:""; position:absolute; inset:0; width:var(--w); background:linear-gradient(90deg,var(--primary),var(--live)); animation:fill 1.4s ease-out forwards; transform:scaleX(0); transform-origin:left; }
+    html[dir=rtl] .row i::after { transform-origin:right; }
+    @keyframes fill { to { transform:scaleX(1); } }
+    .trophy { position:absolute; bottom:18px; left:14px; right:14px; background:var(--live); color:#0B0A12; border-radius:12px; padding:9px; font-weight:800; font-size:12.5px; text-align:center; opacity:0; animation:rise .5s 2.2s forwards; }
+    .bump-stage { position:relative; height:150px; margin-top:14px; }
+    .ph { position:absolute; top:44px; font-size:52px; animation:shake .5s 1s 3; }
+    .ph1{left:18px}.ph2{left:50%;transform:translateX(-50%);animation-delay:1.1s}.ph3{right:18px;animation-delay:1.2s}
+    @keyframes shake { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-14deg)} 75%{transform:rotate(14deg)} }
+    .ph2 { animation-name:shake2; } @keyframes shake2 { 0%,100%{transform:translateX(-50%) rotate(0)} 25%{transform:translateX(-50%) rotate(-14deg)} 75%{transform:translateX(-50%) rotate(14deg)} }
+    .spark { position:absolute; left:50%; top:10px; transform:translateX(-50%) scale(0); font-size:34px; animation:pop .4s 2.7s forwards; }
+    .cardx { background:var(--card2); border:1px solid var(--primary); border-radius:14px; padding:12px; margin-top:6px; opacity:0; animation:rise .5s 3.1s forwards; }
+    .cardx b { display:block; font-size:14px; color:var(--text); } .cardx > span { font-size:12px; color:var(--gray); display:block; }
+    .msg { max-width:86%; border-radius:14px; padding:9px 11px; font-size:12.5px; margin-bottom:8px; opacity:0; animation:rise .4s forwards; }
+    .msg.me { background:var(--primary); color:#fff; margin-inline-start:auto; animation-delay:.2s; }
+    .msg.ai { background:var(--card2); color:var(--text); border:1px solid var(--border); animation-delay:1.6s; }
+    .msg.typing { animation:rise .3s .8s forwards, fade .3s 1.6s forwards; letter-spacing:3px; }
+    @keyframes fade { to { opacity:0; height:0; margin:0; padding:0; } }
+    .btns { display:flex; gap:8px; margin-top:4px; opacity:0; animation:rise .4s 2.2s forwards; }
+    .btns b { flex:1; background:var(--live); color:#0B0A12; border-radius:12px; padding:9px; text-align:center; font-size:13px; }
+    .btns span { width:44px; border:1px solid var(--border); border-radius:12px; display:flex; align-items:center; justify-content:center; color:var(--gray); }
+    .toast { position:absolute; bottom:18px; left:14px; right:14px; background:var(--card2); border:1px solid var(--live); border-radius:12px; padding:9px; font-size:12px; color:var(--text); text-align:center; opacity:0; animation:rise .5s 1.8s forwards; }
+    .tabs { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; max-width:560px; }
+    .tabs button { background:transparent; border:1px solid var(--border); color:var(--gray); border-radius:999px; padding:7px 12px; font-size:13px; cursor:pointer; font-family:inherit; }
+    .tabs button.on { border-color:var(--primary); color:var(--text); background:rgba(108,99,255,.15); }
+    /* FEATURES */
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:14px; margin-top:60px; }
+    .feat { background:var(--card); border:1px solid var(--border); border-radius:18px; padding:18px; }
+    .feat .ic { font-size:26px; } .feat h3 { font-size:16px; margin-top:8px; font-weight:900; } .feat p { color:var(--gray); font-size:14px; margin-top:6px; }
+    .cta { margin-top:56px; background:linear-gradient(135deg, rgba(108,99,255,.18), rgba(46,204,113,.10)); border:1px solid var(--border); border-radius:22px; padding:26px; text-align:center; }
+    .cta h2 { font-size:24px; font-weight:900; } .cta p { color:var(--gray); margin-top:8px; max-width:640px; margin-inline:auto; }
     footer { margin-top:60px; color:var(--gray); font-size:12.5px; text-align:center; border-top:1px solid var(--border); padding-top:18px; }
     footer a { color:var(--gray); }
-    .en { display:none; }
-    body.en-mode .he { display:none; }
-    body.en-mode .en { display:block; }
-    body.en-mode span.en, body.en-mode a.en, body.en-mode em.en, body.en-mode small.en { display:inline; }
-    body.en-mode { direction:ltr; }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <a href="./" class="logo" style="display:flex;align-items:center;gap:10px;text-decoration:none"><img src="assets/meerada-tribes-wordmark.png" alt="Meerada Tribes" style="height:54px" /></a>
-      <button class="lang" onclick="toggleLang()"><span class="he">English</span><span class="en">עברית</span></button>
+      <a href="group.html"><img src="assets/meerada-tribes-wordmark.png" alt="Meerada Tribes" /></a>
+      <select class="lang" id="lang" aria-label="Language">
+        <option value="en">English</option><option value="es">Español</option><option value="it">Italiano</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="pt">Português</option><option value="he">עברית</option><option value="ar">العربية</option>
+      </select>
     </header>
 
     <section class="hero">
-      <div class="he">
-        <h1>שכבת החברה של <em>העיר שלך</em></h1>
-        <p class="sub">קבוצות חיות סביבך, ראדאר של מי בסביבה עכשיו, ליגות צעדים עם חברים, וטיבי — ה-AI שמדבר איתך. אנשים אמיתיים, מקומות אמיתיים, עכשיו.</p>
-      </div>
-      <div class="en">
-        <h1>Your city's <em>social layer</em></h1>
-        <p class="sub">Live groups around you, a radar of who's nearby right now, step leagues with friends, and Teeby — the AI you just talk to. Real people, real places, now.</p>
-      </div>
+      <h1 data-i18n="h1"></h1>
+      <p class="sub" data-i18n="sub"></p>
       <div class="stores">
-        <a class="store" id="play" href="https://play.google.com/store/apps/details?id=com.tryber.social">▶ <span><span class="he">הורדה ל-Android</span><span class="en">Get it on Android</span><small>Google Play</small></span></a>
-        <a class="store alt" id="ios" href="https://apps.apple.com/app/id6780445573"> <span><span class="he">הורדה ל-iPhone</span><span class="en">Download for iPhone</span><small>App Store</small></span></a>
+        <a class="store" href="https://play.google.com/store/apps/details?id=com.tryber.social">▶ <span><span data-i18n="android"></span><small>Google Play</small></span></a>
+        <a class="store alt" href="https://apps.apple.com/app/id6780445573"> <span><span data-i18n="ios"></span><small>App Store</small></span></a>
       </div>
-      <p class="fine"><span class="he">חינם · ישראל, איטליה ועוד · הכניסה עם מספר טלפון בלבד</span><span class="en">Free · phone number sign-in only · no feeds full of strangers</span></p>
+      <p class="fine" data-i18n="fine"></p>
+      <div class="cities"><span class="city">New York</span><span class="city">London</span><span class="city">Paris</span><span class="city">Berlin</span><span class="city">Rome</span><span class="city">Madrid</span><span class="city">Lisbon</span><span class="city">Miami</span><span class="city">Tokyo</span><span class="city">Tel Aviv</span><span class="city">Buenos Aires</span><span class="city">Dubai</span></div>
+    </section>
+
+    <section class="demo" id="demo">
+      <h2 data-i18n="demo_h"></h2>
+      <p class="demo-sub" data-i18n="demo_sub"></p>
+      <div class="demo-wrap">
+        <div class="phone">
+          <div class="notch"></div>
+          <div class="screen">
+            <!-- 1 RADAR · New York -->
+            <div class="scene on">
+              <div class="bar"><b>Radar</b><span>📡 Williamsburg, NYC</span></div>
+              <div class="radar">
+                <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="sweep"></div>
+                <div class="me">●</div>
+                <div class="blip b1">🙂</div><div class="blip b2">👟</div><div class="blip b3">🎭</div><div class="blip b4">🙂</div><div class="blip b5">🤖</div>
+                <div class="blabel">👟 Maya · 120 m · <span data-i18n="r_walking"></span> · 🎭 <span data-i18n="r_anon"></span> · 🤖 Sam (AI)</div>
+              </div>
+              <div class="cap" data-i18n="r_cap"></div>
+            </div>
+            <!-- 2 TRIBES · London -->
+            <div class="scene">
+              <div class="bar"><b>Tribes</b><span>⚡ Shoreditch, London</span></div>
+              <div class="card d1"><div class="ic">🍻</div><div><b>Pub quiz at The Old Blue Last</b><span>👥 12 · 80 m · <span data-i18n="melts"></span> 23:30</span></div></div>
+              <div class="card d2"><div class="ic">🎨</div><div><b>Brick Lane street-art walk</b><span>👥 7 · 400 m · <span data-i18n="starts"></span> 18:00</span></div></div>
+              <div class="card d3"><div class="ic">☕</div><div><b>Laptop &amp; coffee, Ozone</b><span>👥 5 · 150 m</span></div></div>
+              <div class="fab">+ <span data-i18n="open_tribe"></span></div>
+            </div>
+            <!-- 3 EVENT TRIBE · Miami -->
+            <div class="scene">
+              <div class="bar"><b>Event Tribe</b><span>🎟️ Rooftop sunset, Miami</span></div>
+              <div class="card d1"><div class="ic">🌇</div><div><b>Sunset Sessions · 1 Hotel rooftop</b><span>👥 214 · <span data-i18n="live_now"></span></span></div></div>
+              <div class="post d2"><div class="av">🙂</div><div><b>Lucas</b><span data-i18n="ev_p1"></span><div class="photo"></div></div></div>
+              <div class="post d3"><div class="av">👩</div><div><b>Ana</b><span data-i18n="ev_p2"></span></div></div>
+              <div class="post d4"><div class="av">🧑</div><div><b>Jordan</b><span data-i18n="ev_p3"></span><div class="photo p2"></div></div></div>
+              <div class="post d5"><div class="av">✦</div><div><b>Teeby</b><span data-i18n="ev_p4"></span></div></div>
+              <div class="cap" data-i18n="ev_cap"></div>
+            </div>
+            <!-- 4 CHANCE MEETING · Paris -->
+            <div class="scene">
+              <div class="bar"><b>Bump</b><span>🤝 Canal Saint-Martin, Paris</span></div>
+              <div class="bump-stage"><div class="ph ph1">📱</div><div class="ph ph2">📱</div><div class="ph ph3">📱</div><div class="spark">✨</div></div>
+              <div class="cardx"><b>🤝 Canal Saint-Martin · 16.09</b><span>Léa · Marco · <span data-i18n="you"></span> — <span data-i18n="bump_new"></span></span></div>
+              <div class="post d7"><div class="av">👩</div><div><b>Léa</b><span data-i18n="bump_p1"></span></div></div>
+              <div class="cap" data-i18n="bump_cap"></div>
+            </div>
+            <!-- 5 STEPS · Berlin -->
+            <div class="scene">
+              <div class="bar"><b>Pulse</b><span>👟 Berlin</span></div>
+              <div class="big"><span class="counter" data-to="11675">0</span><small data-i18n="steps_today"></small></div>
+              <div class="floors">🏢 14 <span data-i18n="floors"></span> · ≈ 8.7 km</div>
+              <div class="row"><span>🥇 Jonas</span><i style="--w:92%"></i><span>11,675</span></div>
+              <div class="row"><span>🥈 <span data-i18n="you"></span></span><i style="--w:74%"></i><span>9,420</span></div>
+              <div class="row"><span>🥉 Priya</span><i style="--w:48%"></i><span>6,102</span></div>
+              <div class="trophy">🏆 <span data-i18n="trophy"></span></div>
+            </div>
+            <!-- 6 TEEBY -->
+            <div class="scene">
+              <div class="bar"><b>Teeby</b><span>✦ <span data-i18n="your_ai"></span></span></div>
+              <div class="msg me" data-i18n="t_u"></div>
+              <div class="msg ai typing">…</div>
+              <div class="msg ai" data-i18n="t_a"></div>
+              <div class="btns"><b>✓ <span data-i18n="send"></span></b><span>✎</span></div>
+            </div>
+            <!-- 7 EVENTS · Tokyo -->
+            <div class="scene">
+              <div class="bar"><b>Events</b><span>🎟️ Tokyo · <span data-i18n="this_week"></span></span></div>
+              <div class="card d1"><div class="ic">🎶</div><div><b>Jazz night, Shinjuku Pit Inn</b><span><span data-i18n="tomorrow"></span> 20:30 · 1.2 km</span></div><div class="cal">📅</div></div>
+              <div class="card d2"><div class="ic">🏃</div><div><b>Imperial Palace morning run</b><span><span data-i18n="sat"></span> 07:00 · 34 <span data-i18n="joining"></span></span></div><div class="cal">📅</div></div>
+              <div class="card d3"><div class="ic">🍜</div><div><b>Ramen crawl, Shibuya</b><span><span data-i18n="fri"></span> 19:00 · 12 <span data-i18n="joining"></span></span></div><div class="cal">📅</div></div>
+              <div class="toast">📍 <span data-i18n="arrived"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tabs">
+          <button data-s="0">📡 Radar</button><button data-s="1">⚡ Tribes</button><button data-s="2">🎟️ <span data-i18n="tab_event"></span></button><button data-s="3">🤝 Bump</button><button data-s="4">👟 <span data-i18n="tab_steps"></span></button><button data-s="5">✦ Teeby</button><button data-s="6">📅 <span data-i18n="tab_events"></span></button>
+        </div>
+      </div>
     </section>
 
     <section class="grid">
-      <div class="card"><div class="ic">📍</div><h3><span class="he">טרייבס — קבוצות חיות סביבך</span><span class="en">Tribes — live groups around you</span></h3><p><span class="he">בר, חוף, אירוע, וייב. מצטרפים למה שקורה לידך או פותחים קבוצה בלחיצה — והיא נמסה כשנגמר.</span><span class="en">A bar, a beach, an event, a vibe. Join what's happening near you or open one in a tap — it melts when it's over.</span></p></div>
-      <div class="card"><div class="ic">📡</div><h3><span class="he">ראדאר</span><span class="en">Radar</span></h3><p><span class="he">מי בסביבה ממש עכשיו. גלוי 🔥 או אנונימי 👻 — תמיד בשליטה שלך.</span><span class="en">Who's around right now. Visible 🔥 or anonymous 👻 — always your call.</span></p></div>
-      <div class="card"><div class="ic">👟</div><h3><span class="he">ליגות צעדים וקומות</span><span class="en">Step & floor leagues</span></h3><p><span class="he">ספירה אמיתית מהטלפון, כולל מדרגות. ליגה עם חברים שאישרת, קבוצות הליכה, גביעים וסיכום יומי בעברית טבעית.</span><span class="en">True counts from the phone, stairs included. Leagues with friends you approve, walking groups, trophies and a daily recap.</span></p></div>
-      <div class="card"><div class="ic">🎙️</div><h3><span class="he">טיבי — ה-AI שלך</span><span class="en">Teeby — your AI</span></h3><p><span class="he">"תכתוב לדנה שאני מאחר", "תשלח את המיקום שלי" — טיבי עושה, ותמיד מאשר לפני שליחה.</span><span class="en">"Message Dana I'm late", "share my location" — Teeby does it, and always asks before sending.</span></p></div>
-      <div class="card"><div class="ic">🎟️</div><h3><span class="he">אירועים בעיר</span><span class="en">City events</span></h3><p><span class="he">מה קורה השבוע לידך, עם צ׳אט חי לכל אירוע ולחיצה אחת ליומן.</span><span class="en">What's on near you this week, a live chat per event, one tap to your calendar.</span></p></div>
-      <div class="card"><div class="ic">🤝</div><h3><span class="he">באמפ</span><span class="en">Bump</span></h3><p><span class="he">פגשתם מישהו? מנערים את הטלפונים ביחד — מחליפים כרטיס ביקור ונפתח צ׳אט. בלי NFC, בלי תשלומים.</span><span class="en">Met someone? Shake your phones together — cards swap and a chat opens. No NFC, no payments.</span></p></div>
+      <div class="feat"><div class="ic">📍</div><h3 data-i18n="f1h"></h3><p data-i18n="f1p"></p></div>
+      <div class="feat"><div class="ic">🎟️</div><h3 data-i18n="f2h"></h3><p data-i18n="f2p"></p></div>
+      <div class="feat"><div class="ic">📡</div><h3 data-i18n="f3h"></h3><p data-i18n="f3p"></p></div>
+      <div class="feat"><div class="ic">🤝</div><h3 data-i18n="f4h"></h3><p data-i18n="f4p"></p></div>
+      <div class="feat"><div class="ic">👟</div><h3 data-i18n="f5h"></h3><p data-i18n="f5p"></p></div>
+      <div class="feat"><div class="ic">✦</div><h3 data-i18n="f6h"></h3><p data-i18n="f6p"></p></div>
     </section>
 
-<!-- 👀 TRIBES LIVE DEMO — an animated phone that walks through every feature.
-     Pure CSS/JS, no video files: scenes auto-advance every 5.5 s, tabs jump.
-     Spliced into tribes.html by scripts (kept as its own file for editing). -->
-<section class="demo" id="demo">
-  <h2 class="demo-title"><span class="he">ככה זה נראה</span><span class="en">See it move</span></h2>
-  <p class="demo-sub"><span class="he">כל פיצ׳ר, בשלושים שניות, בלי להתקין</span><span class="en">Every feature in thirty seconds, no install</span></p>
-  <div class="demo-wrap">
-    <div class="phone">
-      <div class="notch"></div>
-      <div class="screen">
-        <!-- 1 RADAR -->
-        <div class="scene s-radar on">
-          <div class="bar"><b>Radar</b><span>📡 <span class="he">בסביבה עכשיו</span><span class="en">around you now</span></span></div>
-          <div class="radar">
-            <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
-            <div class="sweep"></div>
-            <div class="me">●</div>
-            <div class="blip b1">🙂</div><div class="blip b2">👟</div><div class="blip b3">🎭</div><div class="blip b4">🙂</div><div class="blip b5">🤖</div>
-          </div>
-          <div class="cap"><span class="he">🔥 גלוי · 👻 אנונימי · אתה בשליטה</span><span class="en">🔥 visible · 👻 anonymous · your call</span></div>
-        </div>
-        <!-- 2 TRIBES -->
-        <div class="scene s-tribes">
-          <div class="bar"><b>Tribes</b><span>⚡ <span class="he">קבוצות חיות</span><span class="en">live groups</span></span></div>
-          <div class="card t1"><div class="ic">🍻</div><div><b><span class="he">בר ברוטשילד</span><span class="en">Rothschild bar</span></b><span>👥 12 · 80m · <span class="he">נמס ב-23:30</span><span class="en">melts 23:30</span></span></div></div>
-          <div class="card t2"><div class="ic">🏖️</div><div><b><span class="he">חוף גורדון עכשיו</span><span class="en">Gordon beach now</span></b><span>👥 7 · 400m</span></div></div>
-          <div class="card t3"><div class="ic">🎟️</div><div><b><span class="he">הופעה בבארבי</span><span class="en">Barby show</span></b><span>👥 41 · <span class="he">הערב 21:00</span><span class="en">tonight 21:00</span></span></div></div>
-          <div class="fab">+ <span class="he">פתח קבוצה</span><span class="en">open a Tribe</span></div>
-        </div>
-        <!-- 3 STEPS -->
-        <div class="scene s-steps">
-          <div class="bar"><b>Pulse</b><span>👟 <span class="he">ליגת הצעדים</span><span class="en">step league</span></span></div>
-          <div class="big"><span class="counter" data-to="11675">0</span><small><span class="he">צעדים היום</span><span class="en">steps today</span></small></div>
-          <div class="floors">🏢 <span class="he">14 קומות טיפסת</span><span class="en">14 floors climbed</span></div>
-          <div class="row"><span>🥇 Orni</span><i style="--w:92%"></i><span>11,675</span></div>
-          <div class="row"><span>🥈 <span class="he">אתה</span><span class="en">You</span></span><i style="--w:74%"></i><span>9,420</span></div>
-          <div class="row"><span>🥉 Carlo</span><i style="--w:48%"></i><span>6,102</span></div>
-          <div class="trophy">🏆 <span class="he">גביע חדש: שבוע מושלם</span><span class="en">New trophy: perfect week</span></div>
-        </div>
-        <!-- 4 BUMP -->
-        <div class="scene s-bump">
-          <div class="bar"><b>Bump</b><span>🤝 <span class="he">נפגשנו</span><span class="en">we met</span></span></div>
-          <div class="bump-stage">
-            <div class="ph ph1">📱</div><div class="ph ph2">📱</div>
-            <div class="spark">✨</div>
-          </div>
-          <div class="cardx"><b>🤝 Dana</b><span class="he">נפגשנו בדיזנגוף, 15.9.2026</span><span class="en">met on Dizengoff, 15.9.2026</span></div>
-          <div class="cap"><span class="he">מנערים יחד → כרטיס ביקור → צ׳אט. בלי NFC, בלי תשלומים</span><span class="en">shake together → card → chat. No NFC, no payments</span></div>
-        </div>
-        <!-- 5 TEEBY -->
-        <div class="scene s-teeby">
-          <div class="bar"><b>Teeby</b><span>✦ <span class="he">ה-AI שלך</span><span class="en">your AI</span></span></div>
-          <div class="msg me"><span class="he">תכתוב לדנה שאני מאחר 10 דקות</span><span class="en">Tell Dana I'm 10 minutes late</span></div>
-          <div class="msg ai typing">…</div>
-          <div class="msg ai"><span class="he">שולח לדנה: "מאחר 10 דק׳, שמור לי מקום 🙏" — לאשר?</span><span class="en">Sending Dana: "10 min late, save me a seat 🙏" — send?</span></div>
-          <div class="btns"><b>✓ <span class="he">שלח</span><span class="en">Send</span></b><span>✎</span></div>
-        </div>
-        <!-- 6 EVENTS -->
-        <div class="scene s-events">
-          <div class="bar"><b>Events</b><span>🎟️ <span class="he">השבוע בעיר</span><span class="en">this week</span></span></div>
-          <div class="card e1"><div class="ic">🎶</div><div><b><span class="he">ג׳אז בפלורנטין</span><span class="en">Jazz in Florentin</span></b><span><span class="he">מחר 20:30 · 1.2 ק״מ</span><span class="en">tomorrow 20:30 · 1.2 km</span></span></div><div class="cal">📅</div></div>
-          <div class="card e2"><div class="ic">🏃</div><div><b><span class="he">ריצת בוקר בפארק</span><span class="en">Morning run, the park</span></b><span><span class="he">שבת 07:00 · 34 מצטרפים</span><span class="en">Sat 07:00 · 34 joining</span></span></div><div class="cal">📅</div></div>
-          <div class="toast">📍 <span class="he">הגעת לפארק · 3 חברים כאן</span><span class="en">You're at the park · 3 members here</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="tabs">
-      <button data-s="0" class="on">📡 <span class="he">ראדאר</span><span class="en">Radar</span></button>
-      <button data-s="1">⚡ <span class="he">טרייבס</span><span class="en">Tribes</span></button>
-      <button data-s="2">👟 <span class="he">צעדים</span><span class="en">Steps</span></button>
-      <button data-s="3">🤝 <span class="he">באמפ</span><span class="en">Bump</span></button>
-      <button data-s="4">✦ Teeby</button>
-      <button data-s="5">🎟️ <span class="he">אירועים</span><span class="en">Events</span></button>
-    </div>
-  </div>
-</section>
-<style>
-  .demo{margin-top:56px;text-align:center}
-  .demo-title{font-size:28px;font-weight:900}
-  .demo-sub{color:var(--gray);margin-top:6px}
-  .demo-wrap{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:22px}
-  .phone{width:300px;height:620px;border-radius:44px;background:#0B0A12;border:8px solid #23213A;position:relative;box-shadow:0 30px 80px rgba(108,99,255,.25);overflow:hidden}
-  .notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:110px;height:26px;background:#23213A;border-radius:14px;z-index:5}
-  .screen{position:absolute;inset:0;background:linear-gradient(180deg,#14121F,#0E0D16)}
-  .scene{position:absolute;inset:0;padding:52px 14px 14px;opacity:0;transform:translateX(24px);transition:opacity .5s,transform .5s;direction:ltr;text-align:left}
-  body:not(.en-mode) .scene{direction:rtl;text-align:right}
-  .scene.on{opacity:1;transform:none}
-  .bar{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--gray);margin-bottom:10px}
-  .bar b{color:var(--text);font-size:16px}
-  .cap{position:absolute;bottom:16px;left:14px;right:14px;font-size:11.5px;color:var(--gray);text-align:center}
-  /* radar */
-  .radar{position:relative;height:300px;margin:8px auto 0;width:260px}
-  .ring{position:absolute;left:50%;top:50%;border:1px solid rgba(108,99,255,.35);border-radius:50%;transform:translate(-50%,-50%)}
-  .r1{width:90px;height:90px}.r2{width:180px;height:180px}.r3{width:260px;height:260px}
-  .sweep{position:absolute;left:50%;top:50%;width:130px;height:130px;transform-origin:0 0;background:conic-gradient(from 0deg,rgba(108,99,255,.55),transparent 70deg);animation:sweep 3s linear infinite;border-radius:0 100% 0 0}
-  @keyframes sweep{to{transform:rotate(360deg)}}
-  .me{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#2ECC71;font-size:14px}
-  .blip{position:absolute;width:30px;height:30px;border-radius:50%;background:#1E1B33;border:1px solid var(--primary);display:flex;align-items:center;justify-content:center;font-size:15px;opacity:0;animation:pop .6s forwards}
-  .b1{left:60%;top:30%;animation-delay:.3s}.b2{left:28%;top:58%;animation-delay:.9s}.b3{left:72%;top:66%;animation-delay:1.4s}.b4{left:18%;top:26%;animation-delay:1.9s}.b5{left:52%;top:80%;animation-delay:2.3s}
-  @keyframes pop{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
-  /* cards */
-  .card{display:flex;align-items:center;gap:10px;background:#1B1930;border:1px solid #2A2947;border-radius:14px;padding:10px;margin-bottom:8px;opacity:0;transform:translateY(12px);animation:rise .5s forwards}
-  .card .ic{font-size:22px}.card b{display:block;font-size:13px;color:var(--text)}.card span{font-size:11px;color:var(--gray)}
-  .t1{animation-delay:.2s}.t2{animation-delay:.6s}.t3{animation-delay:1s}.e1{animation-delay:.2s}.e2{animation-delay:.6s}
-  .cal{margin-inline-start:auto;font-size:16px;opacity:.8}
-  @keyframes rise{to{opacity:1;transform:none}}
-  .fab{position:absolute;bottom:18px;left:14px;right:14px;background:var(--primary);color:#fff;border-radius:14px;padding:10px;font-weight:800;font-size:13px;text-align:center;animation:rise .5s 1.4s forwards;opacity:0}
-  /* steps */
-  .big{text-align:center;margin-top:6px}.big .counter{font-size:44px;font-weight:900;color:var(--text);display:block}.big small{color:var(--gray);font-size:12px}
-  .floors{text-align:center;color:#C9C7FF;font-size:12.5px;margin:6px 0 12px}
-  .row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text);margin-bottom:8px}
-  .row i{flex:1;height:8px;border-radius:4px;background:#2A2947;position:relative;overflow:hidden}
-  .row i::after{content:"";position:absolute;inset:0;width:var(--w);background:linear-gradient(90deg,var(--primary),#2ECC71);animation:fill 1.4s ease-out forwards;transform:scaleX(0);transform-origin:left}
-  body:not(.en-mode) .row i::after{transform-origin:right}
-  @keyframes fill{to{transform:scaleX(1)}}
-  .trophy{position:absolute;bottom:18px;left:14px;right:14px;background:#2ECC71;color:#0B0A12;border-radius:12px;padding:9px;font-weight:800;font-size:12.5px;text-align:center;opacity:0;animation:rise .5s 2.2s forwards}
-  /* bump */
-  .bump-stage{position:relative;height:150px;margin-top:20px}
-  .ph{position:absolute;top:40px;font-size:60px;animation:shake .5s 1s 3}
-  .ph1{left:40px}.ph2{right:40px;animation-delay:1.05s}
-  @keyframes shake{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
-  .spark{position:absolute;left:50%;top:50px;transform:translateX(-50%) scale(0);font-size:34px;animation:pop .4s 2.6s forwards}
-  .cardx{background:#1B1930;border:1px solid var(--primary);border-radius:14px;padding:12px;margin-top:8px;opacity:0;animation:rise .5s 3s forwards}
-  .cardx b{display:block;font-size:14px;color:var(--text)}.cardx span{font-size:12px;color:var(--gray)}
-  /* teeby */
-  .msg{max-width:86%;border-radius:14px;padding:9px 11px;font-size:12.5px;margin-bottom:8px;opacity:0;animation:rise .4s forwards}
-  .msg.me{background:var(--primary);color:#fff;margin-inline-start:auto;animation-delay:.2s}
-  .msg.ai{background:#1B1930;color:var(--text);border:1px solid #2A2947;animation-delay:1.6s}
-  .msg.typing{animation:rise .3s .8s forwards,fade .3s 1.6s forwards;letter-spacing:3px}
-  @keyframes fade{to{opacity:0;height:0;margin:0;padding:0}}
-  .btns{display:flex;gap:8px;margin-top:4px;opacity:0;animation:rise .4s 2.2s forwards}
-  .btns b{flex:1;background:#2ECC71;color:#0B0A12;border-radius:12px;padding:9px;text-align:center;font-size:13px}
-  .btns span{width:44px;border:1px solid #2A2947;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--gray)}
-  .toast{position:absolute;bottom:18px;left:14px;right:14px;background:#1B1930;border:1px solid #2ECC71;border-radius:12px;padding:9px;font-size:12px;color:var(--text);text-align:center;opacity:0;animation:rise .5s 1.6s forwards}
-  .tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
-  .tabs button{background:transparent;border:1px solid var(--border);color:var(--gray);border-radius:999px;padding:7px 12px;font-size:13px;cursor:pointer;font-family:inherit}
-  .tabs button.on{border-color:var(--primary);color:var(--text);background:rgba(108,99,255,.15)}
-</style>
-<script>
-(function(){
-  var scenes=[].slice.call(document.querySelectorAll('.scene')), tabs=[].slice.call(document.querySelectorAll('.tabs button')), cur=0, timer;
-  function restart(el){ el.querySelectorAll('*').forEach(function(n){ var a=n.style.animation; n.style.animation='none'; void n.offsetWidth; n.style.animation=a; }); }
-  function count(el){ var to=+el.getAttribute('data-to'), t0=performance.now(); function step(t){ var k=Math.min(1,(t-t0)/1400); el.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString(); if(k<1) requestAnimationFrame(step);} requestAnimationFrame(step); }
-  function show(i){ cur=i; scenes.forEach(function(s,j){ s.classList.toggle('on',j===i); if(j===i){ restart(s); var c=s.querySelector('.counter'); if(c) count(c);} }); tabs.forEach(function(b,j){ b.classList.toggle('on',j===i); }); }
-  function auto(){ clearInterval(timer); timer=setInterval(function(){ show((cur+1)%scenes.length); }, 5500); }
-  tabs.forEach(function(b){ b.addEventListener('click', function(){ show(+b.getAttribute('data-s')); auto(); }); });
-  show(0); auto();
-})();
-</script>
-
-    <section class="steps">
-      <div class="big">✦</div>
-      <h2><span class="he">בלי פידים של זרים. בלי רעש.</span><span class="en">No feeds full of strangers. No noise.</span></h2>
-      <p><span class="he">רק האנשים והמקומות סביבך. Meerada Tribes זמינה ב-Google Play וב-App Store.</span><span class="en">Just the people and places around you. Meerada Tribes is on Google Play and the App Store.</span></p>
+    <section class="cta">
+      <h2 data-i18n="cta_h"></h2>
+      <p data-i18n="cta_p"></p>
       <div class="stores">
         <a class="store" href="https://play.google.com/store/apps/details?id=com.tryber.social">▶ Google Play</a>
         <a class="store alt" href="https://apps.apple.com/app/id6780445573"> App Store</a>
       </div>
     </section>
 
-    <footer>
-      <span class="he">© Meerada Tribes · <a href="mailto:rave.mm@gmail.com">צור קשר</a> · <a href="https://play.google.com/store/apps/details?id=com.tryber.social">Android</a> · <a href="https://apps.apple.com/app/id6780445573">iPhone</a></span>
-      <span class="en">© Meerada Tribes · <a href="mailto:rave.mm@gmail.com">Contact</a> · <a href="https://play.google.com/store/apps/details?id=com.tryber.social">Android</a> · <a href="https://apps.apple.com/app/id6780445573">iPhone</a></span>
-    </footer>
+    <footer>© Meerada Tribes · <a href="group.html">Meerada group</a> · <a href="tribes-privacy.html" data-i18n="privacy"></a> · <a href="mailto:rave.mm@gmail.com" data-i18n="contact"></a></footer>
   </div>
+
   <script>
-    // Language: Hebrew by default; English for non-Hebrew browsers (remembered).
-    function setLang(l) { document.body.classList.toggle('en-mode', l === 'en'); document.documentElement.lang = l; document.documentElement.dir = l === 'en' ? 'ltr' : 'rtl'; try { localStorage.setItem('lang', l) } catch (e) {} }
-    function toggleLang() { setLang(document.body.classList.contains('en-mode') ? 'he' : 'en') }
-    (function () {
-      var saved = null; try { saved = localStorage.getItem('lang') } catch (e) {}
-      var nav = (navigator.language || '').toLowerCase();
-      setLang(saved || (nav.indexOf('he') === 0 ? 'he' : 'en'));
-      // /get → straight to the right store for this phone.
-      if (location.pathname.replace(/\/+$/, '') === '/get') {
-        var ua = navigator.userAgent || '';
-        if (/iphone|ipad|ipod/i.test(ua)) location.replace('https://apps.apple.com/app/id6780445573');
-        else if (/android/i.test(ua)) location.replace('https://play.google.com/store/apps/details?id=com.tryber.social');
-      }
-    })();
+  var I18N = {
+    en:{h1:"Your city's <em>social layer</em>",sub:"Live groups around you, a radar of who's nearby right now, event tribes, step and floor leagues with friends, Bump to meet by shaking, and Teeby — the AI you just talk to. Real people, real places, now.",android:"Get it on Android",ios:"Download for iPhone",fine:"Free · phone-number sign-in · no feeds full of strangers",demo_h:"See it move",demo_sub:"Seven short scenes, every feature, no install",r_walking:"walking now",r_anon:"anonymous",r_cap:"Visible 🔥 or anonymous 👻 — always your call",melts:"melts at",starts:"starts",open_tribe:"Open a Tribe here",live_now:"live now",ev_p1:"View from the top 🔥",ev_p2:"Anyone near the bar? Two drinks, one ticket 🍹",ev_p3:"DJ set just started, come up!",ev_p4:"Board: 214 here · 38 photos · next act 20:15",ev_cap:"Every event gets its own Tribe — everyone posts, everyone sees, it melts after",you:"You",bump_new:"new Tribe",bump_p1:"That was random and great. Same time next week? 😄",bump_cap:"Strangers who shake together get a Tribe named after the place and the day. No NFC, no payments.",steps_today:"steps today",floors:"floors climbed",trophy:"New trophy: perfect week",your_ai:"your AI",t_u:"Tell Dana I'm 10 minutes late",t_a:"Sending Dana: \"10 min late, save me a seat 🙏\" — send?",send:"Send",this_week:"this week",tomorrow:"Tomorrow",sat:"Sat",fri:"Fri",joining:"joining",arrived:"You're at the park · 3 members here",tab_event:"Event Tribe",tab_steps:"Steps",tab_events:"Events",f1h:"Tribes — live groups around you",f1p:"A bar, a beach, a co-working table. Join what's happening near you or open one in a tap — it melts when it's over.",f2h:"Event Tribes",f2p:"Concert, festival, rooftop: every event gets its own Tribe where everyone posts photos and meets. It closes when the night does.",f3h:"Radar",f3p:"Who's around right now, visible 🔥 or anonymous 👻. Walkers wear a 👟 and a compass arrow shows you which way to meet them.",f4h:"Bump",f4p:"Met someone? Shake your phones together — cards swap and a chat opens. Three or more shaking get a Tribe named after the place and the day.",f5h:"Step & floor leagues",f5p:"True counts from your phone, stairs included. Leagues with friends you approve, walking Tribes, trophies and a daily coach with a sense of humour.",f6h:"Teeby — your AI",f6p:"\"Message Dana I'm late\", \"share my location\", \"add this to my calendar\" — Teeby does it, and always asks before sending.",cta_h:"No feeds full of strangers. No noise.",cta_p:"Just the people and places around you. Meerada Tribes is on Google Play and the App Store.",privacy:"Privacy",contact:"Contact"},
+    es:{h1:"La <em>capa social</em> de tu ciudad",sub:"Grupos en vivo a tu alrededor, un radar de quién está cerca ahora, tribus de eventos, ligas de pasos y pisos con amigos, Bump para conocerse agitando el móvil, y Teeby, la IA con la que solo hablas. Gente real, lugares reales, ahora.",android:"Descargar para Android",ios:"Descargar para iPhone",fine:"Gratis · entrada con tu número · sin feeds llenos de desconocidos",demo_h:"Míralo en movimiento",demo_sub:"Siete escenas cortas, todas las funciones, sin instalar",r_walking:"caminando ahora",r_anon:"anónimo",r_cap:"Visible 🔥 o anónimo 👻 — siempre tú decides",melts:"se disuelve a las",starts:"empieza",open_tribe:"Abrir una Tribu aquí",live_now:"en vivo",ev_p1:"Vista desde arriba 🔥",ev_p2:"¿Alguien cerca de la barra? Dos copas, una entrada 🍹",ev_p3:"¡Empezó el DJ set, subid!",ev_p4:"Tablero: 214 aquí · 38 fotos · próximo acto 20:15",ev_cap:"Cada evento tiene su propia Tribu: todos publican, todos ven, y se disuelve después",you:"Tú",bump_new:"nueva Tribu",bump_p1:"Fue casual y genial. ¿Misma hora la semana que viene? 😄",bump_cap:"Desconocidos que agitan juntos reciben una Tribu con el nombre del lugar y el día. Sin NFC, sin pagos.",steps_today:"pasos hoy",floors:"pisos subidos",trophy:"Nuevo trofeo: semana perfecta",your_ai:"tu IA",t_u:"Dile a Dana que llego 10 minutos tarde",t_a:"Enviando a Dana: «Llego 10 min tarde, guárdame sitio 🙏» — ¿enviar?",send:"Enviar",this_week:"esta semana",tomorrow:"Mañana",sat:"Sáb",fri:"Vie",joining:"van",arrived:"Estás en el parque · 3 miembros aquí",tab_event:"Tribu de evento",tab_steps:"Pasos",tab_events:"Eventos",f1h:"Tribus — grupos en vivo a tu alrededor",f1p:"Un bar, una playa, una mesa de coworking. Únete a lo que pasa cerca o abre una en un toque; se disuelve al terminar.",f2h:"Tribus de eventos",f2p:"Concierto, festival, azotea: cada evento tiene su Tribu donde todos publican fotos y se conocen. Se cierra cuando termina la noche.",f3h:"Radar",f3p:"Quién está cerca ahora, visible 🔥 o anónimo 👻. Los que caminan llevan 👟 y una flecha de brújula te muestra hacia dónde ir.",f4h:"Bump",f4p:"¿Conociste a alguien? Agitad los móviles juntos: se intercambian tarjetas y se abre un chat. Tres o más agitando reciben una Tribu.",f5h:"Ligas de pasos y pisos",f5p:"Conteo real desde tu móvil, escaleras incluidas. Ligas con amigos que apruebas, Tribus de caminata, trofeos y un coach diario con humor.",f6h:"Teeby — tu IA",f6p:"«Escríbele a Dana que llego tarde», «comparte mi ubicación», «añádelo a mi calendario»: Teeby lo hace y siempre pregunta antes de enviar.",cta_h:"Sin feeds de desconocidos. Sin ruido.",cta_p:"Solo la gente y los lugares a tu alrededor. Meerada Tribes está en Google Play y en el App Store.",privacy:"Privacidad",contact:"Contacto"},
+    it:{h1:"Il <em>livello sociale</em> della tua città",sub:"Gruppi dal vivo intorno a te, un radar di chi è vicino adesso, tribù degli eventi, classifiche di passi e piani con gli amici, Bump per conoscersi scuotendo il telefono, e Teeby, l'IA con cui parli e basta. Persone vere, posti veri, adesso.",android:"Scarica per Android",ios:"Scarica per iPhone",fine:"Gratis · accesso col numero di telefono · niente feed pieni di sconosciuti",demo_h:"Guardala muoversi",demo_sub:"Sette scene brevi, tutte le funzioni, senza installare",r_walking:"a piedi ora",r_anon:"anonimo",r_cap:"Visibile 🔥 o anonimo 👻 — decidi sempre tu",melts:"si scioglie alle",starts:"inizia",open_tribe:"Apri una Tribù qui",live_now:"in diretta",ev_p1:"Vista dall'alto 🔥",ev_p2:"Qualcuno vicino al bar? Due drink, un biglietto 🍹",ev_p3:"DJ set appena iniziato, salite!",ev_p4:"Bacheca: 214 qui · 38 foto · prossimo set 20:15",ev_cap:"Ogni evento ha la sua Tribù: tutti postano, tutti vedono, poi si scioglie",you:"Tu",bump_new:"nuova Tribù",bump_p1:"Incontro casuale e bellissimo. Stessa ora la prossima settimana? 😄",bump_cap:"Sconosciuti che scuotono insieme ricevono una Tribù col nome del posto e del giorno. Niente NFC, niente pagamenti.",steps_today:"passi oggi",floors:"piani saliti",trophy:"Nuovo trofeo: settimana perfetta",your_ai:"la tua IA",t_u:"Di' a Dana che sono in ritardo di 10 minuti",t_a:"Invio a Dana: «10 min di ritardo, tienimi il posto 🙏» — invio?",send:"Invia",this_week:"questa settimana",tomorrow:"Domani",sat:"Sab",fri:"Ven",joining:"partecipano",arrived:"Sei al parco · 3 membri qui",tab_event:"Tribù evento",tab_steps:"Passi",tab_events:"Eventi",f1h:"Tribù — gruppi dal vivo intorno a te",f1p:"Un bar, una spiaggia, un tavolo di coworking. Entra in quello che succede vicino o aprine uno con un tocco; si scioglie quando finisce.",f2h:"Tribù degli eventi",f2p:"Concerto, festival, rooftop: ogni evento ha la sua Tribù dove tutti postano foto e si conoscono. Chiude quando finisce la serata.",f3h:"Radar",f3p:"Chi c'è intorno adesso, visibile 🔥 o anonimo 👻. Chi cammina ha un 👟 e una freccia-bussola ti mostra dove andare.",f4h:"Bump",f4p:"Hai conosciuto qualcuno? Scuotete i telefoni insieme: i biglietti da visita si scambiano e si apre una chat. Tre o più ricevono una Tribù.",f5h:"Classifiche di passi e piani",f5p:"Conteggio vero dal telefono, scale incluse. Classifiche con amici che approvi, Tribù di camminata, trofei e un coach quotidiano con ironia.",f6h:"Teeby — la tua IA",f6p:"«Scrivi a Dana che sono in ritardo», «condividi la mia posizione», «mettilo in calendario»: Teeby lo fa e chiede sempre prima di inviare.",cta_h:"Niente feed di sconosciuti. Niente rumore.",cta_p:"Solo le persone e i posti intorno a te. Meerada Tribes è su Google Play e sull'App Store.",privacy:"Privacy",contact:"Contatti"},
+    fr:{h1:"La <em>couche sociale</em> de ta ville",sub:"Des groupes en direct autour de toi, un radar de qui est là maintenant, des tribus d'événements, des ligues de pas et d'étages entre amis, Bump pour se rencontrer en secouant le téléphone, et Teeby, l'IA à qui tu parles, tout simplement. Des vraies personnes, des vrais lieux, maintenant.",android:"Télécharger sur Android",ios:"Télécharger sur iPhone",fine:"Gratuit · connexion par numéro · pas de fil rempli d'inconnus",demo_h:"Regarde-la bouger",demo_sub:"Sept courtes scènes, toutes les fonctions, sans installer",r_walking:"en balade",r_anon:"anonyme",r_cap:"Visible 🔥 ou anonyme 👻 — c'est toujours toi qui choisis",melts:"fond à",starts:"commence",open_tribe:"Ouvrir une Tribu ici",live_now:"en direct",ev_p1:"Vue d'en haut 🔥",ev_p2:"Quelqu'un près du bar ? Deux verres, un ticket 🍹",ev_p3:"Le DJ set vient de commencer, montez !",ev_p4:"Tableau : 214 ici · 38 photos · prochain set 20:15",ev_cap:"Chaque événement a sa Tribu : tout le monde poste, tout le monde voit, puis elle fond",you:"Toi",bump_new:"nouvelle Tribu",bump_p1:"C'était imprévu et génial. Même heure la semaine prochaine ? 😄",bump_cap:"Des inconnus qui secouent ensemble reçoivent une Tribu au nom du lieu et du jour. Sans NFC, sans paiement.",steps_today:"pas aujourd'hui",floors:"étages montés",trophy:"Nouveau trophée : semaine parfaite",your_ai:"ton IA",t_u:"Dis à Dana que j'ai 10 minutes de retard",t_a:"Envoi à Dana : « 10 min de retard, garde-moi une place 🙏 » — envoyer ?",send:"Envoyer",this_week:"cette semaine",tomorrow:"Demain",sat:"Sam",fri:"Ven",joining:"participent",arrived:"Tu es au parc · 3 membres ici",tab_event:"Tribu d'événement",tab_steps:"Pas",tab_events:"Événements",f1h:"Tribus — des groupes en direct autour de toi",f1p:"Un bar, une plage, une table de coworking. Rejoins ce qui se passe près de toi ou ouvres-en une d'un geste ; elle fond quand c'est fini.",f2h:"Tribus d'événements",f2p:"Concert, festival, rooftop : chaque événement a sa Tribu où tout le monde poste des photos et se rencontre. Elle ferme avec la soirée.",f3h:"Radar",f3p:"Qui est là maintenant, visible 🔥 ou anonyme 👻. Les marcheurs portent un 👟 et une flèche-boussole te montre où aller.",f4h:"Bump",f4p:"Tu as rencontré quelqu'un ? Secouez vos téléphones ensemble : les cartes s'échangent et un chat s'ouvre. À trois ou plus, une Tribu naît.",f5h:"Ligues de pas et d'étages",f5p:"Un vrai comptage depuis ton téléphone, escaliers inclus. Des ligues avec les amis que tu approuves, des Tribus de marche, des trophées et un coach quotidien qui a de l'humour.",f6h:"Teeby — ton IA",f6p:"« Écris à Dana que je suis en retard », « partage ma position », « ajoute ça à mon agenda » : Teeby le fait et demande toujours avant d'envoyer.",cta_h:"Pas de fil d'inconnus. Pas de bruit.",cta_p:"Juste les gens et les lieux autour de toi. Meerada Tribes est sur Google Play et l'App Store.",privacy:"Confidentialité",contact:"Contact"},
+    de:{h1:"Die <em>soziale Ebene</em> deiner Stadt",sub:"Live-Gruppen um dich herum, ein Radar, wer gerade in der Nähe ist, Event-Tribes, Schritte- und Etagen-Ligen mit Freunden, Bump zum Kennenlernen per Schütteln und Teeby — die KI, mit der du einfach redest. Echte Menschen, echte Orte, jetzt.",android:"Für Android laden",ios:"Für iPhone laden",fine:"Kostenlos · Anmeldung per Telefonnummer · keine Feeds voller Fremder",demo_h:"Sieh es in Bewegung",demo_sub:"Sieben kurze Szenen, alle Funktionen, ohne Installation",r_walking:"gerade unterwegs",r_anon:"anonym",r_cap:"Sichtbar 🔥 oder anonym 👻 — immer deine Entscheidung",melts:"löst sich auf um",starts:"beginnt",open_tribe:"Hier einen Tribe öffnen",live_now:"jetzt live",ev_p1:"Blick von oben 🔥",ev_p2:"Jemand an der Bar? Zwei Drinks, ein Ticket 🍹",ev_p3:"DJ-Set hat gerade angefangen, kommt hoch!",ev_p4:"Board: 214 hier · 38 Fotos · nächster Act 20:15",ev_cap:"Jedes Event bekommt seinen eigenen Tribe: alle posten, alle sehen, danach löst er sich auf",you:"Du",bump_new:"neuer Tribe",bump_p1:"Das war zufällig und großartig. Nächste Woche gleiche Zeit? 😄",bump_cap:"Fremde, die zusammen schütteln, bekommen einen Tribe mit dem Namen von Ort und Tag. Kein NFC, keine Zahlungen.",steps_today:"Schritte heute",floors:"Etagen gestiegen",trophy:"Neue Trophäe: perfekte Woche",your_ai:"deine KI",t_u:"Sag Dana, ich komme 10 Minuten später",t_a:"Sende an Dana: „10 Min später, halt mir einen Platz frei 🙏“ — senden?",send:"Senden",this_week:"diese Woche",tomorrow:"Morgen",sat:"Sa",fri:"Fr",joining:"dabei",arrived:"Du bist im Park · 3 Mitglieder hier",tab_event:"Event-Tribe",tab_steps:"Schritte",tab_events:"Events",f1h:"Tribes — Live-Gruppen um dich herum",f1p:"Eine Bar, ein Strand, ein Coworking-Tisch. Mach mit, was in der Nähe passiert, oder öffne einen mit einem Tipp; er löst sich auf, wenn es vorbei ist.",f2h:"Event-Tribes",f2p:"Konzert, Festival, Rooftop: jedes Event hat seinen Tribe, in dem alle Fotos posten und sich treffen. Er schließt mit dem Abend.",f3h:"Radar",f3p:"Wer gerade da ist, sichtbar 🔥 oder anonym 👻. Wer läuft, trägt ein 👟 und ein Kompasspfeil zeigt dir den Weg.",f4h:"Bump",f4p:"Jemanden kennengelernt? Schüttelt eure Handys zusammen — Visitenkarten werden getauscht, ein Chat öffnet sich. Ab drei gibt es einen Tribe.",f5h:"Schritte- & Etagen-Ligen",f5p:"Echte Zahlen von deinem Handy, Treppen inklusive. Ligen mit Freunden, die du freigibst, Lauf-Tribes, Trophäen und ein täglicher Coach mit Humor.",f6h:"Teeby — deine KI",f6p:"„Schreib Dana, dass ich später komme“, „teile meinen Standort“, „trag das in meinen Kalender ein“ — Teeby macht es und fragt immer, bevor es sendet.",cta_h:"Keine Feeds voller Fremder. Kein Lärm.",cta_p:"Nur die Menschen und Orte um dich herum. Meerada Tribes gibt es bei Google Play und im App Store.",privacy:"Datenschutz",contact:"Kontakt"},
+    pt:{h1:"A <em>camada social</em> da tua cidade",sub:"Grupos ao vivo à tua volta, um radar de quem está perto agora, tribos de eventos, ligas de passos e andares com amigos, Bump para conhecer alguém abanando o telemóvel, e a Teeby — a IA com quem simplesmente falas. Pessoas reais, lugares reais, agora.",android:"Obter no Android",ios:"Descarregar para iPhone",fine:"Grátis · entrada com número de telefone · sem feeds cheios de estranhos",demo_h:"Vê a app a mexer",demo_sub:"Sete cenas curtas, todas as funções, sem instalar",r_walking:"a caminhar agora",r_anon:"anónimo",r_cap:"Visível 🔥 ou anónimo 👻 — a escolha é sempre tua",melts:"dissolve-se às",starts:"começa",open_tribe:"Abrir uma Tribo aqui",live_now:"ao vivo",ev_p1:"Vista lá de cima 🔥",ev_p2:"Alguém perto do bar? Duas bebidas, um bilhete 🍹",ev_p3:"O DJ set acabou de começar, subam!",ev_p4:"Painel: 214 aqui · 38 fotos · próximo ato 20:15",ev_cap:"Cada evento tem a sua Tribo: todos publicam, todos veem, e depois dissolve-se",you:"Tu",bump_new:"nova Tribo",bump_p1:"Foi ao acaso e foi ótimo. Mesma hora para a semana? 😄",bump_cap:"Estranhos que abanam juntos recebem uma Tribo com o nome do lugar e do dia. Sem NFC, sem pagamentos.",steps_today:"passos hoje",floors:"andares subidos",trophy:"Novo troféu: semana perfeita",your_ai:"a tua IA",t_u:"Diz à Dana que chego 10 minutos atrasado",t_a:"A enviar à Dana: «10 min atrasado, guarda-me lugar 🙏» — enviar?",send:"Enviar",this_week:"esta semana",tomorrow:"Amanhã",sat:"Sáb",fri:"Sex",joining:"vão",arrived:"Estás no parque · 3 membros aqui",tab_event:"Tribo de evento",tab_steps:"Passos",tab_events:"Eventos",f1h:"Tribos — grupos ao vivo à tua volta",f1p:"Um bar, uma praia, uma mesa de coworking. Junta-te ao que está a acontecer perto ou abre uma com um toque; dissolve-se quando acaba.",f2h:"Tribos de eventos",f2p:"Concerto, festival, rooftop: cada evento tem a sua Tribo onde todos publicam fotos e se conhecem. Fecha quando a noite acaba.",f3h:"Radar",f3p:"Quem está por perto agora, visível 🔥 ou anónimo 👻. Quem caminha usa 👟 e uma seta-bússola mostra-te para onde ir.",f4h:"Bump",f4p:"Conheceste alguém? Abanem os telemóveis juntos: os cartões trocam-se e abre-se um chat. Três ou mais recebem uma Tribo.",f5h:"Ligas de passos e andares",f5p:"Contagem real do teu telemóvel, escadas incluídas. Ligas com amigos que aprovas, Tribos de caminhada, troféus e um coach diário com humor.",f6h:"Teeby — a tua IA",f6p:"«Escreve à Dana que estou atrasado», «partilha a minha localização», «põe isto no calendário»: a Teeby faz, e pergunta sempre antes de enviar.",cta_h:"Sem feeds de estranhos. Sem ruído.",cta_p:"Só as pessoas e os lugares à tua volta. A Meerada Tribes está no Google Play e na App Store.",privacy:"Privacidade",contact:"Contacto"},
+    he:{h1:"שכבת החברה של <em>העיר שלך</em>",sub:"קבוצות חיות סביבך, ראדאר של מי בסביבה עכשיו, טרייבס של אירועים, ליגות צעדים וקומות עם חברים, באמפ להכיר בניעור טלפון, וטיבי — ה-AI שפשוט מדברים איתו. אנשים אמיתיים, מקומות אמיתיים, עכשיו.",android:"הורדה ל-Android",ios:"הורדה ל-iPhone",fine:"חינם · כניסה עם מספר טלפון · בלי פידים של זרים",demo_h:"ככה זה נראה",demo_sub:"שבע סצנות קצרות, כל הפיצ׳רים, בלי להתקין",r_walking:"בהליכה עכשיו",r_anon:"אנונימי",r_cap:"גלוי 🔥 או אנונימי 👻 — תמיד ההחלטה שלך",melts:"נמס ב-",starts:"מתחיל",open_tribe:"פתח טרייב כאן",live_now:"חי עכשיו",ev_p1:"הנוף מלמעלה 🔥",ev_p2:"מישהו ליד הבר? שני משקאות, כרטיס אחד 🍹",ev_p3:"הסט של הדי-ג׳יי התחיל, תעלו!",ev_p4:"לוח: 214 כאן · 38 תמונות · ההופעה הבאה 20:15",ev_cap:"לכל אירוע יש טרייב משלו — כולם מעלים, כולם רואים, ואחר כך הוא נמס",you:"אתה",bump_new:"טרייב חדש",bump_p1:"זה היה מקרי ומעולה. אותה שעה שבוע הבא? 😄",bump_cap:"זרים שמנערים יחד מקבלים טרייב על שם המקום והתאריך. בלי NFC, בלי תשלומים.",steps_today:"צעדים היום",floors:"קומות טיפסת",trophy:"גביע חדש: שבוע מושלם",your_ai:"ה-AI שלך",t_u:"תכתוב לדנה שאני מאחר 10 דקות",t_a:"שולח לדנה: ״מאחר 10 דק׳, שמרי לי מקום 🙏״ — לאשר?",send:"שלח",this_week:"השבוע",tomorrow:"מחר",sat:"שבת",fri:"שישי",joining:"מצטרפים",arrived:"הגעת לפארק · 3 חברים כאן",tab_event:"טרייב אירוע",tab_steps:"צעדים",tab_events:"אירועים",f1h:"טרייבס — קבוצות חיות סביבך",f1p:"בר, חוף, שולחן עבודה בבית קפה. מצטרפים למה שקורה לידך או פותחים בלחיצה — וזה נמס כשנגמר.",f2h:"טרייבס של אירועים",f2p:"הופעה, פסטיבל, גג: לכל אירוע טרייב משלו שבו כולם מעלים תמונות ומכירים. נסגר כשהערב נגמר.",f3h:"ראדאר",f3p:"מי בסביבה עכשיו, גלוי 🔥 או אנונימי 👻. הולכים מסומנים ב-👟 וחץ מצפן מראה לאן ללכת כדי לפגוש.",f4h:"באמפ",f4p:"פגשת מישהו? מנערים טלפונים יחד — כרטיסי ביקור מתחלפים ונפתח צ׳אט. שלושה ומעלה מקבלים טרייב על שם המקום והיום.",f5h:"ליגות צעדים וקומות",f5p:"ספירה אמיתית מהטלפון, כולל מדרגות. ליגות עם חברים שאישרת, טרייבס הליכה, גביעים וקואצ׳ר יומי עם הומור.",f6h:"טיבי — ה-AI שלך",f6p:"״תכתוב לדנה שאני מאחר״, ״תשלח את המיקום שלי״, ״תוסיף ליומן״ — טיבי עושה, ותמיד מאשר לפני שליחה.",cta_h:"בלי פידים של זרים. בלי רעש.",cta_p:"רק האנשים והמקומות סביבך. Meerada Tribes ב-Google Play וב-App Store.",privacy:"פרטיות",contact:"צור קשר"},
+    ar:{h1:"الطبقة <em>الاجتماعية</em> لمدينتك",sub:"مجموعات حيّة حولك، رادار لمن هو قريب الآن، قبائل الفعاليات، دوريات الخطوات والطوابق مع الأصدقاء، Bump للتعارف بهزّ الهاتف، وTeeby — الذكاء الاصطناعي الذي تتحدث معه ببساطة. أشخاص حقيقيون، أماكن حقيقية، الآن.",android:"حمّله لأندرويد",ios:"حمّله لآيفون",fine:"مجاني · الدخول برقم الهاتف · بلا خلاصات مليئة بالغرباء",demo_h:"شاهده يتحرك",demo_sub:"سبع مشاهد قصيرة، كل الميزات، بدون تثبيت",r_walking:"يمشي الآن",r_anon:"مجهول",r_cap:"ظاهر 🔥 أو مجهول 👻 — القرار دائمًا لك",melts:"يذوب في",starts:"يبدأ",open_tribe:"افتح قبيلة هنا",live_now:"مباشر الآن",ev_p1:"المنظر من الأعلى 🔥",ev_p2:"أحد قرب البار؟ مشروبان، تذكرة واحدة 🍹",ev_p3:"بدأ عرض الدي جي، اصعدوا!",ev_p4:"اللوحة: 214 هنا · 38 صورة · الفقرة التالية 20:15",ev_cap:"لكل فعالية قبيلتها: الجميع ينشر، الجميع يرى، ثم تذوب",you:"أنت",bump_new:"قبيلة جديدة",bump_p1:"كان لقاءً عشوائيًا ورائعًا. نفس الوقت الأسبوع القادم؟ 😄",bump_cap:"غرباء يهزّون هواتفهم معًا يحصلون على قبيلة باسم المكان واليوم. بلا NFC، بلا مدفوعات.",steps_today:"خطوة اليوم",floors:"طابقًا صعدتها",trophy:"كأس جديد: أسبوع مثالي",your_ai:"ذكاؤك الاصطناعي",t_u:"أخبر دانا أنني سأتأخر 10 دقائق",t_a:"إرسال إلى دانا: «سأتأخر 10 دقائق، احجزي لي مكانًا 🙏» — إرسال؟",send:"إرسال",this_week:"هذا الأسبوع",tomorrow:"غدًا",sat:"السبت",fri:"الجمعة",joining:"مشاركون",arrived:"أنت في الحديقة · 3 أعضاء هنا",tab_event:"قبيلة فعالية",tab_steps:"خطوات",tab_events:"فعاليات",f1h:"القبائل — مجموعات حيّة حولك",f1p:"بار، شاطئ، طاولة عمل مشترك. انضم لما يحدث قربك أو افتح واحدة بلمسة؛ تذوب عندما ينتهي.",f2h:"قبائل الفعاليات",f2p:"حفل، مهرجان، سطح: لكل فعالية قبيلتها حيث ينشر الجميع الصور ويتعارفون. تُغلق مع انتهاء الليلة.",f3h:"الرادار",f3p:"من حولك الآن، ظاهر 🔥 أو مجهول 👻. من يمشي يحمل 👟 وسهم بوصلة يريك الاتجاه.",f4h:"Bump",f4p:"قابلت أحدًا؟ هزّا هاتفيكما معًا — تُتبادل البطاقات وتُفتح دردشة. ثلاثة أو أكثر يحصلون على قبيلة باسم المكان واليوم.",f5h:"دوريات الخطوات والطوابق",f5p:"عدّ حقيقي من هاتفك، مع السلالم. دوريات مع أصدقاء توافق عليهم، قبائل مشي، كؤوس، ومدرّب يومي بروح دعابة.",f6h:"Teeby — ذكاؤك الاصطناعي",f6p:"«اكتب لدانا أنني متأخر»، «شارك موقعي»، «أضف هذا إلى تقويمي» — Teeby ينفّذ ويسأل دائمًا قبل الإرسال.",cta_h:"بلا خلاصات غرباء. بلا ضجيج.",cta_p:"فقط الأشخاص والأماكن حولك. Meerada Tribes على Google Play وApp Store.",privacy:"الخصوصية",contact:"اتصل بنا"}
+  };
+  var RTL = {he:1, ar:1};
+  function setLang(l){
+    if(!I18N[l]) l='en';
+    var d=I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){ var k=el.getAttribute('data-i18n'); if(d[k]!=null) el.innerHTML=d[k]; });
+    document.documentElement.lang=l; document.documentElement.dir=RTL[l]?'rtl':'ltr';
+    document.getElementById('lang').value=l;
+    try{localStorage.setItem('lang',l)}catch(e){}
+  }
+  (function(){
+    var saved=null; try{saved=localStorage.getItem('lang')}catch(e){}
+    var nav=(navigator.language||'en').slice(0,2).toLowerCase();
+    setLang(saved||(I18N[nav]?nav:'en'));
+    document.getElementById('lang').addEventListener('change',function(e){setLang(e.target.value)});
+    if(location.pathname.replace(/\/+$/,'').endsWith('/get')){ var ua=navigator.userAgent||''; if(/iphone|ipad|ipod/i.test(ua)) location.replace('https://apps.apple.com/app/id6780445573'); else if(/android/i.test(ua)) location.replace('https://play.google.com/store/apps/details?id=com.tryber.social'); }
+    // demo player
+    var scenes=[].slice.call(document.querySelectorAll('.scene')), tabs=[].slice.call(document.querySelectorAll('.tabs button')), cur=0, timer;
+    function restart(el){ el.querySelectorAll('*').forEach(function(n){ var a=getComputedStyle(n).animationName; if(a&&a!=='none'){ n.style.animation='none'; void n.offsetWidth; n.style.animation=''; } }); }
+    function count(el){ var to=+el.getAttribute('data-to'), t0=performance.now(); (function step(t){ var k=Math.min(1,(t-t0)/1400); el.textContent=Math.round(to*(1-Math.pow(1-k,3))).toLocaleString(); if(k<1) requestAnimationFrame(step); })(t0); }
+    function show(i){ cur=i; scenes.forEach(function(s,j){ s.classList.toggle('on',j===i); if(j===i){ restart(s); var c=s.querySelector('.counter'); if(c) count(c);} }); tabs.forEach(function(b,j){ b.classList.toggle('on',j===i); }); }
+    function auto(){ clearInterval(timer); timer=setInterval(function(){ show((cur+1)%scenes.length); }, 6000); }
+    tabs.forEach(function(b){ b.addEventListener('click', function(){ show(+b.getAttribute('data-s')); auto(); }); });
+    show(0); auto();
+  })();
   </script>
 </body>
 </html>
