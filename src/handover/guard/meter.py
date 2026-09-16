@@ -92,13 +92,22 @@ class GuardHub:
         findings = inspect_outbound(outbound, self.policy)
         if findings:
             what = "; ".join(f"{f.what} ({f.snippet})" for f in findings[:4])
+            bypass = any(f.kind == "bypass" for f in findings)
             if decision(findings) == "block":
-                self.alert("blocked", "blocked before it left the machine", what, sid)
+                title = (
+                    "possible attempt to BYPASS Guard — blocked"
+                    if bypass
+                    else "blocked before it left the machine"
+                )
+                self.alert("blocked", title, what, sid)
                 raise GuardBlocked(
                     f"🛡 Guard blocked this call — {what}. Remove it from the message or "
                     "attachment, or allow it in the guard policy."
                 )
-            self.alert("warn", "leaving the workspace", what, sid)
+            self.alert(
+                "warn", "possible attempt to bypass Guard" if bypass else "leaving the workspace",
+                what, sid,
+            )
         return findings
 
     def after_call(

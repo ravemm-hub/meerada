@@ -242,7 +242,11 @@ class ClaudeCodeWatcher:
                 self._sink.send(
                     Alert(
                         level,
-                        "cage: the model is reaching outside the workspace",
+                        (
+                            "cage: possible attempt to BYPASS Guard"
+                            if any(f.kind == "bypass" for f in findings)
+                            else "cage: the model is reaching outside the workspace"
+                        ),
                         what,
                         session=self._label(t),
                         ts=self._clock(),

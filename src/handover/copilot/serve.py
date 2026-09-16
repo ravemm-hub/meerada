@@ -663,7 +663,8 @@ def build_app(
         return shared_connected
 
     from handover.guard.alerts import default_sinks
-    from handover.guard.policy import load_policy
+    from handover.guard.policy import USER_FILE as LOCAL_POLICY_FILE
+    from handover.guard.policy import load_policy, policy_toml
 
     _gpolicy = load_policy()
     _gring, _gsink = default_sinks(_gpolicy.webhook_url, desktop=not hosted)
@@ -710,7 +711,33 @@ def build_app(
         """The watchdog's view: per-session stall/burn verdicts + recent alerts."""
         if current_user(request) is None:
             return JSONResponse({"error": "sign in"}, status_code=401)
-        return JSONResponse(guard.snapshot())
+        snap = guard.snapshot()
+        snap["configured"] = not local_vault or LOCAL_POLICY_FILE.exists()
+        snap["policy"] = {
+            k: getattr(guard.policy, k)
+            for k in (
+                "allowed_roots", "allowed_hosts", "session_budget_usd", "daily_budget_usd",
+                "action", "cage_action", "silence_s",
+            )
+        }
+        return JSONResponse(snap)
+
+    @app.post("/guard/policy")
+    async def guard_policy(request: Request) -> JSONResponse:
+        """The setup wizard's answers -> ~/.meerada/guard.toml (desktop only), applied live."""
+        if current_user(request) is None:
+            return JSONResponse({"error": "sign in"}, status_code=401)
+        if not local_vault:
+            return JSONResponse({"error": "the guard policy is set in the desktop app"}, 403)
+        p = await request.json()
+        try:
+            text = policy_toml(p)
+        except ValueError as exc:
+            return JSONResponse({"error": str(exc)}, 400)
+        LOCAL_POLICY_FILE.parent.mkdir(parents=True, exist_ok=True)
+        LOCAL_POLICY_FILE.write_text(text, encoding="utf-8")
+        guard.policy = load_policy()
+        return JSONResponse({"ok": True, "path": str(LOCAL_POLICY_FILE)})
 
     @app.get("/models")
     def models(request: Request) -> JSONResponse:

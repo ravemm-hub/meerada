@@ -60,6 +60,23 @@ Alerts fire on **state changes only** — never the same verdict twice.
    That is the move no vendor can offer: the guard that catches the stall is
    the tool that switches you out of it.
 
+## 3b. Setup: your boundaries, in five questions
+First run of the desktop app (or `meerada guard init`) asks: the folders models
+may touch · max $ per task · max $ per day · hosts a model may reach · what to
+do on a budget hit (alert / stop) and on an exfil attempt (warn / block). The
+answers become `~/.meerada/guard.toml`; the 🛡 badge in the cockpit reopens the
+wizard any time. Saving requires accepting the disclaimer below.
+
+**Disclaimer (shown in the wizard, on the site, and here):** Guard watches and
+warns; it is not a wall. Models can and do try to get around a guard — by
+encoding a secret, splitting it, or arguing their way past a rule. Guard flags
+every attempt it recognises (base64 / hex-encoded secrets, split key strings,
+text about disabling or evading the guard) and tells you at once as a
+**"possible attempt to bypass Guard"** alert, but it cannot promise to catch
+every one. Stay alert, keep your policy current, tell your models plainly to
+obey Guard, and treat any bypass alert as real. Meerada accepts no liability if
+a model defeats Guard and information leaves your workspace.
+
 ## 4. The cage
 
 Runs on **outbound** text — prompts, attachments, tool-call arguments, shell

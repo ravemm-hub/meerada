@@ -45,13 +45,17 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           GITHUB_MODELS_TOKEN: ${{ secrets.GH_MODELS_TOKEN }}
           CEREBRAS_API_KEY: ${{ secrets.CEREBRAS_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Paid labs (OpenAI, Anthropic) run on the owner's own keys, one model per
+          # tick, on a separate hard cap: worst case 24 x $0.05 = $1.20 a day.
+          MEERADA_ALLOW_PAID: "1"
         run: |
           mkdir -p out
           python -m handover.bench.continuous_run \
             --state grade_state.json \
             --board out/grade.html \
-            --providers groq,openrouter,google,github,mistral,cerebras \
-            --budget "0.50"
+            --providers groq,openrouter,google,github,mistral,cerebras,openai,anthropic \
+            --budget "0.50" --paid-budget "0.05"
 
       - name: discover new models on the web (public OpenRouter catalog)
         run: python -m handover.bench.discover_web --out out/models_live.json || true

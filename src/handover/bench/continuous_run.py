@@ -27,7 +27,7 @@ from handover.bench.runner import ModelSpec, run_model
 from handover.bench.state_store import load_state, save_state
 from handover.metrics.core import CoreMetrics, Proportion, proportion
 from handover.replay.budget import DailyBudget
-from handover.replay.openai_client import ENDPOINTS, HttpChatCaller
+from handover.replay.openai_client import ENDPOINTS, ChatCaller, HttpChatCaller
 
 ENV_KEYS = {
     "openai": "OPENAI_API_KEY",
@@ -39,6 +39,7 @@ ENV_KEYS = {
     "google": "GOOGLE_API_KEY",
     "github": "GITHUB_MODELS_TOKEN",
     "cerebras": "CEREBRAS_API_KEY",
+    "anthropic": "ANTHROPIC_API_KEY",
 }
 
 # HARD SAFETY: only providers with a genuine free tier may be graded by the
@@ -46,9 +47,32 @@ ENV_KEYS = {
 # explicitly — the loop must never spend real money without a deliberate opt-in.
 FREE_PROVIDERS = {"groq", "openrouter", "ollama", "google", "github", "mistral", "cerebras"}
 
+# Paid labs are graded on the owner's own keys from a FIXED list (their /models
+# endpoints list hundreds of non-chat ids, and Anthropic has no OpenAI-compatible
+# catalog). One model per tick, on a separate hard per-tick budget, so a day's
+# worst case is 24 x --paid-budget. Flagships accumulate n slowly across ticks.
+PAID_MODELS: dict[str, tuple[str, ...]] = {
+    "openai": (
+        "gpt-5.4-mini", "gpt-5.4-nano", "gpt-4o-mini", "gpt-4.1-mini", "gpt-5.6-luna",
+        "gpt-4.1", "gpt-5.5", "gpt-5.6-terra",
+    ),
+    "anthropic": ("claude-haiku-4-5-20251001", "claude-sonnet-5", "claude-opus-5"),
+}
+
 # How many models per provider to (re)grade per hourly tick — free tiers are
 # quota'd per day, so we rotate through a few at a time rather than blast.
-PER_TICK: dict[str, int] = {"openrouter": 4, "github": 2, "google": 3, "mistral": 3, "cerebras": 3}
+PER_TICK: dict[str, int] = {
+    "openrouter": 4, "github": 2, "google": 3, "mistral": 3, "cerebras": 3,
+    "openai": 1, "anthropic": 1,
+}
+
+
+def paid_catalog(providers: list[str]) -> list[CatalogModel]:
+    """The fixed rows for paid labs among ``providers``."""
+    return [
+        CatalogModel(provider=p, model_id=m, version_hint="list")
+        for p in providers for m in PAID_MODELS.get(p, ())
+    ]
 
 # Model ids that are not chat-completion models — skip these (audio/embed/etc).
 _NON_CHAT = re.compile(
@@ -123,9 +147,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--board", type=Path, default=Path("out/grade_board.html"))
     parser.add_argument("--providers", default="groq,openrouter,deepseek,mistral,openai")
     parser.add_argument("--budget", type=Decimal, default=Decimal("1.00"))
+    parser.add_argument(
+        "--paid-budget", type=Decimal, default=Decimal("0.05"),
+        help="hard cap per tick for paid labs (OpenAI/Anthropic); worst case = 24 x this per day",
+    )
     args = parser.parse_args(argv)
 
-    providers = [p.strip() for p in args.providers.split(",") if p.strip() in ENDPOINTS]
+    known = set(ENDPOINTS) | set(PAID_MODELS)
+    providers = [p.strip() for p in args.providers.split(",") if p.strip() in known]
     allow_paid = os.environ.get("MEERADA_ALLOW_PAID", "") == "1"
     if not allow_paid:
         blocked = [p for p in providers if p not in FREE_PROVIDERS]
@@ -140,10 +169,13 @@ def main(argv: list[str] | None = None) -> int:
 
     state = load_state(args.state)
     budget = DailyBudget(args.budget)
+    paid_budget = DailyBudget(args.paid_budget)  # the owner's money: a separate, smaller cap
     now = datetime.now(tz=UTC)
+    listed = [p for p in live if p in ENDPOINTS and p not in PAID_MODELS]
 
     def do_fetch() -> list[CatalogModel]:
-        models = [m for m in fetch_catalog(live, keys) if _gradable(m, allow_paid)]
+        found = list(fetch_catalog(listed, keys)) + paid_catalog(live)
+        models = [m for m in found if _gradable(m, allow_paid)]
         # Free-tier quotas are per day: rotate through each provider's models a
         # few per tick (ungraded first) instead of burning the quota on one pass.
         for prov, cap in PER_TICK.items():
@@ -158,7 +190,13 @@ def main(argv: list[str] | None = None) -> int:
         return models
 
     # short timeout: an unresponsive free model must cost seconds, not the whole tick
-    callers = {p: HttpChatCaller(ENDPOINTS[p], keys[p], timeout=25.0) for p in live}
+    callers: dict[str, ChatCaller] = {
+        p: HttpChatCaller(ENDPOINTS[p], keys[p], timeout=25.0) for p in live if p in ENDPOINTS
+    }
+    if "anthropic" in live:  # native Messages API, not OpenAI-compatible
+        from handover.copilot.providers import AnthropicChatCaller
+
+        callers["anthropic"] = AnthropicChatCaller(keys["anthropic"], timeout=40.0)
     provider_of: dict[str, str] = {}
     web_prices = live_prices(fetch_live())  # public list prices for anything discovered
 
@@ -180,8 +218,14 @@ def main(argv: list[str] | None = None) -> int:
         # First look at a new model is a light pass (1 repeat) so a free tier's
         # daily quota covers several models per tick; known cards get 3 repeats.
         repeats = 3 if model_id in state.cards and state.cards[model_id].n > 0 else 1
+        paid = provider in PAID_MODELS
+        if paid:
+            repeats = 1  # paid labs: one light pass per tick, n accumulates over days
         try:
-            per_cluster = run_model(spec, complete, budget, repeats=repeats, delay_s=3.2)
+            per_cluster = run_model(
+                spec, complete, paid_budget if paid else budget, repeats=repeats,
+                delay_s=1.0 if paid else 3.2,
+            )
         except Exception as exc:
             print(f"  skip {model_id}: {type(exc).__name__} {str(exc)[:80]}")
             return None, proportion(0, 0), None, {}
@@ -201,7 +245,10 @@ def main(argv: list[str] | None = None) -> int:
     save_state(args.state, state)
     render_board(list(state.cards.values()), args.board, generated_at=now)
 
-    print(f"tick @ {now:%Y-%m-%d %H:%MZ} | spent ${budget.spent_today():.4f}")
+    print(
+        f"tick @ {now:%Y-%m-%d %H:%MZ} | spent free-tier ${budget.spent_today():.4f}"
+        f" | paid labs ${paid_budget.spent_today():.4f} (cap ${args.paid_budget})"
+    )
     print(
         f"graded: {len(summary.graded)} | prov: {summary.n_provisional} | "
         f"conf: {summary.n_confirmed}"

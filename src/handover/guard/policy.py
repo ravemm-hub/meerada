@@ -11,7 +11,9 @@ cage blocks. Layered: defaults < user file < machine (company) file < env path.
 
 from __future__ import annotations
 
+import json
 import os
+import re
 import sys
 import tomllib
 from collections.abc import Mapping
@@ -54,6 +56,7 @@ class Policy(BaseModel):
     # --- company -------------------------------------------------------------
     webhook_url: str = ""  # Slack / Teams / Telegram-compatible JSON POST for every alert
     locked: tuple[str, ...] = ()  # fields the machine policy forbids users to change
+    accepted_disclaimer: bool = False  # the user read that models may try to bypass Guard
     source: str = "defaults"  # where the effective policy came from (informational)
 
     def cap_hit(self, spent_session: float, spent_day: float) -> str:
@@ -106,6 +109,63 @@ def load_policy(
     )
     merged.pop("source", None)
     return Policy(**merged, source=source)
+
+
+DISCLAIMER = (
+    "Guard watches and warns; it is not a wall. Models can and do try to get around a "
+    "guard — by encoding a secret, splitting it, or arguing their way past a rule. Guard "
+    "flags every attempt it recognises and tells you at once, but it cannot promise to "
+    "catch every one. Stay alert, keep your policy current, tell your models plainly to "
+    "obey Guard, and treat any bypass alert as real. Meerada accepts no liability if a "
+    "model defeats Guard and information leaves your workspace."
+)
+
+
+def policy_toml(answers: Mapping[str, Any]) -> str:
+    """The setup wizard's answers as a guard.toml. Validates through :class:`Policy`."""
+
+    def strs(v: Any) -> tuple[str, ...]:
+        if isinstance(v, str):
+            v = [s for s in re.split(r"[,\n;]", v)]
+        return tuple(str(s).strip() for s in (v or ()) if str(s).strip())
+
+    def num(v: Any, default: float) -> float:
+        try:
+            return max(0.0, float(v))
+        except (TypeError, ValueError):
+            return default
+
+    p = Policy(
+        allowed_roots=strs(answers.get("allowed_roots")),
+        allowed_hosts=strs(answers.get("allowed_hosts")),
+        session_budget_usd=num(answers.get("session_budget_usd"), 5.0),
+        daily_budget_usd=num(answers.get("daily_budget_usd"), 25.0),
+        action="stop" if str(answers.get("action", "alert")) == "stop" else "alert",
+        cage_action="block" if str(answers.get("cage_action", "warn")) == "block" else "warn",
+        silence_s=num(answers.get("silence_s"), 120.0) or 120.0,
+        webhook_url=str(answers.get("webhook_url") or "").strip(),
+    )
+    if not answers.get("accepted"):
+        raise ValueError("the disclaimer must be accepted")
+
+    def lst(t: tuple[str, ...]) -> str:
+        return "[" + ", ".join(json.dumps(s) for s in t) + "]"
+
+    return (
+        "# Meerada Guard policy — written by the setup wizard\n"
+        "enabled = true\n\n"
+        f"silence_s = {p.silence_s:g}\n"
+        f"session_budget_usd = {p.session_budget_usd:g}\n"
+        f"daily_budget_usd = {p.daily_budget_usd:g}\n"
+        f'action = "{p.action}"\n\n'
+        "cage = true\n"
+        f"allowed_roots = {lst(p.allowed_roots)}\n"
+        f"allowed_hosts = {lst(p.allowed_hosts)}\n"
+        "block_secrets = true\n"
+        f'cage_action = "{p.cage_action}"\n\n'
+        f"webhook_url = {json.dumps(p.webhook_url)}\n"
+        "accepted_disclaimer = true\n"
+    )
 
 
 def policy_text(policy: Policy) -> str:

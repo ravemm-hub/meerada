@@ -98,14 +98,53 @@ def init(
     company: Annotated[
         bool, typer.Option("--company", help="write the machine-wide policy")
     ] = False,
+    defaults: Annotated[
+        bool, typer.Option("--defaults", help="skip the questions, write the starter file")
+    ] = False,
 ) -> None:
-    """Write a starter policy file you can edit."""
-    from handover.guard.policy import USER_FILE, machine_policy_path
+    """Set your boundaries in five questions (or --defaults for the starter file)."""
+    from handover.guard.policy import DISCLAIMER, USER_FILE, machine_policy_path, policy_toml
 
     target = machine_policy_path() if company else USER_FILE
     if target.exists():
-        typer.echo(f"exists: {target}")
+        typer.echo(f"exists: {target} — edit it, or delete it and run init again")
         return
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(_STARTER, encoding="utf-8")
+    if defaults:
+        target.write_text(_STARTER, encoding="utf-8")
+        typer.echo(f"wrote {target}")
+        return
+    typer.echo("Meerada Guard — your boundaries. Enter keeps the default.\n")
+    roots = typer.prompt(
+        "1) Workspace folders the models may touch (comma-separated)", default=str(Path.cwd())
+    )
+    session = typer.prompt("2) Max spend per task, USD (0 = no cap)", default="5")
+    daily = typer.prompt("3) Max spend per day, USD (0 = no cap)", default="25")
+    hosts = typer.prompt(
+        "4) Hosts a model may reach (comma-separated; empty = warn on every outbound host)",
+        default="",
+    )
+    action = typer.prompt("5) When a budget is hit: alert or stop", default="alert")
+    cage = typer.prompt(
+        "   When something tries to leave the workspace: warn or block", default="warn"
+    )
+    typer.echo("\n" + DISCLAIMER + "\n")
+    accepted = typer.confirm(
+        "I understand — models may try to bypass Guard; I stay alert", default=False
+    )
+    if not accepted:
+        typer.echo("not written — Guard needs an informed owner")
+        raise typer.Exit(1)
+    text = policy_toml(
+        {
+            "allowed_roots": roots,
+            "session_budget_usd": session,
+            "daily_budget_usd": daily,
+            "allowed_hosts": hosts,
+            "action": action,
+            "cage_action": cage,
+            "accepted": True,
+        }
+    )
+    target.write_text(text, encoding="utf-8")
     typer.echo(f"wrote {target}")

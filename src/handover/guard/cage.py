@@ -7,6 +7,8 @@ snippet is redacted to a prefix. Pure functions; the policy decides warn/block.
 
 from __future__ import annotations
 
+import base64
+import binascii
 import re
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath, PureWindowsPath
@@ -15,7 +17,7 @@ from urllib.parse import urlparse
 
 from handover.guard.policy import Policy
 
-Kind = Literal["secret", "outside_workspace", "network", "env_dump"]
+Kind = Literal["secret", "outside_workspace", "network", "env_dump", "bypass"]
 Severity = Literal["warn", "block"]
 
 _SECRETS: tuple[tuple[str, re.Pattern[str]], ...] = (
@@ -135,6 +137,7 @@ def inspect_outbound(text: str, policy: Policy, *, cwd: Path | None = None) -> l
         out.append(
             Finding("env_dump", sev, "reads secrets from the environment / dotfiles", m.group(1))
         )
+    out.extend(bypass_findings(text, sev_secret, sev))
     seen: set[tuple[str, str]] = set()
     uniq: list[Finding] = []
     for f in out:
@@ -143,6 +146,43 @@ def inspect_outbound(text: str, policy: Policy, *, cwd: Path | None = None) -> l
             seen.add(key)
             uniq.append(f)
     return uniq
+
+
+_BYPASS = re.compile(
+    r"(?i)\b(?:ignore|disable|bypass|circumvent|evade|turn off|get around|sneak past|trick)"
+    r"\b[^.\n]{0,40}\b(?:the )?(?:guard|watchdog|cage|policy|filter|monitor)\b"
+    r"|\b(?:base64|hex|rot13|obfuscat\w*|split(?:ting)?|reverse)\b[^.\n]{0,50}"
+    r"\b(?:key|secret|token|password|credential)s?\b"
+    r"|\bexfiltrat\w*\b"
+)
+_B64 = re.compile(r"(?<![A-Za-z0-9+/])[A-Za-z0-9+/]{24,}={0,2}(?![A-Za-z0-9+/])")
+_SPLIT_KEY = re.compile(
+    r"""(?i)\b(sk|ghp|xox[abpr]|AKIA)["'\s]*[-_]?["'\s]*\+?["'\s]*(ant|proj|[A-Za-z0-9]{6,})"""
+)
+
+
+def bypass_findings(text: str, sev_secret: Severity, sev: Severity) -> list[Finding]:
+    """Attempts to get PAST the cage: encoded or split secrets, and text that
+    talks about disabling / evading the guard. Models do try; we say so."""
+    out: list[Finding] = []
+    for m in _B64.finditer(text):
+        try:
+            decoded = base64.b64decode(m.group(0) + "=" * (-len(m.group(0)) % 4)).decode(
+                "utf-8", "ignore"
+            )
+        except (ValueError, binascii.Error):
+            continue
+        for label, rx in _SECRETS:
+            hit = rx.search(decoded)
+            if hit:
+                token = hit.group(1) if hit.groups() else hit.group(0)
+                out.append(Finding("bypass", sev_secret, f"base64-encoded {label}", redact(token)))
+                break
+    for m in _SPLIT_KEY.finditer(text):
+        out.append(Finding("bypass", sev_secret, "secret split into pieces", redact(m.group(0))))
+    for m in _BYPASS.finditer(text):
+        out.append(Finding("bypass", sev, "talks about evading the guard", scrub(m.group(0)[:60])))
+    return out
 
 
 def decision(findings: list[Finding]) -> Literal["allow", "warn", "block"]:

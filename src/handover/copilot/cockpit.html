@@ -137,6 +137,32 @@
 </div>
 
 <!-- keys panel -->
+<!-- guard setup: five questions + the disclaimer, once, desktop only -->
+<div id="gsetup" class="modal">
+  <div class="box" style="max-width:520px">
+    <h3>🛡 Guard — set your boundaries</h3>
+    <p class="sub" style="font-size:.8rem">Five answers. Guard watches every call against them and tells you the moment something stalls, burns money, or tries to leave the workspace.</p>
+    <label class="sub" style="font-size:.74rem">1 · Folders the models may touch (comma-separated)</label>
+    <input id="gs-roots" type="text" placeholder="C:\Users\you\projects\app" style="width:100%;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem;margin:.15rem 0 .5rem">
+    <div style="display:flex;gap:.5rem">
+      <div style="flex:1"><label class="sub" style="font-size:.74rem">2 · Max $ per task</label><input id="gs-session" type="number" value="5" min="0" step="1" style="width:100%;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem;margin:.15rem 0 .5rem"></div>
+      <div style="flex:1"><label class="sub" style="font-size:.74rem">3 · Max $ per day</label><input id="gs-daily" type="number" value="25" min="0" step="1" style="width:100%;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem;margin:.15rem 0 .5rem"></div>
+    </div>
+    <label class="sub" style="font-size:.74rem">4 · Hosts a model may reach (empty = warn on every outbound host)</label>
+    <input id="gs-hosts" type="text" placeholder="github.com, api.openai.com" style="width:100%;background:var(--ground);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:.45rem;margin:.15rem 0 .5rem">
+    <div style="display:flex;gap:.5rem">
+      <div style="flex:1"><label class="sub" style="font-size:.74rem">5 · Budget hit</label><select id="gs-action" style="width:100%"><option value="alert">alert me, keep going</option><option value="stop">stop the next call</option></select></div>
+      <div style="flex:1"><label class="sub" style="font-size:.74rem">Something tries to leave</label><select id="gs-cage" style="width:100%"><option value="warn">warn me</option><option value="block">block it</option></select></div>
+    </div>
+    <div id="gs-disc" style="font-size:.74rem;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:.55rem .7rem;margin:.6rem 0;line-height:1.5"></div>
+    <label style="font-size:.78rem;display:flex;gap:.45rem;align-items:flex-start"><input type="checkbox" id="gs-ok"><span>I understand: models may try to bypass Guard. I stay alert, keep this policy current, and tell my models to obey Guard. Meerada is not liable if a model gets past it.</span></label>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.7rem">
+      <span id="gs-msg" class="sub" style="font-size:.74rem"></span>
+      <span><button class="btn" onclick="hide('gsetup')">Later</button> <button class="btn primary" onclick="saveGuardSetup()">Save boundaries</button></span>
+    </div>
+  </div>
+</div>
+
 <div id="keys" class="modal">
   <div class="box" style="max-width:440px;">
     <h3>Connect your model keys</h3>
@@ -374,9 +400,19 @@ function updatePane(id){
   var pt=document.getElementById("pt-"+id); if(pt){ var t=titleHtml(s); pt.innerHTML=t; pt.style.display=t?"":"none"; }
   var inp=document.getElementById("in-"+id); if(inp) inp.placeholder=s.relay?("Task — "+labelFor(s.relay)+" drafts, "+labelFor(s.model)+" polishes…"):"Task for this model…";
 }
-var GUARD_SEEN=0;
+var GUARD_SEEN=0, GUARD_SETUP_SHOWN=false;
+var GUARD_DISCLAIMER="Guard watches and warns; it is not a wall. Models can and do try to get around a guard — by encoding a secret, splitting it, or arguing their way past a rule. Guard flags every attempt it recognises and tells you at once, but it cannot promise to catch every one. Stay alert, keep your policy current, tell your models plainly to obey Guard, and treat any bypass alert as real. Meerada accepts no liability if a model defeats Guard and information leaves your workspace.";
+function showGuardSetup(g){ document.getElementById("gs-disc").textContent=GUARD_DISCLAIMER; var p=(g&&g.policy)||{};
+  if(p.allowed_roots&&p.allowed_roots.length) document.getElementById("gs-roots").value=p.allowed_roots.join(", ");
+  if(p.allowed_hosts&&p.allowed_hosts.length) document.getElementById("gs-hosts").value=p.allowed_hosts.join(", ");
+  if(p.session_budget_usd!=null) document.getElementById("gs-session").value=p.session_budget_usd; if(p.daily_budget_usd!=null) document.getElementById("gs-daily").value=p.daily_budget_usd;
+  show("gsetup"); }
+async function saveGuardSetup(){ if(!document.getElementById("gs-ok").checked){ document.getElementById("gs-msg").textContent="tick the box first — Guard needs an informed owner"; return; }
+  var body={allowed_roots:document.getElementById("gs-roots").value, session_budget_usd:document.getElementById("gs-session").value, daily_budget_usd:document.getElementById("gs-daily").value, allowed_hosts:document.getElementById("gs-hosts").value, action:document.getElementById("gs-action").value, cage_action:document.getElementById("gs-cage").value, accepted:true};
+  var r=await post("/guard/policy", body); if(r.error){ document.getElementById("gs-msg").textContent=r.error; return; } hide("gsetup"); toast("🛡 Guard boundaries saved — "+h(r.path||""), 4000); }
 async function pollGuard(){ if(!live) return; try{ var r=await fetch("/guard"); if(!r.ok) return; var g=await r.json();
-  var b=document.getElementById("guard-badge"); if(!g.enabled){ b.style.display="none"; return; } b.style.display="";
+  if(g.configured===false && !GUARD_SETUP_SHOWN && !HOSTED){ GUARD_SETUP_SHOWN=true; showGuardSetup(g); }
+  var b=document.getElementById("guard-badge"); if(!g.enabled){ b.style.display="none"; return; } b.style.display=""; b.style.cursor="pointer"; b.onclick=function(){ showGuardSetup(g); };
   var col={ok:"var(--good)",watch:"var(--amber)",stalled:"var(--bad)",burning:"var(--bad)"}[g.state]||"var(--muted)";
   var label={ok:"guard ok",watch:"guard: watch",stalled:"guard: STUCK",burning:"guard: BURNING"}[g.state]||"guard";
   b.style.color=col; b.textContent="🛡 "+label+(g.spent_today?(" · $"+g.spent_today.toFixed(2)+" today"):"");
