@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-09-26T01:38Z",
+ "generated_at": "2026-09-26T07:27Z",
  "source": "openrouter public catalog",
  "count": 368,
  "new_days": 21,
@@ -240,7 +240,7 @@
    "price_out": 0.47,
    "context": 1000000,
    "created": "2026-09-21",
-   "age_days": 4,
+   "age_days": 5,
    "free": false,
    "modalities": "text+image+audio+video"
   },
@@ -312,7 +312,7 @@
    "price_out": 30.0,
    "context": 1000000,
    "created": "2026-09-11",
-   "age_days": 14,
+   "age_days": 15,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -324,7 +324,7 @@
    "price_out": 6.0,
    "context": 1000000,
    "created": "2026-09-11",
-   "age_days": 14,
+   "age_days": 15,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -344,11 +344,11 @@
    "id": "deepseek/deepseek-v4.1-flash",
    "name": "DeepSeek: DeepSeek V4.1 Flash",
    "vendor": "deepseek",
-   "price_in": 0.14,
-   "price_out": 0.42,
+   "price_in": 0.3,
+   "price_out": 1.2,
    "context": 1048576,
    "created": "2026-09-10",
-   "age_days": 15,
+   "age_days": 16,
    "free": false,
    "modalities": "text+image"
   },
@@ -480,7 +480,7 @@
    "price_out": 2.501,
    "context": 1048576,
    "created": "2026-08-28",
-   "age_days": 28,
+   "age_days": 29,
    "free": false,
    "modalities": "text"
   },
@@ -636,7 +636,7 @@
    "price_out": 0.0,
    "context": 512000,
    "created": "2026-08-14",
-   "age_days": 42,
+   "age_days": 43,
    "free": true,
    "modalities": "text+image"
   },
@@ -800,11 +800,11 @@
    "id": "deepseek/deepseek-v4-flash-0731",
    "name": "DeepSeek: DeepSeek V4 Flash 0731",
    "vendor": "deepseek",
-   "price_in": 0.022,
+   "price_in": 0.021,
    "price_out": 0.32,
    "context": 1310720,
    "created": "2026-07-31",
-   "age_days": 56,
+   "age_days": 57,
    "free": false,
    "modalities": "text"
   },
@@ -1176,7 +1176,7 @@
    "price_out": 30.0,
    "context": 1000000,
    "created": "2026-06-24",
-   "age_days": 93,
+   "age_days": 94,
    "free": false,
    "modalities": "text+image"
   },
@@ -1188,7 +1188,7 @@
    "price_out": 3.0,
    "context": 131072,
    "created": "2026-06-18",
-   "age_days": 99,
+   "age_days": 100,
    "free": false,
    "modalities": "image+text"
   },
@@ -1200,7 +1200,7 @@
    "price_out": 12.0,
    "context": 131072,
    "created": "2026-06-18",
-   "age_days": 99,
+   "age_days": 100,
    "free": false,
    "modalities": "image+text"
   },
@@ -1296,7 +1296,7 @@
    "price_out": 2.4,
    "context": 262144,
    "created": "2026-06-04",
-   "age_days": 113,
+   "age_days": 114,
    "free": false,
    "modalities": "text"
   },
@@ -1308,7 +1308,7 @@
    "price_out": 0.0,
    "context": 1000000,
    "created": "2026-06-04",
-   "age_days": 113,
+   "age_days": 114,
    "free": true,
    "modalities": "text"
   },
@@ -1476,7 +1476,7 @@
    "price_out": 1.8,
    "context": 1000000,
    "created": "2026-04-27",
-   "age_days": 151,
+   "age_days": 152,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1488,7 +1488,7 @@
    "price_out": 1.125,
    "context": 1000000,
    "created": "2026-04-27",
-   "age_days": 151,
+   "age_days": 152,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1500,7 +1500,7 @@
    "price_out": 1.0,
    "context": 262144,
    "created": "2026-04-27",
-   "age_days": 151,
+   "age_days": 152,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1512,7 +1512,7 @@
    "price_out": 6.162,
    "context": 262144,
    "created": "2026-04-27",
-   "age_days": 151,
+   "age_days": 152,
    "free": false,
    "modalities": "text"
   },
@@ -1524,7 +1524,7 @@
    "price_out": 3.2,
    "context": 262144,
    "created": "2026-04-27",
-   "age_days": 151,
+   "age_days": 152,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1560,7 +1560,7 @@
    "price_out": 0.8376,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 154,
+   "age_days": 155,
    "free": false,
    "modalities": "text"
   },
@@ -1572,7 +1572,7 @@
    "price_out": 0.0941,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 154,
+   "age_days": 155,
    "free": false,
    "modalities": "text"
   },
@@ -1632,7 +1632,7 @@
    "price_out": -1000000.0,
    "context": 2000000,
    "created": "2026-04-21",
-   "age_days": 157,
+   "age_days": 158,
    "free": false,
    "modalities": "text"
   },
@@ -1968,7 +1968,7 @@
    "price_out": 1.5,
    "context": 1048576,
    "created": "2026-03-03",
-   "age_days": 206,
+   "age_days": 207,
    "free": false,
    "modalities": "text+image+video+file+audio"
   },
@@ -2124,7 +2124,7 @@
    "price_out": 3.5,
    "context": 262144,
    "created": "2026-02-16",
-   "age_days": 221,
+   "age_days": 222,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -2196,7 +2196,7 @@
    "price_out": 0.0,
    "context": 200000,
    "created": "2026-02-01",
-   "age_days": 236,
+   "age_days": 237,
    "free": true,
    "modalities": "text+image"
   },
@@ -2220,7 +2220,7 @@
    "price_out": 2.25,
    "context": 262144,
    "created": "2026-01-27",
-   "age_days": 241,
+   "age_days": 242,
    "free": false,
    "modalities": "text+image"
   },
@@ -2232,7 +2232,7 @@
    "price_out": 0.6,
    "context": 131072,
    "created": "2026-01-27",
-   "age_days": 241,
+   "age_days": 242,
    "free": false,
    "modalities": "text"
   },
@@ -2340,7 +2340,7 @@
    "price_out": 1.2,
    "context": 204800,
    "created": "2025-12-23",
-   "age_days": 276,
+   "age_days": 277,
    "free": false,
    "modalities": "text"
   },
@@ -2352,7 +2352,7 @@
    "price_out": 2.2,
    "context": 204800,
    "created": "2025-12-22",
-   "age_days": 277,
+   "age_days": 278,
    "free": false,
    "modalities": "text"
   },
@@ -2460,7 +2460,7 @@
    "price_out": -1000000.0,
    "context": 128000,
    "created": "2025-12-05",
-   "age_days": 294,
+   "age_days": 295,
    "free": false,
    "modalities": "text"
   },
@@ -2700,7 +2700,7 @@
    "price_out": 0.112,
    "context": 131000,
    "created": "2025-10-20",
-   "age_days": 340,
+   "age_days": 341,
    "free": false,
    "modalities": "text"
   },
@@ -3684,7 +3684,7 @@
    "price_out": 0.45,
    "context": 131072,
    "created": "2025-03-12",
-   "age_days": 562,
+   "age_days": 563,
    "free": false,
    "modalities": "text+image"
   },
@@ -3708,7 +3708,7 @@
    "price_out": 8.0,
    "context": 128000,
    "created": "2025-03-07",
-   "age_days": 567,
+   "age_days": 568,
    "free": false,
    "modalities": "text+image"
   },
@@ -3720,7 +3720,7 @@
    "price_out": 15.0,
    "context": 200000,
    "created": "2025-03-07",
-   "age_days": 567,
+   "age_days": 568,
    "free": false,
    "modalities": "text+image"
   },
@@ -3864,7 +3864,7 @@
    "price_out": 1.1,
    "context": 1000192,
    "created": "2025-01-15",
-   "age_days": 618,
+   "age_days": 619,
    "free": false,
    "modalities": "text+image"
   },
@@ -3876,7 +3876,7 @@
    "price_out": 0.14,
    "context": 16384,
    "created": "2025-01-10",
-   "age_days": 623,
+   "age_days": 624,
    "free": false,
    "modalities": "text"
   },
@@ -3924,7 +3924,7 @@
    "price_out": 0.15,
    "context": 128000,
    "created": "2024-12-14",
-   "age_days": 650,
+   "age_days": 651,
    "free": false,
    "modalities": "text"
   },
