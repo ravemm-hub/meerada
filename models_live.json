@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-10T02:09Z",
+ "generated_at": "2026-10-10T08:37Z",
  "source": "openrouter public catalog",
  "count": 364,
  "new_days": 21,
@@ -360,7 +360,7 @@
    "price_out": 0.47,
    "context": 1000000,
    "created": "2026-09-21",
-   "age_days": 18,
+   "age_days": 19,
    "free": false,
    "modalities": "text+image+audio+video"
   },
@@ -432,7 +432,7 @@
    "price_out": 30.0,
    "context": 1000000,
    "created": "2026-09-11",
-   "age_days": 28,
+   "age_days": 29,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -444,7 +444,7 @@
    "price_out": 6.0,
    "context": 1000000,
    "created": "2026-09-11",
-   "age_days": 28,
+   "age_days": 29,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -468,7 +468,7 @@
    "price_out": 1.2,
    "context": 1048576,
    "created": "2026-09-10",
-   "age_days": 29,
+   "age_days": 30,
    "free": false,
    "modalities": "text+image"
   },
@@ -624,7 +624,7 @@
    "price_out": 2.501,
    "context": 1048576,
    "created": "2026-08-28",
-   "age_days": 42,
+   "age_days": 43,
    "free": false,
    "modalities": "text"
   },
@@ -756,7 +756,7 @@
    "price_out": 0.0,
    "context": 512000,
    "created": "2026-08-14",
-   "age_days": 56,
+   "age_days": 57,
    "free": true,
    "modalities": "text+image"
   },
@@ -848,8 +848,8 @@
    "id": "nvidia/nemotron-3.5-lightning",
    "name": "NVIDIA: Nemotron 3.5 Lightning",
    "vendor": "nvidia",
-   "price_in": 0.0469,
-   "price_out": 0.134,
+   "price_in": 0.07,
+   "price_out": 0.2,
    "context": 262144,
    "created": "2026-08-11",
    "age_days": 59,
@@ -920,11 +920,11 @@
    "id": "deepseek/deepseek-v4-flash-0731",
    "name": "DeepSeek: DeepSeek V4 Flash 0731",
    "vendor": "deepseek",
-   "price_in": 0.0046,
+   "price_in": 0.0073,
    "price_out": 1.28,
    "context": 1048576,
    "created": "2026-07-31",
-   "age_days": 70,
+   "age_days": 71,
    "free": false,
    "modalities": "text"
   },
@@ -1284,7 +1284,7 @@
    "price_out": 30.0,
    "context": 1000000,
    "created": "2026-06-24",
-   "age_days": 107,
+   "age_days": 108,
    "free": false,
    "modalities": "text+image"
   },
@@ -1296,7 +1296,7 @@
    "price_out": 3.0,
    "context": 131072,
    "created": "2026-06-18",
-   "age_days": 113,
+   "age_days": 114,
    "free": false,
    "modalities": "image+text"
   },
@@ -1308,7 +1308,7 @@
    "price_out": 12.0,
    "context": 131072,
    "created": "2026-06-18",
-   "age_days": 113,
+   "age_days": 114,
    "free": false,
    "modalities": "image+text"
   },
@@ -1404,7 +1404,7 @@
    "price_out": 2.2,
    "context": 262144,
    "created": "2026-06-04",
-   "age_days": 127,
+   "age_days": 128,
    "free": false,
    "modalities": "text"
   },
@@ -1416,7 +1416,7 @@
    "price_out": 0.0,
    "context": 1000000,
    "created": "2026-06-04",
-   "age_days": 127,
+   "age_days": 128,
    "free": true,
    "modalities": "text"
   },
@@ -1584,7 +1584,7 @@
    "price_out": 1.8,
    "context": 1000000,
    "created": "2026-04-27",
-   "age_days": 165,
+   "age_days": 166,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1596,7 +1596,7 @@
    "price_out": 1.125,
    "context": 1000000,
    "created": "2026-04-27",
-   "age_days": 165,
+   "age_days": 166,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1608,7 +1608,7 @@
    "price_out": 1.0,
    "context": 262144,
    "created": "2026-04-27",
-   "age_days": 165,
+   "age_days": 166,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1652,11 +1652,11 @@
    "id": "deepseek/deepseek-v4-pro",
    "name": "DeepSeek: DeepSeek V4 Pro 0423",
    "vendor": "deepseek",
-   "price_in": 0.2088,
-   "price_out": 0.4176,
+   "price_in": 0.9483,
+   "price_out": 1.8966,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 168,
+   "age_days": 169,
    "free": false,
    "modalities": "text"
   },
@@ -1664,11 +1664,11 @@
    "id": "deepseek/deepseek-v4-flash",
    "name": "DeepSeek: DeepSeek V4 Flash 0423",
    "vendor": "deepseek",
-   "price_in": 0.0057,
+   "price_in": 0.0131,
    "price_out": 1.28,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 168,
+   "age_days": 169,
    "free": false,
    "modalities": "text"
   },
@@ -1728,7 +1728,7 @@
    "price_out": -1000000.0,
    "context": 2000000,
    "created": "2026-04-21",
-   "age_days": 171,
+   "age_days": 172,
    "free": false,
    "modalities": "text"
   },
@@ -2064,7 +2064,7 @@
    "price_out": 1.5,
    "context": 1048576,
    "created": "2026-03-03",
-   "age_days": 220,
+   "age_days": 221,
    "free": false,
    "modalities": "text+image+video+file+audio"
   },
@@ -2208,7 +2208,7 @@
    "price_out": 1.56,
    "context": 1000000,
    "created": "2026-02-16",
-   "age_days": 235,
+   "age_days": 236,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -2220,7 +2220,7 @@
    "price_out": 3.5,
    "context": 262144,
    "created": "2026-02-16",
-   "age_days": 235,
+   "age_days": 236,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -2280,7 +2280,7 @@
    "price_out": 0.0,
    "context": 200000,
    "created": "2026-02-01",
-   "age_days": 250,
+   "age_days": 251,
    "free": true,
    "modalities": "text+image"
   },
@@ -2300,11 +2300,11 @@
    "id": "moonshotai/kimi-k2.5",
    "name": "MoonshotAI: Kimi K2.5",
    "vendor": "moonshotai",
-   "price_in": 0.45,
-   "price_out": 2.25,
+   "price_in": 0.5,
+   "price_out": 2.5,
    "context": 262144,
    "created": "2026-01-27",
-   "age_days": 255,
+   "age_days": 256,
    "free": false,
    "modalities": "text+image"
   },
@@ -2316,7 +2316,7 @@
    "price_out": 0.6,
    "context": 131072,
    "created": "2026-01-27",
-   "age_days": 255,
+   "age_days": 256,
    "free": false,
    "modalities": "text"
   },
@@ -2436,7 +2436,7 @@
    "price_out": 2.2,
    "context": 204800,
    "created": "2025-12-22",
-   "age_days": 291,
+   "age_days": 292,
    "free": false,
    "modalities": "text"
   },
@@ -2544,7 +2544,7 @@
    "price_out": -1000000.0,
    "context": 128000,
    "created": "2025-12-05",
-   "age_days": 308,
+   "age_days": 309,
    "free": false,
    "modalities": "text"
   },
@@ -2625,7 +2625,7 @@
    "name": "DeepSeek: DeepSeek V3.2",
    "vendor": "deepseek",
    "price_in": 0.259,
-   "price_out": 0.42,
+   "price_out": 0.8,
    "context": 163840,
    "created": "2025-12-01",
    "age_days": 312,
@@ -2772,7 +2772,7 @@
    "price_out": 0.112,
    "context": 131000,
    "created": "2025-10-20",
-   "age_days": 354,
+   "age_days": 355,
    "free": false,
    "modalities": "text"
   },
@@ -3648,7 +3648,7 @@
    "price_out": 0.45,
    "context": 131072,
    "created": "2025-03-12",
-   "age_days": 576,
+   "age_days": 577,
    "free": false,
    "modalities": "text+image"
   },
@@ -3816,7 +3816,7 @@
    "price_out": 1.1,
    "context": 1000192,
    "created": "2025-01-15",
-   "age_days": 632,
+   "age_days": 633,
    "free": false,
    "modalities": "text+image"
   },
@@ -3828,7 +3828,7 @@
    "price_out": 0.14,
    "context": 16384,
    "created": "2025-01-10",
-   "age_days": 637,
+   "age_days": 638,
    "free": false,
    "modalities": "text"
   },
@@ -3876,7 +3876,7 @@
    "price_out": 0.15,
    "context": 128000,
    "created": "2024-12-14",
-   "age_days": 664,
+   "age_days": 665,
    "free": false,
    "modalities": "text"
   },
