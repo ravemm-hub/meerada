@@ -15,7 +15,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "aion-labs/aion-3.5-mini": {
       "ci_width_points": null,
@@ -32,32 +32,31 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "allam-2-7b": {
-      "ci_width_points": 20.6,
+      "ci_width_points": 21.6,
       "clusters": {
-        "agentic": 0.167,
+        "agentic": 0.333,
         "classification": 1.0,
         "code": 0.0,
         "long_context": 0.0,
         "reasoning": 0.111,
-        "safety": 0.333,
-        "sql": 0.111,
-        "structured_extraction": 0.111,
-        "summary": 0.667,
+        "safety": 0.889,
+        "sql": 0.333,
+        "structured_extraction": 0.0,
+        "summary": 0.333,
         "tool_call": 1.0
       },
       "econ": {
-        "cpat_usd": 0.000135,
-        "n_successes": 23,
+        "cpat_usd": 9.6e-05,
+        "n_successes": 28,
         "price_in": 0.1,
         "price_note": "estimated",
         "price_out": 0.3,
-        "ttat_s": 0.97
+        "ttat_s": 0.87
       },
       "history": [
-        37.0,
         36.5,
         36.5,
         31.1,
@@ -86,19 +85,20 @@
         35.1,
         37.8,
         37.0,
-        31.1
+        31.1,
+        37.8
       ],
       "model_id": "allam-2-7b",
       "n": 74,
       "quality": {
-        "ci_high": 0.4233882474767482,
-        "ci_low": 0.21690691603479303,
+        "ci_high": 0.492287510730847,
+        "ci_low": 0.2764736658122867,
         "n": 74,
-        "value": 0.3108108108108108
+        "value": 0.3783783783783784
       },
-      "score": 31.1,
+      "score": 37.8,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "anthropic/claude-haiku-5.5": {
       "ci_width_points": null,
@@ -115,7 +115,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "anthropic/claude-haiku-5.5:batch": {
       "ci_width_points": null,
@@ -132,7 +132,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "anthropic/claude-opus-5.5": {
       "ci_width_points": null,
@@ -149,7 +149,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "anthropic/claude-opus-5.5:batch": {
       "ci_width_points": null,
@@ -166,7 +166,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "anthropic/claude-sonnet-5.5": {
       "ci_width_points": null,
@@ -183,7 +183,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "anthropic/claude-sonnet-5.5:batch": {
       "ci_width_points": null,
@@ -200,7 +200,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "apodex/apodex-1.1-mini:free": {
       "ci_width_points": null,
@@ -238,7 +238,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "canopylabs/orpheus-arabic-saudi": {
       "ci_width_points": null,
@@ -255,7 +255,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "canopylabs/orpheus-v1-english": {
       "ci_width_points": null,
@@ -272,7 +272,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "cohere/command-a-plus": {
       "ci_width_points": null,
@@ -289,7 +289,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "cohere/north-mini-code:free": {
       "ci_width_points": null,
@@ -306,7 +306,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "dots-studio/dots-3-note-preview:free": {
       "ci_width_points": null,
@@ -333,7 +333,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "fireworks/ember-1": {
       "ci_width_points": null,
@@ -350,7 +350,41 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
+    },
+    "google/gemini-4-argon": {
+      "ci_width_points": null,
+      "clusters": {},
+      "econ": null,
+      "history": [],
+      "model_id": "google/gemini-4-argon",
+      "n": 0,
+      "quality": {
+        "ci_high": null,
+        "ci_low": null,
+        "n": 0,
+        "value": null
+      },
+      "score": null,
+      "status": "provisional",
+      "updated_at": "2026-10-13T19:36:33.454042Z"
+    },
+    "google/gemini-4-argon:batch": {
+      "ci_width_points": null,
+      "clusters": {},
+      "econ": null,
+      "history": [],
+      "model_id": "google/gemini-4-argon:batch",
+      "n": 0,
+      "quality": {
+        "ci_high": null,
+        "ci_low": null,
+        "n": 0,
+        "value": null
+      },
+      "score": null,
+      "status": "provisional",
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "google/gemini-nano-banana-2.1": {
       "ci_width_points": null,
@@ -367,7 +401,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "google/gemma-4-26b-a4b-it:free": {
       "ci_width_points": null,
@@ -384,7 +418,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "google/gemma-4-31b-it:free": {
       "ci_width_points": null,
@@ -401,7 +435,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "groq/compound": {
       "ci_width_points": 16.1,
@@ -550,7 +584,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "inclusionai/ling-3.0-flash-sante:free": {
       "ci_width_points": null,
@@ -585,7 +619,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "inclusionai/ling-3.0-flash-vl:free": {
       "ci_width_points": null,
@@ -616,7 +650,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "inclusionai/ling-3.1-flash": {
       "ci_width_points": null,
@@ -652,7 +686,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "inference-net/schematron-v2-small": {
       "ci_width_points": null,
@@ -679,7 +713,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "inference-net/schematron-v2-turbo": {
       "ci_width_points": null,
@@ -708,7 +742,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "liquid/lfm-2.5-2.6b:free": {
       "ci_width_points": null,
@@ -734,7 +768,24 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
+    },
+    "liquid/lfm-2.5-24b-a2b": {
+      "ci_width_points": null,
+      "clusters": {},
+      "econ": null,
+      "history": [],
+      "model_id": "liquid/lfm-2.5-24b-a2b",
+      "n": 0,
+      "quality": {
+        "ci_high": null,
+        "ci_low": null,
+        "n": 0,
+        "value": null
+      },
+      "score": null,
+      "status": "provisional",
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "meta/muse-wonder": {
       "ci_width_points": null,
@@ -751,7 +802,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "minimax/minimax-m2.7:free": {
       "ci_width_points": null,
@@ -777,7 +828,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "minimax/minimax-m3:free": {
       "ci_width_points": null,
@@ -803,7 +854,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "mistralai/mistral-large-4-0": {
       "ci_width_points": null,
@@ -820,7 +871,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "nex-agi/nex-n2.5-mini:free": {
       "ci_width_points": null,
@@ -848,7 +899,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "nex-agi/nex-n2.5-pro:free": {
       "ci_width_points": null,
@@ -874,7 +925,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
       "ci_width_points": null,
@@ -891,7 +942,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "nvidia/nemotron-3-super-120b-a12b:free": {
       "ci_width_points": null,
@@ -908,7 +959,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "nvidia/nemotron-3-ultra-550b-a55b:free": {
       "ci_width_points": null,
@@ -925,7 +976,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "nvidia/nemotron-3.5-content-safety:free": {
       "ci_width_points": null,
@@ -942,7 +993,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "nvidia/nemotron-3.5-lightning:free": {
       "ci_width_points": null,
@@ -959,7 +1010,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "openai/gpt-6-luna": {
       "ci_width_points": null,
@@ -976,7 +1027,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "openai/gpt-6-luna-pro": {
       "ci_width_points": null,
@@ -993,7 +1044,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "openai/gpt-6-luna-pro:batch": {
       "ci_width_points": null,
@@ -1010,7 +1061,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "openai/gpt-6-luna:batch": {
       "ci_width_points": null,
@@ -1027,7 +1078,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "openai/gpt-6.1-sol": {
       "ci_width_points": null,
@@ -1044,7 +1095,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "openai/gpt-6.1-sol-pro": {
       "ci_width_points": null,
@@ -1061,7 +1112,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "openai/gpt-6.1-sol-pro:batch": {
       "ci_width_points": null,
@@ -1078,7 +1129,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "openai/gpt-6.1-sol:batch": {
       "ci_width_points": null,
@@ -1095,32 +1146,31 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "openai/gpt-oss-120b": {
-      "ci_width_points": 20.2,
+      "ci_width_points": 20.0,
       "clusters": {
-        "agentic": 1.0,
+        "agentic": 0.667,
         "classification": 1.0,
-        "code": 0.25,
+        "code": 0.417,
         "long_context": 1.0,
         "reasoning": 0.333,
         "safety": 0.667,
         "sql": 1.0,
         "structured_extraction": 1.0,
-        "summary": 0.167,
+        "summary": 0.333,
         "tool_call": 1.0
       },
       "econ": {
         "cpat_usd": 0.000286,
-        "n_successes": 53,
+        "n_successes": 54,
         "price_in": 0.15,
         "price_note": "list",
         "price_out": 0.6,
-        "ttat_s": 1.25
+        "ttat_s": 1.24
       },
       "history": [
-        69.7,
         65.8,
         71.1,
         69.7,
@@ -1149,44 +1199,44 @@
         69.7,
         72.4,
         68.4,
-        69.7
+        69.7,
+        71.1
       ],
       "model_id": "openai/gpt-oss-120b",
       "n": 76,
       "quality": {
-        "ci_high": 0.7890881069868022,
-        "ci_low": 0.5866558660798696,
+        "ci_high": 0.8003912443566861,
+        "ci_low": 0.6004023269144307,
         "n": 76,
-        "value": 0.6973684210526315
+        "value": 0.7105263157894737
       },
-      "score": 69.7,
+      "score": 71.1,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "openai/gpt-oss-20b": {
-      "ci_width_points": 21.9,
+      "ci_width_points": 22.3,
       "clusters": {
         "agentic": 0.333,
         "classification": 1.0,
-        "code": 0.25,
+        "code": 0.083,
         "long_context": 1.0,
         "reasoning": 0.333,
         "safety": 0.667,
         "sql": 0.667,
-        "structured_extraction": 1.0,
-        "summary": 0.333,
+        "structured_extraction": 0.889,
+        "summary": 0.5,
         "tool_call": 1.0
       },
       "econ": {
-        "cpat_usd": 5.4e-05,
-        "n_successes": 44,
+        "cpat_usd": 5.8e-05,
+        "n_successes": 41,
         "price_in": 0.018,
         "price_note": "list",
         "price_out": 0.09,
-        "ttat_s": 0.95
+        "ttat_s": 1.05
       },
       "history": [
-        53.4,
         54.2,
         56.9,
         52.9,
@@ -1215,19 +1265,20 @@
         54.9,
         58.0,
         55.6,
-        60.3
+        60.3,
+        56.9
       ],
       "model_id": "openai/gpt-oss-20b",
-      "n": 73,
+      "n": 72,
       "quality": {
-        "ci_high": 0.7071347183493163,
-        "ci_low": 0.48807204465405685,
-        "n": 73,
-        "value": 0.6027397260273972
+        "ci_high": 0.6774227663354686,
+        "ci_low": 0.4544309920240597,
+        "n": 72,
+        "value": 0.5694444444444444
       },
-      "score": 60.3,
+      "score": 56.9,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "perceptron/perceptron-mk1.5": {
       "ci_width_points": null,
@@ -1244,7 +1295,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "poolside/laguna-s-2.1:free": {
       "ci_width_points": null,
@@ -1261,7 +1312,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "poolside/laguna-xs-2.1:free": {
       "ci_width_points": null,
@@ -1278,7 +1329,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "prism-ml/ternary-bonsai-2-27b": {
       "ci_width_points": null,
@@ -1295,7 +1346,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "qwen/qwen3.6-27b": {
       "ci_width_points": 28.9,
@@ -1441,7 +1492,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "scaledown/extract": {
       "ci_width_points": null,
@@ -1458,21 +1509,11 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "scaledown/summarize": {
-      "ci_width_points": 35.3,
-      "clusters": {
-        "agentic": 0.5,
-        "classification": 1.0,
-        "code": 0.25,
-        "reasoning": 0.667,
-        "safety": 0.333,
-        "sql": 1.0,
-        "structured_extraction": 1.0,
-        "summary": 1.0,
-        "tool_call": 1.0
-      },
+      "ci_width_points": null,
+      "clusters": {},
       "econ": {
         "cpat_usd": 1.3e-05,
         "n_successes": 16,
@@ -1485,16 +1526,16 @@
         69.6
       ],
       "model_id": "scaledown/summarize",
-      "n": 23,
+      "n": 0,
       "quality": {
-        "ci_high": 0.8439617197902755,
-        "ci_low": 0.49133870939427393,
-        "n": 23,
-        "value": 0.6956521739130435
+        "ci_high": null,
+        "ci_low": null,
+        "n": 0,
+        "value": null
       },
-      "score": 69.6,
+      "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "stealth/space-bunny-alpha": {
       "ci_width_points": null,
@@ -1525,7 +1566,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "stealth/union-alpha": {
       "ci_width_points": null,
@@ -1554,7 +1595,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "stepfun/step-5-preview": {
       "ci_width_points": null,
@@ -1571,7 +1612,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "thinkingmachines/inkling-small:free": {
       "ci_width_points": null,
@@ -1588,7 +1629,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "thinkingmachines/inkling:free": {
       "ci_width_points": null,
@@ -1605,7 +1646,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "typesafe/jev-router": {
       "ci_width_points": null,
@@ -1634,7 +1675,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "unbiased/pareto": {
       "ci_width_points": null,
@@ -1651,7 +1692,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "unbiased/pareto-26.10-preview": {
       "ci_width_points": null,
@@ -1668,7 +1709,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "upstage/solar-mini4": {
       "ci_width_points": null,
@@ -1685,7 +1726,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "x-ai/grok-4.7": {
       "ci_width_points": null,
@@ -1702,7 +1743,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "xiaomi/mimo-v2.6-flash": {
       "ci_width_points": null,
@@ -1719,7 +1760,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "xiaomi/mimo-v2.6-pro": {
       "ci_width_points": null,
@@ -1736,7 +1777,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "xiaomi/mimo-v2.6-pro-ultraspeed": {
       "ci_width_points": null,
@@ -1753,7 +1794,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "z-ai/glm-5.3-flashx": {
       "ci_width_points": null,
@@ -1770,7 +1811,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "z-ai/glm-5.3-prime": {
       "ci_width_points": null,
@@ -1787,7 +1828,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "~deepseek/deepseek-flash-latest": {
       "ci_width_points": null,
@@ -1815,7 +1856,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "~deepseek/deepseek-pro-latest": {
       "ci_width_points": null,
@@ -1842,7 +1883,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "~openai/gpt-astra-latest": {
       "ci_width_points": null,
@@ -1868,7 +1909,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "~openai/gpt-sol-latest": {
       "ci_width_points": null,
@@ -1894,7 +1935,7 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     },
     "~openai/gpt-terra-latest": {
       "ci_width_points": null,
@@ -1920,17 +1961,17 @@
       },
       "score": null,
       "status": "provisional",
-      "updated_at": "2026-10-13T12:16:49.535069Z"
+      "updated_at": "2026-10-13T19:36:33.454042Z"
     }
   },
   "known_versions": {
     "allam-2-7b": "1737672203",
-    "meta/muse-wonder": "1791807945",
+    "google/gemini-4-argon": "1791907477",
+    "google/gemini-4-argon:batch": "1791907477",
+    "liquid/lfm-2.5-24b-a2b": "1791912025",
     "openai/gpt-oss-120b": "1754408224",
     "openai/gpt-oss-20b": "1754407957",
     "qwen/qwen3.8-27b": "1786984846",
-    "scaledown/extract": "1791893351",
-    "scaledown/summarize": "1791893360",
-    "stepfun/step-5-preview": "1791462849"
+    "scaledown/extract": "1791893351"
   }
 }
