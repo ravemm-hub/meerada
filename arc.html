@@ -1,0 +1,192 @@
+<meta charset="utf-8">
+<script src="assets/family.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Arc</title>
+<link rel="canonical" href="https://meerada.app/arc.html">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<meta name="description" content="The Arc — AI models on a timeline since the first commercial LLM, every turning point explained, and a measured gauge of how close we are to the singularity stage. Live data from the Meerada exchange.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://meerada.app/arc.html">
+<meta property="og:title" content="The Arc — where AI is on the curve"><meta property="og:description" content="Every turning point since 2017 on one chart, and a measured, explained gauge of how close we are to the singularity stage.">
+<meta property="og:image" content="https://meerada.app/assets/og.png"><meta name="twitter:card" content="summary_large_image">
+<script data-goatcounter="https://meerada.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+  :root{--ground:#FFFFFF;--panel:#F7F9FC;--panel2:#EEF2F7;--line:#DDE4EE;--text:#0F172A;--muted:#5B6B82;--teal:#0E8A7E;--amber:#D48A00;--good:#1E8E4C;--bad:#C8403A;--violet:#6D28D9;}
+  *{box-sizing:border-box;} body{margin:0;background:var(--ground);color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.55;}
+  a{color:inherit;text-decoration:none;} .wrap{max-width:1120px;margin:0 auto;padding:0 1.1rem;} .teal{color:var(--teal)}
+  header{text-align:center;padding:2.8rem 0 .8rem;} .kicker{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--violet);border:1px solid #C4B5FD;border-radius:999px;padding:.2rem .7rem;}
+  h1{font-family:"Archivo";font-weight:900;font-size:clamp(2rem,5.2vw,3.2rem);letter-spacing:-.03em;line-height:1.05;margin:.5rem 0 .4rem;} h1 em{font-style:normal;color:var(--teal);}
+  .lede{color:var(--muted);max-width:760px;margin:0 auto 1rem;font-size:1.04rem;}
+  section{padding:1.3rem 0;} h2{font-family:"Archivo";font-weight:800;font-size:1.45rem;margin:0 0 .3rem;} .h2sub{color:var(--muted);max-width:820px;margin:0 0 1rem;font-size:.92rem}
+  /* chart */
+  .chartbox{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:.8rem .8rem .4rem;}
+  .legend{display:flex;gap:.9rem;flex-wrap:wrap;font-size:.76rem;color:var(--muted);padding:.2rem .4rem .5rem} .legend b{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:.3rem;vertical-align:middle}
+  .legend .f{cursor:pointer;padding:.1rem .45rem;border-radius:999px;border:1px solid transparent} .legend .f.off{opacity:.4} .legend .f:hover{border-color:var(--line)}
+  svg.arc{width:100%;height:auto;display:block;font-family:"IBM Plex Sans",system-ui,sans-serif}
+  svg.arc .grid{stroke:var(--line);stroke-width:1} svg.arc .ax{fill:var(--muted);font-size:11px} svg.arc .stage{font-family:"IBM Plex Mono",monospace;font-size:10px;fill:var(--muted)}
+  svg.arc .dot{cursor:pointer;stroke:#fff;stroke-width:1.5;transition:r .15s} svg.arc .dot:hover,svg.arc .dot.on{r:8}
+  svg.arc .band{fill:rgba(14,138,126,.08)} svg.arc .curve{fill:none;stroke:var(--teal);stroke-width:3} svg.arc .proj{fill:none;stroke:var(--teal);stroke-width:2;stroke-dasharray:6 5;opacity:.6}
+  svg.arc .now{stroke:var(--amber);stroke-width:1.5;stroke-dasharray:4 4}
+  .detail{display:grid;grid-template-columns:1fr 1.2fr;gap:1rem;margin-top:.9rem} @media(max-width:760px){.detail{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem;min-height:120px}
+  .card .d{font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--muted)} .card h3{font-family:"Archivo";font-size:1.05rem;margin:.2rem 0 .3rem} .card p{margin:0;font-size:.9rem;color:var(--text)} .card .why{margin-top:.5rem;font-size:.84rem;color:var(--muted)} .card .why b{color:var(--text)}
+  .cat{display:inline-block;font-size:.66rem;font-family:"IBM Plex Mono",monospace;border-radius:999px;padding:.08rem .5rem;color:#fff;margin-left:.4rem;vertical-align:middle}
+  .ms{list-style:none;padding:0;margin:0;max-height:300px;overflow:auto} .ms li{display:grid;grid-template-columns:4.6rem 1fr;gap:.5rem;padding:.3rem .4rem;border-bottom:1px dashed var(--line);font-size:.84rem;cursor:pointer;border-radius:6px} .ms li:hover,.ms li.on{background:var(--panel2)} .ms li .d{font-family:"IBM Plex Mono",monospace;color:var(--muted);font-size:.72rem}
+  /* gauge */
+  .gauges{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem} @media(max-width:900px){.gauges{grid-template-columns:1fr 1fr}} @media(max-width:520px){.gauges{grid-template-columns:1fr}}
+  .g{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem} .g .k{font-family:"IBM Plex Mono",monospace;font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em} .g .v{font-family:"Archivo";font-weight:900;font-size:1.6rem;margin:.1rem 0} .g .bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:.35rem 0} .g .bar i{display:block;height:8px;background:linear-gradient(90deg,var(--teal),var(--violet));width:0;transition:width 1s} .g p{margin:.3rem 0 0;font-size:.8rem;color:var(--muted)}
+  .meter{background:#0F172A;color:#E2E8F0;border-radius:16px;padding:1.2rem 1.3rem;margin-top:1rem;display:grid;grid-template-columns:1fr 1.4fr;gap:1.2rem;align-items:center} @media(max-width:760px){.meter{grid-template-columns:1fr}}
+  .meter .big{font-family:"Archivo";font-weight:900;font-size:3.4rem;line-height:1;color:#5EEAD4} .meter .st{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:#94A3B8} .meter .stage{font-family:"Archivo";font-weight:800;font-size:1.2rem;margin:.3rem 0}
+  .stages{display:grid;grid-template-columns:repeat(5,1fr);gap:.3rem;margin-top:.6rem} .stages div{font-size:.66rem;text-align:center;padding:.35rem .2rem;border-radius:6px;background:#1E293B;color:#94A3B8;font-family:"IBM Plex Mono",monospace} .stages div.on{background:#0E8A7E;color:#fff} .stages div.past{background:#334155;color:#CBD5E1}
+  .meter p{margin:.4rem 0 0;font-size:.86rem;color:#CBD5E1} .meter p b{color:#fff}
+  .note{color:var(--muted);font-size:.8rem;margin-top:.7rem} .note b{color:var(--text)}
+  .faq{display:grid;grid-template-columns:1fr 1fr;gap:1rem} @media(max-width:760px){.faq{grid-template-columns:1fr}} .q{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:.9rem 1rem} .q b{display:block;margin-bottom:.25rem} .q p{margin:0;color:var(--muted);font-size:.88rem}
+</style>
+
+<header><div class="wrap">
+  <span class="kicker">THE ARC · MEASURED, EXPLAINED, LIVE</span>
+  <h1>🧬 The Arc<br><em>Where AI is on the curve — and how close to the singularity stage.</em></h1>
+  <div class="lede">Every turning point since the first commercial language model, on one chart you can read in a minute. Below it, a gauge built from four things that can actually be measured — not vibes — with the formula shown. The right edge is live: what the exchange sees this month.</div>
+</div></header>
+
+<section><div class="wrap">
+  <div class="chartbox">
+    <div class="legend" id="legend"></div>
+    <svg class="arc" id="arc" viewBox="0 0 1100 420" role="img" aria-label="AI capability over time with turning points"></svg>
+    <div class="detail">
+      <div class="card" id="detail"><div class="d">click a point</div><h3>Pick a turning point</h3><p>Each dot is a moment the curve changed direction — a new capability, a new way of working, a collapse in price, a new kind of risk. Hover or click to read why it mattered.</p></div>
+      <div class="card"><div class="d">all turning points</div><ul class="ms" id="mslist"></ul></div>
+    </div>
+  </div>
+  <div class="note"><b>How to read the curve.</b> The vertical axis is the <b>Meerada Capability Index</b> — a 0–100 composite of what the best available model could reliably do for a working person at that date (0 = none, 100 = a competent human expert across all measured task clusters). History is set by hand from the record; the shaded band is our uncertainty; the dashed tail is a projection at the measured pace. Stages across the top are the five phases on the way to a self-improving system.</div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>⚡ Singularity proximity — four gauges, one formula</h2>
+  <div class="h2sub">"Singularity" here means something specific and testable: <b>AI systems that improve AI systems faster than people can follow</b>. Four measurable things have to be true for that. We score each 0–100 and average them. Nothing here is a prediction of consciousness or doom — it is a dashboard.</div>
+  <div class="gauges">
+    <div class="g"><div class="k">1 · Task horizon (autonomy)</div><div class="v" id="g1v">—</div><div class="bar"><i id="g1b"></i></div><p id="g1p"></p></div>
+    <div class="g"><div class="k">2 · Cost of frontier intelligence</div><div class="v" id="g2v">—</div><div class="bar"><i id="g2b"></i></div><p id="g2p"></p></div>
+    <div class="g"><div class="k">3 · Capability vs. human experts</div><div class="v" id="g3v">—</div><div class="bar"><i id="g3b"></i></div><p id="g3p"></p></div>
+    <div class="g"><div class="k">4 · AI building AI</div><div class="v" id="g4v">—</div><div class="bar"><i id="g4b"></i></div><p id="g4p"></p></div>
+  </div>
+  <div class="meter">
+    <div><div class="st">ARC SCORE · 0–100</div><div class="big" id="arcscore">—</div><div class="stage" id="arcstage">—</div><div class="st" id="arcdate"></div></div>
+    <div>
+      <div class="stages" id="stages"></div>
+      <p id="arctext"></p>
+      <p><b>Formula:</b> Arc = mean(horizon, cost, capability, self-build). Horizon: log-scale from 1 minute (0) to one working month, 160 h (100). Cost: log-scale from $60 (0) to $0.01 (100) per million output tokens at frontier quality. Capability: share of expert-level task clusters where the best model matches a competent human. Self-build: share of frontier-lab engineering done by AI. Each input and its source is written on the gauge.</p>
+    </div>
+  </div>
+  <div class="note"><b>Honesty note.</b> Gauges 1 and 2 are computed from published trend measurements and the exchange's own live prices. Gauges 3 and 4 rest on lab-reported figures and our own reading of benchmark saturation; they are estimates, labelled as such, and we would rather be corrected than be wrong quietly. The projection line uses the measured doubling rate of agent task horizons (about seven months) — if that rate holds, a one-month autonomous task horizon arrives around <b id="eta-month">—</b>.</div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>What the stages mean</h2>
+  <div class="faq">
+    <div class="q"><b>1 · Tools (2017–2020)</b><p>Models complete text. Useful to researchers; a working person cannot hand them a job. The Transformer, GPT-2, the first API.</p></div>
+    <div class="q"><b>2 · Assistants (2021–2023)</b><p>A model answers, drafts, explains and writes code on request. ChatGPT, GPT-4, Claude, Llama. You do the task; it helps.</p></div>
+    <div class="q"><b>3 · Agents (2024–2026) — we are here</b><p>Models plan, use tools, browse, run code, and work for hours on a task with checkpoints. Reasoning models, computer use, coding agents. You give the job; you check the result. This is exactly why Meerada exists: measuring done tasks, guarding the run, cross-checking the answer.</p></div>
+    <div class="q"><b>4 · Autonomous researchers</b><p>Agents run multi-day projects end to end — experiments, code, papers — with people setting goals and reviewing outcomes. Entered when the task horizon passes a working week at high reliability.</p></div>
+    <div class="q"><b>5 · Recursive improvement (the singularity threshold)</b><p>AI systems design, train and evaluate the next generation faster than people can audit. The gauge calls it when all four inputs sit above 80. The whole point of a public, neutral measurement layer is that this is noticed when it happens, not after.</p></div>
+    <div class="q"><b>Why a model exchange keeps this chart</b><p>Because we measure the same thing every hour: how many verified tasks a model finishes and what each one costs. That is the curve's right edge, updated by machines, not by press releases. Open data: <a class="teal" href="grade_state.json">grade_state.json</a>, <a class="teal" href="models_live.json">models_live.json</a>, <a class="teal" href="index.json">index.json</a>.</p></div>
+  </div>
+</div></section>
+
+<script>
+// ---------------------------------------------------------------- data ----
+var CATS={cap:{n:"🧠 capability",c:"#0E8A7E"},auto:{n:"🤖 autonomy",c:"#6D28D9"},cost:{n:"💸 cost",c:"#D48A00"},adopt:{n:"🌍 adoption",c:"#1E8E4C"},safe:{n:"⚠️ safety & governance",c:"#C8403A"}};
+// y = Meerada Capability Index at that date (0–100). Hand-set from the record; the band shows uncertainty.
+var MS=[
+ {d:"2017-06",y:5,cat:"cap",t:"The Transformer",p:"'Attention Is All You Need' — the architecture every model on this chart is built on.",w:"Replaced recurrence with attention: training could scale with compute. Everything after is this idea, scaled."},
+ {d:"2018-06",y:7,cat:"cap",t:"GPT-1 / BERT",p:"Pre-train on raw text, then fine-tune. Language understanding jumps on every benchmark.",w:"Proved that unlabeled text is enough — the data bottleneck disappeared."},
+ {d:"2019-02",y:11,cat:"safe",t:"GPT-2 withheld, then released",p:"First model considered 'too dangerous' to release at once; staged release over nine months.",w:"The first public argument about AI release policy — a pattern every later model repeated."},
+ {d:"2020-06",y:20,cat:"adopt",t:"GPT-3 API — the commercial era begins",p:"175B parameters behind a paid API. Developers build products on a model they cannot see.",w:"The moment language models became something you buy by the token. Day zero for this chart's economics."},
+ {d:"2021-06",y:25,cat:"auto",t:"Codex / GitHub Copilot",p:"A model writes code inside the editor as you type.",w:"First time a model took a share of real professional work, measured in accepted lines."},
+ {d:"2022-04",y:30,cat:"cap",t:"DALL·E 2 → Stable Diffusion",p:"Photoreal images from text; open weights four months later.",w:"Generative AI left the text box; open release set the price of images to near zero."},
+ {d:"2022-11",y:36,cat:"adopt",t:"ChatGPT",p:"A chat interface on GPT-3.5. 100 million users in two months — the fastest consumer product ever.",w:"Capability did not jump; access did. Adoption became the curve's main driver for a year."},
+ {d:"2023-03",y:52,cat:"cap",t:"GPT-4",p:"Passes the bar exam in the top decile, reads images, handles long documents.",w:"The first model many professionals judged 'good enough' to delegate real work to."},
+ {d:"2023-03",y:50,cat:"safe",t:"Claude; the pause letter",p:"Anthropic's Claude launches on constitutional training; an open letter asks for a six-month pause on frontier training.",w:"Safety stopped being an academic topic and became a product and a policy fight at once."},
+ {d:"2023-07",y:54,cat:"cost",t:"Llama 2 — open weights, commercial use",p:"A near-frontier model anyone can run and fine-tune, free.",w:"Set a permanent floor under prices: whatever the labs charge, an open model is a year behind at zero."},
+ {d:"2023-11",y:57,cat:"safe",t:"Bletchley; the US executive order; OpenAI board crisis",p:"First international AI safety summit; first binding reporting rules for frontier training runs.",w:"Governments entered the chart. Compute thresholds became a legal object."},
+ {d:"2024-02",y:60,cat:"cap",t:"Gemini 1.5 — a million tokens of context",p:"A whole codebase or hours of video in one prompt.",w:"Context stopped being the limit; what you could hand a model changed from a page to a project."},
+ {d:"2024-05",y:64,cat:"cost",t:"GPT-4o — frontier quality at a fraction of the price",p:"Faster, multimodal, and roughly four times cheaper than GPT-4 at launch; realtime voice.",w:"The first big step of the cost collapse: GPT-4-class work at $15 instead of $60 per million output tokens."},
+ {d:"2024-06",y:66,cat:"auto",t:"Claude 3.5 Sonnet + Artifacts",p:"Beats the flagships on coding; the model builds and runs things beside the chat.",w:"The interface moved from 'answer' to 'make'. Coding agents became the main use of frontier models."},
+ {d:"2024-09",y:70,cat:"cap",t:"o1 — reasoning with test-time compute",p:"The model thinks before answering; PhD-level science and math benchmarks jump.",w:"A second scaling axis: spend compute at answer time, not only at training time. The curve steepened again."},
+ {d:"2024-10",y:71,cat:"auto",t:"Computer use",p:"A model moves the mouse, reads the screen, fills forms, runs software.",w:"Autonomy stopped being a text-only idea. Any software a person uses became a tool the model can use."},
+ {d:"2024-12",y:74,cat:"cap",t:"o3 on ARC-AGI",p:"Scores above the human-average threshold on a benchmark built to resist memorisation.",w:"The first time a 'this needs real reasoning' benchmark fell to brute test-time compute."},
+ {d:"2025-01",y:75,cat:"cost",t:"DeepSeek-R1",p:"Open reasoning model near o1 quality, trained on a fraction of the budget, API at roughly a thirtieth of the price.",w:"The cost collapse went global and open. Markets repriced the whole industry in a day."},
+ {d:"2025-02",y:77,cat:"auto",t:"Claude Code, Operator, Deep Research",p:"Agents that take a task and come back with the work: browse, research, write, run code, commit.",w:"The agent stage proper. Hours-long tasks with a person reviewing at the end. Meerada's Guard and Cross-check exist for this stage."},
+ {d:"2025-05",y:80,cat:"auto",t:"Claude 4 — hours of autonomous coding",p:"Labs report multi-hour autonomous refactors; the measured task horizon of agents keeps doubling (about every seven months).",w:"The number that matters for the singularity gauge — how long an agent can work alone — became a published trend."},
+ {d:"2025-08",y:82,cat:"cap",t:"GPT-5",p:"Unified reasoning + fast model with automatic routing; frontier quality at the price of last year's mid-tier.",w:"'Which model' became a routing decision — exactly what the exchange prices by cost per done task."},
+ {d:"2026-03",y:86,cat:"cap",t:"The 2026 frontier: GPT-5.5/5.6, Claude Opus 5 & Fable 5.1, Gemini 3.x, DeepSeek V4, Grok 4.6",p:"The models the exchange tracks today; several labs within a few points of each other on verifiable tasks.",w:"Capability converged across labs; price and reliability now decide. Dates and ids from the exchange's live feed.",src:"feed"},
+ {d:"2026-09",y:88,cat:"adopt",t:"Meerada goes live",p:"Every reachable model measured hourly on verifiable tasks; the right edge of this chart stops being written by hand.",w:"From here the curve is a measurement, not a story.",src:"us"}
+];
+var PROJ=[{d:"2026-10",y:88},{d:"2027-06",y:91},{d:"2028-06",y:95},{d:"2029-06",y:98}];
+var STAGES=[["Tools","2017-01","2020-12"],["Assistants","2021-01","2023-12"],["Agents","2024-01","2026-12"],["Autonomous researchers","2027-01","2028-12"],["Recursive","2029-01","2030-06"]];
+
+// ------------------------------------------------------------- helpers ----
+function ym(s){ var p=s.split("-"); return parseInt(p[0],10)+(parseInt(p[1],10)-1)/12; }
+var X0=2017, X1=2030.5, W=1100, H=420, L=48, R=16, T=34, B=36;
+function sx(x){ return L+(x-X0)/(X1-X0)*(W-L-R); } function sy(y){ return T+(1-y/100)*(H-T-B); }
+var NOW=new Date(), NOWX=NOW.getFullYear()+NOW.getMonth()/12;
+var off={};
+function draw(){
+  var s='';
+  STAGES.forEach(function(st,i){ var a=sx(ym(st[1])), b=sx(ym(st[2])); s+='<rect x="'+a+'" y="'+T+'" width="'+(b-a)+'" height="'+(H-T-B)+'" fill="'+(i%2?'rgba(15,23,42,.025)':'transparent')+'"/><text class="stage" x="'+(a+4)+'" y="'+(T-10)+'">'+(i+1)+' · '+st[0]+'</text>'; });
+  for(var y=0;y<=100;y+=25){ s+='<line class="grid" x1="'+L+'" x2="'+(W-R)+'" y1="'+sy(y)+'" y2="'+sy(y)+'"/><text class="ax" x="'+(L-6)+'" y="'+(sy(y)+4)+'" text-anchor="end">'+y+'</text>'; }
+  for(var x=X0;x<=2030;x++){ s+='<text class="ax" x="'+sx(x)+'" y="'+(H-B+16)+'" text-anchor="middle">'+x+'</text>'; }
+  var pts=MS.map(function(m){return [sx(ym(m.d)),sy(m.y)];});
+  var band=pts.map(function(p){return p[0]+','+(p[1]-10);}).join(' ')+' '+pts.slice().reverse().map(function(p){return p[0]+','+(p[1]+10);}).join(' ');
+  s+='<polygon class="band" points="'+band+'"/>';
+  s+='<polyline class="curve" points="'+pts.map(function(p){return p.join(',');}).join(' ')+'"/>';
+  var last=pts[pts.length-1]; s+='<polyline class="proj" points="'+[last].concat(PROJ.map(function(m){return [sx(ym(m.d)),sy(m.y)];})).map(function(p){return p.join(',');}).join(' ')+'"/>';
+  s+='<line class="now" x1="'+sx(NOWX)+'" x2="'+sx(NOWX)+'" y1="'+T+'" y2="'+(H-B)+'"/><text class="ax" x="'+(sx(NOWX)+4)+'" y="'+(H-B-6)+'" fill="#D48A00">today</text>';
+  s+='<text class="ax" x="'+(sx(2028.4))+'" y="'+(sy(93)-8)+'" text-anchor="middle" fill="#5B6B82">projection at the measured pace</text>';
+  MS.forEach(function(m,i){ if(off[m.cat])return; s+='<circle class="dot" id="dot'+i+'" cx="'+sx(ym(m.d))+'" cy="'+sy(m.y)+'" r="6" fill="'+CATS[m.cat].c+'" onmouseover="showMs('+i+')" onclick="showMs('+i+',true)"><title>'+m.t+'</title></circle>'; });
+  document.getElementById("arc").innerHTML=s;
+}
+function showMs(i,pin){ var m=MS[i]; var c=CATS[m.cat]; document.getElementById("detail").innerHTML='<div class="d">'+m.d+' · index '+m.y+(m.src?' · from the exchange feed':'')+'<span class="cat" style="background:'+c.c+'">'+c.n+'</span></div><h3>'+m.t+'</h3><p>'+m.p+'</p><div class="why"><b>Why it bent the curve:</b> '+m.w+'</div>';
+  document.querySelectorAll(".dot").forEach(function(d){d.classList.remove("on");}); var d=document.getElementById("dot"+i); if(d)d.classList.add("on");
+  document.querySelectorAll(".ms li").forEach(function(l,j){ l.className=j==i?"on":""; }); if(pin){ var li=document.querySelector(".ms li.on"); if(li) li.scrollIntoView({block:"nearest"}); } }
+document.getElementById("legend").innerHTML=Object.keys(CATS).map(function(k){return '<span class="f" id="leg-'+k+'" onclick="toggle(\''+k+'\')"><b style="background:'+CATS[k].c+'"></b>'+CATS[k].n+'</span>';}).join('')+'<span style="margin-left:auto">● history &nbsp; ┄ projection &nbsp; <span style="color:var(--amber)">┆</span> today</span>';
+function toggle(k){ off[k]=!off[k]; document.getElementById("leg-"+k).classList.toggle("off",!!off[k]); draw(); }
+document.getElementById("mslist").innerHTML=MS.map(function(m,i){return '<li onclick="showMs('+i+',true)"><span class="d">'+m.d+'</span><span>'+m.t+'</span></li>';}).join('');
+draw(); showMs(MS.length-2);
+
+// --------------------------------------------------------------- gauges ----
+// 1 · task horizon: METR-style measurement — ~1 hour at 50% reliability in early 2025, doubling about every 7 months.
+var H0=1.0, H0DATE=2025+2/12, DOUBLE=7/12;
+var hours=H0*Math.pow(2,(NOWX-H0DATE)/DOUBLE);
+var g1=Math.max(0,Math.min(100,100*Math.log(hours*60)/Math.log(160*60)));  // 1 min -> 0, 160 h -> 100
+var etaYears=H0DATE+Math.log2(160/H0)*DOUBLE; var etaD=new Date(Math.floor(etaYears),Math.round((etaYears%1)*12),1);
+document.getElementById("g1v").textContent=(hours<1?Math.round(hours*60)+" min":hours.toFixed(1)+" h"); document.getElementById("g1b").style.width=g1+"%";
+document.getElementById("g1p").textContent="How long an agent works alone at 50% reliability, projected from the published trend (≈1 h in early 2025, doubling every ≈7 months). Score "+Math.round(g1)+"/100 on a log scale to one working month.";
+document.getElementById("eta-month").textContent=etaD.toLocaleString("en",{month:"long",year:"numeric"});
+// 2 · cost: $ per million output tokens at frontier quality. History: $60 (GPT-4, 2023) → live median of the top-graded models today.
+function g2(price){ var v=100*Math.log(60/price)/Math.log(60/0.01); return Math.max(0,Math.min(100,v)); }
+function setCost(price,src){ var v=g2(price); document.getElementById("g2v").textContent="$"+(price<1?price.toFixed(2):price.toFixed(1))+"/M"; document.getElementById("g2b").style.width=v+"%"; document.getElementById("g2p").textContent="Price per million output tokens for frontier-quality work: $60 in March 2023 → "+src+". Score "+Math.round(v)+"/100 on a log scale to one cent."; return v; }
+var g2v=setCost(2.0,"≈$2 at GPT-5 launch (2025)");
+// 3 · capability vs experts (estimate): share of expert task clusters where the best model matches a competent human on verified tasks.
+var g3v=72; document.getElementById("g3v").textContent=g3v+"%"; document.getElementById("g3b").style.width=g3v+"%";
+document.getElementById("g3p").textContent="Our reading of benchmark saturation (bar exam, PhD-level science, coding contests passed; long-horizon planning, novel research, physical work not yet). Estimate; the exchange's own measured clusters replace it as coverage grows.";
+// 4 · AI building AI (lab-reported): share of frontier-lab code written by AI.
+var g4v=55; document.getElementById("g4v").textContent=g4v+"%"; document.getElementById("g4b").style.width=g4v+"%";
+document.getElementById("g4p").textContent="Share of code at frontier labs written by their own models — reported to have passed a quarter in 2024 and a majority by late 2025. Self-reported; we show it, we do not vouch for it.";
+function arc(){ var v=(g1+g2v+g3v+g4v)/4; var stage=v<20?0:v<40?1:v<60?2:v<80?3:4; var names=["Tools","Assistants","Agents","Autonomous researchers","Recursive improvement"];
+  document.getElementById("arcscore").textContent=Math.round(v); document.getElementById("arcstage").textContent="Stage "+(stage+1)+" · "+names[stage];
+  document.getElementById("arcdate").textContent="as of "+NOW.toISOString().slice(0,10)+" · live inputs: cost, horizon";
+  document.getElementById("stages").innerHTML=names.map(function(n,i){return '<div class="'+(i==stage?'on':i<stage?'past':'')+'">'+(i+1)+' '+n+'</div>';}).join('');
+  var next=[20,40,60,80,100][stage];
+  document.getElementById("arctext").innerHTML="<b>"+Math.round(v)+" of 100.</b> We are in the <b>"+names[stage]+"</b> stage; the next stage begins at "+next+". What moves it fastest now: the task horizon (doubling every ≈7 months) and the price of frontier work (falling ≈10× a year). The singularity threshold on this dashboard is all four gauges above 80 — not any one headline."; }
+arc();
+// live right edge: the exchange's current median price among top-graded models and this month's launches
+Promise.all([fetch("models_live.json?cb="+Date.now()).then(function(r){return r.json();}).catch(function(){return null;}), fetch("index.json?cb="+Date.now()).then(function(r){return r.json();}).catch(function(){return null;})]).then(function(res){
+  var live=res[0], idx=res[1]; if(!live||!live.models) return;
+  var ids=(idx&&idx.members)||[]; var prices=live.models.filter(function(m){ return ids.indexOf(m.id)>=0 && m.price_out>0; }).map(function(m){return m.price_out;}).sort(function(a,b){return a-b;});
+  if(!prices.length){ prices=live.models.filter(function(m){return m.price_out>0 && !m.free;}).map(function(m){return m.price_out;}).sort(function(a,b){return a-b;}); }
+  if(prices.length){ var med=prices[Math.floor(prices.length/2)]; g2v=setCost(med,"$"+med.toFixed(2)+" median today among the exchange's top-graded models (live)"); arc(); }
+  var fresh=live.models.filter(function(m){return (m.age_days||999)<=30;}).length;
+  var d=document.getElementById("detail"); if(d && fresh){ MS[MS.length-1].p+=" This month the feed shows "+fresh+" models launched in the last 30 days"+(idx&&idx.value?" and the Meerada Index at "+idx.value.toFixed(1):"")+"."; }
+});
+</script>
