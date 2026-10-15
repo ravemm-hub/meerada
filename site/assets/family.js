@@ -9,6 +9,7 @@
     { href: "crosscheck.html", id: "crosscheck", ic: "🔎", name: "Cross-check", tag: "models examining models" },
     { href: "judge.html", id: "judge", ic: "⚖️", name: "Judge", tag: "the reliability layer" },
     { href: "handshake.html", id: "handshake", ic: "🤝", name: "Handshake", tag: "measured migration" },
+    { href: "arc.html", id: "arc", ic: "🧬", name: "Arc", tag: "AI on the curve · singularity gauge" },
     { href: "tribes.html", id: "tribes", ic: "🏙️", name: "Tribes", tag: "AI-powered city app" },
     { href: "company.html", id: "company", ic: "🏢", name: "Company", tag: "who we are" }
   ];
@@ -49,7 +50,7 @@
   };
   var foot = '<footer id="mfoot"><div class="w">'
     + '<div class="about"><img src="assets/meerada-wordmark.png" alt="Meerada"><b>Meerada</b> is the AI operations company: we <b>measure</b> models, <b>operate</b> them for you, <b>protect</b> your work, <b>verify</b> every answer, and <b>build</b> AI-powered apps. One rule under everything: measure what is real.</div>'
-    + col("Measure", [["Exchange — live model ranking", "index.html"], ["Which model for me?", "pick.html"], ["Grade board", "grade.html"], ["Frontier Watch", "index.html#frontier"], ["Labs & valuations", "index.html#labs"], ["RSS: grade moves & new models", "feed.xml"], ["Badges for your model", "index.html#measured-wrap"]])
+    + col("Measure", [["Exchange — live model ranking", "index.html"], ["Which model for me?", "pick.html"], ["Grade board", "grade.html"], ["The Arc — AI on the curve, singularity gauge", "arc.html"], ["Frontier Watch", "index.html#frontier"], ["Labs & valuations", "index.html#labs"], ["RSS: grade moves & new models", "feed.xml"], ["Badges for your model", "index.html#measured-wrap"]])
     + col("Operate", [["Manager (LLManager)", "manager.html"], ["Handshake — switch models with history", "handshake.html"], ["Try it in the browser", "https://app.meerada.app"], ["Download the app", "manager.html#get"]])
     + col("Protect & verify", [["Guard — watchdog + cage", "guard.html"], ["Cross-check — models examining models", "crosscheck.html"], ["Judge — the reliability layer", "judge.html"], ["Outcome Exchange", "index.html#exchange"]])
     + col("Company", [["About Meerada", "company.html"], ["Tribes — the city app", "tribes.html"], ["Everything is free", "pricing.html"], ["Open source on GitHub", "https://github.com/ravemm-hub/meerada"], ["Contact", "mailto:rave.mm@gmail.com"]])
