@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-15T07:35Z",
+ "generated_at": "2026-10-15T13:06Z",
  "source": "openrouter public catalog",
- "count": 366,
+ "count": 365,
  "new_days": 21,
  "models": [
   {
@@ -48,7 +48,7 @@
    "price_out": 0.0,
    "context": 1000000,
    "created": "2026-10-13",
-   "age_days": 1,
+   "age_days": 2,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -60,7 +60,7 @@
    "price_out": 0.0,
    "context": 1000000,
    "created": "2026-10-13",
-   "age_days": 1,
+   "age_days": 2,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -72,7 +72,7 @@
    "price_out": 20.0,
    "context": 1048576,
    "created": "2026-10-12",
-   "age_days": 2,
+   "age_days": 3,
    "free": false,
    "modalities": "text+image+video+file+audio"
   },
@@ -84,7 +84,7 @@
    "price_out": 2.7,
    "context": 1048576,
    "created": "2026-10-08",
-   "age_days": 6,
+   "age_days": 7,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -276,7 +276,7 @@
    "price_out": 0.2,
    "context": 524288,
    "created": "2026-09-23",
-   "age_days": 21,
+   "age_days": 22,
    "free": false,
    "modalities": "text"
   },
@@ -512,8 +512,8 @@
    "id": "deepseek/deepseek-v4.1-flash",
    "name": "DeepSeek: DeepSeek V4.1 Flash",
    "vendor": "deepseek",
-   "price_in": 0.0137,
-   "price_out": 0.891,
+   "price_in": 0.0238,
+   "price_out": 0.72,
    "context": 1048576,
    "created": "2026-09-10",
    "age_days": 35,
@@ -680,8 +680,8 @@
    "id": "z-ai/glm-5.3-flash",
    "name": "Z.ai: GLM 5.3 Flash",
    "vendor": "z-ai",
-   "price_in": 0.036,
-   "price_out": 0.9,
+   "price_in": 0.15,
+   "price_out": 0.5,
    "context": 1048576,
    "created": "2026-08-26",
    "age_days": 49,
@@ -708,7 +708,7 @@
    "price_out": 0.6468,
    "context": 1048576,
    "created": "2026-08-21",
-   "age_days": 54,
+   "age_days": 55,
    "free": false,
    "modalities": "text+image"
   },
@@ -836,8 +836,8 @@
    "id": "deepseek/deepseek-v4-pro-0813",
    "name": "DeepSeek: DeepSeek V4 Pro 0813",
    "vendor": "deepseek",
-   "price_in": 1.32,
-   "price_out": 3.96,
+   "price_in": 0.66,
+   "price_out": 1.98,
    "context": 1048576,
    "created": "2026-08-12",
    "age_days": 63,
@@ -876,7 +876,7 @@
    "price_out": 0.2,
    "context": 262144,
    "created": "2026-08-11",
-   "age_days": 64,
+   "age_days": 65,
    "free": false,
    "modalities": "text"
   },
@@ -888,7 +888,7 @@
    "price_out": 0.0,
    "context": 1000000,
    "created": "2026-08-11",
-   "age_days": 64,
+   "age_days": 65,
    "free": true,
    "modalities": "text"
   },
@@ -1140,7 +1140,7 @@
    "price_out": 1.2,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 97,
+   "age_days": 98,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1152,7 +1152,7 @@
    "price_out": 1.2,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 97,
+   "age_days": 98,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1164,7 +1164,7 @@
    "price_out": 12.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 97,
+   "age_days": 98,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1176,7 +1176,7 @@
    "price_out": 12.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 97,
+   "age_days": 98,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1188,7 +1188,7 @@
    "price_out": 20.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 97,
+   "age_days": 98,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1200,7 +1200,7 @@
    "price_out": 20.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 97,
+   "age_days": 98,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1352,7 +1352,7 @@
    "id": "z-ai/glm-5.2",
    "name": "Z.ai: GLM 5.2",
    "vendor": "z-ai",
-   "price_in": 0.037,
+   "price_in": 0.02,
    "price_out": 7.0,
    "context": 1048576,
    "created": "2026-06-16",
@@ -1380,7 +1380,7 @@
    "price_out": 3.35,
    "context": 262144,
    "created": "2026-06-12",
-   "age_days": 124,
+   "age_days": 125,
    "free": false,
    "modalities": "text+image"
   },
@@ -1392,7 +1392,7 @@
    "price_out": 50.0,
    "context": 1000000,
    "created": "2026-06-09",
-   "age_days": 127,
+   "age_days": 128,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -1452,7 +1452,7 @@
    "price_out": 1.28,
    "context": 1000000,
    "created": "2026-06-03",
-   "age_days": 133,
+   "age_days": 134,
    "free": false,
    "modalities": "text+image"
   },
@@ -1524,7 +1524,7 @@
    "price_out": 9.0,
    "context": 1048576,
    "created": "2026-05-19",
-   "age_days": 148,
+   "age_days": 149,
    "free": false,
    "modalities": "text+image+video+file+audio"
   },
@@ -1640,8 +1640,8 @@
    "id": "qwen/qwen3.6-27b",
    "name": "Qwen: Qwen3.6 27B",
    "vendor": "qwen",
-   "price_in": 0.32,
-   "price_out": 3.2,
+   "price_in": 0.45,
+   "price_out": 2.7,
    "context": 262144,
    "created": "2026-04-27",
    "age_days": 171,
@@ -1676,8 +1676,8 @@
    "id": "deepseek/deepseek-v4-pro",
    "name": "DeepSeek: DeepSeek V4 Pro 0423",
    "vendor": "deepseek",
-   "price_in": 0.9553,
-   "price_out": 1.9105,
+   "price_in": 0.4461,
+   "price_out": 0.8923,
    "context": 1048576,
    "created": "2026-04-24",
    "age_days": 174,
@@ -1848,7 +1848,7 @@
    "price_out": 1.95,
    "context": 1000000,
    "created": "2026-04-02",
-   "age_days": 195,
+   "age_days": 196,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1944,7 +1944,7 @@
    "price_out": 1.2,
    "context": 204800,
    "created": "2026-03-18",
-   "age_days": 210,
+   "age_days": 211,
    "free": false,
    "modalities": "text"
   },
@@ -1956,7 +1956,7 @@
    "price_out": 1.25,
    "context": 400000,
    "created": "2026-03-17",
-   "age_days": 211,
+   "age_days": 212,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1968,7 +1968,7 @@
    "price_out": 4.5,
    "context": 400000,
    "created": "2026-03-17",
-   "age_days": 211,
+   "age_days": 212,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -2232,7 +2232,7 @@
    "price_out": 1.56,
    "context": 1000000,
    "created": "2026-02-16",
-   "age_days": 240,
+   "age_days": 241,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -2532,7 +2532,7 @@
    "price_out": 2.0,
    "context": 262144,
    "created": "2025-12-09",
-   "age_days": 309,
+   "age_days": 310,
    "free": false,
    "modalities": "text+file"
   },
@@ -2904,7 +2904,7 @@
    "price_out": 2.0,
    "context": 204800,
    "created": "2025-09-30",
-   "age_days": 379,
+   "age_days": 380,
    "free": false,
    "modalities": "text"
   },
@@ -2928,7 +2928,7 @@
    "price_out": 0.41,
    "context": 163840,
    "created": "2025-09-29",
-   "age_days": 380,
+   "age_days": 381,
    "free": false,
    "modalities": "text"
   },
@@ -2952,7 +2952,7 @@
    "price_out": 1.25,
    "context": 256000,
    "created": "2025-09-26",
-   "age_days": 383,
+   "age_days": 384,
    "free": false,
    "modalities": "text"
   },
@@ -3048,7 +3048,7 @@
    "price_out": 0.95,
    "context": 163840,
    "created": "2025-08-21",
-   "age_days": 419,
+   "age_days": 420,
    "free": false,
    "modalities": "text"
   },
@@ -3413,18 +3413,6 @@
    "modalities": "text"
   },
   {
-   "id": "anthropic/claude-sonnet-4",
-   "name": "Anthropic: Claude Sonnet 4",
-   "vendor": "anthropic",
-   "price_in": 3.0,
-   "price_out": 15.0,
-   "context": 200000,
-   "created": "2025-05-22",
-   "age_days": 510,
-   "free": false,
-   "modalities": "image+text+file"
-  },
-  {
    "id": "mistralai/mistral-medium-3",
    "name": "Mistral: Mistral Medium 3",
    "vendor": "mistralai",
@@ -3768,7 +3756,7 @@
    "price_out": 1.0,
    "context": 128000,
    "created": "2025-02-01",
-   "age_days": 620,
+   "age_days": 621,
    "free": false,
    "modalities": "text+image"
   },
@@ -3780,7 +3768,7 @@
    "price_out": 0.78,
    "context": 1000000,
    "created": "2025-02-01",
-   "age_days": 620,
+   "age_days": 621,
    "free": false,
    "modalities": "text"
   },
@@ -4040,8 +4028,8 @@
    "id": "meta-llama/llama-3.2-3b-instruct",
    "name": "Meta: Llama 3.2 3B Instruct",
    "vendor": "meta-llama",
-   "price_in": 0.0509,
-   "price_out": 0.335,
+   "price_in": 0.05,
+   "price_out": 0.33,
    "context": 131072,
    "created": "2024-09-25",
    "age_days": 750,
