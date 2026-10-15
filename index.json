@@ -1,15 +1,15 @@
 {
- "value": 64.21,
- "median_cpat_usd": 0.000527,
+ "value": 64.8,
+ "median_cpat_usd": 0.000462,
  "n": 7,
  "members": [
   "groq/compound",
   "groq/compound-mini",
   "qwen/qwen3.8-27b",
-  "openai/gpt-oss-20b",
   "openai/gpt-oss-120b",
+  "openai/gpt-oss-20b",
   "allam-2-7b",
   "qwen/qwen3.6-27b"
  ],
- "as_of": "2026-09-20T10:25+00:00"
+ "as_of": "2026-10-15T06:45+00:00"
 }
