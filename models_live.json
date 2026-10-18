@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-17T22:40Z",
+ "generated_at": "2026-10-18T00:43Z",
  "source": "openrouter public catalog",
  "count": 374,
  "new_days": 21,
@@ -92,8 +92,8 @@
    "id": "nvidia/nemotron-3.5-super-vl",
    "name": "NVIDIA: Nemotron 3.5 Super VL",
    "vendor": "nvidia",
-   "price_in": 0.15,
-   "price_out": 0.5,
+   "price_in": 0.1,
+   "price_out": 0.4,
    "context": 1048576,
    "created": "2026-10-15",
    "age_days": 2,
@@ -324,7 +324,7 @@
    "price_out": 15.0,
    "context": 1048576,
    "created": "2026-09-24",
-   "age_days": 23,
+   "age_days": 24,
    "free": false,
    "modalities": "text+image"
   },
@@ -620,7 +620,7 @@
    "id": "deepseek/deepseek-v4.1-flash",
    "name": "DeepSeek: DeepSeek V4.1 Flash",
    "vendor": "deepseek",
-   "price_in": 0.0568,
+   "price_in": 0.0552,
    "price_out": 0.144,
    "context": 1048576,
    "created": "2026-09-10",
@@ -764,8 +764,8 @@
    "id": "tencent/hy4-preview",
    "name": "Tencent: Hy4 preview",
    "vendor": "tencent",
-   "price_in": 0.7506,
-   "price_out": 2.2509,
+   "price_in": 0.834,
+   "price_out": 2.501,
    "context": 1048576,
    "created": "2026-08-28",
    "age_days": 50,
@@ -861,7 +861,7 @@
    "name": "Z.ai: GLM 5.3",
    "vendor": "z-ai",
    "price_in": 0.079,
-   "price_out": 4.8,
+   "price_out": 3.2,
    "context": 1048576,
    "created": "2026-08-18",
    "age_days": 60,
@@ -1052,8 +1052,8 @@
    "id": "deepseek/deepseek-v4-flash-0731",
    "name": "DeepSeek: DeepSeek V4 Flash 0731",
    "vendor": "deepseek",
-   "price_in": 0.0125,
-   "price_out": 1.28,
+   "price_in": 0.1,
+   "price_out": 0.3,
    "context": 1048576,
    "created": "2026-07-31",
    "age_days": 78,
@@ -1352,8 +1352,8 @@
    "id": "tencent/hy3",
    "name": "Tencent: Hy3",
    "vendor": "tencent",
-   "price_in": 0.0825,
-   "price_out": 0.33,
+   "price_in": 0.132,
+   "price_out": 0.528,
    "context": 262144,
    "created": "2026-07-06",
    "age_days": 103,
@@ -1680,7 +1680,7 @@
    "price_out": 2.5,
    "context": 1000000,
    "created": "2026-04-30",
-   "age_days": 169,
+   "age_days": 170,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -2400,7 +2400,7 @@
    "price_out": 0.8,
    "context": 262144,
    "created": "2026-02-04",
-   "age_days": 255,
+   "age_days": 256,
    "free": false,
    "modalities": "text"
   },
@@ -2424,7 +2424,7 @@
    "price_out": 0.3,
    "context": 262144,
    "created": "2026-01-29",
-   "age_days": 260,
+   "age_days": 261,
    "free": false,
    "modalities": "text"
   },
@@ -2484,7 +2484,7 @@
    "price_out": 10.0,
    "context": 128000,
    "created": "2026-01-19",
-   "age_days": 270,
+   "age_days": 271,
    "free": false,
    "modalities": "text+audio"
   },
@@ -2976,7 +2976,7 @@
    "price_out": 1.0,
    "context": 262144,
    "created": "2025-10-06",
-   "age_days": 375,
+   "age_days": 376,
    "free": false,
    "modalities": "text+image"
   },
@@ -2988,7 +2988,7 @@
    "price_out": 0.6,
    "context": 262144,
    "created": "2025-10-06",
-   "age_days": 375,
+   "age_days": 376,
    "free": false,
    "modalities": "text+image"
   },
@@ -3048,7 +3048,7 @@
    "price_out": 0.5,
    "context": 131072,
    "created": "2025-09-27",
-   "age_days": 385,
+   "age_days": 386,
    "free": false,
    "modalities": "text"
   },
@@ -3072,7 +3072,7 @@
    "price_out": 1.9,
    "context": 262144,
    "created": "2025-09-23",
-   "age_days": 388,
+   "age_days": 389,
    "free": false,
    "modalities": "text+image"
   },
@@ -3284,7 +3284,7 @@
    "id": "qwen/qwen3-30b-a3b-instruct-2507",
    "name": "Qwen: Qwen3 30B A3B Instruct 2507",
    "vendor": "qwen",
-   "price_in": 0.1,
+   "price_in": 0.09,
    "price_out": 0.3,
    "context": 262144,
    "created": "2025-07-29",
@@ -3336,7 +3336,7 @@
    "price_out": 1.0,
    "context": 262144,
    "created": "2025-07-23",
-   "age_days": 451,
+   "age_days": 452,
    "free": false,
    "modalities": "text"
   },
@@ -3456,7 +3456,7 @@
    "price_out": 2.2,
    "context": 1000000,
    "created": "2025-06-17",
-   "age_days": 486,
+   "age_days": 487,
    "free": false,
    "modalities": "text"
   },
@@ -3492,7 +3492,7 @@
    "price_out": 80.0,
    "context": 200000,
    "created": "2025-06-10",
-   "age_days": 493,
+   "age_days": 494,
    "free": false,
    "modalities": "text+file+image"
   },
@@ -3765,7 +3765,7 @@
    "name": "Google: Gemma 3 27B",
    "vendor": "google",
    "price_in": 0.08,
-   "price_out": 0.45,
+   "price_out": 0.35,
    "context": 131072,
    "created": "2025-03-12",
    "age_days": 584,
@@ -4080,7 +4080,7 @@
    "price_out": 1.0,
    "context": 32768,
    "created": "2024-11-11",
-   "age_days": 704,
+   "age_days": 705,
    "free": false,
    "modalities": "text"
   },
@@ -4104,7 +4104,7 @@
    "price_out": 5.0,
    "context": 32768,
    "created": "2024-10-22",
-   "age_days": 725,
+   "age_days": 726,
    "free": false,
    "modalities": "text"
   },
@@ -4116,7 +4116,7 @@
    "price_out": 0.2,
    "context": 32768,
    "created": "2024-10-16",
-   "age_days": 731,
+   "age_days": 732,
    "free": false,
    "modalities": "text"
   },
@@ -4128,7 +4128,7 @@
    "price_out": 0.201,
    "context": 60000,
    "created": "2024-09-25",
-   "age_days": 752,
+   "age_days": 753,
    "free": false,
    "modalities": "text"
   },
@@ -4140,7 +4140,7 @@
    "price_out": 0.33,
    "context": 131072,
    "created": "2024-09-25",
-   "age_days": 752,
+   "age_days": 753,
    "free": false,
    "modalities": "text"
   },
@@ -4152,7 +4152,7 @@
    "price_out": 0.4,
    "context": 32768,
    "created": "2024-09-19",
-   "age_days": 758,
+   "age_days": 759,
    "free": false,
    "modalities": "text"
   },
@@ -4164,7 +4164,7 @@
    "price_out": 0.6,
    "context": 128000,
    "created": "2024-08-30",
-   "age_days": 778,
+   "age_days": 779,
    "free": false,
    "modalities": "text"
   },
@@ -4176,7 +4176,7 @@
    "price_out": 10.0,
    "context": 128000,
    "created": "2024-08-30",
-   "age_days": 778,
+   "age_days": 779,
    "free": false,
    "modalities": "text"
   },
@@ -4188,7 +4188,7 @@
    "price_out": 0.85,
    "context": 131072,
    "created": "2024-08-28",
-   "age_days": 780,
+   "age_days": 781,
    "free": false,
    "modalities": "text"
   },
@@ -4200,7 +4200,7 @@
    "price_out": 0.7,
    "context": 131072,
    "created": "2024-08-18",
-   "age_days": 790,
+   "age_days": 791,
    "free": false,
    "modalities": "text"
   },
@@ -4212,7 +4212,7 @@
    "price_out": 1.0,
    "context": 131072,
    "created": "2024-08-16",
-   "age_days": 792,
+   "age_days": 793,
    "free": false,
    "modalities": "text"
   },
@@ -4224,7 +4224,7 @@
    "price_out": 0.05,
    "context": 8192,
    "created": "2024-08-13",
-   "age_days": 795,
+   "age_days": 796,
    "free": false,
    "modalities": "text"
   },
@@ -4236,7 +4236,7 @@
    "price_out": 10.0,
    "context": 128000,
    "created": "2024-08-06",
-   "age_days": 802,
+   "age_days": 803,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -4248,7 +4248,7 @@
    "price_out": 0.4,
    "context": 131072,
    "created": "2024-07-23",
-   "age_days": 816,
+   "age_days": 817,
    "free": false,
    "modalities": "text"
   },
@@ -4260,7 +4260,7 @@
    "price_out": 0.08,
    "context": 131072,
    "created": "2024-07-23",
-   "age_days": 816,
+   "age_days": 817,
    "free": false,
    "modalities": "text"
   },
@@ -4272,7 +4272,7 @@
    "price_out": 0.03,
    "context": 131072,
    "created": "2024-07-19",
-   "age_days": 820,
+   "age_days": 821,
    "free": false,
    "modalities": "text"
   },
@@ -4284,7 +4284,7 @@
    "price_out": 0.6,
    "context": 128000,
    "created": "2024-07-18",
-   "age_days": 821,
+   "age_days": 822,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -4296,7 +4296,7 @@
    "price_out": 0.6,
    "context": 128000,
    "created": "2024-07-18",
-   "age_days": 821,
+   "age_days": 822,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -4308,7 +4308,7 @@
    "price_out": 0.65,
    "context": 8192,
    "created": "2024-07-13",
-   "age_days": 826,
+   "age_days": 827,
    "free": false,
    "modalities": "text"
   },
@@ -4320,7 +4320,7 @@
    "price_out": 10.0,
    "context": 128000,
    "created": "2024-05-13",
-   "age_days": 887,
+   "age_days": 888,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -4332,7 +4332,7 @@
    "price_out": 15.0,
    "context": 128000,
    "created": "2024-05-13",
-   "age_days": 887,
+   "age_days": 888,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -4344,7 +4344,7 @@
    "price_out": 6.0,
    "context": 65536,
    "created": "2024-04-17",
-   "age_days": 913,
+   "age_days": 914,
    "free": false,
    "modalities": "text+file"
   },
@@ -4356,7 +4356,7 @@
    "price_out": 0.62,
    "context": 65535,
    "created": "2024-04-16",
-   "age_days": 914,
+   "age_days": 915,
    "free": false,
    "modalities": "text"
   },
@@ -4368,7 +4368,7 @@
    "price_out": 30.0,
    "context": 128000,
    "created": "2024-04-09",
-   "age_days": 921,
+   "age_days": 922,
    "free": false,
    "modalities": "text+image"
   },
@@ -4380,7 +4380,7 @@
    "price_out": 6.0,
    "context": 128000,
    "created": "2024-02-26",
-   "age_days": 964,
+   "age_days": 965,
    "free": false,
    "modalities": "text+file"
   },
@@ -4392,7 +4392,7 @@
    "price_out": 2.0,
    "context": 4095,
    "created": "2024-01-25",
-   "age_days": 996,
+   "age_days": 997,
    "free": false,
    "modalities": "text"
   },
@@ -4404,7 +4404,7 @@
    "price_out": -1000000.0,
    "context": 2000000,
    "created": "2023-11-08",
-   "age_days": 1074,
+   "age_days": 1075,
    "free": false,
    "modalities": "text+image+audio+file+video"
   },
@@ -4416,7 +4416,7 @@
    "price_out": 2.0,
    "context": 4095,
    "created": "2023-09-28",
-   "age_days": 1115,
+   "age_days": 1116,
    "free": false,
    "modalities": "text"
   },
@@ -4428,7 +4428,7 @@
    "price_out": 4.0,
    "context": 16385,
    "created": "2023-08-28",
-   "age_days": 1146,
+   "age_days": 1147,
    "free": false,
    "modalities": "text"
   },
@@ -4440,7 +4440,7 @@
    "price_out": 0.75,
    "context": 8000,
    "created": "2023-08-02",
-   "age_days": 1172,
+   "age_days": 1173,
    "free": false,
    "modalities": "text"
   },
@@ -4452,7 +4452,7 @@
    "price_out": 0.65,
    "context": 6144,
    "created": "2023-07-22",
-   "age_days": 1183,
+   "age_days": 1184,
    "free": false,
    "modalities": "text"
   },
@@ -4464,7 +4464,7 @@
    "price_out": 0.11,
    "context": 8192,
    "created": "2023-07-02",
-   "age_days": 1203,
+   "age_days": 1204,
    "free": false,
    "modalities": "text"
   },
@@ -4476,7 +4476,7 @@
    "price_out": 1.5,
    "context": 16385,
    "created": "2023-05-28",
-   "age_days": 1238,
+   "age_days": 1239,
    "free": false,
    "modalities": "text"
   },
@@ -4488,7 +4488,7 @@
    "price_out": 60.0,
    "context": 8191,
    "created": "2023-05-28",
-   "age_days": 1238,
+   "age_days": 1239,
    "free": false,
    "modalities": "text"
   }
