@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T01:21Z",
+ "generated_at": "2026-10-23T06:33Z",
  "source": "openrouter public catalog",
  "count": 374,
  "new_days": 21,
@@ -22,9 +22,9 @@
    "vendor": "minimax",
    "price_in": 0.15,
    "price_out": 0.6,
-   "context": 1000000,
+   "context": 1048576,
    "created": "2026-10-19",
-   "age_days": 3,
+   "age_days": 4,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -48,7 +48,7 @@
    "price_out": 3.0,
    "context": 262144,
    "created": "2026-10-17",
-   "age_days": 5,
+   "age_days": 6,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -564,7 +564,7 @@
    "price_out": 0.47,
    "context": 1000000,
    "created": "2026-09-21",
-   "age_days": 31,
+   "age_days": 32,
    "free": false,
    "modalities": "text+image+audio+video"
   },
@@ -600,7 +600,7 @@
    "price_out": 0.15,
    "context": 128000,
    "created": "2026-09-12",
-   "age_days": 40,
+   "age_days": 41,
    "free": false,
    "modalities": "text"
   },
@@ -612,7 +612,7 @@
    "price_out": 0.23,
    "context": 128000,
    "created": "2026-09-12",
-   "age_days": 40,
+   "age_days": 41,
    "free": false,
    "modalities": "text"
   },
@@ -624,7 +624,7 @@
    "price_out": 30.0,
    "context": 1000000,
    "created": "2026-09-11",
-   "age_days": 41,
+   "age_days": 42,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -636,7 +636,7 @@
    "price_out": 6.0,
    "context": 1000000,
    "created": "2026-09-11",
-   "age_days": 41,
+   "age_days": 42,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -660,7 +660,7 @@
    "price_out": 0.66,
    "context": 1048576,
    "created": "2026-09-10",
-   "age_days": 42,
+   "age_days": 43,
    "free": false,
    "modalities": "text+image"
   },
@@ -804,7 +804,7 @@
    "price_out": 2.501,
    "context": 1048576,
    "created": "2026-08-28",
-   "age_days": 55,
+   "age_days": 56,
    "free": false,
    "modalities": "text"
   },
@@ -908,8 +908,8 @@
    "id": "qwen/qwen3.8-27b",
    "name": "Qwen: Qwen3.8 27B",
    "vendor": "qwen",
-   "price_in": 0.04,
-   "price_out": 1.35,
+   "price_in": 0.2,
+   "price_out": 2.5,
    "context": 1000000,
    "created": "2026-08-14",
    "age_days": 69,
@@ -924,7 +924,7 @@
    "price_out": 0.0,
    "context": 512000,
    "created": "2026-08-14",
-   "age_days": 69,
+   "age_days": 70,
    "free": true,
    "modalities": "text+image"
   },
@@ -1092,7 +1092,7 @@
    "price_out": 1.32,
    "context": 1048576,
    "created": "2026-07-31",
-   "age_days": 83,
+   "age_days": 84,
    "free": false,
    "modalities": "text"
   },
@@ -1452,7 +1452,7 @@
    "price_out": 30.0,
    "context": 1000000,
    "created": "2026-06-24",
-   "age_days": 120,
+   "age_days": 121,
    "free": false,
    "modalities": "text+image"
   },
@@ -1464,7 +1464,7 @@
    "price_out": 3.0,
    "context": 131072,
    "created": "2026-06-18",
-   "age_days": 126,
+   "age_days": 127,
    "free": false,
    "modalities": "image+text"
   },
@@ -1476,7 +1476,7 @@
    "price_out": 12.0,
    "context": 131072,
    "created": "2026-06-18",
-   "age_days": 126,
+   "age_days": 127,
    "free": false,
    "modalities": "image+text"
   },
@@ -1572,7 +1572,7 @@
    "price_out": 2.4,
    "context": 262144,
    "created": "2026-06-04",
-   "age_days": 140,
+   "age_days": 141,
    "free": false,
    "modalities": "text"
   },
@@ -1584,7 +1584,7 @@
    "price_out": 0.0,
    "context": 1000000,
    "created": "2026-06-04",
-   "age_days": 140,
+   "age_days": 141,
    "free": true,
    "modalities": "text"
   },
@@ -1752,7 +1752,7 @@
    "price_out": 1.8,
    "context": 1000000,
    "created": "2026-04-27",
-   "age_days": 178,
+   "age_days": 179,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1764,7 +1764,7 @@
    "price_out": 1.125,
    "context": 1000000,
    "created": "2026-04-27",
-   "age_days": 178,
+   "age_days": 179,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1776,7 +1776,7 @@
    "price_out": 0.95,
    "context": 262144,
    "created": "2026-04-27",
-   "age_days": 178,
+   "age_days": 179,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1788,7 +1788,7 @@
    "price_out": 2.0,
    "context": 262144,
    "created": "2026-04-27",
-   "age_days": 178,
+   "age_days": 179,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1824,7 +1824,7 @@
    "price_out": 1.9105,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 181,
+   "age_days": 182,
    "free": false,
    "modalities": "text"
   },
@@ -1836,7 +1836,7 @@
    "price_out": 0.182,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 181,
+   "age_days": 182,
    "free": false,
    "modalities": "text"
   },
@@ -1896,7 +1896,7 @@
    "price_out": -1000000.0,
    "context": 2000000,
    "created": "2026-04-21",
-   "age_days": 184,
+   "age_days": 185,
    "free": false,
    "modalities": "text"
   },
@@ -1940,8 +1940,8 @@
    "id": "google/gemma-4-26b-a4b-it",
    "name": "Google: Gemma 4 26B A4B ",
    "vendor": "google",
-   "price_in": 0.0765,
-   "price_out": 0.255,
+   "price_in": 0.09,
+   "price_out": 0.3,
    "context": 262144,
    "created": "2026-04-03",
    "age_days": 202,
@@ -2180,8 +2180,8 @@
    "id": "qwen/qwen3.5-9b",
    "name": "Qwen: Qwen3.5-9B",
    "vendor": "qwen",
-   "price_in": 0.08,
-   "price_out": 0.13,
+   "price_in": 0.17,
+   "price_out": 0.25,
    "context": 262144,
    "created": "2026-03-10",
    "age_days": 226,
@@ -2232,7 +2232,7 @@
    "price_out": 1.5,
    "context": 1048576,
    "created": "2026-03-03",
-   "age_days": 233,
+   "age_days": 234,
    "free": false,
    "modalities": "text+image+video+file+audio"
   },
@@ -2388,7 +2388,7 @@
    "price_out": 3.6,
    "context": 262144,
    "created": "2026-02-16",
-   "age_days": 248,
+   "age_days": 249,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -2448,7 +2448,7 @@
    "price_out": 0.0,
    "context": 200000,
    "created": "2026-02-01",
-   "age_days": 263,
+   "age_days": 264,
    "free": true,
    "modalities": "text+image"
   },
@@ -2472,7 +2472,7 @@
    "price_out": 2.5,
    "context": 262144,
    "created": "2026-01-27",
-   "age_days": 268,
+   "age_days": 269,
    "free": false,
    "modalities": "text+image"
   },
@@ -2484,7 +2484,7 @@
    "price_out": 0.6,
    "context": 131072,
    "created": "2026-01-27",
-   "age_days": 268,
+   "age_days": 269,
    "free": false,
    "modalities": "text"
   },
@@ -2592,7 +2592,7 @@
    "price_out": 1.2,
    "context": 204800,
    "created": "2025-12-23",
-   "age_days": 303,
+   "age_days": 304,
    "free": false,
    "modalities": "text"
   },
@@ -2604,7 +2604,7 @@
    "price_out": 1.98,
    "context": 204800,
    "created": "2025-12-22",
-   "age_days": 304,
+   "age_days": 305,
    "free": false,
    "modalities": "text"
   },
@@ -2712,7 +2712,7 @@
    "price_out": -1000000.0,
    "context": 128000,
    "created": "2025-12-05",
-   "age_days": 321,
+   "age_days": 322,
    "free": false,
    "modalities": "text"
   },
@@ -2940,7 +2940,7 @@
    "price_out": 0.112,
    "context": 131000,
    "created": "2025-10-20",
-   "age_days": 367,
+   "age_days": 368,
    "free": false,
    "modalities": "text"
   },
@@ -3804,7 +3804,7 @@
    "price_out": 0.35,
    "context": 131072,
    "created": "2025-03-12",
-   "age_days": 589,
+   "age_days": 590,
    "free": false,
    "modalities": "text+image"
   },
@@ -3828,7 +3828,7 @@
    "price_out": 8.0,
    "context": 128000,
    "created": "2025-03-07",
-   "age_days": 594,
+   "age_days": 595,
    "free": false,
    "modalities": "text+image"
   },
@@ -3840,7 +3840,7 @@
    "price_out": 15.0,
    "context": 200000,
    "created": "2025-03-07",
-   "age_days": 594,
+   "age_days": 595,
    "free": false,
    "modalities": "text+image"
   },
@@ -3852,7 +3852,7 @@
    "price_out": 8.0,
    "context": 128000,
    "created": "2025-03-07",
-   "age_days": 594,
+   "age_days": 595,
    "free": false,
    "modalities": "text"
   },
@@ -3960,7 +3960,7 @@
    "price_out": 1.1,
    "context": 1000192,
    "created": "2025-01-15",
-   "age_days": 645,
+   "age_days": 646,
    "free": false,
    "modalities": "text+image"
   },
@@ -3972,7 +3972,7 @@
    "price_out": 0.14,
    "context": 16384,
    "created": "2025-01-10",
-   "age_days": 650,
+   "age_days": 651,
    "free": false,
    "modalities": "text"
   },
