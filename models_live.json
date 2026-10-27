@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-27T02:39Z",
+ "generated_at": "2026-10-27T08:00Z",
  "source": "openrouter public catalog",
  "count": 374,
  "new_days": 21,
@@ -60,7 +60,7 @@
    "price_out": 0.6,
    "context": 1048576,
    "created": "2026-10-19",
-   "age_days": 7,
+   "age_days": 8,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -84,7 +84,7 @@
    "price_out": 3.0,
    "context": 262144,
    "created": "2026-10-17",
-   "age_days": 9,
+   "age_days": 10,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -600,7 +600,7 @@
    "price_out": 0.47,
    "context": 1000000,
    "created": "2026-09-21",
-   "age_days": 35,
+   "age_days": 36,
    "free": false,
    "modalities": "text+image+audio+video"
   },
@@ -660,7 +660,7 @@
    "price_out": 30.0,
    "context": 1000000,
    "created": "2026-09-11",
-   "age_days": 45,
+   "age_days": 46,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -672,7 +672,7 @@
    "price_out": 6.0,
    "context": 1000000,
    "created": "2026-09-11",
-   "age_days": 45,
+   "age_days": 46,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -696,7 +696,7 @@
    "price_out": 0.42,
    "context": 1048576,
    "created": "2026-09-10",
-   "age_days": 46,
+   "age_days": 47,
    "free": false,
    "modalities": "text+image"
   },
@@ -840,7 +840,7 @@
    "price_out": 2.501,
    "context": 1048576,
    "created": "2026-08-28",
-   "age_days": 59,
+   "age_days": 60,
    "free": false,
    "modalities": "text"
   },
@@ -932,7 +932,7 @@
    "id": "z-ai/glm-5.3",
    "name": "Z.ai: GLM 5.3",
    "vendor": "z-ai",
-   "price_in": 0.0769,
+   "price_in": 0.0699,
    "price_out": 1.4,
    "context": 1048576,
    "created": "2026-08-18",
@@ -944,8 +944,8 @@
    "id": "qwen/qwen3.8-27b",
    "name": "Qwen: Qwen3.8 27B",
    "vendor": "qwen",
-   "price_in": 0.039,
-   "price_out": 1.25,
+   "price_in": 0.2,
+   "price_out": 2.5,
    "context": 1000000,
    "created": "2026-08-14",
    "age_days": 73,
@@ -960,7 +960,7 @@
    "price_out": 0.0,
    "context": 512000,
    "created": "2026-08-14",
-   "age_days": 73,
+   "age_days": 74,
    "free": true,
    "modalities": "text+image"
   },
@@ -1136,11 +1136,11 @@
    "id": "deepseek/deepseek-v4-flash-0731",
    "name": "DeepSeek: DeepSeek V4 Flash 0731",
    "vendor": "deepseek",
-   "price_in": 0.44,
-   "price_out": 1.32,
+   "price_in": 0.119,
+   "price_out": 0.238,
    "context": 1048576,
    "created": "2026-07-31",
-   "age_days": 87,
+   "age_days": 88,
    "free": false,
    "modalities": "text"
   },
@@ -1500,7 +1500,7 @@
    "price_out": 30.0,
    "context": 1000000,
    "created": "2026-06-24",
-   "age_days": 124,
+   "age_days": 125,
    "free": false,
    "modalities": "text+image"
   },
@@ -1512,7 +1512,7 @@
    "price_out": 3.0,
    "context": 131072,
    "created": "2026-06-18",
-   "age_days": 130,
+   "age_days": 131,
    "free": false,
    "modalities": "image+text"
   },
@@ -1524,7 +1524,7 @@
    "price_out": 12.0,
    "context": 131072,
    "created": "2026-06-18",
-   "age_days": 130,
+   "age_days": 131,
    "free": false,
    "modalities": "image+text"
   },
@@ -1620,7 +1620,7 @@
    "price_out": 2.4,
    "context": 262144,
    "created": "2026-06-04",
-   "age_days": 144,
+   "age_days": 145,
    "free": false,
    "modalities": "text"
   },
@@ -1632,7 +1632,7 @@
    "price_out": 0.0,
    "context": 1000000,
    "created": "2026-06-04",
-   "age_days": 144,
+   "age_days": 145,
    "free": true,
    "modalities": "text"
   },
@@ -1800,7 +1800,7 @@
    "price_out": 1.8,
    "context": 1000000,
    "created": "2026-04-27",
-   "age_days": 182,
+   "age_days": 183,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1812,7 +1812,7 @@
    "price_out": 1.125,
    "context": 1000000,
    "created": "2026-04-27",
-   "age_days": 182,
+   "age_days": 183,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1824,7 +1824,7 @@
    "price_out": 0.95,
    "context": 262144,
    "created": "2026-04-27",
-   "age_days": 182,
+   "age_days": 183,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1872,7 +1872,7 @@
    "price_out": 1.9105,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 185,
+   "age_days": 186,
    "free": false,
    "modalities": "text"
   },
@@ -1880,11 +1880,11 @@
    "id": "deepseek/deepseek-v4-flash",
    "name": "DeepSeek: DeepSeek V4 Flash 0423",
    "vendor": "deepseek",
-   "price_in": 0.14,
-   "price_out": 0.28,
+   "price_in": 0.05,
+   "price_out": 0.45,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 185,
+   "age_days": 186,
    "free": false,
    "modalities": "text"
   },
@@ -1944,7 +1944,7 @@
    "price_out": -1000000.0,
    "context": 2000000,
    "created": "2026-04-21",
-   "age_days": 188,
+   "age_days": 189,
    "free": false,
    "modalities": "text"
   },
@@ -1988,8 +1988,8 @@
    "id": "google/gemma-4-26b-a4b-it",
    "name": "Google: Gemma 4 26B A4B ",
    "vendor": "google",
-   "price_in": 0.0765,
-   "price_out": 0.255,
+   "price_in": 0.09,
+   "price_out": 0.3,
    "context": 262144,
    "created": "2026-04-03",
    "age_days": 206,
@@ -2268,7 +2268,7 @@
    "price_out": 1.5,
    "context": 1048576,
    "created": "2026-03-03",
-   "age_days": 237,
+   "age_days": 238,
    "free": false,
    "modalities": "text+image+video+file+audio"
   },
@@ -2424,7 +2424,7 @@
    "price_out": 3.6,
    "context": 262144,
    "created": "2026-02-16",
-   "age_days": 252,
+   "age_days": 253,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -2484,7 +2484,7 @@
    "price_out": 0.0,
    "context": 200000,
    "created": "2026-02-01",
-   "age_days": 267,
+   "age_days": 268,
    "free": true,
    "modalities": "text+image"
   },
@@ -2508,7 +2508,7 @@
    "price_out": 2.5,
    "context": 262144,
    "created": "2026-01-27",
-   "age_days": 272,
+   "age_days": 273,
    "free": false,
    "modalities": "text+image"
   },
@@ -2640,7 +2640,7 @@
    "price_out": 1.98,
    "context": 204800,
    "created": "2025-12-22",
-   "age_days": 308,
+   "age_days": 309,
    "free": false,
    "modalities": "text"
   },
@@ -2748,7 +2748,7 @@
    "price_out": -1000000.0,
    "context": 128000,
    "created": "2025-12-05",
-   "age_days": 325,
+   "age_days": 326,
    "free": false,
    "modalities": "text"
   },
@@ -3776,8 +3776,8 @@
    "id": "google/gemma-3-4b-it",
    "name": "Google: Gemma 3 4B",
    "vendor": "google",
-   "price_in": 0.04,
-   "price_out": 0.05,
+   "price_in": 0.05,
+   "price_out": 0.1,
    "context": 131072,
    "created": "2025-03-13",
    "age_days": 592,
@@ -3828,7 +3828,7 @@
    "price_out": 0.35,
    "context": 131072,
    "created": "2025-03-12",
-   "age_days": 593,
+   "age_days": 594,
    "free": false,
    "modalities": "text+image"
   },
@@ -3984,7 +3984,7 @@
    "price_out": 1.1,
    "context": 1000192,
    "created": "2025-01-15",
-   "age_days": 649,
+   "age_days": 650,
    "free": false,
    "modalities": "text+image"
   },
@@ -3996,7 +3996,7 @@
    "price_out": 0.14,
    "context": 16384,
    "created": "2025-01-10",
-   "age_days": 654,
+   "age_days": 655,
    "free": false,
    "modalities": "text"
   },
@@ -4032,7 +4032,7 @@
    "price_out": 0.15,
    "context": 128000,
    "created": "2024-12-14",
-   "age_days": 681,
+   "age_days": 682,
    "free": false,
    "modalities": "text"
   },
