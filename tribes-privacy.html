@@ -24,7 +24,7 @@
   <div class="wrap">
     <a class="logo" href="tribes.html"><img src="assets/meerada-tribes-wordmark.png" alt="Meerada Tribes" style="height:44px" /></a>
     <h1>Privacy Policy</h1>
-    <p class="muted">Last updated: 15 September 2026 · Applies to the Meerada Tribes mobile app (Android package <code>com.tryber.social</code>, iOS bundle <code>com.tryber.app</code>).</p>
+    <p class="muted">Last updated: 28 October 2026 · Applies to the Meerada Tribes mobile app (Android package <code>com.tryber.social</code>, iOS bundle <code>com.tryber.app</code>).</p>
 
     <h2>What Meerada Tribes is</h2>
     <p>Meerada Tribes is a location-based social app: live groups ("Tribes") around you, a radar of nearby members, city events, step and floor leagues with friends you approve, and Teeby, an AI assistant. This policy explains what we collect, why, and your choices.</p>
@@ -44,10 +44,24 @@
     <ul>
       <li>To run the service: sign-in, matching you with people and groups nearby, delivering messages and notifications.</li>
       <li>To power features you turn on: step leagues, walking groups, calendar sync, arrival notices, Bump.</li>
-      <li>Teeby and in-app AI characters: your messages to them are sent to AI model providers (Anthropic, OpenAI, Google) to generate replies. Providers process this data under their API terms and do not use it to train their models.</li>
+      <li>AI features, only with your permission — see the next section.</li>
       <li>Safety: moderation, blocking and reporting tools, abuse prevention.</li>
       <li>Improvement: aggregated analytics and crash reports.</li>
     </ul>
+
+    <h2>AI features and third-party AI providers</h2>
+    <p>Some features generate text with large language models run by third-party providers: <b>Anthropic</b> (Claude), <b>OpenAI</b> (GPT), <b>Google</b> (Gemini) and <b>xAI</b> (Grok). Each provider processes the data only to produce the reply, under its API terms, and does not use it to train its models. <b>Nothing is sent to any of them until you allow AI features in the app</b> (asked once during sign-up, and changeable at any time in Settings → AI features). If you decline, the features below are simply off for you and your content stays out of them.</p>
+    <p>When AI features are on, this is what each feature sends:</p>
+    <ul>
+      <li><b>Teeby, the assistant</b> — the text you type or dictate, your display name, your city or country (never your precise position), the names of your groups, and the facts you asked Teeby to remember. When you ask Teeby what is new in your groups, the recent messages of those groups go with the request, with the senders' display names.</li>
+      <li><b>AI characters</b> in group chats, direct messages and the feed — the recent messages or the post they are replying to, with display names (or the alias of anonymous members), and the latest photos in that thread. Only the messages of members who allowed AI features are included; members who declined are left out.</li>
+      <li><b>Translation</b> (only when you tap it) — the message or post being translated.</li>
+      <li><b>Photo captions and "make it pop"</b> — the photo or caption you chose.</li>
+      <li><b>Walking-group coach and step leagues</b> — your display name, gender and daily step counts, to write the group's evening round-up.</li>
+      <li><b>Medical clearance review</b> (Go Outs that require one) — the document you upload and your display name, to check that it is a valid clearance. The document itself is deleted after the check.</li>
+      <li><b>Agent Handshake</b> (when two people choose to compare profiles) — each person's bio, gender, age range, language and group topics.</li>
+    </ul>
+    <p>Voice input uses your phone's own speech recognition (Apple or Google); audio is never sent to the providers above, only the resulting text. Your phone number, contacts and precise location are never sent to any AI provider.</p>
 
     <h2>Where it lives and who sees it</h2>
     <p>Data is stored with Supabase (PostgreSQL, EU region) with row-level security. Service providers we rely on: Supabase (database, storage), Twilio (verification codes), Expo and Firebase (push notifications and analytics), Google Play and Apple (distribution), and the AI providers above. We do not sell personal data and we do not share it with advertisers.</p>
@@ -55,7 +69,7 @@
 
     <h2>Your choices and rights</h2>
     <ul>
-      <li>Change radar visibility, step sharing, and permissions at any time in the app or in your phone's settings.</li>
+      <li>Change radar visibility, step sharing, AI features, and permissions at any time in the app or in your phone's settings.</li>
       <li>Delete your account from Profile → Settings, or email us. Deletion removes your profile, messages, steps history and contacts matches within 30 days (backups may persist up to 90 days).</li>
       <li>Request a copy or correction of your data by email.</li>
       <li>EU/EEA and Israeli residents have the rights provided by GDPR and the Israeli Privacy Protection Law; contact us to exercise them.</li>
