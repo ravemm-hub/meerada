@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="robots" content="noindex">
+<!-- Meerada in-app player page. The app's WebView loads THIS page (a real https
+     document on meerada.app) and the page hosts the official YouTube iframe, so
+     the embed request carries a genuine Referer — YouTube refuses embeds without
+     one (error 153 "Video player configuration error"). Query: ?yt=<videoId>
+     [&autoplay=1][&mute=1][&controls=0]. -->
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Meerada player</title>
+<style>
+  html,body{margin:0;padding:0;background:#000;height:100%;overflow:hidden}
+  iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  #err{position:absolute;inset:0;display:none;align-items:center;justify-content:center;color:#ccc;font:14px -apple-system,Roboto,sans-serif;text-align:center;padding:20px}
+</style>
+</head>
+<body>
+<div id="err">This video can't be played here.</div>
+<script>
+(function(){
+  var q = new URLSearchParams(location.search);
+  var id = (q.get('yt') || '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 11);
+  if (id.length !== 11) { document.getElementById('err').style.display = 'flex'; return; }
+  var p = new URLSearchParams({ playsinline: '1', rel: '0', modestbranding: '1', enablejsapi: '1', origin: location.origin,
+    controls: q.get('controls') === '0' ? '0' : '1' });
+  if (q.get('autoplay') === '1') p.set('autoplay', '1');
+  if (q.get('mute') === '1') p.set('mute', '1');
+  if (q.get('loop') === '1') { p.set('loop', '1'); p.set('playlist', id); }
+  var f = document.createElement('iframe');
+  f.src = 'https://www.youtube.com/embed/' + id + '?' + p.toString();
+  f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+  f.setAttribute('allowfullscreen', '');
+  f.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+  document.body.appendChild(f);
+})();
+</script>
+</body>
+</html>
