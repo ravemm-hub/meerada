@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-02T00:14Z",
+ "generated_at": "2026-11-02T04:07Z",
  "source": "openrouter public catalog",
  "count": 362,
  "new_days": 21,
@@ -68,11 +68,11 @@
    "id": "minimax/minimax-m3.1-flash",
    "name": "MiniMax: MiniMax M3.1 Flash",
    "vendor": "minimax",
-   "price_in": 0.075,
-   "price_out": 0.3,
+   "price_in": 0.15,
+   "price_out": 0.6,
    "context": 1048576,
    "created": "2026-10-19",
-   "age_days": 13,
+   "age_days": 14,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -96,7 +96,7 @@
    "price_out": 3.0,
    "context": 262144,
    "created": "2026-10-17",
-   "age_days": 15,
+   "age_days": 16,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -612,7 +612,7 @@
    "price_out": 0.47,
    "context": 1000000,
    "created": "2026-09-21",
-   "age_days": 41,
+   "age_days": 42,
    "free": false,
    "modalities": "text+image+audio+video"
   },
@@ -660,7 +660,7 @@
    "price_out": 0.15,
    "context": 128000,
    "created": "2026-09-12",
-   "age_days": 50,
+   "age_days": 51,
    "free": false,
    "modalities": "text"
   },
@@ -672,7 +672,7 @@
    "price_out": 0.23,
    "context": 128000,
    "created": "2026-09-12",
-   "age_days": 50,
+   "age_days": 51,
    "free": false,
    "modalities": "text"
   },
@@ -984,7 +984,7 @@
    "price_out": 0.0,
    "context": 512000,
    "created": "2026-08-14",
-   "age_days": 79,
+   "age_days": 80,
    "free": true,
    "modalities": "text+image"
   },
@@ -1116,7 +1116,7 @@
    "price_out": 4.0,
    "context": 262144,
    "created": "2026-08-11",
-   "age_days": 82,
+   "age_days": 83,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -1488,7 +1488,7 @@
    "price_out": 3.0,
    "context": 131072,
    "created": "2026-06-18",
-   "age_days": 136,
+   "age_days": 137,
    "free": false,
    "modalities": "image+text"
   },
@@ -1500,7 +1500,7 @@
    "price_out": 12.0,
    "context": 131072,
    "created": "2026-06-18",
-   "age_days": 136,
+   "age_days": 137,
    "free": false,
    "modalities": "image+text"
   },
@@ -1776,7 +1776,7 @@
    "price_out": 1.8,
    "context": 1000000,
    "created": "2026-04-27",
-   "age_days": 188,
+   "age_days": 189,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1788,7 +1788,7 @@
    "price_out": 1.125,
    "context": 1000000,
    "created": "2026-04-27",
-   "age_days": 188,
+   "age_days": 189,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1800,7 +1800,7 @@
    "price_out": 0.9,
    "context": 262144,
    "created": "2026-04-27",
-   "age_days": 188,
+   "age_days": 189,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1812,7 +1812,7 @@
    "price_out": 2.7,
    "context": 262144,
    "created": "2026-04-27",
-   "age_days": 188,
+   "age_days": 189,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1848,7 +1848,7 @@
    "price_out": 3.2,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 191,
+   "age_days": 192,
    "free": false,
    "modalities": "text"
   },
@@ -1860,7 +1860,7 @@
    "price_out": 0.182,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 191,
+   "age_days": 192,
    "free": false,
    "modalities": "text"
   },
@@ -1964,8 +1964,8 @@
    "id": "google/gemma-4-26b-a4b-it",
    "name": "Google: Gemma 4 26B A4B ",
    "vendor": "google",
-   "price_in": 0.023,
-   "price_out": 0.07,
+   "price_in": 0.022,
+   "price_out": 0.067,
    "context": 262144,
    "created": "2026-04-03",
    "age_days": 212,
@@ -2436,7 +2436,7 @@
    "price_out": 0.8,
    "context": 262144,
    "created": "2026-02-04",
-   "age_days": 270,
+   "age_days": 271,
    "free": false,
    "modalities": "text"
   },
@@ -2448,7 +2448,7 @@
    "price_out": 0.0,
    "context": 200000,
    "created": "2026-02-01",
-   "age_days": 273,
+   "age_days": 274,
    "free": true,
    "modalities": "text+image"
   },
@@ -2580,7 +2580,7 @@
    "price_out": 1.2,
    "context": 204800,
    "created": "2025-12-23",
-   "age_days": 313,
+   "age_days": 314,
    "free": false,
    "modalities": "text"
   },
@@ -2700,7 +2700,7 @@
    "price_out": -1000000.0,
    "context": 128000,
    "created": "2025-12-05",
-   "age_days": 331,
+   "age_days": 332,
    "free": false,
    "modalities": "text"
   },
@@ -3236,8 +3236,8 @@
    "id": "openai/gpt-oss-20b",
    "name": "OpenAI: gpt-oss-20b",
    "vendor": "openai",
-   "price_in": 0.03,
-   "price_out": 0.13,
+   "price_in": 0.018,
+   "price_out": 0.09,
    "context": 131072,
    "created": "2025-08-05",
    "age_days": 453,
@@ -3336,7 +3336,7 @@
    "price_out": 1.0,
    "context": 262144,
    "created": "2025-07-23",
-   "age_days": 466,
+   "age_days": 467,
    "free": false,
    "modalities": "text"
   },
@@ -3540,7 +3540,7 @@
    "price_out": 0.18,
    "context": 163840,
    "created": "2025-04-30",
-   "age_days": 550,
+   "age_days": 551,
    "free": false,
    "modalities": "image+text"
   },
@@ -3756,7 +3756,7 @@
    "price_out": 8.0,
    "context": 128000,
    "created": "2025-03-07",
-   "age_days": 604,
+   "age_days": 605,
    "free": false,
    "modalities": "text+image"
   },
@@ -3768,7 +3768,7 @@
    "price_out": 15.0,
    "context": 200000,
    "created": "2025-03-07",
-   "age_days": 604,
+   "age_days": 605,
    "free": false,
    "modalities": "text+image"
   },
@@ -3780,7 +3780,7 @@
    "price_out": 8.0,
    "context": 128000,
    "created": "2025-03-07",
-   "age_days": 604,
+   "age_days": 605,
    "free": false,
    "modalities": "text"
   },
@@ -3972,7 +3972,7 @@
    "price_out": 6.0,
    "context": 131072,
    "created": "2024-11-19",
-   "age_days": 712,
+   "age_days": 713,
    "free": false,
    "modalities": "text+file"
   },
@@ -4040,8 +4040,8 @@
    "id": "meta-llama/llama-3.2-3b-instruct",
    "name": "Meta: Llama 3.2 3B Instruct",
    "vendor": "meta-llama",
-   "price_in": 0.05,
-   "price_out": 0.33,
+   "price_in": 0.0509,
+   "price_out": 0.335,
    "context": 131072,
    "created": "2024-09-25",
    "age_days": 768,
