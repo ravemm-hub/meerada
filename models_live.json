@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-11-08T04:11Z",
+ "generated_at": "2026-11-08T11:57Z",
  "source": "openrouter public catalog",
- "count": 363,
+ "count": 360,
  "new_days": 21,
  "models": [
   {
@@ -96,7 +96,7 @@
    "price_out": 1.2505,
    "context": 1048576,
    "created": "2026-11-04",
-   "age_days": 3,
+   "age_days": 4,
    "free": false,
    "modalities": "text+image"
   },
@@ -204,7 +204,7 @@
    "price_out": 0.5,
    "context": 1048576,
    "created": "2026-10-17",
-   "age_days": 21,
+   "age_days": 22,
    "free": false,
    "modalities": "text+image"
   },
@@ -245,18 +245,6 @@
    "modalities": "text"
   },
   {
-   "id": "inception/mercury-3",
-   "name": "Inception: Mercury 3",
-   "vendor": "inception",
-   "price_in": 0.1,
-   "price_out": 0.35,
-   "context": 1000000,
-   "created": "2026-10-16",
-   "age_days": 22,
-   "free": false,
-   "modalities": "text"
-  },
-  {
    "id": "prism-ml/ternary-bonsai-2-9b",
    "name": "PrismML: Ternary Bonsai 2 9B",
    "vendor": "prism-ml",
@@ -264,7 +252,7 @@
    "price_out": 0.13,
    "context": 262144,
    "created": "2026-10-16",
-   "age_days": 22,
+   "age_days": 23,
    "free": false,
    "modalities": "text+image"
   },
@@ -600,7 +588,7 @@
    "price_out": 0.2,
    "context": 524288,
    "created": "2026-09-23",
-   "age_days": 45,
+   "age_days": 46,
    "free": false,
    "modalities": "text"
   },
@@ -804,7 +792,7 @@
    "price_out": 30.0,
    "context": 1000000,
    "created": "2026-09-11",
-   "age_days": 57,
+   "age_days": 58,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -816,7 +804,7 @@
    "price_out": 6.0,
    "context": 1000000,
    "created": "2026-09-11",
-   "age_days": 57,
+   "age_days": 58,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -837,24 +825,12 @@
    "name": "DeepSeek: DeepSeek V4.1 Flash",
    "vendor": "deepseek",
    "price_in": 0.051,
-   "price_out": 0.567,
+   "price_out": 0.41,
    "context": 1048576,
    "created": "2026-09-10",
-   "age_days": 58,
+   "age_days": 59,
    "free": false,
    "modalities": "text+image"
-  },
-  {
-   "id": "inception/mercury-2.5",
-   "name": "Inception: Mercury 2.5",
-   "vendor": "inception",
-   "price_in": 0.04,
-   "price_out": 0.15,
-   "context": 260000,
-   "created": "2026-09-08",
-   "age_days": 60,
-   "free": false,
-   "modalities": "text"
   },
   {
    "id": "nex-agi/nex-n2.5-mini",
@@ -984,7 +960,7 @@
    "price_out": 2.501,
    "context": 1048576,
    "created": "2026-08-28",
-   "age_days": 71,
+   "age_days": 72,
    "free": false,
    "modalities": "text"
   },
@@ -1032,7 +1008,7 @@
    "price_out": 1.32,
    "context": 1048576,
    "created": "2026-08-21",
-   "age_days": 78,
+   "age_days": 79,
    "free": false,
    "modalities": "text+image"
   },
@@ -1296,7 +1272,7 @@
    "price_out": 0.3,
    "context": 1048576,
    "created": "2026-07-31",
-   "age_days": 99,
+   "age_days": 100,
    "free": false,
    "modalities": "text"
   },
@@ -1440,7 +1416,7 @@
    "price_out": 1.2,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 121,
+   "age_days": 122,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1452,7 +1428,7 @@
    "price_out": 1.2,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 121,
+   "age_days": 122,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1464,7 +1440,7 @@
    "price_out": 12.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 121,
+   "age_days": 122,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1476,7 +1452,7 @@
    "price_out": 12.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 121,
+   "age_days": 122,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1488,7 +1464,7 @@
    "price_out": 20.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 121,
+   "age_days": 122,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1500,7 +1476,7 @@
    "price_out": 20.0,
    "context": 1050000,
    "created": "2026-07-09",
-   "age_days": 121,
+   "age_days": 122,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -1584,7 +1560,7 @@
    "price_out": 30.0,
    "context": 1000000,
    "created": "2026-06-24",
-   "age_days": 136,
+   "age_days": 137,
    "free": false,
    "modalities": "text+image"
   },
@@ -1692,7 +1668,7 @@
    "price_out": 2.4,
    "context": 262144,
    "created": "2026-06-04",
-   "age_days": 156,
+   "age_days": 157,
    "free": false,
    "modalities": "text"
   },
@@ -1704,7 +1680,7 @@
    "price_out": 0.0,
    "context": 1000000,
    "created": "2026-06-04",
-   "age_days": 156,
+   "age_days": 157,
    "free": true,
    "modalities": "text"
   },
@@ -1940,8 +1916,8 @@
    "id": "deepseek/deepseek-v4-pro",
    "name": "DeepSeek: DeepSeek V4 Pro 0423",
    "vendor": "deepseek",
-   "price_in": 0.4341,
-   "price_out": 0.8683,
+   "price_in": 0.2718,
+   "price_out": 0.5436,
    "context": 1048576,
    "created": "2026-04-24",
    "age_days": 198,
@@ -2016,7 +1992,7 @@
    "price_out": -1000000.0,
    "context": 2000000,
    "created": "2026-04-21",
-   "age_days": 200,
+   "age_days": 201,
    "free": false,
    "modalities": "text"
   },
@@ -2208,7 +2184,7 @@
    "price_out": 1.25,
    "context": 400000,
    "created": "2026-03-17",
-   "age_days": 235,
+   "age_days": 236,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -2220,7 +2196,7 @@
    "price_out": 4.5,
    "context": 400000,
    "created": "2026-03-17",
-   "age_days": 235,
+   "age_days": 236,
    "free": false,
    "modalities": "file+image+text"
   },
@@ -2309,18 +2285,6 @@
    "modalities": "text+image+file"
   },
   {
-   "id": "inception/mercury-2",
-   "name": "Inception: Mercury 2",
-   "vendor": "inception",
-   "price_in": 0.25,
-   "price_out": 0.75,
-   "context": 128000,
-   "created": "2026-03-04",
-   "age_days": 248,
-   "free": false,
-   "modalities": "text"
-  },
-  {
    "id": "google/gemini-3.1-flash-lite-preview",
    "name": "Google: Gemini 3.1 Flash Lite Preview",
    "vendor": "google",
@@ -2328,7 +2292,7 @@
    "price_out": 1.5,
    "context": 1048576,
    "created": "2026-03-03",
-   "age_days": 249,
+   "age_days": 250,
    "free": false,
    "modalities": "text+image+video+file+audio"
   },
@@ -2472,7 +2436,7 @@
    "price_out": 1.56,
    "context": 1000000,
    "created": "2026-02-16",
-   "age_days": 264,
+   "age_days": 265,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -2484,7 +2448,7 @@
    "price_out": 3.6,
    "context": 262144,
    "created": "2026-02-16",
-   "age_days": 264,
+   "age_days": 265,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -2568,7 +2532,7 @@
    "price_out": 3.325,
    "context": 262144,
    "created": "2026-01-27",
-   "age_days": 284,
+   "age_days": 285,
    "free": false,
    "modalities": "text+image"
   },
@@ -2664,7 +2628,7 @@
    "price_out": 2.2,
    "context": 204800,
    "created": "2025-12-22",
-   "age_days": 320,
+   "age_days": 321,
    "free": false,
    "modalities": "text"
   },
@@ -3284,8 +3248,8 @@
    "id": "openai/gpt-oss-120b",
    "name": "OpenAI: gpt-oss-120b",
    "vendor": "openai",
-   "price_in": 0.021,
-   "price_out": 0.079,
+   "price_in": 0.014,
+   "price_out": 0.053,
    "context": 131072,
    "created": "2025-08-05",
    "age_days": 459,
@@ -3792,7 +3756,7 @@
    "price_out": 0.35,
    "context": 131072,
    "created": "2025-03-12",
-   "age_days": 605,
+   "age_days": 606,
    "free": false,
    "modalities": "text+image"
   },
@@ -3876,7 +3840,7 @@
    "price_out": 1.0,
    "context": 128000,
    "created": "2025-02-01",
-   "age_days": 644,
+   "age_days": 645,
    "free": false,
    "modalities": "text+image"
   },
@@ -3888,7 +3852,7 @@
    "price_out": 0.78,
    "context": 1000000,
    "created": "2025-02-01",
-   "age_days": 644,
+   "age_days": 645,
    "free": false,
    "modalities": "text"
   },
@@ -3924,7 +3888,7 @@
    "price_out": 0.14,
    "context": 16384,
    "created": "2025-01-10",
-   "age_days": 666,
+   "age_days": 667,
    "free": false,
    "modalities": "text"
   },
@@ -3948,7 +3912,7 @@
    "price_out": 0.15,
    "context": 128000,
    "created": "2024-12-14",
-   "age_days": 693,
+   "age_days": 694,
    "free": false,
    "modalities": "text"
   },
