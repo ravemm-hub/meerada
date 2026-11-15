@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-15T00:09Z",
+ "generated_at": "2026-11-15T03:25Z",
  "source": "openrouter public catalog",
  "count": 365,
  "new_days": 21,
@@ -332,11 +332,11 @@
    "id": "minimax/minimax-m3.1-flash",
    "name": "MiniMax: MiniMax M3.1 Flash",
    "vendor": "minimax",
-   "price_in": 0.075,
-   "price_out": 0.3,
+   "price_in": 0.15,
+   "price_out": 0.6,
    "context": 1048576,
    "created": "2026-10-19",
-   "age_days": 26,
+   "age_days": 27,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -360,7 +360,7 @@
    "price_out": 3.0,
    "context": 262144,
    "created": "2026-10-17",
-   "age_days": 28,
+   "age_days": 29,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -864,7 +864,7 @@
    "price_out": 0.47,
    "context": 1000000,
    "created": "2026-09-21",
-   "age_days": 54,
+   "age_days": 55,
    "free": false,
    "modalities": "text+image+audio+video"
   },
@@ -912,7 +912,7 @@
    "price_out": 0.15,
    "context": 128000,
    "created": "2026-09-12",
-   "age_days": 63,
+   "age_days": 64,
    "free": false,
    "modalities": "text"
   },
@@ -924,7 +924,7 @@
    "price_out": 0.23,
    "context": 128000,
    "created": "2026-09-12",
-   "age_days": 63,
+   "age_days": 64,
    "free": false,
    "modalities": "text"
   },
@@ -1320,7 +1320,7 @@
    "price_out": 4.0,
    "context": 262144,
    "created": "2026-08-11",
-   "age_days": 95,
+   "age_days": 96,
    "free": false,
    "modalities": "text+image+file"
   },
@@ -1980,7 +1980,7 @@
    "price_out": 0.9,
    "context": 262144,
    "created": "2026-04-27",
-   "age_days": 201,
+   "age_days": 202,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -1992,7 +1992,7 @@
    "price_out": 3.2,
    "context": 262144,
    "created": "2026-04-27",
-   "age_days": 201,
+   "age_days": 202,
    "free": false,
    "modalities": "text+image+video"
   },
@@ -2028,7 +2028,7 @@
    "price_out": 1.5,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 204,
+   "age_days": 205,
    "free": false,
    "modalities": "text"
   },
@@ -2040,7 +2040,7 @@
    "price_out": 0.18,
    "context": 1048576,
    "created": "2026-04-24",
-   "age_days": 204,
+   "age_days": 205,
    "free": false,
    "modalities": "text"
   },
@@ -2360,8 +2360,8 @@
    "id": "qwen/qwen3.5-9b",
    "name": "Qwen: Qwen3.5-9B",
    "vendor": "qwen",
-   "price_in": 0.028,
-   "price_out": 0.041,
+   "price_in": 0.095,
+   "price_out": 0.139,
    "context": 262144,
    "created": "2026-03-10",
    "age_days": 249,
@@ -2604,7 +2604,7 @@
    "price_out": 0.8,
    "context": 262144,
    "created": "2026-02-04",
-   "age_days": 283,
+   "age_days": 284,
    "free": false,
    "modalities": "text"
   },
@@ -2708,8 +2708,8 @@
    "id": "z-ai/glm-4.7",
    "name": "Z.ai: GLM 4.7",
    "vendor": "z-ai",
-   "price_in": 0.6,
-   "price_out": 2.2,
+   "price_in": 0.4,
+   "price_out": 1.75,
    "context": 204800,
    "created": "2025-12-22",
    "age_days": 327,
@@ -2820,7 +2820,7 @@
    "price_out": -1000000.0,
    "context": 128000,
    "created": "2025-12-05",
-   "age_days": 344,
+   "age_days": 345,
    "free": false,
    "modalities": "text"
   },
@@ -3168,7 +3168,7 @@
    "price_out": 0.5,
    "context": 131072,
    "created": "2025-09-27",
-   "age_days": 413,
+   "age_days": 414,
    "free": false,
    "modalities": "text"
   },
@@ -3444,7 +3444,7 @@
    "price_out": 1.0,
    "context": 262144,
    "created": "2025-07-23",
-   "age_days": 479,
+   "age_days": 480,
    "free": false,
    "modalities": "text"
   },
@@ -3636,7 +3636,7 @@
    "price_out": 0.18,
    "context": 163840,
    "created": "2025-04-30",
-   "age_days": 563,
+   "age_days": 564,
    "free": false,
    "modalities": "image+text"
   },
@@ -3852,7 +3852,7 @@
    "price_out": 8.0,
    "context": 128000,
    "created": "2025-03-07",
-   "age_days": 617,
+   "age_days": 618,
    "free": false,
    "modalities": "text+image"
   },
@@ -3864,7 +3864,7 @@
    "price_out": 15.0,
    "context": 200000,
    "created": "2025-03-07",
-   "age_days": 617,
+   "age_days": 618,
    "free": false,
    "modalities": "text+image"
   },
@@ -3876,7 +3876,7 @@
    "price_out": 8.0,
    "context": 128000,
    "created": "2025-03-07",
-   "age_days": 617,
+   "age_days": 618,
    "free": false,
    "modalities": "text"
   },
@@ -4056,7 +4056,7 @@
    "price_out": 6.0,
    "context": 131072,
    "created": "2024-11-19",
-   "age_days": 725,
+   "age_days": 726,
    "free": false,
    "modalities": "text+file"
   },
