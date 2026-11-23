@@ -63,6 +63,12 @@
   var q = new URLSearchParams(location.search);
   var id = q.get('a') || q.get('id') || '';
   var by = q.get('by') || '';
+  // MeeraAI links from WhatsApp (11-23): ?dm=<agent or user id> opens that chat, ?tab=goouts|events|feed|me
+  // opens a tab. Both fall back to the store buttons on a fresh install.
+  var dm = q.get('dm') || '';
+  var tab = (q.get('tab') || '').toLowerCase();
+  var okDm = /^[0-9a-f-]{36}$/i.test(dm);
+  var tabRoute = { goouts: 'activities', activities: 'activities', events: 'events', feed: 'feed', me: 'profile', chats: 'index', meera: 'agent' }[tab] || '';
   var okId = /^[0-9a-f-]{36}$/i.test(id), okBy = /^[0-9a-f-]{36}$/i.test(by);
   var lang = (q.get('lang') || (navigator.language || 'en').slice(0, 2)) === 'he' ? 'he' : 'en';
   function applyLang() {
@@ -74,7 +80,9 @@
   document.querySelectorAll('.lang a').forEach(function (a) { a.addEventListener('click', function (e) { e.preventDefault(); lang = a.getAttribute('data-lang'); applyLang(); render(window.__ev); }); });
 
   // Deep link into the activity room; the inviter rides along so the app records the invite.
-  var deep = 'trybe://chat?id=' + encodeURIComponent(id) + (okBy ? '&by=' + encodeURIComponent(by) : '');
+  var deep = okDm ? 'trybe://dm?id=' + encodeURIComponent(dm)
+    : tabRoute ? 'trybe://' + tabRoute
+    : 'trybe://chat?id=' + encodeURIComponent(id) + (okBy ? '&by=' + encodeURIComponent(by) : '');
   var openBtn = document.getElementById('openApp');
   openBtn.setAttribute('href', deep);
 
@@ -97,7 +105,7 @@
 
   // Auto-attempt the app on mobile; if nothing takes focus away, the page simply stays.
   var mobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-  if (okId && mobile) {
+  if ((okId || okDm || tabRoute) && mobile) {
     setTimeout(function () {
       var f = document.createElement('iframe');
       f.style.display = 'none'; f.src = deep; document.body.appendChild(f);
@@ -124,6 +132,15 @@
     if (ev.cover_url) { c.src = ev.cover_url; c.style.display = 'block'; } else { c.style.display = 'none'; }
   }
   applyLang();
+  if (okDm) {
+    document.getElementById('name').textContent = lang === 'he' ? 'שיחה במירדה' : 'A chat on Meerada';
+    fetch(SB + '/rest/v1/profiles?id=eq.' + dm + '&select=display_name,bio', { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
+      .then(function (r) { return r.json(); })
+      .then(function (rows) { var p = rows && rows[0]; if (p) { document.getElementById('name').textContent = (lang === 'he' ? 'לדבר עם ' : 'Talk to ') + (p.display_name || ''); document.getElementById('desc').textContent = p.bio || ''; } })
+      .catch(function () {});
+    return;
+  }
+  if (tabRoute) { document.getElementById('name').textContent = lang === 'he' ? 'פותחים את מירדה' : 'Opening Meerada'; return; }
   if (!okId) { document.getElementById('name').textContent = lang === 'he' ? 'הפעילות לא נמצאה' : 'Activity not found'; return; }
   fetch(SB + '/rest/v1/groups?id=eq.' + id + '&select=name,description,event_at,location_name,cover_url,member_count', { headers: { apikey: KEY, Authorization: 'Bearer ' + KEY } })
     .then(function (r) { return r.json(); })
