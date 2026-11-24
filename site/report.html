@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>MeeraAI · report</title>
+<link rel="icon" href="assets/meera-avatar.png">
+<style>
+:root{color-scheme:dark}
+body{margin:0;background:#0E0D16;color:#ECEBF5;font:16px/1.6 -apple-system,"Segoe UI",Roboto,"Noto Sans Hebrew",sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:28px 18px 60px}
+.brand{display:flex;align-items:center;gap:10px;color:#9A96B8;font-size:13px;margin-bottom:18px}
+.brand img{width:28px;height:28px;border-radius:50%}
+.brand b{color:#8B84FF;font-size:15px}
+h1{font-size:24px;line-height:1.25;margin:0 0 6px}
+.when{color:#9A96B8;font-size:13px;margin-bottom:22px}
+.card{background:#17162A;border:1px solid #2A2846;border-radius:18px;padding:20px 20px 8px}
+.card h2,.card h3,.card h4,.card h5{margin:20px 0 8px;line-height:1.3;color:#C9C5FF}
+.card h2{font-size:19px}.card h3{font-size:17px}
+.card p{margin:0 0 12px}
+.card ul{margin:0 0 12px;padding-inline-start:22px}
+.card li{margin:6px 0}
+.card a{color:#8B84FF;word-break:break-all}
+.card code{background:#22213A;padding:1px 6px;border-radius:6px}
+.card hr{border:0;border-top:1px solid #2A2846;margin:16px 0}
+.card table{border-collapse:collapse;width:100%;margin:0 0 12px;font-size:14px}
+.card td,.card th{border:1px solid #2A2846;padding:6px 8px;text-align:start;vertical-align:top}
+.cta{display:block;text-align:center;margin:26px auto 0;background:#6C63FF;color:#fff;text-decoration:none;padding:13px 22px;border-radius:14px;font-weight:700;max-width:320px}
+.foot{color:#6E6A8C;font-size:12px;text-align:center;margin-top:18px}
+.muted{color:#9A96B8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><img src="assets/meera-avatar.png" alt=""><b>MeeraAI</b> · Meerada</div>
+  <h1 id="title">…</h1>
+  <div class="when" id="when"></div>
+  <div class="card" id="card"><p class="muted">Loading…</p></div>
+  <a class="cta" id="cta" href="https://meerada.app/go">Open Meerada</a>
+  <div class="foot" id="foot">Prepared by Meera, Meerada's personal assistant. Verify important details with the source.</div>
+</div>
+<script>
+(function(){
+  var API = 'https://vytkiwibuohtcmjmslkh.supabase.co/functions/v1/meera-report';
+  var id = (new URLSearchParams(location.search).get('id') || '').trim();
+  var card = document.getElementById('card');
+  if (!/^[0-9a-f-]{36}$/i.test(id)) { card.innerHTML = '<p>Report not found.</p>'; return; }
+  var esc = function (s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+  var inline = function (t) {
+    return t.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+      .replace(/(^|[^*])\*(?!\s)([^*]+?)\*(?!\w)/g,'$1<b>$2</b>')
+      .replace(/`([^`]+)`/g,'<code>$1</code>')
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
+      .replace(/(^|[^"'>])(https?:\/\/[^\s<)]+)/g,'$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+  };
+  // light markdown → HTML (headings, bullets, numbered lists, tables, rules, paragraphs)
+  var md = function (src) {
+    var lines = esc(src).split(/\r?\n/), out = [], inList = false, inTable = false;
+    var closeAll = function () { if (inList) { out.push('</ul>'); inList = false; } if (inTable) { out.push('</table>'); inTable = false; } };
+    for (var i = 0; i < lines.length; i++) {
+      var l = lines[i].replace(/\s+$/,'');
+      var li = l.match(/^\s*(?:[-•*]|\d+[.)])\s+(.*)$/);
+      if (li) { if (inTable) { out.push('</table>'); inTable = false; } if (!inList) { out.push('<ul>'); inList = true; } out.push('<li>' + inline(li[1]) + '</li>'); continue; }
+      if (/^\s*\|.*\|\s*$/.test(l)) {
+        if (/^\s*\|[\s:|-]+\|\s*$/.test(l)) continue;           // header separator
+        if (inList) { out.push('</ul>'); inList = false; }
+        if (!inTable) { out.push('<table>'); inTable = true; }
+        var cells = l.trim().replace(/^\|/,'').replace(/\|$/,'').split('|');
+        out.push('<tr>' + cells.map(function (c) { return '<td>' + inline(c.trim()) + '</td>'; }).join('') + '</tr>');
+        continue;
+      }
+      closeAll();
+      if (!l.trim()) continue;
+      var h = l.match(/^(#{1,4})\s+(.*)$/);
+      if (h) { var lvl = h[1].length + 1; out.push('<h' + lvl + '>' + inline(h[2]) + '</h' + lvl + '>'); continue; }
+      if (/^-{3,}$/.test(l.trim())) { out.push('<hr>'); continue; }
+      out.push('<p>' + inline(l) + '</p>');
+    }
+    closeAll();
+    return out.join('\n');
+  };
+  fetch(API + '?id=' + encodeURIComponent(id) + '&format=json').then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (t) {
+    var rtl = /[֐-׿؀-ۿ]/.test(String(t.result || '').slice(0, 400));
+    document.documentElement.lang = rtl ? 'he' : 'en'; document.documentElement.dir = rtl ? 'rtl' : 'ltr';
+    document.title = (t.title || 'Report') + ' · MeeraAI';
+    document.getElementById('title').textContent = t.title || '';
+    if (t.finished_at) document.getElementById('when').textContent = new Date(t.finished_at).toLocaleString(rtl ? 'he-IL' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    card.innerHTML = md(String(t.result || ''));
+    document.getElementById('cta').textContent = rtl ? 'פתח את מירדה' : 'Open Meerada';
+    document.getElementById('foot').textContent = rtl ? 'הוכן על ידי מירה, העוזרת האישית של מירדה. בדקו פרטים חשובים מול המקור.' : "Prepared by Meera, Meerada's personal assistant. Verify important details with the source.";
+  }).catch(function () { card.innerHTML = '<p>Report not found or not ready yet.</p>'; });
+})();
+</script>
+</body>
+</html>
