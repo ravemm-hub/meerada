@@ -1,0 +1,152 @@
+# מנוע הנוכחות של מיראדה — Meerada Index · Meerada Presence (שמות עבודה)
+
+מסמך תכנון, 24.11.2026. דיון ראשון — לא קוד. הבורסה והכלים הקיימים: §7.
+
+## 1. התזה במשפט
+רוב החיפושים עוברים לסוכני AI, והסוכנים ממליצים היום על פחות מ-2% מהעסקים הקיימים.
+מיראדה בונה את שכבת האמת שהסוכנים יקראו: אינדקס פתוח ומהיר של עסקים ובעלי מקצוע
+מאומתים עם ציון איכות חד (צד הביקוש), ומוצר שמכניס כל עסק לאינדקס ולכל המקומות
+שהמודלים קוראים (צד ההיצע). הלינקים עוברים דרכנו, Promoted מסומן ונפרד מהציון.
+
+## 2. איך המודלים באמת בוחרים היום (נובמבר 2026)
+- **הקופה בצ'אט נעצרה.** OpenAI הורידה את Instant Checkout במרץ 2026 אחרי ~30 חנויות
+  Shopify בלבד; הקנייה חזרה לאתר המוכר ("discover in AI, buy on site"). Google UCP
+  מתגלגל בשלבים, ארה"ב בלבד, קנדה/אוסטרליה בדרך. מסקנה: המינוף שלנו הוא ב-Discovery,
+  לא בתשלום. אנחנו לא בונים קופה.
+- **מי מזין את התשובות:** ChatGPT ← Bing + פידים בפורמט Google Shopping + ספקי לוחות
+  עסקים; Perplexity ← Yelp + תוכנית סוחרים חינמית; Gemini ← Google Maps/Merchant Center;
+  Claude ← חיפוש רשת חי (מה שלא ניתן לאינדוקס לא קיים). מקומי: ChatGPT ממליץ על 1.2%
+  מהמקומות הקיימים לשאילתה, Perplexity על 7.4%. כמעט כל עסק בעולם בלתי נראה — זה השוק.
+- **שוק GEO (Generative Engine Optimization):** Profound גייסה 180M$ בשווי 1.8B$
+  (9/2026), Scrunch נקנתה ב-225M$, HubSpot קנתה XFunnel. כולם מכשירי מדידה למותגי
+  אנטרפרייז, 265$+ לחודש. אין שחקן ל-SMB ולבעלי מקצוע מחוץ לארה"ב — הפער.
+- **כלים לסוכנים:** Exa / Tavily / Parallel / Brave מוכרים חיפוש רשת ב-1–7$ לאלף
+  שאילתות, לכולם MCP. אינדקס אופקי של הרשת — לא נתחרה. אינדקס ורטיקלי של עסקים
+  מאומתים עם מדדי איכות ו-n ורווח ביטחון — אין לאף אחד.
+- **המודלים לא "בוחרים" מקור בעצמם.** המעבדות קובעות מה מזין אותם. הדרך פנימה:
+  (א) להיות המקור המובנה הטוב ביותר שהזחלנים שלהם קוראים ומצטטים;
+  (ב) להיות כלי שהסוכן קורא לו — MCP, ChatGPT App, Claude connector, Gemini extension;
+  (ג) עסקות BD עם המעבדות — רק אחרי שיש נתונים שמוכיחים שאנחנו המקור הטוב.
+
+## 3. המוצר — שני צדדים של מנוע אחד
+
+### 3א. Meerada Index — צד הביקוש ("גוגל של הסוכנים")
+- מאגר פתוח של עסקים / בעלי מקצוע / מקומות, כל רשומה מובנית, מאומתת, עם ציון.
+- שלוש דלתות: (1) דפי פרופיל קריאים לזחלנים — JSON-LD (LocalBusiness/Service/Product/
+  Offer/FAQ), llms.txt, EN + השפה המקומית; (2) search API חינמי + שרת MCP מאוחסן;
+  (3) אפליקציה/קונקטור בכל ארבע חנויות הסוכנים (§6).
+- **כל לינק החוצה עובר דרך `meerada.app/go?b=<id>`** — מדידה, אטריבוציה, הוכחת ROI
+  לעסק. go.html כבר קיים לאפליקציה; מרחיבים אותו.
+- מהירות: תשובה מתחת ל-300ms — snapshot סטטי ב-CDN + edge function, בדיוק כמו
+  "Ranking right now" של הבורסה היום.
+
+### 3ב. Meerada Presence — צד ההיצע (מה שהעסק משלם עליו)
+- **הקמה ב-5 דקות דרך Meera בוואטסאפ:** העסק שולח קישור/שם, מירה בונה פרופיל מובנה
+  מהאתר ומהרשת, שואלת 6 שאלות, מאמתת טלפון (ה-OTP כבר חי), מפרסמת. אותו מספר, אותה מירה.
+- **סינדיקציה למקומות שהמודלים באמת קוראים:** Google Business Profile, Bing Places,
+  Apple Business Connect, Yelp, Perplexity merchant feed, Google/Bing Merchant Center
+  למוצרים; robots.txt של העסק פתוח ל-OAI-SearchBot / Claude-SearchBot / PerplexityBot.
+- **דוח נראות שבועי:** 20 השאלות שהלקוחות שלו שואלים × 4 מנועים → מופיע/לא, מי מופיע
+  במקומו, מה לתקן. זה בדיוק מה שהגריידר של הבורסה עושה היום (אותו פרומפט על הרבה
+  מודלים, דירוג התוצאות) — repurpose, לא כתיבה מאפס.
+- **תוכן שמצוטט:** מירה כותבת לעסק FAQ / תיאורים / תשובות בפורמט שהמודלים אוהבים
+  לצטט, EN + מקומי, מתעדכן.
+
+## 4. ציון מיראדה — המדד החד
+- רק רכיבים מדודים, בדרגות measured / derived / declared כמו CPAT: אימות (טלפון,
+  ח.פ./רישיון, בעלות על דומיין), **זמן תגובה אמיתי** (נמדד דרך וואטסאפ של מירה —
+  יתרון שאין לאף GEO), שלמות נתונים, עדכניות (last verified), ביקורות משולשות ממקורות
+  חיצוניים, ולמקומות שעובדים עם Go Outs — הגעות אמיתיות.
+- **כלל ברזל: Promoted לא נוגע בציון.** תשלום קונה מיקום מסומן "Promoted by Meerada",
+  לא ציון. מודלים ומשתמשים מזהים ספאם; גוגל ניצחה כי הדירוג היה כנה.
+- כל ציון עם n ורווח ביטחון. זה ה-DNA של הבורסה וזו הסיבה שיצטטו דווקא אותנו.
+
+## 5. מודל עסקי
+- **Presence:** חינם = פרופיל + ציון בסיסי (צריכים מסה כדי שהאינדקס ישווה משהו).
+  Pro ~29$/חודש = סינדיקציה + דוח נראות + תוכן.
+  **Promoted = תשלום לליד מוכשר** (קליק / וואטסאפ / שיחה דרך go), לא אחוז מעסקה —
+  הקופה לא אצלנו.
+- **Index:** חינם לסוכנים ולמפתחים, כמו שהבורסה חינמית — ההפצה היא המוצר.
+  מאוחר יותר: enterprise API לפי נפח.
+- אבני דרך: 1,000 פרופילים מאומתים לפני שמציעים Promoted; ציטוט ראשון של meerada.app
+  בתשובת ChatGPT / Perplexity = הוכחת הקונספט.
+
+## 6. הפצה אל תוך הסוכנים (בסדר הזה)
+1. Perplexity — תוכנית סוחרים חינמית, הכי פתוחה; מגישים feed של האינדקס.
+2. שרת MCP מאוחסן + רישום ב-MCP registry וב-Claude connectors directory.
+3. ChatGPT Apps SDK — אפליקציית Meerada (ChatGPT מציעה אפליקציות לפי הקשר השיחה).
+4. Gemini extension + Google Business Profile API + Merchant Center.
+5. SEO קלאסי של דפי הפרופיל + IndexNow — Claude וחלק מ-ChatGPT עובדים על אינדקס רגיל.
+
+## 7. מה עושים עם הבורסה — הוחלט 24.11.2026: אופציה A (להסתיר ל-/lab, לא למחוק). ביצוע ב-P1 יחד עם דף הבית החדש; עד אז האתר לא משתנה
+| אופציה | מה קורה | מחיר |
+|---|---|---|
+| **A. להסתיר, לא למחוק** (נבחר) | דף הבית = מירה + המנוע; הבורסה, Arc, pick, LLManager עוברים ל-/lab עם לינק אחד בפוטר | 0 אובדן לינקים (Reddit, GitHub, Arc), הכל חינמי אז 0 חיסכון, 0 סיכון |
+| B. להסיר לגמרי | דפים, grader, Render יורדים | שובר לינקים, מוחק 3 חודשי מדידה, לא חוסך כסף |
+| C. להשאיר ולהוסיף לידו | שני מוצרים בלי קשר באתר אחד | דף בית מבולבל — נגד הפוקוס שביקשת |
+
+בכל אופציה: **grader + Judge לא נמחקים** — הם הופכים ל-Visibility Monitor (§3ב).
+LLManager / Handshake / Guard מוקפאים: ה-release האחרון נשאר ב-GitHub, בלי בילדים חדשים.
+
+## 8. תוכנית עבודה
+**P0 — "האם זה אמיתי" (שבוע 1–2)**
+- T1 Visibility Monitor: לקחת grade.yml, לשאול 4 מנועים (OpenAI web search, Perplexity
+  Sonar, Gemini grounding, Claude web search) 50 שאלות מקומיות (IL + NYC + London) —
+  מי מומלץ, מאיזה מקור. תוצר: דף "AI visibility — who gets recommended" שמחליף את
+  market.html. זה בעצמו תוכן ויראלי כמו הבורסה, ומייצר את הנתון הראשון למכירה.
+- T2 סכמה ב-Supabase של מיראדה: businesses, verifications, scores, go_clicks, syndications.
+- T3 20 עסקים ראשונים ביד: ספקי Go Outs (מקומות, מאמנים, מארחים) + עסקים שאתה מכיר.
+  פרופיל + JSON-LD + go-link; הגשה ל-Perplexity merchant + IndexNow.
+
+**P1 (שבוע 3–6):** Meera onboarding בוואטסאפ; MCP server + search API; ציון v1;
+דף הבית החדש; החלטת §7 מבוצעת.
+
+**P2 (חודש 2–3):** סינדיקציה אוטומטית (GBP / Bing Places / Apple), דוח נראות שבועי
+בתשלום, ChatGPT App, Promoted.
+
+**מדדי הצלחה:** ציטוטים של meerada.app בתשובות סוכנים לשבוע; קליקים דרך go; עסקים משלמים.
+
+## 9. חוקים וסיכונים
+- אין קניית דירוג; Promoted מסומן בגלוי (FTC / חוק הגנת הצרכן).
+- נתוני משרד רו"ח לא נוגעים (data-never-leaves-office); לקוח של המשרד נכנס רק אם הוא
+  עצמו נרשם כעסק.
+- International first — כל פרופיל EN + מקומי; הגיאוגרפיה הראשונה היא החלטת היצע, לא מוצר.
+- כל שאילתה למודל תחת תקרה יומית קשה כמו בבורסה.
+- סיכון מרכזי: המעבדות סוגרות את שכבת ה-Discovery לספקים שלהן (Yelp, Maps). התשובה:
+  להיות המקור הפתוח והכי מצוטט מספיק מוקדם, ולהחזיק את הערוץ הישיר (מירה בוואטסאפ).
+
+## 10. החלטות פתוחות לך
+1. שם (Index / Presence הם שמות עבודה).
+2. ~~הבורסה — A / B / C.~~ הוחלט: A.
+3. גיאוגרפיה ראשונה ל-20 העסקים.
+4. Presence חינמי לגמרי בשנה הראשונה, או Pro מהיום הראשון.
+5. איפה הקוד: ריפו handover (האתר והגריידר כבר שם) או ריפו חדש.
+
+## 11. סטטוס T1 — Visibility Monitor (נבנה 24.11.2026, לא בקומיט)
+- קוד: `src/handover/visibility/` (questions, engines, extract, state, report, page, run), CLI
+  `meerada visibility run|report`, workflow `.github/workflows/visibility.yml` (יומי 06:30 UTC,
+  13 שאלות לכל מנוע, תקרה 0.60$ ליום), דף `visibility.html` + `visibility.json` +
+  `visibility_state.json` ב-gh-pages, לינק בפס המשפחה ו-sitemap. 18 טסטים על תשובות מוקלטות.
+- ריצת עשן חיה (3 שאלות, 0.15$): **ChatGPT** (Responses API + web_search, gpt-4.1-mini) חיפש
+  בכל שאלה ונתן 6–8 עסקים, כולם כלינקים ל-Google Maps search. **Claude** (haiku 4.5 + web_search)
+  לא חיפש בכלל ב-2 מתוך 3 ("אין לי גישה למדריכים") ונתן 7 שמות רק ביוגה-לונדון.
+  **Perplexity** דרך OpenRouter: 402, אין קרדיטים בחשבון. **Gemini**: המפתח ב-private/ אינו מפתח
+  AI Studio (403). השאלות בעברית טרם נשאלו.
+- מה חסר כדי שה-workflow ירוץ: סודות OPENAI_API_KEY ו-ANTHROPIC_API_KEY בריפו GitHub (היום יש
+  רק OPENROUTER_API_KEY ברפו ו-GROQ ב-environment meeraba), קרדיטים ב-OpenRouter או מפתח
+  Perplexity, מפתח Gemini מ-AI Studio (google.txt לפי docs/LAUNCH.md).
+- המחלץ (extract.py) קורא רשימות, שמות מודגשים, `**[שם](לינק)**` של ChatGPT, ושמות מתוך לינקי
+  Google-Maps-search; מסנן עצות ("Ask your doctor"), פלטפורמות (Yelp, Google Maps) ומשפטים עם
+  כינויי גוף. `--reextract` מריץ מחלץ משופר על כל ההיסטוריה.
+
+## מקורות (נובמבר 2026)
+- https://www.digitalcommerce360.com/2026/03/06/openai-shifts-checkout-plans-agentic-commerce-strategy/
+- https://www.digitalapplied.com/blog/ai-agentic-commerce-discover-in-ai-buy-on-site-2026
+- https://www.techcrunch.com/2026/01/11/google-announces-a-new-protocol-to-facilitate-commerce-using-ai-agents/
+- https://blog.google/products-and-platforms/products/shopping/shopping-updates-google-marketing-live/
+- https://dealroom.co/resources/generative-engine-optimization-startups/
+- https://www.rankability.com/blog/profound-ai-review/
+- https://www.bigcommerce.com/articles/ecommerce/get-products-into-chatgpt-google-ai-mode-perplexity/
+- https://www.arfadia.com/blog/how-chatgpt-gemini-perplexity-pick-local-businesses/
+- https://parallel.ai/articles/the-honest-2026-comparison-web-search-apis-for-ai-agents
+- https://dev.to/cloro/what-are-the-best-web-search-apis-for-ai-agents-in-2026-8-apis-tested-with-mcp-servers-and-pricing-1boo

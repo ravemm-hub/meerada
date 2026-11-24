@@ -36,6 +36,7 @@ _force_utf8()
 app = typer.Typer(no_args_is_help=True, add_completion=False)
 from handover.cli.crosscheck_cmd import crosscheck_app  # noqa: E402
 from handover.cli.guard_cmd import guard_app  # noqa: E402
+from handover.cli.visibility_cmd import visibility_app  # noqa: E402
 
 app.add_typer(
     crosscheck_app,
@@ -44,6 +45,11 @@ app.add_typer(
 )
 app.add_typer(
     guard_app, name="guard", help="Meerada Guard — the watchdog + cage for AI models at work"
+)
+app.add_typer(
+    visibility_app,
+    name="visibility",
+    help="Visibility Monitor — who do the AI answer engines recommend for local needs",
 )
 
 DbOption = Annotated[Path, typer.Option("--db", help="SQLite database path")]

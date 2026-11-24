@@ -1,0 +1,1295 @@
+{
+ "generated_at": "2026-11-24T17:04:58.533533+00:00",
+ "method": {
+  "queries": 50,
+  "cities": [
+   "Haifa",
+   "Jerusalem",
+   "London",
+   "New York City",
+   "Tel Aviv"
+  ],
+  "categories": [
+   "accountant",
+   "coffee",
+   "dentist",
+   "electrician",
+   "florist",
+   "groomer",
+   "gym",
+   "hair",
+   "italian",
+   "lawyer",
+   "photographer",
+   "physio",
+   "plumber",
+   "realtor",
+   "trainer",
+   "yoga"
+  ],
+  "nudge": "Who do you recommend? Please name specific ones.",
+  "extraction": "program (list items, bold names, links) — evidence derived",
+  "interval": "Wilson 95%"
+ },
+ "engines": [
+  {
+   "engine": "chatgpt",
+   "label": "ChatGPT (web search)",
+   "model": "gpt-4.1-mini",
+   "asked": 3,
+   "errors": 0,
+   "last_error": null,
+   "named_rate": {
+    "value": 1.0,
+    "n": 3,
+    "ci_low": 0.43849391955098227,
+    "ci_high": 1.0
+   },
+   "searched_rate": {
+    "value": 1.0,
+    "n": 3,
+    "ci_low": 0.43849391955098227,
+    "ci_high": 1.0
+   },
+   "names_per_answer": {
+    "value": 6.666666666666667,
+    "n": 3
+   },
+   "distinct_names": 20,
+   "total_mentions": 20,
+   "cited_per_answer": {
+    "value": 6.666666666666667,
+    "n": 3
+   },
+   "sources": [
+    {
+     "family": "Google",
+     "count": 20,
+     "share": 1.0
+    }
+   ],
+   "latency_ms": {
+    "value": 5979.0,
+    "n": 3
+   },
+   "cost_usd": "0.09"
+  },
+  {
+   "engine": "perplexity",
+   "label": "Perplexity (Sonar)",
+   "model": "perplexity/sonar",
+   "asked": 3,
+   "errors": 3,
+   "last_error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits\",\"code\":402,\"metadata\":{\"limit_source\":\"openrouter_credits\",\"remedy_hint\":\"Add credits at https://o",
+   "named_rate": {
+    "value": null,
+    "n": 0,
+    "ci_low": null,
+    "ci_high": null
+   },
+   "searched_rate": {
+    "value": null,
+    "n": 0,
+    "ci_low": null,
+    "ci_high": null
+   },
+   "names_per_answer": {
+    "value": null,
+    "n": 0
+   },
+   "distinct_names": 0,
+   "total_mentions": 0,
+   "cited_per_answer": {
+    "value": null,
+    "n": 0
+   },
+   "sources": [],
+   "latency_ms": {
+    "value": null,
+    "n": 0
+   },
+   "cost_usd": "0.0"
+  },
+  {
+   "engine": "gemini",
+   "label": "Gemini (Google grounding)",
+   "model": "gemini-2.5-flash",
+   "asked": 3,
+   "errors": 3,
+   "last_error": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"Permission denied on the service.\",\n    \"status\": \"PERMISSION_DENIED\",\n    \"details\": [\n      {\n        \"@type\": \"type.googleapis.com/google.rpc.ErrorInfo\",\n        \"reason\": \"ACCESS_DENIED\",\n        \"domain\": \"googleapis.com\",\n        \"metadata\": {\n  ",
+   "named_rate": {
+    "value": null,
+    "n": 0,
+    "ci_low": null,
+    "ci_high": null
+   },
+   "searched_rate": {
+    "value": null,
+    "n": 0,
+    "ci_low": null,
+    "ci_high": null
+   },
+   "names_per_answer": {
+    "value": null,
+    "n": 0
+   },
+   "distinct_names": 0,
+   "total_mentions": 0,
+   "cited_per_answer": {
+    "value": null,
+    "n": 0
+   },
+   "sources": [],
+   "latency_ms": {
+    "value": null,
+    "n": 0
+   },
+   "cost_usd": "0.0"
+  },
+  {
+   "engine": "claude",
+   "label": "Claude (web search)",
+   "model": "claude-haiku-4-5-20251001",
+   "asked": 3,
+   "errors": 0,
+   "last_error": null,
+   "named_rate": {
+    "value": 0.3333333333333333,
+    "n": 3,
+    "ci_low": 0.061490315276160556,
+    "ci_high": 0.792345044873512
+   },
+   "searched_rate": {
+    "value": 0.3333333333333333,
+    "n": 3,
+    "ci_low": 0.061490315276160556,
+    "ci_high": 0.792345044873512
+   },
+   "names_per_answer": {
+    "value": 7.0,
+    "n": 1
+   },
+   "distinct_names": 7,
+   "total_mentions": 7,
+   "cited_per_answer": {
+    "value": 6.0,
+    "n": 3
+   },
+   "sources": [
+    {
+     "family": "Business sites",
+     "count": 16,
+     "share": 0.8888888888888888
+    },
+    {
+     "family": "Reviews & directories",
+     "count": 2,
+     "share": 0.1111111111111111
+    }
+   ],
+   "latency_ms": {
+    "value": 4711.333333333333,
+    "n": 3
+   },
+   "cost_usd": "0.06"
+  }
+ ],
+ "skipped": {},
+ "overlap": [
+  {
+   "a": "chatgpt",
+   "b": "perplexity",
+   "jaccard": {
+    "value": null,
+    "n": 0
+   }
+  },
+  {
+   "a": "chatgpt",
+   "b": "gemini",
+   "jaccard": {
+    "value": null,
+    "n": 0
+   }
+  },
+  {
+   "a": "chatgpt",
+   "b": "claude",
+   "jaccard": {
+    "value": 0.0,
+    "n": 3
+   }
+  },
+  {
+   "a": "perplexity",
+   "b": "gemini",
+   "jaccard": {
+    "value": null,
+    "n": 0
+   }
+  },
+  {
+   "a": "perplexity",
+   "b": "claude",
+   "jaccard": {
+    "value": null,
+    "n": 0
+   }
+  },
+  {
+   "a": "gemini",
+   "b": "claude",
+   "jaccard": {
+    "value": null,
+    "n": 0
+   }
+  }
+ ],
+ "top_names": [
+  {
+   "name": "A.S. Plumbing",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "plumber"
+   ]
+  },
+  {
+   "name": "Amnon",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "plumber"
+   ]
+  },
+  {
+   "name": "Baruch The Plumber",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "plumber"
+   ]
+  },
+  {
+   "name": "Centre Dental",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "New York City"
+   ],
+   "categories": [
+    "dentist"
+   ]
+  },
+  {
+   "name": "City Lit (Covent Garden)",
+   "mentions": 1,
+   "engines": [
+    "claude"
+   ],
+   "cities": [
+    "London"
+   ],
+   "categories": [
+    "yoga"
+   ]
+  },
+  {
+   "name": "Eitan Plumber",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "plumber"
+   ]
+  },
+  {
+   "name": "Hello Studio (Hornsey Road)",
+   "mentions": 1,
+   "engines": [
+    "claude"
+   ],
+   "cities": [
+    "London"
+   ],
+   "categories": [
+    "yoga"
+   ]
+  },
+  {
+   "name": "Hot Yoga South Balham",
+   "mentions": 1,
+   "engines": [
+    "claude"
+   ],
+   "cities": [
+    "London"
+   ],
+   "categories": [
+    "yoga"
+   ]
+  },
+  {
+   "name": "Indaba Yoga Studio",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "London"
+   ],
+   "categories": [
+    "yoga"
+   ]
+  },
+  {
+   "name": "Master Fix Plumbing",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "plumber"
+   ]
+  },
+  {
+   "name": "Mudra Yoga London",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "London"
+   ],
+   "categories": [
+    "yoga"
+   ]
+  },
+  {
+   "name": "Oca London",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "London"
+   ],
+   "categories": [
+    "yoga"
+   ]
+  },
+  {
+   "name": "One Yoga London (Crouch End)",
+   "mentions": 1,
+   "engines": [
+    "claude"
+   ],
+   "cities": [
+    "London"
+   ],
+   "categories": [
+    "yoga"
+   ]
+  },
+  {
+   "name": "Park 56 Dental",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "New York City"
+   ],
+   "categories": [
+    "dentist"
+   ]
+  },
+  {
+   "name": "R.P. Plumbing",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "plumber"
+   ]
+  },
+  {
+   "name": "Sachar Dental NYC",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "New York City"
+   ],
+   "categories": [
+    "dentist"
+   ]
+  },
+  {
+   "name": "Sangha Studios",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "London"
+   ],
+   "categories": [
+    "yoga"
+   ]
+  },
+  {
+   "name": "Sangye Yoga",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "London"
+   ],
+   "categories": [
+    "yoga"
+   ]
+  },
+  {
+   "name": "Smile Lab NYC",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "New York City"
+   ],
+   "categories": [
+    "dentist"
+   ]
+  },
+  {
+   "name": "Sunshine Shisler at FLOW Tottenham Court Road",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "London"
+   ],
+   "categories": [
+    "yoga"
+   ]
+  }
+ ],
+ "queries": [
+  {
+   "id": "tlv-plumber",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "plumber",
+   "text": "I'm looking for a plumber in Tel Aviv for a leaking pipe this week. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": {
+     "names": [
+      "Master Fix Plumbing",
+      "Eitan Plumber",
+      "A.S. Plumbing",
+      "R.P. Plumbing",
+      "Termitek",
+      "Tzuri'El Yafei",
+      "Amnon",
+      "Baruch The Plumber"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    },
+    "gemini": {
+     "error": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"Permission denied on the service.\",\n    \"status\": \"PERMISSION_",
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    },
+    "claude": {
+     "names": [],
+     "sources": [],
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    }
+   }
+  },
+  {
+   "id": "tlv-dentist",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "dentist",
+   "text": "I'm looking for a dentist in Tel Aviv for a check-up and a filling. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-yoga",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "yoga",
+   "text": "I'm looking for a yoga studio in Tel Aviv for a beginner, evening classes. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-italian",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "italian",
+   "text": "I'm looking for an Italian restaurant in Tel Aviv for a dinner for four. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-trainer",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "trainer",
+   "text": "I'm looking for a personal trainer in Tel Aviv for weight training, twice a week. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-hair",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "hair",
+   "text": "I'm looking for a hair salon in Tel Aviv for a cut and color. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-lawyer",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "lawyer",
+   "text": "I'm looking for a family lawyer in Tel Aviv for a divorce agreement. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-accountant",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "accountant",
+   "text": "I'm looking for an accountant in Tel Aviv for a small business. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-electrician",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "electrician",
+   "text": "I'm looking for an electrician in Tel Aviv to replace a fuse box. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-coffee",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "coffee",
+   "text": "I'm looking for a specialty coffee shop in Tel Aviv to work from with a laptop. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-gym",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "gym",
+   "text": "I'm looking for a gym in Tel Aviv with a pool, near the center. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-physio",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "physio",
+   "text": "I'm looking for a physiotherapist in Tel Aviv for a running knee injury. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-florist",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "florist",
+   "text": "I'm looking for a florist in Tel Aviv for a same-day bouquet delivery. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-photographer",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "photographer",
+   "text": "I'm looking for a wedding photographer in Tel Aviv for a wedding next spring. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-groomer",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "groomer",
+   "text": "I'm looking for a dog groomer in Tel Aviv for a medium-sized dog. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "tlv-realtor",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "lang": "en",
+   "category": "realtor",
+   "text": "I'm looking for a real estate agent in Tel Aviv to rent a two-bedroom apartment. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-plumber",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "plumber",
+   "text": "I'm looking for a plumber in New York City for a leaking pipe this week. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-dentist",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "dentist",
+   "text": "I'm looking for a dentist in New York City for a check-up and a filling. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": {
+     "names": [
+      "Sachar Dental NYC",
+      "Centre Dental",
+      "Park 56 Dental",
+      "Tribeca Dental Associates PC",
+      "Smile Lab NYC",
+      "Vitta Dental"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    },
+    "gemini": {
+     "error": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"Permission denied on the service.\",\n    \"status\": \"PERMISSION_",
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    },
+    "claude": {
+     "names": [],
+     "sources": [],
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    }
+   }
+  },
+  {
+   "id": "nyc-yoga",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "yoga",
+   "text": "I'm looking for a yoga studio in New York City for a beginner, evening classes. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-italian",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "italian",
+   "text": "I'm looking for an Italian restaurant in New York City for a dinner for four. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-trainer",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "trainer",
+   "text": "I'm looking for a personal trainer in New York City for weight training, twice a week. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-hair",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "hair",
+   "text": "I'm looking for a hair salon in New York City for a cut and color. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-lawyer",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "lawyer",
+   "text": "I'm looking for a family lawyer in New York City for a divorce agreement. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-accountant",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "accountant",
+   "text": "I'm looking for an accountant in New York City for a small business. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-electrician",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "electrician",
+   "text": "I'm looking for an electrician in New York City to replace a fuse box. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-coffee",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "coffee",
+   "text": "I'm looking for a specialty coffee shop in New York City to work from with a laptop. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-gym",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "gym",
+   "text": "I'm looking for a gym in New York City with a pool, near the center. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-physio",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "physio",
+   "text": "I'm looking for a physiotherapist in New York City for a running knee injury. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-florist",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "florist",
+   "text": "I'm looking for a florist in New York City for a same-day bouquet delivery. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-photographer",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "photographer",
+   "text": "I'm looking for a wedding photographer in New York City for a wedding next spring. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-groomer",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "groomer",
+   "text": "I'm looking for a dog groomer in New York City for a medium-sized dog. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "nyc-realtor",
+   "city": "New York City",
+   "country": "US",
+   "lang": "en",
+   "category": "realtor",
+   "text": "I'm looking for a real estate agent in New York City to rent a two-bedroom apartment. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-plumber",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "plumber",
+   "text": "I'm looking for a plumber in London for a leaking pipe this week. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-dentist",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "dentist",
+   "text": "I'm looking for a dentist in London for a check-up and a filling. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-yoga",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "yoga",
+   "text": "I'm looking for a yoga studio in London for a beginner, evening classes. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": {
+     "names": [
+      "Oca London",
+      "Sunshine Shisler at FLOW Tottenham Court Road",
+      "Sangha Studios",
+      "Mudra Yoga London",
+      "Indaba Yoga Studio",
+      "Sangye Yoga"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    },
+    "gemini": {
+     "error": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"Permission denied on the service.\",\n    \"status\": \"PERMISSION_",
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    },
+    "claude": {
+     "names": [
+      "City Lit (Covent Garden)",
+      "Triyoga",
+      "Hello Studio (Hornsey Road)",
+      "One Yoga London (Crouch End)",
+      "Hot Yoga South Balham",
+      "Yoga on the Lane (Dalston)",
+      "The Power Yoga Company (Fulham)"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
+     ],
+     "asked_at": "2026-11-24T17:01:34.026429+00:00"
+    }
+   }
+  },
+  {
+   "id": "ldn-italian",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "italian",
+   "text": "I'm looking for an Italian restaurant in London for a dinner for four. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-trainer",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "trainer",
+   "text": "I'm looking for a personal trainer in London for weight training, twice a week. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-hair",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "hair",
+   "text": "I'm looking for a hair salon in London for a cut and color. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-lawyer",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "lawyer",
+   "text": "I'm looking for a family lawyer in London for a divorce agreement. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-accountant",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "accountant",
+   "text": "I'm looking for an accountant in London for a small business. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-electrician",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "electrician",
+   "text": "I'm looking for an electrician in London to replace a fuse box. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-coffee",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "coffee",
+   "text": "I'm looking for a specialty coffee shop in London to work from with a laptop. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-gym",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "gym",
+   "text": "I'm looking for a gym in London with a pool, near the center. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-physio",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "physio",
+   "text": "I'm looking for a physiotherapist in London for a running knee injury. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-florist",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "florist",
+   "text": "I'm looking for a florist in London for a same-day bouquet delivery. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-photographer",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "photographer",
+   "text": "I'm looking for a wedding photographer in London for a wedding next spring. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-groomer",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "groomer",
+   "text": "I'm looking for a dog groomer in London for a medium-sized dog. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "ldn-realtor",
+   "city": "London",
+   "country": "UK",
+   "lang": "en",
+   "category": "realtor",
+   "text": "I'm looking for a real estate agent in London to rent a two-bedroom apartment. Who do you recommend? Please name specific ones.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "hfa-plumber-he",
+   "city": "Haifa",
+   "country": "IL",
+   "lang": "he",
+   "category": "plumber",
+   "text": "אני צריך שרברב טוב בחיפה לנזילה בצנרת השבוע. על מי אתה ממליץ? תן שמות ספציפיים.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  },
+  {
+   "id": "jlm-dentist-he",
+   "city": "Jerusalem",
+   "country": "IL",
+   "lang": "he",
+   "category": "dentist",
+   "text": "מחפש רופא שיניים טוב בירושלים לבדיקה וסתימה. תמליץ על כמה, בשם.",
+   "engines": {
+    "chatgpt": null,
+    "perplexity": null,
+    "gemini": null,
+    "claude": null
+   }
+  }
+ ],
+ "answers_total": 12
+}

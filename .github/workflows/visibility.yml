@@ -1,0 +1,67 @@
+name: visibility-monitor
+
+# Who do the AI answer engines recommend? One round of local questions a day,
+# answers kept verbatim on gh-pages next to the page (visibility_state.json).
+on:
+  schedule:
+    - cron: "30 6 * * *"      # daily, 06:30 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: visibility-monitor
+  cancel-in-progress: false
+
+jobs:
+  ask:
+    runs-on: ubuntu-latest
+    environment: meeraba
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: install
+        run: pip install -e .
+
+      - name: fetch prior answers from gh-pages
+        run: |
+          git fetch origin gh-pages || true
+          git show origin/gh-pages:visibility_state.json > visibility_state.json 2>/dev/null || echo '{}' > visibility_state.json
+
+      - name: ask one round
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PERPLEXITY_API_KEY: ${{ secrets.PERPLEXITY_API_KEY }}
+        # 13 questions × 4 engines a day; the whole set refreshes every ~4 days.
+        # Worst case per day: 13 × (0.030 + 0.008 + 0.002 + 0.020) ≈ $0.78, capped at 0.60.
+        run: |
+          mkdir -p out
+          python -m handover.visibility.run \
+            --state visibility_state.json \
+            --out out/visibility.html --json out/visibility.json \
+            --engines chatgpt,perplexity,gemini,claude \
+            --per-tick 13 --budget "0.60"
+
+      - name: publish page + answers to gh-pages
+        run: |
+          git config user.name "meerada-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git fetch origin gh-pages
+          git worktree add pages origin/gh-pages
+          cp out/visibility.html pages/visibility.html
+          cp out/visibility.json pages/visibility.json
+          cp visibility_state.json pages/visibility_state.json
+          cd pages
+          git add visibility.html visibility.json visibility_state.json
+          git commit -m "visibility $(date -u +%FT%RZ)" || echo "no change"
+          git push origin HEAD:gh-pages
