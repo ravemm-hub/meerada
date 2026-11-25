@@ -114,7 +114,8 @@ def test_experiments_track_presence_before_and_after(tmp_path: Path) -> None:
     state.add(_answer("chatgpt", "tlv-plumber", NOW, ["shai plumbing services", "eitan plumber"]))
     rows = track(exps, state, ["chatgpt", "claude"])
     chat = rows[0]["engines"]["chatgpt"]
-    assert chat["before"] == {"n": 1, "present": 0} and chat["after"] == {"n": 1, "present": 1}
+    assert chat["before"] == {"n": 1, "named": 0, "cited": 0}
+    assert chat["after"] == {"n": 1, "named": 1, "cited": 0}
     assert rows[0]["engines"]["claude"]["after"]["n"] == 0
     assert load_experiments(tmp_path / "missing.json") == []
     assert Experiment(id="e", business="B", queries=[], started=date(2026, 1, 1)).lever == "none"

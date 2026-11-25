@@ -81,16 +81,27 @@ class ChatGPTSearch:
     """ChatGPT with web search: the Responses API with the ``web_search`` tool on
     ``gpt-4.1-mini`` (the search-preview chat models were retired in 2026). Text
     parts carry url_citation annotations; each ``web_search_call`` item is one
-    search. Direct OpenAI key, or OpenRouter."""
+    search. Direct OpenAI key, or OpenRouter. With ``reasoning=True`` (gpt-5-mini) the
+    model fans out over several searches, closer to consumer ChatGPT."""
 
     name = "chatgpt"
     estimate_usd = Decimal("0.030")
 
     def __init__(
-        self, api_key: str, post: Post, base_url: str = "https://api.openai.com/v1"
+        self,
+        api_key: str,
+        post: Post,
+        base_url: str = "https://api.openai.com/v1",
+        model: str = "gpt-4.1-mini",
+        name: str = "chatgpt",
+        reasoning: bool = False,
     ) -> None:
         self._key, self._post, self._url = api_key, post, base_url.rstrip("/")
-        self.model = "gpt-4.1-mini" if "openai.com" in base_url else "openai/gpt-4.1-mini"
+        self.model = model if "openai.com" in base_url else f"openai/{model}"
+        self.name = name
+        self._reasoning = reasoning
+        if reasoning:
+            self.estimate_usd = Decimal("0.040")
 
     def ask(self, question: str) -> Reply:
         body: dict[str, Any] = {
@@ -99,6 +110,8 @@ class ChatGPTSearch:
             "tools": [{"type": "web_search", "search_context_size": "low"}],
             "tool_choice": "auto",
         }
+        if self._reasoning:  # gpt-5 family: lets the model fan out over several searches
+            body["reasoning"] = {"effort": "low"}
         data = self._post(f"{self._url}/responses", {"Authorization": f"Bearer {self._key}"}, body)
         texts: list[str] = []
         citations: list[str] = []
@@ -224,7 +237,7 @@ class ClaudeSearch:
         return Reply("\n".join(texts), citations, self.model, inp, out, searches)
 
 
-ALL_ENGINES: tuple[str, ...] = ("chatgpt", "perplexity", "gemini", "claude")
+ALL_ENGINES: tuple[str, ...] = ("chatgpt", "chatgpt5", "perplexity", "gemini", "claude")
 OPENROUTER = "https://openrouter.ai/api/v1"
 
 
@@ -245,6 +258,15 @@ def engines_from_env(
                 built.append(ChatGPTSearch(openrouter, post, OPENROUTER))
             else:
                 skipped[name] = "no OPENAI_API_KEY / OPENROUTER_API_KEY"
+        elif name == "chatgpt5":  # the fan-out variant: closer to consumer ChatGPT
+            if env.get("OPENAI_API_KEY"):
+                built.append(
+                    ChatGPTSearch(
+                        env["OPENAI_API_KEY"], post, model="gpt-5-mini", name=name, reasoning=True
+                    )
+                )
+            else:
+                skipped[name] = "no OPENAI_API_KEY"
         elif name == "perplexity":
             if env.get("PERPLEXITY_API_KEY"):
                 built.append(PerplexitySonar(env["PERPLEXITY_API_KEY"], post))

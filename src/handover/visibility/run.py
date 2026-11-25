@@ -72,20 +72,23 @@ def tick(
     now: datetime,
     queries: tuple[Query, ...] = QUESTIONS,
     save: Path | None = None,
+    runs: int = 1,
 ) -> list[Answer]:
-    """Ask, record, save; returns what this tick added."""
+    """Ask, record, save; returns what this tick added. ``runs`` > 1 repeats every
+    question (test-case rounds: the engines are volatile, one answer proves nothing)."""
     added: list[Answer] = []
     for engine in engines:
         for query in pick_queries(state, engine.name, queries, per_tick):
-            if not budget.can_spend(engine.estimate_usd):
-                print(f"budget: skipping {engine.name} {query.id}", file=sys.stderr)
-                break
-            answer = ask_one(engine, query, now)
-            budget.record(Decimal(answer.cost_usd) if not answer.error else Decimal("0"))
-            state.add(answer)
-            added.append(answer)
-            if save is not None:
-                save_state(state, save)
+            for _ in range(max(1, runs)):
+                if not budget.can_spend(engine.estimate_usd):
+                    print(f"budget: skipping {engine.name} {query.id}", file=sys.stderr)
+                    break
+                answer = ask_one(engine, query, now)
+                budget.record(Decimal(answer.cost_usd) if not answer.error else Decimal("0"))
+                state.add(answer)
+                added.append(answer)
+                if save is not None:
+                    save_state(state, save)
     return added
 
 
@@ -114,6 +117,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--per-tick", type=int, default=13)
     parser.add_argument("--budget", type=Decimal, default=Decimal("0.60"))
     parser.add_argument("--only", default="", help="comma-separated query ids (smoke runs)")
+    parser.add_argument(
+        "--runs", type=int, default=1, help="repeat each question this many times (test cases)"
+    )
+    parser.add_argument("--cases", type=Path, default=None, help="also write the test-case page")
     parser.add_argument("--report-only", action="store_true", help="re-render, ask nothing")
     parser.add_argument(
         "--experiments",
@@ -140,7 +147,9 @@ def main(argv: list[str] | None = None) -> int:
         for name, why in skipped.items():
             print(f"skip {name}: {why}", file=sys.stderr)
         budget = DailyBudget(args.budget)
-        added = tick(state, engines, budget, args.per_tick, now, queries, save=args.state)
+        added = tick(
+            state, engines, budget, args.per_tick, now, queries, save=args.state, runs=args.runs
+        )
         errors = sum(1 for a in added if a.error)
         print(
             f"tick @ {now:%Y-%m-%d %H:%MZ} | asked {len(added)} ({errors} errors)"
@@ -157,6 +166,11 @@ def main(argv: list[str] | None = None) -> int:
     args.json.write_text(_dumps(report), encoding="utf-8")
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(render_page(report), encoding="utf-8")
+    if args.cases is not None:
+        from handover.visibility.cases import render_cases
+
+        args.cases.parent.mkdir(parents=True, exist_ok=True)
+        args.cases.write_text(render_cases(report), encoding="utf-8")
     print(f"wrote {args.out} and {args.json}")
     return 0
 

@@ -68,3 +68,36 @@ def report(
         "--report-only",
     ]
     raise typer.Exit(main(argv))
+
+
+@visibility_app.command("audit")
+def audit_cmd(
+    url: Annotated[str, typer.Argument(help="the business website")],
+    name: Annotated[str, typer.Option("--name", help="business name as on Google/Yelp")] = "",
+    as_json: Annotated[bool, typer.Option("--json", help="print JSON instead of text")] = False,
+) -> None:
+    """Entity audit v0: can the engines read this site, and what is missing (declared)."""
+    import json
+
+    from handover.visibility.audit import audit, format_audit
+
+    result = audit(url, name)
+    typer.echo(
+        json.dumps(result.as_dict(), ensure_ascii=False, indent=1)
+        if as_json
+        else format_audit(result)
+    )
+
+
+@visibility_app.command("guides")
+def guides_cmd(
+    data: Annotated[str, typer.Option("--data")] = "data/guides",
+    out: Annotated[str, typer.Option("--out")] = "site/guides",
+) -> None:
+    """Build the editorial guide pages from data/guides/*.json."""
+    from pathlib import Path
+
+    from handover.visibility.guides import build_guides
+
+    for path in build_guides(Path(data), Path(out)):
+        typer.echo(f"wrote {path}")

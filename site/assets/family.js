@@ -10,7 +10,8 @@
     { href: "judge.html", id: "judge", ic: "⚖️", name: "Judge", tag: "the reliability layer" },
     { href: "handshake.html", id: "handshake", ic: "🤝", name: "Handshake", tag: "measured migration" },
     { href: "arc.html", id: "arc", ic: "🧬", name: "Arc", tag: "AI on the curve · singularity gauge" },
-    { href: "visibility.html", id: "visibility", ic: "📍", name: "Visibility", tag: "who the AI engines recommend" },
+    { href: "visibility.html", id: "visibility", ic: "📍", name: "Search Lab", tag: "how the AI engines choose" },
+    { href: "cases.html", id: "cases", ic: "🧪", name: "Cases", tag: "before and after" },
     { href: "tribes.html", id: "tribes", ic: "🏙️", name: "Tribes", tag: "AI-powered city app" },
     { href: "company.html", id: "company", ic: "🏢", name: "Company", tag: "who we are" }
   ];
