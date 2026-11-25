@@ -38,7 +38,7 @@
   var esc = function(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
   var heb = function(s){ return /[֐-׿]/.test(s); };
   var index = null, current = null;
-  fetch('s/index.json').then(function(r){ return r.json(); }).then(function(d){ index = d.queries || []; var ex = index.slice(0, 6).map(function(q){ return '<a href="#" data-q="'+esc(q.text)+'">'+esc(q.city)+' · '+esc(q.category)+'</a>'; }).join(''); $('hint').innerHTML = 'Try: '+ex; }).catch(function(){ index = []; });
+  fetch('s/index.json', { cache: 'no-cache' }).then(function(r){ return r.json(); }).then(function(d){ index = d.queries || []; var ex = index.slice(0, 6).map(function(q){ return '<a href="#" data-q="'+esc(q.text)+'">'+esc(q.city)+' · '+esc(q.category)+'</a>'; }).join(''); $('hint').innerHTML = 'Try: '+ex; }).catch(function(){ index = []; });
   $('hint').addEventListener('click', function(e){ var a = e.target.closest('a[data-q]'); if (!a) return; e.preventDefault(); $('q').value = a.getAttribute('data-q'); go(); });
 
   function tokens(s){ return s.toLowerCase().replace(/[^\w֐-׿ ]+/g,' ').split(/\s+/).filter(function(t){ return t.length > 2; }); }
@@ -100,7 +100,7 @@
     var m = labMatch(q);
     if (m) {
       $('status').innerHTML = '<span class="spin"></span>loading the measured answers…';
-      fetch('s/'+encodeURIComponent(m.id)+'.json').then(function(r){ return r.json(); }).then(function(d){ d.query = d.text; d.matched = d.id; render(d, 'measured repeatedly by the lab'); }).catch(function(){ live(q); });
+      fetch('s/'+encodeURIComponent(m.id)+'.json', { cache: 'no-cache' }).then(function(r){ return r.json(); }).then(function(d){ d.query = d.text; d.matched = d.id; render(d, 'measured repeatedly by the lab'); }).catch(function(){ live(q); });
     } else { live(q); }
   }
   function live(q){
