@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-25T14:27:49.639846+00:00",
+ "generated_at": "2026-11-25T15:26:48.915024+00:00",
  "method": {
   "queries": 138,
   "intents": [
@@ -2689,13 +2689,13 @@
    "domain": "plumber-telaviv.co.il",
    "lever": "guide",
    "control": false,
-   "started": "2026-12-01",
+   "started": "2026-11-26",
    "city": "Tel Aviv",
    "category": "plumber",
    "queries": [
     "tlv-plumber"
    ],
-   "notes": "Maps position 10 · 4.5 (175)",
+   "notes": "guide published 2026-11-25 evening at meerada.app/guides · Maps position 10 · 4.5 (175)",
    "engines": {
     "chatgpt": {
      "before": {
@@ -3775,13 +3775,13 @@
    "domain": "",
    "lever": "guide",
    "control": false,
-   "started": "2026-12-01",
+   "started": "2026-11-26",
    "city": "Tel Aviv",
    "category": "italian",
    "queries": [
     "tlv-italian"
    ],
-   "notes": "Maps position 8 · 4.8 (82) · lists only an Instagram page, no own site",
+   "notes": "guide published 2026-11-25 evening at meerada.app/guides · Maps position 8 · 4.8 (82) · lists only an Instagram page, no own site",
    "engines": {
     "chatgpt": {
      "before": {
@@ -5023,13 +5023,13 @@
    "domain": "energyoga.co.uk",
    "lever": "guide",
    "control": false,
-   "started": "2026-12-01",
+   "started": "2026-11-26",
    "city": "London",
    "category": "yoga",
    "queries": [
     "ldn-yoga"
    ],
-   "notes": "Maps position 8 · 4.8 (45) · 4 Foster Ln",
+   "notes": "guide published 2026-11-25 evening at meerada.app/guides · Maps position 8 · 4.8 (45) · 4 Foster Ln",
    "engines": {
     "chatgpt": {
      "before": {
@@ -7126,13 +7126,13 @@
    "domain": "",
    "lever": "guide",
    "control": false,
-   "started": "2026-12-01",
+   "started": "2026-11-26",
    "city": "Tel Aviv",
    "category": "hair",
    "queries": [
     "tlv-hair"
    ],
-   "notes": "Maps position 11 · 4.5 (171) · Frishman St 88 · lists only a Facebook page, no own site",
+   "notes": "guide published 2026-11-25 evening at meerada.app/guides · Maps position 11 · 4.5 (171) · Frishman St 88 · lists only a Facebook page, no own site",
    "engines": {
     "chatgpt": {
      "before": {
