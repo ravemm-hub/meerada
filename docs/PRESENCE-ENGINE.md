@@ -175,6 +175,25 @@ best-of מתוך 9–10). Claude חיפש בכל השאלות האלה, 16–31 
   AliExpress (מוצרים) כדי לשפר איך הרשומות שלהם מוצגות בתוך המודלים. כשיוזר שואל AI על מלון, מה שאנחנו
   מקדמים הוא הטוב ביותר *ליוזר*, גם אם Booking מדרג אחרת. זה בדיוק מה ש"ציון עם n ורווח ביטחון" מאפשר.
 
+## 14. סטטוס T3 (25.11.2026, המשך)
+- **נבנה:** וריאנט ChatGPT שני (`chatgpt5` = gpt-5-mini עם reasoning, fan-out); `--runs N` לריצות חוזרות
+  של שאלות מקרי מבחן; "נקוב" מול "מצוטט" (דומיין העסק בציטוטים) במעקב הניסויים, עם קבוצת ביקורת
+  (`control: true`); דף מקרי מבחן ציבורי `cases.html` (ריבוע לכל ריצה: ירוק = נקוב, בהיר = רק מצוטט);
+  `meerada visibility audit <url>` — ביקורת ישות v0 (זחלנים, טקסט, טלפון/כתובת/שעות/מחירים, רשתות
+  חברתיות, טריות, sitemap) עם ציון "declared" ורשימת תיקונים; `meerada visibility guides` — מחולל מדריכים
+  עריכתיים מ-`data/guides/*.json` (טבלת עובדות, JSON-LD ItemList, גילוי נאות, סדר אלפביתי, בלי כוכבים);
+  `scripts/select_businesses.py` — בחירת מועמדים ממיקומים 8–20 בגוגל (דירוג ≥4.3, ≥10 ביקורות, אתר).
+  ה-workflow היומי: 5 מנועים, 10 שאלות לכל אחד, תקרה 0.80$, מפרסם גם cases.html.
+- **ממצא מריצת העשן:** gpt-5-mini לאותה שאלה (שרברב ת"א) חיפש פעם אחת אבל ציטט **easy.co.il** (4 מתוך 5)
+  ו-tzaneret.co.il — לא Google Maps כמו gpt-4.1-mini. כלומר המקור המקומי של ChatGPT תלוי במודל, והספרייה
+  הישראלית easy.co.il היא דלת כניסה שלא הופיעה במחקר הבינלאומי. רישום ב-easy.co.il נכנס לרשימת המנופים
+  החיצוניים לישראל.
+- **חסום עד שתפתח:** המפתח ב-private/google-api-key.txt מחזיר 403 ל-Places API. ב-Google Cloud Console,
+  בפרויקט של המפתח: APIs & Services → Enable "Places API (New)". אחרי זה: `python scripts/select_businesses.py
+  --key-file <file> --query "plumber in Tel Aviv" --n 3`, ואז baseline עם `--runs 7`.
+- **הבא בתור:** בחירת 10 עסקים + 3 ביקורת, baseline (7 ריצות × 3 מנועים), כתיבת 5 מדריכים ראשונים מעובדות
+  מאומתות, רישומי Yelp/easy, outreach.
+
 ## מקורות (נובמבר 2026)
 - https://www.digitalcommerce360.com/2026/03/06/openai-shifts-checkout-plans-agentic-commerce-strategy/
 - https://www.digitalapplied.com/blog/ai-agentic-commerce-discover-in-ai-buy-on-site-2026

@@ -192,6 +192,25 @@ def test_extraction_handles_split_bold_and_header_phrases() -> None:
     assert names == ["Boostify", "Webix Digital", "Salesflare"]
 
 
+GPT5_TEXT = """Recommended options
+- Maor (Maor Plumber) — advertises emergency/24-hour service. ([easy.co.il](https://easy.co.il/en/page/1?utm_source=openai))
+
+- Shlomo The Plumber — listed as available 24/7. ([easy.co.il](https://easy.co.il/en/page/2?utm_source=openai))
+
+- Top/Local Tel Aviv plumbing directory (multiple vetted local plumbers) — use the directory. ([tzaneret.co.il](https://tzaneret.co.il/plumbers/tel-aviv/))
+
+Quick tips when you call
+- Describe the leak location (apartment, ceiling, under sink).
+- [Yelp](https://yelp.com/tel-aviv) has more.
+"""
+
+
+def test_extraction_reads_gpt5_dash_items_with_trailing_citation_links() -> None:
+    names = [m.name for m in extract_mentions(GPT5_TEXT, exclude=("Tel Aviv", "plumber"))]
+    assert names == ["Maor", "Shlomo The Plumber"]  # the bracketed alias is split off
+    assert extract_mentions(GPT5_TEXT)[0].url == "https://easy.co.il/en/page/1?utm_source=openai"
+
+
 def test_extraction_ignores_advice_platforms_and_pronoun_phrases() -> None:
     names = [m.name for m in extract_mentions(ADVICE_TEXT, exclude=("New York City", "dentist"))]
     assert names == ["Family Dental NYC"]

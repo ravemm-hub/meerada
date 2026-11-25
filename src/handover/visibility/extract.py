@@ -18,6 +18,9 @@ _ITEM = re.compile(r"^\s*(?:[-*•]|\d{1,2}[.)])\s+(.*\S)\s*$")
 _HEADER = re.compile(r"^\s*#{2,4}\s+(.*\S)\s*$")
 _BOLD = re.compile(r"\*\*([^*]{1,300}?)\*\*")  # may span a line break (Claude's lists)
 _LEADING_NUMBER = re.compile(r"^\s*\d{1,2}[.)]\s*")
+_DOMAIN = re.compile(
+    r"^\[?[\w.-]+\.(?:com|co|net|org|il|uk|io|ai|de|fr|es|it|pt)(?:\.[a-z]{2})?\]?$", re.I
+)
 _WS = re.compile(r"\s+")
 _LINK = re.compile(r"\[([^\]]+)\]\((https?://[^)\s]+)\)")
 _URL = re.compile(r"https?://[^\s)\]]+")
@@ -72,6 +75,19 @@ _STOP = {
 _STOP_PREFIX = ("how ", "what ", "why ", "when ", "where ", "if ", "tip", "note", "before ")
 # Advice, not a business: "Ask your primary care doctor", "Check your insurance provider's website"
 _ADVICE_PREFIX = (
+    "describe ",
+    "tell ",
+    "mention ",
+    "have ",
+    "keep ",
+    "turn ",
+    "shut ",
+    "take ",
+    "bring ",
+    "prepare ",
+    "expect ",
+    "quick ",
+    "top/local",
     "for ",
     "cost ",
     "budget ",
@@ -236,7 +252,7 @@ def _looks_like_name(name: str) -> bool:
     words = plain.split()
     if len(words) > 8 or plain.endswith(":"):
         return False
-    if low.startswith(_ADVICE_PREFIX) or _PRONOUN.search(low):
+    if low.startswith(_ADVICE_PREFIX) or _PRONOUN.search(low) or _DOMAIN.match(plain):
         return False
     key = normalize(plain)
     if key in _PLATFORMS or any(w in _GENERIC_WORDS for w in key.split()):
@@ -249,11 +265,12 @@ def _name_of(item: str) -> str | None:
     bold = _BOLD.search(item)
     if bold:
         return bold.group(1).strip()
+    head = _SPLIT.split(item, maxsplit=1)[0].strip()
     link = _LINK.search(item)
-    if link:
+    # "- Name — note ([easy.co.il](url))": the link is the citation, the name is the head.
+    if link and (link.start() == 0 or not head or _DOMAIN.search(head)):
         return link.group(1).strip()
-    head = _SPLIT.split(item, maxsplit=1)[0]
-    return head.strip() if head else None
+    return head or None
 
 
 def _url_of(item: str) -> str | None:
