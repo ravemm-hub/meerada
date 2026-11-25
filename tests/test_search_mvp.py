@@ -90,6 +90,7 @@ def test_service_answers_lab_questions_from_state_and_live_otherwise() -> None:
     svc._lock = threading.Lock()
     svc._state = State()
     svc._state.add(_a("chatgpt", ["Alpha Plumbing"]))
+    svc._state.add(_a("claude", ["Triyoga", "Energy Yoga"], qid="ldn-yoga"))
     svc._state_at = 10**12  # never refresh
     svc._cache = {}
     svc._ip_live = {}
