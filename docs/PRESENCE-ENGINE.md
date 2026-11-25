@@ -247,6 +247,18 @@ BrightLocal, Moz Local) — אנחנו אותו מוצר לעידן ה-AI, עם 
 5. **מהירות וזולות** — סבב מדידה אוטומטי יומי ב-0.80$, מקרה מבחן ב-3$, שהמתחרים לא מריצים.
 6. **ראש חוף** — ישראל ועברית בלי מתחרה, ומשם לשווקים שה"וינאים" מכסים רק בניטור.
 
+## 17. סטטוס המנופים (25.11.2026, ערב)
+| עסק | מנוף | מה נעשה | מתי נספר "אחרי" |
+|---|---|---|---|
+| אורן רדה, Lupa, Energy Yoga, Gazooz | guide | 4 מדריכים עריכתיים חיים ב-meerada.app/guides/ (עובדות מאומתות מהאתרים, גילוי נאות, בלי כוכבים), ב-sitemap וב-IndexNow | מ-26.11 |
+| Gusto, Manhattan Dental Arts, Kosma Hair Studio | profile | 3 עמודי פרופיל חיים ב-meerada.app/b/ (JSON-LD LocalBusiness, מקורות, ערוץ תיקון), sitemap + IndexNow | מ-26.11 |
+| Fold Yoga London | outreach | ערכת outreach ב-docs/OUTREACH-FOLD-YOGA.md: 9 העמודים שהמנועים מצטטים (bestinbritain ב-21 מ-21 תשובות), אף אחד לא מזכיר את Fold; 3 טיוטות מייל. **השליחה אצלך** — רישום התאריך ב-experiments.json אחרי כל שליחה | מיום השליחה (לעדכן started) |
+| א.ל פתרונות אינסטלציה, New York General Dentistry | directory | הוראות ב-docs/DIRECTORY-LEVER.md (Yelp / easy.co.il). דורש חשבון משתמש → פעולה שלך או אישור מפורש | 1.12 או מיום הרישום |
+| 5 ביקורת | none | לא נוגעים | — |
+
+ממצא דרך-אגב מהאיסוף: energyoga.co.uk עם תעודת TLS שפגה (האתר לא נטען לאף זחלן); Indaba Yoga נסגר
+30.11.2026 (הושמט מהמדריך); אתר Amit Noam נושא טלפון שונה מגוגל (נשמרו רק עובדות המפה).
+
 ## מקורות (נובמבר 2026)
 - https://www.digitalcommerce360.com/2026/03/06/openai-shifts-checkout-plans-agentic-commerce-strategy/
 - https://www.digitalapplied.com/blog/ai-agentic-commerce-discover-in-ai-buy-on-site-2026

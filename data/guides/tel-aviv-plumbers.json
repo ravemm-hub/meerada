@@ -194,6 +194,36 @@
    "source": "Google Maps listing",
    "checked": "2026-11-25",
    "note": "No own website found; the Google Maps listing shows no phone number, so no other page could be matched to this business."
+  },
+  {
+   "name": "א.ל פתרונות אינסטלציה מתקדמים (A.L. Advanced Plumbing Solutions)",
+   "website": "https://al-biuvit.co.il",
+   "phone": "050-250-9104",
+   "address": "",
+   "hours": "Google Maps: Open 24 hours. Website: 24/7 sewer services in the centre",
+   "services": [
+    "sewer and drain unblocking (all types)",
+    "root removal from sewer lines",
+    "grease removal from sewer and pipes",
+    "high-pressure flushing of sewer lines",
+    "patch repair of a pipe damaged by roots",
+    "CCTV inspection of sewer lines",
+    "replacement of collapsed sewer lines"
+   ],
+   "areas": [
+    "Tel Aviv",
+    "Petah Tikva",
+    "Ramat Gan",
+    "Savyon",
+    "Kiryat Ono"
+   ],
+   "languages": [],
+   "since": "Website states '35 years of family experience'",
+   "licence": "",
+   "prices": "No prices published; website states 'fair prices and full transparency'",
+   "source": "https://al-biuvit.co.il/",
+   "checked": "2026-11-25",
+   "note": "Specialised in sewer (ביובית) work: high-pressure jetting, pipe camera and rehabilitation; run by Alon according to the website. Website shows ratings; not recorded here."
   }
  ],
  "sources": [
@@ -202,6 +232,7 @@
   "https://maor-sos.co.il/plumber-prices/",
   "https://maor-sos.co.il/service-areas/",
   "https://maor-sos.co.il/plumber-in-the-center/",
-  "Google Maps listings for 'plumber in Tel Aviv', read 2026-11-25"
+  "Google Maps listings for 'plumber in Tel Aviv', read 2026-11-25",
+  "https://al-biuvit.co.il/"
  ]
 }
