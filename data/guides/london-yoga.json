@@ -1,0 +1,227 @@
+{
+ "slug": "london-yoga",
+ "city": "London",
+ "country": "UK",
+ "category": "yoga",
+ "title": "Yoga studios in London compared by styles, beginner classes and prices",
+ "intro": "This guide compares nine yoga studios listed on Google Maps for 'yoga studio in London' on 25 November 2026, excluding sponsored listings. Every fact comes from each studio's own website as fetched on that date, or from its Google Maps listing where the website could not be fetched; prices and timetables change, so check the studio before booking. Studios are listed alphabetically and no ratings or rankings are given. Indaba Yoga Studio was left out because its own site announces closure on 30 November 2026.",
+ "criteria": [
+  "styles taught",
+  "beginner classes and intro offers",
+  "drop-in and membership prices",
+  "class hours",
+  "online classes"
+ ],
+ "order": "alphabetical",
+ "updated": "2026-11-25",
+ "lang": "en",
+ "businesses": [
+  {
+   "name": "Energy Yoga",
+   "website": "https://www.energyoga.co.uk/",
+   "phone": "",
+   "address": "4 Foster Lane, City of London",
+   "hours": "Google Maps: open, closes 5 pm (25 Nov 2026)",
+   "services": [],
+   "areas": [
+    "City of London"
+   ],
+   "languages": [],
+   "since": "",
+   "licence": "",
+   "prices": "",
+   "source": "Google Maps listing",
+   "checked": "2026-11-25",
+   "note": "The website energyoga.co.uk could not be fetched on 25 November 2026 (http redirects to https, whose TLS certificate has expired), so only the Google Maps facts are recorded."
+  },
+  {
+   "name": "Iyengar Yoga London",
+   "website": "https://iyengaryogalondon.co.uk/",
+   "phone": "+44 20 7624 3080",
+   "address": "223a Randolph Avenue, Maida Vale, London W9 1NL",
+   "hours": "Daily classes (site); Google Maps: closes 8 pm (25 Nov 2026)",
+   "services": [
+    "Iyengar yoga (beginners, general and intermediate levels)",
+    "six-week beginners course",
+    "free one-hour taster sessions",
+    "60+, gentle, pregnancy, children's and teenagers' classes",
+    "pranayama",
+    "remedial yoga and yoga for MS/neurological conditions",
+    "online classes",
+    "introductory-level teacher mentorship"
+   ],
+   "areas": [
+    "Maida Vale"
+   ],
+   "languages": [],
+   "since": "1984",
+   "licence": "",
+   "prices": "Studio drop-in: 75 min £12.50 visitor / £9.50 member, 90 min £18.50 / £14.25, 120 min £23.25 / £18; online 60 min £11 / £8.50. Annual membership £65 (autopay £60). Six-week beginners course £85 (£25 for under-25s and full-time students). Free one-hour taster classes.",
+   "source": "https://iyengaryogalondon.co.uk/class-prices/",
+   "checked": "2026-11-25",
+   "note": "A members-run not-for-profit charity; the site says B.K.S. Iyengar helped found the centre in 1984 and opened the purpose-built studios in 1994 (one large studio that divides into three units)."
+  },
+  {
+   "name": "MoreYoga Soho",
+   "website": "https://www.moreyoga.co.uk/yoga-london/soho-studio",
+   "phone": "0808 175 0238",
+   "address": "Marshall Street Leisure Centre, 15 Marshall Street, Soho, London W1F 7EL",
+   "hours": "Soho classes 22-28 Nov 2026: earliest 7:30am, latest finish 8:30pm; Google Maps: closes 10 pm (25 Nov 2026)",
+   "services": [
+    "vinyasa",
+    "power flow",
+    "hot vinyasa",
+    "hot pilates",
+    "yang yin",
+    "Dharma",
+    "Rocket yoga",
+    "inversions & drills",
+    "restorative",
+    "'Top 10 beginner friendly' timetable filter",
+    "teacher training",
+    "Wellness TV online"
+   ],
+   "areas": [
+    "Soho"
+   ],
+   "languages": [],
+   "since": "",
+   "licence": "",
+   "prices": "Intro membership: £1 first month then £44/month (new members, 2-month minimum, offer stated to end 30.11.2026); monthly unlimited one month only £88; returning members £54/month; 4-class pass £23, 8-class pass £56, 12-class pass £74; annual pass £365.",
+   "source": "https://www.moreyoga.co.uk/yoga-london/soho-studio",
+   "checked": "2026-11-25",
+   "note": "Part of a chain of '40+' studios across London; memberships give access to all studios."
+  },
+  {
+   "name": "Mudra Yoga London",
+   "website": "https://www.mudrayogalondon.com/",
+   "phone": "",
+   "address": "2 Shelford Place, Stoke Newington, London N16 9HS",
+   "hours": "Daily classes (site); Google Maps: closes 9 pm (25 Nov 2026)",
+   "services": [
+    "flow yoga",
+    "slow flow",
+    "restore",
+    "yin",
+    "Pause & Breathe",
+    "beginner-friendly classes (Slow Flow, Restore, Yin, Pause & Breathe)",
+    "pre/postnatal yoga",
+    "kids yoga",
+    "workshops"
+   ],
+   "areas": [
+    "Stoke Newington"
+   ],
+   "languages": [],
+   "since": "2013",
+   "licence": "",
+   "prices": "Drop-in £17; unlimited 14-day intro £50; 5-class pack £75, 10-class pack £140, 20-class pack £200; memberships £55/month (1 class a week), £80/month (2 a week), £110/month (3 a week); workshops average £35.",
+   "source": "https://www.mudrayogalondon.com/pricing",
+   "checked": "2026-11-25",
+   "note": "The site describes the studio as 'part of the local fabric since 2013', next to Clissold Park."
+  },
+  {
+   "name": "Stillpoint Yoga London",
+   "website": "https://stillpoint.yoga/",
+   "phone": "",
+   "address": "Room AR1, West Wing, Guy's Campus, St Thomas Street, London Bridge, London SE1 9TL",
+   "hours": "Mysore classes Mon-Fri, 'start anytime after 6:30 and finish by 9:00' (site); Google Maps: opens 6:30 am",
+   "services": [
+    "Ashtanga yoga, Mysore self-practice method",
+    "five-day beginners Ashtanga course (7-8am, £80)",
+    "online live-stream classes six days a week",
+    "workshops with guest teachers"
+   ],
+   "areas": [
+    "London Bridge"
+   ],
+   "languages": [],
+   "since": "2009",
+   "licence": "",
+   "prices": "New students: 2 weeks for £50. Memberships (include unlimited online classes): 2 classes a week £95/month, 3 a week £125/month, 5 a week £140/month. Beginners course £80. Online-only membership £60/month, online trial £20 for two weeks.",
+   "source": "https://stillpoint.yoga/ashtanga-yoga-london-bridge/",
+   "checked": "2026-11-25",
+   "note": "Founded by Scott Johnson; the site says it has been 'sharing Ashtanga yoga since 2009'. Morning-only in-person schedule."
+  },
+  {
+   "name": "The Shala School of Yoga",
+   "website": "https://www.theshalalondon.com/",
+   "phone": "",
+   "address": "3rd floor, 1 Chestnut Road (537 Norwood Road), West Norwood, London SE27 9EZ",
+   "hours": "Vahni classes from 7:15am to 7:15pm start (site 'next up' list); Google Maps: closes 6 pm (25 Nov 2026)",
+   "services": [
+    "200-hour Yoga Alliance teacher training (£3,250)",
+    "300-hour advanced training (from £3,900)",
+    "CPD modules (yin, somatic, menopause, yoga nidra, trauma-informed)",
+    "livestream training options",
+    "public classes at the same address run by Vahni: vinyasa, slow flow, yin, restorative, qi gong, somatic movement, pregnancy yoga"
+   ],
+   "areas": [
+    "West Norwood"
+   ],
+   "languages": [],
+   "since": "",
+   "licence": "",
+   "prices": "Teacher training: 200-hour £3,250; 300-hour from £3,900; Yoga Philosophy Club £30 drop-in. Public classes (Vahni, same studio): single class £20; introductory pass £39 for 21 days unlimited; 6-class pack £96, 10-class pack £140; monthly unlimited £110; 20% concessions on single classes and packs.",
+   "source": "https://www.theshalalondon.com/",
+   "checked": "2026-11-25",
+   "note": "The Shala School of Yoga site says classes and workshops in West Norwood are now run by Vahni, its sister organisation at the same address; the School itself focuses on teacher training and cites '29 years in South London'."
+  },
+  {
+   "name": "Yogarise Peckham",
+   "website": "https://yogarise.london/",
+   "phone": "020 3096 3158",
+   "address": "1st Floor, The Bussey Building, 133 Copeland Road, Peckham, London SE15",
+   "hours": "Google Maps: closes 9 pm (25 Nov 2026); full timetable is in the booking app",
+   "services": [
+    "yoga flow",
+    "mat pilates",
+    "mat barre",
+    "reformer pilates ('for total beginners and regulars alike')",
+    "yoga nidra and sound bath workshops",
+    "online classes and on-demand library in the Yogarise app",
+    "200-hour vinyasa teacher training",
+    "pregnancy and postnatal yoga trainings"
+   ],
+   "areas": [
+    "Peckham"
+   ],
+   "languages": [],
+   "since": "",
+   "licence": "",
+   "prices": "Studio drop-in £18 (yoga and mat pilates); reformer drop-in £25; studio intro offer £45 for 21 days unlimited yoga/mat pilates; reformer intro offer £45 for 4 classes in 21 days; 5-class pack £75, 10-class pack £140, 20-class pack £260; monthly pre-pay unlimited studio + online £105; off-peak monthly £79; Platinum (unlimited reformer + yoga + online) £250/month.",
+   "source": "https://yogarise.london/book/",
+   "checked": "2026-11-25",
+   "note": "One of three Yogarise studios (Peckham, Streatham, Queen's Park); the site does not print the Peckham street address, which is taken from Google Maps."
+  }
+ ],
+ "sources": [
+  "https://www.brewerstreetyoga.com/",
+  "https://www.brewerstreetyoga.com/pricesandbooking",
+  "https://www.brewerstreetyoga.com/timetable",
+  "https://www.indabayoga.com/",
+  "https://www.indabayoga.com/prices",
+  "https://www.indabayoga.com/timetable",
+  "https://iyengaryogalondon.co.uk/",
+  "https://iyengaryogalondon.co.uk/class-prices/",
+  "https://iyengaryogalondon.co.uk/full-timetable/",
+  "https://iyengaryogalondon.co.uk/beginners-yoga-course/",
+  "https://iyengaryogalondon.co.uk/yoga-studios-london-maida-vale/",
+  "https://www.moreyoga.co.uk/yoga-london/soho-studio",
+  "https://www.mudrayogalondon.com/",
+  "https://www.mudrayogalondon.com/pricing",
+  "https://www.mudrayogalondon.com/new-to-yoga",
+  "https://stillpoint.yoga/",
+  "https://stillpoint.yoga/ashtanga-yoga-london-bridge/",
+  "https://stillpoint.yoga/beginners-ashtanga-yoga-london/",
+  "https://stillpoint.yoga/yoga-online-membership/",
+  "https://www.theshalalondon.com/",
+  "https://vahnilondon.com/",
+  "https://vahnilondon.com/pricing",
+  "https://yogarise.london/",
+  "https://yogarise.london/book/",
+  "https://yogarise.london/peckham/",
+  "https://yogarise.london/contact/",
+  "Google Maps listings for 'yoga studio in London', 25 November 2026 (addresses and opening/closing times; sole source for Energy Yoga)"
+ ]
+}

@@ -131,6 +131,7 @@ def render_guide(g: Guide) -> str:
 <meta property="article:modified_time" content="{escape(g.updated)}">
 <script type="application/ld+json">{_jsonld(g)}</script>
 <script src="../assets/family.js" defer></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
   :root{{--panel:#F7F9FC;--line:#DDE4EE;--text:#0F172A;--muted:#5B6B82;--teal:#0E8A7E}}
   body{{margin:0;color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.55}} .wrap{{max-width:1040px;margin:0 auto;padding:0 1.1rem}}
@@ -162,6 +163,7 @@ def render_index(guides: list[Guide]) -> str:
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Meerada guides — businesses compared by the facts</title><link rel="canonical" href="https://meerada.app/guides/">
 <link rel="icon" href="../logo.svg" type="image/svg+xml"><script src="../assets/family.js" defer></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>body{{margin:0;font-family:"IBM Plex Sans",system-ui,sans-serif;color:#0F172A;line-height:1.55}} .wrap{{max-width:860px;margin:0 auto;padding:2rem 1.1rem}} .s{{color:#5B6B82;font-size:.8rem}} li{{margin:.4rem 0}}</style></head>
 <body><div class="wrap"><h1>Guides</h1><p class="s">{escape(DISCLOSURE)}</p><ul>{items}</ul></div></body></html>
 """
