@@ -115,3 +115,18 @@ def profiles_cmd(
 
     for path in build_profiles(Path(data), Path(out)):
         typer.echo(f"wrote {path}")
+
+
+@visibility_app.command("pages")
+def pages_cmd(
+    state: Annotated[str, typer.Option("--state")] = "visibility_state.json",
+    out: Annotated[str, typer.Option("--out")] = "site/s",
+) -> None:
+    """Build the static 'what the AI shows' page for every measured question."""
+    from pathlib import Path
+
+    from handover.visibility.pages import build_query_pages
+    from handover.visibility.state import load_state
+
+    written = build_query_pages(load_state(Path(state)), Path(out))
+    typer.echo(f"wrote {len(written)} files to {out}")

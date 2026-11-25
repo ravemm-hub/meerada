@@ -127,3 +127,45 @@ def test_named_vs_cited_and_tracking_with_controls() -> None:
     assert "Alpha Plumbing" in html and "control" in html and html.count("</script>") == 4
     empty = render_cases(build_report(State(), QUESTIONS, ["chatgpt"], NOW, []))
     assert "No test cases published yet" in empty
+
+
+def test_grok_and_mistral_adapters_and_openrouter_prefix() -> None:
+    calls: list[tuple[str, dict[str, Any]]] = []
+
+    def post(url: str, headers: dict[str, str], body: dict[str, Any]) -> dict[str, Any]:
+        calls.append((url, body))
+        if "mistral" in url:
+            return {
+                "outputs": [
+                    {"type": "tool.execution", "name": "web_search"},
+                    {
+                        "type": "message.output",
+                        "content": [
+                            {"type": "text", "text": "1. **Omega Dental**"},
+                            {"type": "tool_reference", "url": "https://omega.example"},
+                        ],
+                    },
+                ],
+                "usage": {"prompt_tokens": 3, "completion_tokens": 4},
+            }
+        return {"output": [], "usage": {}}
+
+    built, skipped = eng.engines_from_env(
+        ["grok", "mistral", "chatgpt"],
+        {"XAI_API_KEY": "x", "MISTRAL_API_KEY": "m", "OPENROUTER_API_KEY": "o"},
+        post,
+    )
+    assert [e.name for e in built] == ["grok", "mistral", "chatgpt"] and not skipped
+    assert built[0].model == "grok-4-fast" and built[2].model == "openai/gpt-4.1-mini"
+    built[0].ask("q")
+    assert (
+        calls[-1][0] == "https://api.x.ai/v1/responses"
+        and calls[-1][1]["tools"][0]["type"] == "web_search"
+    )
+    reply = built[1].ask("q")
+    assert (
+        reply.text == "1. **Omega Dental**"
+        and reply.citations == ["https://omega.example"]
+        and reply.searches == 1
+    )
+    assert set(eng.ALL_ENGINES) >= {"grok", "mistral", "gemini", "perplexity"}

@@ -1112,6 +1112,13 @@ def build_app(
             )
         return JSONResponse({"ok": True})
 
+    try:  # Meerada Search: /api/search, /api/audit, /api/status
+        from handover.visibility.api import mount_search
+
+        mount_search(app)
+    except Exception as exc:
+        print(f"search api not mounted: {exc}")
+
     return app
 
 

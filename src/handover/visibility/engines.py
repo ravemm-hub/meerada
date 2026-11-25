@@ -97,7 +97,7 @@ class ChatGPTSearch:
         reasoning: bool = False,
     ) -> None:
         self._key, self._post, self._url = api_key, post, base_url.rstrip("/")
-        self.model = model if "openai.com" in base_url else f"openai/{model}"
+        self.model = f"openai/{model}" if "openrouter" in base_url else model
         self.name = name
         self._reasoning = reasoning
         if reasoning:
@@ -237,7 +237,64 @@ class ClaudeSearch:
         return Reply("\n".join(texts), citations, self.model, inp, out, searches)
 
 
-ALL_ENGINES: tuple[str, ...] = ("chatgpt", "chatgpt5", "perplexity", "gemini", "claude")
+class MistralSearch:
+    """Mistral with the web_search tool (conversations API): outputs carry tool executions
+    and message chunks with tool_reference urls."""
+
+    name = "mistral"
+    model = "mistral-medium-latest"
+    estimate_usd = Decimal("0.010")
+
+    def __init__(self, api_key: str, post: Post) -> None:
+        self._key, self._post = api_key, post
+
+    def ask(self, question: str) -> Reply:
+        body: dict[str, Any] = {
+            "model": self.model,
+            "inputs": question,
+            "tools": [{"type": "web_search"}],
+            "completion_args": {"max_tokens": 1200},
+        }
+        data = self._post(
+            "https://api.mistral.ai/v1/conversations",
+            {"Authorization": f"Bearer {self._key}"},
+            body,
+        )
+        texts: list[str] = []
+        citations: list[str] = []
+        searches = 0
+        for entry in data.get("outputs") or []:
+            if not isinstance(entry, dict):
+                continue
+            if entry.get("type") == "tool.execution":
+                searches += 1
+            elif entry.get("type") == "message.output":
+                content = entry.get("content")
+                if isinstance(content, str):
+                    texts.append(content)
+                else:
+                    for chunk in content or []:
+                        if not isinstance(chunk, dict):
+                            continue
+                        if chunk.get("type") == "text":
+                            texts.append(str(chunk.get("text") or ""))
+                        elif chunk.get("type") == "tool_reference" and chunk.get("url"):
+                            citations.append(str(chunk["url"]))
+        usage = data.get("usage") or {}
+        inp = int(usage.get("prompt_tokens", 0) or 0)
+        out = int(usage.get("completion_tokens", 0) or 0)
+        return Reply("".join(texts), citations, self.model, inp, out, searches)
+
+
+ALL_ENGINES: tuple[str, ...] = (
+    "chatgpt",
+    "chatgpt5",
+    "claude",
+    "gemini",
+    "perplexity",
+    "grok",
+    "mistral",
+)
 OPENROUTER = "https://openrouter.ai/api/v1"
 
 
@@ -267,6 +324,24 @@ def engines_from_env(
                 )
             else:
                 skipped[name] = "no OPENAI_API_KEY"
+        elif name == "grok":  # xAI: Responses-compatible API with web_search
+            if env.get("XAI_API_KEY"):
+                built.append(
+                    ChatGPTSearch(
+                        env["XAI_API_KEY"],
+                        post,
+                        "https://api.x.ai/v1",
+                        model="grok-4-fast",
+                        name=name,
+                    )
+                )
+            else:
+                skipped[name] = "no XAI_API_KEY"
+        elif name == "mistral":
+            if env.get("MISTRAL_API_KEY"):
+                built.append(MistralSearch(env["MISTRAL_API_KEY"], post))
+            else:
+                skipped[name] = "no MISTRAL_API_KEY"
         elif name == "perplexity":
             if env.get("PERPLEXITY_API_KEY"):
                 built.append(PerplexitySonar(env["PERPLEXITY_API_KEY"], post))

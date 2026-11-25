@@ -27,6 +27,8 @@ ENGINE_LABELS = {
     "perplexity": "Perplexity (Sonar)",
     "gemini": "Gemini (Google grounding)",
     "claude": "Claude (web search)",
+    "grok": "Grok (xAI web search)",
+    "mistral": "Mistral (web search)",
 }
 
 
