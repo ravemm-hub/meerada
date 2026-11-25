@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-25T15:37:00.623800+00:00",
+ "generated_at": "2026-11-25T17:32:03.105686+00:00",
  "method": {
   "queries": 138,
   "intents": [
@@ -106,6 +106,83 @@
    "engine": "chatgpt",
    "label": "ChatGPT (web search)",
    "model": "gpt-4.1-mini",
+   "asked": 25,
+   "errors": 0,
+   "last_error": null,
+   "named_rate": {
+    "value": 1.0,
+    "n": 25,
+    "ci_low": 0.8668035060468213,
+    "ci_high": 1.0
+   },
+   "searched_rate": {
+    "value": 1.0,
+    "n": 25,
+    "ci_low": 0.8668035060468213,
+    "ci_high": 1.0
+   },
+   "names_per_answer": {
+    "value": 5.64,
+    "n": 25
+   },
+   "distinct_names": 141,
+   "total_mentions": 141,
+   "cited_per_answer": {
+    "value": 6.2,
+    "n": 25
+   },
+   "sources": [
+    {
+     "family": "Google",
+     "count": 118,
+     "share": 0.7612903225806451
+    },
+    {
+     "family": "Business sites",
+     "count": 37,
+     "share": 0.23870967741935484
+    }
+   ],
+   "choosing": {
+    "candidates": {
+     "value": 3.12,
+     "n": 25
+    },
+    "pick_rate": {
+     "value": 0.0,
+     "n": 25,
+     "ci_low": 0.0,
+     "ci_high": 0.13319649395317873
+    },
+    "table_rate": {
+     "value": 0.0,
+     "n": 25,
+     "ci_low": 0.0,
+     "ci_high": 0.13319649395317873
+    },
+    "rated_share": 0.0641025641025641,
+    "priced_share": 0.08974358974358974,
+    "own_site_share": 0.07692307692307693,
+    "listicle_share": 0.15789473684210525,
+    "hosts_per_answer": {
+     "value": 1.68,
+     "n": 25
+    }
+   },
+   "stability": {
+    "value": 0.8,
+    "n": 5
+   },
+   "latency_ms": {
+    "value": 4152.48,
+    "n": 25
+   },
+   "cost_usd": "0.75"
+  },
+  {
+   "engine": "chatgpt5",
+   "label": "chatgpt5",
+   "model": "gpt-5-mini",
    "asked": 15,
    "errors": 0,
    "last_error": null,
@@ -116,139 +193,72 @@
     "ci_high": 1.0
    },
    "searched_rate": {
-    "value": 1.0,
+    "value": 0.9333333333333333,
     "n": 15,
-    "ci_low": 0.7961107336956521,
-    "ci_high": 1.0
+    "ci_low": 0.70182922447576,
+    "ci_high": 0.9881334113938052
    },
    "names_per_answer": {
-    "value": 6.133333333333334,
+    "value": 7.733333333333333,
     "n": 15
    },
-   "distinct_names": 92,
-   "total_mentions": 92,
+   "distinct_names": 116,
+   "total_mentions": 116,
    "cited_per_answer": {
-    "value": 5.933333333333334,
+    "value": 6.533333333333333,
     "n": 15
    },
    "sources": [
-    {
-     "family": "Google",
-     "count": 89,
-     "share": 1.0
-    }
-   ],
-   "choosing": {
-    "candidates": {
-     "value": 1.9333333333333333,
-     "n": 15
-    },
-    "pick_rate": {
-     "value": 0.0,
-     "n": 15,
-     "ci_low": 0.0,
-     "ci_high": 0.20388926630434784
-    },
-    "table_rate": {
-     "value": 0.0,
-     "n": 15,
-     "ci_low": 0.0,
-     "ci_high": 0.20388926630434784
-    },
-    "rated_share": 0.034482758620689655,
-    "priced_share": 0.034482758620689655,
-    "own_site_share": 0.0,
-    "listicle_share": 0.0,
-    "hosts_per_answer": {
-     "value": 0.3333333333333333,
-     "n": 15
-    }
-   },
-   "stability": {
-    "value": 0.8,
-    "n": 5
-   },
-   "latency_ms": {
-    "value": 4399.466666666666,
-    "n": 15
-   },
-   "cost_usd": "0.44999999999999996"
-  },
-  {
-   "engine": "chatgpt5",
-   "label": "chatgpt5",
-   "model": "gpt-5-mini",
-   "asked": 5,
-   "errors": 0,
-   "last_error": null,
-   "named_rate": {
-    "value": 1.0,
-    "n": 5,
-    "ci_low": 0.5655085052479191,
-    "ci_high": 1.0
-   },
-   "searched_rate": {
-    "value": 1.0,
-    "n": 5,
-    "ci_low": 0.5655085052479191,
-    "ci_high": 1.0
-   },
-   "names_per_answer": {
-    "value": 6.6,
-    "n": 5
-   },
-   "distinct_names": 33,
-   "total_mentions": 33,
-   "cited_per_answer": {
-    "value": 5.6,
-    "n": 5
-   },
-   "sources": [
-    {
-     "family": "Reviews & directories",
-     "count": 15,
-     "share": 0.5357142857142857
-    },
     {
      "family": "Business sites",
-     "count": 11,
-     "share": 0.39285714285714285
+     "count": 69,
+     "share": 0.7040816326530612
+    },
+    {
+     "family": "Reviews & directories",
+     "count": 25,
+     "share": 0.25510204081632654
+    },
+    {
+     "family": "News & magazines",
+     "count": 2,
+     "share": 0.02040816326530612
     },
     {
      "family": "Tripadvisor",
      "count": 1,
-     "share": 0.03571428571428571
+     "share": 0.01020408163265306
     },
     {
-     "family": "News & magazines",
+     "family": "Google",
      "count": 1,
-     "share": 0.03571428571428571
+     "share": 0.01020408163265306
     }
    ],
    "choosing": {
     "candidates": {
-     "value": 6.6,
-     "n": 5
+     "value": 7.733333333333333,
+     "n": 15
     },
     "pick_rate": {
-     "value": 0.0,
-     "n": 5,
-     "ci_low": 0.0,
-     "ci_high": 0.43449149475208104
+     "value": 0.13333333333333333,
+     "n": 15,
+     "ci_low": 0.0373604698913593,
+     "ci_high": 0.3788249920651624
     },
     "table_rate": {
      "value": 0.0,
-     "n": 5,
+     "n": 15,
      "ci_low": 0.0,
-     "ci_high": 0.43449149475208104
+     "ci_high": 0.20388926630434784
     },
     "rated_share": 0.0,
-    "priced_share": 0.0,
-    "own_site_share": 0.21212121212121213,
-    "listicle_share": 0.07142857142857142,
+    "priced_share": 0.034482758620689655,
+    "own_site_share": 0.19827586206896552,
+    "listicle_share": 0.1836734693877551,
     "hosts_per_answer": {
-     "value": 3.8,
-     "n": 5
+     "value": 4.533333333333333,
+     "n": 15
     }
    },
    "stability": {
@@ -256,17 +266,17 @@
     "n": 5
    },
    "latency_ms": {
-    "value": 12830.6,
-    "n": 5
+    "value": 14392.8,
+    "n": 15
    },
-   "cost_usd": "0.2"
+   "cost_usd": "0.6"
   },
   {
    "engine": "perplexity",
    "label": "Perplexity (Sonar)",
    "model": "perplexity/sonar",
-   "asked": 13,
-   "errors": 13,
+   "asked": 23,
+   "errors": 23,
    "last_error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits\",\"code\":402,\"metadata\":{\"limit_source\":\"openrouter_credits\",\"remedy_hint\":\"Add credits at https://o",
    "named_rate": {
     "value": null,
@@ -397,87 +407,87 @@
    "engine": "claude",
    "label": "Claude (web search)",
    "model": "claude-haiku-4-5-20251001",
-   "asked": 12,
+   "asked": 17,
    "errors": 0,
    "last_error": null,
    "named_rate": {
-    "value": 0.8333333333333334,
-    "n": 12,
-    "ci_low": 0.5519636426153274,
-    "ci_high": 0.9530358523851776
+    "value": 0.8823529411764706,
+    "n": 17,
+    "ci_low": 0.6566315750229009,
+    "ci_high": 0.967120919987079
    },
    "searched_rate": {
-    "value": 0.5833333333333334,
-    "n": 12,
-    "ci_low": 0.3195073356553728,
-    "ci_high": 0.8067425380947535
+    "value": 0.7058823529411765,
+    "n": 17,
+    "ci_low": 0.468664666737861,
+    "ci_high": 0.8672020613444361
    },
    "names_per_answer": {
-    "value": 4.8,
-    "n": 10
+    "value": 5.066666666666666,
+    "n": 15
    },
-   "distinct_names": 48,
-   "total_mentions": 48,
+   "distinct_names": 76,
+   "total_mentions": 76,
    "cited_per_answer": {
-    "value": 10.0,
-    "n": 12
+    "value": 14.823529411764707,
+    "n": 17
    },
    "sources": [
     {
      "family": "Business sites",
-     "count": 97,
-     "share": 0.8083333333333333
+     "count": 218,
+     "share": 0.8650793650793651
+    },
+    {
+     "family": "News & magazines",
+     "count": 12,
+     "share": 0.047619047619047616
+    },
+    {
+     "family": "Social",
+     "count": 7,
+     "share": 0.027777777777777776
     },
     {
      "family": "Reviews & directories",
      "count": 7,
-     "share": 0.058333333333333334
-    },
-    {
-     "family": "News & magazines",
-     "count": 6,
-     "share": 0.05
+     "share": 0.027777777777777776
     },
     {
      "family": "Tripadvisor",
      "count": 5,
-     "share": 0.041666666666666664
-    },
-    {
-     "family": "Social",
-     "count": 3,
-     "share": 0.025
+     "share": 0.01984126984126984
     },
     {
      "family": "Wikipedia",
-     "count": 2,
-     "share": 0.016666666666666666
+     "count": 3,
+     "share": 0.011904761904761904
     }
    ],
    "choosing": {
     "candidates": {
-     "value": 2.0,
-     "n": 10
+     "value": 3.2,
+     "n": 15
     },
     "pick_rate": {
-     "value": 0.0,
-     "n": 10,
-     "ci_low": 0.0,
-     "ci_high": 0.2775401687666166
+     "value": 0.06666666666666667,
+     "n": 15,
+     "ci_low": 0.011866588606194828,
+     "ci_high": 0.29817077552423993
     },
     "table_rate": {
      "value": 0.0,
-     "n": 10,
+     "n": 15,
      "ci_low": 0.0,
-     "ci_high": 0.2775401687666166
+     "ci_high": 0.20388926630434784
     },
-    "rated_share": 0.05,
-    "priced_share": 0.0,
-    "own_site_share": 0.3,
-    "listicle_share": 0.47058823529411764,
+    "rated_share": 0.020833333333333332,
+    "priced_share": 0.16666666666666666,
+    "own_site_share": 0.25,
+    "listicle_share": 0.3825136612021858,
     "hosts_per_answer": {
-     "value": 1.6666666666666667,
-     "n": 12
+     "value": 4.176470588235294,
+     "n": 17
     }
    },
    "stability": {
@@ -485,10 +495,10 @@
     "n": 5
    },
    "latency_ms": {
-    "value": 4947.166666666667,
-    "n": 12
+    "value": 5682.64705882353,
+    "n": 17
    },
-   "cost_usd": "0.24"
+   "cost_usd": "0.34"
   }
  ],
  "intents": [
@@ -498,50 +508,50 @@
    "queries": 50,
    "engines": {
     "chatgpt": {
-     "asked": 15,
+     "asked": 16,
      "named_rate": {
       "value": 1.0,
-      "n": 15,
-      "ci_low": 0.7961107336956521,
+      "n": 16,
+      "ci_low": 0.8063865817272802,
       "ci_high": 1.0
      },
      "searched_rate": {
       "value": 1.0,
-      "n": 15,
-      "ci_low": 0.7961107336956521,
+      "n": 16,
+      "ci_low": 0.8063865817272802,
       "ci_high": 1.0
      },
      "sources": [
       {
        "family": "Google",
-       "count": 89,
+       "count": 94,
        "share": 1.0
       }
      ],
      "choosing": {
       "candidates": {
-       "value": 1.9333333333333333,
-       "n": 15
+       "value": 2.125,
+       "n": 16
       },
       "pick_rate": {
        "value": 0.0,
-       "n": 15,
+       "n": 16,
        "ci_low": 0.0,
-       "ci_high": 0.20388926630434784
+       "ci_high": 0.19361341827271994
       },
       "table_rate": {
        "value": 0.0,
-       "n": 15,
+       "n": 16,
        "ci_low": 0.0,
-       "ci_high": 0.20388926630434784
+       "ci_high": 0.19361341827271994
       },
-      "rated_share": 0.034482758620689655,
-      "priced_share": 0.034482758620689655,
+      "rated_share": 0.058823529411764705,
+      "priced_share": 0.029411764705882353,
       "own_site_share": 0.0,
       "listicle_share": 0.0,
       "hosts_per_answer": {
-       "value": 0.3333333333333333,
-       "n": 15
+       "value": 0.375,
+       "n": 16
       }
      },
      "stability": {
@@ -550,60 +560,60 @@
      }
     },
     "chatgpt5": {
-     "asked": 5,
+     "asked": 7,
      "named_rate": {
       "value": 1.0,
-      "n": 5,
-      "ci_low": 0.5655085052479191,
+      "n": 7,
+      "ci_low": 0.6456611570247934,
       "ci_high": 1.0
      },
      "searched_rate": {
       "value": 1.0,
-      "n": 5,
-      "ci_low": 0.5655085052479191,
+      "n": 7,
+      "ci_low": 0.6456611570247934,
       "ci_high": 1.0
      },
      "sources": [
       {
        "family": "Reviews & directories",
-       "count": 15,
-       "share": 0.5357142857142857
+       "count": 21,
+       "share": 0.5121951219512195
       },
       {
        "family": "Business sites",
-       "count": 11,
-       "share": 0.39285714285714285
+       "count": 18,
+       "share": 0.43902439024390244
       },
       {
        "family": "Tripadvisor",
        "count": 1,
-       "share": 0.03571428571428571
+       "share": 0.024390243902439025
       }
      ],
      "choosing": {
       "candidates": {
-       "value": 6.6,
-       "n": 5
+       "value": 6.714285714285714,
+       "n": 7
       },
       "pick_rate": {
        "value": 0.0,
-       "n": 5,
+       "n": 7,
        "ci_low": 0.0,
-       "ci_high": 0.43449149475208104
+       "ci_high": 0.35433884297520657
       },
       "table_rate": {
        "value": 0.0,
-       "n": 5,
+       "n": 7,
        "ci_low": 0.0,
-       "ci_high": 0.43449149475208104
+       "ci_high": 0.35433884297520657
       },
       "rated_share": 0.0,
       "priced_share": 0.0,
-      "own_site_share": 0.21212121212121213,
-      "listicle_share": 0.07142857142857142,
+      "own_site_share": 0.1702127659574468,
+      "listicle_share": 0.07317073170731707,
       "hosts_per_answer": {
-       "value": 3.8,
-       "n": 5
+       "value": 4.142857142857143,
+       "n": 7
       }
      },
      "stability": {
@@ -612,7 +622,7 @@
      }
     },
     "perplexity": {
-     "asked": 13,
+     "asked": 14,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -773,44 +783,50 @@
    "queries": 25,
    "engines": {
     "chatgpt": {
-     "asked": 0,
+     "asked": 2,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 18,
+       "share": 1.0
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 5.0,
+       "n": 2
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 2,
+       "ci_low": 0.0,
+       "ci_high": 0.6576280471103807
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 2,
+       "ci_low": 0.0,
+       "ci_high": 0.6576280471103807
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.1,
+      "priced_share": 0.1,
+      "own_site_share": 0.2,
+      "listicle_share": 0.3888888888888889,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 6.5,
+       "n": 2
       }
      },
      "stability": {
@@ -819,44 +835,55 @@
      }
     },
     "chatgpt5": {
-     "asked": 0,
+     "asked": 2,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 15,
+       "share": 0.9375
+      },
+      {
+       "family": "Reviews & directories",
+       "count": 1,
+       "share": 0.0625
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 7.0,
+       "n": 2
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.5,
+       "n": 2,
+       "ci_low": 0.09452865480086614,
+       "ci_high": 0.9054713451991339
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 2,
+       "ci_low": 0.0,
+       "ci_high": 0.6576280471103807
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.21428571428571427,
+      "own_site_share": 0.2857142857142857,
+      "listicle_share": 0.375,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 5.5,
+       "n": 2
       }
      },
      "stability": {
@@ -865,7 +892,7 @@
      }
     },
     "perplexity": {
-     "asked": 0,
+     "asked": 2,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -957,44 +984,55 @@
      }
     },
     "claude": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 25,
+       "share": 0.9259259259259259
+      },
+      {
+       "family": "Social",
+       "count": 2,
+       "share": 0.07407407407407407
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 5.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.6,
+      "own_site_share": 0.2,
+      "listicle_share": 0.4444444444444444,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 11.0,
+       "n": 1
       }
      },
      "stability": {
@@ -1010,44 +1048,50 @@
    "queries": 16,
    "engines": {
     "chatgpt": {
-     "asked": 0,
+     "asked": 2,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 19,
+       "share": 1.0
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 5.0,
+       "n": 2
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 2,
+       "ci_low": 0.0,
+       "ci_high": 0.6576280471103807
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 2,
+       "ci_low": 0.0,
+       "ci_high": 0.6576280471103807
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.4,
+      "own_site_share": 0.4,
+      "listicle_share": 0.42105263157894735,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 9.0,
+       "n": 2
       }
      },
      "stability": {
@@ -1056,44 +1100,55 @@
      }
     },
     "chatgpt5": {
-     "asked": 0,
+     "asked": 2,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 0.5,
+      "n": 2,
+      "ci_low": 0.09452865480086614,
+      "ci_high": 0.9054713451991339
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 13,
+       "share": 0.9285714285714286
+      },
+      {
+       "family": "Google",
+       "count": 1,
+       "share": 0.07142857142857142
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 12.0,
+       "n": 2
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.5,
+       "n": 2,
+       "ci_low": 0.09452865480086614,
+       "ci_high": 0.9054713451991339
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 2,
+       "ci_low": 0.0,
+       "ci_high": 0.6576280471103807
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.125,
+      "listicle_share": 0.35714285714285715,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 4.0,
+       "n": 2
       }
      },
      "stability": {
@@ -1102,7 +1157,7 @@
      }
     },
     "perplexity": {
-     "asked": 0,
+     "asked": 2,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -1194,44 +1249,50 @@
      }
     },
     "claude": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 30,
+       "share": 1.0
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 8.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 1.0,
+       "n": 1,
+       "ci_low": 0.2065432914738929,
+       "ci_high": 1.0
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.5,
+      "own_site_share": 0.125,
+      "listicle_share": 0.6,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 13.0,
+       "n": 1
       }
      },
      "stability": {
@@ -1247,44 +1308,50 @@
    "queries": 13,
    "engines": {
     "chatgpt": {
-     "asked": 0,
+     "asked": 2,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Google",
+       "count": 12,
+       "share": 1.0
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 6.0,
+       "n": 2
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 2,
+       "ci_low": 0.0,
+       "ci_high": 0.6576280471103807
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 2,
+       "ci_low": 0.0,
+       "ci_high": 0.6576280471103807
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.16666666666666666,
+      "priced_share": 0.0,
+      "own_site_share": 0.0,
+      "listicle_share": 0.0,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 1.0,
+       "n": 2
       }
      },
      "stability": {
@@ -1293,44 +1360,55 @@
      }
     },
     "chatgpt5": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 4,
+       "share": 0.5714285714285714
+      },
+      {
+       "family": "Reviews & directories",
+       "count": 3,
+       "share": 0.42857142857142855
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 8.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.125,
+      "own_site_share": 0.0,
+      "listicle_share": 0.5714285714285714,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 5.0,
+       "n": 1
       }
      },
      "stability": {
@@ -1339,7 +1417,7 @@
      }
     },
     "perplexity": {
-     "asked": 0,
+     "asked": 2,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -1431,44 +1509,55 @@
      }
     },
     "claude": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 15,
+       "share": 0.9375
+      },
+      {
+       "family": "Social",
+       "count": 1,
+       "share": 0.0625
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 6.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.0,
+      "listicle_share": 0.4375,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 9.0,
+       "n": 1
       }
      },
      "stability": {
@@ -1484,44 +1573,50 @@
    "queries": 16,
    "engines": {
     "chatgpt": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Google",
+       "count": 6,
+       "share": 1.0
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 6.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.0,
+      "listicle_share": 0.0,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 1.0,
+       "n": 1
       }
      },
      "stability": {
@@ -1530,44 +1625,50 @@
      }
     },
     "chatgpt5": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 7,
+       "share": 1.0
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 7.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.0,
+      "listicle_share": 0.0,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 3.0,
+       "n": 1
       }
      },
      "stability": {
@@ -1576,7 +1677,7 @@
      }
     },
     "perplexity": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -1668,44 +1769,60 @@
      }
     },
     "claude": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 30,
+       "share": 0.9375
+      },
+      {
+       "family": "Wikipedia",
+       "count": 1,
+       "share": 0.03125
+      },
+      {
+       "family": "Social",
+       "count": 1,
+       "share": 0.03125
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 5.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.6,
+      "listicle_share": 0.0625,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 12.0,
+       "n": 1
       }
      },
      "stability": {
@@ -1721,44 +1838,50 @@
    "queries": 9,
    "engines": {
     "chatgpt": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Google",
+       "count": 3,
+       "share": 1.0
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 3.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.0,
+      "listicle_share": 0.0,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 1.0,
+       "n": 1
       }
      },
      "stability": {
@@ -1767,44 +1890,55 @@
      }
     },
     "chatgpt5": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 6,
+       "share": 0.8571428571428571
+      },
+      {
+       "family": "News & magazines",
+       "count": 1,
+       "share": 0.14285714285714285
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 10.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.3,
+      "listicle_share": 0.0,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 6.0,
+       "n": 1
       }
      },
      "stability": {
@@ -1813,7 +1947,7 @@
      }
     },
     "perplexity": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -1905,44 +2039,55 @@
      }
     },
     "claude": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 21,
+       "share": 0.7777777777777778
+      },
+      {
+       "family": "News & magazines",
+       "count": 6,
+       "share": 0.2222222222222222
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 4.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.25,
+      "own_site_share": 0.25,
+      "listicle_share": 0.25925925925925924,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 6.0,
+       "n": 1
       }
      },
      "stability": {
@@ -1958,44 +2103,50 @@
    "queries": 9,
    "engines": {
     "chatgpt": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Google",
+       "count": 3,
+       "share": 1.0
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 3.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.3333333333333333,
+      "own_site_share": 0.0,
+      "listicle_share": 0.0,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 1.0,
+       "n": 1
       }
      },
      "stability": {
@@ -2004,44 +2155,50 @@
      }
     },
     "chatgpt5": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 6,
+       "share": 1.0
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 6.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.8333333333333334,
+      "listicle_share": 0.0,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 6.0,
+       "n": 1
       }
      },
      "stability": {
@@ -2050,7 +2207,7 @@
      }
     },
     "perplexity": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -2190,14 +2347,16 @@
    }
   }
  ],
- "skipped": {},
+ "skipped": {
+  "gemini": "no GOOGLE_API_KEY"
+ },
  "overlap": [
   {
    "a": "chatgpt",
    "b": "chatgpt5",
    "jaccard": {
-    "value": 0.03666666666666667,
-    "n": 5
+    "value": 0.0874455077086656,
+    "n": 15
    }
   },
   {
@@ -2220,8 +2379,8 @@
    "a": "chatgpt",
    "b": "claude",
    "jaccard": {
-    "value": 0.022727272727272724,
-    "n": 12
+    "value": 0.05472370766488414,
+    "n": 17
    }
   },
   {
@@ -2244,8 +2403,8 @@
    "a": "chatgpt5",
    "b": "claude",
    "jaccard": {
-    "value": 0.0365079365079365,
-    "n": 5
+    "value": 0.05240718877082513,
+    "n": 11
    }
   },
   {
@@ -2275,6 +2434,147 @@
  ],
  "top_names": [
   {
+   "name": "Boostify",
+   "mentions": 3,
+   "engines": [
+    "chatgpt",
+    "chatgpt5",
+    "claude"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "webagency"
+   ],
+   "intents": [
+    "b2b"
+   ]
+  },
+  {
+   "name": "HubSpot CRM",
+   "mentions": 3,
+   "engines": [
+    "chatgpt",
+    "chatgpt5",
+    "claude"
+   ],
+   "cities": [
+    "Israel"
+   ],
+   "categories": [
+    "crm"
+   ],
+   "intents": [
+    "software"
+   ]
+  },
+  {
+   "name": "Memmo Alfama",
+   "mentions": 3,
+   "engines": [
+    "chatgpt",
+    "chatgpt5",
+    "claude"
+   ],
+   "cities": [
+    "Lisbon"
+   ],
+   "categories": [
+    "hotel"
+   ],
+   "intents": [
+    "travel"
+   ]
+  },
+  {
+   "name": "Pipedrive",
+   "mentions": 3,
+   "engines": [
+    "chatgpt",
+    "chatgpt5",
+    "claude"
+   ],
+   "cities": [
+    "Israel"
+   ],
+   "categories": [
+    "crm"
+   ],
+   "intents": [
+    "software"
+   ]
+  },
+  {
+   "name": "Zoho CRM",
+   "mentions": 3,
+   "engines": [
+    "chatgpt",
+    "chatgpt5",
+    "claude"
+   ],
+   "cities": [
+    "Israel"
+   ],
+   "categories": [
+    "crm"
+   ],
+   "intents": [
+    "software"
+   ]
+  },
+  {
+   "name": "Adidas Israel",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "chatgpt5"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "runninggear"
+   ],
+   "intents": [
+    "ecommerce"
+   ]
+  },
+  {
+   "name": "AlmaLusa Baixa/Chiado",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "chatgpt5"
+   ],
+   "cities": [
+    "Lisbon"
+   ],
+   "categories": [
+    "hotel"
+   ],
+   "intents": [
+    "travel"
+   ]
+  },
+  {
+   "name": "BillOS",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "chatgpt5"
+   ],
+   "cities": [
+    "Israel"
+   ],
+   "categories": [
+    "invoicing"
+   ],
+   "intents": [
+    "software"
+   ]
+  },
+  {
    "name": "Café Shneor",
    "mentions": 2,
    "engines": [
@@ -2292,6 +2592,57 @@
    ]
   },
   {
+   "name": "Developers.Institute",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "claude"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "bootcamp"
+   ],
+   "intents": [
+    "education"
+   ]
+  },
+  {
+   "name": "Dr. Gidi Katz Dental Clinic",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "chatgpt5"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "dentist"
+   ],
+   "intents": [
+    "local"
+   ]
+  },
+  {
+   "name": "HYBRID",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "chatgpt5"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "webagency"
+   ],
+   "intents": [
+    "b2b"
+   ]
+  },
+  {
    "name": "Iyengar Yoga London",
    "mentions": 2,
    "engines": [
@@ -2306,6 +2657,40 @@
    ],
    "intents": [
     "local"
+   ]
+  },
+  {
+   "name": "Kamut",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "chatgpt5"
+   ],
+   "cities": [
+    "Israel"
+   ],
+   "categories": [
+    "invoicing"
+   ],
+   "intents": [
+    "software"
+   ]
+  },
+  {
+   "name": "LX Boutique Hotel",
+   "mentions": 2,
+   "engines": [
+    "chatgpt5",
+    "claude"
+   ],
+   "cities": [
+    "Lisbon"
+   ],
+   "categories": [
+    "hotel"
+   ],
+   "intents": [
+    "travel"
    ]
   },
   {
@@ -2360,6 +2745,23 @@
    ]
   },
   {
+   "name": "Sony WH-CH720N",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "chatgpt5"
+   ],
+   "cities": [
+    "Israel"
+   ],
+   "categories": [
+    "headphones"
+   ],
+   "intents": [
+    "product"
+   ]
+  },
+  {
    "name": "Tachtit Café",
    "mentions": 2,
    "engines": [
@@ -2374,6 +2776,23 @@
    ],
    "intents": [
     "local"
+   ]
+  },
+  {
+   "name": "The Lumiares",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "chatgpt5"
+   ],
+   "cities": [
+    "Lisbon"
+   ],
+   "categories": [
+    "hotel"
+   ],
+   "intents": [
+    "travel"
    ]
   },
   {
@@ -2394,6 +2813,38 @@
    ]
   },
   {
+   "name": "1908 Lisboa Hotel",
+   "mentions": 1,
+   "engines": [
+    "chatgpt5"
+   ],
+   "cities": [
+    "Lisbon"
+   ],
+   "categories": [
+    "hotel"
+   ],
+   "intents": [
+    "travel"
+   ]
+  },
+  {
+   "name": "1More SonoFlow Pro HQ51",
+   "mentions": 1,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "Israel"
+   ],
+   "categories": [
+    "headphones"
+   ],
+   "intents": [
+    "product"
+   ]
+  },
+  {
    "name": "A salon featuring Tal",
    "mentions": 1,
    "engines": [
@@ -2404,278 +2855,6 @@
    ],
    "categories": [
     "hair"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "A.S. Plumbing",
-   "mentions": 1,
-   "engines": [
-    "chatgpt"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "plumber"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "AcroByJoe",
-   "mentions": 1,
-   "engines": [
-    "chatgpt"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "yoga"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Alon Manhart",
-   "mentions": 1,
-   "engines": [
-    "claude"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "trainer"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Alon Ring",
-   "mentions": 1,
-   "engines": [
-    "claude"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "trainer"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Amaryllis",
-   "mentions": 1,
-   "engines": [
-    "chatgpt"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "florist"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Amnon",
-   "mentions": 1,
-   "engines": [
-    "chatgpt"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "plumber"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Amnon Electric",
-   "mentions": 1,
-   "engines": [
-    "chatgpt"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "electrician"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Amore Mio",
-   "mentions": 1,
-   "engines": [
-    "chatgpt"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "italian"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Anna Hair",
-   "mentions": 1,
-   "engines": [
-    "chatgpt5"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "hair"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Are properly licensed and insured",
-   "mentions": 1,
-   "engines": [
-    "claude"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "electrician"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Aroma Espresso Bar",
-   "mentions": 1,
-   "engines": [
-    "chatgpt"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "coffee"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Asher Electric",
-   "mentions": 1,
-   "engines": [
-    "chatgpt"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "electrician"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Ashtanga Yoga Tel Aviv",
-   "mentions": 1,
-   "engines": [
-    "claude"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "yoga"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Attorney Amir Cohen",
-   "mentions": 1,
-   "engines": [
-    "claude"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "lawyer"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Attorney Avital Horef",
-   "mentions": 1,
-   "engines": [
-    "claude"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "lawyer"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Attorney Shy Kedmi",
-   "mentions": 1,
-   "engines": [
-    "claude"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "lawyer"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "BDO CPA",
-   "mentions": 1,
-   "engines": [
-    "chatgpt"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "accountant"
    ],
    "intents": [
     "local"
@@ -8444,11 +8623,57 @@
    "intent": "product",
    "text": "I want to buy noise-cancelling headphones for commuting, under 700 shekels. I'm in Israel. Which ones would you recommend? Please name specific models.",
    "engines": {
-    "chatgpt": null,
-    "chatgpt5": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Sony WH-CH530",
+      "Sony WH-CH520",
+      "Earfun Wave Pro X",
+      "1More SonoFlow Pro HQ51",
+      "Sony WH-CH720N"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Anker / Soundcore Space Q45",
+      "Anker / Soundcore Life Q35",
+      "Sennheiser HD 450BT",
+      "Sony WH‑CH720N",
+      "JBL Tune / JBL T750",
+      "Effective ANC",
+      "Comfortable fit for 30–60 minute daily rides"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "gemini": null,
-    "claude": null
+    "claude": {
+     "names": [
+      "Important Note",
+      "Miracase BT MBTH77",
+      "Bose NC-700",
+      "Anker Soundcore Space Q45 Wireless",
+      "Sony WH-CH730N"
+     ],
+     "sources": [
+      "Business sites",
+      "Social"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    }
    }
   },
   {
@@ -8460,11 +8685,66 @@
    "intent": "software",
    "text": "I need a CRM for a five-person marketing agency, based in Israel. What would you recommend? Please name specific products.",
    "engines": {
-    "chatgpt": null,
-    "chatgpt5": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "HubSpot CRM",
+      "Zoho CRM",
+      "Pipedrive",
+      "Freshsales",
+      "GoHighLevel"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Ease of setup and low admin overhead",
+      "Marketing and contact-management features",
+      "Pipeline / deal management for new business",
+      "Integrations",
+      "Basic automation",
+      "Localization & compliance",
+      "HubSpot CRM",
+      "Pipedrive",
+      "Zoho CRM",
+      "Monday.com CRM",
+      "ActiveCampaign",
+      "Copper CRM",
+      "Salesforce Essentials",
+      "Language & phone formats",
+      "Data residency & privacy",
+      "Payments & billing",
+      "Recommend a 30‑day trial checklist"
+     ],
+     "sources": [],
+     "searched": false,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "gemini": null,
-    "claude": null
+    "claude": {
+     "names": [
+      "Israel-Specific Option",
+      "HubSpot CRM",
+      "Pipedrive",
+      "Zoho CRM",
+      "Fluid CRM",
+      "monday CRM",
+      "My recommendation",
+      "HubSpot's free tier"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    }
    }
   },
   {
@@ -8476,11 +8756,60 @@
    "intent": "travel",
    "text": "I'm looking for a boutique hotel for a couple, three nights in May, mid-range in Lisbon. Which hotels would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
-    "chatgpt5": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "AlmaLusa Baixa/Chiado",
+      "The Lumiares",
+      "Hotel Mundial",
+      "Memmo Alfama",
+      "Hotel Pousada Alfama",
+      "The Leaf Boutique Hotel"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Memmo Alfama",
+      "Memmo Príncipe Real",
+      "AlmaLusa Baixa/Chiado",
+      "The Lumiares",
+      "Santiago de Alfama",
+      "LX Boutique Hotel",
+      "1908 Lisboa Hotel",
+      "Narrow suggestions by neighbourhood"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "gemini": null,
-    "claude": null
+    "claude": {
+     "names": [
+      "Nicola Rossio Hotel",
+      "Casa Balthazar",
+      "Be Poet Baixa Hotel",
+      "Memmo Alfama",
+      "LX Boutique Hotel",
+      "Hotel AlmaLusa Baixa/Chiado"
+     ],
+     "sources": [
+      "Business sites",
+      "Social"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    }
    }
   },
   {
@@ -8492,11 +8821,58 @@
    "intent": "b2b",
    "text": "We need a web agency in Tel Aviv to build a Shopify store. Which companies would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
-    "chatgpt5": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Boostify",
+      "HYBRID",
+      "Betanet",
+      "moblers",
+      "San Interactive Ltd",
+      "PMAX SOLUTIONS"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Boostify",
+      "Dominatecom",
+      "CHERRY",
+      "HYBRID",
+      "Sitrus / Convo / UL‑UX Studio",
+      "Specialist freelancers / smaller experts",
+      "Pull case studies"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "gemini": null,
-    "claude": null
+    "claude": {
+     "names": [
+      "Plus972",
+      "Sweans",
+      "Boostify",
+      "Web Tonic",
+      "SporeSec"
+     ],
+     "sources": [
+      "Business sites",
+      "Social",
+      "Wikipedia"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    }
    }
   },
   {
@@ -8508,11 +8884,57 @@
    "intent": "education",
    "text": "I'm looking for a bootcamp to learn web development, evenings, in Tel Aviv. What would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
-    "chatgpt5": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Deploy Academy",
+      "Developers.Institute",
+      "WebSchool"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Le Wagon",
+      "John Bryce / John Bryce College",
+      "Coding Academy",
+      "Deploy Academy / Deploy TLV",
+      "Israel Tech Challenge",
+      "Schedule fit",
+      "Pace & duration",
+      "Curriculum focus",
+      "Language",
+      "Outcomes"
+     ],
+     "sources": [
+      "Business sites",
+      "News & magazines"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "gemini": null,
-    "claude": null
+    "claude": {
+     "names": [
+      "Developers.Institute",
+      "Israel Tech Challenge (ITC)",
+      "Elevation Academy",
+      "Le Wagon Tel Aviv"
+     ],
+     "sources": [
+      "Business sites",
+      "News & magazines"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    }
    }
   },
   {
@@ -8524,9 +8946,37 @@
    "intent": "ecommerce",
    "text": "I'm looking for an online store to buy running gear with fast delivery in Israel. Which would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
-    "chatgpt5": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Motion Lab",
+      "On Israel",
+      "Adidas Israel"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Decathlon Israel",
+      "Nike Israel",
+      "adidas Israel",
+      "Under Armour Israel",
+      "Motion Lab / local running boutiques",
+      "Amazon"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -8540,9 +8990,43 @@
    "intent": "local",
    "text": "אני צריך שרברב טוב בחיפה לנזילה בצנרת השבוע. על מי אתה ממליץ? תן שמות ספציפיים.",
    "engines": {
-    "chatgpt": null,
-    "chatgpt5": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "צביקה ברגר - אינסטלציה ואיתור נזילות",
+      "האינסטלטור חיים שטח",
+      "יוחאי ג'קסון - אינסטלטור ואיתור נזילות",
+      "אשף האינסטלציה",
+      "מעיין טכנולוגיות ללא הרס"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "דניאל",
+      "סרגיי",
+      "סופר שרברב / סופר אינסטלטור",
+      "יוסי",
+      "אחיה ארד",
+      "בקשו מהאינסטלטור להגיע עם ציוד לאיתור נזילות",
+      "אם הגורם הוא בניין משותף",
+      "לחפש עבורך טלפונים ישירים וזמינות ספציפית להיום/השבוע",
+      "להתמקד באזור מסוים בחיפה"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -8571,7 +9055,21 @@
      "searched": true,
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
     },
-    "chatgpt5": null,
+    "chatgpt5": {
+     "names": [
+      "Dr. Ben Miller",
+      "Dr. Meytal Salman / Dental Studio TLV",
+      "Dr. Gidi Katz Dental Clinic",
+      "D Dental / Dental Harmonia",
+      "Dr. Roman Itelman"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
@@ -8594,9 +9092,40 @@
    "intent": "product",
    "text": "I want to buy a robot vacuum for a small apartment with a cat. I'm in Israel. Which ones would you recommend? Please name specific models.",
    "engines": {
-    "chatgpt": null,
-    "chatgpt5": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Roborock Q5+",
+      "eufy Clean L60",
+      "Dreame L40 Ultra",
+      "Roborock Saros 20",
+      "Shark Matrix Plus 2-in-1"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Roborock S8 Pro Ultra",
+      "iRobot Roomba j9+",
+      "ECOVACS Deebot X1 Omni",
+      "Roborock S7 / S7 MaxV or standard S8",
+      "Easiest upkeep / least frequent emptying",
+      "Best at removing cat hair",
+      "Small apartment / limited storage"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -8610,9 +9139,41 @@
    "intent": "software",
    "text": "I need an invoicing app for a freelancer, based in Israel. What would you recommend? Please name specific products.",
    "engines": {
-    "chatgpt": null,
-    "chatgpt5": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Kamut",
+      "BillOS",
+      "Quickly",
+      "easydox",
+      "Sumit"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Language and customer needs",
+      "BillOS",
+      "Slate",
+      "Sendu / Fatoora / Quickly Invoice",
+      "Sendu and Fatoora",
+      "Kamut",
+      "Zoho Invoice / Wave / QuickBooks / FreshBooks"
+     ],
+     "sources": [
+      "Business sites",
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -8626,9 +9187,26 @@
    "intent": "travel",
    "text": "I'm looking for a family-friendly hotel with a pool, two kids, one week in August in Lisbon. Which hotels would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
+    "chatgpt": {
+     "names": [
+      "Martinhal Oriente Lisbon",
+      "Tivoli Oriente Lisboa Hotel",
+      "EPIC SANA Lisboa Hotel",
+      "Jupiter Lisboa Hotel",
+      "NH Collection Lisboa Liberdade Hotel",
+      "Pestana Palace Lisboa Hotel & National Monument"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "chatgpt5": null,
-    "perplexity": null,
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -11059,5 +11637,5 @@
    }
   }
  ],
- "answers_total": 141
+ "answers_total": 176
 }
