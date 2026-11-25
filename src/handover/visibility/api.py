@@ -37,6 +37,7 @@ from handover.visibility.run import ask_one
 from handover.visibility.state import Answer, State
 
 STATE_URL = os.environ.get("MEERADA_STATE_URL", "https://meerada.app/visibility_state.json")
+PAGES_URL = os.environ.get("MEERADA_PAGES_URL", "https://meerada.app")
 LIVE_ENGINES = os.environ.get(
     "MEERADA_SEARCH_ENGINES", "chatgpt,chatgpt5,claude,gemini,perplexity,grok,mistral"
 )
@@ -57,6 +58,7 @@ class SearchService:
         self._state_at = 0.0
         self._cache: dict[str, tuple[float, dict[str, Any]]] = {}
         self._ip_live: dict[str, tuple[str, int]] = {}  # ip -> (day, count)
+        self._google: dict[str, tuple[float, GoogleSnapshot | None]] = {}
         self.budget = DailyBudget(Decimal(os.environ.get("MEERADA_SEARCH_DAILY_USD", "5")))
         self.engines: list[Engine] = []
         self.skipped: dict[str, str] = {}
@@ -99,7 +101,7 @@ class SearchService:
         if not answers:
             return None
         ranking = rank(answers)
-        snap = load_snapshot(lq.id)
+        snap = load_snapshot(lq.id) or self.published_snapshot(lq.id)
         return {
             "source": "lab",
             "query": lq.text,
@@ -111,6 +113,22 @@ class SearchService:
             "google": snap.model_dump() if snap else None,
             "comparison": compare(ranking, snap),
         }
+
+    def published_snapshot(self, query_id: str) -> GoogleSnapshot | None:
+        """The Google side as published in the question's page JSON on meerada.app — the
+        hosted image ships without ``data/``, the pages are the record. Cached an hour."""
+        hit = self._google.get(query_id)
+        if hit and time.time() - hit[0] < 3600:
+            return hit[1]
+        snap: GoogleSnapshot | None = None
+        try:
+            with urllib.request.urlopen(f"{PAGES_URL}/s/{query_id}.json", timeout=15) as resp:
+                raw = json.loads(resp.read().decode()).get("google")
+            snap = GoogleSnapshot.model_validate(raw) if raw else None
+        except Exception:  # no page, no Google column; nothing to report
+            pass
+        self._google[query_id] = (time.time(), snap)
+        return snap
 
     def google_live(self, q: str, lang: str) -> GoogleSnapshot | None:
         """Google's list for a live question, when the server has a Places-enabled key."""
