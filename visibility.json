@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-25T15:26:48.915024+00:00",
+ "generated_at": "2026-11-25T15:34:03.348232+00:00",
  "method": {
   "queries": 138,
   "intents": [
@@ -4191,13 +4191,13 @@
    "domain": "gusto.co.il",
    "lever": "profile",
    "control": false,
-   "started": "2026-12-01",
+   "started": "2026-11-26",
    "city": "Tel Aviv",
    "category": "italian",
    "queries": [
     "tlv-italian"
    ],
-   "notes": "Maps position 9 · 4.4 (2,226) · replaced Tonino (position 14), which has no website",
+   "notes": "profile page published 2026-11-25 evening at meerada.app/b · Maps position 9 · 4.4 (2,226) · replaced Tonino (position 14), which has no website",
    "engines": {
     "chatgpt": {
      "before": {
@@ -6145,13 +6145,13 @@
    "domain": "manhattandentalarts.com",
    "lever": "profile",
    "control": false,
-   "started": "2026-12-01",
+   "started": "2026-11-26",
    "city": "New York City",
    "category": "dentist",
    "queries": [
     "nyc-dentist"
    ],
-   "notes": "Maps position 9 · 4.7 (494) · 1995 Broadway",
+   "notes": "profile page published 2026-11-25 evening at meerada.app/b · Maps position 9 · 4.7 (494) · 1995 Broadway",
    "engines": {
     "chatgpt": {
      "before": {
@@ -7545,13 +7545,13 @@
    "domain": "kosmahair.com",
    "lever": "profile",
    "control": false,
-   "started": "2026-12-01",
+   "started": "2026-11-26",
    "city": "Tel Aviv",
    "category": "hair",
    "queries": [
     "tlv-hair"
    ],
-   "notes": "Maps position 10 · 5.0 (102) · Davidka St 9 · replaced Dawn Hair Salon (position 13), which the baseline showed already named by Claude 8/8 and gpt-5-mini 4/7",
+   "notes": "profile page published 2026-11-25 evening at meerada.app/b · Maps position 10 · 5.0 (102) · Davidka St 9 · replaced Dawn Hair Salon (position 13), which the baseline showed already named by Claude 8/8 and gpt-5-mini 4/7",
    "engines": {
     "chatgpt": {
      "before": {
