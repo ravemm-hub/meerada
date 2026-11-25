@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/search.css">
 </head><body><div class="wrap">
 <h1>What the AI shows</h1>
-<p class="lede">Type what you would ask an AI. We show which options ChatGPT, Claude and the other engines actually name for it — ranked by how consistently and how high they name them — and then ask one question: is your business there?</p>
+<p class="lede">Type what you would ask an AI. On the left: which options ChatGPT, Claude and the other engines actually name, ranked by how consistently and how high they name them. On the right: what Google shows for the same question. Between them, the gap — and how a business gets into the AI answers.</p>
 <form class="search" id="f"><input id="q" type="search" placeholder="a plumber in Tel Aviv · a CRM for a 5-person agency · a hotel in Lisbon for a couple" autocomplete="off" autofocus><button type="submit">Show</button></form>
 <div class="hint" id="hint"></div>
 <div class="status" id="status"></div>
@@ -53,6 +53,25 @@
     });
     return bs >= 0.6 ? best : null;
   }
+  function stars(r){ return r.rating == null ? '' : '<span class="g-rating">'+r.rating+'★ ('+(r.reviews||0)+')</span>'; }
+  function googleCol(d){
+    var c = d.comparison;
+    if (!c) return '<div class="col google"><h2>What Google shows</h2><p class="s">Not recorded yet for this question.</p></div>';
+    var rows = c.both.concat(c.google_only).sort(function(a,b){ return a.google_rank-b.google_rank; }).map(function(r){
+      var tag = r.ai_rank ? '<span class="tag on">AI #'+r.ai_rank+' · '+r.named_runs+'/'+r.runs+'</span>' : '<span class="tag off">invisible to AI · 0/'+r.runs+'</span>';
+      return '<li><div class="rank">'+r.google_rank+'</div><div class="body"><div class="name">'+esc(r.name)+' '+stars(r)+'</div>'+tag+'</div></li>';
+    }).join('');
+    return '<div class="col google"><h2>What Google shows</h2><div class="meta">'+esc(c.google_label)+' · \u201c'+esc(c.google_query)+'\u201d</div><ol class="results g">'+rows+'</ol></div>';
+  }
+  function gapBlock(d){
+    var c = d.comparison; if (!c) return '';
+    var inv = c.google_only || [];
+    var gap = inv.length ? '<b>'+inv.length+' of Google\'s top '+c.google_count+'</b> never appear in any AI answer ('+c.runs+' runs).' : 'Every one of Google\'s top '+c.google_count+' is named by at least one engine.';
+    var cards = inv.slice(0, 5).map(function(b){
+      return '<div class="lift"><div class="lift-head"><b>'+esc(b.name)+'</b> '+stars(b)+' <span class="s">Google #'+b.google_rank+' · AI 0/'+b.runs+'</span></div>'+(b.quality === false ? '<div class="bar-note">Below the quality bar — not promoted.</div>' : '')+'<ol class="steps">'+(b.lift||[]).map(function(x){ return '<li>'+esc(x)+'</li>'; }).join('')+'</ol><a class="cta" href="#claim" data-business="'+esc(b.name)+'">Lift this business →</a></div>';
+    }).join('');
+    return '<div class="gap"><h2>The gap</h2><p>'+gap+' The engines for this question cite '+esc((c.cited_families||[]).join(', ') || 'the business sites')+'; a business that is not on those pages is not in the answer, however well it ranks on Google.</p>'+cards+'</div>';
+  }
   function render(d, note){
     current = d;
     var rtl = heb(d.query || d.text || '') ? ' dir="rtl"' : '';
@@ -64,7 +83,8 @@
     }).join('');
     var engines = Object.keys(d.engines || {}).map(function(e){ return (labels[e]||e)+' ×'+d.engines[e]; }).join(', ');
     var errs = d.errors && Object.keys(d.errors).length ? '<div class="s">Not answering right now: '+Object.keys(d.errors).join(', ')+'</div>' : '';
-    $('out').innerHTML = '<h2'+rtl+'>'+esc(d.query || d.text)+'</h2><div class="meta">'+esc(note)+' · '+(d.runs||0)+' answers · '+esc(engines)+(d.last_asked ? ' · last asked '+esc(String(d.last_asked).slice(0,10)) : '')+(d.matched ? ' · <a href="s/'+esc(d.matched)+'.html">permanent page</a>' : '')+'</div>'+errs+'<ol class="results"'+rtl+'>'+(rows || '<li class="none">The engines named no specific option for this question.</li>')+'</ol>';
+    $('out').innerHTML = '<h2'+rtl+'>'+esc(d.query || d.text)+'</h2><div class="meta">'+esc(note)+' · '+(d.runs||0)+' answers · '+esc(engines)+(d.last_asked ? ' · last asked '+esc(String(d.last_asked).slice(0,10)) : '')+(d.matched ? ' · <a href="s/'+esc(d.matched)+'.html">permanent page</a>' : '')+'</div>'+errs
+      + '<div class="cols"><div class="col ai"><h2>What the AI engines show</h2><ol class="results"'+rtl+'>'+(rows || '<li class="none">The engines named no specific option for this question.</li>')+'</ol></div>'+googleCol(d)+'</div>'+gapBlock(d);
     $('claim').style.display = '';
     $('claimTitle').textContent = rows ? 'Is your business here?' : 'Your business is not here — nobody is.';
     $('status').textContent = '';
@@ -93,7 +113,9 @@
     }).catch(function(){ clearTimeout(t); unavailable('the live service did not answer'); });
   }
   $('f').addEventListener('submit', function(e){ e.preventDefault(); go(); });
+  $('out').addEventListener('click', function(e){ var a = e.target.closest('a[data-business]'); if (!a) return; e.preventDefault(); document.querySelector('#cf [name=business]').value = a.getAttribute('data-business'); $('claimTitle').textContent = 'Lift '+a.getAttribute('data-business')+' into the AI answers'; $('claim').scrollIntoView({ behavior: 'smooth' }); });
   var p = new URLSearchParams(location.search); if (p.get('q')) { $('q').value = p.get('q'); setTimeout(go, 300); }
+  if (p.get('business')) { document.querySelector('#cf [name=business]').value = p.get('business'); setTimeout(function(){ $('claim').scrollIntoView({ behavior: 'smooth' }); }, 1800); }
 
   $('cf').addEventListener('submit', function(e){
     e.preventDefault();
