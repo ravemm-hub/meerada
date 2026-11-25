@@ -27,8 +27,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from handover.replay.budget import DailyBudget
 from handover.visibility.audit import audit
+from handover.visibility.compare import compare
 from handover.visibility.consensus import rank
 from handover.visibility.engines import Engine, engines_from_env
+from handover.visibility.google import PLACES_EST_USD, GoogleSnapshot, load_snapshot, places_search
 from handover.visibility.questions import QUESTIONS
 from handover.visibility.questions import Query as LabQuery
 from handover.visibility.run import ask_one
@@ -96,6 +98,8 @@ class SearchService:
         answers = [a for a in self.state().answers if a.query_id == lq.id and not a.error]
         if not answers:
             return None
+        ranking = rank(answers)
+        snap = load_snapshot(lq.id)
         return {
             "source": "lab",
             "query": lq.text,
@@ -103,8 +107,22 @@ class SearchService:
             "city": lq.city,
             "category": lq.category,
             "intent": lq.intent,
-            **rank(answers),
+            **ranking,
+            "google": snap.model_dump() if snap else None,
+            "comparison": compare(ranking, snap),
         }
+
+    def google_live(self, q: str, lang: str) -> GoogleSnapshot | None:
+        """Google's list for a live question, when the server has a Places-enabled key."""
+        key = os.environ.get("GOOGLE_API_KEY", "")
+        if not key or not self.budget.can_spend(PLACES_EST_USD):
+            return None
+        try:
+            snap = places_search(q, key, lang)
+        except Exception:  # a 403 on a key without Places is not an outage
+            return None
+        self.budget.record(PLACES_EST_USD)
+        return snap
 
     # ---- live -------------------------------------------------------------------
     def _allow_live(self, ip: str) -> bool:
@@ -150,12 +168,15 @@ class SearchService:
             answers: list[Answer] = list(pool.map(lambda e: ask_one(e, lq, now), self.engines))
         self.budget.record(sum((Decimal(a.cost_usd) for a in answers if not a.error), Decimal("0")))
         ranking = rank(answers)
+        snap = self.google_live(q, lq.lang)
         return {
             "source": "live",
             "query": q,
             "asked_at": now.isoformat(),
             "errors": {a.engine: a.error[:120] for a in answers if a.error},
             **ranking,
+            "google": snap.model_dump() if snap else None,
+            "comparison": compare(ranking, snap),
         }
 
     def search(self, q: str, ip: str) -> dict[str, Any]:

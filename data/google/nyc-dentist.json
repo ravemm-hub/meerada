@@ -1,0 +1,90 @@
+{
+ "query_id": "nyc-dentist",
+ "query": "dentist New York City",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-25",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "209 NYC Dental",
+   "key": "209 nyc dental",
+   "rating": 4.8,
+   "reviews": 1936,
+   "website": null,
+   "maps_url": null,
+   "category": "Dentist"
+  },
+  {
+   "rank": 2,
+   "name": "New York Dental Office",
+   "key": "new york dental office",
+   "rating": 4.9,
+   "reviews": 480,
+   "website": null,
+   "maps_url": null,
+   "category": "Dentist"
+  },
+  {
+   "rank": 3,
+   "name": "City Dental Group NYC",
+   "key": "city dental group nyc",
+   "rating": 4.7,
+   "reviews": 325,
+   "website": null,
+   "maps_url": null,
+   "category": "Dentist"
+  },
+  {
+   "rank": 4,
+   "name": "NYC Smile Spa",
+   "key": "nyc smile spa",
+   "rating": 4.9,
+   "reviews": 406,
+   "website": null,
+   "maps_url": null,
+   "category": "Cosmetic dentist"
+  },
+  {
+   "rank": 5,
+   "name": "Pearl Dental NYC",
+   "key": "pearl dental nyc",
+   "rating": 4.9,
+   "reviews": 489,
+   "website": null,
+   "maps_url": null,
+   "category": "Cosmetic dentist"
+  },
+  {
+   "rank": 6,
+   "name": "Village Dental NYC",
+   "key": "village dental nyc",
+   "rating": 4.8,
+   "reviews": 478,
+   "website": null,
+   "maps_url": null,
+   "category": "Dentist"
+  },
+  {
+   "rank": 7,
+   "name": "Soho Smile - Cosmetic Dentist NYC",
+   "key": "soho smile cosmetic dentist nyc",
+   "rating": 4.9,
+   "reviews": 211,
+   "website": null,
+   "maps_url": null,
+   "category": "Dentist"
+  },
+  {
+   "rank": 8,
+   "name": "Sky Dental",
+   "key": "sky dental",
+   "rating": 4.9,
+   "reviews": 2752,
+   "website": null,
+   "maps_url": null,
+   "category": "Dentist"
+  }
+ ]
+}

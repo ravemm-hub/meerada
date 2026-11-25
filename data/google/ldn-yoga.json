@@ -1,0 +1,90 @@
+{
+ "query_id": "ldn-yoga",
+ "query": "yoga studio London",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-25",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "MoreYoga Soho",
+   "key": "moreyoga soho",
+   "rating": 4.5,
+   "reviews": 112,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  },
+  {
+   "rank": 2,
+   "name": "MoreYoga Aldgate",
+   "key": "moreyoga aldgate",
+   "rating": 4.6,
+   "reviews": 206,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  },
+  {
+   "rank": 3,
+   "name": "Brewer Street Yoga",
+   "key": "brewer street yoga",
+   "rating": 5.0,
+   "reviews": 105,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  },
+  {
+   "rank": 4,
+   "name": "Yogarise Peckham - Yoga & Reformer Pilates classes",
+   "key": "yogarise peckham yoga reformer pilates classes",
+   "rating": 4.8,
+   "reviews": 355,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  },
+  {
+   "rank": 5,
+   "name": "Iyengar Yoga London",
+   "key": "iyengar yoga london",
+   "rating": 4.7,
+   "reviews": 76,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  },
+  {
+   "rank": 6,
+   "name": "3Tribes Crouch End (Studio 1): Hot Yoga, Pilates & Fitness London",
+   "key": "3tribes crouch end studio 1 hot yoga pilates fitness london",
+   "rating": 4.5,
+   "reviews": 64,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  },
+  {
+   "rank": 7,
+   "name": "Indaba Yoga Studio",
+   "key": "indaba yoga studio",
+   "rating": 4.3,
+   "reviews": 143,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  },
+  {
+   "rank": 8,
+   "name": "Islington Yoga",
+   "key": "islington yoga",
+   "rating": 4.9,
+   "reviews": 30,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  }
+ ]
+}

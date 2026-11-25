@@ -1,0 +1,90 @@
+{
+ "query_id": "tlv-hair",
+ "query": "hair salon Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-25",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "Ami Shriki",
+   "key": "ami shriki",
+   "rating": 4.3,
+   "reviews": 103,
+   "website": null,
+   "maps_url": null,
+   "category": "Hairdresser"
+  },
+  {
+   "rank": 2,
+   "name": "YOFI4U beauty salon יופי4יו סלון יופי קוסמטיקה ציפורניים עיסוי איפור ושיער",
+   "key": "yofi4u beauty salon יופי4יו סלון יופי קוסמטיקה ציפורניים עיסוי איפור ושיער",
+   "rating": 4.7,
+   "reviews": 90,
+   "website": null,
+   "maps_url": null,
+   "category": "Nail salon"
+  },
+  {
+   "rank": 3,
+   "name": "Omer Shimoni עומר שמעוני מספרה",
+   "key": "omer shimoni עומר שמעוני מספרה",
+   "rating": 4.8,
+   "reviews": 729,
+   "website": null,
+   "maps_url": null,
+   "category": "Hair salon"
+  },
+  {
+   "rank": 4,
+   "name": "Salon Tlv",
+   "key": "salon tlv",
+   "rating": 5.0,
+   "reviews": 1081,
+   "website": null,
+   "maps_url": null,
+   "category": "Hair salon"
+  },
+  {
+   "rank": 5,
+   "name": "Studio Hafif",
+   "key": "studio hafif",
+   "rating": 5.0,
+   "reviews": 1361,
+   "website": null,
+   "maps_url": null,
+   "category": "Hairdresser"
+  },
+  {
+   "rank": 6,
+   "name": "איציק אואקיל - עיצוב שיער ואיפור",
+   "key": "איציק אואקיל עיצוב שיער ואיפור",
+   "rating": 4.9,
+   "reviews": 790,
+   "website": null,
+   "maps_url": null,
+   "category": "Hair salon"
+  },
+  {
+   "rank": 7,
+   "name": "בית ספר לעיצוב שיער - מוטיה רובין - MOTIE RUBIN",
+   "key": "בית ספר לעיצוב שיער מוטיה רובין motie rubin",
+   "rating": 4.9,
+   "reviews": 916,
+   "website": null,
+   "maps_url": null,
+   "category": "Barber school"
+  },
+  {
+   "rank": 8,
+   "name": "Assaf Hair Design",
+   "key": "assaf hair design",
+   "rating": 4.9,
+   "reviews": 165,
+   "website": null,
+   "maps_url": null,
+   "category": "Hair salon"
+  }
+ ]
+}

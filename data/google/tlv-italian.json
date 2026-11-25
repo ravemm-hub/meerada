@@ -1,0 +1,60 @@
+{
+ "query_id": "tlv-italian",
+ "query": "Italian restaurant Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-25",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "Altito",
+   "key": "altito",
+   "rating": 5.0,
+   "reviews": 78,
+   "website": null,
+   "maps_url": null,
+   "category": "Amore Mio"
+  },
+  {
+   "rank": 2,
+   "name": "Amore Mio",
+   "key": "amore mio",
+   "rating": 4.5,
+   "reviews": 8139,
+   "website": null,
+   "maps_url": null,
+   "category": "olio"
+  },
+  {
+   "rank": 3,
+   "name": "olio",
+   "key": "olio",
+   "rating": 4.4,
+   "reviews": 242,
+   "website": null,
+   "maps_url": null,
+   "category": "Kiosk Del Pasta"
+  },
+  {
+   "rank": 4,
+   "name": "Kiosk Del Pasta",
+   "key": "kiosk del pasta",
+   "rating": 4.7,
+   "reviews": 230,
+   "website": null,
+   "maps_url": null,
+   "category": "Cicchetti"
+  },
+  {
+   "rank": 5,
+   "name": "Cicchetti",
+   "key": "cicchetti",
+   "rating": 4.5,
+   "reviews": 4488,
+   "website": null,
+   "maps_url": null,
+   "category": null
+  }
+ ]
+}

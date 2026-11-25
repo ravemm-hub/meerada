@@ -1,0 +1,100 @@
+{
+ "query_id": "tlv-plumber",
+ "query": "plumber Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-25",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "אינסטלטור בתל אביב - פרו אינסטלטורים",
+   "key": "אינסטלטור בתל אביב פרו אינסטלטורים",
+   "rating": 5.0,
+   "reviews": 91,
+   "website": null,
+   "maps_url": null,
+   "category": "Plumber"
+  },
+  {
+   "rank": 2,
+   "name": "עמית נועם - אינסטלטור בתל אביב",
+   "key": "עמית נועם אינסטלטור בתל אביב",
+   "rating": 5.0,
+   "reviews": 90,
+   "website": null,
+   "maps_url": null,
+   "category": "Plumber"
+  },
+  {
+   "rank": 3,
+   "name": "אינסטלטור בתל אביב - טופ אינסטלטורים",
+   "key": "אינסטלטור בתל אביב טופ אינסטלטורים",
+   "rating": 5.0,
+   "reviews": 28,
+   "website": null,
+   "maps_url": null,
+   "category": "Plumber"
+  },
+  {
+   "rank": 4,
+   "name": "מאור - אינסטלטור בתל אביב",
+   "key": "מאור אינסטלטור בתל אביב",
+   "rating": 5.0,
+   "reviews": 311,
+   "website": null,
+   "maps_url": null,
+   "category": "Plumber"
+  },
+  {
+   "rank": 5,
+   "name": "אורן רדה: אינסטלטור בתל אביב",
+   "key": "אורן רדה אינסטלטור בתל אביב",
+   "rating": 4.5,
+   "reviews": 175,
+   "website": null,
+   "maps_url": null,
+   "category": "Plumber"
+  },
+  {
+   "rank": 6,
+   "name": "אינסטלטור תל אביב",
+   "key": "אינסטלטור תל אביב",
+   "rating": 4.9,
+   "reviews": 44,
+   "website": null,
+   "maps_url": null,
+   "category": "Plumber"
+  },
+  {
+   "rank": 7,
+   "name": "מיילי שרותי אינסטלציה",
+   "key": "מיילי שרותי אינסטלציה",
+   "rating": 5.0,
+   "reviews": 219,
+   "website": null,
+   "maps_url": null,
+   "category": "Plumber"
+  },
+  {
+   "rank": 8,
+   "name": "אינסטלטור בתל אביב-שרברב לוקאל אינסטלציה",
+   "key": "אינסטלטור בתל אביב שרברב לוקאל אינסטלציה",
+   "rating": 4.8,
+   "reviews": 19,
+   "website": null,
+   "maps_url": null,
+   "category": "Plumber"
+  },
+  {
+   "rank": 9,
+   "name": "אינסטלטור עכשיו",
+   "key": "אינסטלטור עכשיו",
+   "rating": null,
+   "reviews": 0,
+   "website": null,
+   "maps_url": null,
+   "category": "Plumber"
+  }
+ ]
+}

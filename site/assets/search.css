@@ -23,3 +23,13 @@ h2{font-family:Archivo,system-ui;font-weight:800;font-size:1.15rem;margin:1.6rem
 .fixes{padding-left:1.2rem;font-size:.9rem}.fixes li{margin:.3rem 0}
 [dir=rtl] .results li,[dir=rtl] .search{direction:rtl}[dir=rtl] .rank{text-align:center}
 @media(max-width:600px){.claim form{grid-template-columns:1fr}}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;align-items:start}.col h2{margin-top:1rem}
+.col.google .results li{padding:.55rem 0}.col.google .name{font-size:.95rem}
+.g-rating{font-family:"IBM Plex Mono",monospace;font-size:.72rem;color:var(--amber);font-weight:600;margin-left:.3rem}
+.tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.68rem;border-radius:999px;padding:.08rem .55rem;margin-top:.25rem}
+.tag.on{color:var(--good);background:#E6F6EC;border:1px solid var(--teal)}.tag.off{color:var(--bad);background:#FBEAEA;border:1px solid #E7B2AF}
+.gap{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem;margin:1.4rem 0}.gap h2{margin-top:0}.gap p{margin:.2rem 0 .8rem;font-size:.95rem}
+.lift{background:#fff;border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;margin:.6rem 0}.lift-head{font-size:.98rem}.lift-head .s{margin-left:.4rem}
+.bar-note{color:var(--bad);font-size:.8rem;margin:.3rem 0}.steps{padding-left:1.2rem;font-size:.88rem;margin:.5rem 0}.steps li{margin:.25rem 0}
+.cta{display:inline-block;font-family:Archivo,system-ui;font-weight:700;font-size:.9rem;text-decoration:none;background:#F2B84B;color:#171205;border-radius:10px;padding:.45rem .9rem;margin-top:.3rem}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}

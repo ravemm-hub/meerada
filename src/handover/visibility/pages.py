@@ -16,7 +16,9 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
+from handover.visibility.compare import NO_GOOGLE, compare, render_compare
 from handover.visibility.consensus import rank
+from handover.visibility.google import DATA_DIR, load_snapshot
 from handover.visibility.questions import INTENT_LABELS, QUESTIONS, Query
 from handover.visibility.state import State
 
@@ -39,7 +41,11 @@ PAGE = """<!doctype html><html lang="{lang}"{rtl}><head>
 <h1>{h1}</h1>
 <p class="lede">{lede}</p>
 <div class="meta">{meta}</div>
-<ol class="results">{rows}</ol>
+<div class="cols">
+<div class="col ai"><h2>What the AI engines show</h2><ol class="results">{rows}</ol></div>
+{google_col}
+</div>
+{gap}
 <div class="claim" id="claim">
   <h2>Is your business here?</h2>
   <p>If it is not in this list, the AI engines are not recommending it for this question. <a href="../search.html?q={q_enc}#claim">Check your business and get the report</a> — what the engines read for this category, and what to fix, in order.</p>
@@ -66,12 +72,14 @@ def _row(i: int, r: dict[str, Any], labels: dict[str, str]) -> str:
 _TOP: list[float] = [1.0]
 
 
-def render_query_page(q: Query, ranking: dict[str, Any]) -> str:
+def render_query_page(q: Query, ranking: dict[str, Any], cmp: dict[str, Any] | None = None) -> str:
     global _TOP
     results = ranking["results"]
     _TOP = [results[0]["score"]] if results else [1.0]
     rows = "".join(_row(i, r, ranking["engine_labels"]) for i, r in enumerate(results, start=1))
     lang = "he" if q.lang == "he" else "en"
+    q_enc = escape(q.text.replace(" ", "+"))
+    google_col, gap = render_compare(cmp, f"../search.html?q={q_enc}") if cmp else (NO_GOOGLE, "")
     title = f"{INTENT_LABELS.get(q.intent, q.intent)} · {q.city}: what the AI engines show for “{q.text[:70]}”"
     top = ", ".join(r["name"] for r in results[:3])
     description = (
@@ -110,13 +118,18 @@ def render_query_page(q: Query, ranking: dict[str, Any]) -> str:
         lede=f"What ChatGPT, Claude and the other engines answer when people ask this — the options they name, ranked by how consistently and how high they name them. {escape(q.city)} · {escape(INTENT_LABELS.get(q.intent, q.intent))}.",
         meta=f"{ranking['runs']} answers · {escape(engines_txt)} · last asked {escape((ranking['last_asked'] or '')[:10])} · {ranking['distinct']} distinct options named",
         rows=rows or '<li class="none">No answers with named options yet.</li>',
-        q_enc=escape(q.text.replace(" ", "+")),
+        google_col=google_col,
+        gap=gap,
+        q_enc=q_enc,
         note='Measured through the models\' APIs with web search; the consumer apps can differ. Options are read from the answer text by a program; the score is Σ engine weight x share of runs naming it x 1/√position. No star ratings, no payment affects this order. Raw answers: <a href="../visibility_state.json">visibility_state.json</a>.',
     )
 
 
 def build_query_pages(
-    state: State, out_dir: Path, queries: tuple[Query, ...] = QUESTIONS
+    state: State,
+    out_dir: Path,
+    queries: tuple[Query, ...] = QUESTIONS,
+    google_dir: Path = DATA_DIR,
 ) -> list[Path]:
     out_dir.mkdir(parents=True, exist_ok=True)
     by_query: dict[str, list[Any]] = {}
@@ -129,6 +142,8 @@ def build_query_pages(
         if not any(not a.error for a in answers):
             continue
         ranking = rank(answers)
+        snap = load_snapshot(q.id, google_dir)
+        cmp = compare(ranking, snap)
         payload = {
             "id": q.id,
             "text": q.text,
@@ -138,11 +153,13 @@ def build_query_pages(
             "category": q.category,
             "intent": q.intent,
             **ranking,
+            "google": snap.model_dump() if snap else None,
+            "comparison": cmp,
         }
         (out_dir / f"{q.id}.json").write_text(
             json.dumps(payload, ensure_ascii=False), encoding="utf-8"
         )
-        (out_dir / f"{q.id}.html").write_text(render_query_page(q, ranking), encoding="utf-8")
+        (out_dir / f"{q.id}.html").write_text(render_query_page(q, ranking, cmp), encoding="utf-8")
         written += [out_dir / f"{q.id}.json", out_dir / f"{q.id}.html"]
         index.append(
             {
