@@ -10,10 +10,13 @@
     { href: "judge.html", id: "judge", ic: "⚖️", name: "Judge", tag: "the reliability layer" },
     { href: "handshake.html", id: "handshake", ic: "🤝", name: "Handshake", tag: "measured migration" },
     { href: "arc.html", id: "arc", ic: "🧬", name: "Arc", tag: "AI on the curve · singularity gauge" },
+    { href: "visibility.html", id: "visibility", ic: "📍", name: "Search Lab", tag: "how the AI engines choose" },
+    { href: "cases.html", id: "cases", ic: "🧪", name: "Cases", tag: "before and after" },
     { href: "tribes.html", id: "tribes", ic: "🏙️", name: "Tribes", tag: "AI-powered city app" },
     { href: "company.html", id: "company", ic: "🏢", name: "Company", tag: "who we are" }
   ];
   var here = (location.pathname.split("/").pop() || "index.html").replace(".html", "");
+  var B = location.pathname.indexOf("/guides/") >= 0 ? "../" : "";  // pages one level down
   if (here === "llmanager") here = "manager";
   var css = [
     "#mfam{position:relative;z-index:30;background:#0F172A;color:#E2E8F0;font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:.78rem}",
@@ -40,16 +43,16 @@
   var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
   var links = P.map(function (p) {
-    return '<a href="' + p.href + '"' + (p.id === here ? ' class="on"' : "") + ' title="' + p.tag + '">' + p.ic + " " + p.name + "</a>";
-  }).join("") + '<a href="pricing.html" class="free' + (here === "pricing" ? " on" : "") + '">Free</a>';
-  var bar = '<div id="mfam"><div class="w"><a class="co" href="company.html"><img src="assets/meerada-wordmark.png" alt="Meerada"><small>the AI operations company</small></a><nav class="links">' + links + "</nav></div></div>";
+    return '<a href="' + B + p.href + '"' + (p.id === here ? ' class="on"' : "") + ' title="' + p.tag + '">' + p.ic + " " + p.name + "</a>";
+  }).join("") + '<a href="' + B + 'pricing.html" class="free' + (here === "pricing" ? " on" : "") + '">Free</a>';
+  var bar = '<div id="mfam"><div class="w"><a class="co" href="' + B + 'company.html"><img src="' + B + 'assets/meerada-wordmark.png" alt="Meerada"><small>the AI operations company</small></a><nav class="links">' + links + "</nav></div></div>";
   document.body.insertAdjacentHTML("afterbegin", bar);
 
   var col = function (title, items) {
-    return "<div><h4>" + title + "</h4>" + items.map(function (i) { return '<a href="' + i[1] + '">' + i[0] + "</a>"; }).join("") + "</div>";
+    return "<div><h4>" + title + "</h4>" + items.map(function (i) { return '<a href="' + (/^https?:/.test(i[1]) ? "" : B) + i[1] + '">' + i[0] + "</a>"; }).join("") + "</div>";
   };
   var foot = '<footer id="mfoot"><div class="w">'
-    + '<div class="about"><img src="assets/meerada-wordmark.png" alt="Meerada"><b>Meerada</b> is the AI operations company: we <b>measure</b> models, <b>operate</b> them for you, <b>protect</b> your work, <b>verify</b> every answer, and <b>build</b> AI-powered apps. One rule under everything: measure what is real.</div>'
+    + '<div class="about"><img src="' + B + 'assets/meerada-wordmark.png" alt="Meerada"><b>Meerada</b> is the AI operations company: we <b>measure</b> models, <b>operate</b> them for you, <b>protect</b> your work, <b>verify</b> every answer, and <b>build</b> AI-powered apps. One rule under everything: measure what is real.</div>'
     + col("Measure", [["Exchange — live model ranking", "index.html"], ["Which model for me?", "pick.html"], ["Grade board", "grade.html"], ["The Arc — AI on the curve, singularity gauge", "arc.html"], ["Frontier Watch", "index.html#frontier"], ["Labs & valuations", "index.html#labs"], ["RSS: grade moves & new models", "feed.xml"], ["Badges for your model", "index.html#measured-wrap"]])
     + col("Operate", [["Manager (LLManager)", "manager.html"], ["Handshake — switch models with history", "handshake.html"], ["Try it in the browser", "https://app.meerada.app"], ["Download the app", "manager.html#get"]])
     + col("Protect & verify", [["Guard — watchdog + cage", "guard.html"], ["Cross-check — models examining models", "crosscheck.html"], ["Judge — the reliability layer", "judge.html"], ["Outcome Exchange", "index.html#exchange"]])
