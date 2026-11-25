@@ -26,4 +26,6 @@
   <url><loc>https://meerada.app/b/gusto-tel-aviv.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://meerada.app/b/manhattan-dental-arts-new-york.html</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://meerada.app/b/kosma-hair-studio-tel-aviv.html</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://meerada.app/search.html</loc><changefreq>daily</changefreq></url>
+  <url><loc>https://meerada.app/s/</loc><changefreq>daily</changefreq></url>
 </urlset>

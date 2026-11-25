@@ -1,0 +1,130 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What the AI shows — search anything</title>
+<link rel="canonical" href="https://meerada.app/search.html">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<meta name="description" content="Type what you would ask an AI — a plumber in Tel Aviv, a CRM for a small agency, a hotel in Lisbon — and see which options ChatGPT, Claude and the other engines actually name, ranked by how consistently they name them. Then check whether your business is there.">
+<meta property="og:title" content="What the AI shows — Meerada Search"><meta property="og:description" content="See what the AI engines recommend for any question, and whether your business is in it."><meta property="og:type" content="website"><meta property="og:url" content="https://meerada.app/search.html"><meta property="og:image" content="https://meerada.app/assets/og.png">
+<script data-goatcounter="https://meerada.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script src="assets/family.js" defer></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/search.css">
+</head><body><div class="wrap">
+<h1>What the AI shows</h1>
+<p class="lede">Type what you would ask an AI. We show which options ChatGPT, Claude and the other engines actually name for it — ranked by how consistently and how high they name them — and then ask one question: is your business there?</p>
+<form class="search" id="f"><input id="q" type="search" placeholder="a plumber in Tel Aviv · a CRM for a 5-person agency · a hotel in Lisbon for a couple" autocomplete="off" autofocus><button type="submit">Show</button></form>
+<div class="hint" id="hint"></div>
+<div class="status" id="status"></div>
+<div id="out"></div>
+<div class="claim" id="claim" style="display:none">
+  <h2 id="claimTitle">Is your business here?</h2>
+  <p id="claimText">If it is not in the list, the AI engines are not recommending it for this question. Leave your details: we check where you appear, what the engines read for your category, and send a free report with the fixes in order.</p>
+  <form id="cf">
+    <input name="business" placeholder="Business name" required>
+    <input name="website" placeholder="Website (if any)">
+    <input name="phone" placeholder="WhatsApp / phone" required>
+    <input name="contact" placeholder="Email (optional)">
+    <button type="submit">Check my business</button>
+  </form>
+  <div id="cmsg"></div>
+</div>
+<div class="note">Measured through the models' APIs with web search (ChatGPT, a fan-out ChatGPT variant, Claude; Perplexity and Gemini as their keys allow); consumer apps can differ. Options are read from the answer text by a program. Score = Σ engine weight × share of runs naming it × 1/√position. No star ratings; nothing here can be bought. Known questions answer instantly from <a href="s/">the measured set</a>; new questions run live within a daily budget. <a href="visibility.html">How the engines choose</a> · <a href="cases.html">Test cases</a> · <a href="guides/">Guides</a>.</div>
+</div>
+<script>
+(function(){
+  var API = 'https://app.meerada.app/api';
+  var SB_URL = 'https://vytkiwibuohtcmjmslkh.supabase.co', SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5dGtpd2lidW9odGNtam1zbGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzODIwNDUsImV4cCI6MjA5MDk1ODA0NX0.jgggUmp5stzW-9QKLjtrVJdQE4MBbKaFLuySZjgi-ds';
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = function(s){ return String(s==null?'':s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  var heb = function(s){ return /[֐-׿]/.test(s); };
+  var index = null, current = null;
+  fetch('s/index.json').then(function(r){ return r.json(); }).then(function(d){ index = d.queries || []; var ex = index.slice(0, 6).map(function(q){ return '<a href="#" data-q="'+esc(q.text)+'">'+esc(q.city)+' · '+esc(q.category)+'</a>'; }).join(''); $('hint').innerHTML = 'Try: '+ex; }).catch(function(){ index = []; });
+  $('hint').addEventListener('click', function(e){ var a = e.target.closest('a[data-q]'); if (!a) return; e.preventDefault(); $('q').value = a.getAttribute('data-q'); go(); });
+
+  function tokens(s){ return s.toLowerCase().replace(/[^\w֐-׿ ]+/g,' ').split(/\s+/).filter(function(t){ return t.length > 2; }); }
+  function labMatch(q){
+    if (!index || !index.length) return null;
+    var qt = tokens(q), best = null, bs = 0;
+    index.forEach(function(e){
+      var et = tokens(e.text + ' ' + e.city + ' ' + e.category), hit = 0;
+      qt.forEach(function(t){ if (et.indexOf(t) >= 0) hit++; });
+      var score = qt.length ? hit / qt.length : 0;
+      if (score > bs) { bs = score; best = e; }
+    });
+    return bs >= 0.6 ? best : null;
+  }
+  function render(d, note){
+    current = d;
+    var rtl = heb(d.query || d.text || '') ? ' dir="rtl"' : '';
+    var top = d.results && d.results.length ? d.results[0].score : 1;
+    var labels = d.engine_labels || {};
+    var rows = (d.results || []).map(function(r, i){
+      var chips = Object.keys(r.engines || {}).map(function(e){ var v = r.engines[e]; return '<span class="chip'+(v.named?' on':'')+'">'+esc(labels[e]||e)+' '+v.named+'/'+v.runs+'</span>'; }).join('');
+      return '<li><div class="rank">'+(i+1)+'</div><div class="body"><div class="name">'+esc(r.name)+'</div><div class="bar"><span style="width:'+Math.max(4, Math.round(100*r.score/Math.max(0.0001, top)))+'%"></span></div><div class="chips">'+chips+'</div><div class="src">cited sources: '+esc((r.sources||[]).join(', ') || '—')+' · best position '+esc(r.best_position)+'</div></div></li>';
+    }).join('');
+    var engines = Object.keys(d.engines || {}).map(function(e){ return (labels[e]||e)+' ×'+d.engines[e]; }).join(', ');
+    var errs = d.errors && Object.keys(d.errors).length ? '<div class="s">Not answering right now: '+Object.keys(d.errors).join(', ')+'</div>' : '';
+    $('out').innerHTML = '<h2'+rtl+'>'+esc(d.query || d.text)+'</h2><div class="meta">'+esc(note)+' · '+(d.runs||0)+' answers · '+esc(engines)+(d.last_asked ? ' · last asked '+esc(String(d.last_asked).slice(0,10)) : '')+(d.matched ? ' · <a href="s/'+esc(d.matched)+'.html">permanent page</a>' : '')+'</div>'+errs+'<ol class="results"'+rtl+'>'+(rows || '<li class="none">The engines named no specific option for this question.</li>')+'</ol>';
+    $('claim').style.display = '';
+    $('claimTitle').textContent = rows ? 'Is your business here?' : 'Your business is not here — nobody is.';
+    $('status').textContent = '';
+  }
+  function unavailable(reason){
+    $('out').innerHTML = '<div class="snapshot">We have not measured this question yet'+(reason ? ' ('+esc(reason)+')' : '')+'. Leave your details below and we will run it and send you the result.</div>';
+    $('claim').style.display = ''; $('claimTitle').textContent = 'Get this question measured for your business'; $('status').textContent = '';
+    current = { query: $('q').value, results: [], unmeasured: true };
+  }
+  function go(){
+    var q = $('q').value.trim(); if (q.length < 2) return;
+    history.replaceState(null, '', 'search.html?q='+encodeURIComponent(q));
+    var m = labMatch(q);
+    if (m) {
+      $('status').innerHTML = '<span class="spin"></span>loading the measured answers…';
+      fetch('s/'+encodeURIComponent(m.id)+'.json').then(function(r){ return r.json(); }).then(function(d){ d.query = d.text; d.matched = d.id; render(d, 'measured repeatedly by the lab'); }).catch(function(){ live(q); });
+    } else { live(q); }
+  }
+  function live(q){
+    $('status').innerHTML = '<span class="spin"></span>asking the engines live — 15 to 30 seconds…';
+    var ctrl = new AbortController(); var t = setTimeout(function(){ ctrl.abort(); }, 45000);
+    fetch(API+'/search?q='+encodeURIComponent(q), { signal: ctrl.signal }).then(function(r){ return r.json(); }).then(function(d){
+      clearTimeout(t);
+      if (d.source === 'unavailable') return unavailable(d.reason);
+      render(d, d.source === 'cache' ? 'measured recently' : d.source === 'lab' ? 'measured repeatedly by the lab' : 'asked live just now');
+    }).catch(function(){ clearTimeout(t); unavailable('the live service did not answer'); });
+  }
+  $('f').addEventListener('submit', function(e){ e.preventDefault(); go(); });
+  var p = new URLSearchParams(location.search); if (p.get('q')) { $('q').value = p.get('q'); setTimeout(go, 300); }
+
+  $('cf').addEventListener('submit', function(e){
+    e.preventDefault();
+    var fd = new FormData(e.target); var row = {
+      kind: current && current.unmeasured ? 'request' : 'claim', query: current ? (current.query || current.text || $('q').value) : $('q').value,
+      business: fd.get('business'), website: fd.get('website'), phone: fd.get('phone'), contact: fd.get('contact'),
+      lang: heb($('q').value) ? 'he' : 'en', page: location.href.slice(0, 300), user_agent: navigator.userAgent.slice(0, 200)
+    };
+    $('cmsg').innerHTML = '<span class="spin"></span>saving…';
+    fetch(SB_URL+'/rest/v1/search_claims', { method: 'POST', headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer '+SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, body: JSON.stringify(row) })
+      .then(function(r){ if (!r.ok) throw new Error('save failed '+r.status); snapshot(row); })
+      .catch(function(err){ $('cmsg').innerHTML = '<span class="err">Could not save ('+esc(err.message)+'). Write to hello@meerada.app and we will do it by hand.</span>'; });
+  });
+  function snapshot(row){
+    var name = (row.business || '').toLowerCase(); var hits = [];
+    (current && current.results || []).forEach(function(r, i){ var n = r.name.toLowerCase(); if (name && (n.indexOf(name) >= 0 || name.indexOf(n) >= 0)) hits.push({ pos: i+1, r: r }); });
+    var html = '<div class="snapshot"><b>Saved.</b> ';
+    if (hits.length) { var h = hits[0]; html += 'Good news: the engines already name <b>'+esc(h.r.name)+'</b> at position '+h.pos+' for this question ('+h.r.named_runs+' of '+h.r.runs+' runs). The report will show how to make that consistent.'; }
+    else if (current && current.unmeasured) { html += 'We will run this question on the engines and send you what they show, and where you stand.'; }
+    else { html += 'For this question the engines did not name <b>'+esc(row.business)+'</b> in any of '+(current ? current.runs : 0)+' runs. That is the gap the report is about: what the named options have that you do not (a readable site, prices, listings the engines read, mentions on pages they cite).'; }
+    html += '</div>';
+    if (row.website) {
+      html += '<div class="status" id="audStatus"><span class="spin"></span>checking your site the way an engine would…</div><div id="aud"></div>';
+      $('cmsg').innerHTML = html;
+      fetch(API+'/audit?url='+encodeURIComponent(row.website)+'&name='+encodeURIComponent(row.business)).then(function(r){ return r.json(); }).then(function(a){
+        $('audStatus').textContent = '';
+        var fixes = (a.fixes || []).slice(0, 6).map(function(f){ return '<li>'+esc(f)+'</li>'; }).join('');
+        $('aud').innerHTML = '<div class="snapshot"><b>Site readability score: '+a.score+'/100</b> <span class="s">(heuristic, '+esc(a.grade)+')</span>'+(fixes ? '<ol class="fixes">'+fixes+'</ol>' : '<div class="ok">Nothing obvious to fix on the site itself.</div>')+'<div class="s">The full report adds what the engines read for your category and the off-site steps. We send it to the number you left.</div></div>';
+      }).catch(function(){ $('audStatus').innerHTML = '<span class="s">Site check will be in the report (the live checker is not reachable right now).</span>'; });
+    } else { $('cmsg').innerHTML = html; }
+  }
+})();
+</script>
+</body></html>
