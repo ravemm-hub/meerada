@@ -1,0 +1,141 @@
+{
+  "profiles": [
+    {
+      "id": "tlv-italian-gusto",
+      "name": "Gusto",
+      "slug": "gusto-tel-aviv",
+      "city": "Tel Aviv",
+      "country": "Israel",
+      "category": "Italian restaurant",
+      "website": "https://www.gusto.co.il",
+      "phone": "1-700-700-919",
+      "address": "Frishman 90, Tel Aviv-Yafo (as written on the restaurant's Ontopo reservation page; gusto.co.il itself states only \"Tel Aviv\")",
+      "hours": "Sun–Sat 12:00–23:00 (gusto.co.il). Ontopo reservation page lists: Sun 12:00–22:00; Mon–Tue 12:00–22:30; Thu 12:00–23:00; Fri–Sat 12:00–22:30 (Wednesday not labelled separately).",
+      "summary": "Gusto is an Italian restaurant and pizzeria in central Tel Aviv, at Frishman 90 on the south-west corner of Rabin Square. The menu covers antipasti, salads, pasta, filled pasta, gnocchi, pizza, a few meat and fish mains, wine, beer and cocktails; gnocchi and pasta dishes are available gluten-free. The restaurant states it is not kosher and offers take-away, delivery and event bookings.",
+      "services": [
+        "Italian restaurant: antipasti, salads, pasta, filled pasta (ravioli, tortellini, agnolotti), gnocchi, pizza, meat and fish mains",
+        "Wine, beer and cocktails",
+        "Gluten-free option for gnocchi and pasta dishes",
+        "Take-away (self-pickup via Tabit)",
+        "Delivery (via Mishloha)",
+        "Events (booked via Ontopo)",
+        "Outdoor seating",
+        "Lunch deal Sun–Thu 12:00–17:00 (excl. holidays)",
+        "Happy hour: 20% off alcohol Sun–Thu 17:00–20:00 (excl. holidays)"
+      ],
+      "prices": "English menu PDF (file dated 2026-08-18), prices in ₪: starters 29–68 (Focaccina 29, Arancini 54, Burrata 66, Bresaola Siciliana 68); salads 58–68 (Cesar 58, Caprese 63, Gusto Salad 68); pasta 62–98 (Linguine Aglio e Olio 62, Cacio e Pepe 65, Linguine Pomodoro 68, Penne Carbonara 88, Veal Ragu Tortellini 98); gnocchi 72–98; pizza 76–96 (Margherita 76, Bianca 78, Fungi 92, Pepperoni 94, Jambon Qui 96); mains: Crispy Chicken Tenderloins 86, Vitellona 88, Lasagna 94, Frutti di Mare 98; cocktails 52; beer 28–42; wine by glass 42–52 / bottle 148–192. Maps price band ₪100–150 per person is consistent with these dish prices.",
+      "booking": "Table reservations and events online via Ontopo (https://ontopo.com/64592643/); phone 1-700-700-919; delivery via Mishloha; self-pickup ordering via Tabit",
+      "people": [],
+      "languages": [
+        "Hebrew (website)",
+        "English (menu PDF; English navigation text on the website)"
+      ],
+      "since": "",
+      "extras": [
+        "Not kosher (stated on gusto.co.il: \"מסעדה לא כשרה\")",
+        "Accessibility: the website has an accessibility-for-disabled section and an accessibility statement link; no details of physical accessibility features are published",
+        "Public transport access and outdoor seating listed on gusto.co.il",
+        "Parking: Gan Ha'ir parking lot (City Hall building), per Ontopo page",
+        "Delivery via Mishloha; self-pickup via Tabit",
+        "Gluten-free gnocchi and pasta available (menu)"
+      ],
+      "sources": [
+        "https://gusto.co.il",
+        "https://www.gusto.co.il/_files/ugd/438f6a_552f1ffd56094f0297db4ede6200b2e0.pdf",
+        "https://6e5d4d1b-1c9a-4456-a426-15391990aeb3.filesusr.com/ugd/438f6a_552f1ffd56094f0297db4ede6200b2e0.pdf",
+        "https://ontopo.com/64592643/"
+      ],
+      "checked": "2026-11-25",
+      "discrepancies": "Hours: gusto.co.il states Sun–Sat 12:00–23:00 and Maps shows 'closes 11 pm', but the Ontopo reservation page lists earlier closing on most days (22:00 Sun, 22:30 Mon–Tue and Fri–Sat, 23:00 Thu). Happy hour: menu says 17:00–20:00, Ontopo says 17:00–19:00. Address: gusto.co.il publishes no street address; 'Frishman 90' comes from the Ontopo page and matches Maps. Age: the Ontopo description says the restaurant 'marked 15 years last summer' (undated text), so no founding year is recorded. Chef and owner are not named on the site. Maps shows a Wolt menu link; the site itself links Mishloha and Tabit, not Wolt (Wolt page not fetched)."
+    },
+    {
+      "id": "nyc-dentist-manhattan-dental-arts",
+      "name": "Manhattan Dental Arts",
+      "slug": "manhattan-dental-arts-new-york",
+      "city": "New York",
+      "country": "United States",
+      "category": "Dentist",
+      "website": "https://manhattandentalarts.com",
+      "phone": "(212) 247-2330",
+      "address": "1995 Broadway Suite 200, New York, NY 10023",
+      "hours": "Mon 8:00 am–6:00 pm; Tue 8:00 am–5:00 pm; Wed 8:00 am–6:00 pm; Thu 8:00 am–6:00 pm; Fri 8:00 am–2:00 pm; Sat 9:00 am–2:00 pm (first Saturday of each month only); Sun closed",
+      "summary": "Manhattan Dental Arts is a dental practice at 1995 Broadway, Suite 200, on the Upper West Side of Manhattan (ZIP 10023). It offers general, cosmetic, restorative and oral-surgery dentistry, including implants, veneers, Invisalign, root canals and same-day crowns. Four dentists are named on the site; appointments are booked by phone or online through Zocdoc.",
+      "services": [
+        "General: dental exams and X-rays, teeth cleaning, dental sealants, oral cancer screening, sedation dentistry, sleep apnea therapy, emergency dental care",
+        "Cosmetic: cosmetic bonding, porcelain veneers, smile makeovers, teeth whitening",
+        "Restorative: crowns and Crown In a Day, dental bridges, dental implants, dentures, tooth fillings, root canals, gum recontouring, periodontics",
+        "Orthodontics and Invisalign / clear aligners",
+        "Oral surgery: tooth extractions, wisdom tooth extraction, TMJ & TMD treatment"
+      ],
+      "prices": "Published offers (site, seasonal-offers page): $199 New Patient Special (cleaning, exam and X-ray); $5,000 Clear Aligners (comprehensive case); 15% off dental treatment over $2,500 for new patients (offer valid 12/01/2026–12/31/2026, conditions apply, not combinable with insurance); Dental Savings Plans: Adult Complete $475/year, Perio $825/year. Financing via Sunbit. No other fees published.",
+      "booking": "Online via Zocdoc (https://www.zocdoc.com/practice/manhattan-dental-arts-60877); phone (212) 247-2330; appointment request form on the Contact Us page",
+      "people": [
+        "Marc Liechtung, DMD — Inventor of Snap-On Smile",
+        "Jaron Vanmeter, DDS — General, Cosmetic, and Implant Dentistry",
+        "Dr. Evan Lynn — Endodontist / Root Canal Therapy",
+        "Dr. Valentina Sasieta — General Dentist"
+      ],
+      "languages": [],
+      "since": "",
+      "extras": [
+        "Insurance: no plans named; site says insurance acceptance and coverage may vary and asks patients to speak with the office",
+        "Financing: Sunbit pay-over-time; online bill payment portal",
+        "Parking: none available (FAQ page)",
+        "Accessibility: the site's accessibility page concerns website (WCAG 2.0) accessibility only; no physical-access details published",
+        "Emergency dental care offered during office hours; no after-hours line published",
+        "Neighbourhood: Upper West Side (site)"
+      ],
+      "sources": [
+        "https://manhattandentalarts.com",
+        "https://manhattandentalarts.com/contact-us",
+        "https://manhattandentalarts.com/manhattan-dentists",
+        "https://manhattandentalarts.com/faq",
+        "https://manhattandentalarts.com/for-patients/seasonal-offers",
+        "https://manhattandentalarts.com/accessibility"
+      ],
+      "checked": "2026-11-25",
+      "discrepancies": "Maps shows 'closes 6 pm'; the site closes at 6 pm only Mon/Wed/Thu — Tue 5 pm, Fri 2 pm, first Saturday of the month 2 pm. Maps writes 'Ste 200', site writes 'Suite 200'. Seasonal-offers page shows two validity statements for the 15% offer ('until 12/31/2026' and '12/01/2026 - 12/31/2026'). Year founded, languages spoken and accepted insurance plans are not published."
+    },
+    {
+      "id": "tlv-hair-kosma",
+      "name": "Kosma Hair Studio",
+      "slug": "kosma-hair-studio-tel-aviv",
+      "city": "Tel Aviv",
+      "country": "Israel",
+      "category": "Hair salon",
+      "website": "https://kosmahair.com",
+      "phone": "+972543048197",
+      "address": "9 דוידקה, Tel-Aviv, IL, 6742158 (Davidka St 9, Tel Aviv 6742158)",
+      "hours": "Sun 09:00–20:00; Mon 14:00–20:00; Tue 09:00–20:00; Wed 14:00–20:00; Thu 09:00–20:00; Fri closed; Sat closed",
+      "summary": "Kosma Hair Studio TLV is a private one-chair hair studio at Davidka St 9 in the Yad Eliyahu neighbourhood of Tel Aviv, set in a garden. It offers custom haircuts with scalp and hair analysis, Korean (K-Beauty) hair care and Japanese-style head spa treatments, and hair-care consultations. Appointments are booked online through the studio's SimplyBook.me booking page, by phone or WhatsApp.",
+      "services": [
+        "Custom Cut incl. hair & scalp analysis and K-Beauty spa care — 2 hr — ₪350",
+        "K-Beauty Hair Care & Japanese Relax Head Spa — 1 hr 30 min — ₪350",
+        "Korean Hair Care Routine (scalp/hair diagnosis and home-care plan, digital guide, no product sales) — 1 hr — ₪200",
+        "Custom Dry Touch-Up (refresh of an existing cut, dry hair only, no wash) — 1 hr — ₪200",
+        "Consultation (Shape | Color | Recovery), online or in studio — ₪200",
+        "Techniques named on the site: Dry Cut for curly hair, razor technique for fine hair, Wash & Go cuts"
+      ],
+      "prices": "₪200–₪350 per service as listed on the online booking page (Custom Cut ₪350; Head Spa ₪350; Korean Hair Care Routine ₪200; Dry Touch-Up ₪200; Consultation ₪200). Cancellation policy: changes/cancellations up to 48 hours ahead; later cancellation charged 50% of the service price.",
+      "booking": "Online at https://kosmahair.com/v2/book/ (SimplyBook.me); phone or WhatsApp +972543048197; email kosmatics@gmail.com",
+      "people": [],
+      "languages": [
+        "Hebrew (website and booking page; service names in English)"
+      ],
+      "since": "",
+      "extras": [
+        "Parking: accessible, convenient parking in the studio's surroundings (site)",
+        "Pets: the space is shared with animals; visitors with allergies are asked to prepare; friendly pets welcome if the atmosphere stays quiet",
+        "Private studio with a garden; the site describes it as open to all genders, ages, religions and nationalities",
+        "Products described as Korean, natural, vegan and ecological",
+        "Neighbourhood: Yad Eliyahu (site)"
+      ],
+      "sources": [
+        "https://kosmahair.com/v2/",
+        "https://kosmahair.com/v2/book/"
+      ],
+      "checked": "2026-11-25",
+      "discrepancies": "Maps 'closes 8 pm' matches the site (20:00) for Sun–Thu, but the site shows the studio closed Fri and Sat and opening only at 14:00 on Mon and Wed. The site names no stylist: it says the studio is run by a hair designer who graduated from Bezalel's fashion department and hair-design academies (no name published); customer reviews on the page mention a first name, but reviews are excluded by rule. No founding year, no wheelchair-accessibility statement. Site is a SimplyBook.me booking site rendered client-side; plain HTTP fetch returns an empty shell, data was read via a rendered browser page."
+    }
+  ]
+}

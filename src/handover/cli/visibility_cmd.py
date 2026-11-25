@@ -101,3 +101,17 @@ def guides_cmd(
 
     for path in build_guides(Path(data), Path(out)):
         typer.echo(f"wrote {path}")
+
+
+@visibility_app.command("profiles")
+def profiles_cmd(
+    data: Annotated[str, typer.Option("--data")] = "data/profiles",
+    out: Annotated[str, typer.Option("--out")] = "site/b",
+) -> None:
+    """Build the factual profile pages from data/profiles/*.json."""
+    from pathlib import Path
+
+    from handover.visibility.profiles import build_profiles
+
+    for path in build_profiles(Path(data), Path(out)):
+        typer.echo(f"wrote {path}")
