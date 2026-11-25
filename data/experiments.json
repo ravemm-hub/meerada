@@ -18,7 +18,7 @@
     {"id": "nyc-dentist-soho-control", "business": "SoHo Dental Group NYC", "aliases": ["SoHo Dental Group"], "domain": "sohodentalgroup.com", "queries": ["nyc-dentist"], "lever": "none", "control": true, "started": "2026-12-01", "city": "New York City", "category": "dentist", "notes": "control · Maps position 12 · 4.7 (551) · 552 Broadway"},
 
     {"id": "tlv-hair-gazooz", "business": "Gazooz", "aliases": ["גזוז"], "domain": "", "queries": ["tlv-hair"], "lever": "guide", "started": "2026-12-01", "city": "Tel Aviv", "category": "hair", "notes": "Maps position 11 · 4.5 (171) · Frishman St 88 · lists only a Facebook page, no own site"},
-    {"id": "tlv-hair-dawn", "business": "Dawn Hair Salon", "aliases": ["Dawn Hair", "Dawn TLV"], "domain": "dawntlv.com", "queries": ["tlv-hair"], "lever": "profile", "started": "2026-12-01", "city": "Tel Aviv", "category": "hair", "notes": "Maps position 13 · 5.0 (67) · HaYarkon St 51"},
+    {"id": "tlv-hair-kosma", "business": "Kosma Hair Studio", "aliases": ["Kosma Hair", "קוסמה"], "domain": "kosmahair.com", "queries": ["tlv-hair"], "lever": "profile", "started": "2026-12-01", "city": "Tel Aviv", "category": "hair", "notes": "Maps position 10 · 5.0 (102) · Davidka St 9 · replaced Dawn Hair Salon (position 13), which the baseline showed already named by Claude 8/8 and gpt-5-mini 4/7"},
     {"id": "tlv-hair-assaf-control", "business": "Assaf Hair Design", "aliases": ["אסף עיצוב שיער", "Asaf Hair"], "domain": "asaf-hair.co.il", "queries": ["tlv-hair"], "lever": "none", "control": true, "started": "2026-12-01", "city": "Tel Aviv", "category": "hair", "notes": "control · Maps position 12 · 4.9 (165) · Walter Moses St 5"}
   ]
 }

@@ -194,6 +194,25 @@ best-of מתוך 9–10). Claude חיפש בכל השאלות האלה, 16–31 
 - **הבא בתור:** בחירת 10 עסקים + 3 ביקורת, baseline (7 ריצות × 3 מנועים), כתיבת 5 מדריכים ראשונים מעובדות
   מאומתות, רישומי Yelp/easy, outreach.
 
+## 15. הקבוצה הראשונה (25.11.2026) — 10 עסקי מבחן + 5 ביקורת
+נבחרו מ-Google Maps (hl=en) דרך הדפדפן, מיקומים 8–20 ברשימה האורגנית, דירוג ≥4.3 עם ≥10 ביקורות, עסק
+אמיתי בקטגוריה. ביקורת אחת לכל קטגוריה. הרישום המלא: data/experiments.json (עם הדומיינים מה-Maps).
+
+| קטגוריה | שאלה | מבחן 1 (מנוף) | מבחן 2 (מנוף) | ביקורת |
+|---|---|---|---|---|
+| שרברב ת"א | tlv-plumber | אורן רדה (guide) | א.ל פתרונות אינסטלציה (directory) | יוזף אינסטלציה |
+| איטלקית ת"א | tlv-italian | Lupa (guide; רק אינסטגרם) | Gusto (profile) | Goomba |
+| יוגה לונדון | ldn-yoga | Energy Yoga (guide) | Fold Yoga London (outreach) | Yogahome |
+| רופא שיניים מנהטן | nyc-dentist | Manhattan Dental Arts (profile) | New York General Dentistry (directory) | SoHo Dental Group |
+| מספרה ת"א | tlv-hair | Gazooz (guide; רק פייסבוק) | Dawn Hair Salon (profile) | Assaf Hair Design |
+
+- **ה-baseline** רץ ב-25.11 אחה"צ: 5 שאלות × 7 ריצות × 3 מנועים (chatgpt, chatgpt5, claude) = 105 תשובות,
+  נשמר ב-visibility_state.json ב-gh-pages; מופיע בדף cases.html. מועד תחילת המנופים: 1.12.2026.
+- **ביקורת הישות (audit v0) על 13 האתרים:** ציונים 69–86 לרוב; חסרים נפוצים: מחירים (11 מ-13), כתובת
+  כטקסט (7), תאריך/טריות (7), רשתות חברתיות (5). **שני אתרים לא נגישים:** energyoga.co.uk (כשל TLS) ו-
+  asaf-hair.co.il (404) — ממצא בפני עצמו: מנוע לא יכול לצטט אתר שלא נטען. הדוחות ב-out/audits/*.json.
+- Places API של גוגל לא נדרש בסוף: הבחירה נעשתה ידנית מהמפות; הסקריפט נשאר לקבוצות הבאות.
+
 ## מקורות (נובמבר 2026)
 - https://www.digitalcommerce360.com/2026/03/06/openai-shifts-checkout-plans-agentic-commerce-strategy/
 - https://www.digitalapplied.com/blog/ai-agentic-commerce-discover-in-ai-buy-on-site-2026
