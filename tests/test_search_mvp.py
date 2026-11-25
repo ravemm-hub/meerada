@@ -105,6 +105,8 @@ def test_service_answers_lab_questions_from_state_and_live_otherwise() -> None:
         and lab["matched"] == "tlv-plumber"
         and lab["results"][0]["name"] == "Alpha Plumbing"
     )
+    short = svc.search("a yoga studio in London for a beginner", "9.9.9.9")
+    assert short["source"] == "lab" and short["matched"] == "ldn-yoga"
     live = svc.search("a good dentist in Haifa", "1.1.1.1")
     assert live["source"] == "live" and [r["name"] for r in live["results"]] == [
         "Gamma Clinic",

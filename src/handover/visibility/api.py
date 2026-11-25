@@ -39,6 +39,7 @@ LIVE_ENGINES = os.environ.get(
     "MEERADA_SEARCH_ENGINES", "chatgpt,chatgpt5,claude,gemini,perplexity,grok,mistral"
 )
 CACHE_TTL = 7 * 24 * 3600
+_WORD = re.compile(r"[\w\u0590-\u05FF]+")
 FREE_LIVE_PER_IP = int(os.environ.get("MEERADA_SEARCH_FREE_PER_IP", "3"))
 ALLOWED_ORIGINS = ["https://meerada.app", "https://www.meerada.app", "http://localhost:8766"]
 
@@ -75,12 +76,21 @@ class SearchService:
             return self._state
 
     def lab_match(self, q: str) -> LabQuery | None:
+        """The measured question closest to ``q``: exact id, a near-identical text, or a
+        question whose city/category/text covers most of the query's words."""
+        for lq in QUESTIONS:
+            if q == lq.id or q == lq.text.lower():
+                return lq
+        qt = {t for t in _WORD.findall(q) if len(t) > 2}
         best, best_score = None, 0.0
         for lq in QUESTIONS:
-            score = SequenceMatcher(None, q, lq.text.lower()).ratio()
+            hay = set(_WORD.findall(f"{lq.text} {lq.city} {lq.category}".lower()))
+            overlap = len(qt & hay) / len(qt) if qt else 0.0
+            ratio = SequenceMatcher(None, q, lq.text.lower()).ratio()
+            score = max(overlap, ratio)
             if score > best_score:
                 best, best_score = lq, score
-        return best if best is not None and best_score >= 0.86 else None
+        return best if best is not None and best_score >= 0.6 else None
 
     def lab_result(self, lq: LabQuery) -> dict[str, Any] | None:
         answers = [a for a in self.state().answers if a.query_id == lq.id and not a.error]
