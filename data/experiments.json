@@ -1,3 +1,24 @@
 {
-  "experiments": []
+  "_method": "Picked 2026-11-25 from Google Maps (hl=en) organic results, positions 8-20 for the category in the city, rating >= 4.3 with >= 10 reviews, a real business (not a directory, not a mismatched category). One control per category: a comparable business from the same band that gets no lever. 'started' is the planned lever start; answers before it are the baseline. Domains are filled in during the audit step. Ratings/positions are kept here for selection only and are never published.",
+  "experiments": [
+    {"id": "tlv-plumber-oren-rada", "business": "אורן רדה: אינסטלטור בתל אביב", "aliases": ["אורן רדה", "Oren Rada"], "domain": "", "queries": ["tlv-plumber"], "lever": "guide", "started": "2026-12-01", "city": "Tel Aviv", "category": "plumber", "notes": "Maps position 10 · 4.5 (175) · website listed"},
+    {"id": "tlv-plumber-al-solutions", "business": "א.ל פתרונות אינסטלציה מתקדמים", "aliases": ["א.ל פתרונות אינסטלציה", "A.L. Advanced Plumbing Solutions", "A.L Plumbing"], "domain": "", "queries": ["tlv-plumber"], "lever": "directory", "started": "2026-12-01", "city": "Tel Aviv", "category": "plumber", "notes": "Maps position 11 · 5.0 (36) · website listed"},
+    {"id": "tlv-plumber-yosef-control", "business": "יוזף אינסטלציה", "aliases": ["יוזף אינסטלציה - בהנהלת איציק יוזף", "Yosef Plumbing", "Itzik Yosef"], "domain": "", "queries": ["tlv-plumber"], "lever": "none", "control": true, "started": "2026-12-01", "city": "Tel Aviv", "category": "plumber", "notes": "control · Maps position 17 · 5.0 (11) · website listed"},
+
+    {"id": "tlv-italian-lupa", "business": "Lupa", "aliases": ["Lupa לופה", "לופה"], "domain": "", "queries": ["tlv-italian"], "lever": "guide", "started": "2026-12-01", "city": "Tel Aviv", "category": "italian", "notes": "Maps position 8 · 4.8 (82)"},
+    {"id": "tlv-italian-tonino", "business": "Tonino", "aliases": ["טונינו"], "domain": "", "queries": ["tlv-italian"], "lever": "profile", "started": "2026-12-01", "city": "Tel Aviv", "category": "italian", "notes": "Maps position 14 · 4.5 (79)"},
+    {"id": "tlv-italian-goomba-control", "business": "Goomba", "aliases": ["גומבה"], "domain": "", "queries": ["tlv-italian"], "lever": "none", "control": true, "started": "2026-12-01", "city": "Tel Aviv", "category": "italian", "notes": "control · Maps position 10 · 4.3 (2,251)"},
+
+    {"id": "ldn-yoga-energy", "business": "Energy Yoga", "aliases": ["Energy Yoga London"], "domain": "", "queries": ["ldn-yoga"], "lever": "guide", "started": "2026-12-01", "city": "London", "category": "yoga", "notes": "Maps position 8 · 4.8 (45) · 4 Foster Ln"},
+    {"id": "ldn-yoga-fold", "business": "Fold Yoga London", "aliases": ["Fold Yoga"], "domain": "", "queries": ["ldn-yoga"], "lever": "outreach", "started": "2026-12-01", "city": "London", "category": "yoga", "notes": "Maps position 15 · 4.9 (83) · 97 Green Lanes"},
+    {"id": "ldn-yoga-yogahome-control", "business": "Yogahome", "aliases": ["Yoga Home"], "domain": "", "queries": ["ldn-yoga"], "lever": "none", "control": true, "started": "2026-12-01", "city": "London", "category": "yoga", "notes": "control · Maps position 14 · 4.5 (118) · 14 Allen Rd"},
+
+    {"id": "nyc-dentist-manhattan-dental-arts", "business": "Manhattan Dental Arts", "aliases": [], "domain": "", "queries": ["nyc-dentist"], "lever": "profile", "started": "2026-12-01", "city": "New York City", "category": "dentist", "notes": "Maps position 9 · 4.7 (494) · 1995 Broadway"},
+    {"id": "nyc-dentist-ny-general", "business": "New York General Dentistry", "aliases": ["NY General Dentistry"], "domain": "", "queries": ["nyc-dentist"], "lever": "directory", "started": "2026-12-01", "city": "New York City", "category": "dentist", "notes": "Maps position 10 · 4.9 (378) · 133 E 58th St"},
+    {"id": "nyc-dentist-soho-control", "business": "SoHo Dental Group NYC", "aliases": ["SoHo Dental Group"], "domain": "", "queries": ["nyc-dentist"], "lever": "none", "control": true, "started": "2026-12-01", "city": "New York City", "category": "dentist", "notes": "control · Maps position 12 · 4.7 (551) · 552 Broadway"},
+
+    {"id": "tlv-hair-gazooz", "business": "Gazooz", "aliases": ["גזוז"], "domain": "", "queries": ["tlv-hair"], "lever": "guide", "started": "2026-12-01", "city": "Tel Aviv", "category": "hair", "notes": "Maps position 11 · 4.5 (171) · Frishman St 88"},
+    {"id": "tlv-hair-dawn", "business": "Dawn Hair Salon", "aliases": ["Dawn Hair"], "domain": "", "queries": ["tlv-hair"], "lever": "profile", "started": "2026-12-01", "city": "Tel Aviv", "category": "hair", "notes": "Maps position 13 · 5.0 (67) · HaYarkon St 51"},
+    {"id": "tlv-hair-assaf-control", "business": "Assaf Hair Design", "aliases": ["אסף עיצוב שיער"], "domain": "", "queries": ["tlv-hair"], "lever": "none", "control": true, "started": "2026-12-01", "city": "Tel Aviv", "category": "hair", "notes": "control · Maps position 12 · 4.9 (165) · Walter Moses St 5"}
+  ]
 }
