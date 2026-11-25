@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-25T15:34:03.348232+00:00",
+ "generated_at": "2026-11-25T15:37:00.623800+00:00",
  "method": {
   "queries": 138,
   "intents": [
@@ -3049,15 +3049,15 @@
    "id": "tlv-plumber-al-solutions",
    "business": "א.ל פתרונות אינסטלציה מתקדמים",
    "domain": "al-biuvit.co.il",
-   "lever": "directory",
+   "lever": "guide",
    "control": false,
-   "started": "2026-12-01",
+   "started": "2026-11-26",
    "city": "Tel Aviv",
    "category": "plumber",
    "queries": [
     "tlv-plumber"
    ],
-   "notes": "Maps position 11 · 5.0 (36)",
+   "notes": "lever switched from directory to guide on 2026-11-25: easy.co.il requires owner SMS verification (docs/DIRECTORY-LEVER.md); added to the Tel Aviv plumbers guide that evening · Maps position 11 · 5.0 (36)",
    "engines": {
     "chatgpt": {
      "before": {
