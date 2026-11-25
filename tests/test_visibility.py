@@ -37,9 +37,9 @@ frequently recommended[1][2]. **Why it fits**: both offer same-day service.
 
 
 def test_question_set_is_fifty_unique_and_bilingual() -> None:
-    assert len(QUESTIONS) == 50
-    assert len({q.id for q in QUESTIONS}) == 50
-    assert sum(q.lang == "he" for q in QUESTIONS) == 2
+    assert len(QUESTIONS) == len({q.id for q in QUESTIONS}) >= 130
+    assert sum(q.intent == "local" for q in QUESTIONS) == 50
+    assert sum(q.lang == "he" for q in QUESTIONS) == 6
     assert {q.city for q in QUESTIONS} >= {"Tel Aviv", "New York City", "London"}
     assert all(q.text.strip() for q in QUESTIONS)
 
@@ -169,6 +169,29 @@ def test_reextract_rereads_stored_answers() -> None:
     assert state.answers[0].names == ["Master Fix Plumbing", "Eitan Plumber"]
 
 
+CLAUDE_SPLIT_BOLD = """## סוכנויות מומלצות:
+
+**1.
+Boostify
+** - בונים פתרונות Shopify מתקדמים
+
+**2.
+Webix Digital
+** - סוכנות בתל אביב
+
+## Best Options for Your Team Size
+
+**For the best balance of features and affordability** - Pipedrive at £14/seat
+**Cost Comparison for 5 Seats** - see below
+**Salesflare** - built for agencies
+"""
+
+
+def test_extraction_handles_split_bold_and_header_phrases() -> None:
+    names = [m.name for m in extract_mentions(CLAUDE_SPLIT_BOLD, exclude=("Tel Aviv", "webagency"))]
+    assert names == ["Boostify", "Webix Digital", "Salesflare"]
+
+
 def test_extraction_ignores_advice_platforms_and_pronoun_phrases() -> None:
     names = [m.name for m in extract_mentions(ADVICE_TEXT, exclude=("New York City", "dentist"))]
     assert names == ["Family Dental NYC"]
@@ -284,7 +307,7 @@ def test_pick_queries_is_round_robin_by_age() -> None:
             error="x",
         )
     )
-    picked = [q.id for q in pick_queries(state, "chatgpt", QUESTIONS, 50)]
+    picked = [q.id for q in pick_queries(state, "chatgpt", QUESTIONS, len(QUESTIONS))]
     assert picked[-1] == "tlv-plumber" and picked[-2] == "tlv-dentist"
     assert pick_queries(state, "gemini", QUESTIONS, 2) == list(QUESTIONS[:2])
 
@@ -374,6 +397,7 @@ def test_report_numbers_carry_n_and_ci() -> None:
         "engines": ["chatgpt", "gemini"],
         "cities": ["Tel Aviv"],
         "categories": ["plumber"],
+        "intents": ["local"],
     }
     overlap = report["overlap"][0]
     assert overlap["jaccard"] == {"value": pytest.approx(1 / 3), "n": 1}
@@ -386,7 +410,7 @@ def test_page_embeds_the_report_and_escapes_script_close() -> None:
     report["queries"][0]["text"] = "evil </script><script>alert(1)"
     html = render_page(report)
     assert "</script><script>alert" not in html
-    assert '"named_rate"' in html and "Who gets recommended" in html
+    assert '"named_rate"' in html and "How the engines choose" in html
     assert html.count("</script>") == 4  # family.js, analytics, the data block, the renderer
 
 

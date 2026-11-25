@@ -20,7 +20,9 @@ from pathlib import Path
 
 from handover.replay.budget import DailyBudget
 from handover.visibility.engines import Engine, EngineError, engines_from_env
+from handover.visibility.experiments import load_experiments
 from handover.visibility.extract import extract_mentions
+from handover.visibility.features import answer_features
 from handover.visibility.page import render_page
 from handover.visibility.questions import BY_ID, QUESTIONS, Query
 from handover.visibility.report import build_report
@@ -53,6 +55,7 @@ def ask_one(engine: Engine, query: Query, now: datetime) -> Answer:
         citations=reply.citations,
         names=[m.name for m in mentions],
         name_keys=[m.key for m in mentions],
+        features=answer_features(reply.text, reply.citations, [m.name for m in mentions]),
         latency_ms=int((time.perf_counter() - started) * 1000),
         cost_usd=str(engine.estimate_usd),  # declared: the per-call estimate, not a bill
         input_tokens=reply.input_tokens,
@@ -97,6 +100,7 @@ def reextract(state: State) -> int:
         exclude = (q.city, q.category) if q else ()
         mentions = extract_mentions(a.text, exclude=exclude, citations=a.citations)
         a.names, a.name_keys = [m.name for m in mentions], [m.key for m in mentions]
+        a.features = answer_features(a.text, a.citations, a.names)
         count += 1
     return count
 
@@ -111,6 +115,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--budget", type=Decimal, default=Decimal("0.60"))
     parser.add_argument("--only", default="", help="comma-separated query ids (smoke runs)")
     parser.add_argument("--report-only", action="store_true", help="re-render, ask nothing")
+    parser.add_argument(
+        "--experiments",
+        type=Path,
+        default=Path("data/experiments.json"),
+        help="registry of controlled experiments (business, lever, questions, start)",
+    )
     parser.add_argument(
         "--reextract", action="store_true", help="re-read stored answers with the current extractor"
     )
@@ -142,7 +152,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"re-extracted {reextract(state)} answers")
         save_state(state, args.state)
 
-    report = build_report(state, QUESTIONS, names, now)
+    report = build_report(state, QUESTIONS, names, now, load_experiments(args.experiments))
     args.json.parent.mkdir(parents=True, exist_ok=True)
     args.json.write_text(_dumps(report), encoding="utf-8")
     args.out.parent.mkdir(parents=True, exist_ok=True)

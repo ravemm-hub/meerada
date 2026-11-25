@@ -16,7 +16,9 @@ from urllib.parse import unquote_plus, urlparse
 
 _ITEM = re.compile(r"^\s*(?:[-*•]|\d{1,2}[.)])\s+(.*\S)\s*$")
 _HEADER = re.compile(r"^\s*#{2,4}\s+(.*\S)\s*$")
-_BOLD = re.compile(r"\*\*(.+?)\*\*")
+_BOLD = re.compile(r"\*\*([^*]{1,300}?)\*\*")  # may span a line break (Claude's lists)
+_LEADING_NUMBER = re.compile(r"^\s*\d{1,2}[.)]\s*")
+_WS = re.compile(r"\s+")
 _LINK = re.compile(r"\[([^\]]+)\]\((https?://[^)\s]+)\)")
 _URL = re.compile(r"https?://[^\s)\]]+")
 _SPLIT = re.compile(r"\s+[\u2014\u2013-]\s+|:\s|\s\(|,\s|\s\|\s")  # dash, en/em dash, colon
@@ -70,6 +72,17 @@ _STOP = {
 _STOP_PREFIX = ("how ", "what ", "why ", "when ", "where ", "if ", "tip", "note", "before ")
 # Advice, not a business: "Ask your primary care doctor", "Check your insurance provider's website"
 _ADVICE_PREFIX = (
+    "for ",
+    "cost ",
+    "budget ",
+    "overall ",
+    "strong ",
+    "other ",
+    "honorable ",
+    "runner",
+    "also ",
+    "alternatively",
+    "bonus",
     "ask ",
     "check ",
     "look ",
@@ -111,6 +124,19 @@ _ADVICE_PREFIX = (
 _PRONOUN = re.compile(r"\b(i|they|you|your|their|we|our|them)\b")
 # Words a business name almost never carries but advice lines do
 _GENERIC_WORDS = {
+    "comparison",
+    "summary",
+    "options",
+    "specifically",
+    # Hebrew header words: recommended / options / summary / recommendations / tips / note
+    "מומלצות",
+    "מומלצים",
+    "אפשרויות",
+    "סיכום",
+    "המלצות",
+    "טיפים",
+    "הערה",
+    "השוואה",
     "reviews",
     "ratings",
     "directories",
@@ -131,7 +157,6 @@ _GENERIC_WORDS = {
     "sites",
     "search",
     "numbers",
-    "options",
     "confirmation",
     "quote",
     "quotes",
@@ -242,6 +267,7 @@ def _url_of(item: str) -> str | None:
 def _add(found: dict[str, Mention], name: str | None, url: str | None) -> None:
     if not name:
         return
+    name = _LEADING_NUMBER.sub("", _WS.sub(" ", name)).strip()
     link = _LINK.search(name)
     if link:  # **[Name](url)** — ChatGPT's format: the name is the link text
         name, url = link.group(1), url or link.group(2)

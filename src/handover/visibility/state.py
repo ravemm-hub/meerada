@@ -33,6 +33,7 @@ class Answer(BaseModel):
     input_tokens: int = 0
     output_tokens: int = 0
     searches: int = 0
+    features: dict[str, float] = Field(default_factory=dict)  # see features.py
     error: str | None = None
 
 
