@@ -111,3 +111,18 @@ def test_guide_renders_alphabetically_with_disclosure_and_jsonld(tmp_path: Path)
     written = build_guides(data, tmp_path / "out")
     assert [p.name for p in written] == ["tel-aviv-plumbers.html", "index.html"]
     assert "Guides" in (tmp_path / "out" / "index.html").read_text(encoding="utf-8")
+
+
+def test_audit_reads_advertising_tags_from_the_page() -> None:
+    from handover.visibility.adsignals import ad_signals, pays_for_ads
+
+    html = (
+        "<script async src='https://www.googletagmanager.com/gtag/js?id=AW-987654321'></script>"
+        "<script>fbq('init', '1234567890');</script>"
+    )
+    sig = ad_signals(html)
+    assert sig["google_ads"] and sig["meta_pixel"] and not sig["tiktok_pixel"] and not sig["gtm"]
+    assert pays_for_ads(sig)
+    assert not pays_for_ads({"gtm": True})
+    a = audit("ads.example", "Ads Co", _fetch({"ads.example": (200, "<html>" + html + "</html>")}))
+    assert a.as_dict()["pays_for_ads"] is True and "pays for ads" in format_audit(a)

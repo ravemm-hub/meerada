@@ -17,6 +17,8 @@ from html import unescape
 from typing import Any
 from urllib.parse import urljoin, urlparse
 
+from handover.visibility.adsignals import ad_signals, pays_for_ads
+
 Fetch = Callable[[str], tuple[int, dict[str, str], str]]
 
 SEARCH_BOTS = ("OAI-SearchBot", "PerplexityBot", "Claude-SearchBot", "Googlebot", "Bingbot")
@@ -66,6 +68,7 @@ class Audit:
     name: str
     status: int
     checks: list[Check] = field(default_factory=list)
+    ads: dict[str, bool] = field(default_factory=dict)
 
     @property
     def score(self) -> int:
@@ -85,6 +88,8 @@ class Audit:
             "grade": "declared",
             "checks": [c.__dict__ for c in self.checks],
             "fixes": self.fixes(),
+            "ads": self.ads,
+            "pays_for_ads": pays_for_ads(self.ads),
         }
 
 
@@ -119,6 +124,7 @@ def audit(url: str, name: str = "", fetch: Fetch = http_get) -> Audit:
     text = re.sub(r"\s+", " ", text).strip()
     words = len(text.split())
     result = Audit(url=url, name=name, status=status)
+    result.ads = ad_signals(html)
     add = result.checks.append
 
     add(
@@ -275,6 +281,8 @@ def audit(url: str, name: str = "", fetch: Fetch = http_get) -> Audit:
 
 def format_audit(a: Audit) -> str:
     lines = [f"{a.name or a.url} — score {a.score}/100 (declared, heuristic v0)"]
+    if pays_for_ads(a.ads):
+        lines.append("  pays for ads: " + ", ".join(k for k, v in a.ads.items() if v))
     for c in a.checks:
         mark = "ok " if c.ok else "-- "
         lines.append(f"  {mark}{c.label}" + (f"  [{c.detail}]" if c.detail else ""))
