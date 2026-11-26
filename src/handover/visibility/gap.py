@@ -114,13 +114,13 @@ def render_gap_page(
             )
             + " פיילוט חינם, בלי כרטיס אשראי: אנחנו מפרסמים עמוד ישות באנגלית ובעברית, בודקים נוכחות בעמודים שהמנועים מצטטים, ומודדים שוב כל שבוע.</p>"
         )
-    title = f"{name} — {headline.lower()} · {q.city}"
+    title = f"{name} — {(headline[0].lower() + headline[1:])} · {q.city}"
     return f"""<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(title)}</title>
 <link rel="canonical" href="https://meerada.app/gap/{escape(slug)}.html">
 <link rel="icon" href="../logo.svg" type="image/svg+xml">
-<meta name="description" content="{escape(name)}: Google Maps #{row["google_rank"]} for “{escape(q.text[:80])}”, {headline.lower()}. What the engines read instead, and the steps that close the gap.">
+<meta name="description" content="{escape(name)}: Google Maps #{row["google_rank"]} for “{escape(q.text[:80])}”, {(headline[0].lower() + headline[1:])}. What the engines read instead, and the steps that close the gap.">
 <meta property="og:title" content="{escape(title)}"><meta property="og:type" content="article">
 <script src="../assets/family.js" defer></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap">
