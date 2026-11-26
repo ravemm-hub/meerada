@@ -56,7 +56,7 @@ def draft(exp: dict[str, Any], counts: dict[str, tuple[int, int]], page: str | N
 
 Hello,
 
-I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them for a {q.category} in {q.city}.
+I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them about {q.category} in {q.city}.
 
 We asked the engines "{q.text}" {total_runs} times. {name} was named {total_named} times ({per}). The measurement, and who the engines name instead, is public here: {link}
 

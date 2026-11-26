@@ -13,7 +13,7 @@ Subject: Gusto is not in the AI answers for "italian in Tel Aviv" — a free mon
 
 Hello,
 
-I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them for a italian in Tel Aviv.
+I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them about italian in Tel Aviv.
 
 We asked the engines "I'm looking for an Italian restaurant in Tel Aviv for a dinner for four. Who do you recommend? Please name specific ones." 23 times. Gusto was named 2 times (chatgpt 0/8, chatgpt5 0/7, claude 2/8). The measurement, and who the engines name instead, is public here: https://meerada.app/s/tlv-italian.html
 

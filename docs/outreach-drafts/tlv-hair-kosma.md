@@ -13,7 +13,7 @@ Subject: Kosma Hair Studio is not in the AI answers for "hair in Tel Aviv" — a
 
 Hello,
 
-I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them for a hair in Tel Aviv.
+I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them about hair in Tel Aviv.
 
 We asked the engines "I'm looking for a hair salon in Tel Aviv for a cut and color. Who do you recommend? Please name specific ones." 23 times. Kosma Hair Studio was named 0 times (chatgpt 0/8, chatgpt5 0/7, claude 0/8). The measurement, and who the engines name instead, is public here: https://meerada.app/s/tlv-hair.html
 

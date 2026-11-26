@@ -13,7 +13,7 @@ Subject: א.ל פתרונות אינסטלציה מתקדמים is not in the AI
 
 Hello,
 
-I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them for a plumber in Tel Aviv.
+I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them about plumber in Tel Aviv.
 
 We asked the engines "I'm looking for a plumber in Tel Aviv for a leaking pipe this week. Who do you recommend? Please name specific ones." 23 times. א.ל פתרונות אינסטלציה מתקדמים was named 0 times (chatgpt 0/8, chatgpt5 0/7, claude 0/8). The measurement, and who the engines name instead, is public here: https://meerada.app/s/tlv-plumber.html
 

@@ -13,7 +13,7 @@ Subject: Energy Yoga is not in the AI answers for "yoga in London" — a free mo
 
 Hello,
 
-I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them for a yoga in London.
+I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them about yoga in London.
 
 We asked the engines "I'm looking for a yoga studio in London for a beginner, evening classes. Who do you recommend? Please name specific ones." 21 times. Energy Yoga was named 0 times (chatgpt 0/7, chatgpt5 0/7, claude 0/7). The measurement, and who the engines name instead, is public here: https://meerada.app/s/ldn-yoga.html
 

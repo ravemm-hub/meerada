@@ -13,7 +13,7 @@ Subject: New York General Dentistry is not in the AI answers for "dentist in New
 
 Hello,
 
-I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them for a dentist in New York City.
+I run Meerada, a small service that measures what ChatGPT and the other AI assistants answer when people ask them about dentist in New York City.
 
 We asked the engines "I'm looking for a dentist in New York City for a check-up and a filling. Who do you recommend? Please name specific ones." 21 times. New York General Dentistry was named 0 times (chatgpt 0/7, chatgpt5 0/7, claude 0/7). The measurement, and who the engines name instead, is public here: https://meerada.app/s/nyc-dentist.html
 
