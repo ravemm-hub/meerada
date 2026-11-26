@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-26T10:11:28.609395+00:00",
+ "generated_at": "2026-11-26T17:14:31.190374+00:00",
  "method": {
   "queries": 138,
   "intents": [
@@ -106,6 +106,88 @@
    "engine": "chatgpt",
    "label": "ChatGPT (web search)",
    "model": "gpt-4.1-mini",
+   "asked": 35,
+   "errors": 0,
+   "last_error": null,
+   "named_rate": {
+    "value": 1.0,
+    "n": 35,
+    "ci_low": 0.9010957324106112,
+    "ci_high": 1.0
+   },
+   "searched_rate": {
+    "value": 1.0,
+    "n": 35,
+    "ci_low": 0.9010957324106112,
+    "ci_high": 1.0
+   },
+   "names_per_answer": {
+    "value": 5.742857142857143,
+    "n": 35
+   },
+   "distinct_names": 197,
+   "total_mentions": 201,
+   "cited_per_answer": {
+    "value": 6.485714285714286,
+    "n": 35
+   },
+   "sources": [
+    {
+     "family": "Google",
+     "count": 153,
+     "share": 0.6740088105726872
+    },
+    {
+     "family": "Business sites",
+     "count": 69,
+     "share": 0.3039647577092511
+    },
+    {
+     "family": "Reviews & directories",
+     "count": 5,
+     "share": 0.022026431718061675
+    }
+   ],
+   "choosing": {
+    "candidates": {
+     "value": 5.742857142857143,
+     "n": 35
+    },
+    "pick_rate": {
+     "value": 0.0,
+     "n": 35,
+     "ci_low": 0.0,
+     "ci_high": 0.0989042675893887
+    },
+    "table_rate": {
+     "value": 0.0,
+     "n": 35,
+     "ci_low": 0.0,
+     "ci_high": 0.0989042675893887
+    },
+    "rated_share": 0.05472636815920398,
+    "priced_share": 0.0845771144278607,
+    "own_site_share": 0.11442786069651742,
+    "listicle_share": 0.07488986784140969,
+    "hosts_per_answer": {
+     "value": 2.4857142857142858,
+     "n": 35
+    }
+   },
+   "stability": {
+    "value": 0.8,
+    "n": 5
+   },
+   "latency_ms": {
+    "value": 4134.942857142857,
+    "n": 35
+   },
+   "cost_usd": "1.05"
+  },
+  {
+   "engine": "chatgpt5",
+   "label": "chatgpt5",
+   "model": "gpt-5-mini",
    "asked": 25,
    "errors": 0,
    "last_error": null,
@@ -116,43 +198,63 @@
     "ci_high": 1.0
    },
    "searched_rate": {
-    "value": 1.0,
+    "value": 0.96,
     "n": 25,
-    "ci_low": 0.8668035060468213,
-    "ci_high": 1.0
+    "ci_low": 0.8045552759497747,
+    "ci_high": 0.9929039496133008
    },
    "names_per_answer": {
-    "value": 5.64,
+    "value": 6.08,
     "n": 25
    },
-   "distinct_names": 141,
-   "total_mentions": 141,
+   "distinct_names": 150,
+   "total_mentions": 152,
    "cited_per_answer": {
-    "value": 6.2,
+    "value": 6.76,
     "n": 25
    },
    "sources": [
     {
-     "family": "Google",
-     "count": 118,
-     "share": 0.7612903225806451
+     "family": "Business sites",
+     "count": 132,
+     "share": 0.7810650887573964
     },
     {
-     "family": "Business sites",
-     "count": 37,
-     "share": 0.23870967741935484
+     "family": "Reviews & directories",
+     "count": 32,
+     "share": 0.1893491124260355
+    },
+    {
+     "family": "News & magazines",
+     "count": 2,
+     "share": 0.011834319526627219
+    },
+    {
+     "family": "Tripadvisor",
+     "count": 1,
+     "share": 0.005917159763313609
+    },
+    {
+     "family": "Google",
+     "count": 1,
+     "share": 0.005917159763313609
+    },
+    {
+     "family": "Social",
+     "count": 1,
+     "share": 0.005917159763313609
     }
    ],
    "choosing": {
     "candidates": {
-     "value": 5.64,
+     "value": 6.08,
      "n": 25
     },
     "pick_rate": {
-     "value": 0.0,
+     "value": 0.16,
      "n": 25,
-     "ci_low": 0.0,
-     "ci_high": 0.13319649395317873
+     "ci_low": 0.06403347608577986,
+     "ci_high": 0.34654013980238163
     },
     "table_rate": {
      "value": 0.0,
@@ -160,31 +262,31 @@
      "ci_low": 0.0,
      "ci_high": 0.13319649395317873
     },
-    "rated_share": 0.05673758865248227,
-    "priced_share": 0.11347517730496454,
-    "own_site_share": 0.0425531914893617,
-    "listicle_share": 0.0967741935483871,
+    "rated_share": 0.006578947368421052,
+    "priced_share": 0.05263157894736842,
+    "own_site_share": 0.2565789473684211,
+    "listicle_share": 0.15384615384615385,
     "hosts_per_answer": {
-     "value": 2.08,
+     "value": 4.84,
      "n": 25
     }
    },
    "stability": {
-    "value": 0.8,
+    "value": 0.25,
     "n": 5
    },
    "latency_ms": {
-    "value": 4152.48,
+    "value": 15614.36,
     "n": 25
    },
-   "cost_usd": "0.75"
+   "cost_usd": "1.0"
   },
   {
    "engine": "perplexity",
    "label": "Perplexity (Sonar)",
    "model": "perplexity/sonar",
-   "asked": 23,
-   "errors": 23,
+   "asked": 33,
+   "errors": 33,
    "last_error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the correct account or org, and if so, purchase more at https://openrouter.ai/settings/credits\",\"code\":402,\"metadata\":{\"limit_source\":\"openrouter_credits\",\"remedy_hint\":\"Add credits at https://o",
    "named_rate": {
     "value": null,
@@ -315,87 +417,87 @@
    "engine": "claude",
    "label": "Claude (web search)",
    "model": "claude-haiku-4-5-20251001",
-   "asked": 17,
+   "asked": 22,
    "errors": 0,
    "last_error": null,
    "named_rate": {
-    "value": 0.7647058823529411,
-    "n": 17,
-    "ci_low": 0.5273775411082839,
-    "ci_high": 0.9044511092832406
+    "value": 0.8181818181818182,
+    "n": 22,
+    "ci_low": 0.6148297802336213,
+    "ci_high": 0.9269323397589488
    },
    "searched_rate": {
-    "value": 0.7058823529411765,
-    "n": 17,
-    "ci_low": 0.468664666737861,
-    "ci_high": 0.8672020613444361
+    "value": 0.7272727272727273,
+    "n": 22,
+    "ci_low": 0.5184787630099802,
+    "ci_high": 0.8684941798418556
    },
    "names_per_answer": {
-    "value": 5.230769230769231,
-    "n": 13
+    "value": 5.611111111111111,
+    "n": 18
    },
-   "distinct_names": 68,
-   "total_mentions": 68,
+   "distinct_names": 101,
+   "total_mentions": 101,
    "cited_per_answer": {
-    "value": 14.823529411764707,
-    "n": 17
+    "value": 15.909090909090908,
+    "n": 22
    },
    "sources": [
     {
      "family": "Business sites",
-     "count": 218,
-     "share": 0.8650793650793651
+     "count": 313,
+     "share": 0.8942857142857142
     },
     {
      "family": "News & magazines",
-     "count": 12,
-     "share": 0.047619047619047616
+     "count": 13,
+     "share": 0.037142857142857144
     },
     {
      "family": "Social",
-     "count": 7,
-     "share": 0.027777777777777776
+     "count": 8,
+     "share": 0.022857142857142857
     },
     {
      "family": "Reviews & directories",
      "count": 7,
-     "share": 0.027777777777777776
+     "share": 0.02
     },
     {
      "family": "Tripadvisor",
      "count": 5,
-     "share": 0.01984126984126984
+     "share": 0.014285714285714285
     },
     {
      "family": "Wikipedia",
-     "count": 3,
-     "share": 0.011904761904761904
+     "count": 4,
+     "share": 0.011428571428571429
     }
    ],
    "choosing": {
     "candidates": {
-     "value": 5.230769230769231,
-     "n": 13
+     "value": 5.611111111111111,
+     "n": 18
     },
     "pick_rate": {
-     "value": 0.07692307692307693,
-     "n": 13,
-     "ci_low": 0.013710066379696323,
-     "ci_high": 0.3331453392824736
+     "value": 0.16666666666666666,
+     "n": 18,
+     "ci_low": 0.05836470400465757,
+     "ci_high": 0.39222499638359243
     },
     "table_rate": {
      "value": 0.0,
-     "n": 13,
+     "n": 18,
      "ci_low": 0.0,
-     "ci_high": 0.22810184305529166
+     "ci_high": 0.1758845505823749
     },
-    "rated_share": 0.014705882352941176,
-    "priced_share": 0.11764705882352941,
-    "own_site_share": 0.3088235294117647,
-    "listicle_share": 0.3333333333333333,
+    "rated_share": 0.0297029702970297,
+    "priced_share": 0.1188118811881188,
+    "own_site_share": 0.2871287128712871,
+    "listicle_share": 0.36,
     "hosts_per_answer": {
-     "value": 6.117647058823529,
-     "n": 17
+     "value": 7.0,
+     "n": 22
     }
    },
    "stability": {
@@ -403,10 +505,10 @@
     "n": 3
    },
    "latency_ms": {
-    "value": 5682.64705882353,
-    "n": 17
+    "value": 6252.454545454545,
+    "n": 22
    },
-   "cost_usd": "0.34"
+   "cost_usd": "0.44"
   }
  ],
  "intents": [
@@ -416,50 +518,50 @@
    "queries": 50,
    "engines": {
     "chatgpt": {
-     "asked": 16,
+     "asked": 17,
      "named_rate": {
       "value": 1.0,
-      "n": 16,
-      "ci_low": 0.8063865817272802,
+      "n": 17,
+      "ci_low": 0.8156763396284354,
       "ci_high": 1.0
      },
      "searched_rate": {
       "value": 1.0,
-      "n": 16,
-      "ci_low": 0.8063865817272802,
+      "n": 17,
+      "ci_low": 0.8156763396284354,
       "ci_high": 1.0
      },
      "sources": [
       {
        "family": "Google",
-       "count": 94,
+       "count": 99,
        "share": 1.0
       }
      ],
      "choosing": {
       "candidates": {
-       "value": 6.0625,
-       "n": 16
+       "value": 6.0,
+       "n": 17
       },
       "pick_rate": {
        "value": 0.0,
-       "n": 16,
+       "n": 17,
        "ci_low": 0.0,
-       "ci_high": 0.19361341827271994
+       "ci_high": 0.18432366037156456
       },
       "table_rate": {
        "value": 0.0,
-       "n": 16,
+       "n": 17,
        "ci_low": 0.0,
-       "ci_high": 0.19361341827271994
+       "ci_high": 0.18432366037156456
       },
-      "rated_share": 0.05154639175257732,
-      "priced_share": 0.10309278350515463,
+      "rated_share": 0.049019607843137254,
+      "priced_share": 0.09803921568627451,
       "own_site_share": 0.0,
       "listicle_share": 0.0,
       "hosts_per_answer": {
        "value": 1.0,
-       "n": 16
+       "n": 17
       }
      },
      "stability": {
@@ -467,8 +569,70 @@
       "n": 5
      }
     },
+    "chatgpt5": {
+     "asked": 9,
+     "named_rate": {
+      "value": 1.0,
+      "n": 9,
+      "ci_low": 0.7008472464490407,
+      "ci_high": 1.0
+     },
+     "searched_rate": {
+      "value": 1.0,
+      "n": 9,
+      "ci_low": 0.7008472464490407,
+      "ci_high": 1.0
+     },
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 26,
+       "share": 0.52
+      },
+      {
+       "family": "Reviews & directories",
+       "count": 22,
+       "share": 0.44
+      },
+      {
+       "family": "Tripadvisor",
+       "count": 1,
+       "share": 0.02
+      }
+     ],
+     "choosing": {
+      "candidates": {
+       "value": 5.777777777777778,
+       "n": 9
+      },
+      "pick_rate": {
+       "value": 0.0,
+       "n": 9,
+       "ci_low": 0.0,
+       "ci_high": 0.2991527535509594
+      },
+      "table_rate": {
+       "value": 0.0,
+       "n": 9,
+       "ci_low": 0.0,
+       "ci_high": 0.2991527535509594
+      },
+      "rated_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.21153846153846154,
+      "listicle_share": 0.06,
+      "hosts_per_answer": {
+       "value": 4.0,
+       "n": 9
+      }
+     },
+     "stability": {
+      "value": 0.25,
+      "n": 5
+     }
+    },
     "perplexity": {
-     "asked": 14,
+     "asked": 15,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -560,18 +724,18 @@
      }
     },
     "claude": {
-     "asked": 12,
+     "asked": 13,
      "named_rate": {
-      "value": 0.6666666666666666,
-      "n": 12,
-      "ci_low": 0.3906175873976138,
-      "ci_high": 0.8618821601026385
+      "value": 0.6923076923076923,
+      "n": 13,
+      "ci_low": 0.4236888781333764,
+      "ci_high": 0.8731950283838191
      },
      "searched_rate": {
-      "value": 0.5833333333333334,
-      "n": 12,
-      "ci_low": 0.3195073356553728,
-      "ci_high": 0.8067425380947535
+      "value": 0.5384615384615384,
+      "n": 13,
+      "ci_low": 0.2914343243183205,
+      "ci_high": 0.7679424569851186
      },
      "sources": [
       {
@@ -592,28 +756,28 @@
      ],
      "choosing": {
       "candidates": {
-       "value": 5.125,
-       "n": 8
+       "value": 5.666666666666667,
+       "n": 9
       },
       "pick_rate": {
        "value": 0.0,
-       "n": 8,
+       "n": 9,
        "ci_low": 0.0,
-       "ci_high": 0.32441561951087694
+       "ci_high": 0.2991527535509594
       },
       "table_rate": {
        "value": 0.0,
-       "n": 8,
+       "n": 9,
        "ci_low": 0.0,
-       "ci_high": 0.32441561951087694
+       "ci_high": 0.2991527535509594
       },
-      "rated_share": 0.024390243902439025,
+      "rated_share": 0.0196078431372549,
       "priced_share": 0.0,
-      "own_site_share": 0.36585365853658536,
+      "own_site_share": 0.29411764705882354,
       "listicle_share": 0.31666666666666665,
       "hosts_per_answer": {
-       "value": 4.416666666666667,
-       "n": 12
+       "value": 4.076923076923077,
+       "n": 13
       }
      },
      "stability": {
@@ -629,50 +793,112 @@
    "queries": 25,
    "engines": {
     "chatgpt": {
-     "asked": 2,
+     "asked": 3,
      "named_rate": {
       "value": 1.0,
-      "n": 2,
-      "ci_low": 0.34237195288961925,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
       "ci_high": 1.0
      },
      "searched_rate": {
       "value": 1.0,
-      "n": 2,
-      "ci_low": 0.34237195288961925,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
       "ci_high": 1.0
      },
      "sources": [
       {
        "family": "Business sites",
-       "count": 18,
-       "share": 1.0
+       "count": 22,
+       "share": 0.8148148148148148
+      },
+      {
+       "family": "Reviews & directories",
+       "count": 5,
+       "share": 0.18518518518518517
       }
      ],
      "choosing": {
       "candidates": {
        "value": 5.0,
-       "n": 2
+       "n": 3
       },
       "pick_rate": {
        "value": 0.0,
-       "n": 2,
+       "n": 3,
        "ci_low": 0.0,
-       "ci_high": 0.6576280471103807
+       "ci_high": 0.5615060804490177
       },
       "table_rate": {
        "value": 0.0,
-       "n": 2,
+       "n": 3,
        "ci_low": 0.0,
-       "ci_high": 0.6576280471103807
+       "ci_high": 0.5615060804490177
       },
-      "rated_share": 0.1,
-      "priced_share": 0.1,
+      "rated_share": 0.2,
+      "priced_share": 0.06666666666666667,
       "own_site_share": 0.2,
-      "listicle_share": 0.3888888888888889,
+      "listicle_share": 0.25925925925925924,
       "hosts_per_answer": {
-       "value": 6.5,
-       "n": 2
+       "value": 6.0,
+       "n": 3
+      }
+     },
+     "stability": {
+      "value": null,
+      "n": 0
+     }
+    },
+    "chatgpt5": {
+     "asked": 3,
+     "named_rate": {
+      "value": 1.0,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
+      "ci_high": 1.0
+     },
+     "searched_rate": {
+      "value": 1.0,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
+      "ci_high": 1.0
+     },
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 17,
+       "share": 0.8095238095238095
+      },
+      {
+       "family": "Reviews & directories",
+       "count": 4,
+       "share": 0.19047619047619047
+      }
+     ],
+     "choosing": {
+      "candidates": {
+       "value": 5.333333333333333,
+       "n": 3
+      },
+      "pick_rate": {
+       "value": 0.6666666666666666,
+       "n": 3,
+       "ci_low": 0.20765495512648796,
+       "ci_high": 0.9385096847238394
+      },
+      "table_rate": {
+       "value": 0.0,
+       "n": 3,
+       "ci_low": 0.0,
+       "ci_high": 0.5615060804490177
+      },
+      "rated_share": 0.0,
+      "priced_share": 0.4375,
+      "own_site_share": 0.1875,
+      "listicle_share": 0.2857142857142857,
+      "hosts_per_answer": {
+       "value": 4.666666666666667,
+       "n": 3
       }
      },
      "stability": {
@@ -681,7 +907,7 @@
      }
     },
     "perplexity": {
-     "asked": 2,
+     "asked": 3,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -773,55 +999,60 @@
      }
     },
     "claude": {
-     "asked": 1,
+     "asked": 2,
      "named_rate": {
       "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
       "ci_high": 1.0
      },
      "searched_rate": {
       "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
       "ci_high": 1.0
      },
      "sources": [
       {
        "family": "Business sites",
-       "count": 25,
-       "share": 0.9259259259259259
+       "count": 51,
+       "share": 0.9272727272727272
       },
       {
        "family": "Social",
        "count": 2,
-       "share": 0.07407407407407407
+       "share": 0.03636363636363636
+      },
+      {
+       "family": "News & magazines",
+       "count": 1,
+       "share": 0.01818181818181818
       }
      ],
      "choosing": {
       "candidates": {
-       "value": 5.0,
-       "n": 1
+       "value": 4.5,
+       "n": 2
       },
       "pick_rate": {
-       "value": 0.0,
-       "n": 1,
-       "ci_low": 0.0,
-       "ci_high": 0.7934567085261071
+       "value": 0.5,
+       "n": 2,
+       "ci_low": 0.09452865480086614,
+       "ci_high": 0.9054713451991339
       },
       "table_rate": {
        "value": 0.0,
-       "n": 1,
+       "n": 2,
        "ci_low": 0.0,
-       "ci_high": 0.7934567085261071
+       "ci_high": 0.6576280471103807
       },
       "rated_share": 0.0,
-      "priced_share": 0.6,
-      "own_site_share": 0.2,
-      "listicle_share": 0.4444444444444444,
+      "priced_share": 0.3333333333333333,
+      "own_site_share": 0.1111111111111111,
+      "listicle_share": 0.4727272727272727,
       "hosts_per_answer": {
-       "value": 11.0,
-       "n": 1
+       "value": 12.5,
+       "n": 2
       }
      },
      "stability": {
@@ -837,50 +1068,107 @@
    "queries": 16,
    "engines": {
     "chatgpt": {
-     "asked": 2,
+     "asked": 3,
      "named_rate": {
       "value": 1.0,
-      "n": 2,
-      "ci_low": 0.34237195288961925,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
       "ci_high": 1.0
      },
      "searched_rate": {
       "value": 1.0,
-      "n": 2,
-      "ci_low": 0.34237195288961925,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
       "ci_high": 1.0
      },
      "sources": [
       {
        "family": "Business sites",
-       "count": 19,
+       "count": 30,
        "share": 1.0
       }
      ],
      "choosing": {
       "candidates": {
-       "value": 5.0,
-       "n": 2
+       "value": 5.333333333333333,
+       "n": 3
       },
       "pick_rate": {
        "value": 0.0,
-       "n": 2,
+       "n": 3,
        "ci_low": 0.0,
-       "ci_high": 0.6576280471103807
+       "ci_high": 0.5615060804490177
       },
       "table_rate": {
        "value": 0.0,
-       "n": 2,
+       "n": 3,
        "ci_low": 0.0,
-       "ci_high": 0.6576280471103807
+       "ci_high": 0.5615060804490177
       },
       "rated_share": 0.0,
-      "priced_share": 0.4,
-      "own_site_share": 0.4,
-      "listicle_share": 0.42105263157894735,
+      "priced_share": 0.25,
+      "own_site_share": 0.5625,
+      "listicle_share": 0.26666666666666666,
       "hosts_per_answer": {
-       "value": 9.0,
-       "n": 2
+       "value": 9.333333333333334,
+       "n": 3
+      }
+     },
+     "stability": {
+      "value": null,
+      "n": 0
+     }
+    },
+    "chatgpt5": {
+     "asked": 3,
+     "named_rate": {
+      "value": 1.0,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
+      "ci_high": 1.0
+     },
+     "searched_rate": {
+      "value": 0.6666666666666666,
+      "n": 3,
+      "ci_low": 0.20765495512648796,
+      "ci_high": 0.9385096847238394
+     },
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 20,
+       "share": 0.9523809523809523
+      },
+      {
+       "family": "Google",
+       "count": 1,
+       "share": 0.047619047619047616
+      }
+     ],
+     "choosing": {
+      "candidates": {
+       "value": 7.666666666666667,
+       "n": 3
+      },
+      "pick_rate": {
+       "value": 0.6666666666666666,
+       "n": 3,
+       "ci_low": 0.20765495512648796,
+       "ci_high": 0.9385096847238394
+      },
+      "table_rate": {
+       "value": 0.0,
+       "n": 3,
+       "ci_low": 0.0,
+       "ci_high": 0.5615060804490177
+      },
+      "rated_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.21739130434782608,
+      "listicle_share": 0.42857142857142855,
+      "hosts_per_answer": {
+       "value": 4.666666666666667,
+       "n": 3
       }
      },
      "stability": {
@@ -889,7 +1177,7 @@
      }
     },
     "perplexity": {
-     "asked": 2,
+     "asked": 3,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -981,65 +1269,6 @@
      }
     },
     "claude": {
-     "asked": 1,
-     "named_rate": {
-      "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
-      "ci_high": 1.0
-     },
-     "searched_rate": {
-      "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
-      "ci_high": 1.0
-     },
-     "sources": [
-      {
-       "family": "Business sites",
-       "count": 30,
-       "share": 1.0
-      }
-     ],
-     "choosing": {
-      "candidates": {
-       "value": 7.0,
-       "n": 1
-      },
-      "pick_rate": {
-       "value": 1.0,
-       "n": 1,
-       "ci_low": 0.2065432914738929,
-       "ci_high": 1.0
-      },
-      "table_rate": {
-       "value": 0.0,
-       "n": 1,
-       "ci_low": 0.0,
-       "ci_high": 0.7934567085261071
-      },
-      "rated_share": 0.0,
-      "priced_share": 0.5714285714285714,
-      "own_site_share": 0.14285714285714285,
-      "listicle_share": 0.6,
-      "hosts_per_answer": {
-       "value": 13.0,
-       "n": 1
-      }
-     },
-     "stability": {
-      "value": null,
-      "n": 0
-     }
-    }
-   }
-  },
-  {
-   "intent": "travel",
-   "label": "Hotels & travel",
-   "queries": 13,
-   "engines": {
-    "chatgpt": {
      "asked": 2,
      "named_rate": {
       "value": 1.0,
@@ -1055,9 +1284,279 @@
      },
      "sources": [
       {
+       "family": "Business sites",
+       "count": 57,
+       "share": 0.9827586206896551
+      },
+      {
+       "family": "Social",
+       "count": 1,
+       "share": 0.017241379310344827
+      }
+     ],
+     "choosing": {
+      "candidates": {
+       "value": 6.5,
+       "n": 2
+      },
+      "pick_rate": {
+       "value": 1.0,
+       "n": 2,
+       "ci_low": 0.34237195288961925,
+       "ci_high": 1.0
+      },
+      "table_rate": {
+       "value": 0.0,
+       "n": 2,
+       "ci_low": 0.0,
+       "ci_high": 0.6576280471103807
+      },
+      "rated_share": 0.0,
+      "priced_share": 0.5384615384615384,
+      "own_site_share": 0.15384615384615385,
+      "listicle_share": 0.603448275862069,
+      "hosts_per_answer": {
+       "value": 15.5,
+       "n": 2
+      }
+     },
+     "stability": {
+      "value": null,
+      "n": 0
+     }
+    }
+   }
+  },
+  {
+   "intent": "travel",
+   "label": "Hotels & travel",
+   "queries": 13,
+   "engines": {
+    "chatgpt": {
+     "asked": 3,
+     "named_rate": {
+      "value": 1.0,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
+      "ci_high": 1.0
+     },
+     "searched_rate": {
+      "value": 1.0,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
+      "ci_high": 1.0
+     },
+     "sources": [
+      {
        "family": "Google",
-       "count": 12,
+       "count": 18,
        "share": 1.0
+      }
+     ],
+     "choosing": {
+      "candidates": {
+       "value": 6.333333333333333,
+       "n": 3
+      },
+      "pick_rate": {
+       "value": 0.0,
+       "n": 3,
+       "ci_low": 0.0,
+       "ci_high": 0.5615060804490177
+      },
+      "table_rate": {
+       "value": 0.0,
+       "n": 3,
+       "ci_low": 0.0,
+       "ci_high": 0.5615060804490177
+      },
+      "rated_share": 0.15789473684210525,
+      "priced_share": 0.0,
+      "own_site_share": 0.0,
+      "listicle_share": 0.0,
+      "hosts_per_answer": {
+       "value": 1.0,
+       "n": 3
+      }
+     },
+     "stability": {
+      "value": null,
+      "n": 0
+     }
+    },
+    "chatgpt5": {
+     "asked": 3,
+     "named_rate": {
+      "value": 1.0,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
+      "ci_high": 1.0
+     },
+     "searched_rate": {
+      "value": 1.0,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
+      "ci_high": 1.0
+     },
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 17,
+       "share": 0.85
+      },
+      {
+       "family": "Reviews & directories",
+       "count": 3,
+       "share": 0.15
+      }
+     ],
+     "choosing": {
+      "candidates": {
+       "value": 6.333333333333333,
+       "n": 3
+      },
+      "pick_rate": {
+       "value": 0.0,
+       "n": 3,
+       "ci_low": 0.0,
+       "ci_high": 0.5615060804490177
+      },
+      "table_rate": {
+       "value": 0.0,
+       "n": 3,
+       "ci_low": 0.0,
+       "ci_high": 0.5615060804490177
+      },
+      "rated_share": 0.05263157894736842,
+      "priced_share": 0.0,
+      "own_site_share": 0.2631578947368421,
+      "listicle_share": 0.2,
+      "hosts_per_answer": {
+       "value": 5.0,
+       "n": 3
+      }
+     },
+     "stability": {
+      "value": null,
+      "n": 0
+     }
+    },
+    "perplexity": {
+     "asked": 3,
+     "named_rate": {
+      "value": null,
+      "n": 0,
+      "ci_low": null,
+      "ci_high": null
+     },
+     "searched_rate": {
+      "value": null,
+      "n": 0,
+      "ci_low": null,
+      "ci_high": null
+     },
+     "sources": [],
+     "choosing": {
+      "candidates": {
+       "value": null,
+       "n": 0
+      },
+      "pick_rate": {
+       "value": null,
+       "n": 0,
+       "ci_low": null,
+       "ci_high": null
+      },
+      "table_rate": {
+       "value": null,
+       "n": 0,
+       "ci_low": null,
+       "ci_high": null
+      },
+      "rated_share": null,
+      "priced_share": null,
+      "own_site_share": null,
+      "listicle_share": null,
+      "hosts_per_answer": {
+       "value": null,
+       "n": 0
+      }
+     },
+     "stability": {
+      "value": null,
+      "n": 0
+     }
+    },
+    "gemini": {
+     "asked": 0,
+     "named_rate": {
+      "value": null,
+      "n": 0,
+      "ci_low": null,
+      "ci_high": null
+     },
+     "searched_rate": {
+      "value": null,
+      "n": 0,
+      "ci_low": null,
+      "ci_high": null
+     },
+     "sources": [],
+     "choosing": {
+      "candidates": {
+       "value": null,
+       "n": 0
+      },
+      "pick_rate": {
+       "value": null,
+       "n": 0,
+       "ci_low": null,
+       "ci_high": null
+      },
+      "table_rate": {
+       "value": null,
+       "n": 0,
+       "ci_low": null,
+       "ci_high": null
+      },
+      "rated_share": null,
+      "priced_share": null,
+      "own_site_share": null,
+      "listicle_share": null,
+      "hosts_per_answer": {
+       "value": null,
+       "n": 0
+      }
+     },
+     "stability": {
+      "value": null,
+      "n": 0
+     }
+    },
+    "claude": {
+     "asked": 2,
+     "named_rate": {
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
+     },
+     "searched_rate": {
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
+     },
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 40,
+       "share": 0.975609756097561
+      },
+      {
+       "family": "Social",
+       "count": 1,
+       "share": 0.024390243902439025
       }
      ],
      "choosing": {
@@ -1079,160 +1578,11 @@
       },
       "rated_share": 0.16666666666666666,
       "priced_share": 0.0,
-      "own_site_share": 0.0,
-      "listicle_share": 0.0,
-      "hosts_per_answer": {
-       "value": 1.0,
-       "n": 2
-      }
-     },
-     "stability": {
-      "value": null,
-      "n": 0
-     }
-    },
-    "perplexity": {
-     "asked": 2,
-     "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
-     },
-     "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
-     },
-     "sources": [],
-     "choosing": {
-      "candidates": {
-       "value": null,
-       "n": 0
-      },
-      "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
-      },
-      "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
-      },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
-      "hosts_per_answer": {
-       "value": null,
-       "n": 0
-      }
-     },
-     "stability": {
-      "value": null,
-      "n": 0
-     }
-    },
-    "gemini": {
-     "asked": 0,
-     "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
-     },
-     "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
-     },
-     "sources": [],
-     "choosing": {
-      "candidates": {
-       "value": null,
-       "n": 0
-      },
-      "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
-      },
-      "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
-      },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
-      "hosts_per_answer": {
-       "value": null,
-       "n": 0
-      }
-     },
-     "stability": {
-      "value": null,
-      "n": 0
-     }
-    },
-    "claude": {
-     "asked": 1,
-     "named_rate": {
-      "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
-      "ci_high": 1.0
-     },
-     "searched_rate": {
-      "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
-      "ci_high": 1.0
-     },
-     "sources": [
-      {
-       "family": "Business sites",
-       "count": 15,
-       "share": 0.9375
-      },
-      {
-       "family": "Social",
-       "count": 1,
-       "share": 0.0625
-      }
-     ],
-     "choosing": {
-      "candidates": {
-       "value": 6.0,
-       "n": 1
-      },
-      "pick_rate": {
-       "value": 0.0,
-       "n": 1,
-       "ci_low": 0.0,
-       "ci_high": 0.7934567085261071
-      },
-      "table_rate": {
-       "value": 0.0,
-       "n": 1,
-       "ci_low": 0.0,
-       "ci_high": 0.7934567085261071
-      },
-      "rated_share": 0.0,
-      "priced_share": 0.0,
-      "own_site_share": 0.0,
-      "listicle_share": 0.4375,
+      "own_site_share": 0.16666666666666666,
+      "listicle_share": 0.43902439024390244,
       "hosts_per_answer": {
        "value": 9.0,
-       "n": 1
+       "n": 2
       }
      },
      "stability": {
@@ -1248,42 +1598,42 @@
    "queries": 16,
    "engines": {
     "chatgpt": {
-     "asked": 1,
+     "asked": 3,
      "named_rate": {
       "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
       "ci_high": 1.0
      },
      "searched_rate": {
       "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
       "ci_high": 1.0
      },
      "sources": [
       {
        "family": "Google",
-       "count": 6,
+       "count": 15,
        "share": 1.0
       }
      ],
      "choosing": {
       "candidates": {
-       "value": 6.0,
-       "n": 1
+       "value": 5.0,
+       "n": 3
       },
       "pick_rate": {
        "value": 0.0,
-       "n": 1,
+       "n": 3,
        "ci_low": 0.0,
-       "ci_high": 0.7934567085261071
+       "ci_high": 0.5615060804490177
       },
       "table_rate": {
        "value": 0.0,
-       "n": 1,
+       "n": 3,
        "ci_low": 0.0,
-       "ci_high": 0.7934567085261071
+       "ci_high": 0.5615060804490177
       },
       "rated_share": 0.0,
       "priced_share": 0.0,
@@ -1291,7 +1641,64 @@
       "listicle_share": 0.0,
       "hosts_per_answer": {
        "value": 1.0,
-       "n": 1
+       "n": 3
+      }
+     },
+     "stability": {
+      "value": null,
+      "n": 0
+     }
+    },
+    "chatgpt5": {
+     "asked": 3,
+     "named_rate": {
+      "value": 1.0,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
+      "ci_high": 1.0
+     },
+     "searched_rate": {
+      "value": 1.0,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
+      "ci_high": 1.0
+     },
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 29,
+       "share": 0.9666666666666667
+      },
+      {
+       "family": "Social",
+       "count": 1,
+       "share": 0.03333333333333333
+      }
+     ],
+     "choosing": {
+      "candidates": {
+       "value": 7.0,
+       "n": 3
+      },
+      "pick_rate": {
+       "value": 0.0,
+       "n": 3,
+       "ci_low": 0.0,
+       "ci_high": 0.5615060804490177
+      },
+      "table_rate": {
+       "value": 0.0,
+       "n": 3,
+       "ci_low": 0.0,
+       "ci_high": 0.5615060804490177
+      },
+      "rated_share": 0.0,
+      "priced_share": 0.047619047619047616,
+      "own_site_share": 0.09523809523809523,
+      "listicle_share": 0.13333333333333333,
+      "hosts_per_answer": {
+       "value": 7.0,
+       "n": 3
       }
      },
      "stability": {
@@ -1300,7 +1707,7 @@
      }
     },
     "perplexity": {
-     "asked": 1,
+     "asked": 3,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -1461,50 +1868,117 @@
    "queries": 9,
    "engines": {
     "chatgpt": {
-     "asked": 1,
+     "asked": 3,
      "named_rate": {
       "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
       "ci_high": 1.0
      },
      "searched_rate": {
       "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
       "ci_high": 1.0
      },
      "sources": [
       {
        "family": "Google",
-       "count": 3,
-       "share": 1.0
+       "count": 11,
+       "share": 0.55
+      },
+      {
+       "family": "Business sites",
+       "count": 9,
+       "share": 0.45
       }
      ],
      "choosing": {
       "candidates": {
-       "value": 3.0,
-       "n": 1
+       "value": 5.333333333333333,
+       "n": 3
       },
       "pick_rate": {
        "value": 0.0,
-       "n": 1,
+       "n": 3,
        "ci_low": 0.0,
-       "ci_high": 0.7934567085261071
+       "ci_high": 0.5615060804490177
       },
       "table_rate": {
        "value": 0.0,
-       "n": 1,
+       "n": 3,
        "ci_low": 0.0,
-       "ci_high": 0.7934567085261071
+       "ci_high": 0.5615060804490177
       },
       "rated_share": 0.0,
       "priced_share": 0.0,
-      "own_site_share": 0.0,
+      "own_site_share": 0.3125,
+      "listicle_share": 0.1,
+      "hosts_per_answer": {
+       "value": 2.6666666666666665,
+       "n": 3
+      }
+     },
+     "stability": {
+      "value": null,
+      "n": 0
+     }
+    },
+    "chatgpt5": {
+     "asked": 2,
+     "named_rate": {
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
+     },
+     "searched_rate": {
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
+     },
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 8,
+       "share": 0.6666666666666666
+      },
+      {
+       "family": "Reviews & directories",
+       "count": 3,
+       "share": 0.25
+      },
+      {
+       "family": "News & magazines",
+       "count": 1,
+       "share": 0.08333333333333333
+      }
+     ],
+     "choosing": {
+      "candidates": {
+       "value": 5.0,
+       "n": 2
+      },
+      "pick_rate": {
+       "value": 0.0,
+       "n": 2,
+       "ci_low": 0.0,
+       "ci_high": 0.6576280471103807
+      },
+      "table_rate": {
+       "value": 0.0,
+       "n": 2,
+       "ci_low": 0.0,
+       "ci_high": 0.6576280471103807
+      },
+      "rated_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.3,
       "listicle_share": 0.0,
       "hosts_per_answer": {
-       "value": 1.0,
-       "n": 1
+       "value": 4.5,
+       "n": 2
       }
      },
      "stability": {
@@ -1513,7 +1987,7 @@
      }
     },
     "perplexity": {
-     "asked": 1,
+     "asked": 3,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -1669,50 +2143,107 @@
    "queries": 9,
    "engines": {
     "chatgpt": {
-     "asked": 1,
+     "asked": 3,
      "named_rate": {
       "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
       "ci_high": 1.0
      },
      "searched_rate": {
       "value": 1.0,
-      "n": 1,
-      "ci_low": 0.2065432914738929,
+      "n": 3,
+      "ci_low": 0.43849391955098227,
       "ci_high": 1.0
      },
      "sources": [
       {
        "family": "Google",
-       "count": 3,
+       "count": 10,
+       "share": 0.5555555555555556
+      },
+      {
+       "family": "Business sites",
+       "count": 8,
+       "share": 0.4444444444444444
+      }
+     ],
+     "choosing": {
+      "candidates": {
+       "value": 6.0,
+       "n": 3
+      },
+      "pick_rate": {
+       "value": 0.0,
+       "n": 3,
+       "ci_low": 0.0,
+       "ci_high": 0.5615060804490177
+      },
+      "table_rate": {
+       "value": 0.0,
+       "n": 3,
+       "ci_low": 0.0,
+       "ci_high": 0.5615060804490177
+      },
+      "rated_share": 0.0,
+      "priced_share": 0.1111111111111111,
+      "own_site_share": 0.3333333333333333,
+      "listicle_share": 0.0,
+      "hosts_per_answer": {
+       "value": 3.3333333333333335,
+       "n": 3
+      }
+     },
+     "stability": {
+      "value": null,
+      "n": 0
+     }
+    },
+    "chatgpt5": {
+     "asked": 2,
+     "named_rate": {
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
+     },
+     "searched_rate": {
+      "value": 1.0,
+      "n": 2,
+      "ci_low": 0.34237195288961925,
+      "ci_high": 1.0
+     },
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 15,
        "share": 1.0
       }
      ],
      "choosing": {
       "candidates": {
-       "value": 3.0,
-       "n": 1
+       "value": 5.5,
+       "n": 2
       },
       "pick_rate": {
        "value": 0.0,
-       "n": 1,
+       "n": 2,
        "ci_low": 0.0,
-       "ci_high": 0.7934567085261071
+       "ci_high": 0.6576280471103807
       },
       "table_rate": {
        "value": 0.0,
-       "n": 1,
+       "n": 2,
        "ci_low": 0.0,
-       "ci_high": 0.7934567085261071
+       "ci_high": 0.6576280471103807
       },
       "rated_share": 0.0,
-      "priced_share": 0.3333333333333333,
-      "own_site_share": 0.0,
+      "priced_share": 0.0,
+      "own_site_share": 0.9090909090909091,
       "listicle_share": 0.0,
       "hosts_per_answer": {
-       "value": 1.0,
-       "n": 1
+       "value": 6.0,
+       "n": 2
       }
      },
      "stability": {
@@ -1721,7 +2252,7 @@
      }
     },
     "perplexity": {
-     "asked": 1,
+     "asked": 3,
      "named_rate": {
       "value": null,
       "n": 0,
@@ -1813,44 +2344,50 @@
      }
     },
     "claude": {
-     "asked": 0,
+     "asked": 1,
      "named_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
      "searched_rate": {
-      "value": null,
-      "n": 0,
-      "ci_low": null,
-      "ci_high": null
+      "value": 1.0,
+      "n": 1,
+      "ci_low": 0.2065432914738929,
+      "ci_high": 1.0
      },
-     "sources": [],
+     "sources": [
+      {
+       "family": "Business sites",
+       "count": 17,
+       "share": 1.0
+      }
+     ],
      "choosing": {
       "candidates": {
-       "value": null,
-       "n": 0
+       "value": 7.0,
+       "n": 1
       },
       "pick_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
       "table_rate": {
-       "value": null,
-       "n": 0,
-       "ci_low": null,
-       "ci_high": null
+       "value": 0.0,
+       "n": 1,
+       "ci_low": 0.0,
+       "ci_high": 0.7934567085261071
       },
-      "rated_share": null,
-      "priced_share": null,
-      "own_site_share": null,
-      "listicle_share": null,
+      "rated_share": 0.0,
+      "priced_share": 0.14285714285714285,
+      "own_site_share": 0.7142857142857143,
+      "listicle_share": 0.0,
       "hosts_per_answer": {
-       "value": null,
-       "n": 0
+       "value": 9.0,
+       "n": 1
       }
      },
      "stability": {
@@ -1865,6 +2402,14 @@
   "gemini": "no GOOGLE_API_KEY"
  },
  "overlap": [
+  {
+   "a": "chatgpt",
+   "b": "chatgpt5",
+   "jaccard": {
+    "value": 0.08042901542901543,
+    "n": 25
+   }
+  },
   {
    "a": "chatgpt",
    "b": "perplexity",
@@ -1885,7 +2430,31 @@
    "a": "chatgpt",
    "b": "claude",
    "jaccard": {
-    "value": 0.05668449197860963,
+    "value": 0.05866620752984389,
+    "n": 22
+   }
+  },
+  {
+   "a": "chatgpt5",
+   "b": "perplexity",
+   "jaccard": {
+    "value": null,
+    "n": 0
+   }
+  },
+  {
+   "a": "chatgpt5",
+   "b": "gemini",
+   "jaccard": {
+    "value": null,
+    "n": 0
+   }
+  },
+  {
+   "a": "chatgpt5",
+   "b": "claude",
+   "jaccard": {
+    "value": 0.05859499977147036,
     "n": 17
    }
   },
@@ -1916,6 +2485,24 @@
  ],
  "top_names": [
   {
+   "name": "Adidas Israel",
+   "mentions": 3,
+   "engines": [
+    "chatgpt",
+    "chatgpt5",
+    "claude"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "runninggear"
+   ],
+   "intents": [
+    "ecommerce"
+   ]
+  },
+  {
    "name": "Boostify",
    "mentions": 3,
    "engines": [
@@ -1931,6 +2518,23 @@
    ],
    "intents": [
     "b2b"
+   ]
+  },
+  {
+   "name": "Corinthia Lisbon",
+   "mentions": 3,
+   "engines": [
+    "chatgpt5",
+    "claude"
+   ],
+   "cities": [
+    "Lisbon"
+   ],
+   "categories": [
+    "hotel"
+   ],
+   "intents": [
+    "travel"
    ]
   },
   {
@@ -2006,23 +2610,6 @@
    ]
   },
   {
-   "name": "Adidas Israel",
-   "mentions": 2,
-   "engines": [
-    "chatgpt",
-    "chatgpt5"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "runninggear"
-   ],
-   "intents": [
-    "ecommerce"
-   ]
-  },
-  {
    "name": "AlmaLusa Baixa/Chiado",
    "mentions": 2,
    "engines": [
@@ -2037,6 +2624,23 @@
    ],
    "intents": [
     "travel"
+   ]
+  },
+  {
+   "name": "BDO Israel",
+   "mentions": 2,
+   "engines": [
+    "chatgpt5"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "cpa",
+    "payroll"
+   ],
+   "intents": [
+    "b2b"
    ]
   },
   {
@@ -2070,6 +2674,24 @@
     "coffee"
    ],
    "intents": [
+    "local"
+   ]
+  },
+  {
+   "name": "Cleo Botanica",
+   "mentions": 2,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "florist",
+    "flowers"
+   ],
+   "intents": [
+    "ecommerce",
     "local"
    ]
   },
@@ -2108,6 +2730,75 @@
    ]
   },
   {
+   "name": "EPIC SANA Lisboa Hotel",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "claude"
+   ],
+   "cities": [
+    "Lisbon"
+   ],
+   "categories": [
+    "hotel"
+   ],
+   "intents": [
+    "travel"
+   ]
+  },
+  {
+   "name": "ERB Proximo",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "chatgpt5"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "cpa"
+   ],
+   "intents": [
+    "b2b"
+   ]
+  },
+  {
+   "name": "Flowers4TelAviv",
+   "mentions": 2,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "florist",
+    "flowers"
+   ],
+   "intents": [
+    "ecommerce",
+    "local"
+   ]
+  },
+  {
+   "name": "Four Seasons Hotel Ritz Lisbon",
+   "mentions": 2,
+   "engines": [
+    "chatgpt5",
+    "claude"
+   ],
+   "cities": [
+    "Lisbon"
+   ],
+   "categories": [
+    "hotel"
+   ],
+   "intents": [
+    "travel"
+   ]
+  },
+  {
    "name": "HYBRID",
    "mentions": 2,
    "engines": [
@@ -2122,6 +2813,60 @@
    ],
    "intents": [
     "b2b"
+   ]
+  },
+  {
+   "name": "Hemda Flowers",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "chatgpt5"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "florist",
+    "flowers"
+   ],
+   "intents": [
+    "ecommerce",
+    "local"
+   ]
+  },
+  {
+   "name": "House of Flowers TLV",
+   "mentions": 2,
+   "engines": [
+    "chatgpt"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "florist",
+    "flowers"
+   ],
+   "intents": [
+    "ecommerce",
+    "local"
+   ]
+  },
+  {
+   "name": "Irit Flowers",
+   "mentions": 2,
+   "engines": [
+    "chatgpt",
+    "chatgpt5"
+   ],
+   "cities": [
+    "Tel Aviv"
+   ],
+   "categories": [
+    "flowers"
+   ],
+   "intents": [
+    "ecommerce"
    ]
   },
   {
@@ -2173,173 +2918,6 @@
    ],
    "intents": [
     "travel"
-   ]
-  },
-  {
-   "name": "Nahat Coffee",
-   "mentions": 2,
-   "engines": [
-    "chatgpt",
-    "claude"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "coffee"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Phil & Joe",
-   "mentions": 2,
-   "engines": [
-    "chatgpt",
-    "chatgpt5"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "hair"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Pronto",
-   "mentions": 2,
-   "engines": [
-    "chatgpt5",
-    "claude"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "italian"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "Sony WH-CH720N",
-   "mentions": 2,
-   "engines": [
-    "chatgpt",
-    "chatgpt5"
-   ],
-   "cities": [
-    "Israel"
-   ],
-   "categories": [
-    "headphones"
-   ],
-   "intents": [
-    "product"
-   ]
-  },
-  {
-   "name": "Tachtit Café",
-   "mentions": 2,
-   "engines": [
-    "chatgpt",
-    "claude"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "coffee"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "The Lumiares",
-   "mentions": 2,
-   "engines": [
-    "chatgpt",
-    "chatgpt5"
-   ],
-   "cities": [
-    "Lisbon"
-   ],
-   "categories": [
-    "hotel"
-   ],
-   "intents": [
-    "travel"
-   ]
-  },
-  {
-   "name": "Triyoga",
-   "mentions": 2,
-   "engines": [
-    "chatgpt5",
-    "claude"
-   ],
-   "cities": [
-    "London"
-   ],
-   "categories": [
-    "yoga"
-   ],
-   "intents": [
-    "local"
-   ]
-  },
-  {
-   "name": "1908 Lisboa Hotel",
-   "mentions": 1,
-   "engines": [
-    "chatgpt5"
-   ],
-   "cities": [
-    "Lisbon"
-   ],
-   "categories": [
-    "hotel"
-   ],
-   "intents": [
-    "travel"
-   ]
-  },
-  {
-   "name": "1More SonoFlow Pro HQ51",
-   "mentions": 1,
-   "engines": [
-    "chatgpt"
-   ],
-   "cities": [
-    "Israel"
-   ],
-   "categories": [
-    "headphones"
-   ],
-   "intents": [
-    "product"
-   ]
-  },
-  {
-   "name": "A salon featuring Tal",
-   "mentions": 1,
-   "engines": [
-    "claude"
-   ],
-   "cities": [
-    "Tel Aviv"
-   ],
-   "categories": [
-    "hair"
-   ],
-   "intents": [
-    "local"
    ]
   }
  ],
@@ -2485,6 +3063,111 @@
         "Tzuri'El Yafei",
         "Amnon",
         "Baruch The Plumber"
+       ]
+      }
+     ]
+    },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 1,
+      "cited": 1
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": true,
+       "names": [
+        "Oren Reda",
+        "Altar",
+        "A.S. / Eli",
+        "Shlomi / “שלומי שירותי אינסטלציה"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Maor / “Maor Plumber Tel Aviv",
+        "Yosi",
+        "Ma s ter Fix / מאסטר פיקס אינסטלציה",
+        "Tel"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Hartek",
+        "Israel Stamker",
+        "Abba Chaim / \"אבא חיים",
+        "The Center For Leak Detection",
+        "Eli HaGingi",
+        "Maor"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": true,
+       "cited": false,
+       "names": [
+        "Avi Mizrachi",
+        "Ran “The Plumber",
+        "Maor Plumbing / “Maor שירותי אינסטלציה",
+        "Israel Stamker",
+        "Oren Rada / “אורן רדה אינסטלציה"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Maor",
+        "The Center for Leak Detection",
+        "Israel Stamker / “Pro Team",
+        "Aviv Mizrachi",
+        "Ran",
+        "LocalIsrael aggregated list"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Plumber nuni",
+        "Plumber Abba Chaim",
+        "Shlomo The Plumber",
+        "Aharon",
+        "Eli Express Plumber"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "אינסטלטור במרכז אלי",
+        "גולן פתרונות אינסטלציה",
+        "ברק שירותי אינסטלציה",
+        "The Center For Leak Detection",
+        "Shlomo The Plumber"
        ]
       }
      ]
@@ -2732,6 +3415,111 @@
       }
      ]
     },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Oren Reda",
+        "Altar",
+        "A.S. / Eli",
+        "Shlomi / “שלומי שירותי אינסטלציה"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Maor / “Maor Plumber Tel Aviv",
+        "Yosi",
+        "Ma s ter Fix / מאסטר פיקס אינסטלציה",
+        "Tel"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Hartek",
+        "Israel Stamker",
+        "Abba Chaim / \"אבא חיים",
+        "The Center For Leak Detection",
+        "Eli HaGingi",
+        "Maor"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Avi Mizrachi",
+        "Ran “The Plumber",
+        "Maor Plumbing / “Maor שירותי אינסטלציה",
+        "Israel Stamker",
+        "Oren Rada / “אורן רדה אינסטלציה"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Maor",
+        "The Center for Leak Detection",
+        "Israel Stamker / “Pro Team",
+        "Aviv Mizrachi",
+        "Ran",
+        "LocalIsrael aggregated list"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Plumber nuni",
+        "Plumber Abba Chaim",
+        "Shlomo The Plumber",
+        "Aharon",
+        "Eli Express Plumber"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "אינסטלטור במרכז אלי",
+        "גולן פתרונות אינסטלציה",
+        "ברק שירותי אינסטלציה",
+        "The Center For Leak Detection",
+        "Shlomo The Plumber"
+       ]
+      }
+     ]
+    },
     "perplexity": {
      "before": {
       "n": 0,
@@ -2975,6 +3763,111 @@
       }
      ]
     },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Oren Reda",
+        "Altar",
+        "A.S. / Eli",
+        "Shlomi / “שלומי שירותי אינסטלציה"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Maor / “Maor Plumber Tel Aviv",
+        "Yosi",
+        "Ma s ter Fix / מאסטר פיקס אינסטלציה",
+        "Tel"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Hartek",
+        "Israel Stamker",
+        "Abba Chaim / \"אבא חיים",
+        "The Center For Leak Detection",
+        "Eli HaGingi",
+        "Maor"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Avi Mizrachi",
+        "Ran “The Plumber",
+        "Maor Plumbing / “Maor שירותי אינסטלציה",
+        "Israel Stamker",
+        "Oren Rada / “אורן רדה אינסטלציה"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Maor",
+        "The Center for Leak Detection",
+        "Israel Stamker / “Pro Team",
+        "Aviv Mizrachi",
+        "Ran",
+        "LocalIsrael aggregated list"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Plumber nuni",
+        "Plumber Abba Chaim",
+        "Shlomo The Plumber",
+        "Aharon",
+        "Eli Express Plumber"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-plumber",
+       "named": false,
+       "cited": false,
+       "names": [
+        "אינסטלטור במרכז אלי",
+        "גולן פתרונות אינסטלציה",
+        "ברק שירותי אינסטלציה",
+        "The Center For Leak Detection",
+        "Shlomo The Plumber"
+       ]
+      }
+     ]
+    },
     "perplexity": {
      "before": {
       "n": 0,
@@ -3212,6 +4105,120 @@
         "Cafe Italia",
         "Juvani TLV",
         "Pomo"
+       ]
+      }
+     ]
+    },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Pronto",
+        "Cucina Hess",
+        "Taverna Romana",
+        "POMO",
+        "Olivery",
+        "Cicchetti",
+        "Weekends and Friday nights fill up fast"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Toto",
+        "Magazzino",
+        "Cicchetti",
+        "Gemma",
+        "Piano Piano",
+        "Olio / other popular local Italian spots"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Olio",
+        "Cicchetti",
+        "Pronto"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Cucina Hess",
+        "Where",
+        "Taverna Romana",
+        "La Lasagna",
+        "Boccaccio",
+        "Guido",
+        "Rustico / Magazzino"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Olio",
+        "Gemma",
+        "Cucina Hess",
+        "Taverna Romana",
+        "Piano Piano"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Pronto",
+        "Gemma",
+        "Piano Piano",
+        "Cicchetti",
+        "Olio"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Upscale Italian",
+        "Pronto",
+        "Gemma",
+        "Charming",
+        "Cicchetti",
+        "Small‑plates Italian",
+        "Olio"
        ]
       }
      ]
@@ -3514,6 +4521,120 @@
       }
      ]
     },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Pronto",
+        "Cucina Hess",
+        "Taverna Romana",
+        "POMO",
+        "Olivery",
+        "Cicchetti",
+        "Weekends and Friday nights fill up fast"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Toto",
+        "Magazzino",
+        "Cicchetti",
+        "Gemma",
+        "Piano Piano",
+        "Olio / other popular local Italian spots"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Olio",
+        "Cicchetti",
+        "Pronto"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Cucina Hess",
+        "Where",
+        "Taverna Romana",
+        "La Lasagna",
+        "Boccaccio",
+        "Guido",
+        "Rustico / Magazzino"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Olio",
+        "Gemma",
+        "Cucina Hess",
+        "Taverna Romana",
+        "Piano Piano"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Pronto",
+        "Gemma",
+        "Piano Piano",
+        "Cicchetti",
+        "Olio"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Upscale Italian",
+        "Pronto",
+        "Gemma",
+        "Charming",
+        "Cicchetti",
+        "Small‑plates Italian",
+        "Olio"
+       ]
+      }
+     ]
+    },
     "perplexity": {
      "before": {
       "n": 0,
@@ -3812,6 +4933,120 @@
       }
      ]
     },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Pronto",
+        "Cucina Hess",
+        "Taverna Romana",
+        "POMO",
+        "Olivery",
+        "Cicchetti",
+        "Weekends and Friday nights fill up fast"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Toto",
+        "Magazzino",
+        "Cicchetti",
+        "Gemma",
+        "Piano Piano",
+        "Olio / other popular local Italian spots"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Olio",
+        "Cicchetti",
+        "Pronto"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Cucina Hess",
+        "Where",
+        "Taverna Romana",
+        "La Lasagna",
+        "Boccaccio",
+        "Guido",
+        "Rustico / Magazzino"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Olio",
+        "Gemma",
+        "Cucina Hess",
+        "Taverna Romana",
+        "Piano Piano"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Pronto",
+        "Gemma",
+        "Piano Piano",
+        "Cicchetti",
+        "Olio"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-italian",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Magazzino",
+        "Upscale Italian",
+        "Pronto",
+        "Gemma",
+        "Charming",
+        "Cicchetti",
+        "Small‑plates Italian",
+        "Olio"
+       ]
+      }
+     ]
+    },
     "perplexity": {
      "before": {
       "n": 0,
@@ -4090,6 +5325,112 @@
       }
      ]
     },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "triyoga",
+        "The Life Centre",
+        "Iyengar Yoga Institute South London",
+        "Millpond Yoga",
+        "The Radiant Hand",
+        "Local/community studios listed on Namaspot / What’s Glowing"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "Iyengar Yoga London",
+        "Indaba Yoga Studio",
+        "Yogarise",
+        "Putney / local Iyengar"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "MoreYoga",
+        "hum London",
+        "Iyengar Yoga Institute South London",
+        "Tribe Yoga"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "The Life Centre",
+        "MoreYoga",
+        "Mission",
+        "Oca London",
+        "Iyengar Yoga London"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "MoreYoga",
+        "Frame",
+        "Yogarise",
+        "Namaspot"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "triyoga",
+        "The Life Centre",
+        "Mission",
+        "MoreYoga",
+        "Millpond Yoga"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "The Life Centre",
+        "Iyengar Yoga London",
+        "Mission E1",
+        "Indaba Yoga Studio"
+       ]
+      }
+     ]
+    },
     "perplexity": {
      "before": {
       "n": 0,
@@ -4353,6 +5694,112 @@
         "Mudra Yoga London",
         "MoreYoga Clapham Junction",
         "Iyengar Yoga London"
+       ]
+      }
+     ]
+    },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "triyoga",
+        "The Life Centre",
+        "Iyengar Yoga Institute South London",
+        "Millpond Yoga",
+        "The Radiant Hand",
+        "Local/community studios listed on Namaspot / What’s Glowing"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "Iyengar Yoga London",
+        "Indaba Yoga Studio",
+        "Yogarise",
+        "Putney / local Iyengar"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "MoreYoga",
+        "hum London",
+        "Iyengar Yoga Institute South London",
+        "Tribe Yoga"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "The Life Centre",
+        "MoreYoga",
+        "Mission",
+        "Oca London",
+        "Iyengar Yoga London"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "MoreYoga",
+        "Frame",
+        "Yogarise",
+        "Namaspot"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "triyoga",
+        "The Life Centre",
+        "Mission",
+        "MoreYoga",
+        "Millpond Yoga"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "The Life Centre",
+        "Iyengar Yoga London",
+        "Mission E1",
+        "Indaba Yoga Studio"
        ]
       }
      ]
@@ -4624,6 +6071,112 @@
       }
      ]
     },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "triyoga",
+        "The Life Centre",
+        "Iyengar Yoga Institute South London",
+        "Millpond Yoga",
+        "The Radiant Hand",
+        "Local/community studios listed on Namaspot / What’s Glowing"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "Iyengar Yoga London",
+        "Indaba Yoga Studio",
+        "Yogarise",
+        "Putney / local Iyengar"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "MoreYoga",
+        "hum London",
+        "Iyengar Yoga Institute South London",
+        "Tribe Yoga"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "The Life Centre",
+        "MoreYoga",
+        "Mission",
+        "Oca London",
+        "Iyengar Yoga London"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "MoreYoga",
+        "Frame",
+        "Yogarise",
+        "Namaspot"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "triyoga",
+        "The Life Centre",
+        "Mission",
+        "MoreYoga",
+        "Millpond Yoga"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "ldn-yoga",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Triyoga",
+        "The Life Centre",
+        "Iyengar Yoga London",
+        "Mission E1",
+        "Indaba Yoga Studio"
+       ]
+      }
+     ]
+    },
     "perplexity": {
      "before": {
       "n": 0,
@@ -4885,6 +6438,106 @@
       }
      ]
     },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Smile Lab NYC",
+        "Highline Dental Practice",
+        "Madison Dental Loft / Madison Dental",
+        "National Dental Manhattan",
+        "NYU College of Dentistry"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": []
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Park 56 Dental",
+        "Where",
+        "Source",
+        "Pearl Dental NYC",
+        "Manhattan Dental Design",
+        "Downtown Dental NYC / Downtown Dental",
+        "NYU Langone Dental"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Pearl Dental NYC",
+        "Midtown Restorative Dentistry",
+        "Manhattan Dental Spa",
+        "NYU Dentistry / NYU College of Dentistry",
+        "Centre Dental / City Smiles Dental"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "TriBeCa Dental Associates",
+        "Levy Dental Arts",
+        "Manhattan Dental Care / Midtown practices",
+        "Bowery Dental"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "NYU Langone",
+        "Centre Dental",
+        "West Soho Dentistry / Gentle Dental Care",
+        "Dental 365"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Dr. Eric Chason",
+        "Dr. Yookyung",
+        "Dr. Andrew S. Deutch",
+        "Dr. Brandon Huang",
+        "Dr. David Musheyev",
+        "Dr. Lana Rozenberg"
+       ]
+      }
+     ]
+    },
     "perplexity": {
      "before": {
       "n": 0,
@@ -5096,6 +6749,106 @@
       }
      ]
     },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Smile Lab NYC",
+        "Highline Dental Practice",
+        "Madison Dental Loft / Madison Dental",
+        "National Dental Manhattan",
+        "NYU College of Dentistry"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": []
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Park 56 Dental",
+        "Where",
+        "Source",
+        "Pearl Dental NYC",
+        "Manhattan Dental Design",
+        "Downtown Dental NYC / Downtown Dental",
+        "NYU Langone Dental"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Pearl Dental NYC",
+        "Midtown Restorative Dentistry",
+        "Manhattan Dental Spa",
+        "NYU Dentistry / NYU College of Dentistry",
+        "Centre Dental / City Smiles Dental"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "TriBeCa Dental Associates",
+        "Levy Dental Arts",
+        "Manhattan Dental Care / Midtown practices",
+        "Bowery Dental"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "NYU Langone",
+        "Centre Dental",
+        "West Soho Dentistry / Gentle Dental Care",
+        "Dental 365"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Dr. Eric Chason",
+        "Dr. Yookyung",
+        "Dr. Andrew S. Deutch",
+        "Dr. Brandon Huang",
+        "Dr. David Musheyev",
+        "Dr. Lana Rozenberg"
+       ]
+      }
+     ]
+    },
     "perplexity": {
      "before": {
       "n": 0,
@@ -5303,6 +7056,106 @@
         "Centre Dental",
         "Smile Lab NYC",
         "Vitta Dental"
+       ]
+      }
+     ]
+    },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Smile Lab NYC",
+        "Highline Dental Practice",
+        "Madison Dental Loft / Madison Dental",
+        "National Dental Manhattan",
+        "NYU College of Dentistry"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": []
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Park 56 Dental",
+        "Where",
+        "Source",
+        "Pearl Dental NYC",
+        "Manhattan Dental Design",
+        "Downtown Dental NYC / Downtown Dental",
+        "NYU Langone Dental"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Pearl Dental NYC",
+        "Midtown Restorative Dentistry",
+        "Manhattan Dental Spa",
+        "NYU Dentistry / NYU College of Dentistry",
+        "Centre Dental / City Smiles Dental"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "TriBeCa Dental Associates",
+        "Levy Dental Arts",
+        "Manhattan Dental Care / Midtown practices",
+        "Bowery Dental"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "NYU Langone",
+        "Centre Dental",
+        "West Soho Dentistry / Gentle Dental Care",
+        "Dental 365"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "nyc-dentist",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Dr. Eric Chason",
+        "Dr. Yookyung",
+        "Dr. Andrew S. Deutch",
+        "Dr. Brandon Huang",
+        "Dr. David Musheyev",
+        "Dr. Lana Rozenberg"
        ]
       }
      ]
@@ -5536,6 +7389,116 @@
         "Phil & Joe",
         "CaliTLV Hair Studio by Marisa Bhojak",
         "Dawn Salon at David Kempinski Tel Aviv"
+       ]
+      }
+     ]
+    },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Zeev Levin Salon",
+        "Dawn",
+        "Haus of Hair",
+        "Hair & Co / Nathan Jeffrey",
+        "Shaffa"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Zeev Levin Salon",
+        "Shaffa Hairdresser",
+        "Liron Cohen Studio",
+        "Mipelo",
+        "Motia Rubin Hair Design"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Shaffa Hairdresser",
+        "Phil & Joe",
+        "Transition Salons",
+        "Barak Shoshan Hair Design",
+        "Hair & Co / Nathan Jeffrey",
+        "Studio Hafif / Studio Hapif"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Dawn Hair Salon",
+        "Tomer Ben Simon / Hair Design",
+        "Anna Hair Salon",
+        "Hair & Co / Nathan Jeffrey",
+        "Book"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Shaffa Hairdresser",
+        "Tomer Ben Simon Hair Design",
+        "Transition Salons",
+        "Lichtenshtein / Rosh Gadol"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Zeev Levin Salon",
+        "Dawn Hair Salon",
+        "YBYT / Ybytlv",
+        "Hair & Co / Nathan Jeffrey",
+        "Shaffa"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Tomer Ben Simon",
+        "Dawn",
+        "Shaffa",
+        "Hair & Co / Nathan Jeffrey",
+        "Anna Hair"
        ]
       }
      ]
@@ -5845,6 +7808,116 @@
       }
      ]
     },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Zeev Levin Salon",
+        "Dawn",
+        "Haus of Hair",
+        "Hair & Co / Nathan Jeffrey",
+        "Shaffa"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Zeev Levin Salon",
+        "Shaffa Hairdresser",
+        "Liron Cohen Studio",
+        "Mipelo",
+        "Motia Rubin Hair Design"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Shaffa Hairdresser",
+        "Phil & Joe",
+        "Transition Salons",
+        "Barak Shoshan Hair Design",
+        "Hair & Co / Nathan Jeffrey",
+        "Studio Hafif / Studio Hapif"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Dawn Hair Salon",
+        "Tomer Ben Simon / Hair Design",
+        "Anna Hair Salon",
+        "Hair & Co / Nathan Jeffrey",
+        "Book"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Shaffa Hairdresser",
+        "Tomer Ben Simon Hair Design",
+        "Transition Salons",
+        "Lichtenshtein / Rosh Gadol"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Zeev Levin Salon",
+        "Dawn Hair Salon",
+        "YBYT / Ybytlv",
+        "Hair & Co / Nathan Jeffrey",
+        "Shaffa"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Tomer Ben Simon",
+        "Dawn",
+        "Shaffa",
+        "Hair & Co / Nathan Jeffrey",
+        "Anna Hair"
+       ]
+      }
+     ]
+    },
     "perplexity": {
      "before": {
       "n": 0,
@@ -6150,6 +8223,116 @@
       }
      ]
     },
+    "chatgpt5": {
+     "before": {
+      "n": 7,
+      "named": 0,
+      "cited": 0
+     },
+     "after": {
+      "n": 0,
+      "named": 0,
+      "cited": 0
+     },
+     "series": [
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Zeev Levin Salon",
+        "Dawn",
+        "Haus of Hair",
+        "Hair & Co / Nathan Jeffrey",
+        "Shaffa"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Zeev Levin Salon",
+        "Shaffa Hairdresser",
+        "Liron Cohen Studio",
+        "Mipelo",
+        "Motia Rubin Hair Design"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Shaffa Hairdresser",
+        "Phil & Joe",
+        "Transition Salons",
+        "Barak Shoshan Hair Design",
+        "Hair & Co / Nathan Jeffrey",
+        "Studio Hafif / Studio Hapif"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Dawn Hair Salon",
+        "Tomer Ben Simon / Hair Design",
+        "Anna Hair Salon",
+        "Hair & Co / Nathan Jeffrey",
+        "Book"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Shaffa Hairdresser",
+        "Tomer Ben Simon Hair Design",
+        "Transition Salons",
+        "Lichtenshtein / Rosh Gadol"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Zeev Levin Salon",
+        "Dawn Hair Salon",
+        "YBYT / Ybytlv",
+        "Hair & Co / Nathan Jeffrey",
+        "Shaffa"
+       ]
+      },
+      {
+       "t": "2026-11-25T14:13:43.290537+00:00",
+       "q": "tlv-hair",
+       "named": false,
+       "cited": false,
+       "names": [
+        "Phil & Joe",
+        "Tomer Ben Simon",
+        "Dawn",
+        "Shaffa",
+        "Hair & Co / Nathan Jeffrey",
+        "Anna Hair"
+       ]
+      }
+     ]
+    },
     "perplexity": {
      "before": {
       "n": 0,
@@ -6343,6 +8526,20 @@
      "searched": true,
      "asked_at": "2026-11-25T14:13:43.290537+00:00"
     },
+    "chatgpt5": {
+     "names": [
+      "אינסטלטור במרכז אלי",
+      "גולן פתרונות אינסטלציה",
+      "ברק שירותי אינסטלציה",
+      "The Center For Leak Detection",
+      "Shlomo The Plumber"
+     ],
+     "sources": [
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T14:13:43.290537+00:00"
+    },
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
@@ -6375,6 +8572,22 @@
      ],
      "sources": [
       "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Anker / Soundcore Space Q45",
+      "Anker / Soundcore Life Q35",
+      "Sennheiser HD 450BT",
+      "Sony WH‑CH720N",
+      "JBL Tune / JBL T750",
+      "Effective ANC"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
      ],
      "searched": true,
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
@@ -6424,6 +8637,21 @@
      "searched": true,
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
+    "chatgpt5": {
+     "names": [
+      "Integrations",
+      "HubSpot CRM",
+      "Pipedrive",
+      "Zoho CRM",
+      "Monday.com CRM",
+      "ActiveCampaign",
+      "Copper CRM",
+      "Salesforce Essentials"
+     ],
+     "sources": [],
+     "searched": false,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
@@ -6467,6 +8695,23 @@
      ],
      "sources": [
       "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Memmo Alfama",
+      "Memmo Príncipe Real",
+      "AlmaLusa Baixa/Chiado",
+      "The Lumiares",
+      "Santiago de Alfama",
+      "LX Boutique Hotel",
+      "1908 Lisboa Hotel"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
      ],
      "searched": true,
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
@@ -6518,6 +8763,20 @@
      "searched": true,
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
+    "chatgpt5": {
+     "names": [
+      "Boostify",
+      "Dominatecom",
+      "CHERRY",
+      "HYBRID",
+      "Sitrus / Convo / UL‑UX Studio"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
@@ -6558,6 +8817,23 @@
      ],
      "sources": [
       "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Le Wagon",
+      "John Bryce / John Bryce College",
+      "Coding Academy",
+      "Deploy Academy / Deploy TLV",
+      "Israel Tech Challenge",
+      "Language",
+      "Outcomes"
+     ],
+     "sources": [
+      "Business sites",
+      "News & magazines"
      ],
      "searched": true,
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
@@ -6604,12 +8880,42 @@
      "searched": true,
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
+    "chatgpt5": {
+     "names": [
+      "Decathlon Israel",
+      "Nike Israel",
+      "adidas Israel",
+      "Under Armour Israel",
+      "Motion Lab / local running boutiques",
+      "Amazon"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
     "gemini": null,
-    "claude": null
+    "claude": {
+     "names": [
+      "Adidas Israel",
+      "HOKA Israel",
+      "On Running Israel",
+      "Asics Store Israel",
+      "Next Israel",
+      "International Option",
+      "Sports Direct"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    }
    }
   },
   {
@@ -6635,12 +8941,44 @@
      "searched": true,
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
+    "chatgpt5": {
+     "names": [
+      "דניאל",
+      "סרגיי",
+      "סופר שרברב / סופר אינסטלטור",
+      "יוסי",
+      "אחיה ארד",
+      "להתמקד באזור מסוים בחיפה"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
     "gemini": null,
-    "claude": null
+    "claude": {
+     "names": [
+      "גוגל מפות (Google Maps)",
+      "וויז (Waze)",
+      "יד2 (Yad2)",
+      "הומגן (Homgn)",
+      "בקשה מחברים ודיירים",
+      "הסתכלות בפייסבוק קבוצות מקומיות",
+      "ביקורות חיוביות",
+      "רישיון תקין",
+      "אמינות וזמינות למוד חירום",
+      "עמוס (Amos)"
+     ],
+     "sources": [],
+     "searched": false,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    }
    }
   },
   {
@@ -6666,6 +9004,21 @@
      ],
      "searched": true,
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Dr. Ben Miller",
+      "Dr. Meytal Salman / Dental Studio TLV",
+      "Dr. Gidi Katz Dental Clinic",
+      "D Dental / Dental Harmonia",
+      "Dr. Roman Itelman"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
@@ -6703,12 +9056,39 @@
      "searched": true,
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
+    "chatgpt5": {
+     "names": [
+      "Roborock S8 Pro Ultra",
+      "iRobot Roomba j9+",
+      "ECOVACS Deebot X1 Omni",
+      "Roborock S7 / S7 MaxV or standard S8"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
     "gemini": null,
-    "claude": null
+    "claude": {
+     "names": [
+      "Roborock Saros 20",
+      "iLife V3S Pro",
+      "Eufy Omni C28",
+      "Dreame D30 Ultra CE"
+     ],
+     "sources": [
+      "Business sites",
+      "News & magazines",
+      "Wikipedia"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    }
    }
   },
   {
@@ -6734,12 +9114,43 @@
      "searched": true,
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
+    "chatgpt5": {
+     "names": [
+      "BillOS",
+      "Slate",
+      "Sendu / Fatoora / Quickly Invoice",
+      "Sendu and Fatoora",
+      "Kamut",
+      "Zoho Invoice / Wave / QuickBooks / FreshBooks"
+     ],
+     "sources": [
+      "Business sites",
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T17:32:03.105686+00:00"
+    },
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
     "gemini": null,
-    "claude": null
+    "claude": {
+     "names": [
+      "Israel-Specific Solutions",
+      "Green Invoice (Morning)",
+      "Invoice4U",
+      "iFreelance",
+      "International Alternatives",
+      "My top recommendation"
+     ],
+     "sources": [
+      "Business sites",
+      "Social"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    }
    }
   },
   {
@@ -6766,12 +9177,42 @@
      "searched": true,
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
+    "chatgpt5": {
+     "names": [
+      "EPIC SANA Lisboa",
+      "Martinhal Chiado or Martinhal Lisbon",
+      "Four Seasons Hotel Ritz Lisbon",
+      "Corinthia Lisbon",
+      "Hotel Valverde",
+      "Pools",
+      "budget"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T17:32:03.105686+00:00"
     },
     "gemini": null,
-    "claude": null
+    "claude": {
+     "names": [
+      "Epic Sana Lisboa Hotel",
+      "Corinthia Lisbon",
+      "Four Seasons Hotel Ritz Lisbon",
+      "Martinhal Oriente",
+      "Novotel Lisboa",
+      "Torel Palace"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    }
    }
   },
   {
@@ -6783,8 +9224,42 @@
    "intent": "b2b",
    "text": "We need a payroll provider in Tel Aviv for a company with 20 employees. Which companies would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Yarel Payroll",
+      "KPMG Payroll Services Ltd",
+      "Lazar & Co C.P.A",
+      "Payroll Management",
+      "NETO"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Papaya Global",
+      "Michpal",
+      "MalamTeam",
+      "Deel",
+      "Remote",
+      "BDO Israel",
+      "TMF Group / CWS Israel",
+      "NETO",
+      "Service level"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -6798,8 +9273,40 @@
    "intent": "education",
    "text": "I'm looking for a driving school in Tel Aviv. What would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Gil Driving",
+      "Golan",
+      "Gilad",
+      "Shimony",
+      "Drive Hacham",
+      "Mivhan Nahiga",
+      "Agada",
+      "Hagay Motorcycles Driving School"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Leon Berger",
+      "Or Havida",
+      "Ofir Driving School / other small local schools"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -6813,8 +9320,40 @@
    "intent": "ecommerce",
    "text": "I'm looking for an online flower delivery for a birthday in Tel Aviv. Which would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Flowers4TelAviv",
+      "Wineflowers",
+      "Amaryllis Flowers TLV",
+      "House of Flowers TLV",
+      "Green Green Flower Shops",
+      "Cleo Botanica",
+      "Irit Flowers"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "House of Flowers / TLV Flowers",
+      "Irit Flowers",
+      "JFLOO",
+      "Flowers4TelAviv / InternetFlorist network",
+      "Hemda Flowers"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -6828,8 +9367,40 @@
    "intent": "local",
    "text": "מחפש רופא שיניים טוב בירושלים לבדיקה וסתימה. תמליץ על כמה, בשם.",
    "engines": {
-    "chatgpt": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "דנט פרימיום",
+      "ד\"ר יצחק דובלסקי",
+      "JDC מרפאת שיניים",
+      "ד\"ר יואב אורבך",
+      "ד\"ר יוסף לרבה"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "מרפאת קיורר–ג׳קסון",
+      "ד\"ר אלן",
+      "ד\"ר נעם ברוק",
+      "ד\"ר מיכאל אטינגר",
+      "למצוא רופא/מרפאה קרובים יותר למקום מגוריך",
+      "להזמין לך תור"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -6856,6 +9427,20 @@
      ],
      "searched": true,
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Prana Yoga",
+      "Ganga Yoga",
+      "Sweet Om",
+      "Humble Yoga Club",
+      "Moveom"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
     },
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
@@ -6886,8 +9471,41 @@
    "intent": "product",
    "text": "I want to buy an espresso machine for home under 2,000 shekels. I'm in Israel. Which ones would you recommend? Please name specific models.",
    "engines": {
-    "chatgpt": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Ninja Luxe Cafe ES603",
+      "Delonghi Magnifica S ECAM22.110.B",
+      "Delonghi ECAM21.117",
+      "Delonghi DEDICA STYLE EC 685",
+      "Dreame Ecceluxe Slim FCM30"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "De'Longhi Dedica series",
+      "Typical price",
+      "De'Longhi Magnifica / ECAM entry models",
+      "Rancilio Silvia",
+      "Gaggia Classic Pro",
+      "Grinder"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -6901,8 +9519,43 @@
    "intent": "software",
    "text": "I need a project-management tool for a small construction company, based in Israel. What would you recommend? Please name specific products.",
    "engines": {
-    "chatgpt": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Procore",
+      "Projul",
+      "Cemento",
+      "Just Manage",
+      "Tabiquo",
+      "Ramdor"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Buildertrend",
+      "Fieldwire",
+      "Procore",
+      "Contractor Foreman",
+      "Benarit",
+      "RBM Solutions",
+      "Decide primary need",
+      "Buildertrend / Builder‑focused SaaS",
+      "Procore / Autodesk Build"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -6916,8 +9569,40 @@
    "intent": "travel",
    "text": "I'm looking for a quiet hotel near the center for a business trip, two nights in Lisbon. Which hotels would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "PortoBay Liberdade",
+      "Sofitel Lisbon Liberdade",
+      "Hotel Dom Carlos Liberty",
+      "Fontecruz Lisboa, Autograph Collection",
+      "York House Lisboa Hotel",
+      "Hyatt Regency Lisbon",
+      "Fontecruz Lisboa"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Corinthia Lisbon",
+      "Altis Avenida Hotel",
+      "Hotel Avenida Palace",
+      "Bairro Alto Hotel",
+      "Alt"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -6931,8 +9616,40 @@
    "intent": "b2b",
    "text": "We need an accounting firm in Tel Aviv for a startup that just raised a seed round. Which companies would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "MAR & CO",
+      "ERB Proximo",
+      "Fresh.fund",
+      "Meron Capital"
+     ],
+     "sources": [
+      "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Kesselman & Kesselman",
+      "Somekh Chaikin",
+      "Kost Forer Gabbay & Kasierer",
+      "BDO Israel",
+      "ERB Proximo",
+      "Alef Accounting / Alliot Global Israel",
+      "Raftel Strategy / boutique finance firms"
+     ],
+     "sources": [
+      "Business sites",
+      "Social"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -6946,8 +9663,25 @@
    "intent": "education",
    "text": "I'm looking for an online course to learn data analysis from zero (I'm in Israel). What would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "Google Data Analytics Professional Certificate",
+      "IBM Data Analyst Professional Certificate",
+      "Microsoft Certified: Power BI Data Analyst (PL-300)",
+      "DataCamp's Data Analysis Courses",
+      "Coursera's Data Analysis Courses"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "chatgpt5": null,
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -6961,8 +9695,28 @@
    "intent": "ecommerce",
    "text": "I'm looking for an online pharmacy that delivers in Israel. Which would you recommend? Please name specific ones.",
    "engines": {
-    "chatgpt": null,
-    "perplexity": null,
+    "chatgpt": {
+     "names": [
+      "IsraelPharm",
+      "Pharmacy TLV",
+      "Maccabi Pharm",
+      "Leumit Health Services",
+      "Pilula",
+      "Tel Aviv Pharma",
+      "iHerb",
+      "Clalit Health Services"
+     ],
+     "sources": [
+      "Business sites"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
+    "chatgpt5": null,
+    "perplexity": {
+     "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
+     "asked_at": "2026-11-26T17:14:31.190374+00:00"
+    },
     "gemini": null,
     "claude": null
    }
@@ -6977,6 +9731,7 @@
    "text": "אני רוצה לקנות אוזניות מבטלות רעשים לנסיעות, עד 700 שקל. אילו דגמים אתה ממליץ? תן שמות ספציפיים.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7002,6 +9757,25 @@
      ],
      "sources": [
       "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T14:13:43.290537+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Magazzino",
+      "Upscale Italian",
+      "Pronto",
+      "Gemma",
+      "Charming",
+      "Cicchetti",
+      "Small‑plates Italian",
+      "Olio"
+     ],
+     "sources": [
+      "Business sites",
+      "Reviews & directories",
+      "Tripadvisor"
      ],
      "searched": true,
      "asked_at": "2026-11-25T14:13:43.290537+00:00"
@@ -7039,6 +9813,7 @@
    "text": "I want to buy a stroller for a newborn, light enough for stairs. I'm in Israel. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7054,6 +9829,7 @@
    "text": "I need an email-marketing tool for an online shop with 3,000 subscribers, based in Israel. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7069,6 +9845,7 @@
    "text": "I'm looking for a boutique hotel for a couple, three nights in May, mid-range in Rome. Which hotels would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7084,6 +9861,7 @@
    "text": "We need a recruiting agency in Tel Aviv to hire two software engineers. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7099,6 +9877,7 @@
    "text": "I'm looking for a bootcamp to learn web development, evenings, in New York City. What would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7114,6 +9893,7 @@
    "text": "I'm looking for an online store to buy running gear with fast delivery in the US. Which would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7129,6 +9909,7 @@
    "text": "אני עוסק פטור ומחפש תוכנת חשבוניות פשוטה. על אילו תוכנות אתה ממליץ? תן שמות.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7157,6 +9938,7 @@
      "searched": true,
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
     },
+    "chatgpt5": null,
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
@@ -7190,6 +9972,7 @@
    "text": "I want to buy running shoes for flat feet, 30 km a week. I'm in Israel. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7205,6 +9988,7 @@
    "text": "I need a password manager for a family of four, based in Israel. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7220,6 +10004,7 @@
    "text": "I'm looking for a family-friendly hotel with a pool, two kids, one week in August in Rome. Which hotels would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7235,6 +10020,7 @@
    "text": "We need a commercial cleaning company in Tel Aviv for a 300 m² office. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7250,6 +10036,7 @@
    "text": "I'm looking for a driving school in New York City. What would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7265,6 +10052,7 @@
    "text": "I'm looking for an online flower delivery for a birthday in New York City. Which would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7280,6 +10068,7 @@
    "text": "מחפש מלון משפחתי באילת עם בריכה לשבוע באוגוסט, שני ילדים. אילו מלונות אתה ממליץ? תן שמות.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7305,6 +10094,23 @@
      ],
      "sources": [
       "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T14:13:43.290537+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Phil & Joe",
+      "Tomer Ben Simon",
+      "Dawn",
+      "Shaffa",
+      "Hair & Co / Nathan Jeffrey",
+      "Anna Hair"
+     ],
+     "sources": [
+      "Business sites",
+      "News & magazines",
+      "Reviews & directories"
      ],
      "searched": true,
      "asked_at": "2026-11-25T14:13:43.290537+00:00"
@@ -7345,6 +10151,7 @@
    "text": "I want to buy a 27-inch monitor for programming. I'm in Israel. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7360,6 +10167,7 @@
    "text": "I need a CRM for a five-person marketing agency, based in the US. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7375,6 +10183,7 @@
    "text": "I'm looking for a quiet hotel near the center for a business trip, two nights in Rome. Which hotels would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7390,6 +10199,7 @@
    "text": "We need a web agency in New York City to build a Shopify store. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7405,6 +10215,7 @@
    "text": "I'm looking for an online course to learn data analysis from zero (I'm in the US). What would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7420,6 +10231,7 @@
    "text": "I'm looking for an online pharmacy that delivers in the US. Which would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7435,6 +10247,7 @@
    "text": "אנחנו צריכים סוכנות דיגיטל בתל אביב שתבנה לנו חנות שופיפיי. על אילו סוכנויות אתה ממליץ? תן שמות.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7466,6 +10279,7 @@
      "searched": true,
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
     },
+    "chatgpt5": null,
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
@@ -7502,6 +10316,7 @@
    "text": "I want to buy a mattress for lower-back pain, queen size. I'm in Israel. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7517,6 +10332,7 @@
    "text": "I need an invoicing app for a freelancer, based in the US. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7532,6 +10348,7 @@
    "text": "I'm looking for a boutique hotel for a couple, three nights in May, mid-range in Tel Aviv. Which hotels would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7547,6 +10364,7 @@
    "text": "We need a payroll provider in New York City for a company with 20 employees. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7562,6 +10380,7 @@
    "text": "I'm looking for a bootcamp to learn web development, evenings, in London. What would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7577,6 +10396,7 @@
    "text": "I'm looking for an online store to buy running gear with fast delivery in the UK. Which would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7607,6 +10427,7 @@
      "searched": true,
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
     },
+    "chatgpt5": null,
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
@@ -7632,6 +10453,7 @@
    "text": "I want to buy an air purifier for a bedroom. I'm in Israel. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7647,6 +10469,7 @@
    "text": "I need a project-management tool for a small construction company, based in the US. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7662,6 +10485,7 @@
    "text": "I'm looking for a family-friendly hotel with a pool, two kids, one week in August in Tel Aviv. Which hotels would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7677,6 +10501,7 @@
    "text": "We need an accounting firm in New York City for a startup that just raised a seed round. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7692,6 +10517,7 @@
    "text": "I'm looking for a driving school in London. What would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7707,6 +10533,7 @@
    "text": "I'm looking for an online flower delivery for a birthday in London. Which would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7736,6 +10563,7 @@
      "searched": true,
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
     },
+    "chatgpt5": null,
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
@@ -7759,6 +10587,7 @@
    "text": "I want to buy noise-cancelling headphones for commuting, under $200. I'm in the US. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7774,6 +10603,7 @@
    "text": "I need an email-marketing tool for an online shop with 3,000 subscribers, based in the US. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7789,6 +10619,7 @@
    "text": "I'm looking for a quiet hotel near the center for a business trip, two nights in Tel Aviv. Which hotels would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7804,6 +10635,7 @@
    "text": "We need a recruiting agency in New York City to hire two software engineers. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7819,6 +10651,7 @@
    "text": "I'm looking for an online course to learn data analysis from zero (I'm in the UK). What would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7834,6 +10667,7 @@
    "text": "I'm looking for an online pharmacy that delivers in the UK. Which would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7865,6 +10699,7 @@
      "searched": true,
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
     },
+    "chatgpt5": null,
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
@@ -7898,6 +10733,7 @@
    "text": "I want to buy a robot vacuum for a small apartment with a cat. I'm in the US. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7913,6 +10749,7 @@
    "text": "I need a password manager for a family of four, based in the US. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7928,6 +10765,7 @@
    "text": "I'm looking for a boutique hotel for a couple, three nights in May, mid-range in New York. Which hotels would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7943,6 +10781,7 @@
    "text": "We need a commercial cleaning company in New York City for a 300 m² office. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -7972,6 +10811,7 @@
      "searched": true,
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
     },
+    "chatgpt5": null,
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
@@ -7990,6 +10830,7 @@
    "text": "I want to buy an espresso machine for home under $500. I'm in the US. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8005,6 +10846,7 @@
    "text": "I need a CRM for a five-person marketing agency, based in the UK. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8020,6 +10862,7 @@
    "text": "I'm looking for a family-friendly hotel with a pool, two kids, one week in August in New York. Which hotels would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8035,6 +10878,7 @@
    "text": "We need a web agency in London to build a Shopify store. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8063,6 +10907,7 @@
      "searched": true,
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
     },
+    "chatgpt5": null,
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
@@ -8081,6 +10926,7 @@
    "text": "I want to buy a stroller for a newborn, light enough for stairs. I'm in the US. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8096,6 +10942,7 @@
    "text": "I need an invoicing app for a freelancer, based in the UK. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8111,6 +10958,7 @@
    "text": "I'm looking for a quiet hotel near the center for a business trip, two nights in New York. Which hotels would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8126,6 +10974,7 @@
    "text": "We need a payroll provider in London for a company with 20 employees. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8156,6 +11005,7 @@
      "searched": true,
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
     },
+    "chatgpt5": null,
     "perplexity": {
      "error": "HTTP 402: {\"error\":{\"message\":\"Insufficient credits. This account never purchased credits. Make sure your key is on the ",
      "asked_at": "2026-11-25T05:30:23.124061+00:00"
@@ -8174,6 +11024,7 @@
    "text": "I want to buy running shoes for flat feet, 30 km a week. I'm in the US. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8189,6 +11040,7 @@
    "text": "I need a project-management tool for a small construction company, based in the UK. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8204,6 +11056,7 @@
    "text": "We need an accounting firm in London for a startup that just raised a seed round. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8219,6 +11072,7 @@
    "text": "I'm looking for a wedding photographer in Tel Aviv for a wedding next spring. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8234,6 +11088,7 @@
    "text": "I want to buy a 27-inch monitor for programming. I'm in the US. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8249,6 +11104,7 @@
    "text": "I need an email-marketing tool for an online shop with 3,000 subscribers, based in the UK. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8264,6 +11120,7 @@
    "text": "We need a recruiting agency in London to hire two software engineers. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8279,6 +11136,7 @@
    "text": "I'm looking for a dog groomer in Tel Aviv for a medium-sized dog. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8294,6 +11152,7 @@
    "text": "I want to buy a mattress for lower-back pain, queen size. I'm in the US. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8309,6 +11168,7 @@
    "text": "I need a password manager for a family of four, based in the UK. What would you recommend? Please name specific products.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8324,6 +11184,7 @@
    "text": "We need a commercial cleaning company in London for a 300 m² office. Which companies would you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8339,6 +11200,7 @@
    "text": "I'm looking for a real estate agent in Tel Aviv to rent a two-bedroom apartment. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8354,6 +11216,7 @@
    "text": "I want to buy an air purifier for a bedroom. I'm in the US. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8369,6 +11232,7 @@
    "text": "I'm looking for a plumber in New York City for a leaking pipe this week. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8384,6 +11248,7 @@
    "text": "I want to buy noise-cancelling headphones for commuting, under £150. I'm in the UK. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8411,6 +11276,21 @@
      "searched": true,
      "asked_at": "2026-11-25T14:13:43.290537+00:00"
     },
+    "chatgpt5": {
+     "names": [
+      "Dr. Eric Chason",
+      "Dr. Yookyung",
+      "Dr. Andrew S. Deutch",
+      "Dr. Brandon Huang",
+      "Dr. David Musheyev",
+      "Dr. Lana Rozenberg"
+     ],
+     "sources": [
+      "Reviews & directories"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T14:13:43.290537+00:00"
+    },
     "perplexity": null,
     "gemini": null,
     "claude": {
@@ -8431,6 +11311,7 @@
    "text": "I want to buy a robot vacuum for a small apartment with a cat. I'm in the UK. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8446,6 +11327,7 @@
    "text": "I'm looking for a yoga studio in New York City for a beginner, evening classes. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8461,6 +11343,7 @@
    "text": "I want to buy an espresso machine for home under £400. I'm in the UK. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8476,6 +11359,7 @@
    "text": "I'm looking for an Italian restaurant in New York City for a dinner for four. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8491,6 +11375,7 @@
    "text": "I want to buy a stroller for a newborn, light enough for stairs. I'm in the UK. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8506,6 +11391,7 @@
    "text": "I'm looking for a personal trainer in New York City for weight training, twice a week. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8521,6 +11407,7 @@
    "text": "I want to buy running shoes for flat feet, 30 km a week. I'm in the UK. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8536,6 +11423,7 @@
    "text": "I'm looking for a hair salon in New York City for a cut and color. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8551,6 +11439,7 @@
    "text": "I want to buy a 27-inch monitor for programming. I'm in the UK. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8566,6 +11455,7 @@
    "text": "I'm looking for a family lawyer in New York City for a divorce agreement. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8581,6 +11471,7 @@
    "text": "I want to buy a mattress for lower-back pain, queen size. I'm in the UK. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8596,6 +11487,7 @@
    "text": "I'm looking for an accountant in New York City for a small business. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8611,6 +11503,7 @@
    "text": "I want to buy an air purifier for a bedroom. I'm in the UK. Which ones would you recommend? Please name specific models.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8626,6 +11519,7 @@
    "text": "I'm looking for an electrician in New York City to replace a fuse box. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8641,6 +11535,7 @@
    "text": "I'm looking for a specialty coffee shop in New York City to work from with a laptop. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8656,6 +11551,7 @@
    "text": "I'm looking for a gym in New York City with a pool, near the center. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8671,6 +11567,7 @@
    "text": "I'm looking for a physiotherapist in New York City for a running knee injury. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8686,6 +11583,7 @@
    "text": "I'm looking for a florist in New York City for a same-day bouquet delivery. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8701,6 +11599,7 @@
    "text": "I'm looking for a wedding photographer in New York City for a wedding next spring. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8716,6 +11615,7 @@
    "text": "I'm looking for a dog groomer in New York City for a medium-sized dog. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8731,6 +11631,7 @@
    "text": "I'm looking for a real estate agent in New York City to rent a two-bedroom apartment. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8746,6 +11647,7 @@
    "text": "I'm looking for a plumber in London for a leaking pipe this week. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8761,6 +11663,7 @@
    "text": "I'm looking for a dentist in London for a check-up and a filling. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8786,6 +11689,20 @@
      ],
      "sources": [
       "Google"
+     ],
+     "searched": true,
+     "asked_at": "2026-11-25T14:13:43.290537+00:00"
+    },
+    "chatgpt5": {
+     "names": [
+      "Triyoga",
+      "The Life Centre",
+      "Iyengar Yoga London",
+      "Mission E1",
+      "Indaba Yoga Studio"
+     ],
+     "sources": [
+      "Business sites"
      ],
      "searched": true,
      "asked_at": "2026-11-25T14:13:43.290537+00:00"
@@ -8819,6 +11736,7 @@
    "text": "I'm looking for an Italian restaurant in London for a dinner for four. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8834,6 +11752,7 @@
    "text": "I'm looking for a personal trainer in London for weight training, twice a week. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8849,6 +11768,7 @@
    "text": "I'm looking for a hair salon in London for a cut and color. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8864,6 +11784,7 @@
    "text": "I'm looking for a family lawyer in London for a divorce agreement. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8879,6 +11800,7 @@
    "text": "I'm looking for an accountant in London for a small business. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8894,6 +11816,7 @@
    "text": "I'm looking for an electrician in London to replace a fuse box. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8909,6 +11832,7 @@
    "text": "I'm looking for a specialty coffee shop in London to work from with a laptop. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8924,6 +11848,7 @@
    "text": "I'm looking for a gym in London with a pool, near the center. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8939,6 +11864,7 @@
    "text": "I'm looking for a physiotherapist in London for a running knee injury. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8954,6 +11880,7 @@
    "text": "I'm looking for a florist in London for a same-day bouquet delivery. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8969,6 +11896,7 @@
    "text": "I'm looking for a wedding photographer in London for a wedding next spring. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8984,6 +11912,7 @@
    "text": "I'm looking for a dog groomer in London for a medium-sized dog. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
@@ -8999,11 +11928,12 @@
    "text": "I'm looking for a real estate agent in London to rent a two-bedroom apartment. Who do you recommend? Please name specific ones.",
    "engines": {
     "chatgpt": null,
+    "chatgpt5": null,
     "perplexity": null,
     "gemini": null,
     "claude": null
    }
   }
  ],
- "answers_total": 176
+ "answers_total": 211
 }
