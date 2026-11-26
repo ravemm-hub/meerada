@@ -51,6 +51,24 @@ def normalize(q: str) -> str:
     return re.sub(r"\s+", " ", q.strip().lower())[:200]
 
 
+def match_question(q: str) -> LabQuery | None:
+    """The measured question closest to ``q``: exact id, a near-identical text, or a
+    question whose city/category/text covers most of the query's words."""
+    for lq in QUESTIONS:
+        if q == lq.id or q == lq.text.lower():
+            return lq
+    qt = {t for t in _WORD.findall(q) if len(t) > 2}
+    best, best_score = None, 0.0
+    for lq in QUESTIONS:
+        hay = set(_WORD.findall(f"{lq.text} {lq.city} {lq.category}".lower()))
+        overlap = len(qt & hay) / len(qt) if qt else 0.0
+        ratio = SequenceMatcher(None, q, lq.text.lower()).ratio()
+        score = max(overlap, ratio)
+        if score > best_score:
+            best, best_score = lq, score
+    return best if best is not None and best_score >= 0.6 else None
+
+
 class SearchService:
     def __init__(self) -> None:
         self._lock = threading.Lock()
@@ -80,21 +98,7 @@ class SearchService:
             return self._state
 
     def lab_match(self, q: str) -> LabQuery | None:
-        """The measured question closest to ``q``: exact id, a near-identical text, or a
-        question whose city/category/text covers most of the query's words."""
-        for lq in QUESTIONS:
-            if q == lq.id or q == lq.text.lower():
-                return lq
-        qt = {t for t in _WORD.findall(q) if len(t) > 2}
-        best, best_score = None, 0.0
-        for lq in QUESTIONS:
-            hay = set(_WORD.findall(f"{lq.text} {lq.city} {lq.category}".lower()))
-            overlap = len(qt & hay) / len(qt) if qt else 0.0
-            ratio = SequenceMatcher(None, q, lq.text.lower()).ratio()
-            score = max(overlap, ratio)
-            if score > best_score:
-                best, best_score = lq, score
-        return best if best is not None and best_score >= 0.6 else None
+        return match_question(q)
 
     def lab_result(self, lq: LabQuery) -> dict[str, Any] | None:
         answers = [a for a in self.state().answers if a.query_id == lq.id and not a.error]

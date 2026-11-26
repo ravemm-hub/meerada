@@ -134,7 +134,11 @@ Yext) — פירוט ומחירים ב-SEARCH-ENGINE-RESEARCH §3. כולם: **�
 - `visibility profile-draft <url>` → data/profiles/drafts/<slug>.json — טיוטת עמוד ישות מהאתר של העסק (שם,
   טלפון, מייל, כתובת, שעות, שירותים, רשתות), כל שדה מסומן לאישור; אחרי אישור עוברת ל-data/profiles ונבנית.
 - `audit` מדווח `pays_for_ads`.
-- **עדיין לא:** שליחה אוטומטית (דומיין), Places → ציון ליד אוטומטי, Paddle, קליטת claims מ-Supabase לפיילוט.
+- `visibility claims --token-file private/supabase-token.txt` — קורא search_claims דרך ה-management API, שומר את כל
+  השורות עם פרטי הקשר ב-out/claims (מחוץ ל-git), מתאים את השאלה לשאלה נמדדת, ומוסיף פיילוט בלי פרטי קשר
+  ל-data/pilots.json (אותו מבנה כמו experiments.json). הסבב השבועי והדוחות קוראים גם אותו; cases.html לא,
+  עד אישור הבעלים. הטבלה ריקה נכון ל-26.11.
+- **עדיין לא:** שליחה אוטומטית (דומיין), Places → ציון ליד אוטומטי, Paddle.
 
 ## 7. החלטות שלך
 1. **Places API** על המפתח — בלי זה אין אתרים לעסקי גוגל ואין ציון ליד אוטומטי.

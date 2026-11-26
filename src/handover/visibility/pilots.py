@@ -184,6 +184,9 @@ def build_pilot_reports(
     now = now or datetime.now(tz=UTC)
     out_dir.mkdir(parents=True, exist_ok=True)
     experiments = load_experiments(experiments_path)
+    claimed = experiments_path.with_name("pilots.json")
+    if claimed != experiments_path:
+        experiments += load_experiments(claimed)
     pilots = summarize(experiments, state, now)
     written = [out_dir / "pilots.json", out_dir / "digest.md"]
     (out_dir / "pilots.json").write_text(

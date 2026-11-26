@@ -195,3 +195,34 @@ def profile_draft_cmd(
 
     path = write_draft(draft_profile(url, name, city, category), Path(out))
     typer.echo(f"wrote {path}")
+
+
+@visibility_app.command("claims")
+def claims_cmd(
+    token_file: Annotated[str, typer.Option("--token-file")] = "",
+    pilots: Annotated[str, typer.Option("--pilots")] = "data/pilots.json",
+    contacts: Annotated[str, typer.Option("--contacts")] = "out/claims/claims.json",
+) -> None:
+    """Pull new claims from Supabase into pilots; contact details stay out of git."""
+    import os
+    from pathlib import Path
+
+    from handover.visibility.claims import fetch_claims, intake, last_claim_id
+
+    token = (
+        Path(token_file).read_text(encoding="utf-8").strip()
+        if token_file
+        else os.environ.get("SUPABASE_ACCESS_TOKEN", "")
+    )
+    if not token:
+        raise typer.BadParameter("need --token-file or SUPABASE_ACCESS_TOKEN")
+    rows = fetch_claims(token, after=last_claim_id(Path(contacts)))
+    new_claims, new_pilots = intake(rows, Path(pilots), Path(contacts))
+    typer.echo(f"{len(rows)} rows read, {len(new_claims)} new claims, {len(new_pilots)} new pilots")
+    for p in new_pilots:
+        typer.echo(
+            f"  pilot {p['id']}: {p['business']} → {p['queries'][0]} (contact in {contacts})"
+        )
+    for c in new_claims:
+        if not any(p["business"] == (c.get("business") or "").strip() for p in new_pilots):
+            typer.echo(f"  no measured question for claim {c['id']}: {c.get('query', '')[:60]!r}")

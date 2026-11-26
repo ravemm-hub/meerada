@@ -47,7 +47,7 @@ jobs:
         # 5 questions x 7 runs x up to 5 engines = 175 answers; worst case ~$7, capped at 8.
         run: |
           mkdir -p out
-          ONLY=$(python -c "import json; print(','.join(sorted({q for e in json.load(open('data/experiments.json', encoding='utf-8'))['experiments'] for q in e['queries']})))")
+          ONLY=$(python -c "import json, pathlib; qs = {q for f in ('data/experiments.json', 'data/pilots.json') if pathlib.Path(f).exists() for e in json.load(open(f, encoding='utf-8'))['experiments'] for q in e['queries']}; print(','.join(sorted(qs)))")
           echo "pilot questions: $ONLY"
           python -m handover.visibility.run \
             --state visibility_state.json \
