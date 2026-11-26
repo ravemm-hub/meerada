@@ -162,3 +162,36 @@ def outreach_cmd(
 
     written = build_outreach(Path(experiments), load_state(Path(state)), Path(out), Path(leads))
     typer.echo(f"wrote {len(written)} drafts to {out}")
+
+
+@visibility_app.command("pilots")
+def pilots_cmd(
+    experiments: Annotated[str, typer.Option("--experiments")] = "data/experiments.json",
+    state: Annotated[str, typer.Option("--state")] = "visibility_state.json",
+    out: Annotated[str, typer.Option("--out")] = "out/pilots",
+) -> None:
+    """Weekly proof for every pilot: numbers vs baseline, a digest, and EN+HE report drafts."""
+    from pathlib import Path
+
+    from handover.visibility.pilots import build_pilot_reports
+    from handover.visibility.state import load_state
+
+    written = build_pilot_reports(Path(experiments), load_state(Path(state)), Path(out))
+    typer.echo(f"wrote {len(written)} files to {out}")
+
+
+@visibility_app.command("profile-draft")
+def profile_draft_cmd(
+    url: str,
+    name: Annotated[str, typer.Option("--name")] = "",
+    city: Annotated[str, typer.Option("--city")] = "",
+    category: Annotated[str, typer.Option("--category")] = "",
+    out: Annotated[str, typer.Option("--out")] = "data/profiles/drafts",
+) -> None:
+    """Draft a factual profile from a business website — every field marked to confirm."""
+    from pathlib import Path
+
+    from handover.visibility.profile_draft import draft_profile, write_draft
+
+    path = write_draft(draft_profile(url, name, city, category), Path(out))
+    typer.echo(f"wrote {path}")

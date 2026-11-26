@@ -123,6 +123,19 @@ Yext) — פירוט ומחירים ב-SEARCH-ENGINE-RESEARCH §3. כולם: **�
   "משלם על פרסום" לציון הליד.
 - המסמך הזה.
 
+### 26.11 לילה — "Yes, start" / "Continue building"
+- **פיילוטים = הקבוצה הראשונה** (data/experiments.json; 10 + 5 ביקורת; בסיס 7 ריצות מ-25.11, כמעט כולם 0).
+- `visibility gap` → meerada.app/gap/ — 150 עמודי פער (86 בלתי-נראים מעל השער), leads.json; נבנה יומית.
+- `visibility outreach` → docs/outreach-drafts/ — 10 טיוטות פנייה EN+HE, חד-פעמיות בבקשת הסכמה. **המייסד שולח.**
+- `.github/workflows/pilots.yml` — כל יום שני 05:00 UTC: שאלות הפיילוטים × 7 ריצות × כל מנוע עם מפתח (תקרה 8$),
+  re-extract, עמודים, gap, pilots.json → gh-pages.
+- `visibility pilots` → pilots.json (מספרים), digest.md (טבלה למייסד), <id>.md (מייל הוכחה שבועי EN+HE לכל
+  פיילוט: בסיס מול השבוע, לכל מנוע). נשלח ידנית עד שיש דומיין שליחה.
+- `visibility profile-draft <url>` → data/profiles/drafts/<slug>.json — טיוטת עמוד ישות מהאתר של העסק (שם,
+  טלפון, מייל, כתובת, שעות, שירותים, רשתות), כל שדה מסומן לאישור; אחרי אישור עוברת ל-data/profiles ונבנית.
+- `audit` מדווח `pays_for_ads`.
+- **עדיין לא:** שליחה אוטומטית (דומיין), Places → ציון ליד אוטומטי, Paddle, קליטת claims מ-Supabase לפיילוט.
+
 ## 7. החלטות שלך
 1. **Places API** על המפתח — בלי זה אין אתרים לעסקי גוגל ואין ציון ליד אוטומטי.
 2. **דומיין שליחה** (mail.meerada.app ב-DNS) + ספק (Resend). פנייה חד-פעמית בבקשת הסכמה — מאשר את הנוסח?
