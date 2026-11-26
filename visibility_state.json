@@ -39,7 +39,18 @@
    "input_tokens": 8174,
    "output_tokens": 633,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 7.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 7.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 2119.0
+   },
    "error": null
   },
   {
@@ -77,7 +88,18 @@
    "input_tokens": 8174,
    "output_tokens": 537,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 6.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 3.0,
+    "priced": 2.0,
+    "own_site": 0.0,
+    "cites": 6.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 1762.0
+   },
    "error": null
   },
   {
@@ -112,7 +134,18 @@
    "input_tokens": 8174,
    "output_tokens": 542,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 5.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 5.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 1949.0
+   },
    "error": null
   },
   {
@@ -153,7 +186,18 @@
    "input_tokens": 8174,
    "output_tokens": 610,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 7.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 7.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 2286.0
+   },
    "error": null
   },
   {
@@ -188,7 +232,18 @@
    "input_tokens": 8174,
    "output_tokens": 459,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 5.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 5.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 1953.0
+   },
    "error": null
   },
   {
@@ -224,7 +279,18 @@
    "input_tokens": 8174,
    "output_tokens": 581,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 5.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 1.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 6.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 2128.0
+   },
    "error": null
   },
   {
@@ -266,7 +332,18 @@
    "input_tokens": 8174,
    "output_tokens": 594,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 8.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 6.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 2289.0
+   },
    "error": null
   },
   {
@@ -307,7 +384,18 @@
    "input_tokens": 8174,
    "output_tokens": 557,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 7.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 7.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 2078.0
+   },
    "error": null
   },
   {
@@ -345,7 +433,18 @@
    "input_tokens": 8174,
    "output_tokens": 659,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 6.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 6.0,
+    "own_site": 0.0,
+    "cites": 6.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 2350.0
+   },
    "error": null
   },
   {
@@ -389,7 +488,18 @@
    "input_tokens": 8174,
    "output_tokens": 832,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 8.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 8.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 3325.0
+   },
    "error": null
   },
   {
@@ -427,7 +537,18 @@
    "input_tokens": 8174,
    "output_tokens": 546,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 6.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 6.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 1971.0
+   },
    "error": null
   },
   {
@@ -462,7 +583,18 @@
    "input_tokens": 8174,
    "output_tokens": 484,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 5.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 5.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 2044.0
+   },
    "error": null
   },
   {
@@ -502,7 +634,18 @@
    "input_tokens": 8174,
    "output_tokens": 511,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 7.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 1.0,
+    "own_site": 0.0,
+    "cites": 6.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 1.0,
+    "chars": 1856.0
+   },
    "error": null
   },
   {
@@ -740,7 +883,18 @@
    "input_tokens": 2241,
    "output_tokens": 245,
    "searches": 0,
-   "features": {},
+   "features": {
+    "candidates": 0.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 0.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 0.0,
+    "chars": 1104.0
+   },
    "error": null
   },
   {
@@ -757,7 +911,18 @@
    "input_tokens": 2242,
    "output_tokens": 227,
    "searches": 0,
-   "features": {},
+   "features": {
+    "candidates": 0.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 0.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 0.0,
+    "chars": 1014.0
+   },
    "error": null
   },
   {
@@ -802,7 +967,18 @@
    "input_tokens": 10432,
    "output_tokens": 523,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 4.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 4.0,
+    "cites": 17.0,
+    "listicle_cites": 1.0,
+    "distinct_hosts": 9.0,
+    "chars": 1418.0
+   },
    "error": null
   },
   {
@@ -854,7 +1030,18 @@
    "input_tokens": 12493,
    "output_tokens": 540,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 7.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 5.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 18.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 4.0,
+    "chars": 1388.0
+   },
    "error": null
   },
   {
@@ -897,7 +1084,18 @@
    "input_tokens": 10641,
    "output_tokens": 417,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 4.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 4.0,
+    "cites": 15.0,
+    "listicle_cites": 1.0,
+    "distinct_hosts": 9.0,
+    "chars": 1125.0
+   },
    "error": null
   },
   {
@@ -950,7 +1148,18 @@
    "input_tokens": 10971,
    "output_tokens": 528,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 8.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 2.0,
+    "cites": 17.0,
+    "listicle_cites": 10.0,
+    "distinct_hosts": 6.0,
+    "chars": 1189.0
+   },
    "error": null
   },
   {
@@ -983,7 +1192,6 @@
     "Yaniv Halevi Law Office",
     "Miron & Salman Law Office and Notary",
     "Eliov-Green Law Firm",
-    "Other Recommended Attorneys",
     "Attorney Avital Horef",
     "Attorney Shy Kedmi",
     "Ilan Yacobovitch – Family Law",
@@ -994,7 +1202,6 @@
     "yaniv halevi law office",
     "miron salman law office and notary",
     "eliov green law firm",
-    "other recommended attorneys",
     "attorney avital horef",
     "attorney shy kedmi",
     "ilan yacobovitch family law",
@@ -1005,7 +1212,18 @@
    "input_tokens": 10311,
    "output_tokens": 598,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 8.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 1.0,
+    "cites": 17.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 8.0,
+    "chars": 1713.0
+   },
    "error": null
   },
   {
@@ -1016,19 +1234,28 @@
    "text": "I don't have access to current, reliable information about specific accountants in Tel Aviv that I could confidently recommend to you. Recommendations for local service providers like accountants are best found through:\n\n1. **Local business networks** - Ask other small business owners in Tel Aviv for referrals\n2. **Professional directories** - Check Israeli accounting associations or professional bodies\n3. **Online review platforms** - Look for accountants on platforms like Google Maps, Waze, or local Israeli business review sites\n4. **Chambers of Commerce** - Tel Aviv's Chamber of Commerce may have referral resources\n5. **Word of mouth** - Local business groups, networking events, or your bank may have recommendations\n\nWhen evaluating accountants, consider their experience with small businesses, familiarity with Israeli tax law, and whether they speak your language. It's also helpful to get multiple consultations before making a decision.",
    "citations": [],
    "names": [
-    "Chambers of Commerce",
-    "Word of mouth"
+    "Chambers of Commerce"
    ],
    "name_keys": [
-    "chambers of commerce",
-    "word of mouth"
+    "chambers of commerce"
    ],
    "latency_ms": 2708,
    "cost_usd": "0.020",
    "input_tokens": 2238,
    "output_tokens": 194,
    "searches": 0,
-   "features": {},
+   "features": {
+    "candidates": 1.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 0.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 0.0,
+    "chars": 953.0
+   },
    "error": null
   },
   {
@@ -1038,22 +1265,25 @@
    "asked_at": "2026-11-25T05:30:23.124061Z",
    "text": "I don't have access to current business directories or recommendations for specific electricians in Tel Aviv. My knowledge isn't real-time enough to reliably recommend particular businesses that are currently operating and available.\n\nHowever, here are some ways you can find a qualified electrician in Tel Aviv:\n\n1. **Local directories**: Search on Israeli business directories like Pricazi, Yellbox, or Google Maps for \"electrician Tel Aviv\" (חשמלאי תל אביב)\n\n2. **Ask for referrals**: Ask friends, family, or neighbors in Tel Aviv for recommendations—personal referrals are often the most reliable\n\n3. **Check online reviews**: Look at platforms with customer reviews to see ratings and feedback\n\n4. **Contact the municipality**: Tel Aviv's municipality may have a list of licensed and certified electricians\n\n5. **Professional associations**: Check with Israeli electrical contractors' associations for certified professionals\n\nWhen you do find someone, make sure they:\n- Are properly licensed and insured\n- Have experience with fuse box replacements\n- Provide written estimates\n- Can explain the work needed in detail\n\nSince fuse box replacement involves electrical work that affects your entire home's safety, it's especially important to hire someone qualified and certified.",
    "citations": [],
-   "names": [
-    "Professional associations",
-    "Are properly licensed and insured",
-    "Can explain the work needed in detail"
-   ],
-   "name_keys": [
-    "professional associations",
-    "are properly licensed and insured",
-    "can explain the work needed in detail"
-   ],
+   "names": [],
+   "name_keys": [],
    "latency_ms": 3386,
    "cost_usd": "0.020",
    "input_tokens": 2240,
    "output_tokens": 268,
    "searches": 0,
-   "features": {},
+   "features": {
+    "candidates": 0.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 0.0,
+    "listicle_cites": 0.0,
+    "distinct_hosts": 0.0,
+    "chars": 1282.0
+   },
    "error": null
   },
   {
@@ -1105,7 +1335,18 @@
    "input_tokens": 11680,
    "output_tokens": 521,
    "searches": 1,
-   "features": {},
+   "features": {
+    "candidates": 6.0,
+    "has_pick": 0.0,
+    "has_table": 0.0,
+    "rated": 0.0,
+    "priced": 0.0,
+    "own_site": 0.0,
+    "cites": 20.0,
+    "listicle_cites": 12.0,
+    "distinct_hosts": 7.0,
+    "chars": 1235.0
+   },
    "error": null
   },
   {
@@ -3105,16 +3346,14 @@
     "גולן פתרונות אינסטלציה",
     "ברק שירותי אינסטלציה",
     "The Center For Leak Detection",
-    "Shlomo The Plumber",
-    "Say exactly where the leak is"
+    "Shlomo The Plumber"
    ],
    "name_keys": [
     "אינסטלטור במרכז אלי",
     "גולן פתרונות אינסטלציה",
     "ברק שירותי אינסטלציה",
     "the center for leak detection",
-    "shlomo the plumber",
-    "say exactly where the leak is"
+    "shlomo the plumber"
    ],
    "latency_ms": 11810,
    "cost_usd": "0.040",
@@ -3122,7 +3361,7 @@
    "output_tokens": 945,
    "searches": 1,
    "features": {
-    "candidates": 6.0,
+    "candidates": 5.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -3206,8 +3445,7 @@
     "Cicchetti",
     "Gemma",
     "Piano Piano",
-    "Olio / other popular local Italian spots",
-    "Weekends and popular weeknights fill up fast"
+    "Olio / other popular local Italian spots"
    ],
    "name_keys": [
     "toto",
@@ -3215,8 +3453,7 @@
     "cicchetti",
     "gemma",
     "piano piano",
-    "olio other popular local italian spots",
-    "weekends and popular weeknights fill up fast"
+    "olio other popular local italian spots"
    ],
    "latency_ms": 12384,
    "cost_usd": "0.040",
@@ -3224,7 +3461,7 @@
    "output_tokens": 917,
    "searches": 1,
    "features": {
-    "candidates": 7.0,
+    "candidates": 6.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -3301,8 +3538,7 @@
     "La Lasagna",
     "Boccaccio",
     "Guido",
-    "Rustico / Magazzino",
-    "narrow to a specific neighborhood"
+    "Rustico / Magazzino"
    ],
    "name_keys": [
     "cucina hess",
@@ -3311,8 +3547,7 @@
     "la lasagna",
     "boccaccio",
     "guido",
-    "rustico magazzino",
-    "narrow to a specific neighborhood"
+    "rustico magazzino"
    ],
    "latency_ms": 10914,
    "cost_usd": "0.040",
@@ -3320,7 +3555,7 @@
    "output_tokens": 1016,
    "searches": 1,
    "features": {
-    "candidates": 8.0,
+    "candidates": 7.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -3353,8 +3588,7 @@
     "Gemma",
     "Cucina Hess",
     "Taverna Romana",
-    "Piano Piano",
-    "Narrow choices by neighborhood"
+    "Piano Piano"
    ],
    "name_keys": [
     "magazzino",
@@ -3362,8 +3596,7 @@
     "gemma",
     "cucina hess",
     "taverna romana",
-    "piano piano",
-    "narrow choices by neighborhood"
+    "piano piano"
    ],
    "latency_ms": 23550,
    "cost_usd": "0.040",
@@ -3371,7 +3604,7 @@
    "output_tokens": 1010,
    "searches": 4,
    "features": {
-    "candidates": 7.0,
+    "candidates": 6.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -3399,7 +3632,6 @@
     "https://www.secrettelaviv.com/best-italian-restaurants-in-tel-aviv?utm_source=openai"
    ],
    "names": [
-    "Any budget or atmosphere preference",
     "Magazzino",
     "Pronto",
     "Gemma",
@@ -3408,7 +3640,6 @@
     "Olio"
    ],
    "name_keys": [
-    "any budget or atmosphere preference",
     "magazzino",
     "pronto",
     "gemma",
@@ -3422,7 +3653,7 @@
    "output_tokens": 992,
    "searches": 2,
    "features": {
-    "candidates": 7.0,
+    "candidates": 6.0,
     "has_pick": 1.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -3456,8 +3687,7 @@
     "Charming",
     "Cicchetti",
     "Small‑plates Italian",
-    "Olio",
-    "Let the restaurant know any dietary needs"
+    "Olio"
    ],
    "name_keys": [
     "magazzino",
@@ -3467,8 +3697,7 @@
     "charming",
     "cicchetti",
     "small plates italian",
-    "olio",
-    "let the restaurant know any dietary needs"
+    "olio"
    ],
    "latency_ms": 12451,
    "cost_usd": "0.040",
@@ -3476,7 +3705,7 @@
    "output_tokens": 819,
    "searches": 1,
    "features": {
-    "candidates": 9.0,
+    "candidates": 8.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -3612,8 +3841,7 @@
     "Transition Salons",
     "Barak Shoshan Hair Design",
     "Hair & Co / Nathan Jeffrey",
-    "Studio Hafif / Studio Hapif",
-    "Narrow to salons that specialize in curly hair"
+    "Studio Hafif / Studio Hapif"
    ],
    "name_keys": [
     "shaffa hairdresser",
@@ -3621,8 +3849,7 @@
     "transition salons",
     "barak shoshan hair design",
     "hair co nathan jeffrey",
-    "studio hafif studio hapif",
-    "narrow to salons that specialize in curly hair"
+    "studio hafif studio hapif"
    ],
    "latency_ms": 12810,
    "cost_usd": "0.040",
@@ -3630,7 +3857,7 @@
    "output_tokens": 1053,
    "searches": 1,
    "features": {
-    "candidates": 7.0,
+    "candidates": 6.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -3663,8 +3890,7 @@
     "Tomer Ben Simon / Hair Design",
     "Anna Hair Salon",
     "Hair & Co / Nathan Jeffrey",
-    "Book",
-    "Or find salons closer to a specific neighborhood"
+    "Book"
    ],
    "name_keys": [
     "phil joe",
@@ -3672,8 +3898,7 @@
     "tomer ben simon hair design",
     "anna hair salon",
     "hair co nathan jeffrey",
-    "book",
-    "or find salons closer to a specific neighborhood"
+    "book"
    ],
    "latency_ms": 9369,
    "cost_usd": "0.040",
@@ -3681,12 +3906,12 @@
    "output_tokens": 670,
    "searches": 1,
    "features": {
-    "candidates": 7.0,
+    "candidates": 6.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
     "priced": 0.0,
-    "own_site": 5.0,
+    "own_site": 4.0,
     "cites": 6.0,
     "listicle_cites": 1.0,
     "distinct_hosts": 5.0,
@@ -3711,15 +3936,13 @@
     "Shaffa Hairdresser",
     "Tomer Ben Simon Hair Design",
     "Transition Salons",
-    "Lichtenshtein / Rosh Gadol",
-    "help booking an appointment"
+    "Lichtenshtein / Rosh Gadol"
    ],
    "name_keys": [
     "shaffa hairdresser",
     "tomer ben simon hair design",
     "transition salons",
-    "lichtenshtein rosh gadol",
-    "help booking an appointment"
+    "lichtenshtein rosh gadol"
    ],
    "latency_ms": 7868,
    "cost_usd": "0.040",
@@ -3727,7 +3950,7 @@
    "output_tokens": 645,
    "searches": 1,
    "features": {
-    "candidates": 5.0,
+    "candidates": 4.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -3811,8 +4034,7 @@
     "Dawn",
     "Shaffa",
     "Hair & Co / Nathan Jeffrey",
-    "Anna Hair",
-    "Mipelo / other top-rated spots"
+    "Anna Hair"
    ],
    "name_keys": [
     "phil joe",
@@ -3820,8 +4042,7 @@
     "dawn",
     "shaffa",
     "hair co nathan jeffrey",
-    "anna hair",
-    "mipelo other top rated spots"
+    "anna hair"
    ],
    "latency_ms": 12392,
    "cost_usd": "0.040",
@@ -3829,7 +4050,7 @@
    "output_tokens": 952,
    "searches": 1,
    "features": {
-    "candidates": 7.0,
+    "candidates": 6.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -3860,16 +4081,14 @@
     "Highline Dental Practice",
     "Madison Dental Loft / Madison Dental",
     "National Dental Manhattan",
-    "NYU College of Dentistry",
-    "and any scheduling needs"
+    "NYU College of Dentistry"
    ],
    "name_keys": [
     "smile lab nyc",
     "highline dental practice",
     "madison dental loft madison dental",
     "national dental manhattan",
-    "nyu college of dentistry",
-    "and any scheduling needs"
+    "nyu college of dentistry"
    ],
    "latency_ms": 10397,
    "cost_usd": "0.040",
@@ -3877,7 +4096,7 @@
    "output_tokens": 779,
    "searches": 1,
    "features": {
-    "candidates": 6.0,
+    "candidates": 5.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -3897,19 +4116,15 @@
    "asked_at": "2026-11-25T14:13:43.290537Z",
    "text": "I can do that — I just need a couple quick details so I search and recommend the best matches.\n\n1. Which part of New York City do you prefer (Manhattan/Brooklyn/Queens/The Bronx/Staten Island) or a ZIP code?  \n2. Do you have dental insurance (and if so, which plan) or do you want options that accept most insurances / offer self-pay pricing?  \n3. Any preferences: gender of dentist, pediatric vs adult dentist, sedation/nitrous oxide, weekend or evening hours, or a specific language spoken?\n\nIf you want, I can start now with broad, highly-rated dentists across NYC — say a mix of academic dental centers (e.g., NYU Langone Dental Medicine) and top private practices — but I’ll get more precise results if you answer the three items above. Which do you prefer?",
    "citations": [],
-   "names": [
-    "Any preferences"
-   ],
-   "name_keys": [
-    "any preferences"
-   ],
+   "names": [],
+   "name_keys": [],
    "latency_ms": 4426,
    "cost_usd": "0.040",
    "input_tokens": 4469,
    "output_tokens": 350,
    "searches": 0,
    "features": {
-    "candidates": 1.0,
+    "candidates": 0.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -4038,15 +4253,13 @@
     "TriBeCa Dental Associates",
     "Levy Dental Arts",
     "Manhattan Dental Care / Midtown practices",
-    "Bowery Dental",
-    "Narrow choices to a specific neighborhood"
+    "Bowery Dental"
    ],
    "name_keys": [
     "tribeca dental associates",
     "levy dental arts",
     "manhattan dental care midtown practices",
-    "bowery dental",
-    "narrow choices to a specific neighborhood"
+    "bowery dental"
    ],
    "latency_ms": 13634,
    "cost_usd": "0.040",
@@ -4054,7 +4267,7 @@
    "output_tokens": 898,
    "searches": 2,
    "features": {
-    "candidates": 5.0,
+    "candidates": 4.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -4324,8 +4537,7 @@
     "MoreYoga",
     "Mission",
     "Oca London",
-    "Iyengar Yoga London",
-    "Many studios offer an intro deal"
+    "Iyengar Yoga London"
    ],
    "name_keys": [
     "triyoga",
@@ -4333,8 +4545,7 @@
     "moreyoga",
     "mission",
     "oca london",
-    "iyengar yoga london",
-    "many studios offer an intro deal"
+    "iyengar yoga london"
    ],
    "latency_ms": 15824,
    "cost_usd": "0.040",
@@ -4342,7 +4553,7 @@
    "output_tokens": 1059,
    "searches": 2,
    "features": {
-    "candidates": 7.0,
+    "candidates": 6.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -4500,15 +4711,11 @@
    "citations": [],
    "names": [
     "Licensed in New York State",
-    "New patient appointments",
-    "Wait times",
-    "Office hours"
+    "New patient appointments"
    ],
    "name_keys": [
     "licensed in new york state",
-    "new patient appointments",
-    "wait times",
-    "office hours"
+    "new patient appointments"
    ],
    "latency_ms": 2883,
    "cost_usd": "0.020",
@@ -4516,7 +4723,7 @@
    "output_tokens": 262,
    "searches": 0,
    "features": {
-    "candidates": 4.0,
+    "candidates": 2.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -4536,19 +4743,15 @@
    "asked_at": "2026-11-25T14:13:43.290537Z",
    "text": "I appreciate your question, but I'm not able to recommend specific dentists in New York City. Here's why:\n\n1. **I don't have current information** about individual dentists' practices, their availability, qualifications, or patient reviews that would allow me to make a reliable recommendation.\n\n2. **Personal preferences matter** - The best dentist for you depends on factors like:\n   - Your dental insurance and what it covers\n   - Your location within NYC\n   - Office hours and appointment availability\n   - Whether you prefer specific amenities or treatment approaches\n   - Patient reviews and ratings\n\n**Here's how I'd recommend finding a good dentist:**\n\n- **Use your insurance provider's directory** - If you have dental insurance, they'll have a list of in-network dentists\n- **Check online reviews** - Look at Google Maps, Healthgrades, or Zocdoc for dentist ratings and patient feedback\n- **Ask for referrals** - Your primary care doctor or friends/family in NYC can suggest dentists they trust\n- **Call ahead** - Confirm they accept your insurance, offer the services you need (cleanings, fillings), and have availability\n\nIf you'd like help with how to evaluate dentists or what to look for, I'm happy to help with that!",
    "citations": [],
-   "names": [
-    "Personal preferences matter"
-   ],
-   "name_keys": [
-    "personal preferences matter"
-   ],
+   "names": [],
+   "name_keys": [],
    "latency_ms": 3055,
    "cost_usd": "0.020",
    "input_tokens": 2243,
    "output_tokens": 281,
    "searches": 0,
    "features": {
-    "candidates": 1.0,
+    "candidates": 0.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -4596,19 +4799,15 @@
    "asked_at": "2026-11-25T14:13:43.290537Z",
    "text": "I appreciate your question, but I'm not able to recommend specific dentists in New York City. Here's why:\n\n1. **I don't have current, verified information** - Dentist availability, qualifications, and patient experiences change frequently, and I can't verify real-time details about specific practitioners.\n\n2. **Personal needs vary** - The best dentist depends on factors like your insurance, location preferences, specific dental needs, and communication style.\n\nInstead, I'd recommend:\n\n- **Ask for referrals** - Your primary care doctor, friends, family, or coworkers can provide personal recommendations\n- **Check online reviews** - Look at Google Maps, Yelp, Healthgrades, or ZocDoc for verified patient reviews and ratings\n- **Verify credentials** - Check the New York State Department of Health or the American Dental Association website to verify licenses\n- **Call ahead** - Contact offices directly to confirm they accept your insurance and can schedule appointments\n- **Insurance provider directory** - Your dental insurance likely has an online provider search tool\n\nFor finding dentists specifically in NYC, searching \"dentists near me\" on Google Maps or using dental appointment apps like ZocDoc can help you filter by location, insurance, and availability.",
    "citations": [],
-   "names": [
-    "Personal needs vary"
-   ],
-   "name_keys": [
-    "personal needs vary"
-   ],
+   "names": [],
+   "name_keys": [],
    "latency_ms": 3119,
    "cost_usd": "0.020",
    "input_tokens": 2243,
    "output_tokens": 270,
    "searches": 0,
    "features": {
-    "candidates": 1.0,
+    "candidates": 0.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -4628,19 +4827,15 @@
    "asked_at": "2026-11-25T14:13:43.290537Z",
    "text": "I don't have access to real-time information about specific dentist practices in New York City, their current availability, or their qualifications. However, I can suggest some ways to find a good dentist for your check-up and filling:\n\n1. **Ask your insurance provider** - They typically have a directory of in-network dentists\n2. **Check online reviews** - Google Maps, Yelp, and Healthgrades have patient reviews and ratings for NYC dentists\n3. **Ask for referrals** - Your primary care doctor or friends/family in NYC can recommend dentists they trust\n4. **Verify credentials** - Check that dentists are licensed through the New York State Department of Health\n5. **Call ahead** - Contact offices directly to confirm they offer check-ups and fillings, and ask about their current availability\n\nWhen evaluating options, consider factors like:\n- Location and convenient hours\n- Insurance acceptance\n- Experience with your specific needs\n- Patient reviews and ratings\n- Whether they offer emergency appointments\n\nThis approach will help you find dentists with current information about their practices and availability for scheduling your appointment soon.",
    "citations": [],
-   "names": [
-    "Location and convenient hours"
-   ],
-   "name_keys": [
-    "location and convenient hours"
-   ],
+   "names": [],
+   "name_keys": [],
    "latency_ms": 2723,
    "cost_usd": "0.020",
    "input_tokens": 2243,
    "output_tokens": 246,
    "searches": 0,
    "features": {
-    "candidates": 1.0,
+    "candidates": 0.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -4660,23 +4855,15 @@
    "asked_at": "2026-11-25T14:13:43.290537Z",
    "text": "I don't have access to current information about specific dentists in New York City, their availability, or their current reviews and ratings. Recommendations for healthcare providers are best found through:\n\n1. **Your insurance provider's directory** - If you have dental insurance, they typically have a searchable list of in-network dentists\n2. **Google Maps/Google Search** - Search \"dentists near me in NYC\" to see current reviews, ratings, and availability\n3. **Yelp** - Provides detailed reviews and patient feedback\n4. **Zocdoc** - Allows you to compare dentists and book appointments online\n5. **Healthgrades** - Shows dentist credentials and patient reviews\n6. **Ask your primary care doctor** - They can provide referrals to dentists they trust\n7. **Ask friends/family** - Personal recommendations are often valuable\n\nWhen choosing a dentist, consider factors like:\n- Location and convenience\n- Insurance acceptance\n- Hours of operation\n- Whether they're accepting new patients\n- Patient reviews and ratings\n- Board certification\n- Experience with the specific services you need (fillings, etc.)\n\nI'd recommend calling a few dentists once you've identified some candidates to ask about appointment availability for a check-up and filling.",
    "citations": [],
-   "names": [
-    "Location and convenience",
-    "Hours of operation",
-    "Board certification"
-   ],
-   "name_keys": [
-    "location and convenience",
-    "hours of operation",
-    "board certification"
-   ],
+   "names": [],
+   "name_keys": [],
    "latency_ms": 3149,
    "cost_usd": "0.020",
    "input_tokens": 2243,
    "output_tokens": 277,
    "searches": 0,
    "features": {
-    "candidates": 3.0,
+    "candidates": 0.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -5217,21 +5404,15 @@
    "asked_at": "2026-11-25T14:13:43.290537Z",
    "text": "I don't have access to current business directories or real-time information about specific plumbers operating in Tel Aviv this week. To find a reliable plumber for your leaking pipe, I'd recommend:\n\n1. **Google Maps/Search** - Search \"plumber Tel Aviv\" or \"אינסטלטור תל אביב\" to see current listings with reviews and ratings\n2. **Local directories** - Check Israeli business directories like Waze or local classified ads\n3. **Ask locals** - Post in Tel Aviv community groups on Facebook or local forums\n4. **Hotline services** - Call emergency plumbing hotlines that operate in your area\n5. **Building management** - If you live in an apartment building, your building management may have preferred contractors\n\nWhen choosing a plumber, look for:\n- Good reviews and ratings\n- Availability for emergency/urgent work\n- Clear pricing upfront\n- Proper licensing and insurance\n- Quick response times\n\nSince you need someone this week due to the leak, I'd suggest searching online immediately and calling several options to compare availability and pricing.",
    "citations": [],
-   "names": [
-    "Hotline services",
-    "Building management"
-   ],
-   "name_keys": [
-    "hotline services",
-    "building management"
-   ],
+   "names": [],
+   "name_keys": [],
    "latency_ms": 2881,
    "cost_usd": "0.020",
    "input_tokens": 2241,
    "output_tokens": 239,
    "searches": 0,
    "features": {
-    "candidates": 2.0,
+    "candidates": 0.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -5251,21 +5432,15 @@
    "asked_at": "2026-11-25T14:13:43.290537Z",
    "text": "I appreciate your question, but I'm not able to provide personal recommendations for specific plumbers in Tel Aviv. Here's why:\n\n1. **I don't have local expertise**: I don't have access to current, reliable information about specific plumbing services in Tel Aviv, their quality, pricing, or availability.\n\n2. **Situations change frequently**: Plumber availability, reputation, and service quality change over time, and any recommendation I could make might not be current or accurate.\n\nFor finding a reliable plumber in Tel Aviv this week, I'd suggest:\n\n- **Ask locals**: Friends, family, or neighbors in Tel Aviv can give you personal recommendations based on their experiences\n- **Check online reviews**: Websites like Google Maps, Waze, or local Israeli review sites often have plumber listings with ratings and reviews\n- **Call directly**: Contact a few plumbers to compare pricing and check their availability for this week\n- **Professional associations**: Look for plumbers registered with Israeli professional bodies who meet certain standards\n- **Local Facebook groups**: Community groups specific to your Tel Aviv neighborhood often have recommendations\n\nThis approach will help you find someone trustworthy with current information about their availability and pricing for your urgent leak.",
    "citations": [],
-   "names": [
-    "Situations change frequently",
-    "Professional associations"
-   ],
-   "name_keys": [
-    "situations change frequently",
-    "professional associations"
-   ],
+   "names": [],
+   "name_keys": [],
    "latency_ms": 3260,
    "cost_usd": "0.020",
    "input_tokens": 2241,
    "output_tokens": 258,
    "searches": 0,
    "features": {
-    "candidates": 2.0,
+    "candidates": 0.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -5285,19 +5460,15 @@
    "asked_at": "2026-11-25T14:13:43.290537Z",
    "text": "I appreciate the question, but I'm not able to recommend specific plumbers in Tel Aviv. Here's why:\n\n1. **I don't have local business data**: I don't have access to current, reliable information about specific plumbing businesses in Tel Aviv, including their current availability, reputation, pricing, or service quality.\n\n2. **Information changes frequently**: Local business reviews, ratings, and availability change constantly, and my knowledge isn't updated in real-time.\n\n3. **Better resources exist**: For finding a plumber this week, I'd recommend:\n   - **Google Maps/Search**: Search \"plumber Tel Aviv\" or \"שרברב תל אביב\" to find highly-rated local plumbers with reviews and availability\n   - **Local platforms**: Check Israeli services like Waze (which has a local services section), or ask in local Facebook groups for Tel Aviv\n   - **Ask your building manager**: If you're in an apartment, your building management often has trusted plumbers they regularly use\n   - **Call a few**: Get quotes from multiple plumbers to compare prices and response times\n\nThis approach will help you find someone available this week with current reviews and pricing relevant to your specific location in Tel Aviv.",
    "citations": [],
-   "names": [
-    "Better resources exist"
-   ],
-   "name_keys": [
-    "better resources exist"
-   ],
+   "names": [],
+   "name_keys": [],
    "latency_ms": 3440,
    "cost_usd": "0.020",
    "input_tokens": 2241,
    "output_tokens": 264,
    "searches": 0,
    "features": {
-    "candidates": 1.0,
+    "candidates": 0.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -5317,19 +5488,15 @@
    "asked_at": "2026-11-25T14:13:43.290537Z",
    "text": "I appreciate your question, but I'm not able to recommend specific plumbers in Tel Aviv. While I could search for plumbers in the area, I don't have reliable information about their quality, reliability, current availability, or customer reviews that would let me make a good recommendation.\n\nHere's what I'd suggest instead:\n\n1. **Local review sites**: Check Google Maps, TripAdvisor, or local Israeli review sites for plumbers in Tel Aviv with high ratings and recent customer reviews.\n\n2. **Ask for referrals**: Ask friends, neighbors, or your landlord/building management for recommendations—they likely have personal experience with local plumbers.\n\n3. **Online directories**: Search for \"אינסטלטור תל אביב\" (plumber Tel Aviv in Hebrew) on local business directories.\n\n4. **Emergency services**: If this is urgent, many plumbers offer emergency services. Check if your building has a maintenance contact or if there's a 24/7 emergency plumber service in your area.\n\n5. **Verify credentials**: Make sure any plumber you contact is licensed and insured.\n\nSince you need someone this week, I'd recommend starting with personal referrals or highly-reviewed options on Google Maps, as these tend to be the most reliable indicators of good service.",
    "citations": [],
-   "names": [
-    "Emergency services"
-   ],
-   "name_keys": [
-    "emergency services"
-   ],
+   "names": [],
+   "name_keys": [],
    "latency_ms": 3153,
    "cost_usd": "0.020",
    "input_tokens": 2241,
    "output_tokens": 282,
    "searches": 0,
    "features": {
-    "candidates": 1.0,
+    "candidates": 0.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -5349,21 +5516,15 @@
    "asked_at": "2026-11-25T14:13:43.290537Z",
    "text": "I appreciate you reaching out, but I'm not able to provide personal recommendations for specific plumbers in Tel Aviv. Here's why:\n\n1. **I don't have real-time local business information** - My knowledge doesn't include current, verified listings of active plumbing businesses in Tel Aviv, their current availability, or their reliability.\n\n2. **Quality varies and changes frequently** - Plumber ratings, availability, pricing, and customer experiences change constantly, and I can't verify current information.\n\n3. **Responsibility for service quality** - I wouldn't want to recommend someone I can't verify, and you'd want to know you're contacting a trusted, currently-operating business.\n\n**Here's what I'd recommend instead:**\n\n- **Google Maps/Search** - Search \"plumber Tel Aviv\" or \"שרברב תל אביב\" to find highly-rated, reviewed plumbers with current contact info\n- **Local directories** - Check Israeli business directories or platforms like Wix or local review sites\n- **Ask neighbors/friends** - Personal referrals from people in Tel Aviv are often the most reliable\n- **Call multiple plumbers** - Get quotes and ask about their availability this week\n- **Verify credentials** - Ensure they're licensed and insured\n\nFor an urgent leak, calling several plumbers today would be your best bet to find someone available this week.",
    "citations": [],
-   "names": [
-    "Quality varies and changes frequently",
-    "Responsibility for service quality"
-   ],
-   "name_keys": [
-    "quality varies and changes frequently",
-    "responsibility for service quality"
-   ],
+   "names": [],
+   "name_keys": [],
    "latency_ms": 3790,
    "cost_usd": "0.020",
    "input_tokens": 2241,
    "output_tokens": 300,
    "searches": 0,
    "features": {
-    "candidates": 2.0,
+    "candidates": 0.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -6077,8 +6238,7 @@
     "Gorgeous Hair Tel Aviv by Jonny Stark",
     "Hair and Co",
     "Roy Daniel",
-    "Miki Hair Atelier",
-    "precise cuts"
+    "Miki Hair Atelier"
    ],
    "name_keys": [
     "dawn hair design",
@@ -6088,8 +6248,7 @@
     "gorgeous hair tel aviv by jonny stark",
     "hair and co",
     "roy daniel",
-    "miki hair atelier",
-    "precise cuts"
+    "miki hair atelier"
    ],
    "latency_ms": 6704,
    "cost_usd": "0.020",
@@ -6097,7 +6256,7 @@
    "output_tokens": 533,
    "searches": 1,
    "features": {
-    "candidates": 9.0,
+    "candidates": 8.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -6733,8 +6892,7 @@
     "Sennheiser HD 450BT",
     "Sony WH‑CH720N",
     "JBL Tune / JBL T750",
-    "Effective ANC",
-    "Comfortable fit for 30–60 minute daily rides"
+    "Effective ANC"
    ],
    "name_keys": [
     "anker soundcore space q45",
@@ -6742,8 +6900,7 @@
     "sennheiser hd 450bt",
     "sony wh ch720n",
     "jbl tune jbl t750",
-    "effective anc",
-    "comfortable fit for 30 60 minute daily rides"
+    "effective anc"
    ],
    "latency_ms": 20108,
    "cost_usd": "0.040",
@@ -6751,7 +6908,7 @@
    "output_tokens": 1370,
    "searches": 3,
    "features": {
-    "candidates": 7.0,
+    "candidates": 6.0,
     "has_pick": 1.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -6772,42 +6929,24 @@
    "text": "Below are CRMs that fit a small (five-person) marketing agency in Israel, with short notes on why each is a good match and what to check before you commit. I name specific products and give a recommended starting pick.\n\nWhat to prioritize for a 5-person marketing agency\n- Ease of setup and low admin overhead (you don’t want a long implementation).  \n- Marketing and contact-management features: lists/segments, email integration, lead capture forms, campaign tracking.  \n- Pipeline / deal management for new business.  \n- Integrations: Google Workspace, Mailchimp/ActiveCampaign, Zapier, project tools (Asana/Monday/Trello).  \n- Affordable per-user pricing and a useful free tier or low-cost starter plan.  \n- Basic automation (task reminders, simple workflows) and reporting.  \n- Localization & compliance: Hebrew UI or good UTF-8 support, ability to handle Israeli phone formats, and clarity on where customer data is stored (if data residency matters).\n\nRecommended CRMs (shortlist)\n1. HubSpot CRM (Free / Starter / Professional)  \n   - Why: Best free CRM for small teams; easy contact management, built-in email tracking, forms, landing pages, and basic marketing automation. Scales if you grow. Strong integrations with Google Workspace, Mailchimp, Zapier.  \n   - Good if you want something fast to adopt and strong marketing features without immediate cost.\n\n2. Pipedrive  \n   - Why: Excellent for pipeline-focused teams; very visual deal stages, lightweight automation, and simple reporting. Popular with small agencies and widely used in Israel. Integrates well with marketing tools via Marketplace and Zapier.  \n   - Good if your agency needs a clear sales pipeline for client acquisition and proposals.\n\n3. Zoho CRM (or Zoho One)  \n   - Why: Highly configurable and cost-effective. Includes CRM, email campaigns, basic marketing automation and other apps (if you want an all-in-one suite). Good for teams that want to customize fields, workflows and processes on a budget.  \n   - Good if you want deep configuration and lower per-seat cost.\n\n4. Monday.com CRM (Sales/CRM template)  \n   - Why: Combines CRM with project/work management — useful if you want sales + campaign execution in one place. Very visual and flexible.  \n   - Good if you want to keep client work and CRM in the same platform.\n\n5. ActiveCampaign  \n   - Why: Strong email marketing + automation with CRM features. Best when email nurture and campaign automation are core to your offering.  \n   - Good if you run advanced email sequences and need CRM that’s tightly integrated with email/broadcasts.\n\n6. Copper CRM  \n   - Why: Native Gmail/Google Workspace integration and minimal setup. Works well if your team lives in Gmail and uses Google Calendar/Contacts.  \n   - Good if you want near-zero onboarding friction for a Google-centric workflow.\n\n7. Salesforce Essentials  \n   - Why: “Starter” version of Salesforce for small businesses. Powerful and extensible but heavier to set up and more expensive.  \n   - Good only if you expect rapid growth and need enterprise features later.\n\nOther notes and Israel-specific considerations\n- Language & phone formats: Most CRMs handle Hebrew and right-to-left text in notes, but the user interface and support are often English-first. If Hebrew UI/support is essential, test the platform or ask vendors directly.  \n- Data residency & privacy: Many major CRMs use data centers outside Israel. If you must host data in Israel or need specific data-handling guarantees under Israeli law, ask vendors about data location, contracts, and security, or consider a local provider or self-hosted option.  \n- Payments & billing: If you want to invoice from the CRM, check whether it integrates with Israeli payment providers or supports your billing workflow.  \n- Local partners/implementation: Some vendors (Pipedrive, HubSpot, Zoho) have local partners/agencies in Israel who can help with onboarding—useful if you prefer in‑language help.\n\nSuggested next step (fast path)\n- If you want the simplest low-risk start: try HubSpot CRM (free) for 30–60 days to see if it meets your marketing workflows.  \n- If you need a sales-pipeline focus: trial Pipedrive (14-day free trial) and import sample deals.  \n- If you want unified email automation + CRM: test ActiveCampaign or Zoho.\n\nIf you want, I can:\n- Compare 2–3 of these options side-by-side (pricing, key features, integrations you use).  \n- Recommend a 30‑day trial checklist (what to import, who does what, which automations to test).  \n- Find Israeli implementation partners or check Hebrew/localization support for the top picks.\n\nWhich option would you like me to expand on, or tell me the tools you currently use (email platform, project tool, billing) and I’ll tailor the recommendation.",
    "citations": [],
    "names": [
-    "Ease of setup and low admin overhead",
-    "Marketing and contact-management features",
-    "Pipeline / deal management for new business",
     "Integrations",
-    "Basic automation",
-    "Localization & compliance",
     "HubSpot CRM",
     "Pipedrive",
     "Zoho CRM",
     "Monday.com CRM",
     "ActiveCampaign",
     "Copper CRM",
-    "Salesforce Essentials",
-    "Language & phone formats",
-    "Data residency & privacy",
-    "Payments & billing",
-    "Recommend a 30‑day trial checklist"
+    "Salesforce Essentials"
    ],
    "name_keys": [
-    "ease of setup and low admin overhead",
-    "marketing and contact management features",
-    "pipeline deal management for new business",
     "integrations",
-    "basic automation",
-    "localization compliance",
     "hubspot crm",
     "pipedrive",
     "zoho crm",
     "monday com crm",
     "activecampaign",
     "copper crm",
-    "salesforce essentials",
-    "language phone formats",
-    "data residency privacy",
-    "payments billing",
-    "recommend a 30 day trial checklist"
+    "salesforce essentials"
    ],
    "latency_ms": 14620,
    "cost_usd": "0.040",
@@ -6815,7 +6954,7 @@
    "output_tokens": 1295,
    "searches": 0,
    "features": {
-    "candidates": 17.0,
+    "candidates": 8.0,
     "has_pick": 1.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -6850,8 +6989,7 @@
     "The Lumiares",
     "Santiago de Alfama",
     "LX Boutique Hotel",
-    "1908 Lisboa Hotel",
-    "Narrow suggestions by neighbourhood"
+    "1908 Lisboa Hotel"
    ],
    "name_keys": [
     "memmo alfama",
@@ -6860,8 +6998,7 @@
     "the lumiares",
     "santiago de alfama",
     "lx boutique hotel",
-    "1908 lisboa hotel",
-    "narrow suggestions by neighbourhood"
+    "1908 lisboa hotel"
    ],
    "latency_ms": 13960,
    "cost_usd": "0.040",
@@ -6869,11 +7006,11 @@
    "output_tokens": 1082,
    "searches": 1,
    "features": {
-    "candidates": 8.0,
+    "candidates": 7.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
-    "priced": 1.0,
+    "priced": 0.0,
     "own_site": 0.0,
     "cites": 7.0,
     "listicle_cites": 4.0,
@@ -6902,18 +7039,14 @@
     "Dominatecom",
     "CHERRY",
     "HYBRID",
-    "Sitrus / Convo / UL‑UX Studio",
-    "Specialist freelancers / smaller experts",
-    "Pull case studies"
+    "Sitrus / Convo / UL‑UX Studio"
    ],
    "name_keys": [
     "boostify",
     "dominatecom",
     "cherry",
     "hybrid",
-    "sitrus convo ul ux studio",
-    "specialist freelancers smaller experts",
-    "pull case studies"
+    "sitrus convo ul ux studio"
    ],
    "latency_ms": 10404,
    "cost_usd": "0.040",
@@ -6921,7 +7054,7 @@
    "output_tokens": 848,
    "searches": 1,
    "features": {
-    "candidates": 7.0,
+    "candidates": 5.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -6955,9 +7088,6 @@
     "Coding Academy",
     "Deploy Academy / Deploy TLV",
     "Israel Tech Challenge",
-    "Schedule fit",
-    "Pace & duration",
-    "Curriculum focus",
     "Language",
     "Outcomes"
    ],
@@ -6967,9 +7097,6 @@
     "coding academy",
     "deploy academy deploy tlv",
     "israel tech challenge",
-    "schedule fit",
-    "pace duration",
-    "curriculum focus",
     "language",
     "outcomes"
    ],
@@ -6979,7 +7106,7 @@
    "output_tokens": 1086,
    "searches": 1,
    "features": {
-    "candidates": 10.0,
+    "candidates": 7.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -7061,9 +7188,6 @@
     "סופר שרברב / סופר אינסטלטור",
     "יוסי",
     "אחיה ארד",
-    "בקשו מהאינסטלטור להגיע עם ציוד לאיתור נזילות",
-    "אם הגורם הוא בניין משותף",
-    "לחפש עבורך טלפונים ישירים וזמינות ספציפית להיום/השבוע",
     "להתמקד באזור מסוים בחיפה"
    ],
    "name_keys": [
@@ -7072,9 +7196,6 @@
     "סופר שרברב סופר אינסטלטור",
     "יוסי",
     "אחיה ארד",
-    "בקשו מהאינסטלטור להגיע עם ציוד לאיתור נזילות",
-    "אם הגורם הוא בניין משותף",
-    "לחפש עבורך טלפונים ישירים וזמינות ספציפית להיום השבוע",
     "להתמקד באזור מסוים בחיפה"
    ],
    "latency_ms": 10663,
@@ -7083,7 +7204,7 @@
    "output_tokens": 920,
    "searches": 1,
    "features": {
-    "candidates": 9.0,
+    "candidates": 6.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -7165,19 +7286,13 @@
     "Roborock S8 Pro Ultra",
     "iRobot Roomba j9+",
     "ECOVACS Deebot X1 Omni",
-    "Roborock S7 / S7 MaxV or standard S8",
-    "Easiest upkeep / least frequent emptying",
-    "Best at removing cat hair",
-    "Small apartment / limited storage"
+    "Roborock S7 / S7 MaxV or standard S8"
    ],
    "name_keys": [
     "roborock s8 pro ultra",
     "irobot roomba j9",
     "ecovacs deebot x1 omni",
-    "roborock s7 s7 maxv or standard s8",
-    "easiest upkeep least frequent emptying",
-    "best at removing cat hair",
-    "small apartment limited storage"
+    "roborock s7 s7 maxv or standard s8"
    ],
    "latency_ms": 18539,
    "cost_usd": "0.040",
@@ -7185,12 +7300,12 @@
    "output_tokens": 1640,
    "searches": 1,
    "features": {
-    "candidates": 7.0,
+    "candidates": 4.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
     "priced": 0.0,
-    "own_site": 1.0,
+    "own_site": 0.0,
     "cites": 9.0,
     "listicle_cites": 6.0,
     "distinct_hosts": 6.0,
@@ -7221,7 +7336,6 @@
     "https://www.itechguides.com/best/freelance-invoicing-software/?utm_source=openai"
    ],
    "names": [
-    "Language and customer needs",
     "BillOS",
     "Slate",
     "Sendu / Fatoora / Quickly Invoice",
@@ -7230,7 +7344,6 @@
     "Zoho Invoice / Wave / QuickBooks / FreshBooks"
    ],
    "name_keys": [
-    "language and customer needs",
     "billos",
     "slate",
     "sendu fatoora quickly invoice",
@@ -7244,7 +7357,7 @@
    "output_tokens": 1523,
    "searches": 1,
    "features": {
-    "candidates": 7.0,
+    "candidates": 6.0,
     "has_pick": 0.0,
     "has_table": 0.0,
     "rated": 0.0,
@@ -7540,7 +7653,6 @@
     "Zoho CRM",
     "Fluid CRM",
     "monday CRM",
-    "My recommendation",
     "HubSpot's free tier"
    ],
    "name_keys": [
@@ -7550,7 +7662,6 @@
     "zoho crm",
     "fluid crm",
     "monday crm",
-    "my recommendation",
     "hubspot s free tier"
    ],
    "latency_ms": 10105,
@@ -7559,7 +7670,7 @@
    "output_tokens": 857,
    "searches": 2,
    "features": {
-    "candidates": 8.0,
+    "candidates": 7.0,
     "has_pick": 1.0,
     "has_table": 0.0,
     "rated": 0.0,
