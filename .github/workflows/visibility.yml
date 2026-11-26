@@ -50,7 +50,7 @@ jobs:
             --state visibility_state.json \
             --out out/visibility.html --json out/visibility.json --cases out/cases.html \
             --engines chatgpt,chatgpt5,perplexity,gemini,claude \
-            --per-tick 10 --budget "0.80"
+            --per-tick 10 --budget "0.80" --reextract
           # the per-question pages (AI side vs Google side) from the merged answers
           python -m handover.cli.main visibility pages --state visibility_state.json --out out/s
 
