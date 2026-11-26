@@ -1,0 +1,64 @@
+{
+  "profiles": [
+    {
+      "id": "tel-aviv-2ee78c",
+      "name": "אורן רדה",
+      "slug": "tel-aviv-2ee78c",
+      "city": "Tel Aviv",
+      "country": "",
+      "category": "plumber",
+      "website": "https://plumber-telaviv.co.il",
+      "phone": "072-392-6556",
+      "address": "",
+      "hours": "אינסטלטור בתל אביב 24 שעות: שירותי אינסטלציה תל אביב 24 שעות ביממה תושבי תל אביב, רמת גן והסביבה יכולים ליהנות משירותי אינסטלציה 24 שעות ביממה עם זמינות מלאה 24",
+      "summary": "אינסטלטור בתל אביב יצאת צדיק: שלום, שמי אורן רדה, אם אתם מחפשים אינסטלטור ✅ אמין ✅ מקצועי ✅ עם 20+ שנות ניסיון, התקשרו אלי עכשיו ואגיע במהירות: אורן :)",
+      "services": [
+        "אינסטלטור בתל אביב והסביבה אמין, מקצועי וישר",
+        "לקוחות מספרים על השירות של אורן והצוות",
+        "באיזו תקלה אפשר לעזור לכם?",
+        "כמה רגעים מהדרך שלי",
+        "באילו תקלות אני והצוות יכולים לעזור לכם?",
+        "מי אנחנו – הכירו את אורן רדה והצוות",
+        "שרברב בתל אביב – איך לדעת איזה אינסטלטור מתאים לך?",
+        "בחירת אינסטלטור תל אביב – למה דווקא אנחנו?"
+      ],
+      "prices": "",
+      "booking": "",
+      "people": [],
+      "languages": [
+        "he"
+      ],
+      "since": "",
+      "extras": [
+        "e-mail: oren@orenrada.co.il",
+        "social: https://www.youtube.com/embed/fNzG2gI6m_A",
+        "social: https://facebook.com/10172085777130122",
+        "social: https://facebook.com/5861032257254684",
+        "social: https://facebook.com/5449454618414216",
+        "social: https://facebook.com/10158953837629376",
+        "social: https://facebook.com/10157955273671731"
+      ],
+      "sources": [
+        "https://plumber-telaviv.co.il"
+      ],
+      "checked": "2026-11-26",
+      "discrepancies": "",
+      "_status": 200,
+      "_confirm": [
+        "name",
+        "phone",
+        "address",
+        "hours",
+        "summary",
+        "services",
+        "prices",
+        "booking",
+        "languages",
+        "since",
+        "country",
+        "people — only business-level facts, never private individuals"
+      ],
+      "_note": "DRAFT read by a program from the page above on 2026-11-26. Confirm every field against the site and the Google listing, remove what is not stated, then move the file to data/profiles/."
+    }
+  ]
+}

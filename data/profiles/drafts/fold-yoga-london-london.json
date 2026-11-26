@@ -1,0 +1,64 @@
+{
+  "profiles": [
+    {
+      "id": "fold-yoga-london-london",
+      "name": "Fold Yoga London",
+      "slug": "fold-yoga-london-london",
+      "city": "London",
+      "country": "",
+      "category": "yoga studio",
+      "website": "https://foldyoga.co.uk",
+      "phone": "",
+      "address": "a First Floor Mainyard Studios 691 High Road Leyton E10 6RA Studio Classes Private Yoga Sessions About Membership FAQ Terms",
+      "hours": "",
+      "summary": "Less stress, more stretch. FOLD Yoga is a judgement-free yoga studio in London & online, for everyone to enjoy.",
+      "services": [
+        "Welcome to FOLD Yoga!",
+        "Unwind where you want. Join us in-person, or online.",
+        "Fold Studios",
+        "Stoke Newington (N16)",
+        "Leyton (E10)",
+        "Fold at Home",
+        "Our Happy Yogis",
+        "Private yoga classes"
+      ],
+      "prices": "",
+      "booking": "",
+      "people": [],
+      "languages": [
+        "en"
+      ],
+      "since": "",
+      "extras": [
+        "e-mail: hello@fold-london.co.uk",
+        "social: http://www.facebook.com/2008/fbml",
+        "social: https://www.instagram.com/fold.london",
+        "social: https://www.instagram.com/reel/C58SUbmIIid/embed/&quot;&gt;&lt;/iframe&gt;",
+        "social: https://www.instagram.com/p/C5ysLOhI-Rv",
+        "social: https://www.instagram.com/p/C4at-Krowl7",
+        "social: https://www.instagram.com/p/C1cc-0gr-QJ"
+      ],
+      "sources": [
+        "https://foldyoga.co.uk"
+      ],
+      "checked": "2026-11-26",
+      "discrepancies": "",
+      "_status": 200,
+      "_confirm": [
+        "name",
+        "phone",
+        "address",
+        "hours",
+        "summary",
+        "services",
+        "prices",
+        "booking",
+        "languages",
+        "since",
+        "country",
+        "people — only business-level facts, never private individuals"
+      ],
+      "_note": "DRAFT read by a program from the page above on 2026-11-26. Confirm every field against the site and the Google listing, remove what is not stated, then move the file to data/profiles/."
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "profiles": [
+    {
+      "id": "new-york-general-dentistry-new-york-city",
+      "name": "New York General Dentistry",
+      "slug": "new-york-general-dentistry-new-york-city",
+      "city": "New York City",
+      "country": "",
+      "category": "dentist",
+      "website": "https://newyorkgeneraldentistry.com",
+      "phone": "212) 838-0842",
+      "address": "0842 133 East 58th St",
+      "hours": ", ste 409 New York, NY 10022 Get Directions Hours: Monday 8am – 7pm Tuesday 8am – 5pm Wednesday 8am – 5pm Thursday 8am – 7pm Friday 8am – 5pm Sundays",
+      "summary": "Dr. Inna Chern offers general, cosmetic and TMJ dentistry in Midtown East Manhattan, with gentle Airflow cleanings and easy online booking. Book your visit.",
+      "services": [
+        "New York General Dentistry",
+        "Brightening Smiles in Midtown East Manhattan",
+        "Brighter Smiles Through Better Dentistry",
+        "Featured In",
+        "Your health and your time are valuable.",
+        "Your First Visit",
+        "Restorative Dental Services in NYC",
+        "What Makes Our Office the Right Fit for Your Dental Needs?"
+      ],
+      "prices": "",
+      "booking": "",
+      "people": [],
+      "languages": [
+        "en"
+      ],
+      "since": "",
+      "extras": [
+        "social: https://www.instagram.com/newyorkgeneraldentistry"
+      ],
+      "sources": [
+        "https://newyorkgeneraldentistry.com"
+      ],
+      "checked": "2026-11-26",
+      "discrepancies": "",
+      "_status": 200,
+      "_confirm": [
+        "name",
+        "phone",
+        "address",
+        "hours",
+        "summary",
+        "services",
+        "prices",
+        "booking",
+        "languages",
+        "since",
+        "country",
+        "people — only business-level facts, never private individuals"
+      ],
+      "_note": "DRAFT read by a program from the page above on 2026-11-26. Confirm every field against the site and the Google listing, remove what is not stated, then move the file to data/profiles/."
+    }
+  ]
+}

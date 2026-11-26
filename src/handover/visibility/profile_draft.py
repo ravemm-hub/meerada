@@ -13,6 +13,7 @@ built as usual. Nothing here is published on its own.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from datetime import UTC, datetime
@@ -36,23 +37,33 @@ _SOCIAL = re.compile(
     re.I,
 )
 _HOURS = re.compile(
-    r"[^.\n]{0,60}(?:open|hours|opening|שעות|פתוח|Sun|Mon|Tue|Wed|Thu|Fri|Sat|א'|ב'-|א-ה)[^.\n]{0,100}",
+    r"[^.\n]{0,60}\b(?:open|hours|opening|שעות|פתוח|Sun|Mon|Tue|Wed|Thu|Fri|Sat|א'|ב'-|א-ה)\b[^.\n]{0,100}",
     re.I,
 )
 _ADDRESS = re.compile(
     r"[^.\n]{0,40}(?:\bSt\.?\b|\bStreet\b|\bRd\.?\b|\bRoad\b|\bAve\.?\b|\bBlvd\b|רחוב|רח'|שד'|שדרות|דרך)[^.\n]{0,80}",
     re.I,
 )
+_SCRIPT = re.compile(r"<(script|style|noscript)[^>]*>.*?</\1>", re.I | re.S)
+_DIGIT = re.compile(r"\d")
 _WS = re.compile(r"\s+")
 _SLUG = re.compile(r"[^a-z0-9]+")
 
 
 def _clean(s: str) -> str:
-    return _WS.sub(" ", unescape(_TAG.sub(" ", s))).strip()
+    return _WS.sub(" ", unescape(_TAG.sub(" ", _SCRIPT.sub(" ", s)))).strip()
+
+
+def _first_with_digit(rx: re.Pattern[str], text: str) -> str:
+    """The first match that carries a number — hours and addresses do, prose does not."""
+    return next((m.group(0).strip() for m in rx.finditer(text) if _DIGIT.search(m.group(0))), "")
 
 
 def slugify(name: str, city: str) -> str:
     base = _SLUG.sub("-", f"{name} {city}".lower()).strip("-")
+    if not _SLUG.sub("", name.lower()):  # a name with no Latin letters: keep it unique
+        digest = hashlib.sha1(name.encode("utf-8")).hexdigest()[:6]
+        base = f"{base}-{digest}" if base else f"business-{digest}"
     return base or "business"
 
 
@@ -71,11 +82,17 @@ def draft_profile(
         t = _clean(h)
         if 3 <= len(t) <= 60 and t not in heads:
             heads.append(t)
-    phones = list(dict.fromkeys(m.group(0).strip() for m in _PHONE.finditer(text)))[:2]
+    phones = list(
+        dict.fromkeys(
+            m.group(0).strip()
+            for m in _PHONE.finditer(text)
+            if "+" in m.group(0) or "-" in m.group(0) or " " in m.group(0).strip()
+        )
+    )[:2]
     emails = list(dict.fromkeys(m.group(0).rstrip(".") for m in _EMAIL.finditer(html)))[:2]
     socials = list(dict.fromkeys(m.group(0).rstrip("/") for m in _SOCIAL.finditer(html)))[:6]
-    hours = _HOURS.search(text)
-    address = _ADDRESS.search(text)
+    hours = _first_with_digit(_HOURS, text)
+    address = _first_with_digit(_ADDRESS, text)
     lang = _LANG.search(html)
     name = name or title.split("|")[0].split(" - ")[0].strip()
     today = datetime.now(tz=UTC).date().isoformat()
@@ -88,8 +105,8 @@ def draft_profile(
         "category": category,
         "website": url,
         "phone": phones[0] if phones else "",
-        "address": address.group(0).strip() if address else "",
-        "hours": hours.group(0).strip() if hours else "",
+        "address": address,
+        "hours": hours,
         "summary": desc,
         "services": heads[:8],
         "prices": "",

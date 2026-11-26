@@ -1,0 +1,64 @@
+{
+  "profiles": [
+    {
+      "id": "tel-aviv-630312",
+      "name": "א.ל פתרונות אינסטלציה",
+      "slug": "tel-aviv-630312",
+      "city": "Tel Aviv",
+      "country": "",
+      "category": "plumber",
+      "website": "https://al-biuvit.co.il",
+      "phone": "050-250-9104",
+      "address": "",
+      "hours": "",
+      "summary": "צריך ביובית במרכז? א.ל פתרונות - ביובית 24/7, פתיחת סתימות, פינוי שורשים ושומנים, שטיפת קווי ביוב, צילום קווים ותיקוני פאץ׳. 35 שנות ניסיון.",
+      "services": [
+        "שירותי ביובית 24/7 במרכז מגיעים אליך תוך דקות!",
+        "השירותים שלנו",
+        "פתיחת סתימות מכל הסוגים",
+        "פינוי שורשים מהביוב",
+        "פינוי שומנים מהביוב והצנרת",
+        "שטיפת קווי ביוב בלחץ מים גבוה",
+        "תיקון צינור שחדר אליו שורש באמצעות פאץ׳",
+        "צילום קווי ביוב מכל הסוגים"
+      ],
+      "prices": "",
+      "booking": "",
+      "people": [],
+      "languages": [
+        "he"
+      ],
+      "since": "",
+      "extras": [
+        "e-mail: Alonsmo01@gmail.com",
+        "social: https://wa.me/972502509104",
+        "social: https://wa.me/972502509104?text=שלום,%20אני%20צריך%20שירות%20ביובית%20דחוף.",
+        "social: https://wa.me/972502509104?text=שלום,%20הגעתי%20מהאתר.%20אני%20צריך%20ייעוץ%20לגבי%20פתיחת%20סתימת%20ביוב.",
+        "social: https://wa.me/972502509104?text=שלום,%20הגעתי%20מהאתר.%20אני%20צריך%20ייעוץ%20לגבי%20פינוי%20שורשים%20מהביוב.",
+        "social: https://wa.me/972502509104?text=שלום,%20הגעתי%20מהאתר.%20אני%20צריך%20ייעוץ%20לגבי%20פינוי%20שומנים%20מהביוב%20והצנרת.",
+        "social: https://wa.me/972502509104?text=שלום,%20הגעתי%20מהאתר.%20אני%20צריך%20ייעוץ%20לגבי%20שטיפת%20קווי%20ביוב%20בלחץ%20מים%20גבוה."
+      ],
+      "sources": [
+        "https://al-biuvit.co.il"
+      ],
+      "checked": "2026-11-26",
+      "discrepancies": "",
+      "_status": 200,
+      "_confirm": [
+        "name",
+        "phone",
+        "address",
+        "hours",
+        "summary",
+        "services",
+        "prices",
+        "booking",
+        "languages",
+        "since",
+        "country",
+        "people — only business-level facts, never private individuals"
+      ],
+      "_note": "DRAFT read by a program from the page above on 2026-11-26. Confirm every field against the site and the Google listing, remove what is not stated, then move the file to data/profiles/."
+    }
+  ]
+}

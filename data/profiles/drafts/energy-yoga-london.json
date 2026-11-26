@@ -1,0 +1,45 @@
+{
+  "profiles": [
+    {
+      "id": "energy-yoga-london",
+      "name": "Energy Yoga",
+      "slug": "energy-yoga-london",
+      "city": "London",
+      "country": "",
+      "category": "yoga studio",
+      "website": "https://energyoga.co.uk",
+      "phone": "",
+      "address": "",
+      "hours": "",
+      "summary": "",
+      "services": [],
+      "prices": "",
+      "booking": "",
+      "people": [],
+      "languages": [],
+      "since": "",
+      "extras": [],
+      "sources": [
+        "https://energyoga.co.uk"
+      ],
+      "checked": "2026-11-26",
+      "discrepancies": "",
+      "_status": 0,
+      "_confirm": [
+        "name",
+        "phone",
+        "address",
+        "hours",
+        "summary",
+        "services",
+        "prices",
+        "booking",
+        "languages",
+        "since",
+        "country",
+        "people — only business-level facts, never private individuals"
+      ],
+      "_note": "DRAFT read by a program from the page above on 2026-11-26. Confirm every field against the site and the Google listing, remove what is not stated, then move the file to data/profiles/."
+    }
+  ]
+}
