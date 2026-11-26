@@ -14,6 +14,8 @@ from collections.abc import Sequence
 from dataclasses import dataclass
 from urllib.parse import unquote_plus, urlparse
 
+from handover.visibility.noise import reads_like_advice
+
 _ITEM = re.compile(r"^\s*(?:[-*•]|\d{1,2}[.)])\s+(.*\S)\s*$")
 _HEADER = re.compile(r"^\s*#{2,4}\s+(.*\S)\s*$")
 _BOLD = re.compile(r"\*\*([^*]{1,300}?)\*\*")  # may span a line break (Claude's lists)
@@ -256,6 +258,8 @@ def _looks_like_name(name: str) -> bool:
         return False
     key = normalize(plain)
     if key in _PLATFORMS or any(w in _GENERIC_WORDS for w in key.split()):
+        return False
+    if reads_like_advice(plain):
         return False
     letters = sum(ch.isalpha() for ch in plain)
     return letters >= 2

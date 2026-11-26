@@ -15,46 +15,37 @@ not promoted, whatever it pays.
 
 from __future__ import annotations
 
-import re
 from collections import Counter
 from html import escape
 from typing import Any
 
 from handover.visibility.extract import normalize
 from handover.visibility.google import QUALITY_MIN_RATING, QUALITY_MIN_REVIEWS, GoogleSnapshot
-
-# Words that say what or where a business is, not which one it is. Two names that share
-# only these are not the same business ("City Dental Group NYC" is not "Sachar Dental NY").
-GENERIC = frozenset(
-    re.split(
-        r"\s+",
-        "the and of in at for dental dentist dentistry clinic yoga studio pilates salon hair "
-        "hairdresser barber plumber plumbing plumbers restaurant pizzeria trattoria cafe coffee "
-        "gym fitness center centre group office practice london nyc new york city tel aviv "
-        "manhattan brooklyn soho ltd inc llc co dr",
-    )
-)
-
-
-def _distinct(key: str, ignore: frozenset[str]) -> set[str]:
-    return {t for t in key.split() if len(t) > 1 and t not in ignore}
+from handover.visibility.names import GENERIC, distinctive, joined, words_match
 
 
 def same_business(a: str, b: str, ignore: frozenset[str] = GENERIC) -> bool:
-    """Same business when the distinctive words (not category, not city) of one name are
-    all in the other, or most of them are (``Oca London`` ~ ``Oca Yoga London``)."""
+    """Same business when the distinctive words (not category, not city, in either
+    language) of one name are all in the other, or most of them are ("Oca London" ~
+    "Oca Yoga London", "Amnon Electric" ~ "אמנון חשמל", "Iron Core" ~ "IronCore Fitness")."""
     ka, kb = normalize(a), normalize(b)
     if not ka or not kb:
         return False
     if ka == kb:
         return True
-    ta, tb = _distinct(ka, ignore), _distinct(kb, ignore)
+    ta, tb = distinctive(ka, ignore), distinctive(kb, ignore)
     if not ta or not tb:
         return False
-    shared = ta & tb
-    if not shared:
+    ja, jb = joined(ka, ta), joined(kb, tb)
+    if min(len(ja), len(jb)) >= 6 and (ja in jb or jb in ja):
+        return True
+    shared_a = {x for x in ta if any(words_match(x, y) for y in tb)}
+    shared_b = {y for y in tb if any(words_match(x, y) for x in ta)}
+    if not shared_a:
         return False
-    return ta <= tb or tb <= ta or len(shared) / min(len(ta), len(tb)) >= 0.6
+    if shared_a == ta or shared_b == tb:
+        return True
+    return len(shared_a) / min(len(ta), len(tb)) >= 0.6
 
 
 def _lift_steps(cited: list[tuple[str, int]], quality: bool | None) -> list[str]:
