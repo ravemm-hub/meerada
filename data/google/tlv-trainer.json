@@ -1,0 +1,100 @@
+{
+ "query_id": "tlv-trainer",
+ "query": "personal trainer Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "Iron Core",
+   "key": "iron core",
+   "rating": 4.9,
+   "reviews": 117,
+   "website": null,
+   "maps_url": null,
+   "category": "Gym"
+  },
+  {
+   "rank": 2,
+   "name": "מאמנת כושר אישית אורטל שושן - סטודיו CHANGEIT",
+   "key": "מאמנת כושר אישית אורטל שושן סטודיו changeit",
+   "rating": 5.0,
+   "reviews": 109,
+   "website": null,
+   "maps_url": null,
+   "category": "Personal trainer"
+  },
+  {
+   "rank": 3,
+   "name": "J'aime Studio",
+   "key": "j aime studio",
+   "rating": 5.0,
+   "reviews": 32,
+   "website": null,
+   "maps_url": null,
+   "category": "Fitness center"
+  },
+  {
+   "rank": 4,
+   "name": "Kesler Fitness",
+   "key": "kesler fitness",
+   "rating": 5.0,
+   "reviews": 71,
+   "website": null,
+   "maps_url": null,
+   "category": "Personal trainer"
+  },
+  {
+   "rank": 5,
+   "name": "Iron Circuit",
+   "key": "iron circuit",
+   "rating": 4.9,
+   "reviews": 65,
+   "website": null,
+   "maps_url": null,
+   "category": "Personal trainer"
+  },
+  {
+   "rank": 6,
+   "name": "קימברלי 'ס - מועדון איגרוף | הגנה עצמית | חדר כושר לנשים",
+   "key": "קימברלי ס מועדון איגרוף הגנה עצמית חדר כושר לנשים",
+   "rating": 4.9,
+   "reviews": 106,
+   "website": null,
+   "maps_url": null,
+   "category": "Boxing gym"
+  },
+  {
+   "rank": 7,
+   "name": "Roy Neeman - Team Pitbull Israel - BJJ",
+   "key": "roy neeman team pitbull israel bjj",
+   "rating": 5.0,
+   "reviews": 99,
+   "website": null,
+   "maps_url": null,
+   "category": "Martial arts school"
+  },
+  {
+   "rank": 8,
+   "name": "Liraz Assor - פילאטיס כושר ויוגה אווירית",
+   "key": "liraz assor פילאטיס כושר ויוגה אווירית",
+   "rating": 5.0,
+   "reviews": 30,
+   "website": null,
+   "maps_url": null,
+   "category": "Pilates studio"
+  },
+  {
+   "rank": 9,
+   "name": "דניאל בוסי - תזונה ואימונים",
+   "key": "דניאל בוסי תזונה ואימונים",
+   "rating": 5.0,
+   "reviews": 101,
+   "website": null,
+   "maps_url": null,
+   "category": "Personal trainer"
+  }
+ ]
+}

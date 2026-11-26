@@ -1,0 +1,110 @@
+{
+ "query_id": "tlv-electrician",
+ "query": "electrician Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "חשמלאי מוסמך 24 שעות ביממה חשמלאים IL",
+   "key": "חשמלאי מוסמך 24 שעות ביממה חשמלאים il",
+   "rating": 3.7,
+   "reviews": 6,
+   "website": null,
+   "maps_url": null,
+   "category": "Electrician"
+  },
+  {
+   "rank": 2,
+   "name": "Electrician Tel Aviv - Itzik electrician",
+   "key": "electrician tel aviv itzik electrician",
+   "rating": 4.8,
+   "reviews": 45,
+   "website": null,
+   "maps_url": null,
+   "category": "Electrician"
+  },
+  {
+   "rank": 3,
+   "name": "חשמלאי יצאת צדיק, חשמלאי חירום 24 שעות",
+   "key": "חשמלאי יצאת צדיק חשמלאי חירום 24 שעות",
+   "rating": 4.9,
+   "reviews": 106,
+   "website": null,
+   "maps_url": null,
+   "category": "Electrician"
+  },
+  {
+   "rank": 4,
+   "name": "‏חשמלאי בתל אביב מוסמך תל אביב",
+   "key": "חשמלאי בתל אביב מוסמך תל אביב",
+   "rating": 5.0,
+   "reviews": 69,
+   "website": null,
+   "maps_url": null,
+   "category": "Electrician"
+  },
+  {
+   "rank": 5,
+   "name": "חשמלאי חירום 24 שעות",
+   "key": "חשמלאי חירום 24 שעות",
+   "rating": 4.9,
+   "reviews": 167,
+   "website": null,
+   "maps_url": null,
+   "category": "Electrician"
+  },
+  {
+   "rank": 6,
+   "name": "Electrical Warehouses",
+   "key": "electrical warehouses",
+   "rating": 3.6,
+   "reviews": 2008,
+   "website": null,
+   "maps_url": null,
+   "category": "Electronics store"
+  },
+  {
+   "rank": 7,
+   "name": "אור-שי סיטונאות חשמל בע\"מ",
+   "key": "אור שי סיטונאות חשמל בע מ",
+   "rating": 4.0,
+   "reviews": 410,
+   "website": null,
+   "maps_url": null,
+   "category": "Electrical supply store"
+  },
+  {
+   "rank": 8,
+   "name": "אור וזיו שירותי חשמל",
+   "key": "אור וזיו שירותי חשמל",
+   "rating": 4.7,
+   "reviews": 45,
+   "website": null,
+   "maps_url": null,
+   "category": "Electrician"
+  },
+  {
+   "rank": 9,
+   "name": "Jacob electrician Tel Aviv 24 hours",
+   "key": "jacob electrician tel aviv 24 hours",
+   "rating": 5.0,
+   "reviews": 1,
+   "website": null,
+   "maps_url": null,
+   "category": "Electrician"
+  },
+  {
+   "rank": 10,
+   "name": "אמנון חשמל",
+   "key": "אמנון חשמל",
+   "rating": 4.8,
+   "reviews": 21,
+   "website": null,
+   "maps_url": null,
+   "category": "Electrician"
+  }
+ ]
+}

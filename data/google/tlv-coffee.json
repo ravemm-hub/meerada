@@ -1,0 +1,50 @@
+{
+ "query_id": "tlv-coffee",
+ "query": "specialty coffee Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "Coffee Brands",
+   "key": "coffee brands",
+   "rating": 4.7,
+   "reviews": 133,
+   "website": null,
+   "maps_url": null,
+   "category": "Coffee shop"
+  },
+  {
+   "rank": 2,
+   "name": "Marbinz",
+   "key": "marbinz",
+   "rating": 5.0,
+   "reviews": 24,
+   "website": null,
+   "maps_url": null,
+   "category": "Coffee store"
+  },
+  {
+   "rank": 3,
+   "name": "Babette בבט",
+   "key": "babette בבט",
+   "rating": 4.6,
+   "reviews": 1007,
+   "website": null,
+   "maps_url": null,
+   "category": "Coffee shop"
+  },
+  {
+   "rank": 4,
+   "name": "ORIGEM Coffee",
+   "key": "origem coffee",
+   "rating": 4.6,
+   "reviews": 1513,
+   "website": null,
+   "maps_url": null,
+   "category": "Coffee shop"
+  }
+ ]
+}

@@ -1,0 +1,90 @@
+{
+ "query_id": "tlv-florist",
+ "query": "florist Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "Flora Bloom",
+   "key": "flora bloom",
+   "rating": 3.9,
+   "reviews": 91,
+   "website": null,
+   "maps_url": null,
+   "category": "Florist"
+  },
+  {
+   "rank": 2,
+   "name": "@Larose_flowers",
+   "key": "larose flowers",
+   "rating": 4.6,
+   "reviews": 83,
+   "website": null,
+   "maps_url": null,
+   "category": "Florist"
+  },
+  {
+   "rank": 3,
+   "name": "פרחי גורדון בן יהודה תל אביב gordon flowers",
+   "key": "פרחי גורדון בן יהודה תל אביב gordon flowers",
+   "rating": 4.3,
+   "reviews": 152,
+   "website": null,
+   "maps_url": null,
+   "category": "Florist"
+  },
+  {
+   "rank": 4,
+   "name": "Forever Roses Israel",
+   "key": "forever roses israel",
+   "rating": 4.9,
+   "reviews": 42,
+   "website": null,
+   "maps_url": null,
+   "category": "Florist"
+  },
+  {
+   "rank": 5,
+   "name": "KEARA Flower shop",
+   "key": "keara flower shop",
+   "rating": 5.0,
+   "reviews": 32,
+   "website": null,
+   "maps_url": null,
+   "category": "Florist"
+  },
+  {
+   "rank": 6,
+   "name": "Allenby Flowers Network",
+   "key": "allenby flowers network",
+   "rating": 4.9,
+   "reviews": 1452,
+   "website": null,
+   "maps_url": null,
+   "category": "Florist"
+  },
+  {
+   "rank": 7,
+   "name": "Garden flower",
+   "key": "garden flower",
+   "rating": 5.0,
+   "reviews": 95,
+   "website": null,
+   "maps_url": null,
+   "category": "Florist"
+  },
+  {
+   "rank": 8,
+   "name": "Amaryllis | פרחים תל אביב | משלוח חינם",
+   "key": "amaryllis פרחים תל אביב משלוח חינם",
+   "rating": 4.8,
+   "reviews": 388,
+   "website": null,
+   "maps_url": null,
+   "category": "Florist"
+  }
+ ]
+}

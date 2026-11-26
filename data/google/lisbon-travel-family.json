@@ -1,0 +1,90 @@
+{
+ "query_id": "lisbon-travel-family",
+ "query": "family hotel with pool Lisbon",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "Martinhal Lisbon Chiado Luxury Hotel & Apartments",
+   "key": "martinhal lisbon chiado luxury hotel apartments",
+   "rating": 4.7,
+   "reviews": 234,
+   "website": null,
+   "maps_url": null,
+   "category": "5-star hotel"
+  },
+  {
+   "rank": 2,
+   "name": "Pestana Palace Lisboa",
+   "key": "pestana palace lisboa",
+   "rating": 4.7,
+   "reviews": 4278,
+   "website": null,
+   "maps_url": null,
+   "category": "5-star hotel"
+  },
+  {
+   "rank": 3,
+   "name": "MS Aparthotel",
+   "key": "ms aparthotel",
+   "rating": 4.4,
+   "reviews": 2099,
+   "website": null,
+   "maps_url": null,
+   "category": "4-star hotel"
+  },
+  {
+   "rank": 4,
+   "name": "Epic Sana Lisboa Hotel",
+   "key": "epic sana lisboa hotel",
+   "rating": 4.7,
+   "reviews": 3986,
+   "website": null,
+   "maps_url": null,
+   "category": "5-star hotel"
+  },
+  {
+   "rank": 5,
+   "name": "Lisbon Marriott Hotel",
+   "key": "lisbon marriott hotel",
+   "rating": 4.4,
+   "reviews": 6456,
+   "website": null,
+   "maps_url": null,
+   "category": "4-star hotel"
+  },
+  {
+   "rank": 6,
+   "name": "Hotel NH Collection Lisboa Liberdade",
+   "key": "hotel nh collection lisboa liberdade",
+   "rating": 4.5,
+   "reviews": 1339,
+   "website": null,
+   "maps_url": null,
+   "category": "4-star hotel"
+  },
+  {
+   "rank": 7,
+   "name": "JAM Lisbon",
+   "key": "jam lisbon",
+   "rating": 4.5,
+   "reviews": 613,
+   "website": null,
+   "maps_url": null,
+   "category": "3-star hotel"
+  },
+  {
+   "rank": 8,
+   "name": "Olissippo Lapa Palace Hotel",
+   "key": "olissippo lapa palace hotel",
+   "rating": 4.8,
+   "reviews": 1088,
+   "website": null,
+   "maps_url": null,
+   "category": "5-star hotel"
+  }
+ ]
+}

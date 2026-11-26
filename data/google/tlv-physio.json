@@ -1,0 +1,90 @@
+{
+ "query_id": "tlv-physio",
+ "query": "physiotherapist Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "תומר פיזיותרפיה",
+   "key": "תומר פיזיותרפיה",
+   "rating": 5.0,
+   "reviews": 15,
+   "website": null,
+   "maps_url": null,
+   "category": "Physical therapist"
+  },
+  {
+   "rank": 2,
+   "name": "פיזיותרפיסט בתל אביב לטיפול בפציעות אורתופדיות וכאב. פיזיו הום",
+   "key": "פיזיותרפיסט בתל אביב לטיפול בפציעות אורתופדיות וכאב פיזיו הום",
+   "rating": 5.0,
+   "reviews": 174,
+   "website": null,
+   "maps_url": null,
+   "category": "Physical therapy clinic"
+  },
+  {
+   "rank": 3,
+   "name": "MEDIMAX",
+   "key": "medimax",
+   "rating": 5.0,
+   "reviews": 222,
+   "website": null,
+   "maps_url": null,
+   "category": "Physical therapist"
+  },
+  {
+   "rank": 4,
+   "name": "Alphys אלפיז קליניקת פיזיותרפיה",
+   "key": "alphys אלפיז קליניקת פיזיותרפיה",
+   "rating": 5.0,
+   "reviews": 20,
+   "website": null,
+   "maps_url": null,
+   "category": "Physical therapist"
+  },
+  {
+   "rank": 5,
+   "name": "Prophysio Clinic",
+   "key": "prophysio clinic",
+   "rating": 5.0,
+   "reviews": 14,
+   "website": null,
+   "maps_url": null,
+   "category": "Physical therapist"
+  },
+  {
+   "rank": 6,
+   "name": "מרפאת מונטיפיורי לפיזיותרפיה ואוסטאופתיה",
+   "key": "מרפאת מונטיפיורי לפיזיותרפיה ואוסטאופתיה",
+   "rating": 4.9,
+   "reviews": 46,
+   "website": null,
+   "maps_url": null,
+   "category": "Physical therapist"
+  },
+  {
+   "rank": 7,
+   "name": "Physyoutlv BGN",
+   "key": "physyoutlv bgn",
+   "rating": 4.9,
+   "reviews": 117,
+   "website": null,
+   "maps_url": null,
+   "category": "Physical therapy clinic"
+  },
+  {
+   "rank": 8,
+   "name": "TLV Physio",
+   "key": "tlv physio",
+   "rating": 5.0,
+   "reviews": 50,
+   "website": null,
+   "maps_url": null,
+   "category": "Physical therapist"
+  }
+ ]
+}

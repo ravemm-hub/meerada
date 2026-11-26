@@ -1,0 +1,60 @@
+{
+ "query_id": "tlv-b2b-webagency",
+ "query": "Shopify web agency Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "Second Nature Agency",
+   "key": "second nature agency",
+   "rating": 5.0,
+   "reviews": 14,
+   "website": null,
+   "maps_url": null,
+   "category": "Website designer"
+  },
+  {
+   "rank": 2,
+   "name": "Terrific Digital - טריפיק דיגיטל - שיווק דיגיטלי וקריאייטיב",
+   "key": "terrific digital טריפיק דיגיטל שיווק דיגיטלי וקריאייטיב",
+   "rating": 5.0,
+   "reviews": 2,
+   "website": null,
+   "maps_url": null,
+   "category": "Website designer"
+  },
+  {
+   "rank": 3,
+   "name": "Byteex",
+   "key": "byteex",
+   "rating": 5.0,
+   "reviews": 3,
+   "website": null,
+   "maps_url": null,
+   "category": "Website designer"
+  },
+  {
+   "rank": 4,
+   "name": "SPIKY DIGITAL",
+   "key": "spiky digital",
+   "rating": 5.0,
+   "reviews": 33,
+   "website": null,
+   "maps_url": null,
+   "category": "E commerce agency"
+  },
+  {
+   "rank": 5,
+   "name": "חנויות שופיפיי ואפליקציות - לוק אראונד",
+   "key": "חנויות שופיפיי ואפליקציות לוק אראונד",
+   "rating": 5.0,
+   "reviews": 10,
+   "website": null,
+   "maps_url": null,
+   "category": "Software company"
+  }
+ ]
+}

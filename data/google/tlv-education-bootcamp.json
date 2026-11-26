@@ -1,0 +1,70 @@
+{
+ "query_id": "tlv-education-bootcamp",
+ "query": "web development bootcamp Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "Developers.Institute TLV",
+   "key": "developers institute tlv",
+   "rating": 4.6,
+   "reviews": 55,
+   "website": null,
+   "maps_url": null,
+   "category": "Learning center"
+  },
+  {
+   "rank": 2,
+   "name": "Coding Academy Israel",
+   "key": "coding academy israel",
+   "rating": 4.9,
+   "reviews": 260,
+   "website": null,
+   "maps_url": null,
+   "category": "Adult education school"
+  },
+  {
+   "rank": 3,
+   "name": "Israel Tech Challenge (ITC) - Coding Academy & Bootcamp in Tel Aviv, Israel",
+   "key": "israel tech challenge itc coding academy bootcamp in tel aviv israel",
+   "rating": 4.4,
+   "reviews": 39,
+   "website": null,
+   "maps_url": null,
+   "category": "Educational institution"
+  },
+  {
+   "rank": 4,
+   "name": "Le Wagon TLV",
+   "key": "le wagon tlv",
+   "rating": 5.0,
+   "reviews": 23,
+   "website": null,
+   "maps_url": null,
+   "category": "Software training institute"
+  },
+  {
+   "rank": 5,
+   "name": "Real Time College - לימודי היייטק בחברת פיתוח אמיתית",
+   "key": "real time college לימודי היייטק בחברת פיתוח אמיתית",
+   "rating": 4.5,
+   "reviews": 57,
+   "website": null,
+   "maps_url": null,
+   "category": "College"
+  },
+  {
+   "rank": 6,
+   "name": "Elevation",
+   "key": "elevation",
+   "rating": 4.6,
+   "reviews": 38,
+   "website": null,
+   "maps_url": null,
+   "category": "Training center"
+  }
+ ]
+}

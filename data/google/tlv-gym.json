@@ -1,0 +1,110 @@
+{
+ "query_id": "tlv-gym",
+ "query": "gym with pool Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "Country Towers Tel Aviv",
+   "key": "country towers tel aviv",
+   "rating": 4.4,
+   "reviews": 674,
+   "website": null,
+   "maps_url": null,
+   "category": "Country club"
+  },
+  {
+   "rank": 2,
+   "name": "הולמס פלייס",
+   "key": "הולמס פלייס",
+   "rating": 3.3,
+   "reviews": 341,
+   "website": null,
+   "maps_url": null,
+   "category": "Gym"
+  },
+  {
+   "rank": 3,
+   "name": "Gordon Gym at Gordon Pool",
+   "key": "gordon gym at gordon pool",
+   "rating": 4.6,
+   "reviews": 112,
+   "website": null,
+   "maps_url": null,
+   "category": "Gym"
+  },
+  {
+   "rank": 4,
+   "name": "Gordon Pool",
+   "key": "gordon pool",
+   "rating": 4.4,
+   "reviews": 1649,
+   "website": null,
+   "maps_url": null,
+   "category": "Public swimming pool"
+  },
+  {
+   "rank": 5,
+   "name": "Holmes Place Dizengoff",
+   "key": "holmes place dizengoff",
+   "rating": 3.6,
+   "reviews": 416,
+   "website": null,
+   "maps_url": null,
+   "category": "Gym"
+  },
+  {
+   "rank": 6,
+   "name": "Iron Core",
+   "key": "iron core",
+   "rating": 4.9,
+   "reviews": 117,
+   "website": null,
+   "maps_url": null,
+   "category": "Gym"
+  },
+  {
+   "rank": 7,
+   "name": "Toha Gym",
+   "key": "toha gym",
+   "rating": 4.5,
+   "reviews": 8,
+   "website": null,
+   "maps_url": null,
+   "category": "Gym"
+  },
+  {
+   "rank": 8,
+   "name": "TLV gym club",
+   "key": "tlv gym club",
+   "rating": 3.7,
+   "reviews": 230,
+   "website": null,
+   "maps_url": null,
+   "category": "Gym"
+  },
+  {
+   "rank": 9,
+   "name": "קימברלי 'ס - מועדון איגרוף | הגנה עצמית | חדר כושר לנשים",
+   "key": "קימברלי ס מועדון איגרוף הגנה עצמית חדר כושר לנשים",
+   "rating": 4.9,
+   "reviews": 106,
+   "website": null,
+   "maps_url": null,
+   "category": "Boxing gym"
+  },
+  {
+   "rank": 10,
+   "name": "Ido Portal Method Israel",
+   "key": "ido portal method israel",
+   "rating": 4.8,
+   "reviews": 15,
+   "website": null,
+   "maps_url": null,
+   "category": "Gym"
+  }
+ ]
+}

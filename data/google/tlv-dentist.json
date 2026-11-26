@@ -1,0 +1,90 @@
+{
+ "query_id": "tlv-dentist",
+ "query": "dentist Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "איאן מרכז לרפואת שיניים AYAN Dental Center",
+   "key": "איאן מרכז לרפואת שיניים ayan dental center",
+   "rating": 4.8,
+   "reviews": 61,
+   "website": null,
+   "maps_url": null,
+   "category": "Dental clinic"
+  },
+  {
+   "rank": 2,
+   "name": "ד\"ר בן מילר, רופא שיניים בתל אביב -Tel Aviv Dentist Dr. Ben Miller",
+   "key": "ד ר בן מילר רופא שיניים בתל אביב tel aviv dentist dr ben miller",
+   "rating": 4.9,
+   "reviews": 157,
+   "website": null,
+   "maps_url": null,
+   "category": "Dentist"
+  },
+  {
+   "rank": 3,
+   "name": "RÊVE clinic",
+   "key": "rêve clinic",
+   "rating": 4.8,
+   "reviews": 17,
+   "website": null,
+   "maps_url": null,
+   "category": "Dental clinic"
+  },
+  {
+   "rank": 4,
+   "name": "tel-aviv dental clinic.מרפאת שיניים חירום",
+   "key": "tel aviv dental clinic מרפאת שיניים חירום",
+   "rating": 4.7,
+   "reviews": 48,
+   "website": null,
+   "maps_url": null,
+   "category": "Dental clinic"
+  },
+  {
+   "rank": 5,
+   "name": "דר לאה יעקובי",
+   "key": "דר לאה יעקובי",
+   "rating": 4.8,
+   "reviews": 38,
+   "website": null,
+   "maps_url": null,
+   "category": "Dental clinic"
+  },
+  {
+   "rank": 6,
+   "name": "ד''ר תום פיזיצקי | רפואת שיניים חירום בתל אביב",
+   "key": "ד ר תום פיזיצקי רפואת שיניים חירום בתל אביב",
+   "rating": 5.0,
+   "reviews": 35,
+   "website": null,
+   "maps_url": null,
+   "category": "Dental clinic"
+  },
+  {
+   "rank": 7,
+   "name": "Dental Harmonia Tel Aviv רופא שיניים תל אביב",
+   "key": "dental harmonia tel aviv רופא שיניים תל אביב",
+   "rating": 4.9,
+   "reviews": 362,
+   "website": null,
+   "maps_url": null,
+   "category": "Dentist"
+  },
+  {
+   "rank": 8,
+   "name": "ד\"ר דוד לביא",
+   "key": "ד ר דוד לביא",
+   "rating": 3.0,
+   "reviews": 4,
+   "website": null,
+   "maps_url": null,
+   "category": "Dentist"
+  }
+ ]
+}

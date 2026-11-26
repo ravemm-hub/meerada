@@ -1,0 +1,90 @@
+{
+ "query_id": "lisbon-travel-couple",
+ "query": "boutique hotel Lisbon",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "LX Boutique Hotel",
+   "key": "lx boutique hotel",
+   "rating": 4.3,
+   "reviews": 922,
+   "website": null,
+   "maps_url": null,
+   "category": "4-star hotel"
+  },
+  {
+   "rank": 2,
+   "name": "262 Boutique Hotel",
+   "key": "262 boutique hotel",
+   "rating": 3.9,
+   "reviews": 563,
+   "website": null,
+   "maps_url": null,
+   "category": "3-star hotel"
+  },
+  {
+   "rank": 3,
+   "name": "Brown's | Avenue Hotel",
+   "key": "brown s avenue hotel",
+   "rating": 4.6,
+   "reviews": 290,
+   "website": null,
+   "maps_url": null,
+   "category": "5-star hotel"
+  },
+  {
+   "rank": 4,
+   "name": "Duplo Charme Boutique Hotel, Lisbon",
+   "key": "duplo charme boutique hotel lisbon",
+   "rating": 4.2,
+   "reviews": 550,
+   "website": null,
+   "maps_url": null,
+   "category": "3-star hotel"
+  },
+  {
+   "rank": 5,
+   "name": "Hotel Portugal - Portugal Boutique Hotel",
+   "key": "hotel portugal portugal boutique hotel",
+   "rating": 4.7,
+   "reviews": 1274,
+   "website": null,
+   "maps_url": null,
+   "category": "4-star hotel"
+  },
+  {
+   "rank": 6,
+   "name": "Santiago de Alfama - Boutique Hotel",
+   "key": "santiago de alfama boutique hotel",
+   "rating": 4.7,
+   "reviews": 449,
+   "website": null,
+   "maps_url": null,
+   "category": "5-star hotel"
+  },
+  {
+   "rank": 7,
+   "name": "Boutique Chiado Apartments & Suites",
+   "key": "boutique chiado apartments suites",
+   "rating": 4.6,
+   "reviews": 436,
+   "website": null,
+   "maps_url": null,
+   "category": "4-star hotel"
+  },
+  {
+   "rank": 8,
+   "name": "Hotel das Amoreiras- Small Luxury Hotels of The World",
+   "key": "hotel das amoreiras small luxury hotels of the world",
+   "rating": 4.8,
+   "reviews": 190,
+   "website": null,
+   "maps_url": null,
+   "category": "4-star hotel"
+  }
+ ]
+}

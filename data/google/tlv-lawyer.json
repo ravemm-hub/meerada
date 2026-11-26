@@ -1,0 +1,90 @@
+{
+ "query_id": "tlv-lawyer",
+ "query": "family lawyer Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "Hait Family Law",
+   "key": "hait family law",
+   "rating": 4.9,
+   "reviews": 51,
+   "website": null,
+   "maps_url": null,
+   "category": "Family law attorney"
+  },
+  {
+   "rank": 2,
+   "name": "נתנאל איסקוב - משרד עורכי דין לענייני משפחה",
+   "key": "נתנאל איסקוב משרד עורכי דין לענייני משפחה",
+   "rating": 5.0,
+   "reviews": 6,
+   "website": null,
+   "maps_url": null,
+   "category": "Family law attorney"
+  },
+  {
+   "rank": 3,
+   "name": "משרד עורכי דין שרון סגל סניף תל אביב",
+   "key": "משרד עורכי דין שרון סגל סניף תל אביב",
+   "rating": 5.0,
+   "reviews": 35,
+   "website": null,
+   "maps_url": null,
+   "category": "Family law attorney"
+  },
+  {
+   "rank": 4,
+   "name": "עו\"ד ונוטריון יניב גיל ושות'",
+   "key": "עו ד ונוטריון יניב גיל ושות",
+   "rating": 4.9,
+   "reviews": 120,
+   "website": null,
+   "maps_url": null,
+   "category": "Family law attorney"
+  },
+  {
+   "rank": 5,
+   "name": "רוית פרינץ - משרד עורכי דין ונוטריון",
+   "key": "רוית פרינץ משרד עורכי דין ונוטריון",
+   "rating": 5.0,
+   "reviews": 13,
+   "website": null,
+   "maps_url": null,
+   "category": "Family law attorney"
+  },
+  {
+   "rank": 6,
+   "name": "עורך דין גירושין, לענייני משפחה - חגית לב",
+   "key": "עורך דין גירושין לענייני משפחה חגית לב",
+   "rating": 4.9,
+   "reviews": 107,
+   "website": null,
+   "maps_url": null,
+   "category": "Divorce lawyer"
+  },
+  {
+   "rank": 7,
+   "name": "Alex Zernopolsky Law Office",
+   "key": "alex zernopolsky law office",
+   "rating": 4.9,
+   "reviews": 66,
+   "website": null,
+   "maps_url": null,
+   "category": "Lawyer"
+  },
+  {
+   "rank": 8,
+   "name": "זרי חזן ושות' - עורך דין הגירה לישראל",
+   "key": "זרי חזן ושות עורך דין הגירה לישראל",
+   "rating": 4.8,
+   "reviews": 87,
+   "website": null,
+   "maps_url": null,
+   "category": "Immigration attorney"
+  }
+ ]
+}

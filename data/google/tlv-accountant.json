@@ -1,0 +1,90 @@
+{
+ "query_id": "tlv-accountant",
+ "query": "accountant Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "החזר מס שבח ושוק ההון רואה חשבון עמית",
+   "key": "החזר מס שבח ושוק ההון רואה חשבון עמית",
+   "rating": 5.0,
+   "reviews": 8,
+   "website": null,
+   "maps_url": null,
+   "category": "Accountant"
+  },
+  {
+   "rank": 2,
+   "name": "Amos Katz & Co. - Certified Public Accountants Tel Aviv",
+   "key": "amos katz co certified public accountants tel aviv",
+   "rating": 4.9,
+   "reviews": 21,
+   "website": null,
+   "maps_url": null,
+   "category": "Corporate office"
+  },
+  {
+   "rank": 3,
+   "name": "YDray, Cabinet d'expertise comptable & fiscalité",
+   "key": "ydray cabinet d expertise comptable fiscalité",
+   "rating": 5.0,
+   "reviews": 74,
+   "website": null,
+   "maps_url": null,
+   "category": "Chartered accountant"
+  },
+  {
+   "rank": 4,
+   "name": "Trullion TLV",
+   "key": "trullion tlv",
+   "rating": 5.0,
+   "reviews": 4,
+   "website": null,
+   "maps_url": null,
+   "category": "Software company"
+  },
+  {
+   "rank": 5,
+   "name": "משרד רואי חשבון שטיינמץ עמינח ושות'",
+   "key": "משרד רואי חשבון שטיינמץ עמינח ושות",
+   "rating": 4.9,
+   "reviews": 112,
+   "website": null,
+   "maps_url": null,
+   "category": "Accountant"
+  },
+  {
+   "rank": 6,
+   "name": "Deloitte",
+   "key": "deloitte",
+   "rating": 4.5,
+   "reviews": 18,
+   "website": null,
+   "maps_url": null,
+   "category": "Accountant"
+  },
+  {
+   "rank": 7,
+   "name": "Lazar & Co. auditors",
+   "key": "lazar co auditors",
+   "rating": 5.0,
+   "reviews": 2,
+   "website": null,
+   "maps_url": null,
+   "category": "Certified public accountant"
+  },
+  {
+   "rank": 8,
+   "name": "Nimrod Yaron & Co. - Israeli and International Taxation",
+   "key": "nimrod yaron co israeli and international taxation",
+   "rating": 4.8,
+   "reviews": 47,
+   "website": null,
+   "maps_url": null,
+   "category": "Accounting firm"
+  }
+ ]
+}

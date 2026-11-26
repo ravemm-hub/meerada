@@ -1,0 +1,60 @@
+{
+ "query_id": "tlv-yoga",
+ "query": "yoga studio Tel Aviv",
+ "source": "google_maps",
+ "locale": "en-IL",
+ "read_at": "2026-11-26",
+ "method": "Google Maps result list (maps.google.com/maps/search, English UI, browser in Israel); sponsored entries skipped; list order kept",
+ "results": [
+  {
+   "rank": 1,
+   "name": "אינר סטודיו יוגה ופילאטיס INNER YOGA STUDIO",
+   "key": "אינר סטודיו יוגה ופילאטיס inner yoga studio",
+   "rating": null,
+   "reviews": 0,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  },
+  {
+   "rank": 2,
+   "name": "אלפא גרביטי תל אביב",
+   "key": "אלפא גרביטי תל אביב",
+   "rating": 5.0,
+   "reviews": 6,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  },
+  {
+   "rank": 3,
+   "name": "KK Dance Gallery סטודיו להשכרה בתל אביב",
+   "key": "kk dance gallery סטודיו להשכרה בתל אביב",
+   "rating": 5.0,
+   "reviews": 10,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  },
+  {
+   "rank": 4,
+   "name": "יוגה עם חני",
+   "key": "יוגה עם חני",
+   "rating": 5.0,
+   "reviews": 4,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  },
+  {
+   "rank": 5,
+   "name": "Bikram Yoga Tel Aviv",
+   "key": "bikram yoga tel aviv",
+   "rating": 4.8,
+   "reviews": 140,
+   "website": null,
+   "maps_url": null,
+   "category": "Yoga studio"
+  }
+ ]
+}
