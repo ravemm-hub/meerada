@@ -130,3 +130,35 @@ def pages_cmd(
 
     written = build_query_pages(load_state(Path(state)), Path(out))
     typer.echo(f"wrote {len(written)} files to {out}")
+
+
+@visibility_app.command("gap")
+def gap_cmd(
+    state: Annotated[str, typer.Option("--state")] = "visibility_state.json",
+    out: Annotated[str, typer.Option("--out")] = "site/gap",
+) -> None:
+    """Build the public gap page for every business Google lists that the engines rarely name."""
+    from pathlib import Path
+
+    from handover.visibility.gap import build_gap_pages
+    from handover.visibility.state import load_state
+
+    written = build_gap_pages(load_state(Path(state)), Path(out))
+    typer.echo(f"wrote {len(written)} files to {out}")
+
+
+@visibility_app.command("outreach")
+def outreach_cmd(
+    experiments: Annotated[str, typer.Option("--experiments")] = "data/experiments.json",
+    state: Annotated[str, typer.Option("--state")] = "visibility_state.json",
+    out: Annotated[str, typer.Option("--out")] = "out/outreach",
+    leads: Annotated[str, typer.Option("--leads")] = "site/gap/leads.json",
+) -> None:
+    """Write the pilot outreach drafts (EN + HE) for the founder to review. Sends nothing."""
+    from pathlib import Path
+
+    from handover.visibility.outreach import build_outreach
+    from handover.visibility.state import load_state
+
+    written = build_outreach(Path(experiments), load_state(Path(state)), Path(out), Path(leads))
+    typer.echo(f"wrote {len(written)} drafts to {out}")

@@ -53,6 +53,8 @@ jobs:
             --per-tick 10 --budget "0.80" --reextract
           # the per-question pages (AI side vs Google side) from the merged answers
           python -m handover.cli.main visibility pages --state visibility_state.json --out out/s
+          # one public page per Google-listed business with its AI count (the lead pages)
+          python -m handover.cli.main visibility gap --state visibility_state.json --out out/gap
 
       - name: publish page + answers to gh-pages
         run: |
@@ -65,7 +67,8 @@ jobs:
           cp out/visibility.json pages/visibility.json
           cp visibility_state.json pages/visibility_state.json
           mkdir -p pages/s && cp out/s/* pages/s/
+          mkdir -p pages/gap && cp out/gap/* pages/gap/
           cd pages
-          git add visibility.html cases.html visibility.json visibility_state.json s
+          git add visibility.html cases.html visibility.json visibility_state.json s gap
           git commit -m "visibility $(date -u +%FT%RZ)" || echo "no change"
           git push origin HEAD:gh-pages
