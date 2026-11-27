@@ -15,6 +15,7 @@ paragraph to paste. Nothing is sent from here.
 from __future__ import annotations
 
 import json
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -28,6 +29,7 @@ from handover.visibility.google import load_snapshot
 from handover.visibility.questions import BY_ID
 from handover.visibility.state import State
 
+_LATIN = re.compile(r"[A-Za-z]")
 OWNER_SIDE = {
     "google.com": "Google Business Profile: add an English business name variant and an English description; pick the exact category; same phone and address as your site.",
     "easy.co.il": "easy.co.il: claim the listing (owner SMS verification) and complete hours, services and photos.",
@@ -102,8 +104,10 @@ def render_fixkit(
         f"- Business name, exactly as on Google: **{name}**"
         + (
             f" — English form: {facts.get('name')}"
-            if facts.get("name") and facts.get("name") != name
-            else ""
+            if facts.get("name")
+            and facts.get("name") != name
+            and _LATIN.search(str(facts.get("name")))
+            else " — English form: TODO (the name customers would type in English)"
         ),
         f"- Phone: {todo(facts.get('phone'))}",
         f"- Address: {todo(facts.get('address'))}",
