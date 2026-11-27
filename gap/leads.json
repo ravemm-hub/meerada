@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-26T17:18:51.385110+00:00",
+ "generated_at": "2026-11-26T16:57:49.218604+00:00",
  "leads": [
   {
    "slug": "hfa-plumber-he-5cdd01",
@@ -13,7 +13,7 @@
    "google_rank": 1,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
@@ -36,7 +36,7 @@
    "google_rank": 2,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
@@ -59,7 +59,7 @@
    "google_rank": 4,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
@@ -82,7 +82,7 @@
    "google_rank": 5,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
@@ -105,7 +105,7 @@
    "google_rank": 6,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
@@ -128,7 +128,7 @@
    "google_rank": 7,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
@@ -351,16 +351,11 @@
    "google_rank": 1,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 1,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
-    "google.com",
-    "my-travelmonkey.com",
-    "marcieinmommyland.com",
-    "lisbontourism.org",
-    "thehotelguru.com",
-    "oyster.com"
+    "google.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -376,16 +371,11 @@
    "google_rank": 3,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 1,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
-    "google.com",
-    "my-travelmonkey.com",
-    "marcieinmommyland.com",
-    "lisbontourism.org",
-    "thehotelguru.com",
-    "oyster.com"
+    "google.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -401,16 +391,11 @@
    "google_rank": 5,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 1,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
-    "google.com",
-    "my-travelmonkey.com",
-    "marcieinmommyland.com",
-    "lisbontourism.org",
-    "thehotelguru.com",
-    "oyster.com"
+    "google.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -426,16 +411,11 @@
    "google_rank": 7,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 1,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
-    "google.com",
-    "my-travelmonkey.com",
-    "marcieinmommyland.com",
-    "lisbontourism.org",
-    "thehotelguru.com",
-    "oyster.com"
+    "google.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -451,16 +431,11 @@
    "google_rank": 8,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 1,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
-    "google.com",
-    "my-travelmonkey.com",
-    "marcieinmommyland.com",
-    "lisbontourism.org",
-    "thehotelguru.com",
-    "oyster.com"
+    "google.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -2031,16 +2006,16 @@
    "google_rank": 5,
    "quality": true,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "naim.org.il",
     "mywellnesstlv.com",
-    "israel.com",
     "ashtangayoga.info",
-    "yogawithdaniela.co.il"
+    "yogawithdaniela.co.il",
+    "ommmm.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -2056,7 +2031,7 @@
    "google_rank": 3,
    "quality": false,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
@@ -2679,16 +2654,16 @@
    "google_rank": 1,
    "quality": null,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "naim.org.il",
     "mywellnesstlv.com",
-    "israel.com",
     "ashtangayoga.info",
-    "yogawithdaniela.co.il"
+    "yogawithdaniela.co.il",
+    "ommmm.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -2704,16 +2679,16 @@
    "google_rank": 2,
    "quality": false,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "naim.org.il",
     "mywellnesstlv.com",
-    "israel.com",
     "ashtangayoga.info",
-    "yogawithdaniela.co.il"
+    "yogawithdaniela.co.il",
+    "ommmm.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -2729,16 +2704,16 @@
    "google_rank": 3,
    "quality": false,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "naim.org.il",
     "mywellnesstlv.com",
-    "israel.com",
     "ashtangayoga.info",
-    "yogawithdaniela.co.il"
+    "yogawithdaniela.co.il",
+    "ommmm.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -2754,16 +2729,16 @@
    "google_rank": 4,
    "quality": false,
    "named_runs": 0,
-   "runs": 3,
+   "runs": 2,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "naim.org.il",
     "mywellnesstlv.com",
-    "israel.com",
     "ashtangayoga.info",
-    "yogawithdaniela.co.il"
+    "yogawithdaniela.co.il",
+    "ommmm.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -2929,16 +2904,11 @@
    "google_rank": 2,
    "quality": true,
    "named_runs": 1,
-   "runs": 3,
-   "ai_rank": 10,
+   "runs": 1,
+   "ai_rank": 6,
    "website": null,
    "cited_hosts": [
-    "google.com",
-    "my-travelmonkey.com",
-    "marcieinmommyland.com",
-    "lisbontourism.org",
-    "thehotelguru.com",
-    "oyster.com"
+    "google.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -2953,17 +2923,12 @@
    "lang": "en",
    "google_rank": 4,
    "quality": true,
-   "named_runs": 2,
-   "runs": 3,
-   "ai_rank": 2,
+   "named_runs": 1,
+   "runs": 1,
+   "ai_rank": 3,
    "website": null,
    "cited_hosts": [
-    "google.com",
-    "my-travelmonkey.com",
-    "marcieinmommyland.com",
-    "lisbontourism.org",
-    "thehotelguru.com",
-    "oyster.com"
+    "google.com"
    ],
    "google_read": "2026-11-26"
   },
@@ -2979,16 +2944,11 @@
    "google_rank": 6,
    "quality": true,
    "named_runs": 1,
-   "runs": 3,
-   "ai_rank": 8,
+   "runs": 1,
+   "ai_rank": 5,
    "website": null,
    "cited_hosts": [
-    "google.com",
-    "my-travelmonkey.com",
-    "marcieinmommyland.com",
-    "lisbontourism.org",
-    "thehotelguru.com",
-    "oyster.com"
+    "google.com"
    ],
    "google_read": "2026-11-26"
   },
