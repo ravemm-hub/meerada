@@ -3,8 +3,9 @@
    Include with <script src="assets/family.js" defer></script>. */
 (function () {
   var P = [
+    { href: "index.html", id: "index", ic: "🎯", name: "AI Visibility", tag: "is your business in the AI answer?" },
     { href: "search.html", id: "search", ic: "🔍", name: "Search", tag: "what the AI shows for any question" },
-    { href: "index.html", id: "index", ic: "📊", name: "Exchange", tag: "every model, measured hourly" },
+    { href: "lab.html", id: "lab", ic: "📊", name: "Exchange", tag: "every model, measured hourly" },
     { href: "manager.html", id: "manager", ic: "🎛️", name: "Manager", tag: "one app for every model" },
     { href: "guard.html", id: "guard", ic: "🛡", name: "Guard", tag: "watchdog + cage for AI at work" },
     { href: "crosscheck.html", id: "crosscheck", ic: "🔎", name: "Cross-check", tag: "models examining models" },

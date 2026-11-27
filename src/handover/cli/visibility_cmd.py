@@ -226,3 +226,32 @@ def claims_cmd(
     for c in new_claims:
         if not any(p["business"] == (c.get("business") or "").strip() for p in new_pilots):
             typer.echo(f"  no measured question for claim {c['id']}: {c.get('query', '')[:60]!r}")
+
+
+@visibility_app.command("home")
+def home_cmd(
+    pages: Annotated[str, typer.Option("--pages")] = "site/s",
+    out: Annotated[str, typer.Option("--out")] = "site/index.html",
+) -> None:
+    """Build the home page: Google vs the AI engines per question, the checker, the offer."""
+    from pathlib import Path
+
+    from handover.visibility.home import build_home
+
+    typer.echo(f"wrote {build_home(Path(pages), Path(out))}")
+
+
+@visibility_app.command("fixkit")
+def fixkit_cmd(
+    experiments: Annotated[str, typer.Option("--experiments")] = "data/experiments.json",
+    state: Annotated[str, typer.Option("--state")] = "visibility_state.json",
+    out: Annotated[str, typer.Option("--out")] = "out/pilots",
+) -> None:
+    """Write each pilot's fix-kit file: instructions its owner hands to Claude or a developer."""
+    from pathlib import Path
+
+    from handover.visibility.fixkit import write_fixkits
+    from handover.visibility.state import load_state
+
+    for path in write_fixkits(Path(experiments), load_state(Path(state)), Path(out)):
+        typer.echo(f"wrote {path}")
