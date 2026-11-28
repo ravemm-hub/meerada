@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-27T17:00:10.814422+00:00",
+ "generated_at": "2026-11-28T15:52:30.016795+00:00",
  "leads": [
   {
    "slug": "hfa-plumber-he-5cdd01",
@@ -1831,16 +1831,16 @@
    "google_rank": 1,
    "quality": true,
    "named_runs": 0,
-   "runs": 2,
+   "runs": 3,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "americanfitnessisrael.com",
+    "easy.co.il",
     "alonring.co.il",
     "justconnectus.com",
-    "imunkosher.co.il",
-    "manhartfitness.com"
+    "imunkosher.co.il"
    ],
    "google_read": "2026-11-26"
   },
@@ -1856,16 +1856,16 @@
    "google_rank": 2,
    "quality": true,
    "named_runs": 0,
-   "runs": 2,
+   "runs": 3,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "americanfitnessisrael.com",
+    "easy.co.il",
     "alonring.co.il",
     "justconnectus.com",
-    "imunkosher.co.il",
-    "manhartfitness.com"
+    "imunkosher.co.il"
    ],
    "google_read": "2026-11-26"
   },
@@ -1881,41 +1881,16 @@
    "google_rank": 3,
    "quality": true,
    "named_runs": 0,
-   "runs": 2,
+   "runs": 3,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "americanfitnessisrael.com",
+    "easy.co.il",
     "alonring.co.il",
     "justconnectus.com",
-    "imunkosher.co.il",
-    "manhartfitness.com"
-   ],
-   "google_read": "2026-11-26"
-  },
-  {
-   "slug": "kesler-fitness-tlv-trainer",
-   "business": "Kesler Fitness",
-   "query_id": "tlv-trainer",
-   "question": "I'm looking for a personal trainer in Tel Aviv for weight training, twice a week. Who do you recommend? Please name specific ones.",
-   "city": "Tel Aviv",
-   "country": "IL",
-   "category": "trainer",
-   "lang": "en",
-   "google_rank": 4,
-   "quality": true,
-   "named_runs": 0,
-   "runs": 2,
-   "ai_rank": null,
-   "website": null,
-   "cited_hosts": [
-    "google.com",
-    "americanfitnessisrael.com",
-    "alonring.co.il",
-    "justconnectus.com",
-    "imunkosher.co.il",
-    "manhartfitness.com"
+    "imunkosher.co.il"
    ],
    "google_read": "2026-11-26"
   },
@@ -1931,16 +1906,16 @@
    "google_rank": 6,
    "quality": true,
    "named_runs": 0,
-   "runs": 2,
+   "runs": 3,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "americanfitnessisrael.com",
+    "easy.co.il",
     "alonring.co.il",
     "justconnectus.com",
-    "imunkosher.co.il",
-    "manhartfitness.com"
+    "imunkosher.co.il"
    ],
    "google_read": "2026-11-26"
   },
@@ -1956,16 +1931,16 @@
    "google_rank": 7,
    "quality": true,
    "named_runs": 0,
-   "runs": 2,
+   "runs": 3,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "americanfitnessisrael.com",
+    "easy.co.il",
     "alonring.co.il",
     "justconnectus.com",
-    "imunkosher.co.il",
-    "manhartfitness.com"
+    "imunkosher.co.il"
    ],
    "google_read": "2026-11-26"
   },
@@ -1981,16 +1956,16 @@
    "google_rank": 8,
    "quality": true,
    "named_runs": 0,
-   "runs": 2,
+   "runs": 3,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "americanfitnessisrael.com",
+    "easy.co.il",
     "alonring.co.il",
     "justconnectus.com",
-    "imunkosher.co.il",
-    "manhartfitness.com"
+    "imunkosher.co.il"
    ],
    "google_read": "2026-11-26"
   },
@@ -2006,16 +1981,16 @@
    "google_rank": 9,
    "quality": true,
    "named_runs": 0,
-   "runs": 2,
+   "runs": 3,
    "ai_rank": null,
    "website": null,
    "cited_hosts": [
     "google.com",
     "americanfitnessisrael.com",
+    "easy.co.il",
     "alonring.co.il",
     "justconnectus.com",
-    "imunkosher.co.il",
-    "manhartfitness.com"
+    "imunkosher.co.il"
    ],
    "google_read": "2026-11-26"
   },
@@ -3473,6 +3448,31 @@
    "google_read": "2026-11-26"
   },
   {
+   "slug": "kesler-fitness-tlv-trainer",
+   "business": "Kesler Fitness",
+   "query_id": "tlv-trainer",
+   "question": "I'm looking for a personal trainer in Tel Aviv for weight training, twice a week. Who do you recommend? Please name specific ones.",
+   "city": "Tel Aviv",
+   "country": "IL",
+   "category": "trainer",
+   "lang": "en",
+   "google_rank": 4,
+   "quality": true,
+   "named_runs": 1,
+   "runs": 3,
+   "ai_rank": 9,
+   "website": null,
+   "cited_hosts": [
+    "google.com",
+    "americanfitnessisrael.com",
+    "easy.co.il",
+    "alonring.co.il",
+    "justconnectus.com",
+    "imunkosher.co.il"
+   ],
+   "google_read": "2026-11-26"
+  },
+  {
    "slug": "iron-circuit-tlv-trainer",
    "business": "Iron Circuit",
    "query_id": "tlv-trainer",
@@ -3484,16 +3484,16 @@
    "google_rank": 5,
    "quality": true,
    "named_runs": 1,
-   "runs": 2,
-   "ai_rank": 5,
+   "runs": 3,
+   "ai_rank": 6,
    "website": null,
    "cited_hosts": [
     "google.com",
     "americanfitnessisrael.com",
+    "easy.co.il",
     "alonring.co.il",
     "justconnectus.com",
-    "imunkosher.co.il",
-    "manhartfitness.com"
+    "imunkosher.co.il"
    ],
    "google_read": "2026-11-26"
   },
